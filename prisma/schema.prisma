@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Politician {
+  id         String   @id @db.Text
+  name       String
+  party      String?
+  chamber    String?
+  state      String?
+  createdAt  DateTime  @default(now()) @map("created_at")
+
+  trades     Trade[]
+}
+
+model Issuer {
+  id         String   @id @db.Text
+  ticker     String?  @db.Text
+  name       String
+  sector     String?
+  country    String?
+  createdAt  DateTime  @default(now()) @map("created_at")
+
+  trades     Trade[]
+
+  @@index([ticker])
+}
+
+model Trade {
+  id              String    @id @db.Text
+  politicianId    String    @map("politician_id")
+  issuerId        String    @map("issuer_id")
+  publishedAt     DateTime? @map("published_at")
+  tradedAt        DateTime  @map("traded_at")
+  filedAfterDays  Int?      @map("filed_after_days")
+  owner           String?
+  type            String
+  sizeMin         Decimal?  @map("size_min")
+  sizeMax         Decimal?  @map("size_max")
+  price           Decimal?
+  sourceUrl       String?   @map("source_url")
+  raw             Json?
+  createdAt       DateTime  @default(now()) @map("created_at")
+
+  politician      Politician @relation(fields: [politicianId], references: [id])
+  issuer          Issuer     @relation(fields: [issuerId], references: [id])
+
+  @@index([tradedAt(sort: Desc)])
+  @@index([politicianId, tradedAt(sort: Desc)])
+  @@index([issuerId, tradedAt(sort: Desc)])
+  @@index([type])
+}
