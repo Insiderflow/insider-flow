@@ -88,8 +88,8 @@ function getEmailContent(notification: NotificationData): string {
         <h2>新交易通知</h2>
         <p>有新的國會議員交易被記錄：</p>
         <ul>
-          <li>政治家: ${notification.data.politicianName}</li>
-          <li>發行商: ${notification.data.issuerName}</li>
+          <li>政治家: ${(notification.data as TradeData).politician.name}</li>
+          <li>發行商: ${(notification.data as TradeData).issuer.name}</li>
           <li>類型: ${notification.data.type}</li>
           <li>交易日期: ${notification.data.tradedAt}</li>
         </ul>
