@@ -102,7 +102,7 @@ export async function createUser(email: string, password: string) {
 }
 
 export async function verifyEmail(token: string) {
-  const user = await prisma.user.findUnique({
+  const user = await prisma.user.findFirst({
     where: { emailVerificationToken: token },
   });
 
