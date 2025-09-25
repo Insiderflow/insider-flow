@@ -15,7 +15,7 @@ export default async function WatchlistPage() {
     );
   }
 
-  const items = await prisma.watchlist.findMany({
+  const items = await prisma.userWatchlist.findMany({
     where: { userId: user.id },
     include: { politician: true },
     orderBy: { createdAt: 'desc' }
