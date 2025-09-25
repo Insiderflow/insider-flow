@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
     const user = await createUser(email, password);
 
     return NextResponse.json({ 
-      message: 'Registration successful. Please check your email to verify your account.',
+      message: 'Registration successful! You can now log in.',
       userId: user.id 
     });
 

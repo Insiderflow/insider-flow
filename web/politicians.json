@@ -1,0 +1,1738 @@
+[
+  {
+    "id": "M001157",
+    "name": "Michael McCaul",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Texas",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "S001217",
+    "name": "Rick Scott",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Florida",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "M001190",
+    "name": "Markwayne Mullin",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Oklahoma",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "T000490",
+    "name": "David Taylor",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Ohio",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "C001123",
+    "name": "Gil Cisneros",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "California",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "M001201",
+    "name": "Paul Mitchell",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Michigan",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "M001236",
+    "name": "Tim Moore",
+    "party": "Republican",
+    "chamber": null,
+    "state": "North",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "M001136",
+    "name": "Lisa McClain",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Michigan",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "K000389",
+    "name": "Ro Khanna",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "California",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "W000802",
+    "name": "Sheldon Whitehouse",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Rhode",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "M001243",
+    "name": "Dave McCormick",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Pennsylvania",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "G000596",
+    "name": "Marjorie Taylor Greene",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Georgia",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "H001094",
+    "name": "Val Hoyle",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Oregon",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "F000479",
+    "name": "John Fetterman",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Pennsylvania",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "F000483",
+    "name": "Laura Friedman",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "California",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "K000398",
+    "name": "Thomas Kean Jr",
+    "party": "Republican",
+    "chamber": null,
+    "state": "New",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "S000250",
+    "name": "Pete Sessions",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Texas",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "M001232",
+    "name": "April McClain Delaney",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Maryland",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "B001236",
+    "name": "John Boozman",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Arkansas",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "B001277",
+    "name": "Richard Blumenthal",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Connecticut",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "G000583",
+    "name": "Josh Gottheimer",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "New",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "F000110",
+    "name": "Cleo Fields",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Louisiana",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "C001129",
+    "name": "Mike Collins",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Georgia",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "C001068",
+    "name": "Steve Cohen",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Tennessee",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "G000597",
+    "name": "Andrew Garbarino",
+    "party": "Republican",
+    "chamber": null,
+    "state": "New",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "A000372",
+    "name": "Rick Allen",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Georgia",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "M001234",
+    "name": "Kelly Morrison",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Minnesota",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "F000450",
+    "name": "Virginia Foxx",
+    "party": "Republican",
+    "chamber": null,
+    "state": "North",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "C001080",
+    "name": "Judy Chu",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "California",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "N000189",
+    "name": "Dan Newhouse",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Washington",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "K000375",
+    "name": "Bill Keating",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Massachusetts",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "B001327",
+    "name": "Rob Bresnahan",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Pennsylvania",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "A000148",
+    "name": "Jake Auchincloss",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Massachusetts",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "Y000067",
+    "name": "Rudy Yakym",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Indiana",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "W000797",
+    "name": "Debbie Wasserman Schultz",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Florida",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "J000310",
+    "name": "Julie Johnson",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Texas",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "D000617",
+    "name": "Suzan DelBene",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Washington",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "S000510",
+    "name": "Adam Smith",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Washington",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "D000032",
+    "name": "Byron Donalds",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Florida",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "P000608",
+    "name": "Scott Peters",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "California",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "C001047",
+    "name": "Shelley Moore Capito",
+    "party": "Republican",
+    "chamber": null,
+    "state": "West",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "M001222",
+    "name": "Max Miller",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Ohio",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "F000472",
+    "name": "Scott Franklin",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Florida",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "B001299",
+    "name": "Jim Banks",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Indiana",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "K000376",
+    "name": "Mike Kelly",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Pennsylvania",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "A000055",
+    "name": "Robert Aderholt",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Alabama",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "L000590",
+    "name": "Susie Lee",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Nevada",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "K000383",
+    "name": "Angus King OtherMaine Trades35 Issuers31 Volume378K Last Traded2025-07-21",
+    "party": null,
+    "chamber": null,
+    "state": null,
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "L000566",
+    "name": "Bob Latta",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Ohio",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "J000309",
+    "name": "Jonathan Jackson",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Illinois",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "F000459",
+    "name": "Chuck Fleischmann",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Tennessee",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "G000603",
+    "name": "Brandon Gill",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Texas",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "M001196",
+    "name": "Seth Moulton",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Massachusetts",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "S001172",
+    "name": "Adrian Smith",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Nebraska",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "L000597",
+    "name": "Laurel Lee",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Florida",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "T000486",
+    "name": "Ritchie Torres",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "New",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "S001214",
+    "name": "Greg Steube",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Florida",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "C001108",
+    "name": "James Comer",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Kentucky",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "G000359",
+    "name": "Lindsey Graham",
+    "party": "Republican",
+    "chamber": null,
+    "state": "South",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "R000395",
+    "name": "Hal Rogers",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Kentucky",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "P000048",
+    "name": "August Pfluger",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Texas",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "W000829",
+    "name": "Tony Wied",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Wisconsin",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "D000399",
+    "name": "Lloyd Doggett",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Texas",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "B001292",
+    "name": "Don Beyer",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Virginia",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "M001239",
+    "name": "John McGuire",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Virginia",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "M000355",
+    "name": "Mitch McConnell",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Kentucky",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "G000590",
+    "name": "Mark Green",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Tennessee",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "H001072",
+    "name": "French Hill",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Arkansas",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "R000612",
+    "name": "John Rose",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Tennessee",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "P000197",
+    "name": "Nancy Pelosi",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "California",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "C001103",
+    "name": "Buddy Carter",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Georgia",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "S001189",
+    "name": "Austin Scott",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Georgia",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "H000273",
+    "name": "John Hickenlooper",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Colorado",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "S001190",
+    "name": "Brad Schneider",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Illinois",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "B000668",
+    "name": "Cliff Bentz",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Oregon",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "W000779",
+    "name": "Ron Wyden",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Oregon",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "D000628",
+    "name": "Neal Dunn",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Florida",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "M001217",
+    "name": "Jared Moskowitz",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Florida",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "S001229",
+    "name": "Jefferson Shreve",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Indiana",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "C001078",
+    "name": "Gerry Connolly",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Virginia",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "R000610",
+    "name": "Guy Reschenthaler",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Pennsylvania",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "K000403",
+    "name": "Mike Kennedy",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Utah",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "P000597",
+    "name": "Chellie Pingree",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Maine",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "L000601",
+    "name": "Greg Landsman",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Ohio",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "M000934",
+    "name": "Jerry Moran",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Kansas",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "H001104",
+    "name": "Jon Husted",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Ohio",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "H001082",
+    "name": "Kevin Hern",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Oklahoma",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "W000821",
+    "name": "Bruce Westerman",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Arkansas",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "K000393",
+    "name": "John Neely Kennedy",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Louisiana",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "T000278",
+    "name": "Tommy Tuberville",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Alabama",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "S001185",
+    "name": "Terri Sewell",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Alabama",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "I000056",
+    "name": "Darrell Issa",
+    "party": "Republican",
+    "chamber": null,
+    "state": "California",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "L000560",
+    "name": "Rick Larsen",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Washington",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "G000581",
+    "name": "Vicente Gonzalez",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Texas",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "M001244",
+    "name": "Ashley Moody",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Florida",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "S000929",
+    "name": "Victoria Spartz",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Indiana",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "E000296",
+    "name": "Dwight Evans",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Pennsylvania",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "M001242",
+    "name": "Bernie Moreno",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Ohio",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "S001201",
+    "name": "Tom Suozzi",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "New",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "D000624",
+    "name": "Debbie Dingell",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Michigan",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "W000830",
+    "name": "George  Whitesides",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "California",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "M001241",
+    "name": "Dave Min",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "California",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "W000812",
+    "name": "Ann Wagner",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Missouri",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "M001205",
+    "name": "Carol Miller",
+    "party": "Republican",
+    "chamber": null,
+    "state": "West",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "S001207",
+    "name": "Mikie Sherrill",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "New",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "N000147",
+    "name": "Eleanor Holmes Norton",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Washington",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "S000344",
+    "name": "Brad Sherman",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "California",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "L000571",
+    "name": "Cynthia Lummis",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Wyoming",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "D000620",
+    "name": "John Delaney",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Maryland",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "W000816",
+    "name": "Roger Williams",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Texas",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "M001204",
+    "name": "Dan Meuser",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Pennsylvania",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "G000599",
+    "name": "Daniel S. Goldman DemocratNew York Trades1,307 Issuers761 Volume59.79M Last Traded2025-02-11",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "New",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "S001203",
+    "name": "Tina Smith",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Minnesota",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "B001257",
+    "name": "Gus Bilirakis",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Florida",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "K000405",
+    "name": "Brad Knott",
+    "party": "Republican",
+    "chamber": null,
+    "state": "North",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "J000295",
+    "name": "David Joyce",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Ohio",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "S001224",
+    "name": "Keith Self",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Texas",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "R000621",
+    "name": "Emily Randall",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Washington",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "R000595",
+    "name": "Marco Rubio",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Florida",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "H000601",
+    "name": "Bill Hagerty",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Tennessee",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "M001135",
+    "name": "Kathy Manning",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "North",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "W000823",
+    "name": "Michael Waltz",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Florida",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "C000174",
+    "name": "Tom Carper",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Delaware",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "C001114",
+    "name": "John Curtis",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Utah",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "L000564",
+    "name": "Doug Lamborn",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Colorado",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "B000574",
+    "name": "Earl Blumenauer",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Oregon",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "G000589",
+    "name": "Lance Gooden",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Texas",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "R000606",
+    "name": "Jamie Raskin",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Maryland",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "M001220",
+    "name": "Morgan McGarvey",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Kentucky",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "G000591",
+    "name": "Michael Guest",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Mississippi",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "P000595",
+    "name": "Gary Peters",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Michigan",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "S000168",
+    "name": "Maria Elvira Salazar",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Florida",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "W000805",
+    "name": "Mark Warner",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Virginia",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "J000307",
+    "name": "John James",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Michigan",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "B001248",
+    "name": "Michael Burgess",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Texas",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "M001163",
+    "name": "Doris Matsui",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "California",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "C001035",
+    "name": "Susan Collins",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Maine",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "C001117",
+    "name": "Sean Casten",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Illinois",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "G000061",
+    "name": "Mike Garcia",
+    "party": "Republican",
+    "chamber": null,
+    "state": "California",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "B001319",
+    "name": "Katie Britt",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Alabama",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "C001066",
+    "name": "Kathy Castor",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Florida",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "P000616",
+    "name": "Dean Phillips",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Minnesota",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "T000488",
+    "name": "Shri Thanedar",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Michigan",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "M000317",
+    "name": "Nicole Malliotakis",
+    "party": "Republican",
+    "chamber": null,
+    "state": "New",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "N000188",
+    "name": "Donald Norcross",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "New",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "S001209",
+    "name": "Abigail Spanberger",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Virginia",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "L000562",
+    "name": "Stephen Lynch",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Massachusetts",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "W000828",
+    "name": "Brandon Williams",
+    "party": "Republican",
+    "chamber": null,
+    "state": "New",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "M001223",
+    "name": "Seth Magaziner",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Rhode",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "R000614",
+    "name": "Chip Roy",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Texas",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "L000596",
+    "name": "Anna Paulina Luna",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Florida",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "R000305",
+    "name": "Deborah Ross",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "North",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "C001098",
+    "name": "Ted Cruz",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Texas",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "M000871",
+    "name": "Tracey Mann",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Kansas",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "M001212",
+    "name": "Barry Moore",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Alabama",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "G000576",
+    "name": "Glenn Grothman",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Wisconsin",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "M001199",
+    "name": "Brian Mast",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Florida",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "C001101",
+    "name": "Katherine Clark",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Massachusetts",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "B001300",
+    "name": "Nanette Barragán DemocratCalifornia Trades3 Issuer1 Volume49K Last Traded2024-02-20",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "California",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "C001088",
+    "name": "Chris Coons",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Delaware",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "S001198",
+    "name": "Dan Sullivan",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Alaska",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "G000577",
+    "name": "Garret Graves",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Louisiana",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "M001213",
+    "name": "Blake Moore",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Utah",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "K000392",
+    "name": "David Kustoff",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Tennessee",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "T000483",
+    "name": "David Trone",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Maryland",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "M001183",
+    "name": "Joe Manchin",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "West",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "B001311",
+    "name": "Dan Bishop",
+    "party": "Republican",
+    "chamber": null,
+    "state": "North",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "S001211",
+    "name": "Greg Stanton",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Arizona",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "V000137",
+    "name": "James Vance",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Ohio",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "W000804",
+    "name": "Rob Wittman",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Virginia",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "B000740",
+    "name": "Stephanie Bice",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Oklahoma",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "R000618",
+    "name": "Pete Ricketts",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Nebraska",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "F000462",
+    "name": "Lois Frankel",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Florida",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "M001198",
+    "name": "Roger Marshall",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Kansas",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "D000615",
+    "name": "Jeff Duncan",
+    "party": "Republican",
+    "chamber": null,
+    "state": "South",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "C001053",
+    "name": "Tom Cole",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Oklahoma",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "L000397",
+    "name": "Zoe Lofgren",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "California",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "S001205",
+    "name": "Mary Gay Scanlon",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Pennsylvania",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "M001159",
+    "name": "Cathy McMorris Rodgers",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Washington",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "M001227",
+    "name": "Jennifer  McClellan",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Virginia",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "R000609",
+    "name": "John Rutherford",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Florida",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "B001267",
+    "name": "Michael Bennet",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Colorado",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "F000474",
+    "name": "Mike Flood",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Nebraska",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "E000298",
+    "name": "Ron Estes",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Kansas",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "D000622",
+    "name": "Tammy Duckworth",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Illinois",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "L000589",
+    "name": "Debbie Lesko",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Arizona",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "C001120",
+    "name": "Dan Crenshaw",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Texas",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "M001218",
+    "name": "Rich McCormick",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Georgia",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "S001148",
+    "name": "Mike Simpson",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Idaho",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "W000806",
+    "name": "Daniel Webster",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Florida",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "H001086",
+    "name": "Diana Harshbarger",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Tennessee",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "H001047",
+    "name": "Jim Himes",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Connecticut",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "B001316",
+    "name": "Eric Burlison",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Missouri",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "J000308",
+    "name": "Jeff Jackson",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "North",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "P000607",
+    "name": "Mark Pocan",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Wisconsin",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "R000608",
+    "name": "Jacklyn Rosen",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Nevada",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "C000127",
+    "name": "Maria Cantwell",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Washington",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "B000575",
+    "name": "Roy Blunt",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Missouri",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "A000378",
+    "name": "Cindy Axne",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Iowa",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "L000569",
+    "name": "Blaine Luetkemeyer",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Missouri",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "G000588",
+    "name": "Anthony Gonzalez",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Ohio",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "S001180",
+    "name": "Kurt Schrader",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Oregon",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "G000563",
+    "name": "Bob Gibbs",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Ohio",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "L000559",
+    "name": "Jim Langevin",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Rhode",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "L000579",
+    "name": "Alan Lowenthal",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "California",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "J000020",
+    "name": "Chris Jacobs",
+    "party": "Republican",
+    "chamber": null,
+    "state": "New",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "B001274",
+    "name": "Mo Brooks",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Alabama",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "T000479",
+    "name": "Van Taylor",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Texas",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "N000192",
+    "name": "Marie Newman",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Illinois",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "L000585",
+    "name": "Darin LaHood",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Illinois",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "W000809",
+    "name": "Steve Womack",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Arkansas",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "P000593",
+    "name": "Ed Perlmutter",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Colorado",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "U000031",
+    "name": "Fred Upton",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Michigan",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "O000171",
+    "name": "Tom O'Halleran DemocratArizona Trades2 Issuer1 Volume16K Last Traded2022-10-31",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Arizona",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "F000246",
+    "name": "Pat Fallon",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Texas",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "H001074",
+    "name": "Trey Hollingsworth",
+    "party": "Republican",
+    "chamber": null,
+    "state": "Indiana",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  },
+  {
+    "id": "K000009",
+    "name": "Marcy Kaptur",
+    "party": "Democrat",
+    "chamber": null,
+    "state": "Ohio",
+    "createdAt": "2025-09-24T18:16:17.072Z"
+  }
+]

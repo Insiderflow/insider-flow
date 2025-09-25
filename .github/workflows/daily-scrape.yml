@@ -1,0 +1,41 @@
+name: Daily Data Scrape
+
+on:
+  schedule:
+    # Run every day at 6 AM UTC (2 AM EST)
+    - cron: '0 6 * * *'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: |
+        cd web
+        npm install
+        
+    - name: Run daily scrape
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      run: |
+        cd web
+        node scripts/daily-scrape.js
+        
+    - name: Notify on success
+      if: success()
+      run: echo "✅ Daily scrape completed successfully"
+      
+    - name: Notify on failure
+      if: failure()
+      run: echo "❌ Daily scrape failed"
