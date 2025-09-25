@@ -212,6 +212,8 @@ export default function PortfolioChart({ politician }: PortfolioChartProps) {
             const value = context.parsed.y;
             const label = dataset.label;
             
+            if (value === null) return '';
+            
             if (label && label.includes('投資組合')) {
               return `${label}: ${value.toFixed(2)}%`;
             } else {
