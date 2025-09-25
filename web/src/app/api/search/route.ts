@@ -11,7 +11,13 @@ export async function GET(request: NextRequest) {
     }
 
     const searchTerm = query.trim();
-    const results = [];
+    const results: Array<{
+      id: string;
+      type: string;
+      title: string;
+      subtitle: string;
+      url: string;
+    }> = [];
 
     // Search politicians
     const politicians = await prisma.politician.findMany({
