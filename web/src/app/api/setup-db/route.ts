@@ -1,13 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
+import { execSync } from 'child_process';
 
 const prisma = new PrismaClient();
 
 export async function POST(_request: NextRequest) {
   try {
     // Run Prisma migrations to create tables
-    const { execSync } = require('child_process');
-    
     console.log('Running Prisma migrations...');
     execSync('npx prisma migrate deploy', { stdio: 'inherit' });
     
@@ -20,7 +19,7 @@ export async function POST(_request: NextRequest) {
   } catch (error) {
     console.error('Database setup error:', error);
     return NextResponse.json(
-      { error: 'Database setup failed', details: error.message },
+      { error: 'Database setup failed', details: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     );
   } finally {
