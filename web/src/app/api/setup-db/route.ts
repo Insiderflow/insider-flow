@@ -6,11 +6,21 @@ const prisma = new PrismaClient();
 
 export async function POST(_request: NextRequest) {
   try {
-    // Run Prisma migrations to create tables
+    // First, try to run migrations
     console.log('Running Prisma migrations...');
-    execSync('npx prisma migrate deploy', { stdio: 'inherit' });
+    try {
+      execSync('npx prisma migrate deploy', { stdio: 'inherit' });
+      console.log('Prisma migrations completed successfully');
+    } catch (migrateError) {
+      console.log('Migration failed, trying to push schema directly...');
+      // If migrations fail, try to push the schema directly
+      execSync('npx prisma db push', { stdio: 'inherit' });
+      console.log('Schema pushed successfully');
+    }
     
-    console.log('Prisma migrations completed successfully');
+    // Test the database connection
+    await prisma.$connect();
+    console.log('Database connection successful');
     
     return NextResponse.json({ 
       message: 'Database setup completed - tables created',
