@@ -16,7 +16,7 @@ model Politician {
   state     String?
   createdAt DateTime  @default(now()) @map("created_at")
   trades    Trade[]
-  watchlist User[] @relation("UserWatchlist")
+  watchlist UserWatchlist[]
 }
 
 model Issuer {
@@ -57,7 +57,7 @@ model User {
   createdAt         DateTime  @default(now()) @map("created_at")
   updatedAt         DateTime  @updatedAt @map("updated_at")
   notificationSettings Json?  @map("notification_settings")
-  watchlist         Politician[] @relation("UserWatchlist")
+  watchlist         UserWatchlist[]
 }
 
 model UserWatchlist {
