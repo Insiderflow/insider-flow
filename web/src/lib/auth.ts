@@ -4,11 +4,11 @@ import { prisma } from './prisma';
 import { sendVerificationEmail, sendPasswordResetEmail } from './email';
 import crypto from 'crypto';
 
-const SESSION_SECRET = process.env.SESSION_SECRET;
+const SESSION_SECRET = process.env.SESSION_SECRET || 'fallback-secret-for-development';
 const SESSION_DURATION = 30 * 24 * 60 * 60 * 1000; // 30 days
 
-if (!SESSION_SECRET) {
-  throw new Error('SESSION_SECRET is required');
+if (!process.env.SESSION_SECRET && process.env.NODE_ENV === 'production') {
+  throw new Error('SESSION_SECRET is required in production');
 }
 
 export async function hashPassword(password: string): Promise<string> {
