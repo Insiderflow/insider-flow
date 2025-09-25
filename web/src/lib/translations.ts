@@ -25,8 +25,6 @@ export interface Translations {
   
   // Stats
   totalTrades: string;
-  politicians: string;
-  issuers: string;
   
   // Table headers
   politician: string;
@@ -40,7 +38,6 @@ export interface Translations {
   price: string;
   name: string;
   ticker: string;
-  trades: string;
   volume: string;
   
   // Account page
@@ -88,8 +85,6 @@ const translations: Record<Language, Translations> = {
     
     // Stats
     totalTrades: '總交易',
-    politicians: '政治家',
-    issuers: '發行商',
     
     // Table headers
     politician: '政治家',
@@ -103,7 +98,6 @@ const translations: Record<Language, Translations> = {
     price: '價格',
     name: '名稱',
     ticker: '代碼',
-    trades: '交易次數',
     volume: '交易金額',
     
     // Account page
@@ -150,8 +144,6 @@ const translations: Record<Language, Translations> = {
     
     // Stats
     totalTrades: '总交易',
-    politicians: '政治家',
-    issuers: '发行商',
     
     // Table headers
     politician: '政治家',
@@ -165,7 +157,6 @@ const translations: Record<Language, Translations> = {
     price: '价格',
     name: '名称',
     ticker: '代码',
-    trades: '交易次数',
     volume: '交易金额',
     
     // Account page
