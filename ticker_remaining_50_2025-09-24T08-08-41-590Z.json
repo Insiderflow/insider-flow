@@ -1,0 +1,310 @@
+{
+  "timestamp": "2025-09-24T08:08:41.592Z",
+  "processed": 50,
+  "total": 2011,
+  "withTicker": 36,
+  "withoutTicker": 14,
+  "results": [
+    {
+      "id": "433486",
+      "name": "MPLX LP",
+      "ticker": "MPLX",
+      "exchange": "US"
+    },
+    {
+      "id": "433610",
+      "name": "NEW JERSEY ECONOMIC DEVELOPMENT AUTHORITY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433627",
+      "name": "New Residential Investment Corp",
+      "ticker": "RITM",
+      "exchange": "US"
+    },
+    {
+      "id": "433634",
+      "name": "New York Community Bancorp Inc",
+      "ticker": "NYCB",
+      "exchange": "US"
+    },
+    {
+      "id": "433667",
+      "name": "Nippon Telegraph & Telephone Corp Ntt",
+      "ticker": "NTTYY",
+      "exchange": "US"
+    },
+    {
+      "id": "433670",
+      "name": "Nitori Holdings Co Ltd",
+      "ticker": "NCLTY",
+      "exchange": "US"
+    },
+    {
+      "id": "433684",
+      "name": "Nordea Bank Abp",
+      "ticker": "NRDBY",
+      "exchange": "US"
+    },
+    {
+      "id": "433713",
+      "name": "NORTHSIDE INDEPENDENT SCHOOL DISTRICT",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433733",
+      "name": "NOV Inc",
+      "ticker": "NOV",
+      "exchange": "US"
+    },
+    {
+      "id": "433794",
+      "name": "OceanFirst Financial Corp",
+      "ticker": "OCFC",
+      "exchange": "US"
+    },
+    {
+      "id": "433812",
+      "name": "OKLAHOMA SCHOOL DISTRICTS",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433820",
+      "name": "OLDHAM COUNTY SCHOOL DISTRICT FINANCE CORP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433830",
+      "name": "Ollie's Bargain Outlet Holdings Inc",
+      "ticker": "OLLI",
+      "exchange": "US"
+    },
+    {
+      "id": "433910",
+      "name": "Pacer Funds Trust - Pacer Benchmark Data & Infrastructure Real estate SCTR ETF",
+      "ticker": "SRVR",
+      "exchange": "US"
+    },
+    {
+      "id": "434009",
+      "name": "PENNSYLVANIA HOUSING FINANCE AGENCY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434043",
+      "name": "PG&E Corp",
+      "ticker": "PCG",
+      "exchange": "US"
+    },
+    {
+      "id": "434089",
+      "name": "Ping An Insurance Group",
+      "ticker": "PNGAY",
+      "exchange": "US"
+    },
+    {
+      "id": "434175",
+      "name": "Primoris Services Corp",
+      "ticker": "PRIM",
+      "exchange": "US"
+    },
+    {
+      "id": "434281",
+      "name": "QuantumScape Corp",
+      "ticker": "QS",
+      "exchange": "US"
+    },
+    {
+      "id": "434308",
+      "name": "Range Resources Corp",
+      "ticker": "RRC",
+      "exchange": "US"
+    },
+    {
+      "id": "434355",
+      "name": "Reinsurance Group of America Inc",
+      "ticker": "RGA",
+      "exchange": "US"
+    },
+    {
+      "id": "434357",
+      "name": "Reliance Steel & Aluminum Co",
+      "ticker": "RS",
+      "exchange": "US"
+    },
+    {
+      "id": "434424",
+      "name": "Roblox Corp",
+      "ticker": "RBLX",
+      "exchange": "US"
+    },
+    {
+      "id": "434435",
+      "name": "Rogers Communications Inc",
+      "ticker": "RCI",
+      "exchange": "US"
+    },
+    {
+      "id": "434453",
+      "name": "ROUND ROCK INDEPENDENT SCHOOL DISTRICT",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434474",
+      "name": "RPM International Inc",
+      "ticker": "RPM",
+      "exchange": "US"
+    },
+    {
+      "id": "434495",
+      "name": "Ryman Hospitality Properties Inc",
+      "ticker": "RHP",
+      "exchange": "US"
+    },
+    {
+      "id": "434703",
+      "name": "Silgan Holdings Inc",
+      "ticker": "SLGN",
+      "exchange": "US"
+    },
+    {
+      "id": "434752",
+      "name": "Smurfit Kappa Group PLC",
+      "ticker": "SMFKY",
+      "exchange": "US"
+    },
+    {
+      "id": "434849",
+      "name": "SPDR MidCap 400 ETF Trust",
+      "ticker": "MDY",
+      "exchange": "US"
+    },
+    {
+      "id": "434863",
+      "name": "SPDR S&P 600 Small Cap Value ETF",
+      "ticker": "SLYV",
+      "exchange": "US"
+    },
+    {
+      "id": "434924",
+      "name": "STAG Industrial Inc",
+      "ticker": "STAG",
+      "exchange": "US"
+    },
+    {
+      "id": "434958",
+      "name": "STATE OF GEORGIA",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434980",
+      "name": "STATE OF NEW YORK MORTGAGE AGENCY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434982",
+      "name": "STATE OF NORTH CAROLINA",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435101",
+      "name": "Syneos Health Inc",
+      "ticker": "SYNH",
+      "exchange": "US"
+    },
+    {
+      "id": "435130",
+      "name": "Tandem Diabetes Care Inc",
+      "ticker": "TNDM",
+      "exchange": "US"
+    },
+    {
+      "id": "435196",
+      "name": "Tenet Healthcare Corp",
+      "ticker": "THC",
+      "exchange": "US"
+    },
+    {
+      "id": "435199",
+      "name": "TENNESSEE HOUSING DEVELOPMENT AGENCY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435230",
+      "name": "TEXAS WATER DEVELOPMENT BOARD",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435285",
+      "name": "Tokyo Electron Ltd",
+      "ticker": "TOELY",
+      "exchange": "US"
+    },
+    {
+      "id": "435381",
+      "name": "Tri Pointe Homes Inc",
+      "ticker": "TPH",
+      "exchange": "US"
+    },
+    {
+      "id": "435452",
+      "name": "Uni-Charm Corp",
+      "ticker": "UNICY",
+      "exchange": "US"
+    },
+    {
+      "id": "435496",
+      "name": "UNIVERSITY OF CINCINNATI",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435501",
+      "name": "UNIVERSITY OF MARYLAND",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435614",
+      "name": "Vanguard Mid-Cap ETF",
+      "ticker": "VO",
+      "exchange": "US"
+    },
+    {
+      "id": "435664",
+      "name": "Veracyte Inc",
+      "ticker": "VCYT",
+      "exchange": "US"
+    },
+    {
+      "id": "435692",
+      "name": "Viavi Solutions Inc",
+      "ticker": "VIAV",
+      "exchange": "US"
+    },
+    {
+      "id": "435727",
+      "name": "VIRGINIA RESOURCES AUTHORITY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435752",
+      "name": "Vontier Corp",
+      "ticker": "VNT",
+      "exchange": "US"
+    }
+  ],
+  "errors": []
+}

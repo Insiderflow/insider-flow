@@ -1,0 +1,310 @@
+{
+  "timestamp": "2025-09-24T07:40:20.015Z",
+  "processed": 50,
+  "total": 600,
+  "withTicker": 46,
+  "withoutTicker": 4,
+  "results": [
+    {
+      "id": "435544",
+      "name": "US TREASURY BILLS",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433382",
+      "name": "Microsoft Corp",
+      "ticker": "MSFT",
+      "exchange": "US"
+    },
+    {
+      "id": "429622",
+      "name": "Alphabet Inc",
+      "ticker": "GOOGL",
+      "exchange": "US"
+    },
+    {
+      "id": "433770",
+      "name": "NVIDIA Corporation",
+      "ticker": "NVDA",
+      "exchange": "US"
+    },
+    {
+      "id": "429789",
+      "name": "Apple Inc",
+      "ticker": "AAPL",
+      "exchange": "US"
+    },
+    {
+      "id": "429648",
+      "name": "Amazon.com Inc",
+      "ticker": "AMZN",
+      "exchange": "US"
+    },
+    {
+      "id": "432796",
+      "name": "JPMorgan Chase & Co",
+      "ticker": "JPM",
+      "exchange": "US"
+    },
+    {
+      "id": "431610",
+      "name": "Meta Platforms Inc",
+      "ticker": "META",
+      "exchange": "US"
+    },
+    {
+      "id": "435467",
+      "name": "Unitedhealth Group Inc",
+      "ticker": "UNH",
+      "exchange": "US"
+    },
+    {
+      "id": "2264488",
+      "name": "Berkshire Hathaway Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334591",
+      "name": "JPMORGAN 100% US TREASURY SECURITIES MONEY MARKET FUND",
+      "ticker": "JTSXX",
+      "exchange": "US"
+    },
+    {
+      "id": "429495",
+      "name": "Adobe Inc",
+      "ticker": "ADBE",
+      "exchange": "US"
+    },
+    {
+      "id": "435735",
+      "name": "Visa Inc",
+      "ticker": "V",
+      "exchange": "US"
+    },
+    {
+      "id": "435211",
+      "name": "Tesla Inc",
+      "ticker": "TSLA",
+      "exchange": "US"
+    },
+    {
+      "id": "435546",
+      "name": "US TREASURY NOTE",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432782",
+      "name": "Johnson & Johnson",
+      "ticker": "JNJ",
+      "exchange": "US"
+    },
+    {
+      "id": "1282836",
+      "name": "Wells Fargo & Co",
+      "ticker": "WFC",
+      "exchange": "US"
+    },
+    {
+      "id": "430431",
+      "name": "CBOE MINI SPX INDEX",
+      "ticker": "XSP",
+      "exchange": "US"
+    },
+    {
+      "id": "429988",
+      "name": "Bank of America Corp",
+      "ticker": "BAC",
+      "exchange": "US"
+    },
+    {
+      "id": "429469",
+      "name": "Accenture PLC",
+      "ticker": "ACN",
+      "exchange": "US"
+    },
+    {
+      "id": "430239",
+      "name": "Broadcom Inc",
+      "ticker": "AVGO",
+      "exchange": "US"
+    },
+    {
+      "id": "433323",
+      "name": "Merck & Co Inc",
+      "ticker": "MRK",
+      "exchange": "US"
+    },
+    {
+      "id": "431303",
+      "name": "The Walt Disney Co",
+      "ticker": "DIS",
+      "exchange": "US"
+    },
+    {
+      "id": "432293",
+      "name": "The Home Depot Inc",
+      "ticker": "HD",
+      "exchange": "US"
+    },
+    {
+      "id": "434517",
+      "name": "salesforce.com Inc",
+      "ticker": "CRM",
+      "exchange": "US"
+    },
+    {
+      "id": "430911",
+      "name": "Comcast Corp",
+      "ticker": "CMCSA",
+      "exchange": "US"
+    },
+    {
+      "id": "433036",
+      "name": "Eli Lilly and Co",
+      "ticker": "LLY",
+      "exchange": "US"
+    },
+    {
+      "id": "432464",
+      "name": "Intel Corp",
+      "ticker": "INTC",
+      "exchange": "US"
+    },
+    {
+      "id": "435219",
+      "name": "Texas Instruments Inc",
+      "ticker": "TXN",
+      "exchange": "US"
+    },
+    {
+      "id": "434019",
+      "name": "PepsiCo Inc",
+      "ticker": "PEP",
+      "exchange": "US"
+    },
+    {
+      "id": "434933",
+      "name": "Starbucks Corp",
+      "ticker": "SBUX",
+      "exchange": "US"
+    },
+    {
+      "id": "434041",
+      "name": "Pfizer Inc",
+      "ticker": "PFE",
+      "exchange": "US"
+    },
+    {
+      "id": "429442",
+      "name": "Abbott Laboratories",
+      "ticker": "ABT",
+      "exchange": "US"
+    },
+    {
+      "id": "433981",
+      "name": "PayPal Holdings Inc",
+      "ticker": "PYPL",
+      "exchange": "US"
+    },
+    {
+      "id": "430570",
+      "name": "Citigroup Inc",
+      "ticker": "C",
+      "exchange": "US"
+    },
+    {
+      "id": "429505",
+      "name": "Advanced Micro Devices Inc",
+      "ticker": "AMD",
+      "exchange": "US"
+    },
+    {
+      "id": "431426",
+      "name": "ELCM2 LLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434191",
+      "name": "The Procter & Gamble Co",
+      "ticker": "PG",
+      "exchange": "US"
+    },
+    {
+      "id": "434591",
+      "name": "Schwab (Charles) Corp",
+      "ticker": "SCHW",
+      "exchange": "US"
+    },
+    {
+      "id": "435244",
+      "name": "Thermo Fisher Scientific Inc",
+      "ticker": "TMO",
+      "exchange": "US"
+    },
+    {
+      "id": "429443",
+      "name": "AbbVie Inc",
+      "ticker": "ABBV",
+      "exchange": "US"
+    },
+    {
+      "id": "433589",
+      "name": "Netflix Inc",
+      "ticker": "NFLX",
+      "exchange": "US"
+    },
+    {
+      "id": "435472",
+      "name": "United Parcel Service Inc",
+      "ticker": "UPS",
+      "exchange": "US"
+    },
+    {
+      "id": "435673",
+      "name": "Verizon Communications Inc",
+      "ticker": "VZ",
+      "exchange": "US"
+    },
+    {
+      "id": "433469",
+      "name": "Morgan Stanley",
+      "ticker": "MS",
+      "exchange": "US"
+    },
+    {
+      "id": "433381",
+      "name": "Micron Technology Inc",
+      "ticker": "MU",
+      "exchange": "US"
+    },
+    {
+      "id": "430852",
+      "name": "The Coca-Cola Co",
+      "ticker": "KO",
+      "exchange": "US"
+    },
+    {
+      "id": "433254",
+      "name": "Mastercard Inc",
+      "ticker": "MA",
+      "exchange": "US"
+    },
+    {
+      "id": "429769",
+      "name": "Aon PLC",
+      "ticker": "AON",
+      "exchange": "US"
+    },
+    {
+      "id": "430423",
+      "name": "Caterpillar Inc",
+      "ticker": "CAT",
+      "exchange": "US"
+    }
+  ],
+  "errors": []
+}

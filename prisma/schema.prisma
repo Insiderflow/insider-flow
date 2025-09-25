@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
   output   = "../generated/prisma"
@@ -15,50 +9,113 @@ datasource db {
 }
 
 model Politician {
-  id         String   @id @db.Text
-  name       String
-  party      String?
-  chamber    String?
-  state      String?
-  createdAt  DateTime  @default(now()) @map("created_at")
-
-  trades     Trade[]
+  id        String   @id
+  name      String
+  party     String?
+  chamber   String?
+  state     String?
+  createdAt DateTime @default(now()) @map("created_at")
+  trades    Trade[]
+  watchlist Watchlist[]
 }
 
 model Issuer {
-  id         String   @id @db.Text
-  ticker     String?  @db.Text
-  name       String
-  sector     String?
-  country    String?
-  createdAt  DateTime  @default(now()) @map("created_at")
-
-  trades     Trade[]
+  id        String   @id
+  ticker    String?
+  name      String
+  sector    String?
+  country   String?
+  createdAt DateTime @default(now()) @map("created_at")
+  trades    Trade[]
 
   @@index([ticker])
 }
 
 model Trade {
-  id              String    @id @db.Text
-  politicianId    String    @map("politician_id")
-  issuerId        String    @map("issuer_id")
-  publishedAt     DateTime? @map("published_at")
-  tradedAt        DateTime  @map("traded_at")
-  filedAfterDays  Int?      @map("filed_after_days")
-  owner           String?
-  type            String
-  sizeMin         Decimal?  @map("size_min")
-  sizeMax         Decimal?  @map("size_max")
-  price           Decimal?
-  sourceUrl       String?   @map("source_url")
-  raw             Json?
-  createdAt       DateTime  @default(now()) @map("created_at")
-
-  politician      Politician @relation(fields: [politicianId], references: [id])
-  issuer          Issuer     @relation(fields: [issuerId], references: [id])
+  id             String     @id
+  politicianId   String     @map("politician_id")
+  issuerId       String     @map("issuer_id")
+  publishedAt    DateTime?  @map("published_at")
+  tradedAt       DateTime   @map("traded_at")
+  filedAfterDays Int?       @map("filed_after_days")
+  owner          String?
+  type           String
+  sizeMin        Decimal?   @map("size_min")
+  sizeMax        Decimal?   @map("size_max")
+  price          Decimal?
+  sourceUrl      String?    @map("source_url")
+  raw            Json?
+  createdAt      DateTime   @default(now()) @map("created_at")
+  issuer         Issuer     @relation(fields: [issuerId], references: [id])
+  politician     Politician @relation(fields: [politicianId], references: [id])
 
   @@index([tradedAt(sort: Desc)])
   @@index([politicianId, tradedAt(sort: Desc)])
   @@index([issuerId, tradedAt(sort: Desc)])
   @@index([type])
+}
+
+model User {
+  id                    String   @id @default(cuid())
+  email                 String   @unique
+  passwordHash          String   @map("password_hash")
+  emailVerified         Boolean  @default(false) @map("email_verified")
+  emailVerificationToken String? @unique @map("email_verification_token")
+  passwordResetToken    String?  @unique @map("password_reset_token")
+  passwordResetExpires  DateTime? @map("password_reset_expires")
+  notificationSettings  Json?    @map("notification_settings")
+  createdAt             DateTime @default(now()) @map("created_at")
+  updatedAt             DateTime @updatedAt @map("updated_at")
+  
+  sessions              Session[]
+  watchlist             Watchlist[]
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  token     String   @unique
+  expiresAt DateTime @map("expires_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([token])
+  @@index([expiresAt])
+}
+
+model EmailVerificationToken {
+  id        String   @id @default(cuid())
+  email     String
+  token     String   @unique
+  expiresAt DateTime @map("expires_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  
+  @@index([token])
+  @@index([expiresAt])
+}
+
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  email     String
+  token     String   @unique
+  expiresAt DateTime @map("expires_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  
+  @@index([token])
+  @@index([expiresAt])
+}
+
+model Watchlist {
+  id           String @id @default(cuid())
+  userId       String @map("user_id")
+  politicianId String @map("politician_id")
+  createdAt    DateTime @default(now()) @map("created_at")
+  
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  politician   Politician @relation(fields: [politicianId], references: [id], onDelete: Cascade)
+  
+  @@unique([userId, politicianId])
+  @@index([userId])
+  @@index([politicianId])
 }

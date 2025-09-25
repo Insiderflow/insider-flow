@@ -1,0 +1,609 @@
+{
+  "timestamp": "2025-09-24T07:19:46.586Z",
+  "total": 100,
+  "withTicker": 94,
+  "withoutTicker": 6,
+  "results": [
+    {
+      "id": "435544",
+      "name": "US TREASURY BILLS",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433382",
+      "name": "Microsoft Corp",
+      "ticker": "MSFT",
+      "exchange": "US"
+    },
+    {
+      "id": "429622",
+      "name": "Alphabet Inc",
+      "ticker": "GOOGL",
+      "exchange": "US"
+    },
+    {
+      "id": "433770",
+      "name": "NVIDIA Corporation",
+      "ticker": "NVDA",
+      "exchange": "US"
+    },
+    {
+      "id": "429789",
+      "name": "Apple Inc",
+      "ticker": "AAPL",
+      "exchange": "US"
+    },
+    {
+      "id": "429648",
+      "name": "Amazon.com Inc",
+      "ticker": "AMZN",
+      "exchange": "US"
+    },
+    {
+      "id": "432796",
+      "name": "JPMorgan Chase & Co",
+      "ticker": "JPM",
+      "exchange": "US"
+    },
+    {
+      "id": "431610",
+      "name": "Meta Platforms Inc",
+      "ticker": "META",
+      "exchange": "US"
+    },
+    {
+      "id": "435467",
+      "name": "Unitedhealth Group Inc",
+      "ticker": "UNH",
+      "exchange": "US"
+    },
+    {
+      "id": "2264488",
+      "name": "Berkshire Hathaway Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334591",
+      "name": "JPMORGAN 100% US TREASURY SECURITIES MONEY MARKET FUND",
+      "ticker": "JTSXX",
+      "exchange": "US"
+    },
+    {
+      "id": "429495",
+      "name": "Adobe Inc",
+      "ticker": "ADBE",
+      "exchange": "US"
+    },
+    {
+      "id": "435735",
+      "name": "Visa Inc",
+      "ticker": "V",
+      "exchange": "US"
+    },
+    {
+      "id": "435211",
+      "name": "Tesla Inc",
+      "ticker": "TSLA",
+      "exchange": "US"
+    },
+    {
+      "id": "435546",
+      "name": "US TREASURY NOTE",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432782",
+      "name": "Johnson & Johnson",
+      "ticker": "JNJ",
+      "exchange": "US"
+    },
+    {
+      "id": "1282836",
+      "name": "Wells Fargo & Co",
+      "ticker": "WFC",
+      "exchange": "US"
+    },
+    {
+      "id": "430431",
+      "name": "CBOE MINI SPX INDEX",
+      "ticker": "XSP",
+      "exchange": "US"
+    },
+    {
+      "id": "429988",
+      "name": "Bank of America Corp",
+      "ticker": "BAC",
+      "exchange": "US"
+    },
+    {
+      "id": "429469",
+      "name": "Accenture PLC",
+      "ticker": "ACN",
+      "exchange": "US"
+    },
+    {
+      "id": "430239",
+      "name": "Broadcom Inc",
+      "ticker": "AVGO",
+      "exchange": "US"
+    },
+    {
+      "id": "433323",
+      "name": "Merck & Co Inc",
+      "ticker": "MRK",
+      "exchange": "US"
+    },
+    {
+      "id": "431303",
+      "name": "The Walt Disney Co",
+      "ticker": "DIS",
+      "exchange": "US"
+    },
+    {
+      "id": "432293",
+      "name": "The Home Depot Inc",
+      "ticker": "HD",
+      "exchange": "US"
+    },
+    {
+      "id": "434517",
+      "name": "salesforce.com Inc",
+      "ticker": "CRM",
+      "exchange": "US"
+    },
+    {
+      "id": "430911",
+      "name": "Comcast Corp",
+      "ticker": "CMCSA",
+      "exchange": "US"
+    },
+    {
+      "id": "433036",
+      "name": "Eli Lilly and Co",
+      "ticker": "LLY",
+      "exchange": "US"
+    },
+    {
+      "id": "432464",
+      "name": "Intel Corp",
+      "ticker": "INTC",
+      "exchange": "US"
+    },
+    {
+      "id": "435219",
+      "name": "Texas Instruments Inc",
+      "ticker": "TXN",
+      "exchange": "US"
+    },
+    {
+      "id": "434019",
+      "name": "PepsiCo Inc",
+      "ticker": "PEP",
+      "exchange": "US"
+    },
+    {
+      "id": "434933",
+      "name": "Starbucks Corp",
+      "ticker": "SBUX",
+      "exchange": "US"
+    },
+    {
+      "id": "434041",
+      "name": "Pfizer Inc",
+      "ticker": "PFE",
+      "exchange": "US"
+    },
+    {
+      "id": "429442",
+      "name": "Abbott Laboratories",
+      "ticker": "ABT",
+      "exchange": "US"
+    },
+    {
+      "id": "433981",
+      "name": "PayPal Holdings Inc",
+      "ticker": "PYPL",
+      "exchange": "US"
+    },
+    {
+      "id": "430570",
+      "name": "Citigroup Inc",
+      "ticker": "C",
+      "exchange": "US"
+    },
+    {
+      "id": "429505",
+      "name": "Advanced Micro Devices Inc",
+      "ticker": "AMD",
+      "exchange": "US"
+    },
+    {
+      "id": "431426",
+      "name": "ELCM2 LLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434191",
+      "name": "The Procter & Gamble Co",
+      "ticker": "PG",
+      "exchange": "US"
+    },
+    {
+      "id": "434591",
+      "name": "Schwab (Charles) Corp",
+      "ticker": "SCHW",
+      "exchange": "US"
+    },
+    {
+      "id": "435244",
+      "name": "Thermo Fisher Scientific Inc",
+      "ticker": "TMO",
+      "exchange": "US"
+    },
+    {
+      "id": "429443",
+      "name": "AbbVie Inc",
+      "ticker": "ABBV",
+      "exchange": "US"
+    },
+    {
+      "id": "433589",
+      "name": "Netflix Inc",
+      "ticker": "NFLX",
+      "exchange": "US"
+    },
+    {
+      "id": "435472",
+      "name": "United Parcel Service Inc",
+      "ticker": "UPS",
+      "exchange": "US"
+    },
+    {
+      "id": "435673",
+      "name": "Verizon Communications Inc",
+      "ticker": "VZ",
+      "exchange": "US"
+    },
+    {
+      "id": "433469",
+      "name": "Morgan Stanley",
+      "ticker": "MS",
+      "exchange": "US"
+    },
+    {
+      "id": "433381",
+      "name": "Micron Technology Inc",
+      "ticker": "MU",
+      "exchange": "US"
+    },
+    {
+      "id": "430852",
+      "name": "The Coca-Cola Co",
+      "ticker": "KO",
+      "exchange": "US"
+    },
+    {
+      "id": "433254",
+      "name": "Mastercard Inc",
+      "ticker": "MA",
+      "exchange": "US"
+    },
+    {
+      "id": "429769",
+      "name": "Aon PLC",
+      "ticker": "AON",
+      "exchange": "US"
+    },
+    {
+      "id": "430423",
+      "name": "Caterpillar Inc",
+      "ticker": "CAT",
+      "exchange": "US"
+    },
+    {
+      "id": "433048",
+      "name": "Linde PLC",
+      "ticker": "LIN",
+      "exchange": "US"
+    },
+    {
+      "id": "432337",
+      "name": "Humana Inc",
+      "ticker": "HUM",
+      "exchange": "US"
+    },
+    {
+      "id": "429929",
+      "name": "AUTODESK Inc",
+      "ticker": "ADSK",
+      "exchange": "US"
+    },
+    {
+      "id": "429914",
+      "name": "AT&T Inc",
+      "ticker": "T",
+      "exchange": "US"
+    },
+    {
+      "id": "431156",
+      "name": "CVS Health Corp",
+      "ticker": "CVS",
+      "exchange": "US"
+    },
+    {
+      "id": "432490",
+      "name": "Intuit Inc",
+      "ticker": "INTU",
+      "exchange": "US"
+    },
+    {
+      "id": "431181",
+      "name": "Danaher Corp",
+      "ticker": "DHR",
+      "exchange": "US"
+    },
+    {
+      "id": "435403",
+      "name": "Truist Financial Corp",
+      "ticker": "TFC",
+      "exchange": "US"
+    },
+    {
+      "id": "435137",
+      "name": "Target Corp",
+      "ticker": "TGT",
+      "exchange": "US"
+    },
+    {
+      "id": "435432",
+      "name": "Uber Technologies Inc",
+      "ticker": "UBER",
+      "exchange": "US"
+    },
+    {
+      "id": "430016",
+      "name": "Baxter International Inc",
+      "ticker": "BAX",
+      "exchange": "US"
+    },
+    {
+      "id": "433658",
+      "name": "Nike Inc",
+      "ticker": "NKE",
+      "exchange": "US"
+    },
+    {
+      "id": "431003",
+      "name": "Costco Wholesale Corp",
+      "ticker": "COST",
+      "exchange": "US"
+    },
+    {
+      "id": "432035",
+      "name": "The Goldman Sachs Group Inc",
+      "ticker": "GS",
+      "exchange": "US"
+    },
+    {
+      "id": "429793",
+      "name": "Applied Materials Inc",
+      "ticker": "AMAT",
+      "exchange": "US"
+    },
+    {
+      "id": "429765",
+      "name": "Elevance Health Inc",
+      "ticker": "ELV",
+      "exchange": "US"
+    },
+    {
+      "id": "436024",
+      "name": "Zoetis Inc",
+      "ticker": "ZTS",
+      "exchange": "US"
+    },
+    {
+      "id": "435459",
+      "name": "Union Pacific Corp",
+      "ticker": "UNP",
+      "exchange": "US"
+    },
+    {
+      "id": "429822",
+      "name": "Arista Networks Inc",
+      "ticker": "ANET",
+      "exchange": "US"
+    },
+    {
+      "id": "430955",
+      "name": "ConocoPhillips",
+      "ticker": "COP",
+      "exchange": "US"
+    },
+    {
+      "id": "434658",
+      "name": "ServiceNow Inc",
+      "ticker": "NOW",
+      "exchange": "US"
+    },
+    {
+      "id": "434275",
+      "name": "QUALCOMM Inc",
+      "ticker": "QCOM",
+      "exchange": "US"
+    },
+    {
+      "id": "430117",
+      "name": "Blackrock Inc",
+      "ticker": "BLK",
+      "exchange": "US"
+    },
+    {
+      "id": "432951",
+      "name": "Lam Research Corp",
+      "ticker": "LRCX",
+      "exchange": "US"
+    },
+    {
+      "id": "433309",
+      "name": "Medtronic PLC",
+      "ticker": "MDT",
+      "exchange": "US"
+    },
+    {
+      "id": "434983",
+      "name": "STATE OF OHIO",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435119",
+      "name": "Taiwan Semiconductor Manufacturing Co Ltd",
+      "ticker": "TSM",
+      "exchange": "US"
+    },
+    {
+      "id": "2334916",
+      "name": "MH BUILT TO LAST LLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429867",
+      "name": "ASML Holding NV",
+      "ticker": "ASML",
+      "exchange": "US"
+    },
+    {
+      "id": "430368",
+      "name": "Capital One Financial Corp",
+      "ticker": "COF",
+      "exchange": "US"
+    },
+    {
+      "id": "430515",
+      "name": "Chevron Corp",
+      "ticker": "CVX",
+      "exchange": "US"
+    },
+    {
+      "id": "430534",
+      "name": "Chipotle Mexican Grill Inc",
+      "ticker": "CMG",
+      "exchange": "US"
+    },
+    {
+      "id": "430172",
+      "name": "Booking Holdings Inc",
+      "ticker": "BKNG",
+      "exchange": "US"
+    },
+    {
+      "id": "431424",
+      "name": "Elanco Animal Health Inc",
+      "ticker": "ELAN",
+      "exchange": "US"
+    },
+    {
+      "id": "431675",
+      "name": "Fidelity National Information Services Inc",
+      "ticker": "FIS",
+      "exchange": "US"
+    },
+    {
+      "id": "432480",
+      "name": "International Business Machines Corp",
+      "ticker": "IBM",
+      "exchange": "US"
+    },
+    {
+      "id": "433279",
+      "name": "McDonald's Corp",
+      "ticker": "MCD",
+      "exchange": "US"
+    },
+    {
+      "id": "429617",
+      "name": "The Allstate Corporation",
+      "ticker": "ALL",
+      "exchange": "US"
+    },
+    {
+      "id": "433865",
+      "name": "Oracle Corp",
+      "ticker": "ORCL",
+      "exchange": "US"
+    },
+    {
+      "id": "430820",
+      "name": "Cleveland-Cliffs Inc",
+      "ticker": "CLF",
+      "exchange": "US"
+    },
+    {
+      "id": "435777",
+      "name": "Walmart Inc",
+      "ticker": "WMT",
+      "exchange": "US"
+    },
+    {
+      "id": "431645",
+      "name": "FedEx Corp",
+      "ticker": "FDX",
+      "exchange": "US"
+    },
+    {
+      "id": "433121",
+      "name": "Lowe's Cos Inc",
+      "ticker": "LOW",
+      "exchange": "US"
+    },
+    {
+      "id": "434678",
+      "name": "The Sherwin-Williams Co",
+      "ticker": "SHW",
+      "exchange": "US"
+    },
+    {
+      "id": "1734484",
+      "name": "Centene Corp",
+      "ticker": "CNC",
+      "exchange": "US"
+    },
+    {
+      "id": "429700",
+      "name": "American International Group Inc",
+      "ticker": "AIG",
+      "exchange": "US"
+    },
+    {
+      "id": "430568",
+      "name": "Cisco Systems Inc",
+      "ticker": "CSCO",
+      "exchange": "US"
+    },
+    {
+      "id": "431527",
+      "name": "EPAM Systems Inc",
+      "ticker": "EPAM",
+      "exchange": "US"
+    },
+    {
+      "id": "431946",
+      "name": "General Motors Co",
+      "ticker": "GM",
+      "exchange": "US"
+    },
+    {
+      "id": "432899",
+      "name": "KKR & Co Inc",
+      "ticker": "KKR",
+      "exchange": "US"
+    }
+  ],
+  "errors": []
+}

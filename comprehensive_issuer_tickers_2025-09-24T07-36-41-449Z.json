@@ -1,0 +1,4294 @@
+{
+  "timestamp": "2025-09-24T07:36:41.450Z",
+  "total": 612,
+  "withTicker": 0,
+  "withoutTicker": 612,
+  "results": [
+    {
+      "id": "435544",
+      "name": "US TREASURY BILLS",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433382",
+      "name": "Microsoft Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429622",
+      "name": "Alphabet Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433770",
+      "name": "NVIDIA Corporation",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429789",
+      "name": "Apple Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429648",
+      "name": "Amazon.com Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432796",
+      "name": "JPMorgan Chase & Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431610",
+      "name": "Meta Platforms Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435467",
+      "name": "Unitedhealth Group Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2264488",
+      "name": "Berkshire Hathaway Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334591",
+      "name": "JPMORGAN 100% US TREASURY SECURITIES MONEY MARKET FUND",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429495",
+      "name": "Adobe Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435735",
+      "name": "Visa Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435211",
+      "name": "Tesla Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435546",
+      "name": "US TREASURY NOTE",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432782",
+      "name": "Johnson & Johnson",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "1282836",
+      "name": "Wells Fargo & Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430431",
+      "name": "CBOE MINI SPX INDEX",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429988",
+      "name": "Bank of America Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429469",
+      "name": "Accenture PLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430239",
+      "name": "Broadcom Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433323",
+      "name": "Merck & Co Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431303",
+      "name": "The Walt Disney Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432293",
+      "name": "The Home Depot Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434517",
+      "name": "salesforce.com Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430911",
+      "name": "Comcast Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433036",
+      "name": "Eli Lilly and Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432464",
+      "name": "Intel Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435219",
+      "name": "Texas Instruments Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434019",
+      "name": "PepsiCo Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434933",
+      "name": "Starbucks Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434041",
+      "name": "Pfizer Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429442",
+      "name": "Abbott Laboratories",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433981",
+      "name": "PayPal Holdings Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430570",
+      "name": "Citigroup Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429505",
+      "name": "Advanced Micro Devices Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431426",
+      "name": "ELCM2 LLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434191",
+      "name": "The Procter & Gamble Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434591",
+      "name": "Schwab (Charles) Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435244",
+      "name": "Thermo Fisher Scientific Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429443",
+      "name": "AbbVie Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433589",
+      "name": "Netflix Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435472",
+      "name": "United Parcel Service Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435673",
+      "name": "Verizon Communications Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433469",
+      "name": "Morgan Stanley",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433381",
+      "name": "Micron Technology Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430852",
+      "name": "The Coca-Cola Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433254",
+      "name": "Mastercard Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429769",
+      "name": "Aon PLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430423",
+      "name": "Caterpillar Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433048",
+      "name": "Linde PLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432337",
+      "name": "Humana Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429929",
+      "name": "AUTODESK Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429914",
+      "name": "AT&T Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431156",
+      "name": "CVS Health Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432490",
+      "name": "Intuit Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431181",
+      "name": "Danaher Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435403",
+      "name": "Truist Financial Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435137",
+      "name": "Target Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435432",
+      "name": "Uber Technologies Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430016",
+      "name": "Baxter International Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433658",
+      "name": "Nike Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431003",
+      "name": "Costco Wholesale Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432035",
+      "name": "The Goldman Sachs Group Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429793",
+      "name": "Applied Materials Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429765",
+      "name": "Elevance Health Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "436024",
+      "name": "Zoetis Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435459",
+      "name": "Union Pacific Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429822",
+      "name": "Arista Networks Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430955",
+      "name": "ConocoPhillips",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434658",
+      "name": "ServiceNow Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434275",
+      "name": "QUALCOMM Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430117",
+      "name": "Blackrock Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432951",
+      "name": "Lam Research Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433309",
+      "name": "Medtronic PLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434983",
+      "name": "STATE OF OHIO",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435119",
+      "name": "Taiwan Semiconductor Manufacturing Co Ltd",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334916",
+      "name": "MH BUILT TO LAST LLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429867",
+      "name": "ASML Holding NV",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430368",
+      "name": "Capital One Financial Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430515",
+      "name": "Chevron Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430534",
+      "name": "Chipotle Mexican Grill Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430172",
+      "name": "Booking Holdings Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431424",
+      "name": "Elanco Animal Health Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431675",
+      "name": "Fidelity National Information Services Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432480",
+      "name": "International Business Machines Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433279",
+      "name": "McDonald's Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429617",
+      "name": "The Allstate Corporation",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433865",
+      "name": "Oracle Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430820",
+      "name": "Cleveland-Cliffs Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435777",
+      "name": "Walmart Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431645",
+      "name": "FedEx Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433121",
+      "name": "Lowe's Cos Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434678",
+      "name": "The Sherwin-Williams Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "1734484",
+      "name": "Centene Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429700",
+      "name": "American International Group Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430568",
+      "name": "Cisco Systems Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431527",
+      "name": "EPAM Systems Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431946",
+      "name": "General Motors Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432899",
+      "name": "KKR & Co Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433650",
+      "name": "NextEra Energy Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433952",
+      "name": "Parker-Hannifin Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431772",
+      "name": "Fiserv Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433586",
+      "name": "NetApp Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430182",
+      "name": "Boston Scientific Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431208",
+      "name": "DEERE & COMPANY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431819",
+      "name": "Ford Motor Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431998",
+      "name": "GLOBAL PAYMENTS Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432491",
+      "name": "Intuitive Surgical Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433531",
+      "name": "Nasdaq Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429725",
+      "name": "Amgen Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431833",
+      "name": "Fortinet Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433927",
+      "name": "Palo Alto Networks Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429708",
+      "name": "American Tower Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334013",
+      "name": "VANGUARD FEDERAL MONEY MARKET FUND",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334695",
+      "name": "GE VERNOVA INC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334865",
+      "name": "NOT FADE AWAY LLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430231",
+      "name": "Bristol-Myers Squibb Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431124",
+      "name": "Crown Castle International Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431944",
+      "name": "General Electric Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434652",
+      "name": "Sensata Technologies Holding PLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429741",
+      "name": "Analog Devices Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434348",
+      "name": "Regeneron Pharmaceuticals Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435112",
+      "name": "Sysco Corporation",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433227",
+      "name": "Marriott International Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434094",
+      "name": "Pinterest Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435040",
+      "name": "Stryker Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435108",
+      "name": "Synopsys Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429677",
+      "name": "American Express Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429932",
+      "name": "Automatic Data Processing Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430041",
+      "name": "Becton Dickinson and Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430133",
+      "name": "Blackstone Group Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430994",
+      "name": "Corning Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431608",
+      "name": "Exxon Mobil Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432965",
+      "name": "The Estee Lauder Cos Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433456",
+      "name": "Monster Beverage Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433568",
+      "name": "NCR Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434118",
+      "name": "The PNC Financial Services Group Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434201",
+      "name": "Prologis Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430305",
+      "name": "Cadence Design Systems Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433229",
+      "name": "Marsh & McLennan Companies Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434055",
+      "name": "Philip Morris International Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435611",
+      "name": "VANGUARD LONG TERM TAX EXEMPT FUND",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431315",
+      "name": "Dollar General Corporation",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435282",
+      "name": "T-Mobile US Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431945",
+      "name": "General Mills Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432298",
+      "name": "Honeywell International Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433444",
+      "name": "Mondelez International Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435532",
+      "name": "U.S. Bancorp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431346",
+      "name": "Dow Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431395",
+      "name": "Eaton Corp PLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433130",
+      "name": "Lululemon Athletica Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433283",
+      "name": "McKesson Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435808",
+      "name": "Waste Management Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334500",
+      "name": "MAYS ALLOCATE LP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429542",
+      "name": "Airbnb Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433735",
+      "name": "Novo Nordisk A/S",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429428",
+      "name": "3M Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429550",
+      "name": "Air Products and Chemicals Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429939",
+      "name": "Avantor Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431299",
+      "name": "Warner Bros Discover Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434919",
+      "name": "SS&C Technologies Holdings Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434316",
+      "name": "RTX Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434562",
+      "name": "SBA Communications Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435958",
+      "name": "Workday Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430543",
+      "name": "Chubb Ltd",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435639",
+      "name": "Vanguard Total Stock Market ETF",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431607",
+      "name": "Extra Space Storage Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432924",
+      "name": "The Kraft Heinz Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433688",
+      "name": "Norfolk Southern Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434883",
+      "name": "S&P Global Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "436020",
+      "name": "Zimmer Biomet Holdings Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430554",
+      "name": "Cigna Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432874",
+      "name": "Kimberly-Clark Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433081",
+      "name": "Lockheed Martin Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434460",
+      "name": "Shell PLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430834",
+      "name": "CME Group Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430875",
+      "name": "Colgate-Palmolive Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431320",
+      "name": "Dominion Energy Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432250",
+      "name": "The Hershey Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434151",
+      "name": "PPG Industries Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435281",
+      "name": "The TJX Companies Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435430",
+      "name": "Tyson Foods Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435771",
+      "name": "Walgreens Boots Alliance Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430962",
+      "name": "Constellation Brands Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433338",
+      "name": "Metlife Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433633",
+      "name": "NEW YORK CITY TRANSITIONAL FINANCE AUTHORITY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434194",
+      "name": "The Progressive Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434996",
+      "name": "STATE OF WASHINGTON",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431418",
+      "name": "Edwards Lifesciences Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432199",
+      "name": "HCA Healthcare Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432866",
+      "name": "Keurig Dr Pepper Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432937",
+      "name": "Laboratory Corp of America Holdings",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433819",
+      "name": "Old Dominion Freight Line Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433977",
+      "name": "Paychex Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429590",
+      "name": "Align Technology Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429720",
+      "name": "Cencora Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431121",
+      "name": "CrowdStrike Holdings Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431433",
+      "name": "Electronic Arts Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432382",
+      "name": "Illumina Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435681",
+      "name": "Vertex Pharmaceuticals Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429639",
+      "name": "Altria Group Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431879",
+      "name": "Freeport-McMoRan Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433773",
+      "name": "NXP Semiconductors NV",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434825",
+      "name": "CBOE SPX INDEX",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431316",
+      "name": "Dollar Tree Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431352",
+      "name": "D.R. Horton Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431462",
+      "name": "Emerson Electric Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434429",
+      "name": "Rockwell Automation Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430491",
+      "name": "Charter Communications Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431135",
+      "name": "CSX Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431372",
+      "name": "DuPont  De Nemours Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431493",
+      "name": "Energy Transfer LP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433232",
+      "name": "Martin Marietta Materials Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435295",
+      "name": "The Toronto-Dominion Bank",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429583",
+      "name": "Alexandria Real Estate Equities Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431262",
+      "name": "DexCom Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431506",
+      "name": "Enphase Energy Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432868",
+      "name": "KeyCorp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433147",
+      "name": "LyondellBasell Industries NV",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434554",
+      "name": "SAP SE",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435001",
+      "name": "State Street Corporation",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429569",
+      "name": "Albemarle Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429796",
+      "name": "Aptiv PLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430944",
+      "name": "Conagra Brands Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432274",
+      "name": "Hilton Worldwide Holdings Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432367",
+      "name": "IDEXX Laboratories Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433434",
+      "name": "Moderna Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433790",
+      "name": "Occidental Petroleum Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433817",
+      "name": "OKTA Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435473",
+      "name": "United Rentals Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "1282634",
+      "name": "Vanguard S&P 500 ETF",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431265",
+      "name": "DFA EMERGING MARKETS CORE EQUITY PORTFOLIO",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432077",
+      "name": "Graphic Packaging Holding Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432482",
+      "name": "International Flavors & Fragrances Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433493",
+      "name": "MSCI Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434353",
+      "name": "Regions Financial Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431370",
+      "name": "The Dun & Bradstreet Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433379",
+      "name": "Microchip Technology Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434712",
+      "name": "Simon Property Group Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435122",
+      "name": "Take-Two Interactive Software Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435529",
+      "name": "Urban Outfitters Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435886",
+      "name": "Weyerhaeuser Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429812",
+      "name": "Archer-Daniels-Midland Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429992",
+      "name": "The Bank of New York Mellon Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430082",
+      "name": "Biogen Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430328",
+      "name": "Topgolf Callaway Brands Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430399",
+      "name": "CarMax Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430827",
+      "name": "The Clorox Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432993",
+      "name": "Lennar Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433909",
+      "name": "PACCAR Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434004",
+      "name": "Penn National Gaming Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434954",
+      "name": "STATE OF CONNECTICUT",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435477",
+      "name": "United States Steel Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2331336",
+      "name": "Palantir Technologies Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429957",
+      "name": "Axalta Coating Systems Ltd",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429993",
+      "name": "The Bank of Nova Scotia",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430093",
+      "name": "BJ's Wholesale Club Holdings Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430403",
+      "name": "Carrier Global Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431298",
+      "name": "Discover Financial Services",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431333",
+      "name": "DORMITORY AUTHORITY OF THE STATE OF NEW YORK",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431375",
+      "name": "Dynatrace Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431783",
+      "name": "FleetCor Technologies Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431835",
+      "name": "Fortive Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433854",
+      "name": "ON Semiconductor Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434278",
+      "name": "Quanta Services Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435877",
+      "name": "West Pharmaceutical Services Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430019",
+      "name": "Bayer AG",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431282",
+      "name": "Digital Realty Trust Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433236",
+      "name": "Marvell Technology Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435342",
+      "name": "Trane Technologies PLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2331193",
+      "name": "Vishay Intertechnology Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429782",
+      "name": "Apollo Global Management Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430573",
+      "name": "Citizens Financial Group Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431002",
+      "name": "CoStar Group Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432381",
+      "name": "Illinois Tool Works Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432432",
+      "name": "Ingersoll Rand Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432543",
+      "name": "Iqvia Holdings Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432930",
+      "name": "The Kroger Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433437",
+      "name": "Mohawk Industries Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434248",
+      "name": "Public Storage",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435134",
+      "name": "Tapestry Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435166",
+      "name": "TE Connectivity Ltd",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2331444",
+      "name": "MillerKnoll Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334585",
+      "name": "ISHARES MONTH TREAS BOND ETF",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334903",
+      "name": "DIREXION DAILY SMALL CAP BULL 3X ETF",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432900",
+      "name": "KLA Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433712",
+      "name": "Northrop Grumman Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434233",
+      "name": "Prudential Financial Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434327",
+      "name": "Realty Income Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434507",
+      "name": "Safran SA",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435765",
+      "name": "Westinghouse Air Brake Technologies Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2333561",
+      "name": "Block Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334898",
+      "name": "MH FOUR WINDS LLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430155",
+      "name": "BNP Paribas",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430999",
+      "name": "Corteva Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431648",
+      "name": "Ferguson PLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431961",
+      "name": "Genuine Parts Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431977",
+      "name": "Gilead Sciences Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432290",
+      "name": "Hologic Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433624",
+      "name": "Newmont Corporation",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434171",
+      "name": "T. Rowe Price Group Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435018",
+      "name": "Stifel Financial Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334051",
+      "name": "STATE OF MASSACHUSETTS",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334504",
+      "name": "KENVUE INC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429731",
+      "name": "Amphenol Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429760",
+      "name": "ANSYS Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430865",
+      "name": "Cognizant Technology Solutions Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431222",
+      "name": "Dell Technologies Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431367",
+      "name": "Duke Energy Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431548",
+      "name": "Equity Residential",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432164",
+      "name": "Harley-Davidson Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432323",
+      "name": "HP Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432516",
+      "name": "Invesco QQQ Trust Series 1",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433439",
+      "name": "Molina Healthcare Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433653",
+      "name": "NGL Energy Partners LP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433889",
+      "name": "Oshkosh Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434452",
+      "name": "Ross Stores Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435339",
+      "name": "The Trade Desk Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334687",
+      "name": "SUPER MICRO COMPUTER INC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334843",
+      "name": "ULTRA CLEAN HOLDINGS INC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429528",
+      "name": "Agilent Technologies Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430922",
+      "name": "COMMONWEALTH OF PENNSYLVANIA",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432961",
+      "name": "Las Vegas Sands Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433321",
+      "name": "MercadoLibre Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433464",
+      "name": "Moody's Corp.",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433479",
+      "name": "Motorola Solutions Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433495",
+      "name": "M&T Bank Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434226",
+      "name": "Prosus NV",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434446",
+      "name": "Roper Technologies Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435338",
+      "name": "Tractor Supply Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435443",
+      "name": "Ulta Beauty Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "579351",
+      "name": "OHIO WATER DEVELOPMENT AUTHORITY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2335008",
+      "name": "TENABLE HOLDINGS INC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429724",
+      "name": "AMETEK Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429934",
+      "name": "AutoZone Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430176",
+      "name": "BorgWarner Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431541",
+      "name": "Equinix Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431687",
+      "name": "Fifth Third Bancorp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432872",
+      "name": "Keysight Technologies Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433385",
+      "name": "Mid-America Apartment Communities Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434023",
+      "name": "Revvity Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434241",
+      "name": "PTC Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434771",
+      "name": "SolarEdge Technologies Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434860",
+      "name": "SPDR S&P 500 ETF Trust",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435687",
+      "name": "Paramount Global Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435812",
+      "name": "Waters Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334178",
+      "name": "GE HEALTHCARE TECHNOLOGI INC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429717",
+      "name": "Ameriprise Financial Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430264",
+      "name": "Brown & Brown Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430545",
+      "name": "Church & Dwight Co Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431539",
+      "name": "Equifax Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432306",
+      "name": "Hormel Foods Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432471",
+      "name": "Intercontinental Exchange Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433013",
+      "name": "Liberty Broadband Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435436",
+      "name": "UBS Group AG",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435685",
+      "name": "V.F. Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430980",
+      "name": "Copart Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431148",
+      "name": "Curtiss-Wright Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431260",
+      "name": "Devon Energy Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431405",
+      "name": "Ecolab Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431837",
+      "name": "Fortune Brands Innovations Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431928",
+      "name": "Gartner Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432485",
+      "name": "International Paper Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433073",
+      "name": "LKQ Corporation",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434373",
+      "name": "Resmed Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434422",
+      "name": "Robert Half International Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434758",
+      "name": "Snowflake Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435694",
+      "name": "VICI Properties Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429991",
+      "name": "Bank of Montreal",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430266",
+      "name": "Brown-Forman Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430355",
+      "name": "Canadian Imperial Bank of Commerce",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430400",
+      "name": "Carnival Corporation & PLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430479",
+      "name": "Ceridian HCM Holding Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430565",
+      "name": "Cintas Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432061",
+      "name": "Grainger (W.W.) Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432216",
+      "name": "Healthpeak Properties Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432240",
+      "name": "HENRY SCHEIN Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432528",
+      "name": "Invitation Homes Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433448",
+      "name": "Monolithic Power Systems Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433513",
+      "name": "Murphy Oil Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433708",
+      "name": "Northern Trust Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429888",
+      "name": "Astrazeneca PLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429936",
+      "name": "AvalonBay Communities Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429978",
+      "name": "BALL CORPORATION",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430086",
+      "name": "Bio-Techne Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430393",
+      "name": "Carlisle Cos Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431224",
+      "name": "Delta Air Lines Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431270",
+      "name": "Diageo PLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431626",
+      "name": "Fastenal Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431722",
+      "name": "First Solar Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432977",
+      "name": "Lear Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433978",
+      "name": "Paycom Software Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434371",
+      "name": "Republic Services Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434456",
+      "name": "Royal Bank of Canada",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434800",
+      "name": "The Southern Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429482",
+      "name": "Activision Blizzard Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430164",
+      "name": "Boeing Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430408",
+      "name": "Carter's Inc.",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431509",
+      "name": "Entegris Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432176",
+      "name": "The Hartford Financial Services Group Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433892",
+      "name": "Otis Worldwide Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435691",
+      "name": "Viatris Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435761",
+      "name": "Vulcan Materials Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435862",
+      "name": "Western Digital Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334354",
+      "name": "CAFFEINATED CAPITAL 2023 ALLOCATE ACCESS FUND LP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429589",
+      "name": "Alibaba Group Holding Ltd",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432778",
+      "name": "Johnson Controls International PLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433219",
+      "name": "Markel Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433278",
+      "name": "McCormick & Co Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433540",
+      "name": "National Fuel Gas Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433584",
+      "name": "Nestle SA, Cham Und Vevey",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433878",
+      "name": "O'Reilly Automotive Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434027",
+      "name": "Perrigo Co PLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435671",
+      "name": "VERISK ANALYTICS Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429524",
+      "name": "AFLAC Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429663",
+      "name": "American Airlines Group Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430181",
+      "name": "Boston Properties Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430488",
+      "name": "Charles River Laboratories International Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430841",
+      "name": "CNH Industrial N.V.",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431189",
+      "name": "Datadog Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431845",
+      "name": "Fox Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431941",
+      "name": "General Dynamics Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432321",
+      "name": "Howmet Aerospace Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432338",
+      "name": "Huntington Bancshares Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432394",
+      "name": "Incyte Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432578",
+      "name": "iShares Core S&P Small-Cap ETF",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433350",
+      "name": "Mettler-Toledo International Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433427",
+      "name": "MKS Instruments Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433769",
+      "name": "nVent Electric PLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433772",
+      "name": "NVR Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434130",
+      "name": "PORT AUTHORITY OF NEW YORK AND NEW JERSEY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435061",
+      "name": "Sun Communities Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435457",
+      "name": "Unilever PLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435953",
+      "name": "Woodward Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "436010",
+      "name": "YUM BRANDS  Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2332090",
+      "name": "Kellogg Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334768",
+      "name": "APPLOVIN CORP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429577",
+      "name": "Alcoa Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429608",
+      "name": "Alliance Resource Partners LP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429848",
+      "name": "Arthur J. Gallagher & Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430381",
+      "name": "Cardinal Health Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430439",
+      "name": "CDW Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430715",
+      "name": "CITY OF NEW YORK",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431698",
+      "name": "FirstCash Holdings Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432254",
+      "name": "Hewlett Packard Enterprise Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432879",
+      "name": "Kinder Morgan Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434343",
+      "name": "Regal Rexnord Corporation",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434687",
+      "name": "Shopify Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434817",
+      "name": "Southwest Airlines Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435558",
+      "name": "Valero Energy Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "436015",
+      "name": "Zebra Technologies Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "436022",
+      "name": "Zions Bancorporation National Association",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "1608657",
+      "name": "CBRE Group Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2290378",
+      "name": "Welltower Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334905",
+      "name": "YIELDMAX SMCI OPTION INCOME STRATEGY ETF",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334914",
+      "name": "BITWISE BITCOIN ETF",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429501",
+      "name": "Advance Auto Parts Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429618",
+      "name": "Ally Financial Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429811",
+      "name": "Arch Capital Group Ltd",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430056",
+      "name": "Berkley (W.R.) Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430626",
+      "name": "CITY OF COLUMBUS OHIO",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431721",
+      "name": "First Republic Bank",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431958",
+      "name": "Genpact Ltd",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433043",
+      "name": "Lincoln National Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433471",
+      "name": "MORGAN STANLEY FINANCE LLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434542",
+      "name": "Sanofi",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434726",
+      "name": "Skechers U S A Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435079",
+      "name": "SVB Financial Group",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435438",
+      "name": "UDR Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435545",
+      "name": "US TREASURY BOND",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "1570797",
+      "name": "HSBC Holdings PLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2333558",
+      "name": "Robinhood Markets Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429906",
+      "name": "Atlassian Corp PLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430199",
+      "name": "BP PLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430308",
+      "name": "Caesars Entertainment Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430577",
+      "name": "CITY AND COUNTY OF HONOLULU",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430978",
+      "name": "The Cooper Cos Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431330",
+      "name": "DoorDash Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431611",
+      "name": "FactSet Research Systems Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431863",
+      "name": "Franklin Resources Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431940",
+      "name": "Generac Holdings Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432017",
+      "name": "GoDaddy Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432141",
+      "name": "Halliburton Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432185",
+      "name": "Hasbro Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432314",
+      "name": "Houlihan Lokey Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432707",
+      "name": "ITT Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432876",
+      "name": "Kimco Realty Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434426",
+      "name": "Roche Holding AG",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434930",
+      "name": "Stanley Black & Decker Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435670",
+      "name": "Verisign Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435909",
+      "name": "The Williams Cos Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "547164",
+      "name": "SEVEN BRIDGES LONG SHORT EQUITY FUND LTD",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2300799",
+      "name": "JPMORGAN US GOVERNMENT MONEY MARKET FUND",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2333493",
+      "name": "CME CATTLE",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334032",
+      "name": "FLEX LNG LTD",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429659",
+      "name": "Ameren Corporation",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429941",
+      "name": "Avery Dennison Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430279",
+      "name": "Builders FirstSource Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431146",
+      "name": "Cummins Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431207",
+      "name": "Deckers Outdoor Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431304",
+      "name": "DISTRICT OF COLUMBIA",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431576",
+      "name": "Etsy Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431831",
+      "name": "FORT BEND INDEPENDENT SCHOOL DISTRICT",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432327",
+      "name": "Hubbell Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432434",
+      "name": "ING Groep NV",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432457",
+      "name": "Insulet Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432906",
+      "name": "Knight-Swift Transportation Holdings Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433023",
+      "name": "Liberty Media Corp SiriusXM Group",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433122",
+      "name": "LPL Financial Holdings Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433478",
+      "name": "The Mosaic Company",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433730",
+      "name": "Novartis AG",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433846",
+      "name": "ONEOK Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434012",
+      "name": "PENNSYLVANIA TURNPIKE COMMISSION",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434125",
+      "name": "Pool Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434901",
+      "name": "Spotify Technology S.A",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434950",
+      "name": "STATE OF CALIFORNIA",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435099",
+      "name": "Synchrony Financial",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435585",
+      "name": "Vanguard Dividend Appreciation ETF",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435984",
+      "name": "Xcel Energy Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "1604614",
+      "name": "Formula One Group - The Liberty Media Group",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2333857",
+      "name": "CME SOYBEAN",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334337",
+      "name": "CAPPED BUFFERED ENHANCED PARTICIPATION",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334583",
+      "name": "VERALTO CORP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429791",
+      "name": "Applied Industrial Technologies Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429997",
+      "name": "Barclays Bank PLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430062",
+      "name": "Best Buy Co Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431544",
+      "name": "Equitable Holdings Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432243",
+      "name": "Hercules Capital Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432422",
+      "name": "Infinera Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432453",
+      "name": "Insight Enterprises Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432475",
+      "name": "The Interpublic Group of Cos Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433346",
+      "name": "METROPOLITAN WASHINGTON AIRPORTS AUTHORITY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433364",
+      "name": "MGM Resorts International",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433594",
+      "name": "Neurocrine Biosciences Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433724",
+      "name": "NortonLifeLock Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433744",
+      "name": "Nucor Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433811",
+      "name": "OKLAHOMA DEVELOPMENT FINANCE AUTHORITY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434647",
+      "name": "Sempra",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434737",
+      "name": "Skyworks Solutions Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434763",
+      "name": "Societe Generale Group",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434785",
+      "name": "Sony Group Corporation",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434967",
+      "name": "STATE OF MARYLAND",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435567",
+      "name": "Valvoline Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435682",
+      "name": "Vertiv Holdings Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435914",
+      "name": "Willis Towers Watson PLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435994",
+      "name": "Xylem Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2331163",
+      "name": "3G COURSER ONSHORE FUND LP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334007",
+      "name": "CME SOYBEAN MEAL",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334087",
+      "name": "SEVEN BRIDGES MULTI STRATEGY FUND LP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334588",
+      "name": "CORE & MAIN INC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429555",
+      "name": "AKAMAI TECHNOLOGIES Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430003",
+      "name": "Barrick Gold Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430240",
+      "name": "Broadridge Financial Solutions Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430290",
+      "name": "Burlington Stores Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430560",
+      "name": "Cincinnati Financial Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431625",
+      "name": "Farmers & Merchants Bancorp Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431926",
+      "name": "Garmin Ltd",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432555",
+      "name": "iShares 1-3 Year Treasury Bond ETF",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433003",
+      "name": "LEWIS & CLARK AGRIFOOD FUND II LP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433139",
+      "name": "LVMH Moet Hennessy Louis Vuitton SE",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433919",
+      "name": "Packaging Corp Of America",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434177",
+      "name": "Principal Financial Group Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434255",
+      "name": "PulteGroup Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434314",
+      "name": "Raymond James Financial Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434615",
+      "name": "Seagate Technology Holdings PLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434747",
+      "name": "A. O. Smith Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435205",
+      "name": "Teradyne Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435353",
+      "name": "The Travelers Companies Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435428",
+      "name": "Tyler Technologies Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "1571408",
+      "name": "L3Harris Technologies Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "1734510",
+      "name": "CF Industries Holdings Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "1869593",
+      "name": "Liberty Global PLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334794",
+      "name": "MAYS (J.W.) INC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429653",
+      "name": "Amcor PLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429845",
+      "name": "Arrow Electronics Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430304",
+      "name": "CACI International Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430351",
+      "name": "Campbell Soup Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430445",
+      "name": "Celanese Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430828",
+      "name": "Cloudflare Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431085",
+      "name": "COUNTY OF WILL ILLINOIS",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431241",
+      "name": "DEPARTMENT OF TRANSPORTATION OF MARYLAND",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431326",
+      "name": "Donaldson Co Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431559",
+      "name": "Essex Property Trust Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431598",
+      "name": "Expedia Group Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431809",
+      "name": "FMC Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431930",
+      "name": "Gates Industrial Corp PLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432239",
+      "name": "Henry (Jack) & Associates Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432366",
+      "name": "IDEX Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432550",
+      "name": "Iron Mountain Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432950",
+      "name": "Lamb Weston Holdings Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433066",
+      "name": "Live Nation Entertainment Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433440",
+      "name": "Molson Coors Beverage Company",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433446",
+      "name": "MongoDB Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433603",
+      "name": "Newell Brands Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433686",
+      "name": "Nordson Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434096",
+      "name": "Pioneer Natural Resources Co",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434139",
+      "name": "PORT OF SEATTLE WASHINGTON",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434174",
+      "name": "Primerica Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434209",
+      "name": "ProShares Short QQQ",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435895",
+      "name": "White Mountains Insurance Group Ltd",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "1689224",
+      "name": "ETHEREUM",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2332102",
+      "name": "Southern States Bancshares Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2333803",
+      "name": "DEPARTMENT OF STATE PENNSYLVANIA",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334019",
+      "name": "CONSTELLATION ENE CORP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334327",
+      "name": "HPS SPECIAL SITUATIONS OPPORTUNITY FUND II LP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429898",
+      "name": "CITY OF ATLANTA",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430035",
+      "name": "Beacon Roofing Supply Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430075",
+      "name": "BHP Group Ltd",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430175",
+      "name": "Booz Allen Hamilton Holding Corporation",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431343",
+      "name": "Dover Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431374",
+      "name": "DXC Technology Co",
+      "ticker": null,
+      "exchange": null
+    }
+  ],
+  "errors": [
+    "US TREASURY BILLS (435544): Error: page.goto: Target page, context or browser has been closed",
+    "Microsoft Corp (433382): Error: page.goto: Target page, context or browser has been closed",
+    "Alphabet Inc (429622): Error: page.goto: Target page, context or browser has been closed",
+    "NVIDIA Corporation (433770): Error: page.goto: Target page, context or browser has been closed",
+    "Apple Inc (429789): Error: page.goto: Target page, context or browser has been closed",
+    "Amazon.com Inc (429648): Error: page.goto: Target page, context or browser has been closed",
+    "JPMorgan Chase & Co (432796): Error: page.goto: Target page, context or browser has been closed",
+    "Meta Platforms Inc (431610): Error: page.goto: Target page, context or browser has been closed",
+    "Unitedhealth Group Inc (435467): Error: page.goto: Target page, context or browser has been closed",
+    "Berkshire Hathaway Inc (2264488): Error: page.goto: Target page, context or browser has been closed",
+    "JPMORGAN 100% US TREASURY SECURITIES MONEY MARKET FUND (2334591): Error: page.goto: Target page, context or browser has been closed",
+    "Adobe Inc (429495): Error: page.goto: Target page, context or browser has been closed",
+    "Visa Inc (435735): Error: page.goto: Target page, context or browser has been closed",
+    "Tesla Inc (435211): Error: page.goto: Target page, context or browser has been closed",
+    "US TREASURY NOTE (435546): Error: page.goto: Target page, context or browser has been closed",
+    "Johnson & Johnson (432782): Error: page.goto: Target page, context or browser has been closed",
+    "Wells Fargo & Co (1282836): Error: page.goto: Target page, context or browser has been closed",
+    "CBOE MINI SPX INDEX (430431): Error: page.goto: Target page, context or browser has been closed",
+    "Bank of America Corp (429988): Error: page.goto: Target page, context or browser has been closed",
+    "Accenture PLC (429469): Error: page.goto: Target page, context or browser has been closed",
+    "Broadcom Inc (430239): Error: page.goto: Target page, context or browser has been closed",
+    "Merck & Co Inc (433323): Error: page.goto: Target page, context or browser has been closed",
+    "The Walt Disney Co (431303): Error: page.goto: Target page, context or browser has been closed",
+    "The Home Depot Inc (432293): Error: page.goto: Target page, context or browser has been closed",
+    "salesforce.com Inc (434517): Error: page.goto: Target page, context or browser has been closed",
+    "Comcast Corp (430911): Error: page.goto: Target page, context or browser has been closed",
+    "Eli Lilly and Co (433036): Error: page.goto: Target page, context or browser has been closed",
+    "Intel Corp (432464): Error: page.goto: Target page, context or browser has been closed",
+    "Texas Instruments Inc (435219): Error: page.goto: Target page, context or browser has been closed",
+    "PepsiCo Inc (434019): Error: page.goto: Target page, context or browser has been closed",
+    "Starbucks Corp (434933): Error: page.goto: Target page, context or browser has been closed",
+    "Pfizer Inc (434041): Error: page.goto: Target page, context or browser has been closed",
+    "Abbott Laboratories (429442): Error: page.goto: Target page, context or browser has been closed",
+    "PayPal Holdings Inc (433981): Error: page.goto: Target page, context or browser has been closed",
+    "Citigroup Inc (430570): Error: page.goto: Target page, context or browser has been closed",
+    "Advanced Micro Devices Inc (429505): Error: page.goto: Target page, context or browser has been closed",
+    "ELCM2 LLC (431426): Error: page.goto: Target page, context or browser has been closed",
+    "The Procter & Gamble Co (434191): Error: page.goto: Target page, context or browser has been closed",
+    "Schwab (Charles) Corp (434591): Error: page.goto: Target page, context or browser has been closed",
+    "Thermo Fisher Scientific Inc (435244): Error: page.goto: Target page, context or browser has been closed",
+    "AbbVie Inc (429443): Error: page.goto: Target page, context or browser has been closed",
+    "Netflix Inc (433589): Error: page.goto: Target page, context or browser has been closed",
+    "United Parcel Service Inc (435472): Error: page.goto: Target page, context or browser has been closed",
+    "Verizon Communications Inc (435673): Error: page.goto: Target page, context or browser has been closed",
+    "Morgan Stanley (433469): Error: page.goto: Target page, context or browser has been closed",
+    "Micron Technology Inc (433381): Error: page.goto: Target page, context or browser has been closed",
+    "The Coca-Cola Co (430852): Error: page.goto: Target page, context or browser has been closed",
+    "Mastercard Inc (433254): Error: page.goto: Target page, context or browser has been closed",
+    "Aon PLC (429769): Error: page.goto: Target page, context or browser has been closed",
+    "Caterpillar Inc (430423): Error: page.goto: Target page, context or browser has been closed",
+    "Linde PLC (433048): Error: page.goto: Target page, context or browser has been closed",
+    "Humana Inc (432337): Error: page.goto: Target page, context or browser has been closed",
+    "AUTODESK Inc (429929): Error: page.goto: Target page, context or browser has been closed",
+    "AT&T Inc (429914): Error: page.goto: Target page, context or browser has been closed",
+    "CVS Health Corp (431156): Error: page.goto: Target page, context or browser has been closed",
+    "Intuit Inc (432490): Error: page.goto: Target page, context or browser has been closed",
+    "Danaher Corp (431181): Error: page.goto: Target page, context or browser has been closed",
+    "Truist Financial Corp (435403): Error: page.goto: Target page, context or browser has been closed",
+    "Target Corp (435137): Error: page.goto: Target page, context or browser has been closed",
+    "Uber Technologies Inc (435432): Error: page.goto: Target page, context or browser has been closed",
+    "Baxter International Inc (430016): Error: page.goto: Target page, context or browser has been closed",
+    "Nike Inc (433658): Error: page.goto: Target page, context or browser has been closed",
+    "Costco Wholesale Corp (431003): Error: page.goto: Target page, context or browser has been closed",
+    "The Goldman Sachs Group Inc (432035): Error: page.goto: Target page, context or browser has been closed",
+    "Applied Materials Inc (429793): Error: page.goto: Target page, context or browser has been closed",
+    "Elevance Health Inc (429765): Error: page.goto: Target page, context or browser has been closed",
+    "Zoetis Inc (436024): Error: page.goto: Target page, context or browser has been closed",
+    "Union Pacific Corp (435459): Error: page.goto: Target page, context or browser has been closed",
+    "Arista Networks Inc (429822): Error: page.goto: Target page, context or browser has been closed",
+    "ConocoPhillips (430955): Error: page.goto: Target page, context or browser has been closed",
+    "ServiceNow Inc (434658): Error: page.goto: Target page, context or browser has been closed",
+    "QUALCOMM Inc (434275): Error: page.goto: Target page, context or browser has been closed",
+    "Blackrock Inc (430117): Error: page.goto: Target page, context or browser has been closed",
+    "Lam Research Corp (432951): Error: page.goto: Target page, context or browser has been closed",
+    "Medtronic PLC (433309): Error: page.goto: Target page, context or browser has been closed",
+    "STATE OF OHIO (434983): Error: page.goto: Target page, context or browser has been closed",
+    "Taiwan Semiconductor Manufacturing Co Ltd (435119): Error: page.goto: Target page, context or browser has been closed",
+    "MH BUILT TO LAST LLC (2334916): Error: page.goto: Target page, context or browser has been closed",
+    "ASML Holding NV (429867): Error: page.goto: Target page, context or browser has been closed",
+    "Capital One Financial Corp (430368): Error: page.goto: Target page, context or browser has been closed",
+    "Chevron Corp (430515): Error: page.goto: Target page, context or browser has been closed",
+    "Chipotle Mexican Grill Inc (430534): Error: page.goto: Target page, context or browser has been closed",
+    "Booking Holdings Inc (430172): Error: page.goto: Target page, context or browser has been closed",
+    "Elanco Animal Health Inc (431424): Error: page.goto: Target page, context or browser has been closed",
+    "Fidelity National Information Services Inc (431675): Error: page.goto: Target page, context or browser has been closed",
+    "International Business Machines Corp (432480): Error: page.goto: Target page, context or browser has been closed",
+    "McDonald's Corp (433279): Error: page.goto: Target page, context or browser has been closed",
+    "The Allstate Corporation (429617): Error: page.goto: Target page, context or browser has been closed",
+    "Oracle Corp (433865): Error: page.goto: Target page, context or browser has been closed",
+    "Cleveland-Cliffs Inc (430820): Error: page.goto: Target page, context or browser has been closed",
+    "Walmart Inc (435777): Error: page.goto: Target page, context or browser has been closed",
+    "FedEx Corp (431645): Error: page.goto: Target page, context or browser has been closed",
+    "Lowe's Cos Inc (433121): Error: page.goto: Target page, context or browser has been closed",
+    "The Sherwin-Williams Co (434678): Error: page.goto: Target page, context or browser has been closed",
+    "Centene Corp (1734484): Error: page.goto: Target page, context or browser has been closed",
+    "American International Group Inc (429700): Error: page.goto: Target page, context or browser has been closed",
+    "Cisco Systems Inc (430568): Error: page.goto: Target page, context or browser has been closed",
+    "EPAM Systems Inc (431527): Error: page.goto: Target page, context or browser has been closed",
+    "General Motors Co (431946): Error: page.goto: Target page, context or browser has been closed",
+    "KKR & Co Inc (432899): Error: page.goto: Target page, context or browser has been closed",
+    "NextEra Energy Inc (433650): Error: page.goto: Target page, context or browser has been closed",
+    "Parker-Hannifin Corp (433952): Error: page.goto: Target page, context or browser has been closed",
+    "Fiserv Inc (431772): Error: page.goto: Target page, context or browser has been closed",
+    "NetApp Inc (433586): Error: page.goto: Target page, context or browser has been closed",
+    "Boston Scientific Corp (430182): Error: page.goto: Target page, context or browser has been closed",
+    "DEERE & COMPANY (431208): Error: page.goto: Target page, context or browser has been closed",
+    "Ford Motor Co (431819): Error: page.goto: Target page, context or browser has been closed",
+    "GLOBAL PAYMENTS Inc (431998): Error: page.goto: Target page, context or browser has been closed",
+    "Intuitive Surgical Inc (432491): Error: page.goto: Target page, context or browser has been closed",
+    "Nasdaq Inc (433531): Error: page.goto: Target page, context or browser has been closed",
+    "Amgen Inc (429725): Error: page.goto: Target page, context or browser has been closed",
+    "Fortinet Inc (431833): Error: page.goto: Target page, context or browser has been closed",
+    "Palo Alto Networks Inc (433927): Error: page.goto: Target page, context or browser has been closed",
+    "American Tower Corp (429708): Error: page.goto: Target page, context or browser has been closed",
+    "VANGUARD FEDERAL MONEY MARKET FUND (2334013): Error: page.goto: Target page, context or browser has been closed",
+    "GE VERNOVA INC (2334695): Error: page.goto: Target page, context or browser has been closed",
+    "NOT FADE AWAY LLC (2334865): Error: page.goto: Target page, context or browser has been closed",
+    "Bristol-Myers Squibb Co (430231): Error: page.goto: Target page, context or browser has been closed",
+    "Crown Castle International Corp (431124): Error: page.goto: Target page, context or browser has been closed",
+    "General Electric Co (431944): Error: page.goto: Target page, context or browser has been closed",
+    "Sensata Technologies Holding PLC (434652): Error: page.goto: Target page, context or browser has been closed",
+    "Analog Devices Inc (429741): Error: page.goto: Target page, context or browser has been closed",
+    "Regeneron Pharmaceuticals Inc (434348): Error: page.goto: Target page, context or browser has been closed",
+    "Sysco Corporation (435112): Error: page.goto: Target page, context or browser has been closed",
+    "Marriott International Inc (433227): Error: page.goto: Target page, context or browser has been closed",
+    "Pinterest Inc (434094): Error: page.goto: Target page, context or browser has been closed",
+    "Stryker Corp (435040): Error: page.goto: Target page, context or browser has been closed",
+    "Synopsys Inc (435108): Error: page.goto: Target page, context or browser has been closed",
+    "American Express Co (429677): Error: page.goto: Target page, context or browser has been closed",
+    "Automatic Data Processing Inc (429932): Error: page.goto: Target page, context or browser has been closed",
+    "Becton Dickinson and Co (430041): Error: page.goto: Target page, context or browser has been closed",
+    "Blackstone Group Inc (430133): Error: page.goto: Target page, context or browser has been closed",
+    "Corning Inc (430994): Error: page.goto: Target page, context or browser has been closed",
+    "Exxon Mobil Corp (431608): Error: page.goto: Target page, context or browser has been closed",
+    "The Estee Lauder Cos Inc (432965): Error: page.goto: Target page, context or browser has been closed",
+    "Monster Beverage Corp (433456): Error: page.goto: Target page, context or browser has been closed",
+    "NCR Corp (433568): Error: page.goto: Target page, context or browser has been closed",
+    "The PNC Financial Services Group Inc (434118): Error: page.goto: Target page, context or browser has been closed",
+    "Prologis Inc (434201): Error: page.goto: Target page, context or browser has been closed",
+    "Cadence Design Systems Inc (430305): Error: page.goto: Target page, context or browser has been closed",
+    "Marsh & McLennan Companies Inc (433229): Error: page.goto: Target page, context or browser has been closed",
+    "Philip Morris International Inc (434055): Error: page.goto: Target page, context or browser has been closed",
+    "VANGUARD LONG TERM TAX EXEMPT FUND (435611): Error: page.goto: Target page, context or browser has been closed",
+    "Dollar General Corporation (431315): Error: page.goto: Target page, context or browser has been closed",
+    "T-Mobile US Inc (435282): Error: page.goto: Target page, context or browser has been closed",
+    "General Mills Inc (431945): Error: page.goto: Target page, context or browser has been closed",
+    "Honeywell International Inc (432298): Error: page.goto: Target page, context or browser has been closed",
+    "Mondelez International Inc (433444): Error: page.goto: Target page, context or browser has been closed",
+    "U.S. Bancorp (435532): Error: page.goto: Target page, context or browser has been closed",
+    "Dow Inc (431346): Error: page.goto: Target page, context or browser has been closed",
+    "Eaton Corp PLC (431395): Error: page.goto: Target page, context or browser has been closed",
+    "Lululemon Athletica Inc (433130): Error: page.goto: Target page, context or browser has been closed",
+    "McKesson Corp (433283): Error: page.goto: Target page, context or browser has been closed",
+    "Waste Management Inc (435808): Error: page.goto: Target page, context or browser has been closed",
+    "MAYS ALLOCATE LP (2334500): Error: page.goto: Target page, context or browser has been closed",
+    "Airbnb Inc (429542): Error: page.goto: Target page, context or browser has been closed",
+    "Novo Nordisk A/S (433735): Error: page.goto: Target page, context or browser has been closed",
+    "3M Co (429428): Error: page.goto: Target page, context or browser has been closed",
+    "Air Products and Chemicals Inc (429550): Error: page.goto: Target page, context or browser has been closed",
+    "Avantor Inc (429939): Error: page.goto: Target page, context or browser has been closed",
+    "Warner Bros Discover Inc (431299): Error: page.goto: Target page, context or browser has been closed",
+    "SS&C Technologies Holdings Inc (434919): Error: page.goto: Target page, context or browser has been closed",
+    "RTX Corp (434316): Error: page.goto: Target page, context or browser has been closed",
+    "SBA Communications Corp (434562): Error: page.goto: Target page, context or browser has been closed",
+    "Workday Inc (435958): Error: page.goto: Target page, context or browser has been closed",
+    "Chubb Ltd (430543): Error: page.goto: Target page, context or browser has been closed",
+    "Vanguard Total Stock Market ETF (435639): Error: page.goto: Target page, context or browser has been closed",
+    "Extra Space Storage Inc (431607): Error: page.goto: Target page, context or browser has been closed",
+    "The Kraft Heinz Co (432924): Error: page.goto: Target page, context or browser has been closed",
+    "Norfolk Southern Corp (433688): Error: page.goto: Target page, context or browser has been closed",
+    "S&P Global Inc (434883): Error: page.goto: Target page, context or browser has been closed",
+    "Zimmer Biomet Holdings Inc (436020): Error: page.goto: Target page, context or browser has been closed",
+    "Cigna Corp (430554): Error: page.goto: Target page, context or browser has been closed",
+    "Kimberly-Clark Corp (432874): Error: page.goto: Target page, context or browser has been closed",
+    "Lockheed Martin Corp (433081): Error: page.goto: Target page, context or browser has been closed",
+    "Shell PLC (434460): Error: page.goto: Target page, context or browser has been closed",
+    "CME Group Inc (430834): Error: page.goto: Target page, context or browser has been closed",
+    "Colgate-Palmolive Co (430875): Error: page.goto: Target page, context or browser has been closed",
+    "Dominion Energy Inc (431320): Error: page.goto: Target page, context or browser has been closed",
+    "The Hershey Co (432250): Error: page.goto: Target page, context or browser has been closed",
+    "PPG Industries Inc (434151): Error: page.goto: Target page, context or browser has been closed",
+    "The TJX Companies Inc (435281): Error: page.goto: Target page, context or browser has been closed",
+    "Tyson Foods Inc (435430): Error: page.goto: Target page, context or browser has been closed",
+    "Walgreens Boots Alliance Inc (435771): Error: page.goto: Target page, context or browser has been closed",
+    "Constellation Brands Inc (430962): Error: page.goto: Target page, context or browser has been closed",
+    "Metlife Inc (433338): Error: page.goto: Target page, context or browser has been closed",
+    "NEW YORK CITY TRANSITIONAL FINANCE AUTHORITY (433633): Error: page.goto: Target page, context or browser has been closed",
+    "The Progressive Corp (434194): Error: page.goto: Target page, context or browser has been closed",
+    "STATE OF WASHINGTON (434996): Error: page.goto: Target page, context or browser has been closed",
+    "Edwards Lifesciences Corp (431418): Error: page.goto: Target page, context or browser has been closed",
+    "HCA Healthcare Inc (432199): Error: page.goto: Target page, context or browser has been closed",
+    "Keurig Dr Pepper Inc (432866): Error: page.goto: Target page, context or browser has been closed",
+    "Laboratory Corp of America Holdings (432937): Error: page.goto: Target page, context or browser has been closed",
+    "Old Dominion Freight Line Inc (433819): Error: page.goto: Target page, context or browser has been closed",
+    "Paychex Inc (433977): Error: page.goto: Target page, context or browser has been closed",
+    "Align Technology Inc (429590): Error: page.goto: Target page, context or browser has been closed",
+    "Cencora Inc (429720): Error: page.goto: Target page, context or browser has been closed",
+    "CrowdStrike Holdings Inc (431121): Error: page.goto: Target page, context or browser has been closed",
+    "Electronic Arts Inc (431433): Error: page.goto: Target page, context or browser has been closed",
+    "Illumina Inc (432382): Error: page.goto: Target page, context or browser has been closed",
+    "Vertex Pharmaceuticals Inc (435681): Error: page.goto: Target page, context or browser has been closed",
+    "Altria Group Inc (429639): Error: page.goto: Target page, context or browser has been closed",
+    "Freeport-McMoRan Inc (431879): Error: page.goto: Target page, context or browser has been closed",
+    "NXP Semiconductors NV (433773): Error: page.goto: Target page, context or browser has been closed",
+    "CBOE SPX INDEX (434825): Error: page.goto: Target page, context or browser has been closed",
+    "Dollar Tree Inc (431316): Error: page.goto: Target page, context or browser has been closed",
+    "D.R. Horton Inc (431352): Error: page.goto: Target page, context or browser has been closed",
+    "Emerson Electric Co (431462): Error: page.goto: Target page, context or browser has been closed",
+    "Rockwell Automation Inc (434429): Error: page.goto: Target page, context or browser has been closed",
+    "Charter Communications Inc (430491): Error: page.goto: Target page, context or browser has been closed",
+    "CSX Corp (431135): Error: page.goto: Target page, context or browser has been closed",
+    "DuPont  De Nemours Inc (431372): Error: page.goto: Target page, context or browser has been closed",
+    "Energy Transfer LP (431493): Error: page.goto: Target page, context or browser has been closed",
+    "Martin Marietta Materials Inc (433232): Error: page.goto: Target page, context or browser has been closed",
+    "The Toronto-Dominion Bank (435295): Error: page.goto: Target page, context or browser has been closed",
+    "Alexandria Real Estate Equities Inc (429583): Error: page.goto: Target page, context or browser has been closed",
+    "DexCom Inc (431262): Error: page.goto: Target page, context or browser has been closed",
+    "Enphase Energy Inc (431506): Error: page.goto: Target page, context or browser has been closed",
+    "KeyCorp (432868): Error: page.goto: Target page, context or browser has been closed",
+    "LyondellBasell Industries NV (433147): Error: page.goto: Target page, context or browser has been closed",
+    "SAP SE (434554): Error: page.goto: Target page, context or browser has been closed",
+    "State Street Corporation (435001): Error: page.goto: Target page, context or browser has been closed",
+    "Albemarle Corp (429569): Error: page.goto: Target page, context or browser has been closed",
+    "Aptiv PLC (429796): Error: page.goto: Target page, context or browser has been closed",
+    "Conagra Brands Inc (430944): Error: page.goto: Target page, context or browser has been closed",
+    "Hilton Worldwide Holdings Inc (432274): Error: page.goto: Target page, context or browser has been closed",
+    "IDEXX Laboratories Inc (432367): Error: page.goto: Target page, context or browser has been closed",
+    "Moderna Inc (433434): Error: page.goto: Target page, context or browser has been closed",
+    "Occidental Petroleum Corp (433790): Error: page.goto: Target page, context or browser has been closed",
+    "OKTA Inc (433817): Error: page.goto: Target page, context or browser has been closed",
+    "United Rentals Inc (435473): Error: page.goto: Target page, context or browser has been closed",
+    "Vanguard S&P 500 ETF (1282634): Error: page.goto: Target page, context or browser has been closed",
+    "DFA EMERGING MARKETS CORE EQUITY PORTFOLIO (431265): Error: page.goto: Target page, context or browser has been closed",
+    "Graphic Packaging Holding Co (432077): Error: page.goto: Target page, context or browser has been closed",
+    "International Flavors & Fragrances Inc (432482): Error: page.goto: Target page, context or browser has been closed",
+    "MSCI Inc (433493): Error: page.goto: Target page, context or browser has been closed",
+    "Regions Financial Corp (434353): Error: page.goto: Target page, context or browser has been closed",
+    "The Dun & Bradstreet Corp (431370): Error: page.goto: Target page, context or browser has been closed",
+    "Microchip Technology Inc (433379): Error: page.goto: Target page, context or browser has been closed",
+    "Simon Property Group Inc (434712): Error: page.goto: Target page, context or browser has been closed",
+    "Take-Two Interactive Software Inc (435122): Error: page.goto: Target page, context or browser has been closed",
+    "Urban Outfitters Inc (435529): Error: page.goto: Target page, context or browser has been closed",
+    "Weyerhaeuser Co (435886): Error: page.goto: Target page, context or browser has been closed",
+    "Archer-Daniels-Midland Co (429812): Error: page.goto: Target page, context or browser has been closed",
+    "The Bank of New York Mellon Corp (429992): Error: page.goto: Target page, context or browser has been closed",
+    "Biogen Inc (430082): Error: page.goto: Target page, context or browser has been closed",
+    "Topgolf Callaway Brands Corp (430328): Error: page.goto: Target page, context or browser has been closed",
+    "CarMax Inc (430399): Error: page.goto: Target page, context or browser has been closed",
+    "The Clorox Co (430827): Error: page.goto: Target page, context or browser has been closed",
+    "Lennar Corp (432993): Error: page.goto: Target page, context or browser has been closed",
+    "PACCAR Inc (433909): Error: page.goto: Target page, context or browser has been closed",
+    "Penn National Gaming Inc (434004): Error: page.goto: Target page, context or browser has been closed",
+    "STATE OF CONNECTICUT (434954): Error: page.goto: Target page, context or browser has been closed",
+    "United States Steel Corp (435477): Error: page.goto: Target page, context or browser has been closed",
+    "Palantir Technologies Inc (2331336): Error: page.goto: Target page, context or browser has been closed",
+    "Axalta Coating Systems Ltd (429957): Error: page.goto: Target page, context or browser has been closed",
+    "The Bank of Nova Scotia (429993): Error: page.goto: Target page, context or browser has been closed",
+    "BJ's Wholesale Club Holdings Inc (430093): Error: page.goto: Target page, context or browser has been closed",
+    "Carrier Global Corp (430403): Error: page.goto: Target page, context or browser has been closed",
+    "Discover Financial Services (431298): Error: page.goto: Target page, context or browser has been closed",
+    "DORMITORY AUTHORITY OF THE STATE OF NEW YORK (431333): Error: page.goto: Target page, context or browser has been closed",
+    "Dynatrace Inc (431375): Error: page.goto: Target page, context or browser has been closed",
+    "FleetCor Technologies Inc (431783): Error: page.goto: Target page, context or browser has been closed",
+    "Fortive Corp (431835): Error: page.goto: Target page, context or browser has been closed",
+    "ON Semiconductor Corp (433854): Error: page.goto: Target page, context or browser has been closed",
+    "Quanta Services Inc (434278): Error: page.goto: Target page, context or browser has been closed",
+    "West Pharmaceutical Services Inc (435877): Error: page.goto: Target page, context or browser has been closed",
+    "Bayer AG (430019): Error: page.goto: Target page, context or browser has been closed",
+    "Digital Realty Trust Inc (431282): Error: page.goto: Target page, context or browser has been closed",
+    "Marvell Technology Inc (433236): Error: page.goto: Target page, context or browser has been closed",
+    "Trane Technologies PLC (435342): Error: page.goto: Target page, context or browser has been closed",
+    "Vishay Intertechnology Inc (2331193): Error: page.goto: Target page, context or browser has been closed",
+    "Apollo Global Management Inc (429782): Error: page.goto: Target page, context or browser has been closed",
+    "Citizens Financial Group Inc (430573): Error: page.goto: Target page, context or browser has been closed",
+    "CoStar Group Inc (431002): Error: page.goto: Target page, context or browser has been closed",
+    "Illinois Tool Works Inc (432381): Error: page.goto: Target page, context or browser has been closed",
+    "Ingersoll Rand Inc (432432): Error: page.goto: Target page, context or browser has been closed",
+    "Iqvia Holdings Inc (432543): Error: page.goto: Target page, context or browser has been closed",
+    "The Kroger Co (432930): Error: page.goto: Target page, context or browser has been closed",
+    "Mohawk Industries Inc (433437): Error: page.goto: Target page, context or browser has been closed",
+    "Public Storage (434248): Error: page.goto: Target page, context or browser has been closed",
+    "Tapestry Inc (435134): Error: page.goto: Target page, context or browser has been closed",
+    "TE Connectivity Ltd (435166): Error: page.goto: Target page, context or browser has been closed",
+    "MillerKnoll Inc (2331444): Error: page.goto: Target page, context or browser has been closed",
+    "ISHARES MONTH TREAS BOND ETF (2334585): Error: page.goto: Target page, context or browser has been closed",
+    "DIREXION DAILY SMALL CAP BULL 3X ETF (2334903): Error: page.goto: Target page, context or browser has been closed",
+    "KLA Corp (432900): Error: page.goto: Target page, context or browser has been closed",
+    "Northrop Grumman Corp (433712): Error: page.goto: Target page, context or browser has been closed",
+    "Prudential Financial Inc (434233): Error: page.goto: Target page, context or browser has been closed",
+    "Realty Income Corp (434327): Error: page.goto: Target page, context or browser has been closed",
+    "Safran SA (434507): Error: page.goto: Target page, context or browser has been closed",
+    "Westinghouse Air Brake Technologies Corp (435765): Error: page.goto: Target page, context or browser has been closed",
+    "Block Inc (2333561): Error: page.goto: Target page, context or browser has been closed",
+    "MH FOUR WINDS LLC (2334898): Error: page.goto: Target page, context or browser has been closed",
+    "BNP Paribas (430155): Error: page.goto: Target page, context or browser has been closed",
+    "Corteva Inc (430999): Error: page.goto: Target page, context or browser has been closed",
+    "Ferguson PLC (431648): Error: page.goto: Target page, context or browser has been closed",
+    "Genuine Parts Co (431961): Error: page.goto: Target page, context or browser has been closed",
+    "Gilead Sciences Inc (431977): Error: page.goto: Target page, context or browser has been closed",
+    "Hologic Inc (432290): Error: page.goto: Target page, context or browser has been closed",
+    "Newmont Corporation (433624): Error: page.goto: Target page, context or browser has been closed",
+    "T. Rowe Price Group Inc (434171): Error: page.goto: Target page, context or browser has been closed",
+    "Stifel Financial Corp (435018): Error: page.goto: Target page, context or browser has been closed",
+    "STATE OF MASSACHUSETTS (2334051): Error: page.goto: Target page, context or browser has been closed",
+    "KENVUE INC (2334504): Error: page.goto: Target page, context or browser has been closed",
+    "Amphenol Corp (429731): Error: page.goto: Target page, context or browser has been closed",
+    "ANSYS Inc (429760): Error: page.goto: Target page, context or browser has been closed",
+    "Cognizant Technology Solutions Corp (430865): Error: page.goto: Target page, context or browser has been closed",
+    "Dell Technologies Inc (431222): Error: page.goto: Target page, context or browser has been closed",
+    "Duke Energy Corp (431367): Error: page.goto: Target page, context or browser has been closed",
+    "Equity Residential (431548): Error: page.goto: Target page, context or browser has been closed",
+    "Harley-Davidson Inc (432164): Error: page.goto: Target page, context or browser has been closed",
+    "HP Inc (432323): Error: page.goto: Target page, context or browser has been closed",
+    "Invesco QQQ Trust Series 1 (432516): Error: page.goto: Target page, context or browser has been closed",
+    "Molina Healthcare Inc (433439): Error: page.goto: Target page, context or browser has been closed",
+    "NGL Energy Partners LP (433653): Error: page.goto: Target page, context or browser has been closed",
+    "Oshkosh Corp (433889): Error: page.goto: Target page, context or browser has been closed",
+    "Ross Stores Inc (434452): Error: page.goto: Target page, context or browser has been closed",
+    "The Trade Desk Inc (435339): Error: page.goto: Target page, context or browser has been closed",
+    "SUPER MICRO COMPUTER INC (2334687): Error: page.goto: Target page, context or browser has been closed",
+    "ULTRA CLEAN HOLDINGS INC (2334843): Error: page.goto: Target page, context or browser has been closed",
+    "Agilent Technologies Inc (429528): Error: page.goto: Target page, context or browser has been closed",
+    "COMMONWEALTH OF PENNSYLVANIA (430922): Error: page.goto: Target page, context or browser has been closed",
+    "Las Vegas Sands Corp (432961): Error: page.goto: Target page, context or browser has been closed",
+    "MercadoLibre Inc (433321): Error: page.goto: Target page, context or browser has been closed",
+    "Moody's Corp. (433464): Error: page.goto: Target page, context or browser has been closed",
+    "Motorola Solutions Inc (433479): Error: page.goto: Target page, context or browser has been closed",
+    "M&T Bank Corp (433495): Error: page.goto: Target page, context or browser has been closed",
+    "Prosus NV (434226): Error: page.goto: Target page, context or browser has been closed",
+    "Roper Technologies Inc (434446): Error: page.goto: Target page, context or browser has been closed",
+    "Tractor Supply Co (435338): Error: page.goto: Target page, context or browser has been closed",
+    "Ulta Beauty Inc (435443): Error: page.goto: Target page, context or browser has been closed",
+    "OHIO WATER DEVELOPMENT AUTHORITY (579351): Error: page.goto: Target page, context or browser has been closed",
+    "TENABLE HOLDINGS INC (2335008): Error: page.goto: Target page, context or browser has been closed",
+    "AMETEK Inc (429724): Error: page.goto: Target page, context or browser has been closed",
+    "AutoZone Inc (429934): Error: page.goto: Target page, context or browser has been closed",
+    "BorgWarner Inc (430176): Error: page.goto: Target page, context or browser has been closed",
+    "Equinix Inc (431541): Error: page.goto: Target page, context or browser has been closed",
+    "Fifth Third Bancorp (431687): Error: page.goto: Target page, context or browser has been closed",
+    "Keysight Technologies Inc (432872): Error: page.goto: Target page, context or browser has been closed",
+    "Mid-America Apartment Communities Inc (433385): Error: page.goto: Target page, context or browser has been closed",
+    "Revvity Inc (434023): Error: page.goto: Target page, context or browser has been closed",
+    "PTC Inc (434241): Error: page.goto: Target page, context or browser has been closed",
+    "SolarEdge Technologies Inc (434771): Error: page.goto: Target page, context or browser has been closed",
+    "SPDR S&P 500 ETF Trust (434860): Error: page.goto: Target page, context or browser has been closed",
+    "Paramount Global Inc (435687): Error: page.goto: Target page, context or browser has been closed",
+    "Waters Corp (435812): Error: page.goto: Target page, context or browser has been closed",
+    "GE HEALTHCARE TECHNOLOGI INC (2334178): Error: page.goto: Target page, context or browser has been closed",
+    "Ameriprise Financial Inc (429717): Error: page.goto: Target page, context or browser has been closed",
+    "Brown & Brown Inc (430264): Error: page.goto: Target page, context or browser has been closed",
+    "Church & Dwight Co Inc (430545): Error: page.goto: Target page, context or browser has been closed",
+    "Equifax Inc (431539): Error: page.goto: Target page, context or browser has been closed",
+    "Hormel Foods Corp (432306): Error: page.goto: Target page, context or browser has been closed",
+    "Intercontinental Exchange Inc (432471): Error: page.goto: Target page, context or browser has been closed",
+    "Liberty Broadband Corp (433013): Error: page.goto: Target page, context or browser has been closed",
+    "UBS Group AG (435436): Error: page.goto: Target page, context or browser has been closed",
+    "V.F. Corp (435685): Error: page.goto: Target page, context or browser has been closed",
+    "Copart Inc (430980): Error: page.goto: Target page, context or browser has been closed",
+    "Curtiss-Wright Corp (431148): Error: page.goto: Target page, context or browser has been closed",
+    "Devon Energy Corp (431260): Error: page.goto: Target page, context or browser has been closed",
+    "Ecolab Inc (431405): Error: page.goto: Target page, context or browser has been closed",
+    "Fortune Brands Innovations Inc (431837): Error: page.goto: Target page, context or browser has been closed",
+    "Gartner Inc (431928): Error: page.goto: Target page, context or browser has been closed",
+    "International Paper Co (432485): Error: page.goto: Target page, context or browser has been closed",
+    "LKQ Corporation (433073): Error: page.goto: Target page, context or browser has been closed",
+    "Resmed Inc (434373): Error: page.goto: Target page, context or browser has been closed",
+    "Robert Half International Inc (434422): Error: page.goto: Target page, context or browser has been closed",
+    "Snowflake Inc (434758): Error: page.goto: Target page, context or browser has been closed",
+    "VICI Properties Inc (435694): Error: page.goto: Target page, context or browser has been closed",
+    "Bank of Montreal (429991): Error: page.goto: Target page, context or browser has been closed",
+    "Brown-Forman Corp (430266): Error: page.goto: Target page, context or browser has been closed",
+    "Canadian Imperial Bank of Commerce (430355): Error: page.goto: Target page, context or browser has been closed",
+    "Carnival Corporation & PLC (430400): Error: page.goto: Target page, context or browser has been closed",
+    "Ceridian HCM Holding Inc (430479): Error: page.goto: Target page, context or browser has been closed",
+    "Cintas Corp (430565): Error: page.goto: Target page, context or browser has been closed",
+    "Grainger (W.W.) Inc (432061): Error: page.goto: Target page, context or browser has been closed",
+    "Healthpeak Properties Inc (432216): Error: page.goto: Target page, context or browser has been closed",
+    "HENRY SCHEIN Inc (432240): Error: page.goto: Target page, context or browser has been closed",
+    "Invitation Homes Inc (432528): Error: page.goto: Target page, context or browser has been closed",
+    "Monolithic Power Systems Inc (433448): Error: page.goto: Target page, context or browser has been closed",
+    "Murphy Oil Corp (433513): Error: page.goto: Target page, context or browser has been closed",
+    "Northern Trust Corp (433708): Error: page.goto: Target page, context or browser has been closed",
+    "Astrazeneca PLC (429888): Error: page.goto: Target page, context or browser has been closed",
+    "AvalonBay Communities Inc (429936): Error: page.goto: Target page, context or browser has been closed",
+    "BALL CORPORATION (429978): Error: page.goto: Target page, context or browser has been closed",
+    "Bio-Techne Corp (430086): Error: page.goto: Target page, context or browser has been closed",
+    "Carlisle Cos Inc (430393): Error: page.goto: Target page, context or browser has been closed",
+    "Delta Air Lines Inc (431224): Error: page.goto: Target page, context or browser has been closed",
+    "Diageo PLC (431270): Error: page.goto: Target page, context or browser has been closed",
+    "Fastenal Co (431626): Error: page.goto: Target page, context or browser has been closed",
+    "First Solar Inc (431722): Error: page.goto: Target page, context or browser has been closed",
+    "Lear Corp (432977): Error: page.goto: Target page, context or browser has been closed",
+    "Paycom Software Inc (433978): Error: page.goto: Target page, context or browser has been closed",
+    "Republic Services Inc (434371): Error: page.goto: Target page, context or browser has been closed",
+    "Royal Bank of Canada (434456): Error: page.goto: Target page, context or browser has been closed",
+    "The Southern Co (434800): Error: page.goto: Target page, context or browser has been closed",
+    "Activision Blizzard Inc (429482): Error: page.goto: Target page, context or browser has been closed",
+    "Boeing Co (430164): Error: page.goto: Target page, context or browser has been closed",
+    "Carter's Inc. (430408): Error: page.goto: Target page, context or browser has been closed",
+    "Entegris Inc (431509): Error: page.goto: Target page, context or browser has been closed",
+    "The Hartford Financial Services Group Inc (432176): Error: page.goto: Target page, context or browser has been closed",
+    "Otis Worldwide Corp (433892): Error: page.goto: Target page, context or browser has been closed",
+    "Viatris Inc (435691): Error: page.goto: Target page, context or browser has been closed",
+    "Vulcan Materials Co (435761): Error: page.goto: Target page, context or browser has been closed",
+    "Western Digital Corp (435862): Error: page.goto: Target page, context or browser has been closed",
+    "CAFFEINATED CAPITAL 2023 ALLOCATE ACCESS FUND LP (2334354): Error: page.goto: Target page, context or browser has been closed",
+    "Alibaba Group Holding Ltd (429589): Error: page.goto: Target page, context or browser has been closed",
+    "Johnson Controls International PLC (432778): Error: page.goto: Target page, context or browser has been closed",
+    "Markel Corp (433219): Error: page.goto: Target page, context or browser has been closed",
+    "McCormick & Co Inc (433278): Error: page.goto: Target page, context or browser has been closed",
+    "National Fuel Gas Co (433540): Error: page.goto: Target page, context or browser has been closed",
+    "Nestle SA, Cham Und Vevey (433584): Error: page.goto: Target page, context or browser has been closed",
+    "O'Reilly Automotive Inc (433878): Error: page.goto: Target page, context or browser has been closed",
+    "Perrigo Co PLC (434027): Error: page.goto: Target page, context or browser has been closed",
+    "VERISK ANALYTICS Inc (435671): Error: page.goto: Target page, context or browser has been closed",
+    "AFLAC Inc (429524): Error: page.goto: Target page, context or browser has been closed",
+    "American Airlines Group Inc (429663): Error: page.goto: Target page, context or browser has been closed",
+    "Boston Properties Inc (430181): Error: page.goto: Target page, context or browser has been closed",
+    "Charles River Laboratories International Inc (430488): Error: page.goto: Target page, context or browser has been closed",
+    "CNH Industrial N.V. (430841): Error: page.goto: Target page, context or browser has been closed",
+    "Datadog Inc (431189): Error: page.goto: Target page, context or browser has been closed",
+    "Fox Corp (431845): Error: page.goto: Target page, context or browser has been closed",
+    "General Dynamics Corp (431941): Error: page.goto: Target page, context or browser has been closed",
+    "Howmet Aerospace Inc (432321): Error: page.goto: Target page, context or browser has been closed",
+    "Huntington Bancshares Inc (432338): Error: page.goto: Target page, context or browser has been closed",
+    "Incyte Corp (432394): Error: page.goto: Target page, context or browser has been closed",
+    "iShares Core S&P Small-Cap ETF (432578): Error: page.goto: Target page, context or browser has been closed",
+    "Mettler-Toledo International Inc (433350): Error: page.goto: Target page, context or browser has been closed",
+    "MKS Instruments Inc (433427): Error: page.goto: Target page, context or browser has been closed",
+    "nVent Electric PLC (433769): Error: page.goto: Target page, context or browser has been closed",
+    "NVR Inc (433772): Error: page.goto: Target page, context or browser has been closed",
+    "PORT AUTHORITY OF NEW YORK AND NEW JERSEY (434130): Error: page.goto: Target page, context or browser has been closed",
+    "Sun Communities Inc (435061): Error: page.goto: Target page, context or browser has been closed",
+    "Unilever PLC (435457): Error: page.goto: Target page, context or browser has been closed",
+    "Woodward Inc (435953): Error: page.goto: Target page, context or browser has been closed",
+    "YUM BRANDS  Inc (436010): Error: page.goto: Target page, context or browser has been closed",
+    "Kellogg Co (2332090): Error: page.goto: Target page, context or browser has been closed",
+    "APPLOVIN CORP (2334768): Error: page.goto: Target page, context or browser has been closed",
+    "Alcoa Corp (429577): Error: page.goto: Target page, context or browser has been closed",
+    "Alliance Resource Partners LP (429608): Error: page.goto: Target page, context or browser has been closed",
+    "Arthur J. Gallagher & Co (429848): Error: page.goto: Target page, context or browser has been closed",
+    "Cardinal Health Inc (430381): Error: page.goto: Target page, context or browser has been closed",
+    "CDW Corp (430439): Error: page.goto: Target page, context or browser has been closed",
+    "CITY OF NEW YORK (430715): Error: page.goto: Target page, context or browser has been closed",
+    "FirstCash Holdings Inc (431698): Error: page.goto: Target page, context or browser has been closed",
+    "Hewlett Packard Enterprise Co (432254): Error: page.goto: Target page, context or browser has been closed",
+    "Kinder Morgan Inc (432879): Error: page.goto: Target page, context or browser has been closed",
+    "Regal Rexnord Corporation (434343): Error: page.goto: Target page, context or browser has been closed",
+    "Shopify Inc (434687): Error: page.goto: Target page, context or browser has been closed",
+    "Southwest Airlines Co (434817): Error: page.goto: Target page, context or browser has been closed",
+    "Valero Energy Corp (435558): Error: page.goto: Target page, context or browser has been closed",
+    "Zebra Technologies Corp (436015): Error: page.goto: Target page, context or browser has been closed",
+    "Zions Bancorporation National Association (436022): Error: page.goto: Target page, context or browser has been closed",
+    "CBRE Group Inc (1608657): Error: page.goto: Target page, context or browser has been closed",
+    "Welltower Inc (2290378): Error: page.goto: Target page, context or browser has been closed",
+    "YIELDMAX SMCI OPTION INCOME STRATEGY ETF (2334905): Error: page.goto: Target page, context or browser has been closed",
+    "BITWISE BITCOIN ETF (2334914): Error: page.goto: Target page, context or browser has been closed",
+    "Advance Auto Parts Inc (429501): Error: page.goto: Target page, context or browser has been closed",
+    "Ally Financial Inc (429618): Error: page.goto: Target page, context or browser has been closed",
+    "Arch Capital Group Ltd (429811): Error: page.goto: Target page, context or browser has been closed",
+    "Berkley (W.R.) Corp (430056): Error: page.goto: Target page, context or browser has been closed",
+    "CITY OF COLUMBUS OHIO (430626): Error: page.goto: Target page, context or browser has been closed",
+    "First Republic Bank (431721): Error: page.goto: Target page, context or browser has been closed",
+    "Genpact Ltd (431958): Error: page.goto: Target page, context or browser has been closed",
+    "Lincoln National Corp (433043): Error: page.goto: Target page, context or browser has been closed",
+    "MORGAN STANLEY FINANCE LLC (433471): Error: page.goto: Target page, context or browser has been closed",
+    "Sanofi (434542): Error: page.goto: Target page, context or browser has been closed",
+    "Skechers U S A Inc (434726): Error: page.goto: Target page, context or browser has been closed",
+    "SVB Financial Group (435079): Error: page.goto: Target page, context or browser has been closed",
+    "UDR Inc (435438): Error: page.goto: Target page, context or browser has been closed",
+    "US TREASURY BOND (435545): Error: page.goto: Target page, context or browser has been closed",
+    "HSBC Holdings PLC (1570797): Error: page.goto: Target page, context or browser has been closed",
+    "Robinhood Markets Inc (2333558): Error: page.goto: Target page, context or browser has been closed",
+    "Atlassian Corp PLC (429906): Error: page.goto: Target page, context or browser has been closed",
+    "BP PLC (430199): Error: page.goto: Target page, context or browser has been closed",
+    "Caesars Entertainment Inc (430308): Error: page.goto: Target page, context or browser has been closed",
+    "CITY AND COUNTY OF HONOLULU (430577): Error: page.goto: Target page, context or browser has been closed",
+    "The Cooper Cos Inc (430978): Error: page.goto: Target page, context or browser has been closed",
+    "DoorDash Inc (431330): Error: page.goto: Target page, context or browser has been closed",
+    "FactSet Research Systems Inc (431611): Error: page.goto: Target page, context or browser has been closed",
+    "Franklin Resources Inc (431863): Error: page.goto: Target page, context or browser has been closed",
+    "Generac Holdings Inc (431940): Error: page.goto: Target page, context or browser has been closed",
+    "GoDaddy Inc (432017): Error: page.goto: Target page, context or browser has been closed",
+    "Halliburton Co (432141): Error: page.goto: Target page, context or browser has been closed",
+    "Hasbro Inc (432185): Error: page.goto: Target page, context or browser has been closed",
+    "Houlihan Lokey Inc (432314): Error: page.goto: Target page, context or browser has been closed",
+    "ITT Inc (432707): Error: page.goto: Target page, context or browser has been closed",
+    "Kimco Realty Corp (432876): Error: page.goto: Target page, context or browser has been closed",
+    "Roche Holding AG (434426): Error: page.goto: Target page, context or browser has been closed",
+    "Stanley Black & Decker Inc (434930): Error: page.goto: Target page, context or browser has been closed",
+    "Verisign Inc (435670): Error: page.goto: Target page, context or browser has been closed",
+    "The Williams Cos Inc (435909): Error: page.goto: Target page, context or browser has been closed",
+    "SEVEN BRIDGES LONG SHORT EQUITY FUND LTD (547164): Error: page.goto: Target page, context or browser has been closed",
+    "JPMORGAN US GOVERNMENT MONEY MARKET FUND (2300799): Error: page.goto: Target page, context or browser has been closed",
+    "CME CATTLE (2333493): Error: page.goto: Target page, context or browser has been closed",
+    "FLEX LNG LTD (2334032): Error: page.goto: Target page, context or browser has been closed",
+    "Ameren Corporation (429659): Error: page.goto: Target page, context or browser has been closed",
+    "Avery Dennison Corp (429941): Error: page.goto: Target page, context or browser has been closed",
+    "Builders FirstSource Inc (430279): Error: page.goto: Target page, context or browser has been closed",
+    "Cummins Inc (431146): Error: page.goto: Target page, context or browser has been closed",
+    "Deckers Outdoor Corp (431207): Error: page.goto: Target page, context or browser has been closed",
+    "DISTRICT OF COLUMBIA (431304): Error: page.goto: Target page, context or browser has been closed",
+    "Etsy Inc (431576): Error: page.goto: Target page, context or browser has been closed",
+    "FORT BEND INDEPENDENT SCHOOL DISTRICT (431831): Error: page.goto: Target page, context or browser has been closed",
+    "Hubbell Inc (432327): Error: page.goto: Target page, context or browser has been closed",
+    "ING Groep NV (432434): Error: page.goto: Target page, context or browser has been closed",
+    "Insulet Corp (432457): Error: page.goto: Target page, context or browser has been closed",
+    "Knight-Swift Transportation Holdings Inc (432906): Error: page.goto: Target page, context or browser has been closed",
+    "Liberty Media Corp SiriusXM Group (433023): Error: page.goto: Target page, context or browser has been closed",
+    "LPL Financial Holdings Inc (433122): Error: page.goto: Target page, context or browser has been closed",
+    "The Mosaic Company (433478): Error: page.goto: Target page, context or browser has been closed",
+    "Novartis AG (433730): Error: page.goto: Target page, context or browser has been closed",
+    "ONEOK Inc (433846): Error: page.goto: Target page, context or browser has been closed",
+    "PENNSYLVANIA TURNPIKE COMMISSION (434012): Error: page.goto: Target page, context or browser has been closed",
+    "Pool Corp (434125): Error: page.goto: Target page, context or browser has been closed",
+    "Spotify Technology S.A (434901): Error: page.goto: Target page, context or browser has been closed",
+    "STATE OF CALIFORNIA (434950): Error: page.goto: Target page, context or browser has been closed",
+    "Synchrony Financial (435099): Error: page.goto: Target page, context or browser has been closed",
+    "Vanguard Dividend Appreciation ETF (435585): Error: page.goto: Target page, context or browser has been closed",
+    "Xcel Energy Inc (435984): Error: page.goto: Target page, context or browser has been closed",
+    "Formula One Group - The Liberty Media Group (1604614): Error: page.goto: Target page, context or browser has been closed",
+    "CME SOYBEAN (2333857): Error: page.goto: Target page, context or browser has been closed",
+    "CAPPED BUFFERED ENHANCED PARTICIPATION (2334337): Error: page.goto: Target page, context or browser has been closed",
+    "VERALTO CORP (2334583): Error: page.goto: Target page, context or browser has been closed",
+    "Applied Industrial Technologies Inc (429791): Error: page.goto: Target page, context or browser has been closed",
+    "Barclays Bank PLC (429997): Error: page.goto: Target page, context or browser has been closed",
+    "Best Buy Co Inc (430062): Error: page.goto: Target page, context or browser has been closed",
+    "Equitable Holdings Inc (431544): Error: page.goto: Target page, context or browser has been closed",
+    "Hercules Capital Inc (432243): Error: page.goto: Target page, context or browser has been closed",
+    "Infinera Corp (432422): Error: page.goto: Target page, context or browser has been closed",
+    "Insight Enterprises Inc (432453): Error: page.goto: Target page, context or browser has been closed",
+    "The Interpublic Group of Cos Inc (432475): Error: page.goto: Target page, context or browser has been closed",
+    "METROPOLITAN WASHINGTON AIRPORTS AUTHORITY (433346): Error: page.goto: Target page, context or browser has been closed",
+    "MGM Resorts International (433364): Error: page.goto: Target page, context or browser has been closed",
+    "Neurocrine Biosciences Inc (433594): Error: page.goto: Target page, context or browser has been closed",
+    "NortonLifeLock Inc (433724): Error: page.goto: Target page, context or browser has been closed",
+    "Nucor Corp (433744): Error: page.goto: Target page, context or browser has been closed",
+    "OKLAHOMA DEVELOPMENT FINANCE AUTHORITY (433811): Error: page.goto: Target page, context or browser has been closed",
+    "Sempra (434647): Error: page.goto: Target page, context or browser has been closed",
+    "Skyworks Solutions Inc (434737): Error: page.goto: Target page, context or browser has been closed",
+    "Societe Generale Group (434763): Error: page.goto: Target page, context or browser has been closed",
+    "Sony Group Corporation (434785): Error: page.goto: Target page, context or browser has been closed",
+    "STATE OF MARYLAND (434967): Error: page.goto: Target page, context or browser has been closed",
+    "Valvoline Inc (435567): Error: page.goto: Target page, context or browser has been closed",
+    "Vertiv Holdings Co (435682): Error: page.goto: Target page, context or browser has been closed",
+    "Willis Towers Watson PLC (435914): Error: page.goto: Target page, context or browser has been closed",
+    "Xylem Inc (435994): Error: page.goto: Target page, context or browser has been closed",
+    "3G COURSER ONSHORE FUND LP (2331163): Error: page.goto: Target page, context or browser has been closed",
+    "CME SOYBEAN MEAL (2334007): Error: page.goto: Target page, context or browser has been closed",
+    "SEVEN BRIDGES MULTI STRATEGY FUND LP (2334087): Error: page.goto: Target page, context or browser has been closed",
+    "CORE & MAIN INC (2334588): Error: page.goto: Target page, context or browser has been closed",
+    "AKAMAI TECHNOLOGIES Inc (429555): Error: page.goto: Target page, context or browser has been closed",
+    "Barrick Gold Corp (430003): Error: page.goto: Target page, context or browser has been closed",
+    "Broadridge Financial Solutions Inc (430240): Error: page.goto: Target page, context or browser has been closed",
+    "Burlington Stores Inc (430290): Error: page.goto: Target page, context or browser has been closed",
+    "Cincinnati Financial Corp (430560): Error: page.goto: Target page, context or browser has been closed",
+    "Farmers & Merchants Bancorp Inc (431625): Error: page.goto: Target page, context or browser has been closed",
+    "Garmin Ltd (431926): Error: page.goto: Target page, context or browser has been closed",
+    "iShares 1-3 Year Treasury Bond ETF (432555): Error: page.goto: Target page, context or browser has been closed",
+    "LEWIS & CLARK AGRIFOOD FUND II LP (433003): Error: page.goto: Target page, context or browser has been closed",
+    "LVMH Moet Hennessy Louis Vuitton SE (433139): Error: page.goto: Target page, context or browser has been closed",
+    "Packaging Corp Of America (433919): Error: page.goto: Target page, context or browser has been closed",
+    "Principal Financial Group Inc (434177): Error: page.goto: Target page, context or browser has been closed",
+    "PulteGroup Inc (434255): Error: page.goto: Target page, context or browser has been closed",
+    "Raymond James Financial Inc (434314): Error: page.goto: Target page, context or browser has been closed",
+    "Seagate Technology Holdings PLC (434615): Error: page.goto: Target page, context or browser has been closed",
+    "A. O. Smith Corp (434747): Error: page.goto: Target page, context or browser has been closed",
+    "Teradyne Inc (435205): Error: page.goto: Target page, context or browser has been closed",
+    "The Travelers Companies Inc (435353): Error: page.goto: Target page, context or browser has been closed",
+    "Tyler Technologies Inc (435428): Error: page.goto: Target page, context or browser has been closed",
+    "L3Harris Technologies Inc (1571408): Error: page.goto: Target page, context or browser has been closed",
+    "CF Industries Holdings Inc (1734510): Error: page.goto: Target page, context or browser has been closed",
+    "Liberty Global PLC (1869593): Error: page.goto: Target page, context or browser has been closed",
+    "MAYS (J.W.) INC (2334794): Error: page.goto: Target page, context or browser has been closed",
+    "Amcor PLC (429653): Error: page.goto: Target page, context or browser has been closed",
+    "Arrow Electronics Inc (429845): Error: page.goto: Target page, context or browser has been closed",
+    "CACI International Inc (430304): Error: page.goto: Target page, context or browser has been closed",
+    "Campbell Soup Co (430351): Error: page.goto: Target page, context or browser has been closed",
+    "Celanese Corp (430445): Error: page.goto: Target page, context or browser has been closed",
+    "Cloudflare Inc (430828): Error: page.goto: Target page, context or browser has been closed",
+    "COUNTY OF WILL ILLINOIS (431085): Error: page.goto: Target page, context or browser has been closed",
+    "DEPARTMENT OF TRANSPORTATION OF MARYLAND (431241): Error: page.goto: Target page, context or browser has been closed",
+    "Donaldson Co Inc (431326): Error: page.goto: Target page, context or browser has been closed",
+    "Essex Property Trust Inc (431559): Error: page.goto: Target page, context or browser has been closed",
+    "Expedia Group Inc (431598): Error: page.goto: Target page, context or browser has been closed",
+    "FMC Corp (431809): Error: page.goto: Target page, context or browser has been closed",
+    "Gates Industrial Corp PLC (431930): Error: page.goto: Target page, context or browser has been closed",
+    "Henry (Jack) & Associates Inc (432239): Error: page.goto: Target page, context or browser has been closed",
+    "IDEX Corp (432366): Error: page.goto: Target page, context or browser has been closed",
+    "Iron Mountain Inc (432550): Error: page.goto: Target page, context or browser has been closed",
+    "Lamb Weston Holdings Inc (432950): Error: page.goto: Target page, context or browser has been closed",
+    "Live Nation Entertainment Inc (433066): Error: page.goto: Target page, context or browser has been closed",
+    "Molson Coors Beverage Company (433440): Error: page.goto: Target page, context or browser has been closed",
+    "MongoDB Inc (433446): Error: page.goto: Target page, context or browser has been closed",
+    "Newell Brands Inc (433603): Error: page.goto: Target page, context or browser has been closed",
+    "Nordson Corp (433686): Error: page.goto: Target page, context or browser has been closed",
+    "Pioneer Natural Resources Co (434096): Error: page.goto: Target page, context or browser has been closed",
+    "PORT OF SEATTLE WASHINGTON (434139): Error: page.goto: Target page, context or browser has been closed",
+    "Primerica Inc (434174): Error: page.goto: Target page, context or browser has been closed",
+    "ProShares Short QQQ (434209): Error: page.goto: Target page, context or browser has been closed",
+    "White Mountains Insurance Group Ltd (435895): Error: page.goto: Target page, context or browser has been closed",
+    "ETHEREUM (1689224): Error: page.goto: Target page, context or browser has been closed",
+    "Southern States Bancshares Inc (2332102): Error: page.goto: Target page, context or browser has been closed",
+    "DEPARTMENT OF STATE PENNSYLVANIA (2333803): Error: page.goto: Target page, context or browser has been closed",
+    "CONSTELLATION ENE CORP (2334019): Error: page.goto: Target page, context or browser has been closed",
+    "HPS SPECIAL SITUATIONS OPPORTUNITY FUND II LP (2334327): Error: page.goto: Target page, context or browser has been closed",
+    "CITY OF ATLANTA (429898): Error: page.goto: Target page, context or browser has been closed",
+    "Beacon Roofing Supply Inc (430035): Error: page.goto: Target page, context or browser has been closed",
+    "BHP Group Ltd (430075): Error: page.goto: Target page, context or browser has been closed",
+    "Booz Allen Hamilton Holding Corporation (430175): Error: page.goto: Target page, context or browser has been closed",
+    "Dover Corp (431343): Error: page.goto: Target page, context or browser has been closed",
+    "DXC Technology Co (431374): Error: page.goto: Target page, context or browser has been closed"
+  ]
+}

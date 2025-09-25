@@ -1,0 +1,5712 @@
+{
+  "timestamp": "2025-09-24T07:54:41.718Z",
+  "processed": 950,
+  "total": 1200,
+  "withTicker": 810,
+  "withoutTicker": 140,
+  "results": [
+    {
+      "id": "435544",
+      "name": "US TREASURY BILLS",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433382",
+      "name": "Microsoft Corp",
+      "ticker": "MSFT",
+      "exchange": "US"
+    },
+    {
+      "id": "429622",
+      "name": "Alphabet Inc",
+      "ticker": "GOOGL",
+      "exchange": "US"
+    },
+    {
+      "id": "433770",
+      "name": "NVIDIA Corporation",
+      "ticker": "NVDA",
+      "exchange": "US"
+    },
+    {
+      "id": "429789",
+      "name": "Apple Inc",
+      "ticker": "AAPL",
+      "exchange": "US"
+    },
+    {
+      "id": "429648",
+      "name": "Amazon.com Inc",
+      "ticker": "AMZN",
+      "exchange": "US"
+    },
+    {
+      "id": "432796",
+      "name": "JPMorgan Chase & Co",
+      "ticker": "JPM",
+      "exchange": "US"
+    },
+    {
+      "id": "431610",
+      "name": "Meta Platforms Inc",
+      "ticker": "META",
+      "exchange": "US"
+    },
+    {
+      "id": "435467",
+      "name": "Unitedhealth Group Inc",
+      "ticker": "UNH",
+      "exchange": "US"
+    },
+    {
+      "id": "2264488",
+      "name": "Berkshire Hathaway Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334591",
+      "name": "JPMORGAN 100% US TREASURY SECURITIES MONEY MARKET FUND",
+      "ticker": "JTSXX",
+      "exchange": "US"
+    },
+    {
+      "id": "429495",
+      "name": "Adobe Inc",
+      "ticker": "ADBE",
+      "exchange": "US"
+    },
+    {
+      "id": "435735",
+      "name": "Visa Inc",
+      "ticker": "V",
+      "exchange": "US"
+    },
+    {
+      "id": "435211",
+      "name": "Tesla Inc",
+      "ticker": "TSLA",
+      "exchange": "US"
+    },
+    {
+      "id": "435546",
+      "name": "US TREASURY NOTE",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432782",
+      "name": "Johnson & Johnson",
+      "ticker": "JNJ",
+      "exchange": "US"
+    },
+    {
+      "id": "1282836",
+      "name": "Wells Fargo & Co",
+      "ticker": "WFC",
+      "exchange": "US"
+    },
+    {
+      "id": "430431",
+      "name": "CBOE MINI SPX INDEX",
+      "ticker": "XSP",
+      "exchange": "US"
+    },
+    {
+      "id": "429988",
+      "name": "Bank of America Corp",
+      "ticker": "BAC",
+      "exchange": "US"
+    },
+    {
+      "id": "429469",
+      "name": "Accenture PLC",
+      "ticker": "ACN",
+      "exchange": "US"
+    },
+    {
+      "id": "430239",
+      "name": "Broadcom Inc",
+      "ticker": "AVGO",
+      "exchange": "US"
+    },
+    {
+      "id": "433323",
+      "name": "Merck & Co Inc",
+      "ticker": "MRK",
+      "exchange": "US"
+    },
+    {
+      "id": "431303",
+      "name": "The Walt Disney Co",
+      "ticker": "DIS",
+      "exchange": "US"
+    },
+    {
+      "id": "432293",
+      "name": "The Home Depot Inc",
+      "ticker": "HD",
+      "exchange": "US"
+    },
+    {
+      "id": "434517",
+      "name": "salesforce.com Inc",
+      "ticker": "CRM",
+      "exchange": "US"
+    },
+    {
+      "id": "430911",
+      "name": "Comcast Corp",
+      "ticker": "CMCSA",
+      "exchange": "US"
+    },
+    {
+      "id": "433036",
+      "name": "Eli Lilly and Co",
+      "ticker": "LLY",
+      "exchange": "US"
+    },
+    {
+      "id": "432464",
+      "name": "Intel Corp",
+      "ticker": "INTC",
+      "exchange": "US"
+    },
+    {
+      "id": "435219",
+      "name": "Texas Instruments Inc",
+      "ticker": "TXN",
+      "exchange": "US"
+    },
+    {
+      "id": "434019",
+      "name": "PepsiCo Inc",
+      "ticker": "PEP",
+      "exchange": "US"
+    },
+    {
+      "id": "434933",
+      "name": "Starbucks Corp",
+      "ticker": "SBUX",
+      "exchange": "US"
+    },
+    {
+      "id": "434041",
+      "name": "Pfizer Inc",
+      "ticker": "PFE",
+      "exchange": "US"
+    },
+    {
+      "id": "429442",
+      "name": "Abbott Laboratories",
+      "ticker": "ABT",
+      "exchange": "US"
+    },
+    {
+      "id": "433981",
+      "name": "PayPal Holdings Inc",
+      "ticker": "PYPL",
+      "exchange": "US"
+    },
+    {
+      "id": "430570",
+      "name": "Citigroup Inc",
+      "ticker": "C",
+      "exchange": "US"
+    },
+    {
+      "id": "429505",
+      "name": "Advanced Micro Devices Inc",
+      "ticker": "AMD",
+      "exchange": "US"
+    },
+    {
+      "id": "431426",
+      "name": "ELCM2 LLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434191",
+      "name": "The Procter & Gamble Co",
+      "ticker": "PG",
+      "exchange": "US"
+    },
+    {
+      "id": "434591",
+      "name": "Schwab (Charles) Corp",
+      "ticker": "SCHW",
+      "exchange": "US"
+    },
+    {
+      "id": "435244",
+      "name": "Thermo Fisher Scientific Inc",
+      "ticker": "TMO",
+      "exchange": "US"
+    },
+    {
+      "id": "429443",
+      "name": "AbbVie Inc",
+      "ticker": "ABBV",
+      "exchange": "US"
+    },
+    {
+      "id": "433589",
+      "name": "Netflix Inc",
+      "ticker": "NFLX",
+      "exchange": "US"
+    },
+    {
+      "id": "435472",
+      "name": "United Parcel Service Inc",
+      "ticker": "UPS",
+      "exchange": "US"
+    },
+    {
+      "id": "435673",
+      "name": "Verizon Communications Inc",
+      "ticker": "VZ",
+      "exchange": "US"
+    },
+    {
+      "id": "433469",
+      "name": "Morgan Stanley",
+      "ticker": "MS",
+      "exchange": "US"
+    },
+    {
+      "id": "433381",
+      "name": "Micron Technology Inc",
+      "ticker": "MU",
+      "exchange": "US"
+    },
+    {
+      "id": "430852",
+      "name": "The Coca-Cola Co",
+      "ticker": "KO",
+      "exchange": "US"
+    },
+    {
+      "id": "433254",
+      "name": "Mastercard Inc",
+      "ticker": "MA",
+      "exchange": "US"
+    },
+    {
+      "id": "429769",
+      "name": "Aon PLC",
+      "ticker": "AON",
+      "exchange": "US"
+    },
+    {
+      "id": "430423",
+      "name": "Caterpillar Inc",
+      "ticker": "CAT",
+      "exchange": "US"
+    },
+    {
+      "id": "433048",
+      "name": "Linde PLC",
+      "ticker": "LIN",
+      "exchange": "US"
+    },
+    {
+      "id": "432337",
+      "name": "Humana Inc",
+      "ticker": "HUM",
+      "exchange": "US"
+    },
+    {
+      "id": "429929",
+      "name": "AUTODESK Inc",
+      "ticker": "ADSK",
+      "exchange": "US"
+    },
+    {
+      "id": "429914",
+      "name": "AT&T Inc",
+      "ticker": "T",
+      "exchange": "US"
+    },
+    {
+      "id": "431156",
+      "name": "CVS Health Corp",
+      "ticker": "CVS",
+      "exchange": "US"
+    },
+    {
+      "id": "432490",
+      "name": "Intuit Inc",
+      "ticker": "INTU",
+      "exchange": "US"
+    },
+    {
+      "id": "431181",
+      "name": "Danaher Corp",
+      "ticker": "DHR",
+      "exchange": "US"
+    },
+    {
+      "id": "435403",
+      "name": "Truist Financial Corp",
+      "ticker": "TFC",
+      "exchange": "US"
+    },
+    {
+      "id": "435137",
+      "name": "Target Corp",
+      "ticker": "TGT",
+      "exchange": "US"
+    },
+    {
+      "id": "435432",
+      "name": "Uber Technologies Inc",
+      "ticker": "UBER",
+      "exchange": "US"
+    },
+    {
+      "id": "430016",
+      "name": "Baxter International Inc",
+      "ticker": "BAX",
+      "exchange": "US"
+    },
+    {
+      "id": "433658",
+      "name": "Nike Inc",
+      "ticker": "NKE",
+      "exchange": "US"
+    },
+    {
+      "id": "431003",
+      "name": "Costco Wholesale Corp",
+      "ticker": "COST",
+      "exchange": "US"
+    },
+    {
+      "id": "432035",
+      "name": "The Goldman Sachs Group Inc",
+      "ticker": "GS",
+      "exchange": "US"
+    },
+    {
+      "id": "429793",
+      "name": "Applied Materials Inc",
+      "ticker": "AMAT",
+      "exchange": "US"
+    },
+    {
+      "id": "429765",
+      "name": "Elevance Health Inc",
+      "ticker": "ELV",
+      "exchange": "US"
+    },
+    {
+      "id": "436024",
+      "name": "Zoetis Inc",
+      "ticker": "ZTS",
+      "exchange": "US"
+    },
+    {
+      "id": "435459",
+      "name": "Union Pacific Corp",
+      "ticker": "UNP",
+      "exchange": "US"
+    },
+    {
+      "id": "429822",
+      "name": "Arista Networks Inc",
+      "ticker": "ANET",
+      "exchange": "US"
+    },
+    {
+      "id": "430955",
+      "name": "ConocoPhillips",
+      "ticker": "COP",
+      "exchange": "US"
+    },
+    {
+      "id": "434658",
+      "name": "ServiceNow Inc",
+      "ticker": "NOW",
+      "exchange": "US"
+    },
+    {
+      "id": "434275",
+      "name": "QUALCOMM Inc",
+      "ticker": "QCOM",
+      "exchange": "US"
+    },
+    {
+      "id": "430117",
+      "name": "Blackrock Inc",
+      "ticker": "BLK",
+      "exchange": "US"
+    },
+    {
+      "id": "432951",
+      "name": "Lam Research Corp",
+      "ticker": "LRCX",
+      "exchange": "US"
+    },
+    {
+      "id": "433309",
+      "name": "Medtronic PLC",
+      "ticker": "MDT",
+      "exchange": "US"
+    },
+    {
+      "id": "434983",
+      "name": "STATE OF OHIO",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435119",
+      "name": "Taiwan Semiconductor Manufacturing Co Ltd",
+      "ticker": "TSM",
+      "exchange": "US"
+    },
+    {
+      "id": "2334916",
+      "name": "MH BUILT TO LAST LLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429867",
+      "name": "ASML Holding NV",
+      "ticker": "ASML",
+      "exchange": "US"
+    },
+    {
+      "id": "430368",
+      "name": "Capital One Financial Corp",
+      "ticker": "COF",
+      "exchange": "US"
+    },
+    {
+      "id": "430515",
+      "name": "Chevron Corp",
+      "ticker": "CVX",
+      "exchange": "US"
+    },
+    {
+      "id": "430534",
+      "name": "Chipotle Mexican Grill Inc",
+      "ticker": "CMG",
+      "exchange": "US"
+    },
+    {
+      "id": "430172",
+      "name": "Booking Holdings Inc",
+      "ticker": "BKNG",
+      "exchange": "US"
+    },
+    {
+      "id": "431424",
+      "name": "Elanco Animal Health Inc",
+      "ticker": "ELAN",
+      "exchange": "US"
+    },
+    {
+      "id": "431675",
+      "name": "Fidelity National Information Services Inc",
+      "ticker": "FIS",
+      "exchange": "US"
+    },
+    {
+      "id": "432480",
+      "name": "International Business Machines Corp",
+      "ticker": "IBM",
+      "exchange": "US"
+    },
+    {
+      "id": "433279",
+      "name": "McDonald's Corp",
+      "ticker": "MCD",
+      "exchange": "US"
+    },
+    {
+      "id": "429617",
+      "name": "The Allstate Corporation",
+      "ticker": "ALL",
+      "exchange": "US"
+    },
+    {
+      "id": "433865",
+      "name": "Oracle Corp",
+      "ticker": "ORCL",
+      "exchange": "US"
+    },
+    {
+      "id": "430820",
+      "name": "Cleveland-Cliffs Inc",
+      "ticker": "CLF",
+      "exchange": "US"
+    },
+    {
+      "id": "435777",
+      "name": "Walmart Inc",
+      "ticker": "WMT",
+      "exchange": "US"
+    },
+    {
+      "id": "431645",
+      "name": "FedEx Corp",
+      "ticker": "FDX",
+      "exchange": "US"
+    },
+    {
+      "id": "433121",
+      "name": "Lowe's Cos Inc",
+      "ticker": "LOW",
+      "exchange": "US"
+    },
+    {
+      "id": "434678",
+      "name": "The Sherwin-Williams Co",
+      "ticker": "SHW",
+      "exchange": "US"
+    },
+    {
+      "id": "1734484",
+      "name": "Centene Corp",
+      "ticker": "CNC",
+      "exchange": "US"
+    },
+    {
+      "id": "429700",
+      "name": "American International Group Inc",
+      "ticker": "AIG",
+      "exchange": "US"
+    },
+    {
+      "id": "430568",
+      "name": "Cisco Systems Inc",
+      "ticker": "CSCO",
+      "exchange": "US"
+    },
+    {
+      "id": "431527",
+      "name": "EPAM Systems Inc",
+      "ticker": "EPAM",
+      "exchange": "US"
+    },
+    {
+      "id": "431946",
+      "name": "General Motors Co",
+      "ticker": "GM",
+      "exchange": "US"
+    },
+    {
+      "id": "432899",
+      "name": "KKR & Co Inc",
+      "ticker": "KKR",
+      "exchange": "US"
+    },
+    {
+      "id": "433650",
+      "name": "NextEra Energy Inc",
+      "ticker": "NEE",
+      "exchange": "US"
+    },
+    {
+      "id": "433952",
+      "name": "Parker-Hannifin Corp",
+      "ticker": "PH",
+      "exchange": "US"
+    },
+    {
+      "id": "431772",
+      "name": "Fiserv Inc",
+      "ticker": "FI",
+      "exchange": "US"
+    },
+    {
+      "id": "433586",
+      "name": "NetApp Inc",
+      "ticker": "NTAP",
+      "exchange": "US"
+    },
+    {
+      "id": "430182",
+      "name": "Boston Scientific Corp",
+      "ticker": "BSX",
+      "exchange": "US"
+    },
+    {
+      "id": "431208",
+      "name": "DEERE & COMPANY",
+      "ticker": "DE",
+      "exchange": "US"
+    },
+    {
+      "id": "431819",
+      "name": "Ford Motor Co",
+      "ticker": "F",
+      "exchange": "US"
+    },
+    {
+      "id": "431998",
+      "name": "GLOBAL PAYMENTS Inc",
+      "ticker": "GPN",
+      "exchange": "US"
+    },
+    {
+      "id": "432491",
+      "name": "Intuitive Surgical Inc",
+      "ticker": "ISRG",
+      "exchange": "US"
+    },
+    {
+      "id": "433531",
+      "name": "Nasdaq Inc",
+      "ticker": "NDAQ",
+      "exchange": "US"
+    },
+    {
+      "id": "429725",
+      "name": "Amgen Inc",
+      "ticker": "AMGN",
+      "exchange": "US"
+    },
+    {
+      "id": "431833",
+      "name": "Fortinet Inc",
+      "ticker": "FTNT",
+      "exchange": "US"
+    },
+    {
+      "id": "433927",
+      "name": "Palo Alto Networks Inc",
+      "ticker": "PANW",
+      "exchange": "US"
+    },
+    {
+      "id": "429708",
+      "name": "American Tower Corp",
+      "ticker": "AMT",
+      "exchange": "US"
+    },
+    {
+      "id": "2334013",
+      "name": "VANGUARD FEDERAL MONEY MARKET FUND",
+      "ticker": "VMFXX",
+      "exchange": "US"
+    },
+    {
+      "id": "2334695",
+      "name": "GE VERNOVA INC",
+      "ticker": "GEV",
+      "exchange": "US"
+    },
+    {
+      "id": "2334865",
+      "name": "NOT FADE AWAY LLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430231",
+      "name": "Bristol-Myers Squibb Co",
+      "ticker": "BMY",
+      "exchange": "US"
+    },
+    {
+      "id": "431124",
+      "name": "Crown Castle International Corp",
+      "ticker": "CCI",
+      "exchange": "US"
+    },
+    {
+      "id": "431944",
+      "name": "General Electric Co",
+      "ticker": "GE",
+      "exchange": "US"
+    },
+    {
+      "id": "434652",
+      "name": "Sensata Technologies Holding PLC",
+      "ticker": "ST",
+      "exchange": "US"
+    },
+    {
+      "id": "429741",
+      "name": "Analog Devices Inc",
+      "ticker": "ADI",
+      "exchange": "US"
+    },
+    {
+      "id": "434348",
+      "name": "Regeneron Pharmaceuticals Inc",
+      "ticker": "REGN",
+      "exchange": "US"
+    },
+    {
+      "id": "435112",
+      "name": "Sysco Corporation",
+      "ticker": "SYY",
+      "exchange": "US"
+    },
+    {
+      "id": "433227",
+      "name": "Marriott International Inc",
+      "ticker": "MAR",
+      "exchange": "US"
+    },
+    {
+      "id": "434094",
+      "name": "Pinterest Inc",
+      "ticker": "PINS",
+      "exchange": "US"
+    },
+    {
+      "id": "435040",
+      "name": "Stryker Corp",
+      "ticker": "SYK",
+      "exchange": "US"
+    },
+    {
+      "id": "435108",
+      "name": "Synopsys Inc",
+      "ticker": "SNPS",
+      "exchange": "US"
+    },
+    {
+      "id": "429677",
+      "name": "American Express Co",
+      "ticker": "AXP",
+      "exchange": "US"
+    },
+    {
+      "id": "429932",
+      "name": "Automatic Data Processing Inc",
+      "ticker": "ADP",
+      "exchange": "US"
+    },
+    {
+      "id": "430041",
+      "name": "Becton Dickinson and Co",
+      "ticker": "BDX",
+      "exchange": "US"
+    },
+    {
+      "id": "430133",
+      "name": "Blackstone Group Inc",
+      "ticker": "BX",
+      "exchange": "US"
+    },
+    {
+      "id": "430994",
+      "name": "Corning Inc",
+      "ticker": "GLW",
+      "exchange": "US"
+    },
+    {
+      "id": "431608",
+      "name": "Exxon Mobil Corp",
+      "ticker": "XOM",
+      "exchange": "US"
+    },
+    {
+      "id": "432965",
+      "name": "The Estee Lauder Cos Inc",
+      "ticker": "EL",
+      "exchange": "US"
+    },
+    {
+      "id": "433456",
+      "name": "Monster Beverage Corp",
+      "ticker": "MNST",
+      "exchange": "US"
+    },
+    {
+      "id": "433568",
+      "name": "NCR Corp",
+      "ticker": "NCR",
+      "exchange": "US"
+    },
+    {
+      "id": "434118",
+      "name": "The PNC Financial Services Group Inc",
+      "ticker": "PNC",
+      "exchange": "US"
+    },
+    {
+      "id": "434201",
+      "name": "Prologis Inc",
+      "ticker": "PLD",
+      "exchange": "US"
+    },
+    {
+      "id": "430305",
+      "name": "Cadence Design Systems Inc",
+      "ticker": "CDNS",
+      "exchange": "US"
+    },
+    {
+      "id": "433229",
+      "name": "Marsh & McLennan Companies Inc",
+      "ticker": "MMC",
+      "exchange": "US"
+    },
+    {
+      "id": "434055",
+      "name": "Philip Morris International Inc",
+      "ticker": "PM",
+      "exchange": "US"
+    },
+    {
+      "id": "435611",
+      "name": "VANGUARD LONG TERM TAX EXEMPT FUND",
+      "ticker": "VWLUX",
+      "exchange": "US"
+    },
+    {
+      "id": "431315",
+      "name": "Dollar General Corporation",
+      "ticker": "DG",
+      "exchange": "US"
+    },
+    {
+      "id": "435282",
+      "name": "T-Mobile US Inc",
+      "ticker": "TMUS",
+      "exchange": "US"
+    },
+    {
+      "id": "431945",
+      "name": "General Mills Inc",
+      "ticker": "GIS",
+      "exchange": "US"
+    },
+    {
+      "id": "432298",
+      "name": "Honeywell International Inc",
+      "ticker": "HON",
+      "exchange": "US"
+    },
+    {
+      "id": "433444",
+      "name": "Mondelez International Inc",
+      "ticker": "MDLZ",
+      "exchange": "US"
+    },
+    {
+      "id": "435532",
+      "name": "U.S. Bancorp",
+      "ticker": "USB",
+      "exchange": "US"
+    },
+    {
+      "id": "431346",
+      "name": "Dow Inc",
+      "ticker": "DOW",
+      "exchange": "US"
+    },
+    {
+      "id": "431395",
+      "name": "Eaton Corp PLC",
+      "ticker": "ETN",
+      "exchange": "US"
+    },
+    {
+      "id": "433130",
+      "name": "Lululemon Athletica Inc",
+      "ticker": "LULU",
+      "exchange": "US"
+    },
+    {
+      "id": "433283",
+      "name": "McKesson Corp",
+      "ticker": "MCK",
+      "exchange": "US"
+    },
+    {
+      "id": "435808",
+      "name": "Waste Management Inc",
+      "ticker": "WM",
+      "exchange": "US"
+    },
+    {
+      "id": "2334500",
+      "name": "MAYS ALLOCATE LP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429542",
+      "name": "Airbnb Inc",
+      "ticker": "ABNB",
+      "exchange": "US"
+    },
+    {
+      "id": "433735",
+      "name": "Novo Nordisk A/S",
+      "ticker": "NVO",
+      "exchange": "US"
+    },
+    {
+      "id": "429428",
+      "name": "3M Co",
+      "ticker": "MMM",
+      "exchange": "US"
+    },
+    {
+      "id": "429550",
+      "name": "Air Products and Chemicals Inc",
+      "ticker": "APD",
+      "exchange": "US"
+    },
+    {
+      "id": "429939",
+      "name": "Avantor Inc",
+      "ticker": "AVTR",
+      "exchange": "US"
+    },
+    {
+      "id": "431299",
+      "name": "Warner Bros Discover Inc",
+      "ticker": "WBD",
+      "exchange": "US"
+    },
+    {
+      "id": "434919",
+      "name": "SS&C Technologies Holdings Inc",
+      "ticker": "SSNC",
+      "exchange": "US"
+    },
+    {
+      "id": "434316",
+      "name": "RTX Corp",
+      "ticker": "RTX",
+      "exchange": "US"
+    },
+    {
+      "id": "434562",
+      "name": "SBA Communications Corp",
+      "ticker": "SBAC",
+      "exchange": "US"
+    },
+    {
+      "id": "435958",
+      "name": "Workday Inc",
+      "ticker": "WDAY",
+      "exchange": "US"
+    },
+    {
+      "id": "430543",
+      "name": "Chubb Ltd",
+      "ticker": "CB",
+      "exchange": "US"
+    },
+    {
+      "id": "435639",
+      "name": "Vanguard Total Stock Market ETF",
+      "ticker": "VTI",
+      "exchange": "US"
+    },
+    {
+      "id": "431607",
+      "name": "Extra Space Storage Inc",
+      "ticker": "EXR",
+      "exchange": "US"
+    },
+    {
+      "id": "432924",
+      "name": "The Kraft Heinz Co",
+      "ticker": "KHC",
+      "exchange": "US"
+    },
+    {
+      "id": "433688",
+      "name": "Norfolk Southern Corp",
+      "ticker": "NSC",
+      "exchange": "US"
+    },
+    {
+      "id": "434883",
+      "name": "S&P Global Inc",
+      "ticker": "SPGI",
+      "exchange": "US"
+    },
+    {
+      "id": "436020",
+      "name": "Zimmer Biomet Holdings Inc",
+      "ticker": "ZBH",
+      "exchange": "US"
+    },
+    {
+      "id": "430554",
+      "name": "Cigna Corp",
+      "ticker": "CI",
+      "exchange": "US"
+    },
+    {
+      "id": "432874",
+      "name": "Kimberly-Clark Corp",
+      "ticker": "KMB",
+      "exchange": "US"
+    },
+    {
+      "id": "433081",
+      "name": "Lockheed Martin Corp",
+      "ticker": "LMT",
+      "exchange": "US"
+    },
+    {
+      "id": "434460",
+      "name": "Shell PLC",
+      "ticker": "SHEL",
+      "exchange": "US"
+    },
+    {
+      "id": "430834",
+      "name": "CME Group Inc",
+      "ticker": "CME",
+      "exchange": "US"
+    },
+    {
+      "id": "430875",
+      "name": "Colgate-Palmolive Co",
+      "ticker": "CL",
+      "exchange": "US"
+    },
+    {
+      "id": "431320",
+      "name": "Dominion Energy Inc",
+      "ticker": "D",
+      "exchange": "US"
+    },
+    {
+      "id": "432250",
+      "name": "The Hershey Co",
+      "ticker": "HSY",
+      "exchange": "US"
+    },
+    {
+      "id": "434151",
+      "name": "PPG Industries Inc",
+      "ticker": "PPG",
+      "exchange": "US"
+    },
+    {
+      "id": "435281",
+      "name": "The TJX Companies Inc",
+      "ticker": "TJX",
+      "exchange": "US"
+    },
+    {
+      "id": "435430",
+      "name": "Tyson Foods Inc",
+      "ticker": "TSN",
+      "exchange": "US"
+    },
+    {
+      "id": "435771",
+      "name": "Walgreens Boots Alliance Inc",
+      "ticker": "WBA",
+      "exchange": "US"
+    },
+    {
+      "id": "430962",
+      "name": "Constellation Brands Inc",
+      "ticker": "STZ",
+      "exchange": "US"
+    },
+    {
+      "id": "433338",
+      "name": "Metlife Inc",
+      "ticker": "MET",
+      "exchange": "US"
+    },
+    {
+      "id": "433633",
+      "name": "NEW YORK CITY TRANSITIONAL FINANCE AUTHORITY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434194",
+      "name": "The Progressive Corp",
+      "ticker": "PGR",
+      "exchange": "US"
+    },
+    {
+      "id": "434996",
+      "name": "STATE OF WASHINGTON",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431418",
+      "name": "Edwards Lifesciences Corp",
+      "ticker": "EW",
+      "exchange": "US"
+    },
+    {
+      "id": "432199",
+      "name": "HCA Healthcare Inc",
+      "ticker": "HCA",
+      "exchange": "US"
+    },
+    {
+      "id": "432866",
+      "name": "Keurig Dr Pepper Inc",
+      "ticker": "KDP",
+      "exchange": "US"
+    },
+    {
+      "id": "432937",
+      "name": "Laboratory Corp of America Holdings",
+      "ticker": "LH",
+      "exchange": "US"
+    },
+    {
+      "id": "433819",
+      "name": "Old Dominion Freight Line Inc",
+      "ticker": "ODFL",
+      "exchange": "US"
+    },
+    {
+      "id": "433977",
+      "name": "Paychex Inc",
+      "ticker": "PAYX",
+      "exchange": "US"
+    },
+    {
+      "id": "429590",
+      "name": "Align Technology Inc",
+      "ticker": "ALGN",
+      "exchange": "US"
+    },
+    {
+      "id": "429720",
+      "name": "Cencora Inc",
+      "ticker": "COR",
+      "exchange": "US"
+    },
+    {
+      "id": "431121",
+      "name": "CrowdStrike Holdings Inc",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431433",
+      "name": "Electronic Arts Inc",
+      "ticker": "EA",
+      "exchange": "US"
+    },
+    {
+      "id": "432382",
+      "name": "Illumina Inc",
+      "ticker": "ILMN",
+      "exchange": "US"
+    },
+    {
+      "id": "435681",
+      "name": "Vertex Pharmaceuticals Inc",
+      "ticker": "VRTX",
+      "exchange": "US"
+    },
+    {
+      "id": "429639",
+      "name": "Altria Group Inc",
+      "ticker": "MO",
+      "exchange": "US"
+    },
+    {
+      "id": "431879",
+      "name": "Freeport-McMoRan Inc",
+      "ticker": "FCX",
+      "exchange": "US"
+    },
+    {
+      "id": "433773",
+      "name": "NXP Semiconductors NV",
+      "ticker": "NXPI",
+      "exchange": "US"
+    },
+    {
+      "id": "434825",
+      "name": "CBOE SPX INDEX",
+      "ticker": "SPX",
+      "exchange": "US"
+    },
+    {
+      "id": "431316",
+      "name": "Dollar Tree Inc",
+      "ticker": "DLTR",
+      "exchange": "US"
+    },
+    {
+      "id": "431352",
+      "name": "D.R. Horton Inc",
+      "ticker": "DHI",
+      "exchange": "US"
+    },
+    {
+      "id": "431462",
+      "name": "Emerson Electric Co",
+      "ticker": "EMR",
+      "exchange": "US"
+    },
+    {
+      "id": "434429",
+      "name": "Rockwell Automation Inc",
+      "ticker": "ROK",
+      "exchange": "US"
+    },
+    {
+      "id": "430491",
+      "name": "Charter Communications Inc",
+      "ticker": "CHTR",
+      "exchange": "US"
+    },
+    {
+      "id": "431135",
+      "name": "CSX Corp",
+      "ticker": "CSX",
+      "exchange": "US"
+    },
+    {
+      "id": "431372",
+      "name": "DuPont  De Nemours Inc",
+      "ticker": "DD",
+      "exchange": "US"
+    },
+    {
+      "id": "431493",
+      "name": "Energy Transfer LP",
+      "ticker": "ET",
+      "exchange": "US"
+    },
+    {
+      "id": "433232",
+      "name": "Martin Marietta Materials Inc",
+      "ticker": "MLM",
+      "exchange": "US"
+    },
+    {
+      "id": "435295",
+      "name": "The Toronto-Dominion Bank",
+      "ticker": "TD",
+      "exchange": "US"
+    },
+    {
+      "id": "429583",
+      "name": "Alexandria Real Estate Equities Inc",
+      "ticker": "ARE",
+      "exchange": "US"
+    },
+    {
+      "id": "431262",
+      "name": "DexCom Inc",
+      "ticker": "DXCM",
+      "exchange": "US"
+    },
+    {
+      "id": "431506",
+      "name": "Enphase Energy Inc",
+      "ticker": "ENPH",
+      "exchange": "US"
+    },
+    {
+      "id": "432868",
+      "name": "KeyCorp",
+      "ticker": "KEY",
+      "exchange": "US"
+    },
+    {
+      "id": "433147",
+      "name": "LyondellBasell Industries NV",
+      "ticker": "LYB",
+      "exchange": "US"
+    },
+    {
+      "id": "434554",
+      "name": "SAP SE",
+      "ticker": "SAP",
+      "exchange": "US"
+    },
+    {
+      "id": "435001",
+      "name": "State Street Corporation",
+      "ticker": "STT",
+      "exchange": "US"
+    },
+    {
+      "id": "429569",
+      "name": "Albemarle Corp",
+      "ticker": "ALB",
+      "exchange": "US"
+    },
+    {
+      "id": "429796",
+      "name": "Aptiv PLC",
+      "ticker": "APTV",
+      "exchange": "US"
+    },
+    {
+      "id": "430944",
+      "name": "Conagra Brands Inc",
+      "ticker": "CAG",
+      "exchange": "US"
+    },
+    {
+      "id": "432274",
+      "name": "Hilton Worldwide Holdings Inc",
+      "ticker": "HLT",
+      "exchange": "US"
+    },
+    {
+      "id": "432367",
+      "name": "IDEXX Laboratories Inc",
+      "ticker": "IDXX",
+      "exchange": "US"
+    },
+    {
+      "id": "433434",
+      "name": "Moderna Inc",
+      "ticker": "MRNA",
+      "exchange": "US"
+    },
+    {
+      "id": "433790",
+      "name": "Occidental Petroleum Corp",
+      "ticker": "OXY",
+      "exchange": "US"
+    },
+    {
+      "id": "433817",
+      "name": "OKTA Inc",
+      "ticker": "OKTA",
+      "exchange": "US"
+    },
+    {
+      "id": "435473",
+      "name": "United Rentals Inc",
+      "ticker": "URI",
+      "exchange": "US"
+    },
+    {
+      "id": "1282634",
+      "name": "Vanguard S&P 500 ETF",
+      "ticker": "VOO",
+      "exchange": "US"
+    },
+    {
+      "id": "431265",
+      "name": "DFA EMERGING MARKETS CORE EQUITY PORTFOLIO",
+      "ticker": "DFCEX",
+      "exchange": "US"
+    },
+    {
+      "id": "432077",
+      "name": "Graphic Packaging Holding Co",
+      "ticker": "GPK",
+      "exchange": "US"
+    },
+    {
+      "id": "432482",
+      "name": "International Flavors & Fragrances Inc",
+      "ticker": "IFF",
+      "exchange": "US"
+    },
+    {
+      "id": "433493",
+      "name": "MSCI Inc",
+      "ticker": "MSCI",
+      "exchange": "US"
+    },
+    {
+      "id": "434353",
+      "name": "Regions Financial Corp",
+      "ticker": "RF",
+      "exchange": "US"
+    },
+    {
+      "id": "431370",
+      "name": "The Dun & Bradstreet Corp",
+      "ticker": "DNB",
+      "exchange": "US"
+    },
+    {
+      "id": "433379",
+      "name": "Microchip Technology Inc",
+      "ticker": "MCHP",
+      "exchange": "US"
+    },
+    {
+      "id": "434712",
+      "name": "Simon Property Group Inc",
+      "ticker": "SPG",
+      "exchange": "US"
+    },
+    {
+      "id": "435122",
+      "name": "Take-Two Interactive Software Inc",
+      "ticker": "TTWO",
+      "exchange": "US"
+    },
+    {
+      "id": "435529",
+      "name": "Urban Outfitters Inc",
+      "ticker": "URBN",
+      "exchange": "US"
+    },
+    {
+      "id": "435886",
+      "name": "Weyerhaeuser Co",
+      "ticker": "WY",
+      "exchange": "US"
+    },
+    {
+      "id": "429812",
+      "name": "Archer-Daniels-Midland Co",
+      "ticker": "ADM",
+      "exchange": "US"
+    },
+    {
+      "id": "429992",
+      "name": "The Bank of New York Mellon Corp",
+      "ticker": "BK",
+      "exchange": "US"
+    },
+    {
+      "id": "430082",
+      "name": "Biogen Inc",
+      "ticker": "BIIB",
+      "exchange": "US"
+    },
+    {
+      "id": "430328",
+      "name": "Topgolf Callaway Brands Corp",
+      "ticker": "MODG",
+      "exchange": "US"
+    },
+    {
+      "id": "430399",
+      "name": "CarMax Inc",
+      "ticker": "KMX",
+      "exchange": "US"
+    },
+    {
+      "id": "430827",
+      "name": "The Clorox Co",
+      "ticker": "CLX",
+      "exchange": "US"
+    },
+    {
+      "id": "432993",
+      "name": "Lennar Corp",
+      "ticker": "LEN",
+      "exchange": "US"
+    },
+    {
+      "id": "433909",
+      "name": "PACCAR Inc",
+      "ticker": "PCAR",
+      "exchange": "US"
+    },
+    {
+      "id": "434004",
+      "name": "Penn National Gaming Inc",
+      "ticker": "PENN",
+      "exchange": "US"
+    },
+    {
+      "id": "434954",
+      "name": "STATE OF CONNECTICUT",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435477",
+      "name": "United States Steel Corp",
+      "ticker": "X",
+      "exchange": "US"
+    },
+    {
+      "id": "2331336",
+      "name": "Palantir Technologies Inc",
+      "ticker": "PLTR",
+      "exchange": "US"
+    },
+    {
+      "id": "429957",
+      "name": "Axalta Coating Systems Ltd",
+      "ticker": "AXTA",
+      "exchange": "US"
+    },
+    {
+      "id": "429993",
+      "name": "The Bank of Nova Scotia",
+      "ticker": "BNS",
+      "exchange": "US"
+    },
+    {
+      "id": "430093",
+      "name": "BJ's Wholesale Club Holdings Inc",
+      "ticker": "BJ",
+      "exchange": "US"
+    },
+    {
+      "id": "430403",
+      "name": "Carrier Global Corp",
+      "ticker": "CARR",
+      "exchange": "US"
+    },
+    {
+      "id": "431298",
+      "name": "Discover Financial Services",
+      "ticker": "DFS",
+      "exchange": "US"
+    },
+    {
+      "id": "431333",
+      "name": "DORMITORY AUTHORITY OF THE STATE OF NEW YORK",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431375",
+      "name": "Dynatrace Inc",
+      "ticker": "DT",
+      "exchange": "US"
+    },
+    {
+      "id": "431783",
+      "name": "FleetCor Technologies Inc",
+      "ticker": "FLT",
+      "exchange": "US"
+    },
+    {
+      "id": "431835",
+      "name": "Fortive Corp",
+      "ticker": "FTV",
+      "exchange": "US"
+    },
+    {
+      "id": "433854",
+      "name": "ON Semiconductor Corp",
+      "ticker": "ON",
+      "exchange": "US"
+    },
+    {
+      "id": "434278",
+      "name": "Quanta Services Inc",
+      "ticker": "PWR",
+      "exchange": "US"
+    },
+    {
+      "id": "435877",
+      "name": "West Pharmaceutical Services Inc",
+      "ticker": "WST",
+      "exchange": "US"
+    },
+    {
+      "id": "430019",
+      "name": "Bayer AG",
+      "ticker": "BAYRY",
+      "exchange": "US"
+    },
+    {
+      "id": "431282",
+      "name": "Digital Realty Trust Inc",
+      "ticker": "DLR",
+      "exchange": "US"
+    },
+    {
+      "id": "433236",
+      "name": "Marvell Technology Inc",
+      "ticker": "MRVL",
+      "exchange": "US"
+    },
+    {
+      "id": "435342",
+      "name": "Trane Technologies PLC",
+      "ticker": "TT",
+      "exchange": "US"
+    },
+    {
+      "id": "2331193",
+      "name": "Vishay Intertechnology Inc",
+      "ticker": "VSH",
+      "exchange": "US"
+    },
+    {
+      "id": "429782",
+      "name": "Apollo Global Management Inc",
+      "ticker": "APO",
+      "exchange": "US"
+    },
+    {
+      "id": "430573",
+      "name": "Citizens Financial Group Inc",
+      "ticker": "CFG",
+      "exchange": "US"
+    },
+    {
+      "id": "431002",
+      "name": "CoStar Group Inc",
+      "ticker": "CSGP",
+      "exchange": "US"
+    },
+    {
+      "id": "432381",
+      "name": "Illinois Tool Works Inc",
+      "ticker": "ITW",
+      "exchange": "US"
+    },
+    {
+      "id": "432432",
+      "name": "Ingersoll Rand Inc",
+      "ticker": "IR",
+      "exchange": "US"
+    },
+    {
+      "id": "432543",
+      "name": "Iqvia Holdings Inc",
+      "ticker": "IQV",
+      "exchange": "US"
+    },
+    {
+      "id": "432930",
+      "name": "The Kroger Co",
+      "ticker": "KR",
+      "exchange": "US"
+    },
+    {
+      "id": "433437",
+      "name": "Mohawk Industries Inc",
+      "ticker": "MHK",
+      "exchange": "US"
+    },
+    {
+      "id": "434248",
+      "name": "Public Storage",
+      "ticker": "PSA",
+      "exchange": "US"
+    },
+    {
+      "id": "435134",
+      "name": "Tapestry Inc",
+      "ticker": "TPR",
+      "exchange": "US"
+    },
+    {
+      "id": "435166",
+      "name": "TE Connectivity Ltd",
+      "ticker": "TEL",
+      "exchange": "US"
+    },
+    {
+      "id": "2331444",
+      "name": "MillerKnoll Inc",
+      "ticker": "MLKN",
+      "exchange": "US"
+    },
+    {
+      "id": "2334585",
+      "name": "ISHARES MONTH TREAS BOND ETF",
+      "ticker": "SGOV",
+      "exchange": "US"
+    },
+    {
+      "id": "2334903",
+      "name": "DIREXION DAILY SMALL CAP BULL 3X ETF",
+      "ticker": "TNA",
+      "exchange": "US"
+    },
+    {
+      "id": "432900",
+      "name": "KLA Corp",
+      "ticker": "KLAC",
+      "exchange": "US"
+    },
+    {
+      "id": "433712",
+      "name": "Northrop Grumman Corp",
+      "ticker": "NOC",
+      "exchange": "US"
+    },
+    {
+      "id": "434233",
+      "name": "Prudential Financial Inc",
+      "ticker": "PRU",
+      "exchange": "US"
+    },
+    {
+      "id": "434327",
+      "name": "Realty Income Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434507",
+      "name": "Safran SA",
+      "ticker": "SAFRY",
+      "exchange": "US"
+    },
+    {
+      "id": "435765",
+      "name": "Westinghouse Air Brake Technologies Corp",
+      "ticker": "WAB",
+      "exchange": "US"
+    },
+    {
+      "id": "2333561",
+      "name": "Block Inc",
+      "ticker": "SQ",
+      "exchange": "US"
+    },
+    {
+      "id": "2334898",
+      "name": "MH FOUR WINDS LLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430155",
+      "name": "BNP Paribas",
+      "ticker": "BNPQY",
+      "exchange": "US"
+    },
+    {
+      "id": "430999",
+      "name": "Corteva Inc",
+      "ticker": "CTVA",
+      "exchange": "US"
+    },
+    {
+      "id": "431648",
+      "name": "Ferguson PLC",
+      "ticker": "FERG",
+      "exchange": "US"
+    },
+    {
+      "id": "431961",
+      "name": "Genuine Parts Co",
+      "ticker": "GPC",
+      "exchange": "US"
+    },
+    {
+      "id": "431977",
+      "name": "Gilead Sciences Inc",
+      "ticker": "GILD",
+      "exchange": "US"
+    },
+    {
+      "id": "432290",
+      "name": "Hologic Inc",
+      "ticker": "HOLX",
+      "exchange": "US"
+    },
+    {
+      "id": "433624",
+      "name": "Newmont Corporation",
+      "ticker": "NEM",
+      "exchange": "US"
+    },
+    {
+      "id": "434171",
+      "name": "T. Rowe Price Group Inc",
+      "ticker": "TROW",
+      "exchange": "US"
+    },
+    {
+      "id": "435018",
+      "name": "Stifel Financial Corp",
+      "ticker": "SF",
+      "exchange": "US"
+    },
+    {
+      "id": "2334051",
+      "name": "STATE OF MASSACHUSETTS",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334504",
+      "name": "KENVUE INC",
+      "ticker": "KVUE",
+      "exchange": "US"
+    },
+    {
+      "id": "429731",
+      "name": "Amphenol Corp",
+      "ticker": "APH",
+      "exchange": "US"
+    },
+    {
+      "id": "429760",
+      "name": "ANSYS Inc",
+      "ticker": "ANSS",
+      "exchange": "US"
+    },
+    {
+      "id": "430865",
+      "name": "Cognizant Technology Solutions Corp",
+      "ticker": "CTSH",
+      "exchange": "US"
+    },
+    {
+      "id": "431222",
+      "name": "Dell Technologies Inc",
+      "ticker": "DELL",
+      "exchange": "US"
+    },
+    {
+      "id": "431367",
+      "name": "Duke Energy Corp",
+      "ticker": "DUK",
+      "exchange": "US"
+    },
+    {
+      "id": "431548",
+      "name": "Equity Residential",
+      "ticker": "EQR",
+      "exchange": "US"
+    },
+    {
+      "id": "432164",
+      "name": "Harley-Davidson Inc",
+      "ticker": "HOG",
+      "exchange": "US"
+    },
+    {
+      "id": "432323",
+      "name": "HP Inc",
+      "ticker": "HPQ",
+      "exchange": "US"
+    },
+    {
+      "id": "432516",
+      "name": "Invesco QQQ Trust Series 1",
+      "ticker": "QQQ",
+      "exchange": "US"
+    },
+    {
+      "id": "433439",
+      "name": "Molina Healthcare Inc",
+      "ticker": "MOH",
+      "exchange": "US"
+    },
+    {
+      "id": "433653",
+      "name": "NGL Energy Partners LP",
+      "ticker": "NGL",
+      "exchange": "US"
+    },
+    {
+      "id": "433889",
+      "name": "Oshkosh Corp",
+      "ticker": "OSK",
+      "exchange": "US"
+    },
+    {
+      "id": "434452",
+      "name": "Ross Stores Inc",
+      "ticker": "ROST",
+      "exchange": "US"
+    },
+    {
+      "id": "435339",
+      "name": "The Trade Desk Inc",
+      "ticker": "TTD",
+      "exchange": "US"
+    },
+    {
+      "id": "2334687",
+      "name": "SUPER MICRO COMPUTER INC",
+      "ticker": "SMCI",
+      "exchange": "US"
+    },
+    {
+      "id": "2334843",
+      "name": "ULTRA CLEAN HOLDINGS INC",
+      "ticker": "UCTT",
+      "exchange": "US"
+    },
+    {
+      "id": "429528",
+      "name": "Agilent Technologies Inc",
+      "ticker": "A",
+      "exchange": "US"
+    },
+    {
+      "id": "430922",
+      "name": "COMMONWEALTH OF PENNSYLVANIA",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432961",
+      "name": "Las Vegas Sands Corp",
+      "ticker": "LVS",
+      "exchange": "US"
+    },
+    {
+      "id": "433321",
+      "name": "MercadoLibre Inc",
+      "ticker": "MELI",
+      "exchange": "US"
+    },
+    {
+      "id": "433464",
+      "name": "Moody's Corp.",
+      "ticker": "MCO",
+      "exchange": "US"
+    },
+    {
+      "id": "433479",
+      "name": "Motorola Solutions Inc",
+      "ticker": "MSI",
+      "exchange": "US"
+    },
+    {
+      "id": "433495",
+      "name": "M&T Bank Corp",
+      "ticker": "MTB",
+      "exchange": "US"
+    },
+    {
+      "id": "434226",
+      "name": "Prosus NV",
+      "ticker": "PROSY",
+      "exchange": "US"
+    },
+    {
+      "id": "434446",
+      "name": "Roper Technologies Inc",
+      "ticker": "ROP",
+      "exchange": "US"
+    },
+    {
+      "id": "435338",
+      "name": "Tractor Supply Co",
+      "ticker": "TSCO",
+      "exchange": "US"
+    },
+    {
+      "id": "435443",
+      "name": "Ulta Beauty Inc",
+      "ticker": "ULTA",
+      "exchange": "US"
+    },
+    {
+      "id": "579351",
+      "name": "OHIO WATER DEVELOPMENT AUTHORITY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2335008",
+      "name": "TENABLE HOLDINGS INC",
+      "ticker": "TENB",
+      "exchange": "US"
+    },
+    {
+      "id": "429724",
+      "name": "AMETEK Inc",
+      "ticker": "AME",
+      "exchange": "US"
+    },
+    {
+      "id": "429934",
+      "name": "AutoZone Inc",
+      "ticker": "AZO",
+      "exchange": "US"
+    },
+    {
+      "id": "430176",
+      "name": "BorgWarner Inc",
+      "ticker": "BWA",
+      "exchange": "US"
+    },
+    {
+      "id": "431541",
+      "name": "Equinix Inc",
+      "ticker": "EQIX",
+      "exchange": "US"
+    },
+    {
+      "id": "431687",
+      "name": "Fifth Third Bancorp",
+      "ticker": "FITB",
+      "exchange": "US"
+    },
+    {
+      "id": "432872",
+      "name": "Keysight Technologies Inc",
+      "ticker": "KEYS",
+      "exchange": "US"
+    },
+    {
+      "id": "433385",
+      "name": "Mid-America Apartment Communities Inc",
+      "ticker": "MAA",
+      "exchange": "US"
+    },
+    {
+      "id": "434023",
+      "name": "Revvity Inc",
+      "ticker": "RVTY",
+      "exchange": "US"
+    },
+    {
+      "id": "434241",
+      "name": "PTC Inc",
+      "ticker": "PTC",
+      "exchange": "US"
+    },
+    {
+      "id": "434771",
+      "name": "SolarEdge Technologies Inc",
+      "ticker": "SEDG",
+      "exchange": "US"
+    },
+    {
+      "id": "434860",
+      "name": "SPDR S&P 500 ETF Trust",
+      "ticker": "SPY",
+      "exchange": "US"
+    },
+    {
+      "id": "435687",
+      "name": "Paramount Global Inc",
+      "ticker": "PSKY",
+      "exchange": "US"
+    },
+    {
+      "id": "435812",
+      "name": "Waters Corp",
+      "ticker": "WAT",
+      "exchange": "US"
+    },
+    {
+      "id": "2334178",
+      "name": "GE HEALTHCARE TECHNOLOGI INC",
+      "ticker": "GEHC",
+      "exchange": "US"
+    },
+    {
+      "id": "429717",
+      "name": "Ameriprise Financial Inc",
+      "ticker": "AMP",
+      "exchange": "US"
+    },
+    {
+      "id": "430264",
+      "name": "Brown & Brown Inc",
+      "ticker": "BRO",
+      "exchange": "US"
+    },
+    {
+      "id": "430545",
+      "name": "Church & Dwight Co Inc",
+      "ticker": "CHD",
+      "exchange": "US"
+    },
+    {
+      "id": "431539",
+      "name": "Equifax Inc",
+      "ticker": "EFX",
+      "exchange": "US"
+    },
+    {
+      "id": "432306",
+      "name": "Hormel Foods Corp",
+      "ticker": "HRL",
+      "exchange": "US"
+    },
+    {
+      "id": "432471",
+      "name": "Intercontinental Exchange Inc",
+      "ticker": "ICE",
+      "exchange": "US"
+    },
+    {
+      "id": "433013",
+      "name": "Liberty Broadband Corp",
+      "ticker": "LBRDA",
+      "exchange": "US"
+    },
+    {
+      "id": "435436",
+      "name": "UBS Group AG",
+      "ticker": "UBS",
+      "exchange": "US"
+    },
+    {
+      "id": "435685",
+      "name": "V.F. Corp",
+      "ticker": "VFC",
+      "exchange": "US"
+    },
+    {
+      "id": "430980",
+      "name": "Copart Inc",
+      "ticker": "CPRT",
+      "exchange": "US"
+    },
+    {
+      "id": "431148",
+      "name": "Curtiss-Wright Corp",
+      "ticker": "CW",
+      "exchange": "US"
+    },
+    {
+      "id": "431260",
+      "name": "Devon Energy Corp",
+      "ticker": "DVN",
+      "exchange": "US"
+    },
+    {
+      "id": "431405",
+      "name": "Ecolab Inc",
+      "ticker": "ECL",
+      "exchange": "US"
+    },
+    {
+      "id": "431837",
+      "name": "Fortune Brands Innovations Inc",
+      "ticker": "FBIN",
+      "exchange": "US"
+    },
+    {
+      "id": "431928",
+      "name": "Gartner Inc",
+      "ticker": "IT",
+      "exchange": "US"
+    },
+    {
+      "id": "432485",
+      "name": "International Paper Co",
+      "ticker": "IP",
+      "exchange": "US"
+    },
+    {
+      "id": "433073",
+      "name": "LKQ Corporation",
+      "ticker": "LKQ",
+      "exchange": "US"
+    },
+    {
+      "id": "434373",
+      "name": "Resmed Inc",
+      "ticker": "RMD",
+      "exchange": "US"
+    },
+    {
+      "id": "434422",
+      "name": "Robert Half International Inc",
+      "ticker": "RHI",
+      "exchange": "US"
+    },
+    {
+      "id": "434758",
+      "name": "Snowflake Inc",
+      "ticker": "SNOW",
+      "exchange": "US"
+    },
+    {
+      "id": "435694",
+      "name": "VICI Properties Inc",
+      "ticker": "VICI",
+      "exchange": "US"
+    },
+    {
+      "id": "429991",
+      "name": "Bank of Montreal",
+      "ticker": "BMO",
+      "exchange": "US"
+    },
+    {
+      "id": "430266",
+      "name": "Brown-Forman Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430355",
+      "name": "Canadian Imperial Bank of Commerce",
+      "ticker": "CM",
+      "exchange": "US"
+    },
+    {
+      "id": "430400",
+      "name": "Carnival Corporation & PLC",
+      "ticker": "CCL",
+      "exchange": "US"
+    },
+    {
+      "id": "430479",
+      "name": "Ceridian HCM Holding Inc",
+      "ticker": "CDAY",
+      "exchange": "US"
+    },
+    {
+      "id": "430565",
+      "name": "Cintas Corp",
+      "ticker": "CTAS",
+      "exchange": "US"
+    },
+    {
+      "id": "432061",
+      "name": "Grainger (W.W.) Inc",
+      "ticker": "GWW",
+      "exchange": "US"
+    },
+    {
+      "id": "432216",
+      "name": "Healthpeak Properties Inc",
+      "ticker": "PEAK",
+      "exchange": "US"
+    },
+    {
+      "id": "432240",
+      "name": "HENRY SCHEIN Inc",
+      "ticker": "HSIC",
+      "exchange": "US"
+    },
+    {
+      "id": "432528",
+      "name": "Invitation Homes Inc",
+      "ticker": "INVH",
+      "exchange": "US"
+    },
+    {
+      "id": "433448",
+      "name": "Monolithic Power Systems Inc",
+      "ticker": "MPWR",
+      "exchange": "US"
+    },
+    {
+      "id": "433513",
+      "name": "Murphy Oil Corp",
+      "ticker": "MUR",
+      "exchange": "US"
+    },
+    {
+      "id": "433708",
+      "name": "Northern Trust Corp",
+      "ticker": "NTRS",
+      "exchange": "US"
+    },
+    {
+      "id": "429888",
+      "name": "Astrazeneca PLC",
+      "ticker": "AZN",
+      "exchange": "US"
+    },
+    {
+      "id": "429936",
+      "name": "AvalonBay Communities Inc",
+      "ticker": "AVB",
+      "exchange": "US"
+    },
+    {
+      "id": "429978",
+      "name": "BALL CORPORATION",
+      "ticker": "BALL",
+      "exchange": "US"
+    },
+    {
+      "id": "430086",
+      "name": "Bio-Techne Corp",
+      "ticker": "TECH",
+      "exchange": "US"
+    },
+    {
+      "id": "430393",
+      "name": "Carlisle Cos Inc",
+      "ticker": "CSL",
+      "exchange": "US"
+    },
+    {
+      "id": "431224",
+      "name": "Delta Air Lines Inc",
+      "ticker": "DAL",
+      "exchange": "US"
+    },
+    {
+      "id": "431270",
+      "name": "Diageo PLC",
+      "ticker": "DEO",
+      "exchange": "US"
+    },
+    {
+      "id": "431626",
+      "name": "Fastenal Co",
+      "ticker": "FAST",
+      "exchange": "US"
+    },
+    {
+      "id": "431722",
+      "name": "First Solar Inc",
+      "ticker": "FSLR",
+      "exchange": "US"
+    },
+    {
+      "id": "432977",
+      "name": "Lear Corp",
+      "ticker": "LEA",
+      "exchange": "US"
+    },
+    {
+      "id": "433978",
+      "name": "Paycom Software Inc",
+      "ticker": "PAYC",
+      "exchange": "US"
+    },
+    {
+      "id": "434371",
+      "name": "Republic Services Inc",
+      "ticker": "RSG",
+      "exchange": "US"
+    },
+    {
+      "id": "434456",
+      "name": "Royal Bank of Canada",
+      "ticker": "RY",
+      "exchange": "US"
+    },
+    {
+      "id": "434800",
+      "name": "The Southern Co",
+      "ticker": "SO",
+      "exchange": "US"
+    },
+    {
+      "id": "429482",
+      "name": "Activision Blizzard Inc",
+      "ticker": "ATVI",
+      "exchange": "US"
+    },
+    {
+      "id": "430164",
+      "name": "Boeing Co",
+      "ticker": "BA",
+      "exchange": "US"
+    },
+    {
+      "id": "430408",
+      "name": "Carter's Inc.",
+      "ticker": "CRI",
+      "exchange": "US"
+    },
+    {
+      "id": "431509",
+      "name": "Entegris Inc",
+      "ticker": "ENTG",
+      "exchange": "US"
+    },
+    {
+      "id": "432176",
+      "name": "The Hartford Financial Services Group Inc",
+      "ticker": "HIG",
+      "exchange": "US"
+    },
+    {
+      "id": "433892",
+      "name": "Otis Worldwide Corp",
+      "ticker": "OTIS",
+      "exchange": "US"
+    },
+    {
+      "id": "435691",
+      "name": "Viatris Inc",
+      "ticker": "VTRS",
+      "exchange": "US"
+    },
+    {
+      "id": "435761",
+      "name": "Vulcan Materials Co",
+      "ticker": "VMC",
+      "exchange": "US"
+    },
+    {
+      "id": "435862",
+      "name": "Western Digital Corp",
+      "ticker": "WDC",
+      "exchange": "US"
+    },
+    {
+      "id": "2334354",
+      "name": "CAFFEINATED CAPITAL 2023 ALLOCATE ACCESS FUND LP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429589",
+      "name": "Alibaba Group Holding Ltd",
+      "ticker": "BABA",
+      "exchange": "US"
+    },
+    {
+      "id": "432778",
+      "name": "Johnson Controls International PLC",
+      "ticker": "JCI",
+      "exchange": "US"
+    },
+    {
+      "id": "433219",
+      "name": "Markel Corp",
+      "ticker": "MKL",
+      "exchange": "US"
+    },
+    {
+      "id": "433278",
+      "name": "McCormick & Co Inc",
+      "ticker": "MKC",
+      "exchange": "US"
+    },
+    {
+      "id": "433540",
+      "name": "National Fuel Gas Co",
+      "ticker": "NFG",
+      "exchange": "US"
+    },
+    {
+      "id": "433584",
+      "name": "Nestle SA, Cham Und Vevey",
+      "ticker": "NSRGY",
+      "exchange": "US"
+    },
+    {
+      "id": "433878",
+      "name": "O'Reilly Automotive Inc",
+      "ticker": "ORLY",
+      "exchange": "US"
+    },
+    {
+      "id": "434027",
+      "name": "Perrigo Co PLC",
+      "ticker": "PRGO",
+      "exchange": "US"
+    },
+    {
+      "id": "435671",
+      "name": "VERISK ANALYTICS Inc",
+      "ticker": "VRSK",
+      "exchange": "US"
+    },
+    {
+      "id": "429524",
+      "name": "AFLAC Inc",
+      "ticker": "AFL",
+      "exchange": "US"
+    },
+    {
+      "id": "429663",
+      "name": "American Airlines Group Inc",
+      "ticker": "AAL",
+      "exchange": "US"
+    },
+    {
+      "id": "430181",
+      "name": "Boston Properties Inc",
+      "ticker": "BXP",
+      "exchange": "US"
+    },
+    {
+      "id": "430488",
+      "name": "Charles River Laboratories International Inc",
+      "ticker": "CRL",
+      "exchange": "US"
+    },
+    {
+      "id": "430841",
+      "name": "CNH Industrial N.V.",
+      "ticker": "CNHI",
+      "exchange": "US"
+    },
+    {
+      "id": "431189",
+      "name": "Datadog Inc",
+      "ticker": "DDOG",
+      "exchange": "US"
+    },
+    {
+      "id": "431845",
+      "name": "Fox Corp",
+      "ticker": "FOXA",
+      "exchange": "US"
+    },
+    {
+      "id": "431941",
+      "name": "General Dynamics Corp",
+      "ticker": "GD",
+      "exchange": "US"
+    },
+    {
+      "id": "432321",
+      "name": "Howmet Aerospace Inc",
+      "ticker": "HWM",
+      "exchange": "US"
+    },
+    {
+      "id": "432338",
+      "name": "Huntington Bancshares Inc",
+      "ticker": "HBAN",
+      "exchange": "US"
+    },
+    {
+      "id": "432394",
+      "name": "Incyte Corp",
+      "ticker": "INCY",
+      "exchange": "US"
+    },
+    {
+      "id": "432578",
+      "name": "iShares Core S&P Small-Cap ETF",
+      "ticker": "IJR",
+      "exchange": "US"
+    },
+    {
+      "id": "433350",
+      "name": "Mettler-Toledo International Inc",
+      "ticker": "MTD",
+      "exchange": "US"
+    },
+    {
+      "id": "433427",
+      "name": "MKS Instruments Inc",
+      "ticker": "MKSI",
+      "exchange": "US"
+    },
+    {
+      "id": "433769",
+      "name": "nVent Electric PLC",
+      "ticker": "NVT",
+      "exchange": "US"
+    },
+    {
+      "id": "433772",
+      "name": "NVR Inc",
+      "ticker": "NVR",
+      "exchange": "US"
+    },
+    {
+      "id": "434130",
+      "name": "PORT AUTHORITY OF NEW YORK AND NEW JERSEY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435061",
+      "name": "Sun Communities Inc",
+      "ticker": "SUI",
+      "exchange": "US"
+    },
+    {
+      "id": "435457",
+      "name": "Unilever PLC",
+      "ticker": "UL",
+      "exchange": "US"
+    },
+    {
+      "id": "435953",
+      "name": "Woodward Inc",
+      "ticker": "WWD",
+      "exchange": "US"
+    },
+    {
+      "id": "436010",
+      "name": "YUM BRANDS  Inc",
+      "ticker": "YUM",
+      "exchange": "US"
+    },
+    {
+      "id": "2332090",
+      "name": "Kellogg Co",
+      "ticker": "K",
+      "exchange": "US"
+    },
+    {
+      "id": "2334768",
+      "name": "APPLOVIN CORP",
+      "ticker": "APP",
+      "exchange": "US"
+    },
+    {
+      "id": "429577",
+      "name": "Alcoa Corp",
+      "ticker": "AA",
+      "exchange": "US"
+    },
+    {
+      "id": "429608",
+      "name": "Alliance Resource Partners LP",
+      "ticker": "ARLP",
+      "exchange": "US"
+    },
+    {
+      "id": "429848",
+      "name": "Arthur J. Gallagher & Co",
+      "ticker": "AJG",
+      "exchange": "US"
+    },
+    {
+      "id": "430381",
+      "name": "Cardinal Health Inc",
+      "ticker": "CAH",
+      "exchange": "US"
+    },
+    {
+      "id": "430439",
+      "name": "CDW Corp",
+      "ticker": "CDW",
+      "exchange": "US"
+    },
+    {
+      "id": "430715",
+      "name": "CITY OF NEW YORK",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431698",
+      "name": "FirstCash Holdings Inc",
+      "ticker": "FCFS",
+      "exchange": "US"
+    },
+    {
+      "id": "432254",
+      "name": "Hewlett Packard Enterprise Co",
+      "ticker": "HPE",
+      "exchange": "US"
+    },
+    {
+      "id": "432879",
+      "name": "Kinder Morgan Inc",
+      "ticker": "KMI",
+      "exchange": "US"
+    },
+    {
+      "id": "434343",
+      "name": "Regal Rexnord Corporation",
+      "ticker": "RRX",
+      "exchange": "US"
+    },
+    {
+      "id": "434687",
+      "name": "Shopify Inc",
+      "ticker": "SHOP",
+      "exchange": "US"
+    },
+    {
+      "id": "434817",
+      "name": "Southwest Airlines Co",
+      "ticker": "LUV",
+      "exchange": "US"
+    },
+    {
+      "id": "435558",
+      "name": "Valero Energy Corp",
+      "ticker": "VLO",
+      "exchange": "US"
+    },
+    {
+      "id": "436015",
+      "name": "Zebra Technologies Corp",
+      "ticker": "ZBRA",
+      "exchange": "US"
+    },
+    {
+      "id": "436022",
+      "name": "Zions Bancorporation National Association",
+      "ticker": "ZION",
+      "exchange": "US"
+    },
+    {
+      "id": "1608657",
+      "name": "CBRE Group Inc",
+      "ticker": "CBRE",
+      "exchange": "US"
+    },
+    {
+      "id": "2290378",
+      "name": "Welltower Inc",
+      "ticker": "WELL",
+      "exchange": "US"
+    },
+    {
+      "id": "2334905",
+      "name": "YIELDMAX SMCI OPTION INCOME STRATEGY ETF",
+      "ticker": "SMCY",
+      "exchange": "US"
+    },
+    {
+      "id": "2334914",
+      "name": "BITWISE BITCOIN ETF",
+      "ticker": "BITB",
+      "exchange": "US"
+    },
+    {
+      "id": "429501",
+      "name": "Advance Auto Parts Inc",
+      "ticker": "AAP",
+      "exchange": "US"
+    },
+    {
+      "id": "429618",
+      "name": "Ally Financial Inc",
+      "ticker": "ALLY",
+      "exchange": "US"
+    },
+    {
+      "id": "429811",
+      "name": "Arch Capital Group Ltd",
+      "ticker": "ACGL",
+      "exchange": "US"
+    },
+    {
+      "id": "430056",
+      "name": "Berkley (W.R.) Corp",
+      "ticker": "WRB",
+      "exchange": "US"
+    },
+    {
+      "id": "430626",
+      "name": "CITY OF COLUMBUS OHIO",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431721",
+      "name": "First Republic Bank",
+      "ticker": "FRC",
+      "exchange": "US"
+    },
+    {
+      "id": "431958",
+      "name": "Genpact Ltd",
+      "ticker": "G",
+      "exchange": "US"
+    },
+    {
+      "id": "433043",
+      "name": "Lincoln National Corp",
+      "ticker": "LNC",
+      "exchange": "US"
+    },
+    {
+      "id": "433471",
+      "name": "MORGAN STANLEY FINANCE LLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434542",
+      "name": "Sanofi",
+      "ticker": "SNY",
+      "exchange": "US"
+    },
+    {
+      "id": "434726",
+      "name": "Skechers U S A Inc",
+      "ticker": "SKX",
+      "exchange": "US"
+    },
+    {
+      "id": "435079",
+      "name": "SVB Financial Group",
+      "ticker": "SIVBQ",
+      "exchange": "US"
+    },
+    {
+      "id": "435438",
+      "name": "UDR Inc",
+      "ticker": "UDR",
+      "exchange": "US"
+    },
+    {
+      "id": "435545",
+      "name": "US TREASURY BOND",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "1570797",
+      "name": "HSBC Holdings PLC",
+      "ticker": "HSBC",
+      "exchange": "US"
+    },
+    {
+      "id": "2333558",
+      "name": "Robinhood Markets Inc",
+      "ticker": "HOOD",
+      "exchange": "US"
+    },
+    {
+      "id": "429906",
+      "name": "Atlassian Corp PLC",
+      "ticker": "TEAM",
+      "exchange": "US"
+    },
+    {
+      "id": "430199",
+      "name": "BP PLC",
+      "ticker": "BP",
+      "exchange": "US"
+    },
+    {
+      "id": "430308",
+      "name": "Caesars Entertainment Inc",
+      "ticker": "CZR",
+      "exchange": "US"
+    },
+    {
+      "id": "430577",
+      "name": "CITY AND COUNTY OF HONOLULU",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430978",
+      "name": "The Cooper Cos Inc",
+      "ticker": "COO",
+      "exchange": "US"
+    },
+    {
+      "id": "431330",
+      "name": "DoorDash Inc",
+      "ticker": "DASH",
+      "exchange": "US"
+    },
+    {
+      "id": "431611",
+      "name": "FactSet Research Systems Inc",
+      "ticker": "FDS",
+      "exchange": "US"
+    },
+    {
+      "id": "431863",
+      "name": "Franklin Resources Inc",
+      "ticker": "BEN",
+      "exchange": "US"
+    },
+    {
+      "id": "431940",
+      "name": "Generac Holdings Inc",
+      "ticker": "GNRC",
+      "exchange": "US"
+    },
+    {
+      "id": "432017",
+      "name": "GoDaddy Inc",
+      "ticker": "GDDY",
+      "exchange": "US"
+    },
+    {
+      "id": "432141",
+      "name": "Halliburton Co",
+      "ticker": "HAL",
+      "exchange": "US"
+    },
+    {
+      "id": "432185",
+      "name": "Hasbro Inc",
+      "ticker": "HAS",
+      "exchange": "US"
+    },
+    {
+      "id": "432314",
+      "name": "Houlihan Lokey Inc",
+      "ticker": "HLI",
+      "exchange": "US"
+    },
+    {
+      "id": "432707",
+      "name": "ITT Inc",
+      "ticker": "ITT",
+      "exchange": "US"
+    },
+    {
+      "id": "432876",
+      "name": "Kimco Realty Corp",
+      "ticker": "KIM",
+      "exchange": "US"
+    },
+    {
+      "id": "434426",
+      "name": "Roche Holding AG",
+      "ticker": "RHHBY",
+      "exchange": "US"
+    },
+    {
+      "id": "434930",
+      "name": "Stanley Black & Decker Inc",
+      "ticker": "SWK",
+      "exchange": "US"
+    },
+    {
+      "id": "435670",
+      "name": "Verisign Inc",
+      "ticker": "VRSN",
+      "exchange": "US"
+    },
+    {
+      "id": "435909",
+      "name": "The Williams Cos Inc",
+      "ticker": "WMB",
+      "exchange": "US"
+    },
+    {
+      "id": "547164",
+      "name": "SEVEN BRIDGES LONG SHORT EQUITY FUND LTD",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2300799",
+      "name": "JPMORGAN US GOVERNMENT MONEY MARKET FUND",
+      "ticker": "OGVXX",
+      "exchange": "US"
+    },
+    {
+      "id": "2333493",
+      "name": "CME CATTLE",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334032",
+      "name": "FLEX LNG LTD",
+      "ticker": "FLNG",
+      "exchange": "US"
+    },
+    {
+      "id": "429659",
+      "name": "Ameren Corporation",
+      "ticker": "AEE",
+      "exchange": "US"
+    },
+    {
+      "id": "429941",
+      "name": "Avery Dennison Corp",
+      "ticker": "AVY",
+      "exchange": "US"
+    },
+    {
+      "id": "430279",
+      "name": "Builders FirstSource Inc",
+      "ticker": "BLDR",
+      "exchange": "US"
+    },
+    {
+      "id": "431146",
+      "name": "Cummins Inc",
+      "ticker": "CMI",
+      "exchange": "US"
+    },
+    {
+      "id": "431207",
+      "name": "Deckers Outdoor Corp",
+      "ticker": "DECK",
+      "exchange": "US"
+    },
+    {
+      "id": "431304",
+      "name": "DISTRICT OF COLUMBIA",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431576",
+      "name": "Etsy Inc",
+      "ticker": "ETSY",
+      "exchange": "US"
+    },
+    {
+      "id": "431831",
+      "name": "FORT BEND INDEPENDENT SCHOOL DISTRICT",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432327",
+      "name": "Hubbell Inc",
+      "ticker": "HUBB",
+      "exchange": "US"
+    },
+    {
+      "id": "432434",
+      "name": "ING Groep NV",
+      "ticker": "ING",
+      "exchange": "US"
+    },
+    {
+      "id": "432457",
+      "name": "Insulet Corp",
+      "ticker": "PODD",
+      "exchange": "US"
+    },
+    {
+      "id": "432906",
+      "name": "Knight-Swift Transportation Holdings Inc",
+      "ticker": "KNX",
+      "exchange": "US"
+    },
+    {
+      "id": "433023",
+      "name": "Liberty Media Corp SiriusXM Group",
+      "ticker": "LSXMA",
+      "exchange": "US"
+    },
+    {
+      "id": "433122",
+      "name": "LPL Financial Holdings Inc",
+      "ticker": "LPLA",
+      "exchange": "US"
+    },
+    {
+      "id": "433478",
+      "name": "The Mosaic Company",
+      "ticker": "MOS",
+      "exchange": "US"
+    },
+    {
+      "id": "433730",
+      "name": "Novartis AG",
+      "ticker": "NVS",
+      "exchange": "US"
+    },
+    {
+      "id": "433846",
+      "name": "ONEOK Inc",
+      "ticker": "OKE",
+      "exchange": "US"
+    },
+    {
+      "id": "434012",
+      "name": "PENNSYLVANIA TURNPIKE COMMISSION",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434125",
+      "name": "Pool Corp",
+      "ticker": "POOL",
+      "exchange": "US"
+    },
+    {
+      "id": "434901",
+      "name": "Spotify Technology S.A",
+      "ticker": "SPOT",
+      "exchange": "US"
+    },
+    {
+      "id": "434950",
+      "name": "STATE OF CALIFORNIA",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435099",
+      "name": "Synchrony Financial",
+      "ticker": "SYF",
+      "exchange": "US"
+    },
+    {
+      "id": "435585",
+      "name": "Vanguard Dividend Appreciation ETF",
+      "ticker": "VIG",
+      "exchange": "US"
+    },
+    {
+      "id": "435984",
+      "name": "Xcel Energy Inc",
+      "ticker": "XEL",
+      "exchange": "US"
+    },
+    {
+      "id": "1604614",
+      "name": "Formula One Group - The Liberty Media Group",
+      "ticker": "FWONK",
+      "exchange": "US"
+    },
+    {
+      "id": "2333857",
+      "name": "CME SOYBEAN",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334337",
+      "name": "CAPPED BUFFERED ENHANCED PARTICIPATION",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334583",
+      "name": "VERALTO CORP",
+      "ticker": "VLTO",
+      "exchange": "US"
+    },
+    {
+      "id": "429791",
+      "name": "Applied Industrial Technologies Inc",
+      "ticker": "AIT",
+      "exchange": "US"
+    },
+    {
+      "id": "429997",
+      "name": "Barclays Bank PLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430062",
+      "name": "Best Buy Co Inc",
+      "ticker": "BBY",
+      "exchange": "US"
+    },
+    {
+      "id": "431544",
+      "name": "Equitable Holdings Inc",
+      "ticker": "EQH",
+      "exchange": "US"
+    },
+    {
+      "id": "432243",
+      "name": "Hercules Capital Inc",
+      "ticker": "HTGC",
+      "exchange": "US"
+    },
+    {
+      "id": "432422",
+      "name": "Infinera Corp",
+      "ticker": "INFN",
+      "exchange": "US"
+    },
+    {
+      "id": "432453",
+      "name": "Insight Enterprises Inc",
+      "ticker": "NSIT",
+      "exchange": "US"
+    },
+    {
+      "id": "432475",
+      "name": "The Interpublic Group of Cos Inc",
+      "ticker": "IPG",
+      "exchange": "US"
+    },
+    {
+      "id": "433346",
+      "name": "METROPOLITAN WASHINGTON AIRPORTS AUTHORITY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433364",
+      "name": "MGM Resorts International",
+      "ticker": "MGM",
+      "exchange": "US"
+    },
+    {
+      "id": "433594",
+      "name": "Neurocrine Biosciences Inc",
+      "ticker": "NBIX",
+      "exchange": "US"
+    },
+    {
+      "id": "433724",
+      "name": "NortonLifeLock Inc",
+      "ticker": "GEN",
+      "exchange": "US"
+    },
+    {
+      "id": "433744",
+      "name": "Nucor Corp",
+      "ticker": "NUE",
+      "exchange": "US"
+    },
+    {
+      "id": "433811",
+      "name": "OKLAHOMA DEVELOPMENT FINANCE AUTHORITY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434647",
+      "name": "Sempra",
+      "ticker": "SRE",
+      "exchange": "US"
+    },
+    {
+      "id": "434737",
+      "name": "Skyworks Solutions Inc",
+      "ticker": "SWKS",
+      "exchange": "US"
+    },
+    {
+      "id": "434763",
+      "name": "Societe Generale Group",
+      "ticker": "SCGLY",
+      "exchange": "US"
+    },
+    {
+      "id": "434785",
+      "name": "Sony Group Corporation",
+      "ticker": "SONY",
+      "exchange": "US"
+    },
+    {
+      "id": "434967",
+      "name": "STATE OF MARYLAND",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435567",
+      "name": "Valvoline Inc",
+      "ticker": "VVV",
+      "exchange": "US"
+    },
+    {
+      "id": "435682",
+      "name": "Vertiv Holdings Co",
+      "ticker": "VRT",
+      "exchange": "US"
+    },
+    {
+      "id": "435914",
+      "name": "Willis Towers Watson PLC",
+      "ticker": "WTW",
+      "exchange": "US"
+    },
+    {
+      "id": "435994",
+      "name": "Xylem Inc",
+      "ticker": "XYL",
+      "exchange": "US"
+    },
+    {
+      "id": "2331163",
+      "name": "3G COURSER ONSHORE FUND LP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334007",
+      "name": "CME SOYBEAN MEAL",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334087",
+      "name": "SEVEN BRIDGES MULTI STRATEGY FUND LP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334588",
+      "name": "CORE & MAIN INC",
+      "ticker": "CNM",
+      "exchange": "US"
+    },
+    {
+      "id": "429555",
+      "name": "AKAMAI TECHNOLOGIES Inc",
+      "ticker": "AKAM",
+      "exchange": "US"
+    },
+    {
+      "id": "430003",
+      "name": "Barrick Gold Corp",
+      "ticker": "GOLD",
+      "exchange": "US"
+    },
+    {
+      "id": "430240",
+      "name": "Broadridge Financial Solutions Inc",
+      "ticker": "BR",
+      "exchange": "US"
+    },
+    {
+      "id": "430290",
+      "name": "Burlington Stores Inc",
+      "ticker": "BURL",
+      "exchange": "US"
+    },
+    {
+      "id": "430560",
+      "name": "Cincinnati Financial Corp",
+      "ticker": "CINF",
+      "exchange": "US"
+    },
+    {
+      "id": "431625",
+      "name": "Farmers & Merchants Bancorp Inc",
+      "ticker": "FMAO",
+      "exchange": "US"
+    },
+    {
+      "id": "431926",
+      "name": "Garmin Ltd",
+      "ticker": "GRMN",
+      "exchange": "US"
+    },
+    {
+      "id": "432555",
+      "name": "iShares 1-3 Year Treasury Bond ETF",
+      "ticker": "SHY",
+      "exchange": "US"
+    },
+    {
+      "id": "433003",
+      "name": "LEWIS & CLARK AGRIFOOD FUND II LP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433139",
+      "name": "LVMH Moet Hennessy Louis Vuitton SE",
+      "ticker": "LVMHF",
+      "exchange": "US"
+    },
+    {
+      "id": "433919",
+      "name": "Packaging Corp Of America",
+      "ticker": "PKG",
+      "exchange": "US"
+    },
+    {
+      "id": "434177",
+      "name": "Principal Financial Group Inc",
+      "ticker": "PFG",
+      "exchange": "US"
+    },
+    {
+      "id": "434255",
+      "name": "PulteGroup Inc",
+      "ticker": "PHM",
+      "exchange": "US"
+    },
+    {
+      "id": "434314",
+      "name": "Raymond James Financial Inc",
+      "ticker": "RJF",
+      "exchange": "US"
+    },
+    {
+      "id": "434615",
+      "name": "Seagate Technology Holdings PLC",
+      "ticker": "STX",
+      "exchange": "US"
+    },
+    {
+      "id": "434747",
+      "name": "A. O. Smith Corp",
+      "ticker": "AOS",
+      "exchange": "US"
+    },
+    {
+      "id": "435205",
+      "name": "Teradyne Inc",
+      "ticker": "TER",
+      "exchange": "US"
+    },
+    {
+      "id": "435353",
+      "name": "The Travelers Companies Inc",
+      "ticker": "TRV",
+      "exchange": "US"
+    },
+    {
+      "id": "435428",
+      "name": "Tyler Technologies Inc",
+      "ticker": "TYL",
+      "exchange": "US"
+    },
+    {
+      "id": "1571408",
+      "name": "L3Harris Technologies Inc",
+      "ticker": "LHX",
+      "exchange": "US"
+    },
+    {
+      "id": "1734510",
+      "name": "CF Industries Holdings Inc",
+      "ticker": "CF",
+      "exchange": "US"
+    },
+    {
+      "id": "1869593",
+      "name": "Liberty Global PLC",
+      "ticker": "LBYAV",
+      "exchange": "US"
+    },
+    {
+      "id": "2334794",
+      "name": "MAYS (J.W.) INC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429653",
+      "name": "Amcor PLC",
+      "ticker": "AMCR",
+      "exchange": "US"
+    },
+    {
+      "id": "429845",
+      "name": "Arrow Electronics Inc",
+      "ticker": "ARW",
+      "exchange": "US"
+    },
+    {
+      "id": "430304",
+      "name": "CACI International Inc",
+      "ticker": "CACI",
+      "exchange": "US"
+    },
+    {
+      "id": "430351",
+      "name": "Campbell Soup Co",
+      "ticker": "CPB",
+      "exchange": "US"
+    },
+    {
+      "id": "430445",
+      "name": "Celanese Corp",
+      "ticker": "CE",
+      "exchange": "US"
+    },
+    {
+      "id": "430828",
+      "name": "Cloudflare Inc",
+      "ticker": "NET",
+      "exchange": "US"
+    },
+    {
+      "id": "431085",
+      "name": "COUNTY OF WILL ILLINOIS",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431241",
+      "name": "DEPARTMENT OF TRANSPORTATION OF MARYLAND",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431326",
+      "name": "Donaldson Co Inc",
+      "ticker": "DCI",
+      "exchange": "US"
+    },
+    {
+      "id": "431559",
+      "name": "Essex Property Trust Inc",
+      "ticker": "ESS",
+      "exchange": "US"
+    },
+    {
+      "id": "431598",
+      "name": "Expedia Group Inc",
+      "ticker": "EXPE",
+      "exchange": "US"
+    },
+    {
+      "id": "431809",
+      "name": "FMC Corp",
+      "ticker": "FMC",
+      "exchange": "US"
+    },
+    {
+      "id": "431930",
+      "name": "Gates Industrial Corp PLC",
+      "ticker": "GTES",
+      "exchange": "US"
+    },
+    {
+      "id": "432239",
+      "name": "Henry (Jack) & Associates Inc",
+      "ticker": "JKHY",
+      "exchange": "US"
+    },
+    {
+      "id": "432366",
+      "name": "IDEX Corp",
+      "ticker": "IEX",
+      "exchange": "US"
+    },
+    {
+      "id": "432550",
+      "name": "Iron Mountain Inc",
+      "ticker": "IRM",
+      "exchange": "US"
+    },
+    {
+      "id": "432950",
+      "name": "Lamb Weston Holdings Inc",
+      "ticker": "LW",
+      "exchange": "US"
+    },
+    {
+      "id": "433066",
+      "name": "Live Nation Entertainment Inc",
+      "ticker": "LYV",
+      "exchange": "US"
+    },
+    {
+      "id": "433440",
+      "name": "Molson Coors Beverage Company",
+      "ticker": "TAP",
+      "exchange": "US"
+    },
+    {
+      "id": "433446",
+      "name": "MongoDB Inc",
+      "ticker": "MDB",
+      "exchange": "US"
+    },
+    {
+      "id": "433603",
+      "name": "Newell Brands Inc",
+      "ticker": "NWL",
+      "exchange": "US"
+    },
+    {
+      "id": "433686",
+      "name": "Nordson Corp",
+      "ticker": "NDSN",
+      "exchange": "US"
+    },
+    {
+      "id": "434096",
+      "name": "Pioneer Natural Resources Co",
+      "ticker": "PXD",
+      "exchange": "US"
+    },
+    {
+      "id": "434139",
+      "name": "PORT OF SEATTLE WASHINGTON",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434174",
+      "name": "Primerica Inc",
+      "ticker": "PRI",
+      "exchange": "US"
+    },
+    {
+      "id": "434209",
+      "name": "ProShares Short QQQ",
+      "ticker": "PSQ",
+      "exchange": "US"
+    },
+    {
+      "id": "435895",
+      "name": "White Mountains Insurance Group Ltd",
+      "ticker": "WTM",
+      "exchange": "US"
+    },
+    {
+      "id": "1689224",
+      "name": "ETHEREUM",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2332102",
+      "name": "Southern States Bancshares Inc",
+      "ticker": "SSBK",
+      "exchange": "US"
+    },
+    {
+      "id": "2333803",
+      "name": "DEPARTMENT OF STATE PENNSYLVANIA",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334019",
+      "name": "CONSTELLATION ENE CORP",
+      "ticker": "CEG",
+      "exchange": "US"
+    },
+    {
+      "id": "2334327",
+      "name": "HPS SPECIAL SITUATIONS OPPORTUNITY FUND II LP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429898",
+      "name": "CITY OF ATLANTA",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430035",
+      "name": "Beacon Roofing Supply Inc",
+      "ticker": "BECN",
+      "exchange": "US"
+    },
+    {
+      "id": "430075",
+      "name": "BHP Group Ltd",
+      "ticker": "BHP",
+      "exchange": "US"
+    },
+    {
+      "id": "430175",
+      "name": "Booz Allen Hamilton Holding Corporation",
+      "ticker": "BAH",
+      "exchange": "US"
+    },
+    {
+      "id": "431343",
+      "name": "Dover Corp",
+      "ticker": "DOV",
+      "exchange": "US"
+    },
+    {
+      "id": "431374",
+      "name": "DXC Technology Co",
+      "ticker": "DXC",
+      "exchange": "US"
+    },
+    {
+      "id": "432025",
+      "name": "Goldman Sachs AccessTreasury 0-1 Year ETF",
+      "ticker": "GBIL",
+      "exchange": "US"
+    },
+    {
+      "id": "432203",
+      "name": "H D F C Bank Ltd",
+      "ticker": "HDB",
+      "exchange": "US"
+    },
+    {
+      "id": "432717",
+      "name": "Jabil Inc",
+      "ticker": "JBL",
+      "exchange": "US"
+    },
+    {
+      "id": "433067",
+      "name": "Livent Corp",
+      "ticker": "LTHM",
+      "exchange": "US"
+    },
+    {
+      "id": "433257",
+      "name": "Match Group Inc",
+      "ticker": "MTCH",
+      "exchange": "US"
+    },
+    {
+      "id": "433405",
+      "name": "MISSISSIPPI DEVELOPMENT BANK",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434285",
+      "name": "Quest Diagnostics Inc",
+      "ticker": "DGX",
+      "exchange": "US"
+    },
+    {
+      "id": "434459",
+      "name": "Royal Caribbean Group",
+      "ticker": "RCL",
+      "exchange": "US"
+    },
+    {
+      "id": "434751",
+      "name": "The J M Smucker Company",
+      "ticker": "SJM",
+      "exchange": "US"
+    },
+    {
+      "id": "434960",
+      "name": "STATE OF ILLINOIS",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435175",
+      "name": "Teledyne Technologies Inc",
+      "ticker": "TDY",
+      "exchange": "US"
+    },
+    {
+      "id": "435663",
+      "name": "Ventas Inc",
+      "ticker": "VTR",
+      "exchange": "US"
+    },
+    {
+      "id": "446117",
+      "name": "WASHINGTON KING COUNTY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2331138",
+      "name": "NU HOLDINGS LTD",
+      "ticker": "NU",
+      "exchange": "US"
+    },
+    {
+      "id": "2331401",
+      "name": "TRIBOROUGH BRIDGE AND TUNNEL AUTHORITY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2333494",
+      "name": "CME CORN",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334103",
+      "name": "Ranger Equity Bear ETF",
+      "ticker": "HDGE",
+      "exchange": "US"
+    },
+    {
+      "id": "2334228",
+      "name": "HALEON PLC",
+      "ticker": "HLN",
+      "exchange": "US"
+    },
+    {
+      "id": "430342",
+      "name": "Camden Property Trust",
+      "ticker": "CPT",
+      "exchange": "US"
+    },
+    {
+      "id": "430418",
+      "name": "Catalent Inc",
+      "ticker": "CTLT",
+      "exchange": "US"
+    },
+    {
+      "id": "430630",
+      "name": "CITY OF DALLAS",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430953",
+      "name": "CONNECTICUT HOUSING FINANCE AUTHORITY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431178",
+      "name": "CITIES OF DALLAS AND FORT WORTH TEXAS",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431403",
+      "name": "eBay Inc",
+      "ticker": "EBAY",
+      "exchange": "US"
+    },
+    {
+      "id": "431413",
+      "name": "Edison International",
+      "ticker": "EIX",
+      "exchange": "US"
+    },
+    {
+      "id": "431586",
+      "name": "Eversource Energy",
+      "ticker": "ES",
+      "exchange": "US"
+    },
+    {
+      "id": "431986",
+      "name": "Glaxosmithkline PLC",
+      "ticker": "GSK",
+      "exchange": "US"
+    },
+    {
+      "id": "432553",
+      "name": "iShares 10-20 Year Treasury Bond ETF",
+      "ticker": "TLH",
+      "exchange": "US"
+    },
+    {
+      "id": "432649",
+      "name": "iShares Trust - iShares Russell 2000 ETF",
+      "ticker": "IWM",
+      "exchange": "US"
+    },
+    {
+      "id": "433019",
+      "name": "Liberty Media Corp Braves Group",
+      "ticker": "BATRA",
+      "exchange": "US"
+    },
+    {
+      "id": "433083",
+      "name": "Loews Corp",
+      "ticker": "L",
+      "exchange": "US"
+    },
+    {
+      "id": "433212",
+      "name": "Marathon Petroleum Corp",
+      "ticker": "MPC",
+      "exchange": "US"
+    },
+    {
+      "id": "433543",
+      "name": "National Grid PLC",
+      "ticker": "NGG",
+      "exchange": "US"
+    },
+    {
+      "id": "433632",
+      "name": "NEW YORK CITY MUNICIPAL WATER FINANCE AUTHORITY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434056",
+      "name": "Phillips 66",
+      "ticker": "PSX",
+      "exchange": "US"
+    },
+    {
+      "id": "434410",
+      "name": "Rio Tinto Group",
+      "ticker": "RIO",
+      "exchange": "US"
+    },
+    {
+      "id": "434714",
+      "name": "Simpson Manufacturing Co. Inc",
+      "ticker": "SSD",
+      "exchange": "US"
+    },
+    {
+      "id": "434755",
+      "name": "Snap-On Inc",
+      "ticker": "SNA",
+      "exchange": "US"
+    },
+    {
+      "id": "434969",
+      "name": "STATE OF MICHIGAN",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435009",
+      "name": "Steel Dynamics Inc",
+      "ticker": "STLD",
+      "exchange": "US"
+    },
+    {
+      "id": "435013",
+      "name": "Steris PLC",
+      "ticker": "STE",
+      "exchange": "US"
+    },
+    {
+      "id": "435227",
+      "name": "TEXAS TRANSPORTATION COMMISSION",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435344",
+      "name": "TransDigm Group Inc",
+      "ticker": "TDG",
+      "exchange": "US"
+    },
+    {
+      "id": "435480",
+      "name": "United Therapeutics Corp",
+      "ticker": "UTHR",
+      "exchange": "US"
+    },
+    {
+      "id": "435755",
+      "name": "Vornado Realty Trust",
+      "ticker": "VNO",
+      "exchange": "US"
+    },
+    {
+      "id": "435982",
+      "name": "Wynn Resorts Ltd",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "443910",
+      "name": "CITY OF HOUSTON",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2269470",
+      "name": "STMicroelectronics NV",
+      "ticker": "STM",
+      "exchange": "US"
+    },
+    {
+      "id": "2331058",
+      "name": "BRAZIL GOVERNMENT BONDS",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334270",
+      "name": "APPFOLIO INC",
+      "ticker": "APPF",
+      "exchange": "US"
+    },
+    {
+      "id": "2334412",
+      "name": "FABRINET",
+      "ticker": "FN",
+      "exchange": "US"
+    },
+    {
+      "id": "2334849",
+      "name": "SKI MASK DOG",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429441",
+      "name": "ABB Ltd",
+      "ticker": "ABB",
+      "exchange": "US"
+    },
+    {
+      "id": "429803",
+      "name": "Aramark",
+      "ticker": "ARMK",
+      "exchange": "US"
+    },
+    {
+      "id": "429827",
+      "name": "ARIZONA INDUSTRIAL DEVELOPMENT AUTHORITY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430092",
+      "name": "BITCOIN",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430484",
+      "name": "Championx Corp",
+      "ticker": "CHX",
+      "exchange": "US"
+    },
+    {
+      "id": "430873",
+      "name": "Coinbase Global Inc",
+      "ticker": "COIN",
+      "exchange": "US"
+    },
+    {
+      "id": "431272",
+      "name": "Diamondback Energy Inc",
+      "ticker": "FANG",
+      "exchange": "US"
+    },
+    {
+      "id": "431390",
+      "name": "Eastman Chemical Co",
+      "ticker": "EMN",
+      "exchange": "US"
+    },
+    {
+      "id": "432341",
+      "name": "J.B. Hunt Transport Services Inc",
+      "ticker": "JBHT",
+      "exchange": "US"
+    },
+    {
+      "id": "432344",
+      "name": "Hyatt Hotels Corp",
+      "ticker": "H",
+      "exchange": "US"
+    },
+    {
+      "id": "432648",
+      "name": "iShares Russell 1000 Value ETF",
+      "ticker": "IWD",
+      "exchange": "US"
+    },
+    {
+      "id": "432726",
+      "name": "Jacobs Engineering Group Inc",
+      "ticker": "J",
+      "exchange": "US"
+    },
+    {
+      "id": "432737",
+      "name": "Janus Henderson Mortgage-Backed Securities ETF",
+      "ticker": "JMBS",
+      "exchange": "US"
+    },
+    {
+      "id": "432818",
+      "name": "Juniper Networks Inc",
+      "ticker": "JNPR",
+      "exchange": "US"
+    },
+    {
+      "id": "432988",
+      "name": "Leidos Holdings Inc",
+      "ticker": "LDOS",
+      "exchange": "US"
+    },
+    {
+      "id": "433421",
+      "name": "Mitsubishi UFJ Financial Group",
+      "ticker": "MUFG",
+      "exchange": "US"
+    },
+    {
+      "id": "433805",
+      "name": "OHIO STATE UNIVERSITY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434568",
+      "name": "Schlumberger Ltd",
+      "ticker": "SLB",
+      "exchange": "US"
+    },
+    {
+      "id": "435176",
+      "name": "Teleflex Inc",
+      "ticker": "TFX",
+      "exchange": "US"
+    },
+    {
+      "id": "435194",
+      "name": "Tencent Holdings LTD",
+      "ticker": "TCEHY",
+      "exchange": "US"
+    },
+    {
+      "id": "435275",
+      "name": "The Timken Co",
+      "ticker": "TKR",
+      "exchange": "US"
+    },
+    {
+      "id": "435593",
+      "name": "Vanguard FTSE Developed Markets ETF",
+      "ticker": "VEA",
+      "exchange": "US"
+    },
+    {
+      "id": "435749",
+      "name": "Vodafone Group Public Limited Company",
+      "ticker": "VOD",
+      "exchange": "US"
+    },
+    {
+      "id": "435878",
+      "name": "WestRock Company",
+      "ticker": "WRK",
+      "exchange": "US"
+    },
+    {
+      "id": "2298434",
+      "name": "Chart Industries Inc",
+      "ticker": "GTLS",
+      "exchange": "US"
+    },
+    {
+      "id": "2333855",
+      "name": "HUMACYTE INC",
+      "ticker": "HUMA",
+      "exchange": "US"
+    },
+    {
+      "id": "2334180",
+      "name": "SHOALS TECHNOLOGIES GRP INC",
+      "ticker": "SHLS",
+      "exchange": "US"
+    },
+    {
+      "id": "2334224",
+      "name": "CELSIUS HOLDINGS INC",
+      "ticker": "CELH",
+      "exchange": "US"
+    },
+    {
+      "id": "2334550",
+      "name": "INTAPP INC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334673",
+      "name": "ARDMORE SHIPPING CORP",
+      "ticker": "ASC",
+      "exchange": "US"
+    },
+    {
+      "id": "2334924",
+      "name": "REDDIT INC",
+      "ticker": "RDDT",
+      "exchange": "US"
+    },
+    {
+      "id": "429513",
+      "name": "Adyen N.V",
+      "ticker": "ADYEY",
+      "exchange": "US"
+    },
+    {
+      "id": "429514",
+      "name": "AECOM",
+      "ticker": "ACM",
+      "exchange": "US"
+    },
+    {
+      "id": "429517",
+      "name": "AerCap Holdings NV",
+      "ticker": "AER",
+      "exchange": "US"
+    },
+    {
+      "id": "429755",
+      "name": "Anheuser-Busch InBev SA/NV",
+      "ticker": "BUD",
+      "exchange": "US"
+    },
+    {
+      "id": "430085",
+      "name": "Bio-Rad Laboratories Inc",
+      "ticker": "BIO",
+      "exchange": "US"
+    },
+    {
+      "id": "430457",
+      "name": "CenterPoint Energy Inc",
+      "ticker": "CNP",
+      "exchange": "US"
+    },
+    {
+      "id": "430576",
+      "name": "CITY AND COUNTY OF DENVER COLORADO",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430622",
+      "name": "CITY OF CLEVELAND OHIO",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430702",
+      "name": "CITY OF MEMPHIS TENNESSEE",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430912",
+      "name": "Comerica Incorporated",
+      "ticker": "CMA",
+      "exchange": "US"
+    },
+    {
+      "id": "431125",
+      "name": "Crown Holdings Inc",
+      "ticker": "CCK",
+      "exchange": "US"
+    },
+    {
+      "id": "431186",
+      "name": "Darden Restaurants Inc",
+      "ticker": "DRI",
+      "exchange": "US"
+    },
+    {
+      "id": "431311",
+      "name": "DocuSign Inc",
+      "ticker": "DOCU",
+      "exchange": "US"
+    },
+    {
+      "id": "431504",
+      "name": "ENN Energy Holdings Ltd",
+      "ticker": "XNGSY",
+      "exchange": "US"
+    },
+    {
+      "id": "431593",
+      "name": "Exact Sciences Corporation",
+      "ticker": "EXAS",
+      "exchange": "US"
+    },
+    {
+      "id": "431631",
+      "name": "FEDERAL HOME LOAN BANKS",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431956",
+      "name": "Genmab A/S",
+      "ticker": "GMAB",
+      "exchange": "US"
+    },
+    {
+      "id": "432311",
+      "name": "Host Hotels & Resorts Inc",
+      "ticker": "HST",
+      "exchange": "US"
+    },
+    {
+      "id": "432316",
+      "name": "HOUSTON INDEPENDENT SCHOOL DISTRICT",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432508",
+      "name": "Invesco Ltd",
+      "ticker": "IVZ",
+      "exchange": "US"
+    },
+    {
+      "id": "432557",
+      "name": "iShares Trust iShares 20 Year Treasury Bond ETF",
+      "ticker": "TLT",
+      "exchange": "US"
+    },
+    {
+      "id": "432576",
+      "name": "iShares Core S&P 500 ETF",
+      "ticker": "IVV",
+      "exchange": "US"
+    },
+    {
+      "id": "432784",
+      "name": "Jones Lang LaSalle Inc",
+      "ticker": "JLL",
+      "exchange": "US"
+    },
+    {
+      "id": "433242",
+      "name": "Masco Corporation",
+      "ticker": "MAS",
+      "exchange": "US"
+    },
+    {
+      "id": "433613",
+      "name": "NEW JERSEY HOUSING AND MORTGAGE FINANCE AGENCY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433725",
+      "name": "Norwegian Cruise Line Holdings Ltd",
+      "ticker": "NCLH",
+      "exchange": "US"
+    },
+    {
+      "id": "434111",
+      "name": "Plexus Corp",
+      "ticker": "PLXS",
+      "exchange": "US"
+    },
+    {
+      "id": "434418",
+      "name": "RLI Corp",
+      "ticker": "RLI",
+      "exchange": "US"
+    },
+    {
+      "id": "434601",
+      "name": "Science Applications International Corp",
+      "ticker": "SAIC",
+      "exchange": "US"
+    },
+    {
+      "id": "434611",
+      "name": "Seacoast Banking Corp of Florida",
+      "ticker": "SBCF",
+      "exchange": "US"
+    },
+    {
+      "id": "434719",
+      "name": "Sirius XM Holdings Inc",
+      "ticker": "SIRI",
+      "exchange": "US"
+    },
+    {
+      "id": "434970",
+      "name": "STATE OF MINNESOTA",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434976",
+      "name": "STATE OF NEW JERSEY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435052",
+      "name": "Sumitomo Mitsui Financial Group Inc",
+      "ticker": "SMFG",
+      "exchange": "US"
+    },
+    {
+      "id": "435121",
+      "name": "Takeda Pharmaceutical Co Ltd",
+      "ticker": "TAK",
+      "exchange": "US"
+    },
+    {
+      "id": "435462",
+      "name": "United Airlines Holdings Inc",
+      "ticker": "UAL",
+      "exchange": "US"
+    },
+    {
+      "id": "435489",
+      "name": "Universal Health Services Inc",
+      "ticker": "UHS",
+      "exchange": "US"
+    },
+    {
+      "id": "435659",
+      "name": "Veeva Systems Inc",
+      "ticker": "VEEV",
+      "exchange": "US"
+    },
+    {
+      "id": "435928",
+      "name": "WISCONSIN HOUSING AND ECONOMIC DEVELOPMENT AUTHORITY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "982285",
+      "name": "Lumen Technologies Inc",
+      "ticker": "LUMN",
+      "exchange": "US"
+    },
+    {
+      "id": "2070399",
+      "name": "STATE OF OHIO HIGHER EDUCATIONAL FACILITY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2333391",
+      "name": "VIRGINIA HOUSING DEVELOPMENT AUTHORITY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334206",
+      "name": "NEW WATER CAPITAL PARTNERS II LP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334495",
+      "name": "LOUISIANA-PACIFIC CORP",
+      "ticker": "LPX",
+      "exchange": "US"
+    },
+    {
+      "id": "2334570",
+      "name": "AIX VENTURES FUND II LP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429503",
+      "name": "Advanced Drainage Systems Inc",
+      "ticker": "WMS",
+      "exchange": "US"
+    },
+    {
+      "id": "429520",
+      "name": "The AES Corp",
+      "ticker": "AES",
+      "exchange": "US"
+    },
+    {
+      "id": "429546",
+      "name": "Air Lease Corp",
+      "ticker": "AL",
+      "exchange": "US"
+    },
+    {
+      "id": "429563",
+      "name": "ALASKA AIR GROUP Inc",
+      "ticker": "ALK",
+      "exchange": "US"
+    },
+    {
+      "id": "429593",
+      "name": "COUNTY OF ALLEGHANY PENNSYLVANIA",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429620",
+      "name": "Alnylam Pharmaceuticals Inc",
+      "ticker": "ALNY",
+      "exchange": "US"
+    },
+    {
+      "id": "429674",
+      "name": "American Electric Power Co Inc",
+      "ticker": "AEP",
+      "exchange": "US"
+    },
+    {
+      "id": "429818",
+      "name": "ARES CAPITAL CORPORATION",
+      "ticker": "ARCC",
+      "exchange": "US"
+    },
+    {
+      "id": "430430",
+      "name": "Cboe Global Markets Inc",
+      "ticker": "CBOE",
+      "exchange": "US"
+    },
+    {
+      "id": "430509",
+      "name": "Cheniere Energy Inc",
+      "ticker": "LNG",
+      "exchange": "US"
+    },
+    {
+      "id": "430769",
+      "name": "CITY OF TALLAHASSEE FLORIDA",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431020",
+      "name": "COUNTY OF CLARK NEVADA",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431048",
+      "name": "COUNTY OF MIAMI DADE",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431065",
+      "name": "COUNTY OF PRINCE GEORGES MARYLAND",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431140",
+      "name": "CTS Corp",
+      "ticker": "CTS",
+      "exchange": "US"
+    },
+    {
+      "id": "431195",
+      "name": "DaVita Inc",
+      "ticker": "DVA",
+      "exchange": "US"
+    },
+    {
+      "id": "431238",
+      "name": "DEPARTMENT OF AIRPORTS OF THE CITY OF LOS ANGELES CALIFORNIA",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431323",
+      "name": "Domino's Pizza Inc",
+      "ticker": "DPZ",
+      "exchange": "US"
+    },
+    {
+      "id": "431489",
+      "name": "ENERGY NORTHWEST",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431584",
+      "name": "Everest Re Group Ltd",
+      "ticker": "RE",
+      "exchange": "US"
+    },
+    {
+      "id": "431599",
+      "name": "Expeditors International of Washington Inc",
+      "ticker": "EXPD",
+      "exchange": "US"
+    },
+    {
+      "id": "431615",
+      "name": "Fair Isaac Corporation",
+      "ticker": "FICO",
+      "exchange": "US"
+    },
+    {
+      "id": "431700",
+      "name": "First Citizens BancShares Inc",
+      "ticker": "FCNCA",
+      "exchange": "US"
+    },
+    {
+      "id": "432149",
+      "name": "Hanesbrands Inc",
+      "ticker": "HBI",
+      "exchange": "US"
+    },
+    {
+      "id": "432212",
+      "name": "HealthEquity Inc",
+      "ticker": "HQY",
+      "exchange": "US"
+    },
+    {
+      "id": "433056",
+      "name": "Lions Gate Entertainment Corp",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433089",
+      "name": "London Stock Exchange Group PLC",
+      "ticker": "LDNXF",
+      "exchange": "US"
+    },
+    {
+      "id": "433211",
+      "name": "Marathon Oil Corp",
+      "ticker": "MRO",
+      "exchange": "US"
+    },
+    {
+      "id": "433220",
+      "name": "MarketAxess Holdings Inc",
+      "ticker": "MKTX",
+      "exchange": "US"
+    },
+    {
+      "id": "433307",
+      "name": "Medpace Holdings Inc",
+      "ticker": "MEDP",
+      "exchange": "US"
+    },
+    {
+      "id": "433723",
+      "name": "Northwest Natural Holding Co",
+      "ticker": "NWN",
+      "exchange": "US"
+    },
+    {
+      "id": "433845",
+      "name": "OneMain Holdings Inc",
+      "ticker": "OMF",
+      "exchange": "US"
+    },
+    {
+      "id": "434007",
+      "name": "PENNSYLVANIA HIGHER EDUCATIONAL FACILITIES AUTHORITY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434376",
+      "name": "Restaurant Brands International Inc",
+      "ticker": "QSR",
+      "exchange": "US"
+    },
+    {
+      "id": "434656",
+      "name": "Service Corp International",
+      "ticker": "SCI",
+      "exchange": "US"
+    },
+    {
+      "id": "434693",
+      "name": "Siemens AG",
+      "ticker": "SIEGY",
+      "exchange": "US"
+    },
+    {
+      "id": "434754",
+      "name": "Snap Inc",
+      "ticker": "SNAP",
+      "exchange": "US"
+    },
+    {
+      "id": "434997",
+      "name": "STATE OF WEST VIRGINIA",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434998",
+      "name": "STATE OF WISCONSIN",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435192",
+      "name": "Tempur Sealy International Inc",
+      "ticker": "SGI",
+      "exchange": "US"
+    },
+    {
+      "id": "435331",
+      "name": "Toyota Motor Corp",
+      "ticker": "TM",
+      "exchange": "US"
+    },
+    {
+      "id": "435374",
+      "name": "TriMas Corp",
+      "ticker": "TRS",
+      "exchange": "US"
+    },
+    {
+      "id": "435375",
+      "name": "Trimble Inc",
+      "ticker": "TRMB",
+      "exchange": "US"
+    },
+    {
+      "id": "2320240",
+      "name": "Goldman Sachs Access Investment Grade Corporate Bond ETF",
+      "ticker": "GIGB",
+      "exchange": "US"
+    },
+    {
+      "id": "2331870",
+      "name": "Axon Enterprise Inc",
+      "ticker": "AXON",
+      "exchange": "US"
+    },
+    {
+      "id": "2333544",
+      "name": "Haier Smart Home Co Ltd",
+      "ticker": "HSHCY",
+      "exchange": "US"
+    },
+    {
+      "id": "2333614",
+      "name": "Equity LifeStyle Properties Inc",
+      "ticker": "ELS",
+      "exchange": "US"
+    },
+    {
+      "id": "2333905",
+      "name": "FULL HOUSE RESORTS INC",
+      "ticker": "FLL",
+      "exchange": "US"
+    },
+    {
+      "id": "2334145",
+      "name": "FRANKLIN FTSE JAPAN ETF",
+      "ticker": "FLJP",
+      "exchange": "US"
+    },
+    {
+      "id": "2334235",
+      "name": "ALLOCATE ALPHA FUND II LP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334836",
+      "name": "INVESCO SHORT TERM TREAS ETF",
+      "ticker": "TBLL",
+      "exchange": "US"
+    },
+    {
+      "id": "2334875",
+      "name": "CREDO TECH GROUP HOLDING LTD",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429711",
+      "name": "American Water Works Company Inc",
+      "ticker": "AWK",
+      "exchange": "US"
+    },
+    {
+      "id": "430397",
+      "name": "The Carlyle Group Inc",
+      "ticker": "CG",
+      "exchange": "US"
+    },
+    {
+      "id": "430518",
+      "name": "CHICAGO O'HARE AIRPORT",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431114",
+      "name": "CRH PLC",
+      "ticker": "CRH",
+      "exchange": "US"
+    },
+    {
+      "id": "431199",
+      "name": "DBS Group Holdings Ltd",
+      "ticker": "DBSDY",
+      "exchange": "US"
+    },
+    {
+      "id": "431342",
+      "name": "Douglas Emmett Inc",
+      "ticker": "DEI",
+      "exchange": "US"
+    },
+    {
+      "id": "431512",
+      "name": "Entergy corporation",
+      "ticker": "ETR",
+      "exchange": "US"
+    },
+    {
+      "id": "431524",
+      "name": "EOG Resources Inc",
+      "ticker": "EOG",
+      "exchange": "US"
+    },
+    {
+      "id": "431613",
+      "name": "FAIRFAX COUNTY OF VIRGINIA",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431620",
+      "name": "Fanuc Corp",
+      "ticker": "FANUY",
+      "exchange": "US"
+    },
+    {
+      "id": "431676",
+      "name": "Fidelity National Financial Inc FNF Group",
+      "ticker": "FNF",
+      "exchange": "US"
+    },
+    {
+      "id": "431778",
+      "name": "Five Below Inc",
+      "ticker": "FIVE",
+      "exchange": "US"
+    },
+    {
+      "id": "432012",
+      "name": "Globus Medical Inc",
+      "ticker": "GMED",
+      "exchange": "US"
+    },
+    {
+      "id": "432329",
+      "name": "HubSpot Inc",
+      "ticker": "HUBS",
+      "exchange": "US"
+    },
+    {
+      "id": "432380",
+      "name": "ILLINOIS STATE TOLL HIGHWAY AUTHORITY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432421",
+      "name": "Infineon Technologies AG",
+      "ticker": "IFNNY",
+      "exchange": "US"
+    },
+    {
+      "id": "432559",
+      "name": "iShares 3-7 Year Treasury Bond ETF",
+      "ticker": "IEI",
+      "exchange": "US"
+    },
+    {
+      "id": "432562",
+      "name": "iShares 7-10 Year Treasury Bond ETF",
+      "ticker": "IEF",
+      "exchange": "US"
+    },
+    {
+      "id": "432620",
+      "name": "iShares MSCI EAFE ETF",
+      "ticker": "EFA",
+      "exchange": "US"
+    },
+    {
+      "id": "432647",
+      "name": "iShares Russell 1000 Growth ETF",
+      "ticker": "IWF",
+      "exchange": "US"
+    },
+    {
+      "id": "432964",
+      "name": "Lattice Semiconductor Corporation",
+      "ticker": "LSCC",
+      "exchange": "US"
+    },
+    {
+      "id": "432972",
+      "name": "Bath & Body Works Inc",
+      "ticker": "BBWI",
+      "exchange": "US"
+    },
+    {
+      "id": "433298",
+      "name": "Medical Properties Trust Inc",
+      "ticker": "MPW",
+      "exchange": "US"
+    },
+    {
+      "id": "433615",
+      "name": "NEW JERSEY STATE TURNPIKE AUTHORITY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433639",
+      "name": "NEW YORK STATE ENVIRONMENTAL FACILITIES CORP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433663",
+      "name": "Nintendo Co Ltd",
+      "ticker": "NTDOY",
+      "exchange": "US"
+    },
+    {
+      "id": "433682",
+      "name": "Nokia Corp",
+      "ticker": "NOK",
+      "exchange": "US"
+    },
+    {
+      "id": "433787",
+      "name": "Chord Energy Corp",
+      "ticker": "CHRD",
+      "exchange": "US"
+    },
+    {
+      "id": "433837",
+      "name": "Omnicom Group Inc",
+      "ticker": "OMC",
+      "exchange": "US"
+    },
+    {
+      "id": "434112",
+      "name": "Plug Power Inc",
+      "ticker": "PLUG",
+      "exchange": "US"
+    },
+    {
+      "id": "434137",
+      "name": "PORTLAND WATER DISTRICT",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434247",
+      "name": "Public Service Enterprise Group Inc",
+      "ticker": "PEG",
+      "exchange": "US"
+    },
+    {
+      "id": "434461",
+      "name": "Royal Gold Inc",
+      "ticker": "RGLD",
+      "exchange": "US"
+    },
+    {
+      "id": "434570",
+      "name": "Schneider Electric SA",
+      "ticker": "SBGSY",
+      "exchange": "US"
+    },
+    {
+      "id": "434588",
+      "name": "SCHOOL DISTRICT OF PHILADELPHIA",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434599",
+      "name": "Schwab US TIPS ETF",
+      "ticker": "SCHP",
+      "exchange": "US"
+    },
+    {
+      "id": "434792",
+      "name": "SOUTH CAROLINA JOBS ECONOMIC DEVELOPMENT AUTHORITY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434854",
+      "name": "SPDR Portfolio Developed World ex-US ETF",
+      "ticker": "SPDW",
+      "exchange": "US"
+    },
+    {
+      "id": "434858",
+      "name": "SPDR S&P 400 Mid Cap Growth ETF",
+      "ticker": "MDYG",
+      "exchange": "US"
+    },
+    {
+      "id": "434862",
+      "name": "SPDR S&P 600 Small Cap Growth ETF",
+      "ticker": "SLYG",
+      "exchange": "US"
+    },
+    {
+      "id": "434965",
+      "name": "STATE OF LOUISIANA",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435109",
+      "name": "Synovus Financial Corp",
+      "ticker": "SNV",
+      "exchange": "US"
+    },
+    {
+      "id": "435113",
+      "name": "Sysmex Corp",
+      "ticker": "SSMXY",
+      "exchange": "US"
+    },
+    {
+      "id": "435421",
+      "name": "Twilio Inc",
+      "ticker": "TWLO",
+      "exchange": "US"
+    },
+    {
+      "id": "435757",
+      "name": "Voya Financial Inc",
+      "ticker": "VOYA",
+      "exchange": "US"
+    },
+    {
+      "id": "435774",
+      "name": "WALLEYE CAPITAL PARTNERS LP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435800",
+      "name": "WASHINGTON SUBURBAN SANITARY DISTRICT",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435825",
+      "name": "WEC Energy Group Inc",
+      "ticker": "WEC",
+      "exchange": "US"
+    },
+    {
+      "id": "436028",
+      "name": "Zoom Video Communications Inc",
+      "ticker": "ZM",
+      "exchange": "US"
+    },
+    {
+      "id": "1996993",
+      "name": "SAN ANTONIO TEXAS ELECTRICITY & GAS",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2294106",
+      "name": "Kilroy Realty Corp",
+      "ticker": "KRC",
+      "exchange": "US"
+    },
+    {
+      "id": "2331057",
+      "name": "Ares Management Corp",
+      "ticker": "ARES",
+      "exchange": "US"
+    },
+    {
+      "id": "2331176",
+      "name": "COMMODORE CAPITAL DOMESTIC LP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2332351",
+      "name": "BioNTech SE",
+      "ticker": "BNTX",
+      "exchange": "US"
+    },
+    {
+      "id": "2333898",
+      "name": "ELT ASSOCIATES LLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2333903",
+      "name": "ISHARES BB RAT CORP BOND ETF",
+      "ticker": "HYBB",
+      "exchange": "US"
+    },
+    {
+      "id": "2334078",
+      "name": "ChargePoint Holdings Inc",
+      "ticker": "CHPT",
+      "exchange": "US"
+    },
+    {
+      "id": "2334199",
+      "name": "SPRING INDEPENDENT SCHOOL DISTRICT",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334203",
+      "name": "ATKORE INC",
+      "ticker": "ATKR",
+      "exchange": "US"
+    },
+    {
+      "id": "2334346",
+      "name": "NEXTERA ENERGY CAPITAL HOLDINGS INC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334389",
+      "name": "CROSS TIMBERS ROYALTY TRUST",
+      "ticker": "CRT",
+      "exchange": "US"
+    },
+    {
+      "id": "2334430",
+      "name": "BDT CAPITAL PARTNERS FUND 4 LP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334625",
+      "name": "RECURRING CAPITAL FUND IV LP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334640",
+      "name": "MYNO CARBON CORP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334710",
+      "name": "SOLVENTUM CORP",
+      "ticker": "SOLV",
+      "exchange": "US"
+    },
+    {
+      "id": "2334824",
+      "name": "LINCOLN GAINE LLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334866",
+      "name": "BROKEDOWN PALACE LTD",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334877",
+      "name": "OUNZ VAN ECK GOLD TRUST ETF",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429533",
+      "name": "Agree Realty Corp",
+      "ticker": "ADC",
+      "exchange": "US"
+    },
+    {
+      "id": "429597",
+      "name": "Allegro Microsystems Inc",
+      "ticker": "ALGM",
+      "exchange": "US"
+    },
+    {
+      "id": "429613",
+      "name": "Allianz SE",
+      "ticker": "ALIZY",
+      "exchange": "US"
+    },
+    {
+      "id": "429651",
+      "name": "Ambev SA",
+      "ticker": "ABEV",
+      "exchange": "US"
+    },
+    {
+      "id": "429655",
+      "name": "Amdocs Ltd",
+      "ticker": "DOX",
+      "exchange": "US"
+    },
+    {
+      "id": "429794",
+      "name": "AptarGroup Inc",
+      "ticker": "ATR",
+      "exchange": "US"
+    },
+    {
+      "id": "429903",
+      "name": "Atlas Copco AB",
+      "ticker": "ATLKY",
+      "exchange": "US"
+    },
+    {
+      "id": "429908",
+      "name": "Atmos Energy Corp",
+      "ticker": "ATO",
+      "exchange": "US"
+    },
+    {
+      "id": "430235",
+      "name": "British American Tobacco PLC",
+      "ticker": "BTI",
+      "exchange": "US"
+    },
+    {
+      "id": "430267",
+      "name": "Brp Group Inc",
+      "ticker": "BWIN",
+      "exchange": "US"
+    },
+    {
+      "id": "430541",
+      "name": "C.H. Robinson Worldwide Inc",
+      "ticker": "CHRW",
+      "exchange": "US"
+    },
+    {
+      "id": "430544",
+      "name": "Chugai Pharmaceutical Co Ltd",
+      "ticker": "CHGCY",
+      "exchange": "US"
+    },
+    {
+      "id": "430620",
+      "name": "CITY OF CINCINNATI",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430676",
+      "name": "CITY OF JACKSONVILLE FLORIDA",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430759",
+      "name": "CITY OF SEATTLE",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "430838",
+      "name": "CMS Energy Corp",
+      "ticker": "CMS",
+      "exchange": "US"
+    },
+    {
+      "id": "431013",
+      "name": "COUNTY OF BROWARD FLORIDA AIRPORT SYSTEM REVENUE",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "431363",
+      "name": "DTE Energy Co",
+      "ticker": "DTE",
+      "exchange": "US"
+    },
+    {
+      "id": "431472",
+      "name": "Enbridge Inc",
+      "ticker": "ENB",
+      "exchange": "US"
+    },
+    {
+      "id": "431475",
+      "name": "Endava PLC",
+      "ticker": "DAVA",
+      "exchange": "US"
+    },
+    {
+      "id": "431542",
+      "name": "Equinor ASA",
+      "ticker": "EQNR",
+      "exchange": "US"
+    },
+    {
+      "id": "431596",
+      "name": "Exelon Corp",
+      "ticker": "EXC",
+      "exchange": "US"
+    },
+    {
+      "id": "431659",
+      "name": "FIDELITY ADVISOR TOTAL BOND FUND",
+      "ticker": "FBKWX",
+      "exchange": "US"
+    },
+    {
+      "id": "431846",
+      "name": "Fox Factory Holding Corp",
+      "ticker": "FOXF",
+      "exchange": "US"
+    },
+    {
+      "id": "431947",
+      "name": "General Motors Financial Co Inc",
+      "ticker": "ACF",
+      "exchange": "US"
+    },
+    {
+      "id": "432131",
+      "name": "Guidewire Software Inc",
+      "ticker": "GWRE",
+      "exchange": "US"
+    },
+    {
+      "id": "432169",
+      "name": "HARRIS COUNTY CULTURAL EDUCATION FACILITIES FINANCE CORP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432223",
+      "name": "HEICO Corp",
+      "ticker": "HEI",
+      "exchange": "US"
+    },
+    {
+      "id": "432348",
+      "name": "Iberdrola SA, Bilbao",
+      "ticker": "IBDRY",
+      "exchange": "US"
+    },
+    {
+      "id": "432352",
+      "name": "ICF International Inc",
+      "ticker": "ICFI",
+      "exchange": "US"
+    },
+    {
+      "id": "432373",
+      "name": "Coherent Corp",
+      "ticker": "COHR",
+      "exchange": "US"
+    },
+    {
+      "id": "432417",
+      "name": "INDUSTRIAL DEVELOPMENT AUTHORITY OF WISE COUNTY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "432438",
+      "name": "Inland Real Estate Income Trust Inc",
+      "ticker": "INRE",
+      "exchange": "US"
+    },
+    {
+      "id": "432567",
+      "name": "iShares CMBS ETF",
+      "ticker": "CMBS",
+      "exchange": "US"
+    },
+    {
+      "id": "432661",
+      "name": "iShares S&P 500 Growth ETF",
+      "ticker": "IVW",
+      "exchange": "US"
+    },
+    {
+      "id": "433171",
+      "name": "Magellan Midstream Partners LP",
+      "ticker": "MMP",
+      "exchange": "US"
+    },
+    {
+      "id": "433214",
+      "name": "MARICOPA COUNTY ARIZONA",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433249",
+      "name": "MASSACHUSETTS DEVELOPMENT FINANCE AGENCY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433563",
+      "name": "NatWest Group PLC",
+      "ticker": "NWG",
+      "exchange": "US"
+    },
+    {
+      "id": "433587",
+      "name": "Netease Inc",
+      "ticker": "NTES",
+      "exchange": "US"
+    },
+    {
+      "id": "433630",
+      "name": "NEW YORK CITY HOUSING DEVELOPMENT CORP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433642",
+      "name": "NEW YORK STATE URBAN DEVELOPMENT CORP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433668",
+      "name": "NiSource Inc",
+      "ticker": "NI",
+      "exchange": "US"
+    },
+    {
+      "id": "433806",
+      "name": "OHIO TURNPIKE COMMISSION",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434011",
+      "name": "PENNSYLVANIA STATE UNIVERSITY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434394",
+      "name": "RHODE ISLAND HOUSING AND MORTGAGE FINANCE CORP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434439",
+      "name": "ROLLINS Inc",
+      "ticker": "ROL",
+      "exchange": "US"
+    },
+    {
+      "id": "434558",
+      "name": "Sarepta Therapeutics Inc",
+      "ticker": "SRPT",
+      "exchange": "US"
+    },
+    {
+      "id": "434618",
+      "name": "Sea Ltd",
+      "ticker": "SE",
+      "exchange": "US"
+    },
+    {
+      "id": "434683",
+      "name": "Shionogi & Co Ltd",
+      "ticker": "SGIOY",
+      "exchange": "US"
+    },
+    {
+      "id": "434686",
+      "name": "Shiseido Co Ltd",
+      "ticker": "SSDOY",
+      "exchange": "US"
+    },
+    {
+      "id": "434913",
+      "name": "SPX Technologies Inc",
+      "ticker": "SPXC",
+      "exchange": "US"
+    },
+    {
+      "id": "435135",
+      "name": "Targa Resources Corp",
+      "ticker": "TRGP",
+      "exchange": "US"
+    },
+    {
+      "id": "435180",
+      "name": "PT Telekomunikasi Indonesia (Persero) TBK",
+      "ticker": "TLK",
+      "exchange": "US"
+    },
+    {
+      "id": "435294",
+      "name": "The Toro Co",
+      "ticker": "TTC",
+      "exchange": "US"
+    },
+    {
+      "id": "435300",
+      "name": "TotalEnergies SE",
+      "ticker": "TTE",
+      "exchange": "US"
+    },
+    {
+      "id": "435350",
+      "name": "TransUnion",
+      "ticker": "TRU",
+      "exchange": "US"
+    },
+    {
+      "id": "435449",
+      "name": "Under Armour Inc",
+      "ticker": "UAA",
+      "exchange": "US"
+    },
+    {
+      "id": "435521",
+      "name": "Unum Group",
+      "ticker": "UNM",
+      "exchange": "US"
+    },
+    {
+      "id": "435893",
+      "name": "Whirlpool Corp",
+      "ticker": "WHR",
+      "exchange": "US"
+    },
+    {
+      "id": "436029",
+      "name": "Zscaler Inc",
+      "ticker": "ZS",
+      "exchange": "US"
+    },
+    {
+      "id": "438628",
+      "name": "Globe Life Inc",
+      "ticker": "GL",
+      "exchange": "US"
+    },
+    {
+      "id": "2296311",
+      "name": "Stride Inc",
+      "ticker": "LRN",
+      "exchange": "US"
+    },
+    {
+      "id": "2331101",
+      "name": "Organon & Co",
+      "ticker": "OGN",
+      "exchange": "US"
+    },
+    {
+      "id": "2331375",
+      "name": "SEATTLE CITY LIGHT",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2333439",
+      "name": "Lucid Group Inc",
+      "ticker": "LCID",
+      "exchange": "US"
+    },
+    {
+      "id": "2333577",
+      "name": "CITY OF PITTSBURGH PENNSYLVANIA",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2333618",
+      "name": "Kyndryl Holdings Inc",
+      "ticker": "KD",
+      "exchange": "US"
+    },
+    {
+      "id": "2333644",
+      "name": "Bill.com Holdings Inc",
+      "ticker": "BILL",
+      "exchange": "US"
+    },
+    {
+      "id": "2333920",
+      "name": "ALLOCATE PREMIER ACCESS FUND LP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334179",
+      "name": "INSMED INC",
+      "ticker": "INSM",
+      "exchange": "US"
+    },
+    {
+      "id": "2334194",
+      "name": "SPRINGWORKS THERAPEUTICS INC",
+      "ticker": "SWTX",
+      "exchange": "US"
+    },
+    {
+      "id": "2334215",
+      "name": "PACER US SM CP CSH COWS ETF",
+      "ticker": "CALF",
+      "exchange": "US"
+    },
+    {
+      "id": "2334216",
+      "name": "SPDR GOLD MINISHARES TR",
+      "ticker": "GLDM",
+      "exchange": "US"
+    },
+    {
+      "id": "2334236",
+      "name": "BDT CAPITAL PARTNERS FUND 3 LP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334250",
+      "name": "AB INTERNATIONAL STRATEGIC EQUITIES PORTFOLIO",
+      "ticker": "STEYX",
+      "exchange": "US"
+    },
+    {
+      "id": "2334352",
+      "name": "BRAEMONT PARTNERS I LP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334603",
+      "name": "ALBANY ROAD STRATEGIC OPPORTUNITY FUND LLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334634",
+      "name": "ELLINGTON FINANCIAL INC",
+      "ticker": "EFC",
+      "exchange": "US"
+    },
+    {
+      "id": "2334639",
+      "name": "CITY OF MINNEAPOLIS MN/ST PAUL HOUSING & REDEVELOPMENT AUTHORITY (ALLINA HEALTH SYSTEM)",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334699",
+      "name": "US SAVINGS BOND",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334770",
+      "name": "AERODROME FINANCE",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429536",
+      "name": "AIA Group Ltd",
+      "ticker": "AAGIY",
+      "exchange": "US"
+    },
+    {
+      "id": "429596",
+      "name": "Allegion PLC",
+      "ticker": "ALLE",
+      "exchange": "US"
+    },
+    {
+      "id": "429656",
+      "name": "Amedisys Inc",
+      "ticker": "AMED",
+      "exchange": "US"
+    },
+    {
+      "id": "429719",
+      "name": "Ameris Bancorp",
+      "ticker": "ABCB",
+      "exchange": "US"
+    },
+    {
+      "id": "429830",
+      "name": "ARIZONA STATE TRANSPORTATION BOARD",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "429874",
+      "name": "Assa Abloy AB",
+      "ticker": "ASAZY",
+      "exchange": "US"
+    },
+    {
+      "id": "429971",
+      "name": "Baker Hughes a GE Co",
+      "ticker": "BKR",
+      "exchange": "US"
+    },
+    {
+      "id": "429998",
+      "name": "Barclays PLC",
+      "ticker": "BCS",
+      "exchange": "US"
+    }
+  ],
+  "errors": [
+    "OHIO WATER DEVELOPMENT AUTHORITY (579351): TimeoutError: page.goto: Timeout 10000ms exceeded.\nCall log:\n  - navigating to \"https://www.capitoltrades.com/issuers/579351\", waiting until \"networkidle\"\n"
+  ]
+}

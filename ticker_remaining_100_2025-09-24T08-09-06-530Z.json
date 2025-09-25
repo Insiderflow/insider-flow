@@ -1,0 +1,610 @@
+{
+  "timestamp": "2025-09-24T08:09:06.530Z",
+  "processed": 100,
+  "total": 2011,
+  "withTicker": 62,
+  "withoutTicker": 38,
+  "results": [
+    {
+      "id": "433486",
+      "name": "MPLX LP",
+      "ticker": "MPLX",
+      "exchange": "US"
+    },
+    {
+      "id": "433610",
+      "name": "NEW JERSEY ECONOMIC DEVELOPMENT AUTHORITY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433627",
+      "name": "New Residential Investment Corp",
+      "ticker": "RITM",
+      "exchange": "US"
+    },
+    {
+      "id": "433634",
+      "name": "New York Community Bancorp Inc",
+      "ticker": "NYCB",
+      "exchange": "US"
+    },
+    {
+      "id": "433667",
+      "name": "Nippon Telegraph & Telephone Corp Ntt",
+      "ticker": "NTTYY",
+      "exchange": "US"
+    },
+    {
+      "id": "433670",
+      "name": "Nitori Holdings Co Ltd",
+      "ticker": "NCLTY",
+      "exchange": "US"
+    },
+    {
+      "id": "433684",
+      "name": "Nordea Bank Abp",
+      "ticker": "NRDBY",
+      "exchange": "US"
+    },
+    {
+      "id": "433713",
+      "name": "NORTHSIDE INDEPENDENT SCHOOL DISTRICT",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433733",
+      "name": "NOV Inc",
+      "ticker": "NOV",
+      "exchange": "US"
+    },
+    {
+      "id": "433794",
+      "name": "OceanFirst Financial Corp",
+      "ticker": "OCFC",
+      "exchange": "US"
+    },
+    {
+      "id": "433812",
+      "name": "OKLAHOMA SCHOOL DISTRICTS",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433820",
+      "name": "OLDHAM COUNTY SCHOOL DISTRICT FINANCE CORP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "433830",
+      "name": "Ollie's Bargain Outlet Holdings Inc",
+      "ticker": "OLLI",
+      "exchange": "US"
+    },
+    {
+      "id": "433910",
+      "name": "Pacer Funds Trust - Pacer Benchmark Data & Infrastructure Real estate SCTR ETF",
+      "ticker": "SRVR",
+      "exchange": "US"
+    },
+    {
+      "id": "434009",
+      "name": "PENNSYLVANIA HOUSING FINANCE AGENCY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434043",
+      "name": "PG&E Corp",
+      "ticker": "PCG",
+      "exchange": "US"
+    },
+    {
+      "id": "434089",
+      "name": "Ping An Insurance Group",
+      "ticker": "PNGAY",
+      "exchange": "US"
+    },
+    {
+      "id": "434175",
+      "name": "Primoris Services Corp",
+      "ticker": "PRIM",
+      "exchange": "US"
+    },
+    {
+      "id": "434281",
+      "name": "QuantumScape Corp",
+      "ticker": "QS",
+      "exchange": "US"
+    },
+    {
+      "id": "434308",
+      "name": "Range Resources Corp",
+      "ticker": "RRC",
+      "exchange": "US"
+    },
+    {
+      "id": "434355",
+      "name": "Reinsurance Group of America Inc",
+      "ticker": "RGA",
+      "exchange": "US"
+    },
+    {
+      "id": "434357",
+      "name": "Reliance Steel & Aluminum Co",
+      "ticker": "RS",
+      "exchange": "US"
+    },
+    {
+      "id": "434424",
+      "name": "Roblox Corp",
+      "ticker": "RBLX",
+      "exchange": "US"
+    },
+    {
+      "id": "434435",
+      "name": "Rogers Communications Inc",
+      "ticker": "RCI",
+      "exchange": "US"
+    },
+    {
+      "id": "434453",
+      "name": "ROUND ROCK INDEPENDENT SCHOOL DISTRICT",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434474",
+      "name": "RPM International Inc",
+      "ticker": "RPM",
+      "exchange": "US"
+    },
+    {
+      "id": "434495",
+      "name": "Ryman Hospitality Properties Inc",
+      "ticker": "RHP",
+      "exchange": "US"
+    },
+    {
+      "id": "434703",
+      "name": "Silgan Holdings Inc",
+      "ticker": "SLGN",
+      "exchange": "US"
+    },
+    {
+      "id": "434752",
+      "name": "Smurfit Kappa Group PLC",
+      "ticker": "SMFKY",
+      "exchange": "US"
+    },
+    {
+      "id": "434849",
+      "name": "SPDR MidCap 400 ETF Trust",
+      "ticker": "MDY",
+      "exchange": "US"
+    },
+    {
+      "id": "434863",
+      "name": "SPDR S&P 600 Small Cap Value ETF",
+      "ticker": "SLYV",
+      "exchange": "US"
+    },
+    {
+      "id": "434924",
+      "name": "STAG Industrial Inc",
+      "ticker": "STAG",
+      "exchange": "US"
+    },
+    {
+      "id": "434958",
+      "name": "STATE OF GEORGIA",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434980",
+      "name": "STATE OF NEW YORK MORTGAGE AGENCY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "434982",
+      "name": "STATE OF NORTH CAROLINA",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435101",
+      "name": "Syneos Health Inc",
+      "ticker": "SYNH",
+      "exchange": "US"
+    },
+    {
+      "id": "435130",
+      "name": "Tandem Diabetes Care Inc",
+      "ticker": "TNDM",
+      "exchange": "US"
+    },
+    {
+      "id": "435196",
+      "name": "Tenet Healthcare Corp",
+      "ticker": "THC",
+      "exchange": "US"
+    },
+    {
+      "id": "435199",
+      "name": "TENNESSEE HOUSING DEVELOPMENT AGENCY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435230",
+      "name": "TEXAS WATER DEVELOPMENT BOARD",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435285",
+      "name": "Tokyo Electron Ltd",
+      "ticker": "TOELY",
+      "exchange": "US"
+    },
+    {
+      "id": "435381",
+      "name": "Tri Pointe Homes Inc",
+      "ticker": "TPH",
+      "exchange": "US"
+    },
+    {
+      "id": "435452",
+      "name": "Uni-Charm Corp",
+      "ticker": "UNICY",
+      "exchange": "US"
+    },
+    {
+      "id": "435496",
+      "name": "UNIVERSITY OF CINCINNATI",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435501",
+      "name": "UNIVERSITY OF MARYLAND",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435614",
+      "name": "Vanguard Mid-Cap ETF",
+      "ticker": "VO",
+      "exchange": "US"
+    },
+    {
+      "id": "435664",
+      "name": "Veracyte Inc",
+      "ticker": "VCYT",
+      "exchange": "US"
+    },
+    {
+      "id": "435692",
+      "name": "Viavi Solutions Inc",
+      "ticker": "VIAV",
+      "exchange": "US"
+    },
+    {
+      "id": "435727",
+      "name": "VIRGINIA RESOURCES AUTHORITY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "435752",
+      "name": "Vontier Corp",
+      "ticker": "VNT",
+      "exchange": "US"
+    },
+    {
+      "id": "435807",
+      "name": "Waste Connections Inc",
+      "ticker": "WCN",
+      "exchange": "US"
+    },
+    {
+      "id": "435824",
+      "name": "Webster Financial Corp",
+      "ticker": "WBS",
+      "exchange": "US"
+    },
+    {
+      "id": "435871",
+      "name": "West Japan Railway Company",
+      "ticker": "WJRYY",
+      "exchange": "US"
+    },
+    {
+      "id": "435946",
+      "name": "W L GORE & ASSOCIATES INC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "436009",
+      "name": "YSLETA INDEPENDENT SCHOOL DISTRICT EL PASO COUNTY TEXAS",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "1311252",
+      "name": "CSPC Pharmaceutical Group Ltd",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2314313",
+      "name": "KATY INDEPENDENT SCHOOL DISTRICT FORT BEND HARRIS AND WALLER COUNTIES TEXAS",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2317519",
+      "name": "WYOMING COMMUNITY DEVELOPMENT AUTHORITY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2331206",
+      "name": "VANECK EMERGING MARKETS FUND",
+      "ticker": "EMRIX",
+      "exchange": "US"
+    },
+    {
+      "id": "2331365",
+      "name": "Stellantis NV",
+      "ticker": "STLA",
+      "exchange": "US"
+    },
+    {
+      "id": "2331428",
+      "name": "AB PRIVATE CREDIT INVESTORS CORP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2331979",
+      "name": "CITY OF FRISCO",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2332051",
+      "name": "Arch Coal Inc",
+      "ticker": "ARCH",
+      "exchange": "US"
+    },
+    {
+      "id": "2332120",
+      "name": "CBIZ Inc",
+      "ticker": "CBZ",
+      "exchange": "US"
+    },
+    {
+      "id": "2332207",
+      "name": "CyberArk Software Ltd",
+      "ticker": "CYBR",
+      "exchange": "US"
+    },
+    {
+      "id": "2332221",
+      "name": "RH",
+      "ticker": "RH",
+      "exchange": "US"
+    },
+    {
+      "id": "2332432",
+      "name": "Arlington Asset Investment Corp",
+      "ticker": "AAIC",
+      "exchange": "US"
+    },
+    {
+      "id": "2332605",
+      "name": "Global X Uranium ETF",
+      "ticker": "URA",
+      "exchange": "US"
+    },
+    {
+      "id": "2333183",
+      "name": "THE MERGER FUND",
+      "ticker": "MERFX",
+      "exchange": "US"
+    },
+    {
+      "id": "2333444",
+      "name": "Civitas Resources Inc",
+      "ticker": "CIVI",
+      "exchange": "US"
+    },
+    {
+      "id": "2333484",
+      "name": "Repligen Corp",
+      "ticker": "RGEN",
+      "exchange": "US"
+    },
+    {
+      "id": "2333536",
+      "name": "Rivian Automotive Inc",
+      "ticker": "RIVN",
+      "exchange": "US"
+    },
+    {
+      "id": "2333615",
+      "name": "Triton International Ltd",
+      "ticker": "TRTN",
+      "exchange": "US"
+    },
+    {
+      "id": "2333776",
+      "name": "UNITY SOFTWARE INC",
+      "ticker": "U",
+      "exchange": "US"
+    },
+    {
+      "id": "2333799",
+      "name": "HOUSTON TEXAS AIRPORT SYSTEM",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2333804",
+      "name": "METRO WASHINGTON AIRPORTS AUTH DC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2333806",
+      "name": "NEW HAMPSHIRE HOUSING FINANCE AUTHORITY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2333837",
+      "name": "CITY OF LEANDER TEXAS",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2333852",
+      "name": "Sisecam Resources LP",
+      "ticker": "SIRE",
+      "exchange": "US"
+    },
+    {
+      "id": "2333899",
+      "name": "TIGER GLOBAL CROSSOVER ACCESS LLC",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2333901",
+      "name": "CAREBRIDGE",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334115",
+      "name": "VICTORY CPTL HLDGS INC",
+      "ticker": "VCTR",
+      "exchange": "US"
+    },
+    {
+      "id": "2334169",
+      "name": "STATE OF FLORIDA BOARD OF GOVERNORS",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334171",
+      "name": "INDUSTRIAL DEVELOPMENT AUTHORITY OF MOBILE COUNTY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334175",
+      "name": "SEVEN BRIDGES STRATEGIC EQUITY FUND LP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334200",
+      "name": "CLEAR SECURE INC",
+      "ticker": "YOU",
+      "exchange": "US"
+    },
+    {
+      "id": "2334208",
+      "name": "CONSOLIDATED SCHOOL DISTRICT OF AIKEN COUNTY",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334244",
+      "name": "BOISE CASCADE CO",
+      "ticker": "BCC",
+      "exchange": "US"
+    },
+    {
+      "id": "2334275",
+      "name": "CENTRAL JAPAN RAILWAY CORP",
+      "ticker": "CJPRY",
+      "exchange": "US"
+    },
+    {
+      "id": "2334301",
+      "name": "SPOKANE SCHOOL DISTRICT NO 81 SPOKANE COUNTY WASHINGTON",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334343",
+      "name": "OLAPLEX HOLDINGS INC",
+      "ticker": "OLPX",
+      "exchange": "US"
+    },
+    {
+      "id": "2334345",
+      "name": "ENERGY TRANSFER OPERATING LP",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334395",
+      "name": "PGIM HIGH YIELD FUND",
+      "ticker": "PHYZX",
+      "exchange": "US"
+    },
+    {
+      "id": "2334413",
+      "name": "UBIQUITY VENTURES III",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334426",
+      "name": "CME SOYBEAN OIL",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334499",
+      "name": "DEL VALLE INDEPENDENT SCHOOL DISTRICT",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334511",
+      "name": "SOFI TECHNOLOGIES INC",
+      "ticker": "SOFI",
+      "exchange": "US"
+    },
+    {
+      "id": "2334534",
+      "name": "SCHOOL DISTRICT OF LEON COUNTY FLORIDA",
+      "ticker": null,
+      "exchange": null
+    },
+    {
+      "id": "2334535",
+      "name": "MSD ACQUISITION CORP",
+      "ticker": "MSDA",
+      "exchange": "US"
+    },
+    {
+      "id": "2334540",
+      "name": "MERCATO PARTNERS TRAVERSE IV QP LP",
+      "ticker": null,
+      "exchange": null
+    }
+  ],
+  "errors": []
+}

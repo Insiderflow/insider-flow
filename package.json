@@ -1,32 +1,11 @@
 {
-  "name": "insider-flow",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsx scripts/scrape_trades_page.ts | jq '.'",
-    "scrape": "tsx scripts/scrape_trades_page.ts",
-    "upsert": "tsx scripts/upsert_trades.ts",
-    "prisma:generate": "prisma generate",
-    "prisma:migrate": "prisma migrate dev",
-    "format": "prettier -w .",
-    "lint": "eslint ."
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "module",
-  "devDependencies": {
-    "@types/node": "^24.5.2",
-    "eslint": "^9.36.0",
-    "prettier": "^3.6.2",
-    "prisma": "^6.16.2",
-    "tsx": "^4.20.5",
-    "typescript": "^5.9.2"
-  },
   "dependencies": {
     "@prisma/client": "^6.16.2",
+    "axios": "^1.12.2",
+    "bcryptjs": "^3.0.2",
     "playwright": "^1.55.1"
+  },
+  "devDependencies": {
+    "prisma": "^6.16.2"
   }
 }
