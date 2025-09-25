@@ -90,8 +90,8 @@ function getEmailContent(notification: NotificationData): string {
         <ul>
           <li>政治家: ${(notification.data as TradeData).politician.name}</li>
           <li>發行商: ${(notification.data as TradeData).issuer.name}</li>
-          <li>類型: ${notification.data.type}</li>
-          <li>交易日期: ${notification.data.tradedAt}</li>
+          <li>類型: ${(notification.data as TradeData).type}</li>
+          <li>交易日期: ${(notification.data as TradeData).tradedAt}</li>
         </ul>
         <p><a href="https://insiderflow.com/trades">查看所有交易</a></p>
       `;
@@ -99,13 +99,13 @@ function getEmailContent(notification: NotificationData): string {
     case 'watchlistUpdate':
       return `
         <h2>觀察名單更新</h2>
-        <p>您關注的政治家 ${notification.data.politicianName} 有新交易：</p>
+        <p>您關注的政治家 ${(notification.data as TradeData).politician.name} 有新交易：</p>
         <ul>
-          <li>發行商: ${notification.data.issuerName}</li>
-          <li>類型: ${notification.data.type}</li>
-          <li>交易日期: ${notification.data.tradedAt}</li>
+          <li>發行商: ${(notification.data as TradeData).issuer.name}</li>
+          <li>類型: ${(notification.data as TradeData).type}</li>
+          <li>交易日期: ${(notification.data as TradeData).tradedAt}</li>
         </ul>
-        <p><a href="https://insiderflow.com/politicians/${notification.data.politicianId}">查看政治家詳情</a></p>
+        <p><a href="https://insiderflow.com/politicians/${(notification.data as TradeData).politician.id}">查看政治家詳情</a></p>
       `;
     
     case 'weeklyDigest':
@@ -113,9 +113,9 @@ function getEmailContent(notification: NotificationData): string {
         <h2>週報摘要</h2>
         <p>本週交易統計：</p>
         <ul>
-          <li>總交易數: ${notification.data.totalTrades}</li>
-          <li>活躍政治家: ${notification.data.activePoliticians}</li>
-          <li>交易金額: $${notification.data.totalVolume}</li>
+          <li>總交易數: ${(notification.data as WeeklyDigestData).totalTrades}</li>
+          <li>活躍政治家: ${(notification.data as WeeklyDigestData).activePoliticians}</li>
+          <li>交易金額: $${(notification.data as WeeklyDigestData).totalVolume}</li>
         </ul>
         <p><a href="https://insiderflow.com">查看完整統計</a></p>
       `;
