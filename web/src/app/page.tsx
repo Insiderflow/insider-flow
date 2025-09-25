@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
 import LoadingWrapper from '@/components/LoadingWrapper';
-import LoadingSpinner as _LoadingSpinner from '@/components/LoadingSpinner';
 import HomePoliticianImage from '@/components/HomePoliticianImage';
 import { StatsCardSkeleton } from '@/components/SkeletonLoader';
 import LastUpdated, { DataFreshnessIndicator } from '@/components/LastUpdated';

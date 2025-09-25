@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import Link as _Link from 'next/link';
 import MobileOptimizedTable from './MobileOptimizedTable';
 
 interface Trade {

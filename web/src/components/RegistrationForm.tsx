@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from 'react';
-import { useRouter as _useRouter } from 'next/navigation';
 
 interface RegistrationFormProps {
   next: string;

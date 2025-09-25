@@ -4,7 +4,6 @@ import ClearFiltersButton from '@/components/ClearFiltersButton';
 import AutocompleteInput from '@/components/AutocompleteInput';
 import SortableTradesTable from '@/components/SortableTradesTable';
 import LoadingWrapper from '@/components/LoadingWrapper';
-import LoadingSpinner as _LoadingSpinner from '@/components/LoadingSpinner';
 import { StatsCardSkeleton, TableSkeleton } from '@/components/SkeletonLoader';
 import LastUpdated, { DataFreshnessIndicator } from '@/components/LastUpdated';
 

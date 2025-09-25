@@ -1,8 +1,5 @@
-import { Prisma as _Prisma } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
-import ResponsiveTable as _ResponsiveTable from '@/components/ResponsiveTable';
 import LoadingWrapper from '@/components/LoadingWrapper';
-import LoadingSpinner as _LoadingSpinner from '@/components/LoadingSpinner';
 import PoliticianCard from '@/components/PoliticianCard';
 import { getSessionUser } from '@/lib/auth';
 import { StatsCardSkeleton, PoliticianCardSkeleton } from '@/components/SkeletonLoader';
