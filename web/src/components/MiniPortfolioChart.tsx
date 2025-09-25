@@ -174,6 +174,8 @@ export default function MiniPortfolioChart({ politician, className = "" }: MiniP
             const value = context.parsed.y;
             const label = dataset.label;
             
+            if (value === null) return '';
+            
             if (label === 'Portfolio') {
               return `投資組合: ${value.toFixed(1)}%`;
             } else {
