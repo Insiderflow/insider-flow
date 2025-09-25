@@ -2,8 +2,10 @@
 
 import { useTranslation } from '@/hooks/useTranslation';
 
+import { type Translations } from '@/lib/translations';
+
 interface TranslatedTextProps {
-  translationKey: string;
+  translationKey: keyof Translations;
   fallback?: string;
   className?: string;
 }
