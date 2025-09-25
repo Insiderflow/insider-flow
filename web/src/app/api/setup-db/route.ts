@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export async function POST(request: NextRequest) {
+export async function POST(_request: NextRequest) {
   try {
     // This endpoint is for initial database setup
     // Run this once after deployment to set up the database

@@ -24,7 +24,7 @@ interface MobileOptimizedTableProps<RowT extends object> {
 export default function MobileOptimizedTable<RowT extends object>({ 
   columns, 
   data, 
-  className = "", 
+  className: _className = "", 
   onSort, 
   sortKey, 
   sortOrder,

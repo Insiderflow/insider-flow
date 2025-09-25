@@ -9,7 +9,7 @@ export default function PasswordChangeForm() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState('');
-  const router = useRouter();
+  const _router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -52,7 +52,7 @@ export default function PasswordChangeForm() {
       } else {
         setMessage(data.error || '更改密碼失敗');
       }
-    } catch (error) {
+      } catch (_error) {
       setMessage('網路錯誤，請重試');
     } finally {
       setIsLoading(false);

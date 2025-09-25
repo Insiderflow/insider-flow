@@ -41,7 +41,7 @@ export default function LoginForm({ next }: LoginFormProps) {
           setUnverified(false);
         }
       }
-    } catch (err) {
+    } catch (_err) {
       setError('Network error');
     } finally {
       setIsLoading(false);

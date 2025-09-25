@@ -27,7 +27,7 @@ export default function EmailNotificationSettings() {
           const data = await response.json();
           setSettings(data.settings);
         }
-      } catch (error) {
+      } catch (_error) {
         console.error('Failed to load notification settings:', error);
       } finally {
         setIsInitialized(true);

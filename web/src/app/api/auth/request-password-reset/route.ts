@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
     await requestPasswordReset(email);
     return NextResponse.json({ ok: true });
 
-  } catch (error) {
+    } catch (_error) {
     return NextResponse.json({ error: 'Password reset request failed' }, { status: 500 });
   }
 }

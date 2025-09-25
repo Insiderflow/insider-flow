@@ -1,7 +1,7 @@
-import { Prisma } from '@prisma/client';
+import { Prisma as _Prisma } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
 import LoadingWrapper from '@/components/LoadingWrapper';
-import LoadingSpinner from '@/components/LoadingSpinner';
+import LoadingSpinner as _LoadingSpinner from '@/components/LoadingSpinner';
 import SortableIssuersTable from '@/components/SortableIssuersTable';
 import { StatsCardSkeleton, IssuerCardSkeleton } from '@/components/SkeletonLoader';
 import LastUpdated, { DataFreshnessIndicator } from '@/components/LastUpdated';

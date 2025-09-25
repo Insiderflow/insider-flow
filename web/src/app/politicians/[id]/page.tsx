@@ -90,7 +90,7 @@ export default async function PoliticianDetailPage({
     .slice(0, 5);
 
   // Get sector distribution (simplified - would need sector data)
-  const sectors = allTrades.reduce((acc, trade) => {
+  const sectors = allTrades.reduce((acc, _trade) => {
     // This is a simplified approach - in reality you'd need sector data
     const sector = 'Other'; // Placeholder
     acc[sector] = (acc[sector] || 0) + 1;

@@ -16,7 +16,7 @@ interface ResponsiveTableProps<RowT extends object> {
   sortOrder?: 'asc' | 'desc';
 }
 
-export default function ResponsiveTable<RowT extends object>({ columns, data, className = "", onSort, sortKey, sortOrder }: ResponsiveTableProps<RowT>) {
+export default function ResponsiveTable<RowT extends object>({ columns, data, className: _className = "", onSort, sortKey, sortOrder }: ResponsiveTableProps<RowT>) {
   return (
     <>
       {/* Desktop table */}
