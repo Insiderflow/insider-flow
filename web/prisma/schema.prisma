@@ -50,15 +50,18 @@ model Trade {
 }
 
 model User {
-  id                String    @id @default(cuid())
-  email             String    @unique
-  passwordHash      String    @map("password_hash")
-  emailVerified     Boolean   @default(false) @map("email_verified")
-  createdAt         DateTime  @default(now()) @map("created_at")
-  updatedAt         DateTime  @updatedAt @map("updated_at")
-  notificationSettings Json?  @map("notification_settings")
-  watchlist         UserWatchlist[]
-  sessions          Session[]
+  id                      String    @id @default(cuid())
+  email                   String    @unique
+  passwordHash            String    @map("password_hash")
+  emailVerified           Boolean   @default(false) @map("email_verified")
+  emailVerificationToken  String?   @map("email_verification_token")
+  passwordResetToken      String?   @map("password_reset_token")
+  passwordResetExpires    DateTime? @map("password_reset_expires")
+  createdAt               DateTime  @default(now()) @map("created_at")
+  updatedAt               DateTime  @updatedAt @map("updated_at")
+  notificationSettings    Json?     @map("notification_settings")
+  watchlist               UserWatchlist[]
+  sessions                Session[]
 }
 
 model UserWatchlist {
