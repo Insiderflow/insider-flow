@@ -65,11 +65,7 @@ async function sendNotificationEmail(email: string, notification: NotificationDa
   const subject = getEmailSubject(notification.type);
   const content = getEmailContent(notification);
 
-  await sendEmail({
-    to: email,
-    subject,
-    html: content,
-  });
+  await sendEmail(email, subject, content);
 }
 
 function getEmailSubject(type: string): string {
