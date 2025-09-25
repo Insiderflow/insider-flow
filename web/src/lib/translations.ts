@@ -1,4 +1,4 @@
-type Language = 'zh-Hant' | 'zh-Hans';
+export type Language = 'zh-Hant' | 'zh-Hans';
 
 interface Translations {
   // Navigation
