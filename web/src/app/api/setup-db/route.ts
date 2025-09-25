@@ -5,20 +5,22 @@ const prisma = new PrismaClient();
 
 export async function POST(_request: NextRequest) {
   try {
-    // This endpoint is for initial database setup
-    // Run this once after deployment to set up the database
+    // Run Prisma migrations to create tables
+    const { execSync } = require('child_process');
     
-    // You can add any initial data setup here
-    // For now, just return success
+    console.log('Running Prisma migrations...');
+    execSync('npx prisma migrate deploy', { stdio: 'inherit' });
+    
+    console.log('Prisma migrations completed successfully');
     
     return NextResponse.json({ 
-      message: 'Database setup completed',
+      message: 'Database setup completed - tables created',
       timestamp: new Date().toISOString()
     });
   } catch (error) {
     console.error('Database setup error:', error);
     return NextResponse.json(
-      { error: 'Database setup failed' },
+      { error: 'Database setup failed', details: error.message },
       { status: 500 }
     );
   } finally {
