@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { getTranslation, getCurrentLanguage, type Language } from '@/lib/translations';
+import { getTranslation, getCurrentLanguage, type Language, type Translations } from '@/lib/translations';
 
 export function useTranslation() {
   const [language, setLanguage] = useState<Language>('zh-Hant');
@@ -10,8 +10,8 @@ export function useTranslation() {
     setLanguage(getCurrentLanguage());
   }, []);
 
-  const t = (key: string) => {
-    return getTranslation(key as keyof typeof translations, language);
+  const t = (key: keyof Translations) => {
+    return getTranslation(key, language);
   };
 
   return { t, language };

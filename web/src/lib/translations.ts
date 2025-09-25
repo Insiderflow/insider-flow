@@ -1,6 +1,6 @@
 export type Language = 'zh-Hant' | 'zh-Hans';
 
-interface Translations {
+export interface Translations {
   // Navigation
   home: string;
   trades: string;
