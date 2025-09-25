@@ -16,9 +16,7 @@ export async function POST(req: NextRequest) {
     }
 
     const { user, sessionToken } = await login(email, password);
-    if (!user.emailVerified) {
-      return NextResponse.json({ error: 'Email not verified' }, { status: 403 });
-    }
+    // Email verification check disabled for development
     const res = NextResponse.json({ 
       message: 'Login successful',
       user: {
