@@ -130,8 +130,8 @@ export async function notifyNewTrade(trade: TradeData) {
   await sendNotificationToUsers({
     type: 'newTrade',
     data: {
-      politicianName: trade.politician.name,
-      issuerName: trade.issuer.name,
+      politician: { name: trade.politician.name, id: trade.politician.id },
+      issuer: { name: trade.issuer.name },
       type: trade.type,
       tradedAt: trade.tradedAt,
     },
@@ -143,9 +143,8 @@ export async function notifyWatchlistUpdate(trade: TradeData, _userId: string) {
   await sendNotificationToUsers({
     type: 'watchlistUpdate',
     data: {
-      politicianName: trade.politician.name,
-      politicianId: trade.politician.id,
-      issuerName: trade.issuer.name,
+      politician: { name: trade.politician.name, id: trade.politician.id },
+      issuer: { name: trade.issuer.name },
       type: trade.type,
       tradedAt: trade.tradedAt,
     },
