@@ -55,7 +55,7 @@ export default function SortableIssuersTable({ issuers }: SortableIssuersTablePr
       label: '名稱', 
       sortable: true,
       priority: 'high' as const,
-      render: (value, row) => (
+      render: (value: any, row: any) => (
         <Link 
           href={`/issuers/${row.id}`}
           className="text-blue-400 hover:text-blue-300 underline"
