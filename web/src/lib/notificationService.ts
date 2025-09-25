@@ -1,9 +1,27 @@
 import { sendEmail } from './email';
 import { prisma } from './prisma';
 
+interface TradeData {
+  politician: {
+    name: string;
+    id: string;
+  };
+  issuer: {
+    name: string;
+  };
+  type: string;
+  tradedAt: string;
+}
+
+interface WeeklyDigestData {
+  totalTrades: number;
+  activePoliticians: number;
+  totalVolume: string;
+}
+
 interface NotificationData {
   type: 'newTrade' | 'watchlistUpdate' | 'weeklyDigest';
-  data: any;
+  data: TradeData | WeeklyDigestData;
 }
 
 export async function sendNotificationToUsers(notification: NotificationData) {
@@ -112,7 +130,7 @@ function getEmailContent(notification: NotificationData): string {
 }
 
 // Helper function to send notification when a new trade is added
-export async function notifyNewTrade(trade: any) {
+export async function notifyNewTrade(trade: TradeData) {
   await sendNotificationToUsers({
     type: 'newTrade',
     data: {
@@ -125,7 +143,7 @@ export async function notifyNewTrade(trade: any) {
 }
 
 // Helper function to send notification for watchlist updates
-export async function notifyWatchlistUpdate(trade: any, userId: string) {
+export async function notifyWatchlistUpdate(trade: TradeData, _userId: string) {
   await sendNotificationToUsers({
     type: 'watchlistUpdate',
     data: {
