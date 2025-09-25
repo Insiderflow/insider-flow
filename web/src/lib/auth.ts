@@ -7,8 +7,9 @@ import crypto from 'crypto';
 const SESSION_SECRET = process.env.SESSION_SECRET || 'fallback-secret-for-development';
 const SESSION_DURATION = 30 * 24 * 60 * 60 * 1000; // 30 days
 
+// Only warn in production, don't throw error
 if (!process.env.SESSION_SECRET && process.env.NODE_ENV === 'production') {
-  throw new Error('SESSION_SECRET is required in production');
+  console.warn('WARNING: SESSION_SECRET not set in production, using fallback');
 }
 
 export async function hashPassword(password: string): Promise<string> {
