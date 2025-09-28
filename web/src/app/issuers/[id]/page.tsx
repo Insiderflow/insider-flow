@@ -79,18 +79,18 @@ export default async function IssuerDetailPage({
 
   // Get most active politicians from all trades
   const politicianCounts = allTrades.reduce((acc, trade) => {
-    const politicianId = trade.Politician.id;
+    const politician_id = trade.Politician.id;
     const politicianName = trade.Politician.name;
     const politicianParty = trade.Politician.party;
     const politicianChamber = trade.Politician.chamber;
-    acc[politicianId] = acc[politicianId] || { 
-      id: politicianId,
+    acc[politician_id] = acc[politician_id] || { 
+      id: politician_id,
       name: politicianName, 
       party: politicianParty,
       chamber: politicianChamber,
       count: 0 
     };
-    acc[politicianId].count++;
+    acc[politician_id].count++;
     return acc;
   }, {} as Record<string, { id: string; name: string; party: string | null; chamber: string | null; count: number }>);
 
@@ -116,7 +116,7 @@ export default async function IssuerDetailPage({
   // Prepare trade data for table
   const tradeRows = trades.slice(0, 50).map(trade => ({
     politician: trade.Politician.name,
-    politicianId: trade.Politician.id,
+    politician_id: trade.Politician.id,
     party: trade.Politician.party || 'Unknown',
     published: trade.published_at ? new Date(trade.published_at).toLocaleDateString('en-US', {
       day: 'numeric',
@@ -222,7 +222,7 @@ export default async function IssuerDetailPage({
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 bg-gray-700 rounded-full overflow-hidden flex-shrink-0">
                       <PoliticianProfileImage 
-                        politicianId={politician.id}
+                        politician_id={politician.id}
                         politicianName={politician.name}
                         className="w-full h-full object-cover"
                       />
@@ -241,7 +241,7 @@ export default async function IssuerDetailPage({
                   </div>
                   <div className="flex items-center gap-3">
                     {user && (
-                      <WatchlistButton politicianId={politician.id} initialInWatchlist={false} />
+                      <WatchlistButton politician_id={politician.id} initialInWatchlist={false} />
                     )}
                     <span className="text-gray-400">{politician.count}</span>
                   </div>
@@ -274,10 +274,10 @@ export default async function IssuerDetailPage({
                   defaultValue={sortKey}
                   className="border border-gray-600 p-1 bg-gray-800 text-white text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200"
                 >
-                  <option value="tradedAt">交易日期</option>
-                  <option value="publishedAt">發布日期</option>
+                  <option value="traded_at">交易日期</option>
+                  <option value="published_at">發布日期</option>
                   <option value="price">價格</option>
-                  <option value="sizeMax">金額</option>
+                  <option value="size_max">金額</option>
                 </select>
                 <select 
                   name="order" 

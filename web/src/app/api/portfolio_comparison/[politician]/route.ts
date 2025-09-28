@@ -91,8 +91,8 @@ export async function GET(
       issuer_name: trade.issuer.name,
       ticker: trade.issuer.ticker,
       buy_sell: trade.type,
-      trade_amount: trade.sizeMax ? `$${Number(trade.sizeMax).toLocaleString()}` : 'N/A',
-      filled_date: trade.tradedAt.toISOString().split('T')[0]
+      trade_amount: trade.size_max ? `$${Number(trade.size_max).toLocaleString()}` : 'N/A',
+      filled_date: trade.traded_at.toISOString().split('T')[0]
     }));
 
     return NextResponse.json({

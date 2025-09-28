@@ -13,7 +13,7 @@ export async function GET(_request: NextRequest) {
     const settings = await prisma.user.findUnique({
       where: { id: user.id },
       select: {
-        notificationSettings: true,
+        notification_settings: true,
       },
     });
 
@@ -24,7 +24,7 @@ export async function GET(_request: NextRequest) {
     };
 
     return NextResponse.json({
-      settings: settings?.notificationSettings || defaultSettings,
+      settings: settings?.notification_settings || defaultSettings,
     });
   } catch (error) {
     console.error('Get notification settings error:', error);
@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
     // Update notification settings
     await prisma.user.update({
       where: { id: user.id },
-      data: { notificationSettings: settings },
+      data: { notification_settings: settings },
     });
 
     return NextResponse.json({ message: '通知設定已儲存' });

@@ -13,16 +13,16 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
   const sp = await searchParams;
   const pageSize = 50;
   const page = Math.max(1, Number(typeof sp.page === 'string' ? sp.page : 1) || 1);
-  const allowedSort = new Set(['tradedAt', 'publishedAt', 'price', 'sizeMax']);
+  const allowedSort = new Set(['traded_at', 'published_at', 'price', 'size_max']);
   const order = (typeof sp.order === 'string' && sp.order.toLowerCase() === 'asc') ? 'asc' : 'desc';
-  const sortKeyRaw = typeof sp.sort === 'string' ? sp.sort : 'tradedAt';
-  const sortKey = allowedSort.has(sortKeyRaw) ? sortKeyRaw : 'tradedAt';
+  const sortKeyRaw = typeof sp.sort === 'string' ? sp.sort : 'traded_at';
+  const sortKey = allowedSort.has(sortKeyRaw) ? sortKeyRaw : 'traded_at';
   const qPolitician = typeof sp.qp === 'string' ? sp.qp : '';
   const qIssuer = typeof sp.qi === 'string' ? sp.qi : '';
   const typeFilter = typeof sp.type === 'string' ? sp.type : '';
   const ownerFilter = typeof sp.owner === 'string' ? sp.owner : '';
-  const sizeMin = typeof sp.smin === 'string' && sp.smin !== '' ? Number(sp.smin) : undefined;
-  const sizeMax = typeof sp.smax === 'string' && sp.smax !== '' ? Number(sp.smax) : undefined;
+  const size_min = typeof sp.smin === 'string' && sp.smin !== '' ? Number(sp.smin) : undefined;
+  const size_max = typeof sp.smax === 'string' && sp.smax !== '' ? Number(sp.smax) : undefined;
   const priceMin = typeof sp.pmin === 'string' && sp.pmin !== '' ? Number(sp.pmin) : undefined;
   const priceMax = typeof sp.pmax === 'string' && sp.pmax !== '' ? Number(sp.pmax) : undefined;
 
@@ -41,11 +41,11 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
   if (qIssuer) where.Issuer = { is: { name: { contains: qIssuer, mode: 'insensitive' } } };
   if (typeFilter === 'buy' || typeFilter === 'sell') where.type = typeFilter.toUpperCase();
   if (ownerFilter) where.owner = ownerFilter;
-  if (sizeMin != null || sizeMax != null) {
+  if (size_min != null || size_max != null) {
     // inclusive bounds on size range using size_max/size_min
     where.AND = where.AND || [];
-    if (sizeMin != null) where.AND.push({ size_max: { gte: sizeMin } });
-    if (sizeMax != null) where.AND.push({ size_min: { lte: sizeMax } });
+    if (size_min != null) where.AND.push({ size_max: { gte: size_min } });
+    if (size_max != null) where.AND.push({ size_min: { lte: size_max } });
   }
   if (priceMin != null || priceMax != null) {
     where.AND = where.AND || [];
@@ -170,10 +170,10 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
               <span className="zh-Hans hidden">排序</span>
             </span>
             <select name="sort" defaultValue={sortKey} className="border border-gray-600 p-1 bg-gray-800 text-white text-xs sm:text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200" aria-label="Sort by">
-              <option value="tradedAt">交易日期</option>
-              <option value="publishedAt">發布日期</option>
+              <option value="traded_at">交易日期</option>
+              <option value="published_at">發布日期</option>
               <option value="price">價格</option>
-              <option value="sizeMax">金額(上限)</option>
+              <option value="size_max">金額(上限)</option>
             </select>
           </label>
           <label className="text-xs sm:text-sm flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 text-white">
@@ -240,8 +240,8 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
               <span className="zh-Hans hidden">金额范围</span>
             </span>
             <div className="flex gap-1">
-              <input name="smin" type="number" inputMode="numeric" placeholder="最低" defaultValue={sizeMin ?? ''} className="border border-gray-600 p-1 w-20 sm:w-24 bg-gray-800 text-white placeholder-gray-400 text-xs sm:text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200" aria-label="Minimum size" />
-              <input name="smax" type="number" inputMode="numeric" placeholder="最高" defaultValue={sizeMax ?? ''} className="border border-gray-600 p-1 w-20 sm:w-24 bg-gray-800 text-white placeholder-gray-400 text-xs sm:text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200" aria-label="Maximum size" />
+              <input name="smin" type="number" inputMode="numeric" placeholder="最低" defaultValue={size_min ?? ''} className="border border-gray-600 p-1 w-20 sm:w-24 bg-gray-800 text-white placeholder-gray-400 text-xs sm:text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200" aria-label="Minimum size" />
+              <input name="smax" type="number" inputMode="numeric" placeholder="最高" defaultValue={size_max ?? ''} className="border border-gray-600 p-1 w-20 sm:w-24 bg-gray-800 text-white placeholder-gray-400 text-xs sm:text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200" aria-label="Maximum size" />
             </div>
           </label>
           <label className="text-xs sm:text-sm flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 text-white">
@@ -265,8 +265,8 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
               id: t.id,
               politician: <Link className="text-blue-300 hover:text-blue-100 underline" href={`/politicians/${t.politician_id}`}>{t.Politician.name}</Link>,
               issuer: <Link className="text-blue-300 hover:text-blue-100 underline" href={`/issuers/${t.issuer_id}`}>{t.Issuer.name}</Link>,
-              publishedAt: t.published_at ? new Date(t.published_at).toISOString().slice(0, 10) : '',
-              tradedAt: new Date(t.traded_at).toISOString().slice(0, 10),
+              published_at: t.published_at ? new Date(t.published_at).toISOString().slice(0, 10) : '',
+              traded_at: new Date(t.traded_at).toISOString().slice(0, 10),
               filedAfterDays: t.filed_after_days ?? '',
               owner: t.owner ?? '',
               type: <span className={`px-2 py-0.5 rounded text-xs ${t.type?.toUpperCase() === 'BUY' ? 'bg-green-600 text-white' : 'bg-red-600 text-white'}`}>{t.type}</span>,

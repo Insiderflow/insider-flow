@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 
 interface PoliticianTradeRow {
   issuer: string;
-  issuerId: string;
+  issuer_id: string;
   ticker: string;
   published: string;
   traded: string;
@@ -15,12 +15,12 @@ interface PoliticianTradeRow {
 
 interface PoliticianTradesTableProps {
   data: PoliticianTradeRow[];
-  politicianId: string;
+  politician_id: string;
   currentSort?: string;
   currentOrder?: string;
 }
 
-export default function PoliticianTradesTable({ data, politicianId, currentSort, currentOrder }: PoliticianTradesTableProps) {
+export default function PoliticianTradesTable({ data, politician_id, currentSort, currentOrder }: PoliticianTradesTableProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -45,7 +45,7 @@ export default function PoliticianTradesTable({ data, politicianId, currentSort,
     params.set('order', newOrder);
     params.set('page', '1'); // Reset to first page when sorting
     
-    router.push(`/politicians/${politicianId}?${params.toString()}`);
+    router.push(`/politicians/${politician_id}?${params.toString()}`);
   };
 
   return (
@@ -57,7 +57,7 @@ export default function PoliticianTradesTable({ data, politicianId, currentSort,
           sortable: true,
           render: (value, row) => (
             <Link 
-              href={`/issuers/${row.issuerId}`}
+              href={`/issuers/${row.issuer_id}`}
               className="text-blue-400 hover:text-blue-300 underline"
             >
               {String(value)}

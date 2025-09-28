@@ -87,11 +87,11 @@ export async function GET(request: NextRequest) {
         politician: true,
         issuer: true
       },
-      orderBy: { tradedAt: 'desc' }
+      orderBy: { traded_at: 'desc' }
     });
 
     trades.forEach(trade => {
-      const date = new Date(trade.tradedAt).toLocaleDateString('zh-TW');
+      const date = new Date(trade.traded_at).toLocaleDateString('zh-TW');
       results.push({
         id: trade.id,
         type: 'trade',

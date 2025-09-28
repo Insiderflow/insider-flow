@@ -68,9 +68,9 @@ export default async function IssuersPage({ searchParams }: { searchParams: Prom
     prisma.politician.count(),
     prisma.issuer.count(),
     prisma.trade.findFirst({
-      orderBy: { tradedAt: 'desc' },
-      select: { tradedAt: true }
-    }).then(result => result?.tradedAt || new Date())
+      orderBy: { traded_at: 'desc' },
+      select: { traded_at: true }
+    }).then(result => result?.traded_at || new Date())
   ]);
   const totalPages = Math.max(1, Math.ceil(issuerCount / pageSize));
   const hasPrev = page > 1;
