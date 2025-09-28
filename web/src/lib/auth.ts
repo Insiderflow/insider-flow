@@ -28,7 +28,7 @@ export async function createSession(user_id: string): Promise<string> {
     data: {
       user_id,
       token,
-      expiresAt,
+      expires_at: expiresAt,
     },
   });
 
