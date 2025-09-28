@@ -332,7 +332,7 @@ export default async function PoliticianDetailPage({
           }>
             <PoliticianTradesTable 
               data={tradeRows} 
-              politicianId={id}
+              politician_id={id}
               currentSort={sortKey}
               currentOrder={order}
             />
