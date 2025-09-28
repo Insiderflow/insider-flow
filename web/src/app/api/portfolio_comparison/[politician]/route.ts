@@ -88,8 +88,8 @@ export async function GET(
 
     // Format trades for response
     const formattedTrades = trades.map(trade => ({
-      issuer_name: trade.issuer.name,
-      ticker: trade.issuer.ticker,
+      issuer_name: trade.Issuer.name,
+      ticker: trade.Issuer.ticker,
       buy_sell: trade.type,
       trade_amount: trade.size_max ? `$${Number(trade.size_max).toLocaleString()}` : 'N/A',
       filled_date: trade.traded_at.toISOString().split('T')[0]
