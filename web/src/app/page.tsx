@@ -53,7 +53,7 @@ export default async function Home() {
   // Calculate detailed stats for each politician
   const featuredListWithStats = await Promise.all(
     topPoliticiansGrouped.map(async (g) => {
-      const politician = polById.get(g.politicianId);
+      const politician = polById.get(g.politician_id);
       if (!politician) return null;
 
       // Get issuer count and total volume for this politician
