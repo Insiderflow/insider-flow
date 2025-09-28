@@ -222,7 +222,7 @@ export default async function IssuerDetailPage({
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 bg-gray-700 rounded-full overflow-hidden flex-shrink-0">
                       <PoliticianProfileImage 
-                        politician_id={politician.id}
+                        politicianId={politician.id}
                         politicianName={politician.name}
                         className="w-full h-full object-cover"
                       />
