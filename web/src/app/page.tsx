@@ -59,13 +59,13 @@ export default async function Home() {
       // Get issuer count and total volume for this politician
       const [issuerStats, volumeStats] = await Promise.all([
         prisma.trade.groupBy({
-          by: ['issuerId'],
-          where: { politicianId: g.politicianId },
-          _count: { issuerId: true }
+          by: ['issuer_id'],
+          where: { politician_id: g.politician_id },
+          _count: { issuer_id: true }
         }),
         prisma.trade.aggregate({
-          where: { politicianId: g.politicianId },
-          _sum: { sizeMax: true }
+          where: { politician_id: g.politician_id },
+          _sum: { size_max: true }
         })
       ]);
 
