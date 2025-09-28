@@ -98,6 +98,21 @@ export default async function PoliticianDetailPage({
     take: 5
   });
 
+  // Get issuer names for the most traded issuers
+  const issuerIds = mostTradedIssuers.map(issuer => issuer.issuer_id);
+  const issuerNames = await prisma.issuer.findMany({
+    where: { id: { in: issuerIds } },
+    select: { id: true, name: true }
+  });
+  const issuerNameMap = new Map(issuerNames.map(issuer => [issuer.id, issuer.name]));
+
+  // Combine the data
+  const mostTradedIssuersWithNames = mostTradedIssuers.map(issuer => ({
+    issuer_id: issuer.issuer_id,
+    name: issuerNameMap.get(issuer.issuer_id) || 'Unknown',
+    count: issuer._count.issuer_id
+  }));
+
   // Get sector distribution (simplified - would need sector data)
   const sectors = { 'Other': totalTrades }; // Simplified for now
 
@@ -198,7 +213,7 @@ export default async function PoliticianDetailPage({
           <h2 className="text-xl font-semibold text-white mb-4">最常交易發行商</h2>
           <div className="bg-gray-800 border border-gray-600 rounded-lg p-4 shadow-md">
             <div className="space-y-2">
-              {mostTradedIssuers.map((issuer, index) => (
+              {mostTradedIssuersWithNames.map((issuer, index) => (
                 <div key={index} className="flex justify-between items-center">
                   <Link 
                     href={`/issuers/${issuer.issuer_id}`}
