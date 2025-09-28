@@ -17,7 +17,7 @@ export default async function WatchlistPage() {
 
   const items = await prisma.userWatchlist.findMany({
     where: { user_id: user.id },
-    include: { politician: true },
+    include: { Politician: true },
     orderBy: { created_at: 'desc' }
   });
 
@@ -34,14 +34,14 @@ export default async function WatchlistPage() {
                 <div className="flex items-center justify-between gap-3">
                     <a href={`/politicians/${it.politician_id}`} className="flex items-center gap-3">
                     <div className="w-12 h-12 rounded-full overflow-hidden">
-                      <PoliticianProfileImage politician_id={it.politician_id} politicianName={it.politician.name} />
+                      <PoliticianProfileImage politician_id={it.politician_id} politicianName={it.Politician.name} />
                     </div>
                     <div>
-                      <div className="text-white font-semibold">{it.politician.name}</div>
-                      <div className="text-xs text-gray-400">{it.politician.state} {it.politician.party}</div>
+                      <div className="text-white font-semibold">{it.Politician.name}</div>
+                      <div className="text-xs text-gray-400">{it.Politician.state} {it.Politician.party}</div>
                     </div>
                   </a>
-                  <WatchlistButton politicianId={it.politicianId} initialInWatchlist={true} />
+                  <WatchlistButton politicianId={it.politician_id} initialInWatchlist={true} />
                 </div>
               </div>
             ))}
