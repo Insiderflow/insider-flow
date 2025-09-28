@@ -14,10 +14,10 @@ export async function POST(req: NextRequest) {
 
   const user = await prisma.user.findUnique({ where: { email } });
   if (!user) return NextResponse.json({ ok: true }); // hide enumeration
-  if (user.emailVerified) return NextResponse.json({ ok: true });
+  if (user.email_verified) return NextResponse.json({ ok: true });
 
   const token = crypto.randomBytes(32).toString('hex');
-  await prisma.user.update({ where: { id: user.id }, data: { emailVerificationToken: token } });
+  await prisma.user.update({ where: { id: user.id }, data: { email_verification_token: token } });
   await sendVerificationEmail(email, token);
   return NextResponse.json({ ok: true });
 }

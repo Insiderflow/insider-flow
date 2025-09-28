@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Verify current password
-    const isCurrentPasswordValid = await verifyPassword(currentPassword, user.passwordHash);
+    const isCurrentPasswordValid = await verifyPassword(currentPassword, user.password_hash);
     if (!isCurrentPasswordValid) {
       return NextResponse.json({ error: '目前密碼不正確' }, { status: 400 });
     }

@@ -91,9 +91,9 @@ export async function createUser(email: string, password: string) {
   const user = await prisma.user.create({
     data: {
       email,
-      passwordHash,
-      emailVerificationToken: verificationToken,
-      emailVerified: true, // Auto-verify for development
+      password_hash: passwordHash,
+      email_verification_token: verificationToken,
+      email_verified: true, // Auto-verify for development
     },
   });
 
@@ -109,7 +109,7 @@ export async function createUser(email: string, password: string) {
 
 export async function verifyEmail(token: string) {
   const user = await prisma.user.findFirst({
-    where: { emailVerificationToken: token },
+    where: { email_verification_token: token },
   });
 
   if (!user) {
@@ -119,8 +119,8 @@ export async function verifyEmail(token: string) {
   await prisma.user.update({
     where: { id: user.id },
     data: {
-      emailVerified: true,
-      emailVerificationToken: null,
+      email_verified: true,
+      email_verification_token: null,
     },
   });
 
@@ -136,7 +136,7 @@ export async function login(email: string, password: string) {
     throw new Error('Invalid credentials');
   }
 
-  const isValidPassword = await verifyPassword(password, user.passwordHash);
+  const isValidPassword = await verifyPassword(password, user.password_hash);
   if (!isValidPassword) {
     throw new Error('Invalid credentials');
   }
@@ -162,8 +162,8 @@ export async function requestPasswordReset(email: string) {
   await prisma.user.update({
     where: { id: user.id },
     data: {
-      passwordResetToken: resetToken,
-      passwordResetExpires: expiresAt,
+      password_reset_token: resetToken,
+      password_reset_expires: expiresAt,
     },
   });
 
@@ -173,8 +173,8 @@ export async function requestPasswordReset(email: string) {
 export async function resetPassword(token: string, newPassword: string) {
   const user = await prisma.user.findFirst({
     where: {
-      passwordResetToken: token,
-      passwordResetExpires: {
+      password_reset_token: token,
+      password_reset_expires: {
         gt: new Date(),
       },
     },
@@ -189,9 +189,9 @@ export async function resetPassword(token: string, newPassword: string) {
   await prisma.user.update({
     where: { id: user.id },
     data: {
-      passwordHash,
-      passwordResetToken: null,
-      passwordResetExpires: null,
+      password_hash: passwordHash,
+      password_reset_token: null,
+      password_reset_expires: null,
     },
   });
 

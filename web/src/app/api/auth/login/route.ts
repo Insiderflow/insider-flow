@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
       user: {
         id: user.id,
         email: user.email,
-        emailVerified: user.emailVerified
+        emailVerified: user.email_verified
       }
     });
     res.cookies.set('session', sessionToken, {

@@ -29,8 +29,8 @@ export async function sendNotificationToUsers(notification: NotificationData) {
     // Get all users who have the specific notification enabled
     const users = await prisma.user.findMany({
       where: {
-        emailVerified: true,
-        notificationSettings: {
+        email_verified: true,
+        notification_settings: {
           path: [getNotificationPath(notification.type)],
           equals: true,
         },

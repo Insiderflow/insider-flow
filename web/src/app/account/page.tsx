@@ -43,12 +43,12 @@ export default async function AccountPage() {
                   <span className="zh-Hans hidden">邮件验证:</span>
                 </span>
                 <span className={`px-2 py-1 rounded text-sm ${
-                  user.emailVerified 
+                  user.email_verified 
                     ? 'bg-green-600 text-white' 
                     : 'bg-red-600 text-white'
                 }`}>
-                  <span className="zh-Hant">{user.emailVerified ? '已驗證' : '未驗證'}</span>
-                  <span className="zh-Hans hidden">{user.emailVerified ? '已验证' : '未验证'}</span>
+                  <span className="zh-Hant">{user.email_verified ? '已驗證' : '未驗證'}</span>
+                  <span className="zh-Hans hidden">{user.email_verified ? '已验证' : '未验证'}</span>
                 </span>
               </div>
               <div>
@@ -57,7 +57,7 @@ export default async function AccountPage() {
                   <span className="zh-Hans hidden">注册时间:</span>
                 </span>
                 <span className="text-white ml-2">
-                  {new Date(user.createdAt).toLocaleDateString('zh-TW')}
+                  {new Date(user.created_at).toLocaleDateString('zh-TW')}
                 </span>
               </div>
             </div>
@@ -92,9 +92,9 @@ export default async function AccountPage() {
                 <button 
                   type="submit"
                   className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none transition-colors duration-200"
-                  disabled={user.emailVerified}
+                  disabled={user.email_verified}
                 >
-                  {user.emailVerified ? '已驗證' : '重新發送'}
+                  {user.email_verified ? '已驗證' : '重新發送'}
                 </button>
               </form>
             </div>
