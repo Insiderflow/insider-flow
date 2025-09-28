@@ -34,7 +34,7 @@ export default async function WatchlistPage() {
                 <div className="flex items-center justify-between gap-3">
                     <a href={`/politicians/${it.politician_id}`} className="flex items-center gap-3">
                     <div className="w-12 h-12 rounded-full overflow-hidden">
-                      <PoliticianProfileImage politician_id={it.politician_id} politicianName={it.Politician.name} />
+                      <PoliticianProfileImage politicianId={it.politician_id} politicianName={it.Politician.name} />
                     </div>
                     <div>
                       <div className="text-white font-semibold">{it.Politician.name}</div>
