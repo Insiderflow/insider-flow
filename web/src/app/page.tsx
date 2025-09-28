@@ -87,9 +87,9 @@ export default async function Home() {
     prisma.politician.count(),
     prisma.issuer.count(),
     prisma.trade.findFirst({
-      orderBy: { tradedAt: 'desc' },
-      select: { tradedAt: true }
-    }).then(result => result?.tradedAt || new Date())
+      orderBy: { traded_at: 'desc' },
+      select: { traded_at: true }
+    }).then(result => result?.traded_at || new Date())
   ]);
 
   // Note: per-card stats for politicians are provided by featuredList above
