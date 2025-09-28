@@ -72,10 +72,10 @@ export default async function Home() {
       return {
         politician,
         stats: {
-          tradeCount: g._count.politicianId,
-          latestTradeDate: g._max.tradedAt,
+          tradeCount: g._count.politician_id,
+          latestTradeDate: g._max.traded_at,
           issuerCount: issuerStats.length,
-          totalVolume: Number(volumeStats._sum.sizeMax || 0)
+          totalVolume: Number(volumeStats._sum.size_max || 0)
         }
       };
     })
