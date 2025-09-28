@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ 
       message: 'Registration successful! You can now log in.',
-      userId: user.id 
+      user_id: user.id 
     });
 
   } catch (error) {

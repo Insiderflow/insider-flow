@@ -16,7 +16,7 @@ export default async function WatchlistPage() {
   }
 
   const items = await prisma.userWatchlist.findMany({
-    where: { userId: user.id },
+    where: { user_id: user.id },
     include: { politician: true },
     orderBy: { created_at: 'desc' }
   });
@@ -30,11 +30,11 @@ export default async function WatchlistPage() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {items.map((it) => (
-              <div key={`${it.userId}-${it.politicianId}`} className="border border-gray-600 bg-gray-800 rounded-lg p-4 shadow-md hover:bg-gray-700 transition-colors duration-200">
+              <div key={`${it.user_id}-${it.politician_id}`} className="border border-gray-600 bg-gray-800 rounded-lg p-4 shadow-md hover:bg-gray-700 transition-colors duration-200">
                 <div className="flex items-center justify-between gap-3">
-                  <a href={`/politicians/${it.politicianId}`} className="flex items-center gap-3">
+                    <a href={`/politicians/${it.politician_id}`} className="flex items-center gap-3">
                     <div className="w-12 h-12 rounded-full overflow-hidden">
-                      <PoliticianProfileImage politicianId={it.politicianId} politicianName={it.politician.name} />
+                      <PoliticianProfileImage politician_id={it.politician_id} politicianName={it.politician.name} />
                     </div>
                     <div>
                       <div className="text-white font-semibold">{it.politician.name}</div>

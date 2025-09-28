@@ -20,13 +20,13 @@ export async function verifyPassword(password: string, hash: string): Promise<bo
   return bcrypt.compare(password, hash);
 }
 
-export async function createSession(userId: string): Promise<string> {
+export async function createSession(user_id: string): Promise<string> {
   const token = generateToken();
   const expiresAt = new Date(Date.now() + SESSION_DURATION);
 
   await prisma.session.create({
     data: {
-      userId,
+      user_id,
       token,
       expiresAt,
     },

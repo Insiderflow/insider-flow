@@ -12,7 +12,7 @@ export async function POST(_request: NextRequest) {
 
     // Delete all sessions for this user
     await prisma.session.deleteMany({
-      where: { userId: user.id },
+      where: { user_id: user.id },
     });
 
     // Clear the current session cookie

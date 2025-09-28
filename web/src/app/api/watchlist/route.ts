@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
 
     // Add to watchlist (ignore if already exists)
     await prisma.userWatchlist.create({
-      data: { userId: user.id, politicianId }
+      data: { user_id: user.id, politician_id }
     }).catch(() => {}); // Ignore unique constraint errors
 
     return NextResponse.json({ ok: true });
@@ -52,7 +52,7 @@ export async function DELETE(req: NextRequest) {
 
     // Remove from watchlist
     await prisma.userWatchlist.deleteMany({
-      where: { userId: user.id, politicianId }
+      where: { user_id: user.id, politician_id }
     });
 
     return NextResponse.json({ ok: true });
