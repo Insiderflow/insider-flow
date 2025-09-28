@@ -201,7 +201,7 @@ export default async function PoliticianDetailPage({
               {mostTradedIssuers.map((issuer, index) => (
                 <div key={index} className="flex justify-between items-center">
                   <Link 
-                    href={`/issuers/${issuer.id}`}
+                    href={`/issuers/${issuer.issuer_id}`}
                     className="text-blue-400 hover:text-blue-300 underline text-white hover:text-blue-300"
                   >
                     {issuer.name}
