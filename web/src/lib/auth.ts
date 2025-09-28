@@ -26,6 +26,7 @@ export async function createSession(user_id: string): Promise<string> {
 
   await prisma.session.create({
     data: {
+      id: token,
       user_id,
       token,
       expires_at: expiresAt,
