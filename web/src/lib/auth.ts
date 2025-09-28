@@ -91,10 +91,12 @@ export async function createUser(email: string, password: string) {
 
   const user = await prisma.user.create({
     data: {
+      id: crypto.randomUUID(),
       email,
       password_hash: passwordHash,
       email_verification_token: verificationToken,
       email_verified: true, // Auto-verify for development
+      updated_at: new Date(),
     },
   });
 
