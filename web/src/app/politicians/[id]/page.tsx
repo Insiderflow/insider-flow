@@ -123,7 +123,7 @@ export default async function PoliticianDetailPage({
   // Prepare trade data for table
   const tradeRows = trades.slice(0, 50).map(trade => ({
     issuer: trade.Issuer.name,
-    issuerId: trade.Issuer.id,
+    issuer_id: trade.Issuer.id,
     ticker: trade.Issuer.ticker || 'N/A',
     published: trade.published_at ? new Date(trade.published_at).toLocaleDateString('en-US', {
       day: 'numeric',
