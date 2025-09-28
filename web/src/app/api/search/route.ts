@@ -77,15 +77,15 @@ export async function GET(request: NextRequest) {
     const trades = await prisma.trade.findMany({
       where: {
         OR: [
-          { politician: { name: { contains: searchTerm, mode: 'insensitive' } } },
-          { issuer: { name: { contains: searchTerm, mode: 'insensitive' } } },
-          { issuer: { ticker: { contains: searchTerm, mode: 'insensitive' } } },
+          { Politician: { name: { contains: searchTerm, mode: 'insensitive' } } },
+          { Issuer: { name: { contains: searchTerm, mode: 'insensitive' } } },
+          { Issuer: { ticker: { contains: searchTerm, mode: 'insensitive' } } },
         ]
       },
       take: 5,
       include: {
-        politician: true,
-        issuer: true
+        Politician: true,
+        Issuer: true
       },
       orderBy: { traded_at: 'desc' }
     });
@@ -95,9 +95,9 @@ export async function GET(request: NextRequest) {
       results.push({
         id: trade.id,
         type: 'trade',
-        title: `${trade.politician.name} → ${trade.issuer.name}`,
-        subtitle: `${trade.type} • ${date} • ${trade.issuer.ticker ? `$${trade.issuer.ticker}` : ''}`,
-        url: `/trades?qp=${encodeURIComponent(trade.politician.name)}&qi=${encodeURIComponent(trade.issuer.name)}`
+        title: `${trade.Politician.name} → ${trade.Issuer.name}`,
+        subtitle: `${trade.type} • ${date} • ${trade.Issuer.ticker ? `$${trade.Issuer.ticker}` : ''}`,
+        url: `/trades?qp=${encodeURIComponent(trade.Politician.name)}&qi=${encodeURIComponent(trade.Issuer.name)}`
       });
     });
 
