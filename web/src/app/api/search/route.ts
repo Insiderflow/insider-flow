@@ -31,7 +31,7 @@ export async function GET(request: NextRequest) {
       take: 5,
       include: {
         _count: {
-          select: { trades: true }
+          select: { Trade: true }
         }
       }
     });
@@ -41,7 +41,7 @@ export async function GET(request: NextRequest) {
         id: politician.id,
         type: 'politician',
         title: politician.name,
-        subtitle: `${politician.party || '未知政黨'} • ${politician.state || '未知州'} • ${politician._count.trades} 筆交易`,
+        subtitle: `${politician.party || '未知政黨'} • ${politician.state || '未知州'} • ${politician._count.Trade} 筆交易`,
         url: `/politicians/${politician.id}`
       });
     });
@@ -58,7 +58,7 @@ export async function GET(request: NextRequest) {
       take: 5,
       include: {
         _count: {
-          select: { trades: true }
+          select: { Trade: true }
         }
       }
     });
@@ -68,7 +68,7 @@ export async function GET(request: NextRequest) {
         id: issuer.id,
         type: 'issuer',
         title: issuer.name,
-        subtitle: `${issuer.ticker ? `$${issuer.ticker}` : '無代碼'} • ${issuer.sector || '未知行業'} • ${issuer._count.trades} 筆交易`,
+        subtitle: `${issuer.ticker ? `$${issuer.ticker}` : '無代碼'} • ${issuer.sector || '未知行業'} • ${issuer._count.Trade} 筆交易`,
         url: `/issuers/${issuer.id}`
       });
     });
