@@ -46,14 +46,14 @@ export async function getSessionUser() {
 
   const session = await prisma.session.findUnique({
     where: { token: sessionToken },
-    include: { user: true },
+    include: { User: true },
   });
 
-  if (!session || session.expiresAt < new Date()) {
+  if (!session || session.expires_at < new Date()) {
     return null;
   }
 
-  return session.user;
+  return session.User;
 }
 
 export async function requireAuth() {
