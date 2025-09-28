@@ -26,10 +26,10 @@ export default async function PoliticianDetailPage({
   // Pagination and sorting parameters
   const pageSize = 20;
   const page = Math.max(1, Number(typeof sp.page === 'string' ? sp.page : 1) || 1);
-  const allowedSort = new Set(['tradedAt', 'publishedAt', 'price', 'sizeMax']);
+  const allowedSort = new Set(['traded_at', 'published_at', 'price', 'size_max']);
   const order = (typeof sp.order === 'string' && sp.order.toLowerCase() === 'asc') ? 'asc' : 'desc';
-  const sortKeyRaw = typeof sp.sort === 'string' ? sp.sort : 'tradedAt';
-  const sortKey = allowedSort.has(sortKeyRaw) ? sortKeyRaw : 'tradedAt';
+  const sortKeyRaw = typeof sp.sort === 'string' ? sp.sort : 'traded_at';
+  const sortKey = allowedSort.has(sortKeyRaw) ? sortKeyRaw : 'traded_at';
   
   const orderBy: Record<string, 'asc' | 'desc'> = {};
   orderBy[sortKey] = order;
@@ -38,9 +38,9 @@ export default async function PoliticianDetailPage({
   const politician = await prisma.politician.findUnique({
     where: { id },
     include: {
-      trades: {
+      Trade: {
         include: {
-          issuer: true
+          Issuer: true
         },
         orderBy: [orderBy],
         skip: (page - 1) * pageSize,
@@ -55,46 +55,46 @@ export default async function PoliticianDetailPage({
 
   // Get total count for pagination
   const totalTrades = await prisma.trade.count({
-    where: { politicianId: id }
+    where: { politician_id: id }
   });
 
   // Calculate stats efficiently with aggregation queries
   const [tradeStats, issuerStats, lastTradeDate] = await Promise.all([
     // Get trade count and volume stats
     prisma.trade.aggregate({
-      where: { politicianId: id },
+      where: { politician_id: id },
       _count: { id: true },
       _sum: { 
-        sizeMin: true,
-        sizeMax: true 
+        size_min: true,
+        size_max: true 
       }
     }),
     // Get unique issuer count
     prisma.trade.groupBy({
-      by: ['issuerId'],
-      where: { politicianId: id },
-      _count: { issuerId: true }
+      by: ['issuer_id'],
+      where: { politician_id: id },
+      _count: { issuer_id: true }
     }),
     // Get last trade date
     prisma.trade.findFirst({
-      where: { politicianId: id },
-      orderBy: { tradedAt: 'desc' },
-      select: { tradedAt: true }
+      where: { politician_id: id },
+      orderBy: { traded_at: 'desc' },
+      select: { traded_at: true }
     })
   ]);
 
-  const trades = politician.trades; // Current page trades
+  const trades = politician.Trade; // Current page trades
   const issuers = issuerStats.length;
-  const volume = tradeStats._sum.sizeMin && tradeStats._sum.sizeMax ? 
-    (Number(tradeStats._sum.sizeMin) + Number(tradeStats._sum.sizeMax)) / 2 : 0;
-  const lastTraded = lastTradeDate?.tradedAt || null;
+  const volume = tradeStats._sum.size_min && tradeStats._sum.size_max ? 
+    (Number(tradeStats._sum.size_min) + Number(tradeStats._sum.size_max)) / 2 : 0;
+  const lastTraded = lastTradeDate?.traded_at || null;
 
   // Get most traded issuers efficiently
   const mostTradedIssuers = await prisma.trade.groupBy({
-    by: ['issuerId'],
-    where: { politicianId: id },
-    _count: { issuerId: true },
-    orderBy: { _count: { issuerId: 'desc' } },
+    by: ['issuer_id'],
+    where: { politician_id: id },
+    _count: { issuer_id: true },
+    orderBy: { _count: { issuer_id: 'desc' } },
     take: 5
   });
 
@@ -107,22 +107,22 @@ export default async function PoliticianDetailPage({
 
   // Prepare trade data for table
   const tradeRows = trades.slice(0, 50).map(trade => ({
-    issuer: trade.issuer.name,
-    issuerId: trade.issuer.id,
-    ticker: trade.issuer.ticker || 'N/A',
-    published: trade.publishedAt ? new Date(trade.publishedAt).toLocaleDateString('en-US', {
+    issuer: trade.Issuer.name,
+    issuerId: trade.Issuer.id,
+    ticker: trade.Issuer.ticker || 'N/A',
+    published: trade.published_at ? new Date(trade.published_at).toLocaleDateString('en-US', {
       day: 'numeric',
       month: 'short',
       year: 'numeric'
     }) : '',
-    traded: new Date(trade.tradedAt).toLocaleDateString('en-US', {
+    traded: new Date(trade.traded_at).toLocaleDateString('en-US', {
       day: 'numeric',
       month: 'short',
       year: 'numeric'
     }),
     type: trade.type,
-    size: trade.sizeMin && trade.sizeMax ? 
-      `${trade.sizeMin}K–${trade.sizeMax}K` : 
+    size: trade.size_min && trade.size_max ? 
+      `${trade.size_min}K–${trade.size_max}K` : 
       'N/A',
     detailUrl: `/trades/${trade.id}`
   }));

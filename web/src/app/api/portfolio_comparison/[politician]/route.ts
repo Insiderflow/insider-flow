@@ -15,8 +15,8 @@ export async function GET(
     const politicianData = await prisma.politician.findFirst({
       where: { name: { contains: politician, mode: 'insensitive' } },
       include: {
-        trades: {
-          orderBy: { tradedAt: 'asc' },
+        Trade: {
+          orderBy: { traded_at: 'asc' },
           take: 1
         }
       }
@@ -26,22 +26,22 @@ export async function GET(
       return NextResponse.json({ error: 'Politician not found' }, { status: 404 });
     }
 
-    const defaultStartDate = politicianData.trades[0]?.tradedAt || new Date('2020-01-01');
+    const defaultStartDate = politicianData.Trade[0]?.traded_at || new Date('2020-01-01');
     const queryStartDate = startDate ? new Date(startDate) : defaultStartDate;
 
     // Build where clause for trades
         const whereClause: {
-          politicianId: string;
-          tradedAt: { gte: Date };
-          issuer?: { ticker: { in: string[] } };
+          politician_id: string;
+          traded_at: { gte: Date };
+          Issuer?: { ticker: { in: string[] } };
         } = {
-      politicianId: politicianData.id,
-      tradedAt: { gte: queryStartDate }
+      politician_id: politicianData.id,
+      traded_at: { gte: queryStartDate }
     };
 
     // Add China filter if requested
     if (chinaFilter) {
-      whereClause.issuer = {
+      whereClause.Issuer = {
         ticker: { in: ['TSM', 'BABA', 'NVDA', 'AAPL'] }
       };
     }
@@ -50,9 +50,9 @@ export async function GET(
     const trades = await prisma.trade.findMany({
       where: whereClause,
       include: {
-        issuer: true
+        Issuer: true
       },
-      orderBy: { tradedAt: 'asc' }
+      orderBy: { traded_at: 'asc' }
     });
 
     if (trades.length === 0) {

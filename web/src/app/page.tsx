@@ -16,38 +16,38 @@ export default async function Home() {
 
   const primaryTrades = await prisma.trade.findMany({
     where: {
-      tradedAt: { gte: periodStart, lte: periodEnd },
-      politician: { name: { not: 'Michael McCaul' } },
+      traded_at: { gte: periodStart, lte: periodEnd },
+      Politician: { name: { not: 'Michael McCaul' } },
     },
-    orderBy: { tradedAt: 'desc' },
+    orderBy: { traded_at: 'desc' },
     take: 5,
-    include: { politician: true, issuer: true },
+    include: { Politician: true, Issuer: true },
   });
 
   let latestTrades = primaryTrades;
   if (latestTrades.length < 5) {
     const filled = await prisma.trade.findMany({
       where: {
-        politician: { name: { not: 'Michael McCaul' } },
+        Politician: { name: { not: 'Michael McCaul' } },
         NOT: { id: { in: latestTrades.map(t => t.id) } },
       },
-      orderBy: { tradedAt: 'desc' },
+      orderBy: { traded_at: 'desc' },
       take: 5 - latestTrades.length,
-      include: { politician: true, issuer: true },
+      include: { Politician: true, Issuer: true },
     });
     latestTrades = [...latestTrades, ...filled];
   }
 
   // Top 5 most active politicians (by trade count) with latest trade date
   const topPoliticiansGrouped = await prisma.trade.groupBy({
-    by: ['politicianId'],
-    _count: { politicianId: true },
-    _max: { tradedAt: true },
-    orderBy: { _count: { politicianId: 'desc' } },
+    by: ['politician_id'],
+    _count: { politician_id: true },
+    _max: { traded_at: true },
+    orderBy: { _count: { politician_id: 'desc' } },
     take: 5
   });
 
-  const topPoliticianIds = topPoliticiansGrouped.map(g => g.politicianId);
+  const topPoliticianIds = topPoliticiansGrouped.map(g => g.politician_id);
   const topPoliticians = await prisma.politician.findMany({ where: { id: { in: topPoliticianIds } } });
   const polById = new Map(topPoliticians.map(p => [p.id, p] as const));
   // Calculate detailed stats for each politician
@@ -174,16 +174,16 @@ export default async function Home() {
             {latestTrades.map(t => (
               <div key={t.id} className="bg-gray-700 rounded-lg p-4 hover:shadow-lg transition-shadow duration-300">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm text-gray-300">{new Date(t.tradedAt).toLocaleDateString('zh-TW')}</span>
+                  <span className="text-sm text-gray-300">{new Date(t.traded_at).toLocaleDateString('zh-TW')}</span>
                   <span className="text-xs bg-blue-600 text-white px-2 py-1 rounded-full">{t.type.toUpperCase()}</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <div className="relative w-10 h-10 rounded-full overflow-hidden">
-                    <HomePoliticianImage politicianId={t.politician.id} politicianName={t.politician.name} />
+                    <HomePoliticianImage politicianId={t.Politician.id} politicianName={t.Politician.name} />
                   </div>
                   <div className="flex-1">
-                    <Link href={`/politicians/${t.politician.id}`} className="text-white font-semibold hover:text-blue-300 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none rounded">{t.politician.name}</Link>
-                    <div className="text-xs text-gray-300">{t.politician.party} • {t.politician.state}</div>
+                    <Link href={`/politicians/${t.Politician.id}`} className="text-white font-semibold hover:text-blue-300 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none rounded">{t.Politician.name}</Link>
+                    <div className="text-xs text-gray-300">{t.Politician.party} • {t.Politician.state}</div>
                   </div>
                 </div>
                 <div className="mt-3 pt-3 border-t border-gray-600">
@@ -192,7 +192,7 @@ export default async function Home() {
                       <span className="zh-Hant">發行商</span>
                       <span className="zh-Hans hidden">发行商</span>
                     </div>
-                    <Link href={`/issuers/${t.issuer.id}`} className="text-white font-medium hover:text-blue-300 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none rounded">{t.issuer.name}</Link>
+                    <Link href={`/issuers/${t.Issuer.id}`} className="text-white font-medium hover:text-blue-300 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none rounded">{t.Issuer.name}</Link>
                   </div>
                 </div>
               </div>

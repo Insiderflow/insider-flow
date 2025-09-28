@@ -19,9 +19,9 @@ export default async function IssuersPage({ searchParams }: { searchParams: Prom
   // Get issuers with trade counts using Prisma
   const issuers = await prisma.issuer.findMany({
     include: {
-      trades: {
+      Trade: {
         include: {
-          politician: true
+          Politician: true
         }
       }
     },
@@ -32,11 +32,11 @@ export default async function IssuersPage({ searchParams }: { searchParams: Prom
 
   // Transform to the expected format
   const rows: Row[] = issuers.map(issuer => {
-    const trades = issuer.trades;
-    const politicians = new Set(trades.map(t => t.politician.id)).size;
+    const trades = issuer.Trade;
+    const politicians = new Set(trades.map(t => t.Politician.id)).size;
     const volume = trades.reduce((sum, trade) => {
-      const avgSize = trade.sizeMin && trade.sizeMax ? 
-        (Number(trade.sizeMin) + Number(trade.sizeMax)) / 2 : 0;
+      const avgSize = trade.size_min && trade.size_max ? 
+        (Number(trade.size_min) + Number(trade.size_max)) / 2 : 0;
       return sum + avgSize;
     }, 0);
 

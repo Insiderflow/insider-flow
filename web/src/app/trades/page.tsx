@@ -30,22 +30,22 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
   orderBy[sortKey] = order;
 
   type TradeWhere = {
-    politician?: { is: { name: { contains: string; mode: 'insensitive' } } };
-    issuer?: { is: { name: { contains: string; mode: 'insensitive' } } };
+    Politician?: { is: { name: { contains: string; mode: 'insensitive' } } };
+    Issuer?: { is: { name: { contains: string; mode: 'insensitive' } } };
     type?: string;
     owner?: string;
     AND?: Array<Record<string, unknown>>;
   };
   const where: TradeWhere = {};
-  if (qPolitician) where.politician = { is: { name: { contains: qPolitician, mode: 'insensitive' } } };
-  if (qIssuer) where.issuer = { is: { name: { contains: qIssuer, mode: 'insensitive' } } };
+  if (qPolitician) where.Politician = { is: { name: { contains: qPolitician, mode: 'insensitive' } } };
+  if (qIssuer) where.Issuer = { is: { name: { contains: qIssuer, mode: 'insensitive' } } };
   if (typeFilter === 'buy' || typeFilter === 'sell') where.type = typeFilter.toUpperCase();
   if (ownerFilter) where.owner = ownerFilter;
   if (sizeMin != null || sizeMax != null) {
-    // inclusive bounds on size range using sizeMax/sizeMin
+    // inclusive bounds on size range using size_max/size_min
     where.AND = where.AND || [];
-    if (sizeMin != null) where.AND.push({ sizeMax: { gte: sizeMin } });
-    if (sizeMax != null) where.AND.push({ sizeMin: { lte: sizeMax } });
+    if (sizeMin != null) where.AND.push({ size_max: { gte: sizeMin } });
+    if (sizeMax != null) where.AND.push({ size_min: { lte: sizeMax } });
   }
   if (priceMin != null || priceMax != null) {
     where.AND = where.AND || [];
@@ -59,18 +59,18 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
     orderBy,
     take: pageSize,
     skip: (page - 1) * pageSize,
-    include: { politician: true, issuer: true },
+    include: { Politician: true, Issuer: true },
   });
 
   // Global aggregates for the current filter set
   const [totalCount, distinctPoliticians, distinctIssuers, lastTradeDate] = await Promise.all([
     prisma.trade.count({ where }),
-    prisma.trade.groupBy({ by: ['politicianId'], where }),
-    prisma.trade.groupBy({ by: ['issuerId'], where }),
+    prisma.trade.groupBy({ by: ['politician_id'], where }),
+    prisma.trade.groupBy({ by: ['issuer_id'], where }),
     prisma.trade.findFirst({
-      orderBy: { tradedAt: 'desc' },
-      select: { tradedAt: true }
-    }).then(result => result?.tradedAt || new Date())
+      orderBy: { traded_at: 'desc' },
+      select: { traded_at: true }
+    }).then(result => result?.traded_at || new Date())
   ]);
   const tradeCount = totalCount;
   const polCount = distinctPoliticians.length;
@@ -263,14 +263,14 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
           <SortableTradesTable
             trades={trades.map((t) => ({
               id: t.id,
-              politician: <Link className="text-blue-300 hover:text-blue-100 underline" href={`/politicians/${t.politicianId}`}>{t.politician.name}</Link>,
-              issuer: <Link className="text-blue-300 hover:text-blue-100 underline" href={`/issuers/${t.issuerId}`}>{t.issuer.name}</Link>,
-              publishedAt: t.publishedAt ? new Date(t.publishedAt).toISOString().slice(0, 10) : '',
-              tradedAt: new Date(t.tradedAt).toISOString().slice(0, 10),
-              filedAfterDays: t.filedAfterDays ?? '',
+              politician: <Link className="text-blue-300 hover:text-blue-100 underline" href={`/politicians/${t.politician_id}`}>{t.Politician.name}</Link>,
+              issuer: <Link className="text-blue-300 hover:text-blue-100 underline" href={`/issuers/${t.issuer_id}`}>{t.Issuer.name}</Link>,
+              publishedAt: t.published_at ? new Date(t.published_at).toISOString().slice(0, 10) : '',
+              tradedAt: new Date(t.traded_at).toISOString().slice(0, 10),
+              filedAfterDays: t.filed_after_days ?? '',
               owner: t.owner ?? '',
               type: <span className={`px-2 py-0.5 rounded text-xs ${t.type?.toUpperCase() === 'BUY' ? 'bg-green-600 text-white' : 'bg-red-600 text-white'}`}>{t.type}</span>,
-              size: t.sizeMin && t.sizeMax ? `${t.sizeMin.toString()}–${t.sizeMax.toString()}` : t.sizeMin ? t.sizeMin.toString() : '',
+              size: t.size_min && t.size_max ? `${t.size_min.toString()}–${t.size_max.toString()}` : t.size_min ? t.size_min.toString() : '',
               price: t.price ? new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 }).format(Number(t.price)) : '',
             }))}
           />

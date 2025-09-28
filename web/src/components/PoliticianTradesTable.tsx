@@ -29,9 +29,9 @@ export default function PoliticianTradesTable({ data, politicianId, currentSort,
     
     // Map table column keys to database sort keys
     const sortKeyMap: Record<string, string> = {
-      'traded': 'tradedAt',
-      'published': 'publishedAt',
-      'size': 'sizeMax',
+      'traded': 'traded_at',
+      'published': 'published_at',
+      'size': 'size_max',
       'issuer': 'issuer',
       'type': 'type'
     };

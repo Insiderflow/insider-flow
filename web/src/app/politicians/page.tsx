@@ -28,7 +28,7 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
     include: {
       _count: {
         select: {
-          trades: true
+          Trade: true
         }
       }
     },
@@ -42,7 +42,7 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
       name: politician.name,
       party: politician.party,
       chamber: politician.chamber,
-      trades: politician._count.trades,
+      trades: politician._count.Trade,
       issuers: 0, // Will be calculated on individual pages
       volume: 0, // Will be calculated on individual pages
       lastTraded: null // Will be calculated on individual pages
@@ -67,9 +67,9 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
     prisma.politician.count(),
     prisma.issuer.count(),
     prisma.trade.findFirst({
-      orderBy: { tradedAt: 'desc' },
-      select: { tradedAt: true }
-    }).then(result => result?.tradedAt || new Date())
+      orderBy: { traded_at: 'desc' },
+      select: { traded_at: true }
+    }).then(result => result?.traded_at || new Date())
   ]);
   return (
     <div className="min-h-screen bg-gray-900">
