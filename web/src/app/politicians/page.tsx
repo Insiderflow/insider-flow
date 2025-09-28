@@ -19,46 +19,33 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
   const order = (typeof sp.order === 'string' && sp.order.toLowerCase() === 'asc') ? 'asc' : 'desc';
   const whereChamber = (chamber === 'House' || chamber === 'Senate') ? chamber : null;
 
-  // Get politicians with trade counts using Prisma
+  // Get politicians with trade counts using Prisma (optimized)
   const politicians = await prisma.politician.findMany({
     where: {
       ...(whereChamber ? { chamber: whereChamber } : {}),
       ...(searchName ? { name: { contains: searchName, mode: 'insensitive' } } : {})
     },
     include: {
-      trades: {
-        include: {
-          issuer: true
+      _count: {
+        select: {
+          trades: true
         }
       }
     },
     take: 200
   });
 
-  // Transform to the expected format
+  // Transform to the expected format (optimized - no trade data loaded)
   const rows: Row[] = politicians.map(politician => {
-    const trades = politician.trades;
-    const issuers = new Set(trades.map(t => t.issuer.id)).size;
-    const volume = trades.reduce((sum, trade) => {
-      const avgSize = trade.sizeMin && trade.sizeMax ? 
-        (Number(trade.sizeMin) + Number(trade.sizeMax)) / 2 : 0;
-      return sum + avgSize;
-    }, 0);
-
-    // Find the most recent trade date
-    const lastTraded = trades.length > 0 ? 
-      new Date(Math.max(...trades.map(t => new Date(t.tradedAt).getTime()))) : 
-      null;
-
     return {
       id: politician.id,
       name: politician.name,
       party: politician.party,
       chamber: politician.chamber,
-      trades: trades.length,
-      issuers,
-      volume,
-      lastTraded
+      trades: politician._count.trades,
+      issuers: 0, // Will be calculated on individual pages
+      volume: 0, // Will be calculated on individual pages
+      lastTraded: null // Will be calculated on individual pages
     };
   });
 

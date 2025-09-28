@@ -1,0 +1,111 @@
+{
+  "missing_in_neon": [
+    {
+      "id": "433279",
+      "name": "McDonald's Corp",
+      "ticker": "MCD"
+    },
+    {
+      "id": "433121",
+      "name": "Lowe's Cos Inc",
+      "ticker": "LOW"
+    },
+    {
+      "id": "430093",
+      "name": "BJ's Wholesale Club Holdings Inc",
+      "ticker": "BJ"
+    },
+    {
+      "id": "433464",
+      "name": "Moody's Corp.",
+      "ticker": "MCO"
+    },
+    {
+      "id": "430408",
+      "name": "Carter's Inc.",
+      "ticker": "CRI"
+    },
+    {
+      "id": "433878",
+      "name": "O'Reilly Automotive Inc",
+      "ticker": "ORLY"
+    },
+    {
+      "id": "430518",
+      "name": "CHICAGO O'HARE AIRPORT",
+      "ticker": null
+    },
+    {
+      "id": "431323",
+      "name": "Domino's Pizza Inc",
+      "ticker": "DPZ"
+    },
+    {
+      "id": "433106",
+      "name": "L'Oreal S.A., Paris",
+      "ticker": "LRLCY"
+    },
+    {
+      "id": "431484",
+      "name": "Enel Ente Nazionale Per L'Energia Elettrica SPA, Roma",
+      "ticker": "ENLAY"
+    },
+    {
+      "id": "430412",
+      "name": "Casey's General Stores Inc.",
+      "ticker": "CASY"
+    },
+    {
+      "id": "433830",
+      "name": "Ollie's Bargain Outlet Holdings Inc",
+      "ticker": "OLLI"
+    },
+    {
+      "id": "431276",
+      "name": "Dick's Sporting Goods Inc.",
+      "ticker": "DKS"
+    },
+    {
+      "id": "432939",
+      "name": "L'Air Liquide SA",
+      "ticker": "AIQUY"
+    },
+    {
+      "id": "2335095",
+      "name": "L'ANSE CREUSE PUBLIC SCHOOLS COUNTY OF MACOMB STATE OF MICHIGAN",
+      "ticker": null
+    },
+    {
+      "id": "430548",
+      "name": "Chuy's Holdings Inc",
+      "ticker": "CHUY"
+    },
+    {
+      "id": "432913",
+      "name": "Kohl's Corp",
+      "ticker": "KSS"
+    },
+    {
+      "id": "432997",
+      "name": "Leslie's Inc",
+      "ticker": "LESL"
+    },
+    {
+      "id": "433157",
+      "name": "Macy's Inc",
+      "ticker": "M"
+    },
+    {
+      "id": "2291415",
+      "name": "The Brink's Co",
+      "ticker": "BCO"
+    },
+    {
+      "id": "2334363",
+      "name": "CONN'S INC",
+      "ticker": "CCONN"
+    }
+  ],
+  "missing_in_local": [],
+  "different_data": []
+}

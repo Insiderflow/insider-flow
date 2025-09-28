@@ -22,3 +22,4 @@ export function initializeLanguage(): void {
   setLanguage(currentLanguage);
 }
 
+

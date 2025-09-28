@@ -58,44 +58,48 @@ export default async function PoliticianDetailPage({
     where: { politicianId: id }
   });
 
-  // Calculate stats from all trades (not just current page)
-  const allTrades = await prisma.trade.findMany({
-    where: { politicianId: id },
-    include: { issuer: true }
-  });
+  // Calculate stats efficiently with aggregation queries
+  const [tradeStats, issuerStats, lastTradeDate] = await Promise.all([
+    // Get trade count and volume stats
+    prisma.trade.aggregate({
+      where: { politicianId: id },
+      _count: { id: true },
+      _sum: { 
+        sizeMin: true,
+        sizeMax: true 
+      }
+    }),
+    // Get unique issuer count
+    prisma.trade.groupBy({
+      by: ['issuerId'],
+      where: { politicianId: id },
+      _count: { issuerId: true }
+    }),
+    // Get last trade date
+    prisma.trade.findFirst({
+      where: { politicianId: id },
+      orderBy: { tradedAt: 'desc' },
+      select: { tradedAt: true }
+    })
+  ]);
 
   const trades = politician.trades; // Current page trades
-  const issuers = new Set(allTrades.map(t => t.issuer.id)).size;
-  const volume = allTrades.reduce((sum, trade) => {
-    const avgSize = trade.sizeMin && trade.sizeMax ? 
-      (Number(trade.sizeMin) + Number(trade.sizeMax)) / 2 : 0;
-    return sum + avgSize;
-  }, 0);
+  const issuers = issuerStats.length;
+  const volume = tradeStats._sum.sizeMin && tradeStats._sum.sizeMax ? 
+    (Number(tradeStats._sum.sizeMin) + Number(tradeStats._sum.sizeMax)) / 2 : 0;
+  const lastTraded = lastTradeDate?.tradedAt || null;
 
-  const lastTraded = allTrades.length > 0 ? 
-    new Date(Math.max(...allTrades.map(t => new Date(t.tradedAt).getTime()))) : 
-    null;
-
-  // Get most traded issuers from all trades
-  const issuerCounts = allTrades.reduce((acc, trade) => {
-    const issuerId = trade.issuer.id;
-    const issuerName = trade.issuer.name;
-    acc[issuerId] = acc[issuerId] || { id: issuerId, name: issuerName, count: 0 };
-    acc[issuerId].count++;
-    return acc;
-  }, {} as Record<string, { id: string; name: string; count: number }>);
-
-  const mostTradedIssuers = Object.values(issuerCounts)
-    .sort((a, b) => b.count - a.count)
-    .slice(0, 5);
+  // Get most traded issuers efficiently
+  const mostTradedIssuers = await prisma.trade.groupBy({
+    by: ['issuerId'],
+    where: { politicianId: id },
+    _count: { issuerId: true },
+    orderBy: { _count: { issuerId: 'desc' } },
+    take: 5
+  });
 
   // Get sector distribution (simplified - would need sector data)
-  const sectors = allTrades.reduce((acc, _trade) => {
-    // This is a simplified approach - in reality you'd need sector data
-    const sector = 'Other'; // Placeholder
-    acc[sector] = (acc[sector] || 0) + 1;
-    return acc;
-  }, {} as Record<string, number>);
+  const sectors = { 'Other': totalTrades }; // Simplified for now
 
   const mostTradedSectors = Object.entries(sectors)
     .sort(([,a], [,b]) => b - a)
@@ -165,7 +169,7 @@ export default async function PoliticianDetailPage({
           {/* Stats Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
             <div className="bg-gray-800 border border-gray-600 rounded-lg p-4 shadow-md">
-              <div className="text-2xl font-bold text-white">{allTrades.length}</div>
+              <div className="text-2xl font-bold text-white">{totalTrades}</div>
               <div className="text-sm text-gray-400">交易次數</div>
             </div>
             <div className="bg-gray-800 border border-gray-600 rounded-lg p-4 shadow-md">

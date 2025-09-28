@@ -1,0 +1,23 @@
+INSERT INTO "Issuer" ("id", "name", "ticker") VALUES
+('433279', 'McDonald's Corp', 'MCD'),
+('433121', 'Lowe's Cos Inc', 'LOW'),
+('430093', 'BJ's Wholesale Club Holdings Inc', 'BJ'),
+('433464', 'Moody's Corp.', 'MCO'),
+('430408', 'Carter's Inc.', 'CRI'),
+('433878', 'O'Reilly Automotive Inc', 'ORLY'),
+('430518', 'CHICAGO O'HARE AIRPORT', NULL),
+('431323', 'Domino's Pizza Inc', 'DPZ'),
+('433106', 'L'Oreal S.A., Paris', 'LRLCY'),
+('431484', 'Enel Ente Nazionale Per L'Energia Elettrica SPA, Roma', 'ENLAY'),
+('430412', 'Casey's General Stores Inc.', 'CASY'),
+('433830', 'Ollie's Bargain Outlet Holdings Inc', 'OLLI'),
+('431276', 'Dick's Sporting Goods Inc.', 'DKS'),
+('432939', 'L'Air Liquide SA', 'AIQUY'),
+('2335095', 'L'ANSE CREUSE PUBLIC SCHOOLS COUNTY OF MACOMB STATE OF MICHIGAN', NULL),
+('430548', 'Chuy's Holdings Inc', 'CHUY'),
+('432913', 'Kohl's Corp', 'KSS'),
+('432997', 'Leslie's Inc', 'LESL'),
+('433157', 'Macy's Inc', 'M'),
+('2291415', 'The Brink's Co', 'BCO'),
+('2334363', 'CONN'S INC', 'CCONN')
+ON CONFLICT (id) DO NOTHING;
