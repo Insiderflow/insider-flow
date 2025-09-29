@@ -12,22 +12,14 @@ export async function GET(req: NextRequest) {
 
     const user = await verifyEmail(token);
 
-    return NextResponse.json({ 
-      message: 'Email verified successfully',
-      user: {
-        id: user.id,
-        email: user.email,
-        emailVerified: user.email_verified
-      }
-    });
+    // Redirect to home page with success message
+    return NextResponse.redirect(new URL('/?verified=true', req.url));
 
   } catch (error) {
-    if (error instanceof Error) {
-      if (error.message === 'Invalid verification token') {
-        return NextResponse.json({ error: 'Invalid or expired verification token' }, { status: 400 });
-      }
-      return NextResponse.json({ error: error.message }, { status: 400 });
-    }
-    return NextResponse.json({ error: 'Email verification failed' }, { status: 500 });
+    // Redirect to home page with error message
+    const errorMessage = error instanceof Error && error.message === 'Invalid verification token' 
+      ? 'invalid' 
+      : 'failed';
+    return NextResponse.redirect(new URL(`/?verification=${errorMessage}`, req.url));
   }
 }

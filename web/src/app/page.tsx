@@ -9,7 +9,10 @@ import LastUpdated, { DataFreshnessIndicator } from '@/components/LastUpdated';
 import PoliticianCard from '@/components/PoliticianCard';
 export const dynamic = 'force-dynamic';
 
-export default async function Home() {
+export default async function Home({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
+  const sp = await searchParams;
+  const verified = sp.verified === 'true';
+  const verificationError = sp.verification;
   // Latest 5 trades, excluding Michael McCaul and prioritizing Aug-Sep 2025
   const periodStart = new Date('2025-08-01T00:00:00Z');
   const periodEnd = new Date('2025-09-30T23:59:59Z');
@@ -113,6 +116,47 @@ export default async function Home() {
           </Link>
         </div>
       </section>
+
+      {/* Verification Messages */}
+      {verified && (
+        <div className="bg-green-600 text-white p-4 rounded-lg mx-4">
+          <div className="text-center">
+            <h3 className="font-semibold mb-1">
+              <span className="zh-Hant">✅ 電子郵件驗證成功！</span>
+              <span className="zh-Hans hidden">✅ 电子邮件验证成功！</span>
+            </h3>
+            <p className="text-sm">
+              <span className="zh-Hant">您的帳戶已成功驗證，現在可以完整使用所有功能。</span>
+              <span className="zh-Hans hidden">您的账户已成功验证，现在可以完整使用所有功能。</span>
+            </p>
+          </div>
+        </div>
+      )}
+      
+      {verificationError && (
+        <div className="bg-red-600 text-white p-4 rounded-lg mx-4">
+          <div className="text-center">
+            <h3 className="font-semibold mb-1">
+              <span className="zh-Hant">❌ 驗證失敗</span>
+              <span className="zh-Hans hidden">❌ 验证失败</span>
+            </h3>
+            <p className="text-sm">
+              <span className="zh-Hant">
+                {verificationError === 'invalid' 
+                  ? '驗證連結無效或已過期，請重新註冊。'
+                  : '驗證過程中發生錯誤，請重新註冊。'
+                }
+              </span>
+              <span className="zh-Hans hidden">
+                {verificationError === 'invalid' 
+                  ? '验证链接无效或已过期，请重新注册。'
+                  : '验证过程中发生错误，请重新注册。'
+                }
+              </span>
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* stats */}
       <section className="space-y-4">
