@@ -18,8 +18,20 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
   const sortKey = allowedSort.has(sortKeyRaw) ? sortKeyRaw : 'trades';
   const order = (typeof sp.order === 'string' && sp.order.toLowerCase() === 'asc') ? 'asc' : 'desc';
   const whereChamber = (chamber === 'House' || chamber === 'Senate') ? chamber : null;
+  
+  // Pagination parameters
+  const pageSize = 20;
+  const page = Math.max(1, Number(typeof sp.page === 'string' ? sp.page : 1) || 1);
 
-  // Get politicians with trade counts using Prisma (optimized)
+  // Get total count for pagination
+  const totalPoliticians = await prisma.politician.count({
+    where: {
+      ...(whereChamber ? { chamber: whereChamber } : {}),
+      ...(searchName ? { name: { contains: searchName, mode: 'insensitive' } } : {})
+    }
+  });
+
+  // Get politicians with trade counts using Prisma (optimized with pagination)
   const politicians = await prisma.politician.findMany({
     where: {
       ...(whereChamber ? { chamber: whereChamber } : {}),
@@ -32,7 +44,8 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
         }
       }
     },
-    take: 200
+    skip: (page - 1) * pageSize,
+    take: pageSize
   });
 
   // Get last trade dates for each politician
@@ -141,8 +154,8 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
           </h1>
           <div className="flex items-center gap-4">
             <div className="text-sm text-gray-400">
-              <span className="zh-Hant">顯示 {rows.length} 位政治家</span>
-              <span className="zh-Hans hidden">显示 {rows.length} 位政治家</span>
+              <span className="zh-Hant">顯示 {totalPoliticians} 位政治家 (第 {page} 頁，共 {Math.ceil(totalPoliticians / pageSize)} 頁)</span>
+              <span className="zh-Hans hidden">显示 {totalPoliticians} 位政治家 (第 {page} 页，共 {Math.ceil(totalPoliticians / pageSize)} 页)</span>
             </div>
             <div className="flex items-center gap-2">
               <DataFreshnessIndicator timestamp={lastTradeDate} />
@@ -249,6 +262,44 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
             <span className="zh-Hans hidden">应用</span>
           </button>
         </form>
+        
+        {/* Pagination Controls */}
+        <div className="flex justify-center items-center gap-2 mb-4">
+          {page > 1 && (
+            <a 
+              href={`/politicians?${new URLSearchParams({ 
+                page: String(page - 1),
+                ...(chamber ? { chamber } : {}),
+                ...(searchName ? { name: searchName } : {}),
+                sort: sortKey,
+                order: order
+              }).toString()}`}
+              className="px-3 py-1 bg-gray-700 text-white rounded hover:bg-gray-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none transition-colors duration-200"
+            >
+              <span className="zh-Hant">上一頁</span>
+              <span className="zh-Hans hidden">上一页</span>
+            </a>
+          )}
+          <span className="px-3 py-1 bg-gray-600 text-white rounded">
+            {page} / {Math.ceil(totalPoliticians / pageSize)}
+          </span>
+          {page < Math.ceil(totalPoliticians / pageSize) && (
+            <a 
+              href={`/politicians?${new URLSearchParams({ 
+                page: String(page + 1),
+                ...(chamber ? { chamber } : {}),
+                ...(searchName ? { name: searchName } : {}),
+                sort: sortKey,
+                order: order
+              }).toString()}`}
+              className="px-3 py-1 bg-gray-700 text-white rounded hover:bg-gray-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none transition-colors duration-200"
+            >
+              <span className="zh-Hant">下一頁</span>
+              <span className="zh-Hans hidden">下一页</span>
+            </a>
+          )}
+        </div>
+        
         <LoadingWrapper fallback={
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {Array.from({ length: 8 }).map((_, index) => (
