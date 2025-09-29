@@ -58,6 +58,23 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
     }
   });
 
+  // Get issuer counts for each politician
+  const issuerCounts = await prisma.trade.groupBy({
+    by: ['politician_id'],
+    where: {
+      politician_id: { in: politicianIds }
+    },
+    _count: {
+      issuer_id: true
+    }
+  });
+
+  // Create a map of politician_id to issuer count
+  const issuerCountMap = new Map<string, number>();
+  issuerCounts.forEach(count => {
+    issuerCountMap.set(count.politician_id, count._count.issuer_id);
+  });
+
   // Transform to the expected format (optimized - no trade data loaded)
   const rows: Row[] = politicians.map(politician => {
     return {
@@ -66,7 +83,7 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
       party: politician.party,
       chamber: politician.chamber,
       trades: politician._count.Trade,
-      issuers: 0, // Will be calculated on individual pages
+      issuers: issuerCountMap.get(politician.id) || 0,
       volume: 0, // Will be calculated on individual pages
       lastTraded: lastTradeMap.get(politician.id) || null
     };
