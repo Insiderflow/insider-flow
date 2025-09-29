@@ -221,7 +221,7 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
         }>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {rows.map((politician) => (
-              <PoliticianCard key={politician.id} politician={politician} showWatchlistButton={!!user} initialInWatchlist={false} />
+              <PoliticianCard key={politician.id} politician={politician} showWatchlistButton={true} initialInWatchlist={false} />
             ))}
           </div>
         </LoadingWrapper>
