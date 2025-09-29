@@ -1,7 +1,8 @@
 import bcrypt from 'bcryptjs';
 import { cookies } from 'next/headers';
 import { prisma } from './prisma';
-import { sendVerificationEmail, sendPasswordResetEmail } from './email';
+import { sendVerificationEmail } from './emailService';
+import { sendPasswordResetEmail } from './email';
 import crypto from 'crypto';
 
 const SESSION_SECRET = process.env.SESSION_SECRET || 'fallback-secret-for-development';
