@@ -35,6 +35,29 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
     take: 200
   });
 
+  // Get last trade dates for each politician
+  const politicianIds = politicians.map(p => p.id);
+  const lastTradeDates = await prisma.trade.findMany({
+    where: {
+      politician_id: { in: politicianIds }
+    },
+    select: {
+      politician_id: true,
+      traded_at: true
+    },
+    orderBy: {
+      traded_at: 'desc'
+    }
+  });
+
+  // Create a map of politician_id to last trade date
+  const lastTradeMap = new Map<string, Date>();
+  lastTradeDates.forEach(trade => {
+    if (!lastTradeMap.has(trade.politician_id)) {
+      lastTradeMap.set(trade.politician_id, trade.traded_at);
+    }
+  });
+
   // Transform to the expected format (optimized - no trade data loaded)
   const rows: Row[] = politicians.map(politician => {
     return {
@@ -45,7 +68,7 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
       trades: politician._count.Trade,
       issuers: 0, // Will be calculated on individual pages
       volume: 0, // Will be calculated on individual pages
-      lastTraded: null // Will be calculated on individual pages
+      lastTraded: lastTradeMap.get(politician.id) || null
     };
   });
 
