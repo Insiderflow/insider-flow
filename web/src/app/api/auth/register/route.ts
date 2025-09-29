@@ -33,7 +33,12 @@ export async function POST(req: NextRequest) {
         : 'Registration successful, but email verification failed. Please contact support.',
       user_id: user.id,
       email_sent: emailSent,
-      email_error: emailError
+      email_error: emailError,
+      debug: {
+        sendgrid_key: process.env.SENDGRID_API_KEY ? 'Set' : 'Missing',
+        sendgrid_from: process.env.SENDGRID_FROM_EMAIL || 'Missing',
+        nextauth_url: process.env.NEXTAUTH_URL || 'Missing'
+      }
     });
 
   } catch (error) {
