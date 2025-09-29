@@ -1,7 +1,6 @@
 import bcrypt from 'bcryptjs';
 import { cookies } from 'next/headers';
 import { prisma } from './prisma';
-import { sendVerificationEmail } from './emailService';
 import { sendPasswordResetEmail } from './email';
 import crypto from 'crypto';
 
@@ -101,12 +100,7 @@ export async function createUser(email: string, password: string) {
     },
   });
 
-  // Send verification email
-  try {
-    await sendVerificationEmail(email, verificationToken);
-  } catch (error) {
-    console.error('Failed to send verification email:', error);
-  }
+  // Note: Verification email is sent by the calling route, not here
 
   return user;
 }
