@@ -4,7 +4,7 @@ import { prisma } from './prisma';
 import { sendPasswordResetEmail } from './email';
 import crypto from 'crypto';
 
-const SESSION_SECRET = process.env.SESSION_SECRET || 'fallback-secret-for-development';
+// const SESSION_SECRET = process.env.SESSION_SECRET || 'fallback-secret-for-development';
 const SESSION_DURATION = 30 * 24 * 60 * 60 * 1000; // 30 days
 
 // Only warn in production, don't throw error
