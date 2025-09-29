@@ -13,33 +13,15 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
   const sp = await searchParams;
   const verified = sp.verified === 'true';
   const verificationError = sp.verification;
-  // Latest 5 trades, excluding Michael McCaul and prioritizing Aug-Sep 2025
-  const periodStart = new Date('2025-08-01T00:00:00Z');
-  const periodEnd = new Date('2025-09-30T23:59:59Z');
-
-  const primaryTrades = await prisma.trade.findMany({
+  // Get the latest 5 trades (excluding Michael McCaul if needed)
+  const latestTrades = await prisma.trade.findMany({
     where: {
-      traded_at: { gte: periodStart, lte: periodEnd },
       Politician: { name: { not: 'Michael McCaul' } },
     },
     orderBy: { traded_at: 'desc' },
     take: 5,
     include: { Politician: true, Issuer: true },
   });
-
-  let latestTrades = primaryTrades;
-  if (latestTrades.length < 5) {
-    const filled = await prisma.trade.findMany({
-      where: {
-        Politician: { name: { not: 'Michael McCaul' } },
-        NOT: { id: { in: latestTrades.map(t => t.id) } },
-      },
-      orderBy: { traded_at: 'desc' },
-      take: 5 - latestTrades.length,
-      include: { Politician: true, Issuer: true },
-    });
-    latestTrades = [...latestTrades, ...filled];
-  }
 
   // Top 5 most active politicians (by trade count) with latest trade date
   const topPoliticiansGrouped = await prisma.trade.groupBy({
