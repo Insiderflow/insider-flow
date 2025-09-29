@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createUser } from '@/lib/auth';
+import { sendVerificationEmail } from '@/lib/emailService';
 
 export async function POST(req: NextRequest) {
   try {
@@ -15,8 +16,16 @@ export async function POST(req: NextRequest) {
 
     const user = await createUser(email, password);
 
+    // Send verification email
+    try {
+      await sendVerificationEmail(email, user.email_verification_token!);
+    } catch (emailError) {
+      console.error('Failed to send verification email:', emailError);
+      // Don't fail registration if email fails, but log it
+    }
+
     return NextResponse.json({ 
-      message: 'Registration successful! You can now log in.',
+      message: 'Registration successful! Please check your email to verify your account.',
       user_id: user.id 
     });
 
