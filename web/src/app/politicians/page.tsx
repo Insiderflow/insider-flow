@@ -75,6 +75,26 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
     issuerCountMap.set(count.politician_id, count._count.issuer_id);
   });
 
+  // Get volume data for each politician
+  const volumeData = await prisma.trade.groupBy({
+    by: ['politician_id'],
+    where: {
+      politician_id: { in: politicianIds }
+    },
+    _sum: {
+      size_min: true,
+      size_max: true
+    }
+  });
+
+  // Create a map of politician_id to volume
+  const volumeMap = new Map<string, number>();
+  volumeData.forEach(vol => {
+    const avgSize = vol._sum.size_min && vol._sum.size_max ? 
+      (Number(vol._sum.size_min) + Number(vol._sum.size_max)) / 2 : 0;
+    volumeMap.set(vol.politician_id, avgSize);
+  });
+
   // Transform to the expected format (optimized - no trade data loaded)
   const rows: Row[] = politicians.map(politician => {
     return {
@@ -84,7 +104,7 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
       chamber: politician.chamber,
       trades: politician._count.Trade,
       issuers: issuerCountMap.get(politician.id) || 0,
-      volume: 0, // Will be calculated on individual pages
+      volume: volumeMap.get(politician.id) || 0,
       lastTraded: lastTradeMap.get(politician.id) || null
     };
   });
