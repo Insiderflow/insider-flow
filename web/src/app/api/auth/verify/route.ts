@@ -12,14 +12,11 @@ export async function GET(req: NextRequest) {
 
     const user = await verifyEmail(token);
 
-    // Redirect to home page with success message
-    return NextResponse.redirect(new URL('/?verified=true', req.url));
+    // Redirect to verification success page
+    return NextResponse.redirect(new URL('/verification-success', req.url));
 
   } catch (error) {
-    // Redirect to home page with error message
-    const errorMessage = error instanceof Error && error.message === 'Invalid verification token' 
-      ? 'invalid' 
-      : 'failed';
-    return NextResponse.redirect(new URL(`/?verification=${errorMessage}`, req.url));
+    // Redirect to verification error page
+    return NextResponse.redirect(new URL('/verification-error', req.url));
   }
 }
