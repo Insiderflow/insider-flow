@@ -204,25 +204,40 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
       <section className="space-y-8">
         {/* Latest Trades (5 cards) */}
         <div className="bg-gray-800 border border-gray-600 rounded-xl shadow-md p-6">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-bold text-white">
-              <span className="zh-Hant">最新交易</span>
-              <span className="zh-Hans hidden">最新交易</span>
-            </h2>
-            <Link href="/trades" className="text-blue-400 text-sm hover:text-blue-300 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none rounded">
-              <span className="zh-Hant">查看所有</span>
-              <span className="zh-Hans hidden">查看所有</span>
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h2 className="text-2xl font-bold text-white mb-1">
+                <span className="zh-Hant">🔥 最新交易</span>
+                <span className="zh-Hans hidden">🔥 最新交易</span>
+              </h2>
+              <p className="text-sm text-gray-400">
+                <span className="zh-Hant">國會議員最新股票交易動態</span>
+                <span className="zh-Hans hidden">国会议员最新股票交易动态</span>
+              </p>
+            </div>
+            <Link href="/trades" className="text-blue-400 text-sm hover:text-blue-300 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none rounded bg-gray-700 px-3 py-2 rounded-lg hover:bg-gray-600 transition-colors">
+              <span className="zh-Hant">查看所有 →</span>
+              <span className="zh-Hans hidden">查看所有 →</span>
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {latestTrades.map(t => (
-              <div key={t.id} className="bg-gray-700 rounded-lg p-4 hover:shadow-lg transition-shadow duration-300">
-                <div className="flex items-center justify-between mb-2">
+              <div key={t.id} className="bg-gray-700 rounded-lg p-4 hover:shadow-lg transition-all duration-300 hover:bg-gray-600">
+                <div className="flex items-center justify-between mb-3">
                   <span className="text-sm text-gray-300">{new Date(t.traded_at).toLocaleDateString('zh-TW')}</span>
-                  <span className="text-xs bg-blue-600 text-white px-2 py-1 rounded-full">{t.type.toUpperCase()}</span>
+                  <span className={`text-xs px-2 py-1 rounded-full font-medium ${
+                    t.type.toLowerCase() === 'buy' 
+                      ? 'bg-green-600 text-white' 
+                      : t.type.toLowerCase() === 'sell' 
+                      ? 'bg-red-600 text-white' 
+                      : 'bg-blue-600 text-white'
+                  }`}>
+                    {t.type.toUpperCase()}
+                  </span>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <div className="relative w-10 h-10 rounded-full overflow-hidden">
+                
+                <div className="flex items-center space-x-3 mb-3">
+                  <div className="relative w-12 h-12 rounded-full overflow-hidden">
                     <HomePoliticianImage politicianId={t.Politician.id} politicianName={t.Politician.name} />
                   </div>
                   <div className="flex-1">
@@ -230,14 +245,37 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
                     <div className="text-xs text-gray-300">{t.Politician.party} • {t.Politician.state}</div>
                   </div>
                 </div>
-                <div className="mt-3 pt-3 border-t border-gray-600">
-                  <div>
-                    <div className="text-xs text-gray-400">
+
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-gray-400">
                       <span className="zh-Hant">發行商</span>
                       <span className="zh-Hans hidden">发行商</span>
-                    </div>
-                    <Link href={`/issuers/${t.Issuer.id}`} className="text-white font-medium hover:text-blue-300 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none rounded">{t.Issuer.name}</Link>
+                    </span>
+                    <Link href={`/issuers/${t.Issuer.id}`} className="text-white font-medium hover:text-blue-300 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none rounded text-sm">{t.Issuer.name}</Link>
                   </div>
+                  
+                  {t.size_min && t.size_max && (
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-gray-400">
+                        <span className="zh-Hant">交易規模</span>
+                        <span className="zh-Hans hidden">交易规模</span>
+                      </span>
+                      <span className="text-sm text-white">
+                        ${Number(t.size_min).toLocaleString()} - ${Number(t.size_max).toLocaleString()}
+                      </span>
+                    </div>
+                  )}
+                  
+                  {t.price && (
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-gray-400">
+                        <span className="zh-Hant">價格</span>
+                        <span className="zh-Hans hidden">价格</span>
+                      </span>
+                      <span className="text-sm text-white">${Number(t.price).toFixed(2)}</span>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
