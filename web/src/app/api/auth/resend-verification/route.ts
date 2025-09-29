@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { sendVerificationEmail } from '@/lib/email';
+import { sendVerificationEmail } from '@/lib/emailService';
 import crypto from 'crypto';
 import { rateLimit, keyFromRequest } from '@/lib/rateLimit';
 

@@ -62,3 +62,4 @@ export async function sendVerificationEmail(email: string, token: string) {
     throw new Error('Failed to send verification email');
   }
 }
+

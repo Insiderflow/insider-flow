@@ -95,16 +95,16 @@ export async function createUser(email: string, password: string) {
       email,
       password_hash: passwordHash,
       email_verification_token: verificationToken,
-      email_verified: true, // Auto-verify for development
+      email_verified: false, // Require email verification
       updated_at: new Date(),
     },
   });
 
-  // Send verification email (disabled for development)
+  // Send verification email
   try {
     await sendVerificationEmail(email, verificationToken);
   } catch (error) {
-    console.log('Email verification disabled:', error);
+    console.error('Failed to send verification email:', error);
   }
 
   return user;

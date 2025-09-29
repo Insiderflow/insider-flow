@@ -128,3 +128,4 @@ scrapeLatestTrades()
     console.error('💥 Scraping failed:', error);
     process.exit(1);
   });
+
