@@ -13,10 +13,12 @@ export async function GET(req: NextRequest) {
     const user = await verifyEmail(token);
 
     // Redirect to verification success page
-    return NextResponse.redirect(new URL('/verification-success', req.url));
+    const baseUrl = process.env.NEXTAUTH_URL || 'https://insiderflow.asia';
+    return NextResponse.redirect(new URL('/verification-success', baseUrl));
 
   } catch (error) {
     // Redirect to verification error page
-    return NextResponse.redirect(new URL('/verification-error', req.url));
+    const baseUrl = process.env.NEXTAUTH_URL || 'https://insiderflow.asia';
+    return NextResponse.redirect(new URL('/verification-error', baseUrl));
   }
 }
