@@ -17,16 +17,23 @@ export async function POST(req: NextRequest) {
     const user = await createUser(email, password);
 
     // Send verification email
+    let emailSent = false;
+    let emailError = null;
     try {
       await sendVerificationEmail(email, user.email_verification_token!);
-    } catch (emailError) {
-      console.error('Failed to send verification email:', emailError);
-      // Don't fail registration if email fails, but log it
+      emailSent = true;
+    } catch (error) {
+      console.error('Failed to send verification email:', error);
+      emailError = error.message;
     }
 
     return NextResponse.json({ 
-      message: 'Registration successful! Please check your email to verify your account.',
-      user_id: user.id 
+      message: emailSent 
+        ? 'Registration successful! Please check your email to verify your account.'
+        : 'Registration successful, but email verification failed. Please contact support.',
+      user_id: user.id,
+      email_sent: emailSent,
+      email_error: emailError
     });
 
   } catch (error) {
