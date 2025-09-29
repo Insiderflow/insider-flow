@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
       emailSent = true;
     } catch (error) {
       console.error('Failed to send verification email:', error);
-      emailError = error.message;
+      emailError = error instanceof Error ? error.message : 'Unknown error';
     }
 
     return NextResponse.json({ 
