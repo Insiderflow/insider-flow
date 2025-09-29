@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function VerificationErrorPage() {
   return (
     <div className="min-h-screen bg-gray-900 flex items-center justify-center">
@@ -19,18 +21,18 @@ export default function VerificationErrorPage() {
             </p>
             
             <div className="flex flex-col space-y-3">
-              <a 
+              <Link 
                 href="/register" 
                 className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
               >
                 重新註冊
-              </a>
-              <a 
+              </Link>
+              <Link 
                 href="/" 
                 className="w-full bg-gray-100 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-200 transition-colors"
               >
                 返回首頁
-              </a>
+              </Link>
             </div>
           </div>
         </div>
