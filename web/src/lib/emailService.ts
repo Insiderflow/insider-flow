@@ -17,6 +17,10 @@ export async function sendVerificationEmail(email: string, token: string) {
   }
 
   const verificationUrl = `${process.env.NEXTAUTH_URL || 'https://insiderflow.asia'}/api/auth/verify?token=${token}`;
+  
+  // Debug log to see what URL is being generated
+  console.log('EmailService - NEXTAUTH_URL:', process.env.NEXTAUTH_URL);
+  console.log('EmailService - Generated URL:', verificationUrl);
 
   const msg = {
     to: email,
