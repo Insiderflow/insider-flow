@@ -32,6 +32,20 @@ export default async function RootLayout({
   const user = await getSessionUser();
   return (
     <html lang="zh-Hant" suppressHydrationWarning>
+      <head>
+        {/* Google tag (gtag.js) */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XNQRFHM8EV"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-XNQRFHM8EV');
+            `,
+          }}
+        />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <LanguageInitializer />
         <header className="border-b border-gray-600 bg-gray-900/90 backdrop-blur sticky top-0 z-10">
