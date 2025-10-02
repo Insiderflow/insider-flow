@@ -104,14 +104,16 @@ async function scrapeTrades() {
               const today = new Date();
               const currentYear = today.getFullYear();
               
-              // Handle "Sept 15" format
+              // Handle "23 Sept2025" format (new format from Capitol Trades)
               if (dateStr.includes('Sept') || dateStr.includes('Sep')) {
-                const match = dateStr.match(/(\w+)\s+(\d+)/);
+                const match = dateStr.match(/(\d+)\s+(\w+)(\d{4})/);
                 if (match) {
-                  const month = match[1];
-                  const day = match[2];
+                  const day = parseInt(match[1]);
+                  const month = match[2];
+                  const year = parseInt(match[3]);
                   const monthNum = month === 'Sept' || month === 'Sep' ? 8 : 0; // September is month 8 (0-indexed)
-                  return new Date(currentYear, monthNum, parseInt(day));
+                  const date = new Date(year, monthNum, day);
+                  return date.toISOString();
                 }
               }
               
@@ -120,12 +122,16 @@ async function scrapeTrades() {
                 const days = parseInt(dateStr.replace('days', ''));
                 const tradeDate = new Date(today);
                 tradeDate.setDate(tradeDate.getDate() - days);
-                return tradeDate;
+                return tradeDate.toISOString();
               }
               
               // Try parsing as regular date
               try {
-                return new Date(dateStr);
+                const parsed = new Date(dateStr);
+                if (isNaN(parsed.getTime())) {
+                  return null;
+                }
+                return parsed.toISOString();
               } catch (e) {
                 return null;
               }
@@ -144,8 +150,8 @@ async function scrapeTrades() {
                 issuerId,
                 issuerName,
                 ticker: null, // Will be filled later
-                publishedAt: publishedDate ? publishedDate.toISOString() : null,
-                tradedAt: tradeDate.toISOString(),
+                publishedAt: publishedDate,
+                tradedAt: tradeDate,
                 filedAfterDays: filedAfterDays ? parseInt(filedAfterDays) : null,
                 owner,
                 type: type.toLowerCase(),
