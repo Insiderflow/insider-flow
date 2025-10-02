@@ -43,7 +43,10 @@ async function scrapeTrades() {
             // 8: Price
             // 9: Empty (action button)
             
-            const politicianName = cells[0].textContent.trim();
+            // Extract clean politician name (remove party and chamber info)
+            const politicianRaw = cells[0].textContent.trim();
+            const politicianName = politicianRaw.replace(/(Republican|Democrat|Independent).*$/, '').trim();
+            
             const issuerName = cells[1].textContent.trim();
             const publishedAt = cells[2].textContent.trim();
             const tradedAt = cells[3].textContent.trim();
@@ -104,7 +107,20 @@ async function scrapeTrades() {
               const today = new Date();
               const currentYear = today.getFullYear();
               
-              // Handle "23 Sept2025" format (new format from Capitol Trades)
+              // Handle "13:05Today" format (published date)
+              if (dateStr.includes('Today')) {
+                const timeMatch = dateStr.match(/(\d{1,2}):(\d{2})/);
+                if (timeMatch) {
+                  const hours = parseInt(timeMatch[1]);
+                  const minutes = parseInt(timeMatch[2]);
+                  const date = new Date(today);
+                  date.setHours(hours, minutes, 0, 0);
+                  return date.toISOString();
+                }
+                return today.toISOString();
+              }
+              
+              // Handle "23 Sept2025" format (traded date)
               if (dateStr.includes('Sept') || dateStr.includes('Sep')) {
                 const match = dateStr.match(/(\d+)\s+(\w+)(\d{4})/);
                 if (match) {
