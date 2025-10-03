@@ -266,7 +266,7 @@ export default function PortfolioChart({ politician }: PortfolioChartProps) {
         },
         ticks: {
           color: 'white',
-          callback: function(this: any, tickValue: string | number) {
+          callback: function(this: unknown, tickValue: string | number) {
             return tickValue + '%';
           },
           font: {

@@ -35,7 +35,7 @@ export default async function PoliticianDetailPage({
   orderBy[sortKey] = order;
   
   // Build where clause for trades
-  const tradeWhere: any = { politician_id: id };
+  const tradeWhere: Record<string, any> = { politician_id: id };
   
   // When sorting by published_at, exclude trades with null published dates
   if (sortKey === 'published_at') {

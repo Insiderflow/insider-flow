@@ -220,7 +220,7 @@ export default function PortfolioComparisonChart({
         },
         ticks: {
           color: 'white',
-          callback: function(this: any, tickValue: string | number) {
+          callback: function(this: unknown, tickValue: string | number) {
             return tickValue + '%';
           }
         }
