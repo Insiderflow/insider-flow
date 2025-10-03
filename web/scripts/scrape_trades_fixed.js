@@ -50,7 +50,6 @@ async function scrapeTrades() {
             const issuerName = cells[1].textContent.trim();
             const publishedAt = cells[2].textContent.trim();
             const tradedAt = cells[3].textContent.trim();
-            const filedAfterDays = cells[4].textContent.trim();
             const owner = cells[5].textContent.trim();
             const type = cells[6].textContent.trim();
             const sizeText = cells[7] ? cells[7].textContent.trim() : '';
@@ -172,6 +171,18 @@ async function scrapeTrades() {
             const publishedDate = parseDate(publishedAt);
             const tradeDate = parseDate(tradedAt);
             
+            // Calculate filed_after_days automatically
+            let filedAfterDays = null;
+            if (publishedDate && tradeDate) {
+              const published = new Date(publishedDate);
+              const traded = new Date(tradeDate);
+              const timeDiff = published.getTime() - traded.getTime();
+              const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+              if (daysDiff >= 0) {
+                filedAfterDays = daysDiff;
+              }
+            }
+            
             // Only include trades with valid data
             if (politicianId && issuerId && tradeDate && type) {
               tradeData.push({
@@ -184,7 +195,7 @@ async function scrapeTrades() {
                 ticker: null, // Will be filled later
                 publishedAt: publishedDate,
                 tradedAt: tradeDate,
-                filedAfterDays: filedAfterDays ? parseInt(filedAfterDays) : null,
+                filedAfterDays: filedAfterDays,
                 owner,
                 type: type.toLowerCase(),
                 sizeMin,
