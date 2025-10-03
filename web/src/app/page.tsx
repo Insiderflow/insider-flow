@@ -211,7 +211,18 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
             {latestTrades.map(t => (
               <div key={t.id} className="bg-gray-700 rounded-lg p-4 hover:shadow-lg transition-all duration-300 hover:bg-gray-600">
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-sm text-gray-300">{new Date(t.traded_at).toLocaleDateString('zh-TW')}</span>
+                  <div className="flex flex-col">
+                    <span className="text-sm text-gray-300">
+                      <span className="zh-Hant">交易日期: {new Date(t.traded_at).toLocaleDateString('zh-TW')}</span>
+                      <span className="zh-Hans hidden">交易日期: {new Date(t.traded_at).toLocaleDateString('zh-CN')}</span>
+                    </span>
+                    {t.published_at && (
+                      <span className="text-xs text-gray-400">
+                        <span className="zh-Hant">發布日期: {new Date(t.published_at).toLocaleDateString('zh-TW')}</span>
+                        <span className="zh-Hans hidden">发布日期: {new Date(t.published_at).toLocaleDateString('zh-CN')}</span>
+                      </span>
+                    )}
+                  </div>
                   <span className={`text-xs px-2 py-1 rounded-full font-medium ${
                     t.type.toLowerCase() === 'buy' 
                       ? 'bg-green-600 text-white' 
