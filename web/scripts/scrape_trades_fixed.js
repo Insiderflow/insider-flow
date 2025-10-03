@@ -47,7 +47,11 @@ async function scrapeTrades() {
             const politicianRaw = cells[0].textContent.trim();
             const politicianName = politicianRaw.replace(/(Republican|Democrat|Independent).*$/, '').trim();
             
-            const issuerName = cells[1].textContent.trim();
+            // Extract issuer name and ticker symbol
+            const issuerRaw = cells[1].textContent.trim();
+            const tickerMatch = issuerRaw.match(/(.+?)([A-Z]{1,5}):US$/);
+            const issuerName = tickerMatch ? tickerMatch[1].trim() : issuerRaw;
+            const ticker = tickerMatch ? tickerMatch[2] : null;
             const publishedAt = cells[2].textContent.trim();
             const tradedAt = cells[3].textContent.trim();
             const owner = cells[5].textContent.trim();
@@ -192,7 +196,7 @@ async function scrapeTrades() {
                 politicianChamber: null, // Will be filled later
                 issuerId,
                 issuerName,
-                ticker: null, // Will be filled later
+                ticker: ticker, // Extracted from issuer name
                 publishedAt: publishedDate,
                 tradedAt: tradeDate,
                 filedAfterDays: filedAfterDays,

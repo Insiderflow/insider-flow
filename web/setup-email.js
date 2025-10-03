@@ -45,3 +45,4 @@ if (sendgridApiKey && sendgridApiKey[1].includes('your_')) {
 } else if (sendgridApiKey && sendgridFromEmail) {
   console.log('\n✅ Configuration looks good - ready to test!');
 }
+

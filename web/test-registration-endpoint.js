@@ -45,3 +45,4 @@ async function testRegistration() {
 }
 
 testRegistration();
+
