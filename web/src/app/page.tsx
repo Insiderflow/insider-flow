@@ -77,9 +77,9 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
     prisma.politician.count(),
     prisma.issuer.count(),
     prisma.trade.findFirst({
-      orderBy: { traded_at: 'desc' },
-      select: { traded_at: true }
-    }).then(result => result?.traded_at || new Date())
+      orderBy: { created_at: 'desc' },
+      select: { created_at: true }
+    }).then(result => result?.created_at || new Date())
   ]);
 
   // Note: per-card stats for politicians are provided by featuredList above
