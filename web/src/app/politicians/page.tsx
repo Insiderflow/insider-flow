@@ -81,7 +81,7 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
     politicians = sortedPoliticians.slice((page - 1) * pageSize, page * pageSize);
   } else {
     // For other sorting fields, use database sorting
-    const orderBy: Record<string, 'asc' | 'desc'> = {};
+    const orderBy: any = {};
     if (sortKey === 'trades') {
       orderBy.Trade = { _count: order };
     } else if (sortKey === 'name') {
