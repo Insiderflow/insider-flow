@@ -107,18 +107,34 @@ async function scrapeTrades() {
               const today = new Date();
               const currentYear = today.getFullYear();
               
-              // Handle "13:05Today" format (published date)
-              if (dateStr.includes('Today')) {
-                const timeMatch = dateStr.match(/(\d{1,2}):(\d{2})/);
-                if (timeMatch) {
-                  const hours = parseInt(timeMatch[1]);
-                  const minutes = parseInt(timeMatch[2]);
-                  const date = new Date(today);
-                  date.setHours(hours, minutes, 0, 0);
-                  return date.toISOString();
-                }
-                return today.toISOString();
+            // Handle "21:05Yesterday" format (published date)
+            if (dateStr.includes('Yesterday')) {
+              const timeMatch = dateStr.match(/(\d{1,2}):(\d{2})/);
+              if (timeMatch) {
+                const hours = parseInt(timeMatch[1]);
+                const minutes = parseInt(timeMatch[2]);
+                const yesterday = new Date(today);
+                yesterday.setDate(yesterday.getDate() - 1);
+                yesterday.setHours(hours, minutes, 0, 0);
+                return yesterday.toISOString();
               }
+              const yesterday = new Date(today);
+              yesterday.setDate(yesterday.getDate() - 1);
+              return yesterday.toISOString();
+            }
+            
+            // Handle "13:05Today" format (published date)
+            if (dateStr.includes('Today')) {
+              const timeMatch = dateStr.match(/(\d{1,2}):(\d{2})/);
+              if (timeMatch) {
+                const hours = parseInt(timeMatch[1]);
+                const minutes = parseInt(timeMatch[2]);
+                const date = new Date(today);
+                date.setHours(hours, minutes, 0, 0);
+                return date.toISOString();
+              }
+              return today.toISOString();
+            }
               
               // Handle "23 Sept2025" format (traded date)
               if (dateStr.includes('Sept') || dateStr.includes('Sep')) {
