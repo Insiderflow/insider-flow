@@ -138,15 +138,64 @@ export async function notifyNewTrade(trade: TradeData) {
   });
 }
 
+// Helper function to process a new trade and send appropriate notifications
+export async function processNewTrade(trade: TradeData) {
+  try {
+    console.log(`Processing new trade: ${trade.politician.name} - ${trade.issuer.name}`);
+    
+    // Send general new trade notifications to all users who want them
+    await notifyNewTrade(trade);
+    
+    // Send watchlist notifications to users who watch this specific politician
+    await notifyWatchlistUpdate(trade);
+    
+    console.log(`✅ Completed notifications for trade: ${trade.politician.name}`);
+  } catch (error) {
+    console.error('Error processing new trade notifications:', error);
+  }
+}
+
 // Helper function to send notification for watchlist updates
-export async function notifyWatchlistUpdate(trade: TradeData, _userId: string) {
-  await sendNotificationToUsers({
-    type: 'watchlistUpdate',
-    data: {
-      politician: { name: trade.politician.name, id: trade.politician.id },
-      issuer: { name: trade.issuer.name },
-      type: trade.type,
-      tradedAt: trade.tradedAt,
-    },
-  });
+export async function notifyWatchlistUpdate(trade: TradeData) {
+  try {
+    // Find users who have this politician in their watchlist AND have watchlist notifications enabled
+    const users = await prisma.user.findMany({
+      where: {
+        email_verified: true,
+        notification_settings: {
+          path: ['watchlistUpdates'],
+          equals: true,
+        },
+        UserWatchlist: {
+          some: {
+            politician_id: trade.politician.id
+          }
+        }
+      },
+      include: {
+        UserWatchlist: {
+          where: {
+            politician_id: trade.politician.id
+          }
+        }
+      }
+    });
+
+    // Send email to each user who watches this politician
+    for (const user of users) {
+      await sendNotificationEmail(user.email, {
+        type: 'watchlistUpdate',
+        data: {
+          politician: { name: trade.politician.name, id: trade.politician.id },
+          issuer: { name: trade.issuer.name },
+          type: trade.type,
+          tradedAt: trade.tradedAt,
+        },
+      });
+    }
+
+    console.log(`Sent watchlist notification for ${trade.politician.name} to ${users.length} users`);
+  } catch (error) {
+    console.error('Error sending watchlist notifications:', error);
+  }
 }
