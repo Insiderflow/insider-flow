@@ -1,5 +1,6 @@
 "use client";
 import { useState } from 'react';
+import Image from 'next/image';
 import { getPoliticianImageSrc } from '@/lib/politicianImageMapping';
 
 interface PoliticianProfileImageProps {
@@ -30,9 +31,11 @@ export default function PoliticianProfileImage({
   }
 
   return (
-    <img 
+    <Image 
       src={getPoliticianImageSrc(politicianId, politicianName)}
       alt={`${politicianName} profile`}
+      width={200}
+      height={200}
       className={className}
       onError={handleImageError}
     />

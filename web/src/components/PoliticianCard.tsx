@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { getPoliticianImageSrc } from '@/lib/politicianImageMapping';
 import WatchlistButton from './WatchlistButton';
 import MiniPortfolioChart from './MiniPortfolioChart';
@@ -47,9 +48,11 @@ export default function PoliticianCard({ politician, showWatchlistButton = true,
         <a href={`/politicians/${politician.id}`} className="block w-16 h-16 mx-auto mb-3 bg-gray-700 rounded-full overflow-hidden focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
           <div className="w-16 h-16">
             {!imageError ? (
-              <img 
+              <Image 
                 src={getImageSrc()}
                 alt={`${politician.name} profile`}
+                width={64}
+                height={64}
                 className="w-full h-full object-cover"
                 onError={handleImageError}
               />
