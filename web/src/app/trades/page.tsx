@@ -52,6 +52,11 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
     if (priceMin != null) where.AND.push({ price: { gte: priceMin } });
     if (priceMax != null) where.AND.push({ price: { lte: priceMax } });
   }
+  
+  // When sorting by published_at, exclude trades with null published dates
+  if (sortKey === 'published_at') {
+    where.published_at = { not: null };
+  }
 
   // Fetch page of trades
   const trades = await prisma.trade.findMany({

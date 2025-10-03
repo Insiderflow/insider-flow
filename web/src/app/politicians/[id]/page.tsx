@@ -34,11 +34,20 @@ export default async function PoliticianDetailPage({
   const orderBy: Record<string, 'asc' | 'desc'> = {};
   orderBy[sortKey] = order;
   
+  // Build where clause for trades
+  const tradeWhere: any = { politician_id: id };
+  
+  // When sorting by published_at, exclude trades with null published dates
+  if (sortKey === 'published_at') {
+    tradeWhere.published_at = { not: null };
+  }
+  
   // Get politician with paginated trades
   const politician = await prisma.politician.findUnique({
     where: { id },
     include: {
       Trade: {
+        where: tradeWhere,
         include: {
           Issuer: true
         },
@@ -55,7 +64,7 @@ export default async function PoliticianDetailPage({
 
   // Get total count for pagination
   const totalTrades = await prisma.trade.count({
-    where: { politician_id: id }
+    where: tradeWhere
   });
 
   // Calculate stats efficiently with aggregation queries
