@@ -31,22 +31,80 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
     }
   });
 
-  // Get politicians with trade counts using Prisma (optimized with pagination)
-  const politicians = await prisma.politician.findMany({
-    where: {
-      ...(whereChamber ? { chamber: whereChamber } : {}),
-      ...(searchName ? { name: { contains: searchName, mode: 'insensitive' } } : {})
-    },
-    include: {
-      _count: {
-        select: {
-          Trade: true
+  // Get politicians with their stats, sorted by the requested field
+  let politicians;
+  
+  if (sortKey === 'volume') {
+    // For volume sorting, we need to calculate volume first, then sort
+    const allPoliticians = await prisma.politician.findMany({
+      where: {
+        ...(whereChamber ? { chamber: whereChamber } : {}),
+        ...(searchName ? { name: { contains: searchName, mode: 'insensitive' } } : {})
+      },
+      include: {
+        _count: {
+          select: {
+            Trade: true
+          }
         }
       }
-    },
-    skip: (page - 1) * pageSize,
-    take: pageSize
-  });
+    });
+    
+    // Get volume data for all politicians
+    const politicianIds = allPoliticians.map(p => p.id);
+    const volumeData = await prisma.trade.groupBy({
+      by: ['politician_id'],
+      where: {
+        politician_id: { in: politicianIds }
+      },
+      _sum: {
+        size_min: true,
+        size_max: true
+      }
+    });
+    
+    // Create volume map
+    const volumeMap = new Map<string, number>();
+    volumeData.forEach(vol => {
+      const avgSize = vol._sum.size_min && vol._sum.size_max ? 
+        (Number(vol._sum.size_min) + Number(vol._sum.size_max)) / 2 : 0;
+      volumeMap.set(vol.politician_id, avgSize);
+    });
+    
+    // Sort by volume and apply pagination
+    const sortedPoliticians = allPoliticians.sort((a, b) => {
+      const aVol = volumeMap.get(a.id) || 0;
+      const bVol = volumeMap.get(b.id) || 0;
+      return order === 'asc' ? aVol - bVol : bVol - aVol;
+    });
+    
+    politicians = sortedPoliticians.slice((page - 1) * pageSize, page * pageSize);
+  } else {
+    // For other sorting fields, use database sorting
+    const orderBy: any = {};
+    if (sortKey === 'trades') {
+      orderBy.Trade = { _count: order };
+    } else if (sortKey === 'name') {
+      orderBy.name = order;
+    }
+    
+    politicians = await prisma.politician.findMany({
+      where: {
+        ...(whereChamber ? { chamber: whereChamber } : {}),
+        ...(searchName ? { name: { contains: searchName, mode: 'insensitive' } } : {})
+      },
+      include: {
+        _count: {
+          select: {
+            Trade: true
+          }
+        }
+      },
+      orderBy,
+      skip: (page - 1) * pageSize,
+      take: pageSize
+    });
+  }
 
   // Get last trade dates for each politician
   const politicianIds = politicians.map(p => p.id);
@@ -88,25 +146,27 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
     issuerCountMap.set(count.politician_id, count._count.issuer_id);
   });
 
-  // Get volume data for each politician
-  const volumeData = await prisma.trade.groupBy({
-    by: ['politician_id'],
-    where: {
-      politician_id: { in: politicianIds }
-    },
-    _sum: {
-      size_min: true,
-      size_max: true
-    }
-  });
+  // Get volume data for each politician (only if not already calculated for volume sorting)
+  let volumeMap = new Map<string, number>();
+  if (sortKey !== 'volume') {
+    const volumeData = await prisma.trade.groupBy({
+      by: ['politician_id'],
+      where: {
+        politician_id: { in: politicianIds }
+      },
+      _sum: {
+        size_min: true,
+        size_max: true
+      }
+    });
 
-  // Create a map of politician_id to volume
-  const volumeMap = new Map<string, number>();
-  volumeData.forEach(vol => {
-    const avgSize = vol._sum.size_min && vol._sum.size_max ? 
-      (Number(vol._sum.size_min) + Number(vol._sum.size_max)) / 2 : 0;
-    volumeMap.set(vol.politician_id, avgSize);
-  });
+    // Create a map of politician_id to volume
+    volumeData.forEach(vol => {
+      const avgSize = vol._sum.size_min && vol._sum.size_max ? 
+        (Number(vol._sum.size_min) + Number(vol._sum.size_max)) / 2 : 0;
+      volumeMap.set(vol.politician_id, avgSize);
+    });
+  }
 
   // Transform to the expected format (optimized - no trade data loaded)
   const rows: Row[] = politicians.map(politician => {
@@ -120,20 +180,6 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
       volume: volumeMap.get(politician.id) || 0,
       lastTraded: lastTradeMap.get(politician.id) || null
     };
-  });
-
-  // Sort the results
-  rows.sort((a, b) => {
-    const aVal = a[sortKey as keyof Row];
-    const bVal = b[sortKey as keyof Row];
-    
-    if (typeof aVal === 'string' && typeof bVal === 'string') {
-      return order === 'asc' ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
-    }
-    
-    const numA = Number(aVal);
-    const numB = Number(bVal);
-    return order === 'asc' ? numA - numB : numB - numA;
   });
   const [tradeCount, polCount, issuerCount, lastTradeDate] = await Promise.all([
     prisma.trade.count(),
