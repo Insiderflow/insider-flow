@@ -7,7 +7,7 @@ import { getCurrentLanguage, setLanguage, type Language } from '@/lib/languageUt
 export default function LanguageToggle() {
   const [language, setLanguageState] = useState<Language>('zh-Hant');
   const router = useRouter();
-  const _pathname = usePathname();
+  // const _pathname = usePathname();
 
   useEffect(() => {
     const currentLanguage = getCurrentLanguage();

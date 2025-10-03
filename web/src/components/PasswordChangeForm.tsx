@@ -52,7 +52,7 @@ export default function PasswordChangeForm() {
       } else {
         setMessage(data.error || '更改密碼失敗');
       }
-      } catch (_error) {
+      } catch {
       setMessage('網路錯誤，請重試');
     } finally {
       setIsLoading(false);

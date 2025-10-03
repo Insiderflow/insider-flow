@@ -25,7 +25,7 @@ export default function ForgotPasswordForm() {
         const data = await res.json();
         setError(data.error || '請稍後再試');
       }
-      } catch (_e) {
+      } catch {
       setError('網絡錯誤，請稍後再試');
     } finally {
       setLoading(false);

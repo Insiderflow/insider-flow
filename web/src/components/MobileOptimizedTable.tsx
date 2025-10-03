@@ -24,7 +24,7 @@ interface MobileOptimizedTableProps<RowT extends object> {
 export default function MobileOptimizedTable<RowT extends object>({ 
   columns, 
   data, 
-  className: _className = "", 
+  className: _className = "", // eslint-disable-line @typescript-eslint/no-unused-vars 
   onSort, 
   sortKey, 
   sortOrder,

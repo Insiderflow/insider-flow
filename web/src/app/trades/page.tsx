@@ -55,7 +55,8 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
   
   // When sorting by published_at, exclude trades with null published dates
   if (sortKey === 'published_at') {
-    where.published_at = { not: null };
+    where.AND = where.AND || [];
+    where.AND.push({ published_at: { not: null } });
   }
 
   // Fetch page of trades

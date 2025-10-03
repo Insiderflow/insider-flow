@@ -60,7 +60,7 @@ export default function EmailNotificationSettings() {
         // Revert the change
         setSettings(settings);
       }
-    } catch (error) {
+    } catch {
       setMessage('儲存失敗，請重試');
       // Revert the change
       setSettings(settings);

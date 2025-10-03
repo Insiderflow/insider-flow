@@ -10,7 +10,7 @@ type Row = { id: string; name: string; party: string | null; chamber: string | n
 
 export default async function PoliticiansPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   const sp = await searchParams;
-  const user = await getSessionUser();
+  const _user = await getSessionUser();
   const chamber = typeof sp.chamber === 'string' ? sp.chamber : '';
   const searchName = typeof sp.name === 'string' ? sp.name : '';
   const allowedSort = new Set(['name', 'trades', 'issuers', 'volume']);
@@ -147,7 +147,7 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
   });
 
   // Get volume data for each politician (only if not already calculated for volume sorting)
-  let volumeMap = new Map<string, number>();
+  const volumeMap = new Map<string, number>();
   if (sortKey !== 'volume') {
     const volumeData = await prisma.trade.groupBy({
       by: ['politician_id'],

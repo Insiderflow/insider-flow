@@ -41,7 +41,7 @@ export default function LoginForm({ next }: LoginFormProps) {
           setUnverified(false);
         }
       }
-    } catch (_err) {
+    } catch {
       setError('Network error');
     } finally {
       setIsLoading(false);
@@ -63,7 +63,7 @@ export default function LoginForm({ next }: LoginFormProps) {
         const data = await res.json();
         setResendMsg(data.error || 'Failed to resend. Try again later.');
       }
-    } catch (_e) {
+    } catch {
       setResendMsg('Network error. Try again later.');
     } finally {
       setResending(false);
