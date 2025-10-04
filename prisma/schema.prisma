@@ -27,7 +27,10 @@ model Issuer {
   country   String?
   createdAt DateTime @default(now()) @map("created_at")
   trades    Trade[]
+  holdings13F Holdings13F[]
+  priceHistory PriceHistory[]
 
+  @@unique([ticker])
   @@index([ticker])
 }
 
@@ -118,4 +121,201 @@ model Watchlist {
   @@unique([userId, politicianId])
   @@index([userId])
   @@index([politicianId])
+}
+
+// SEC EDGAR Filing Models
+model SECFiling {
+  id                String   @id @default(cuid())
+  accessionNumber   String   @unique @map("accession_number")
+  cik               String
+  companyName       String   @map("company_name")
+  formType          String   @map("form_type") // 13F, 13D, 13G, 4
+  filingDate        DateTime @map("filing_date")
+  documentUrl       String?  @map("document_url")
+  htmlUrl           String?  @map("html_url")
+  txtUrl            String?  @map("txt_url")
+  xbrlUrl           String?  @map("xbrl_url")
+  rawData           Json?    @map("raw_data")
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
+  
+  // Relations
+  holdings13F       Holdings13F[]
+  ownership13D      Ownership13D[]
+  insiderTrades     InsiderTrade[]
+  fund              Fund?    @relation(fields: [cik], references: [cik])
+  
+  @@index([cik])
+  @@index([formType])
+  @@index([filingDate(sort: Desc)])
+  @@index([companyName])
+}
+
+model Holdings13F {
+  id                String   @id @default(cuid())
+  filingId          String   @map("filing_id")
+  symbol            String
+  companyName       String   @map("company_name")
+  cusip             String?
+  sharesHeld        BigInt   @map("shares_held")
+  marketValue       Decimal  @map("market_value")
+  percentOfPortfolio Decimal @map("percent_of_portfolio")
+  percentOfClass    Decimal? @map("percent_of_class")
+  sharesHeldPrior   BigInt?  @map("shares_held_prior")
+  sharesChange      BigInt?  @map("shares_change")
+  sharesChangePct   Decimal? @map("shares_change_pct")
+  isNewPosition     Boolean  @default(false) @map("is_new_position")
+  isClosedPosition  Boolean  @default(false) @map("is_closed_position")
+  isIncreased       Boolean  @default(false) @map("is_increased")
+  isDecreased       Boolean  @default(false) @map("is_decreased")
+  isOptions         Boolean  @default(false) @map("is_options")
+  callsPuts         Json?    @map("calls_puts")
+  sector            String?
+  industry          String?
+  marketCap         Decimal? @map("market_cap")
+  peRatio           Decimal? @map("pe_ratio")
+  dividendYield     Decimal? @map("dividend_yield")
+  createdAt         DateTime @default(now()) @map("created_at")
+  
+  // Relations
+  filing            SECFiling @relation(fields: [filingId], references: [id], onDelete: Cascade)
+  issuer            Issuer?   @relation(fields: [symbol], references: [ticker])
+  
+  @@index([filingId])
+  @@index([symbol])
+  @@index([isNewPosition])
+  @@index([isClosedPosition])
+  @@index([marketValue(sort: Desc)])
+}
+
+model Ownership13D {
+  id                    String   @id @default(cuid())
+  filingId              String   @map("filing_id")
+  ownershipType         String   @map("ownership_type") // Activist, Passive
+  purpose               String?
+  sharesOwned           BigInt   @map("shares_owned")
+  sharesOwnedPrior      BigInt?  @map("shares_owned_prior")
+  ownershipPercentage   Decimal  @map("ownership_percentage")
+  ownershipPercentagePrior Decimal? @map("ownership_percentage_prior")
+  votingPower           Decimal? @map("voting_power")
+  dispositivePower      Decimal? @map("dispositive_power")
+  sharesBeneficiallyOwned BigInt? @map("shares_beneficially_owned")
+  sharesSoleVoting      BigInt?  @map("shares_sole_voting")
+  sharesSharedVoting    BigInt?  @map("shares_shared_voting")
+  sharesSoleDispositive BigInt?  @map("shares_sole_dispositive")
+  sharesSharedDispositive BigInt? @map("shares_shared_dispositive")
+  purposeCategory       String?  @map("purpose_category")
+  sharesChange          BigInt?  @map("shares_change")
+  sharesChangePct       Decimal? @map("shares_change_pct")
+  ownershipChange       Decimal? @map("ownership_change")
+  ownershipChangePct    Decimal? @map("ownership_change_pct")
+  isIncreased           Boolean  @default(false) @map("is_increased")
+  isDecreased           Boolean  @default(false) @map("is_decreased")
+  isNewPosition         Boolean  @default(false) @map("is_new_position")
+  isClosedPosition      Boolean  @default(false) @map("is_closed_position")
+  createdAt             DateTime @default(now()) @map("created_at")
+  
+  // Relations
+  filing                SECFiling @relation(fields: [filingId], references: [id], onDelete: Cascade)
+  
+  @@index([filingId])
+  @@index([ownershipType])
+  @@index([sharesOwned(sort: Desc)])
+}
+
+model InsiderTrade {
+  id                    String   @id @default(cuid())
+  filingId              String   @map("filing_id")
+  insiderName           String   @map("insider_name")
+  insiderTitle          String?  @map("insider_title")
+  insiderRelationship   String?  @map("insider_relationship")
+  transactionCode       String?  @map("transaction_code")
+  transactionDate       DateTime? @map("transaction_date")
+  sharesTraded          BigInt   @map("shares_traded")
+  pricePerShare         Decimal? @map("price_per_share")
+  totalValue            Decimal? @map("total_value")
+  ownershipAfter        BigInt?  @map("ownership_after")
+  ownershipAfterPercent Decimal? @map("ownership_after_percent")
+  sharesUnderlying      BigInt?  @map("shares_underlying")
+  exercisePrice         Decimal? @map("exercise_price")
+  expirationDate        DateTime? @map("expiration_date")
+  underlyingSecurity    String?  @map("underlying_security")
+  transactionNature     String?  @map("transaction_nature")
+  acquisitionDisposition String? @map("acquisition_disposition")
+  amountCode            String?  @map("amount_code")
+  equitySwap            Boolean  @default(false) @map("equity_swap")
+  sharesHeldDirectly    BigInt?  @map("shares_held_directly")
+  sharesHeldIndirectly  BigInt?  @map("shares_held_indirectly")
+  transactionCategory   String?  @map("transaction_category")
+  calculatedTotalValue  Decimal? @map("calculated_total_value")
+  isAcquisition         Boolean  @default(false) @map("is_acquisition")
+  isDisposition         Boolean  @default(false) @map("is_disposition")
+  tradeSizeCategory     String?  @map("trade_size_category")
+  priceCategory         String?  @map("price_category")
+  ownershipImpact       String?  @map("ownership_impact")
+  createdAt             DateTime @default(now()) @map("created_at")
+  
+  // Relations
+  filing                SECFiling @relation(fields: [filingId], references: [id], onDelete: Cascade)
+  
+  @@index([filingId])
+  @@index([insiderName])
+  @@index([transactionCode])
+  @@index([transactionDate(sort: Desc)])
+  @@index([sharesTraded(sort: Desc)])
+}
+
+model Fund {
+  id                String   @id @default(cuid())
+  cik               String   @unique
+  name              String
+  fundType          String?  @map("fund_type") // Hedge Fund, Mutual Fund, ETF, etc.
+  aum               Decimal? // Assets Under Management
+  fundRating        Int?     @map("fund_rating") // 1-5 scale
+  totalHoldings     Int?     @map("total_holdings")
+  totalPortfolioValue Decimal? @map("total_portfolio_value")
+  averagePositionSize Decimal? @map("average_position_size")
+  largestPosition   Decimal? @map("largest_position")
+  largestPositionSymbol String? @map("largest_position_symbol")
+  concentrationRisk Decimal? @map("concentration_risk")
+  diversificationScore Decimal? @map("diversification_score")
+  portfolioChangePct Decimal? @map("portfolio_change_pct")
+  newPositions      Int?     @map("new_positions")
+  closedPositions   Int?     @map("closed_positions")
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
+  
+  // Relations
+  filings           SECFiling[]
+  
+  @@index([cik])
+  @@index([name])
+  @@index([fundRating])
+  @@index([aum(sort: Desc)])
+}
+
+model PriceHistory {
+  id                String   @id @default(cuid())
+  symbol            String
+  date              DateTime
+  open              Decimal?
+  high              Decimal?
+  low               Decimal?
+  close             Decimal
+  volume            BigInt?
+  adjustedClose     Decimal? @map("adjusted_close")
+  priceChange1d     Decimal? @map("price_change_1d")
+  priceChange1w     Decimal? @map("price_change_1w")
+  priceChange1m     Decimal? @map("price_change_1m")
+  volumeAvg30d      Decimal? @map("volume_avg_30d")
+  high52w           Decimal? @map("high_52w")
+  low52w            Decimal? @map("low_52w")
+  createdAt         DateTime @default(now()) @map("created_at")
+  
+  // Relations
+  issuer            Issuer?  @relation(fields: [symbol], references: [ticker])
+  
+  @@unique([symbol, date])
+  @@index([symbol])
+  @@index([date(sort: Desc)])
 }
