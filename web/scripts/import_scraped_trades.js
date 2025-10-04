@@ -6,9 +6,6 @@ const path = require('path');
 
 const prisma = new PrismaClient();
 
-// Import notification functions
-const { processNewTrade } = require('../src/lib/notificationService');
-
 async function importScrapedTrades() {
   try {
     console.log('🚀 Starting import of scraped trades...');
@@ -125,19 +122,6 @@ async function importScrapedTrades() {
             }
           });
           imported++;
-          
-          // Send notifications for new trades
-          try {
-            await processNewTrade({
-              politician: { name: trade.politicianName, id: trade.politicianId },
-              issuer: { name: trade.issuerName },
-              type: trade.type,
-              tradedAt: trade.tradedAt
-            });
-          } catch (notificationError) {
-            console.error('❌ Notification failed for trade:', trade.tradeId, notificationError.message);
-            // Don't fail the import if notifications fail
-          }
         }
         
         console.log(`✅ Processed: ${trade.politicianName} - ${trade.type} - ${trade.issuerName} - ${new Date(trade.tradedAt).toISOString().split('T')[0]}`);

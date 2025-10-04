@@ -50,8 +50,13 @@ async function scrapeTrades() {
             // Extract issuer name and ticker symbol
             const issuerRaw = cells[1].textContent.trim();
             const tickerMatch = issuerRaw.match(/(.+?)([A-Z]{1,5}):US$/);
-            const issuerName = tickerMatch ? tickerMatch[1].trim() : issuerRaw;
+            let issuerName = tickerMatch ? tickerMatch[1].trim() : issuerRaw;
             const ticker = tickerMatch ? tickerMatch[2] : null;
+            
+            // Clean up issuer name - remove any N/A suffix
+            if (issuerName.endsWith('N/A')) {
+              issuerName = issuerName.replace(/N\/A$/, '').trim();
+            }
             const publishedAt = cells[2].textContent.trim();
             const tradedAt = cells[3].textContent.trim();
             const owner = cells[5].textContent.trim();
