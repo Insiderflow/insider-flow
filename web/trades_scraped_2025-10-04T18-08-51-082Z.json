@@ -1,6 +1,6 @@
 [
   {
-    "tradeId": "trade_D000628_432796_1759601083465_nxgvg3",
+    "tradeId": "trade_D000628_432796_1759601316823_1nv5y4",
     "politicianId": "D000628",
     "politicianName": "Neal Dunn",
     "politicianChamber": null,
@@ -19,12 +19,12 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_B001292_2332863_1759601083466_w3baz5",
+    "tradeId": "trade_B001292_2332863_1759601316823_6i4j33",
     "politicianId": "B001292",
     "politicianName": "Don Beyer",
     "politicianChamber": null,
     "issuerId": "2332863",
-    "issuerName": "MASSACHUSETTS SCHOOL BUILDING AUTHORITYN/A",
+    "issuerName": "MASSACHUSETTS SCHOOL BUILDING AUTHORITY",
     "ticker": null,
     "publishedAt": "2025-10-01T16:00:00.000Z",
     "tradedAt": "2025-09-17T16:00:00.000Z",
@@ -38,7 +38,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_M001190_435765_1759601083466_nu3nox",
+    "tradeId": "trade_M001190_435765_1759601316824_y9fgb0",
     "politicianId": "M001190",
     "politicianName": "Markwayne Mullin",
     "politicianChamber": null,
@@ -57,7 +57,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_M001190_435765_1759601083466_ujegxy",
+    "tradeId": "trade_M001190_435765_1759601316824_u8lrnh",
     "politicianId": "M001190",
     "politicianName": "Markwayne Mullin",
     "politicianChamber": null,
@@ -76,7 +76,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_M001190_435765_1759601083466_suuc95",
+    "tradeId": "trade_M001190_435765_1759601316824_i7hf9o",
     "politicianId": "M001190",
     "politicianName": "Markwayne Mullin",
     "politicianChamber": null,
@@ -95,7 +95,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_M001190_429495_1759601083466_l279zj",
+    "tradeId": "trade_M001190_429495_1759601316824_4gpjdc",
     "politicianId": "M001190",
     "politicianName": "Markwayne Mullin",
     "politicianChamber": null,
@@ -114,7 +114,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_M001190_435467_1759601083466_n5d4cl",
+    "tradeId": "trade_M001190_435467_1759601316824_lh4i3q",
     "politicianId": "M001190",
     "politicianName": "Markwayne Mullin",
     "politicianChamber": null,
@@ -133,7 +133,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_M001190_434658_1759601083466_d6fdyw",
+    "tradeId": "trade_M001190_434658_1759601316824_lsuh1y",
     "politicianId": "M001190",
     "politicianName": "Markwayne Mullin",
     "politicianChamber": null,
@@ -152,7 +152,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_M001190_432490_1759601083466_5uy8wz",
+    "tradeId": "trade_M001190_432490_1759601316824_6g9v5o",
     "politicianId": "M001190",
     "politicianName": "Markwayne Mullin",
     "politicianChamber": null,
@@ -171,7 +171,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_M001190_429469_1759601083466_t2wm8k",
+    "tradeId": "trade_M001190_429469_1759601316824_tdqeec",
     "politicianId": "M001190",
     "politicianName": "Markwayne Mullin",
     "politicianChamber": null,
@@ -190,7 +190,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_M001190_432491_1759601083467_tkx39i",
+    "tradeId": "trade_M001190_432491_1759601316824_3mgco0",
     "politicianId": "M001190",
     "politicianName": "Markwayne Mullin",
     "politicianChamber": null,
@@ -209,7 +209,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_M001190_435219_1759601083467_xiazoh",
+    "tradeId": "trade_M001190_435219_1759601316824_dtluas",
     "politicianId": "M001190",
     "politicianName": "Markwayne Mullin",
     "politicianChamber": null,
@@ -228,12 +228,12 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_M001190_2335188_1759601088156_fki9ah",
+    "tradeId": "trade_M001190_2335188_1759601319992_hfirfl",
     "politicianId": "M001190",
     "politicianName": "Markwayne Mullin",
     "politicianChamber": null,
     "issuerId": "2335188",
-    "issuerName": "ISHARES US HEALTHCARE PRVDRSN/A",
+    "issuerName": "ISHARES US HEALTHCARE PRVDRS",
     "ticker": null,
     "publishedAt": "2025-10-01T16:00:00.000Z",
     "tradedAt": "2025-09-23T16:00:00.000Z",
@@ -247,7 +247,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_F000110_429622_1759601088156_8961qh",
+    "tradeId": "trade_F000110_429622_1759601319992_vg8f7j",
     "politicianId": "F000110",
     "politicianName": "Cleo Fields",
     "politicianChamber": null,
@@ -266,7 +266,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_F000110_429622_1759601088156_txs5xb",
+    "tradeId": "trade_F000110_429622_1759601319992_d2cgb8",
     "politicianId": "F000110",
     "politicianName": "Cleo Fields",
     "politicianChamber": null,
@@ -285,7 +285,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_F000110_429622_1759601088156_43qtcp",
+    "tradeId": "trade_F000110_429622_1759601319992_6k5u52",
     "politicianId": "F000110",
     "politicianName": "Cleo Fields",
     "politicianChamber": null,
@@ -304,7 +304,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_F000110_429622_1759601088156_oh9eg1",
+    "tradeId": "trade_F000110_429622_1759601319992_b2e26p",
     "politicianId": "F000110",
     "politicianName": "Cleo Fields",
     "politicianChamber": null,
@@ -323,7 +323,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_F000110_429648_1759601088156_c5o4qf",
+    "tradeId": "trade_F000110_429648_1759601319992_bdqtz3",
     "politicianId": "F000110",
     "politicianName": "Cleo Fields",
     "politicianChamber": null,
@@ -342,7 +342,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_F000110_429648_1759601088156_tkr1ly",
+    "tradeId": "trade_F000110_429648_1759601319992_vatmgj",
     "politicianId": "F000110",
     "politicianName": "Cleo Fields",
     "politicianChamber": null,
@@ -361,7 +361,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_F000110_429648_1759601088156_nej9dt",
+    "tradeId": "trade_F000110_429648_1759601319992_ay78yu",
     "politicianId": "F000110",
     "politicianName": "Cleo Fields",
     "politicianChamber": null,
@@ -380,7 +380,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_F000110_429789_1759601088156_ckwauj",
+    "tradeId": "trade_F000110_429789_1759601319992_c4uc6y",
     "politicianId": "F000110",
     "politicianName": "Cleo Fields",
     "politicianChamber": null,
@@ -399,7 +399,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_F000110_429789_1759601088156_9z482s",
+    "tradeId": "trade_F000110_429789_1759601319992_390dyp",
     "politicianId": "F000110",
     "politicianName": "Cleo Fields",
     "politicianChamber": null,
@@ -418,7 +418,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_F000110_430239_1759601088156_bm4mnf",
+    "tradeId": "trade_F000110_430239_1759601319992_9dgi2q",
     "politicianId": "F000110",
     "politicianName": "Cleo Fields",
     "politicianChamber": null,
@@ -437,7 +437,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_F000110_2335114_1759601088157_q0opil",
+    "tradeId": "trade_F000110_2335114_1759601319992_u2ivnn",
     "politicianId": "F000110",
     "politicianName": "Cleo Fields",
     "politicianChamber": null,
@@ -456,7 +456,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_F000110_433279_1759601092950_8jqrkp",
+    "tradeId": "trade_F000110_433279_1759601323107_veioc1",
     "politicianId": "F000110",
     "politicianName": "Cleo Fields",
     "politicianChamber": null,
@@ -475,7 +475,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_F000110_431610_1759601092950_tal2uz",
+    "tradeId": "trade_F000110_431610_1759601323108_olclc0",
     "politicianId": "F000110",
     "politicianName": "Cleo Fields",
     "politicianChamber": null,
@@ -494,7 +494,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_F000110_431610_1759601092951_0a9v05",
+    "tradeId": "trade_F000110_431610_1759601323108_h3ywsb",
     "politicianId": "F000110",
     "politicianName": "Cleo Fields",
     "politicianChamber": null,
@@ -513,7 +513,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_F000110_433770_1759601092951_5lju7d",
+    "tradeId": "trade_F000110_433770_1759601323108_r8o53b",
     "politicianId": "F000110",
     "politicianName": "Cleo Fields",
     "politicianChamber": null,
@@ -532,7 +532,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_F000110_2334373_1759601092951_424wnm",
+    "tradeId": "trade_F000110_2334373_1759601323108_9vtmwy",
     "politicianId": "F000110",
     "politicianName": "Cleo Fields",
     "politicianChamber": null,
@@ -551,7 +551,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_F000110_433865_1759601092951_mskhro",
+    "tradeId": "trade_F000110_433865_1759601323108_0njubt",
     "politicianId": "F000110",
     "politicianName": "Cleo Fields",
     "politicianChamber": null,
@@ -570,7 +570,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_F000110_433865_1759601092951_nki5i3",
+    "tradeId": "trade_F000110_433865_1759601323108_k377hc",
     "politicianId": "F000110",
     "politicianName": "Cleo Fields",
     "politicianChamber": null,
@@ -589,7 +589,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_F000110_433865_1759601092951_rjggzv",
+    "tradeId": "trade_F000110_433865_1759601323108_s8bffk",
     "politicianId": "F000110",
     "politicianName": "Cleo Fields",
     "politicianChamber": null,
@@ -608,7 +608,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_F000110_434275_1759601092951_c3znxt",
+    "tradeId": "trade_F000110_434275_1759601323108_64u1hh",
     "politicianId": "F000110",
     "politicianName": "Cleo Fields",
     "politicianChamber": null,
@@ -627,7 +627,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_F000110_435432_1759601092951_tk5658",
+    "tradeId": "trade_F000110_435432_1759601323108_qehq8b",
     "politicianId": "F000110",
     "politicianName": "Cleo Fields",
     "politicianChamber": null,
@@ -646,7 +646,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_G000596_429495_1759601092951_tbudmf",
+    "tradeId": "trade_G000596_429495_1759601323108_mh8avy",
     "politicianId": "G000596",
     "politicianName": "Marjorie Taylor Greene",
     "politicianChamber": null,
@@ -665,7 +665,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_G000596_429622_1759601092951_50t2be",
+    "tradeId": "trade_G000596_429622_1759601323108_u7rr7r",
     "politicianId": "G000596",
     "politicianName": "Marjorie Taylor Greene",
     "politicianChamber": null,
@@ -684,7 +684,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_G000596_429725_1759601097264_1p6gsk",
+    "tradeId": "trade_G000596_429725_1759601326079_cg5vfu",
     "politicianId": "G000596",
     "politicianName": "Marjorie Taylor Greene",
     "politicianChamber": null,
@@ -703,7 +703,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_G000596_429867_1759601097264_9uu5c1",
+    "tradeId": "trade_G000596_429867_1759601326080_czvliw",
     "politicianId": "G000596",
     "politicianName": "Marjorie Taylor Greene",
     "politicianChamber": null,
@@ -722,12 +722,12 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_G000596_431121_1759601097264_ju8nkx",
+    "tradeId": "trade_G000596_431121_1759601326080_7eiq4i",
     "politicianId": "G000596",
     "politicianName": "Marjorie Taylor Greene",
     "politicianChamber": null,
     "issuerId": "431121",
-    "issuerName": "CrowdStrike Holdings IncN/A",
+    "issuerName": "CrowdStrike Holdings Inc",
     "ticker": null,
     "publishedAt": "2025-09-28T16:00:00.000Z",
     "tradedAt": "2025-09-10T16:00:00.000Z",
@@ -741,7 +741,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_G000596_431282_1759601097264_kjhnsx",
+    "tradeId": "trade_G000596_431282_1759601326080_tyea3q",
     "politicianId": "G000596",
     "politicianName": "Marjorie Taylor Greene",
     "politicianChamber": null,
@@ -760,7 +760,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_G000596_431367_1759601097264_5cqu6p",
+    "tradeId": "trade_G000596_431367_1759601326080_4ueyi1",
     "politicianId": "G000596",
     "politicianName": "Marjorie Taylor Greene",
     "politicianChamber": null,
@@ -779,7 +779,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_G000596_432035_1759601097264_d9lgwd",
+    "tradeId": "trade_G000596_432035_1759601326080_7m2d5s",
     "politicianId": "G000596",
     "politicianName": "Marjorie Taylor Greene",
     "politicianChamber": null,
@@ -798,12 +798,12 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_G000596_2334874_1759601097264_jq7nbt",
+    "tradeId": "trade_G000596_2334874_1759601326080_26ykfu",
     "politicianId": "G000596",
     "politicianName": "Marjorie Taylor Greene",
     "politicianChamber": null,
     "issuerId": "2334874",
-    "issuerName": "ISHARES BITCOIN TRUST ETFN/A",
+    "issuerName": "ISHARES BITCOIN TRUST ETF",
     "ticker": null,
     "publishedAt": "2025-09-28T16:00:00.000Z",
     "tradedAt": "2025-09-10T16:00:00.000Z",
@@ -817,7 +817,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_G000596_433469_1759601097264_sf75gg",
+    "tradeId": "trade_G000596_433469_1759601326080_dri2rb",
     "politicianId": "G000596",
     "politicianName": "Marjorie Taylor Greene",
     "politicianChamber": null,
@@ -836,12 +836,12 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_G000596_435544_1759601097264_pnxgbl",
+    "tradeId": "trade_G000596_435544_1759601326080_8yfmkp",
     "politicianId": "G000596",
     "politicianName": "Marjorie Taylor Greene",
     "politicianChamber": null,
     "issuerId": "435544",
-    "issuerName": "US TREASURY BILLSN/A",
+    "issuerName": "US TREASURY BILLS",
     "ticker": null,
     "publishedAt": "2025-09-28T16:00:00.000Z",
     "tradedAt": "2025-09-10T16:00:00.000Z",
@@ -855,12 +855,12 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_D000617_430720_1759601097264_hdni51",
+    "tradeId": "trade_D000617_430720_1759601326080_8lhg9d",
     "politicianId": "D000617",
     "politicianName": "Suzan DelBene",
     "politicianChamber": null,
     "issuerId": "430720",
-    "issuerName": "CITY OF OKLAHOMA CITYN/A",
+    "issuerName": "CITY OF OKLAHOMA CITY",
     "ticker": null,
     "publishedAt": "2025-09-28T16:00:00.000Z",
     "tradedAt": "2025-09-11T16:00:00.000Z",
@@ -874,12 +874,12 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_D000617_2335187_1759601097264_4bx39z",
+    "tradeId": "trade_D000617_2335187_1759601326080_bqczfv",
     "politicianId": "D000617",
     "politicianName": "Suzan DelBene",
     "politicianChamber": null,
     "issuerId": "2335187",
-    "issuerName": "ENERGY SOUTHEAST A COOPERATIVE DISTRICTN/A",
+    "issuerName": "ENERGY SOUTHEAST A COOPERATIVE DISTRICT",
     "ticker": null,
     "publishedAt": "2025-09-28T16:00:00.000Z",
     "tradedAt": "2025-09-11T16:00:00.000Z",
@@ -893,12 +893,12 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_D000617_2335186_1759601097264_3ezsa4",
+    "tradeId": "trade_D000617_2335186_1759601326080_asvh20",
     "politicianId": "D000617",
     "politicianName": "Suzan DelBene",
     "politicianChamber": null,
     "issuerId": "2335186",
-    "issuerName": "TENNESSEE ENERGY ACQUISITION CORPORATIONN/A",
+    "issuerName": "TENNESSEE ENERGY ACQUISITION CORPORATION",
     "ticker": null,
     "publishedAt": "2025-09-28T16:00:00.000Z",
     "tradedAt": "2025-09-09T16:00:00.000Z",
@@ -912,7 +912,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_M001157_432162_1759601101748_d3itjn",
+    "tradeId": "trade_M001157_432162_1759601329075_rse3iv",
     "politicianId": "M001157",
     "politicianName": "Michael McCaul",
     "politicianChamber": null,
@@ -931,7 +931,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_M001157_431265_1759601101748_fxel7o",
+    "tradeId": "trade_M001157_431265_1759601329075_sg8emu",
     "politicianId": "M001157",
     "politicianName": "Michael McCaul",
     "politicianChamber": null,
@@ -950,7 +950,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_M001157_431265_1759601101748_872giz",
+    "tradeId": "trade_M001157_431265_1759601329075_hnxl1t",
     "politicianId": "M001157",
     "politicianName": "Michael McCaul",
     "politicianChamber": null,
@@ -969,7 +969,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_M001157_431265_1759601101748_z4s6wq",
+    "tradeId": "trade_M001157_431265_1759601329076_ofd57o",
     "politicianId": "M001157",
     "politicianName": "Michael McCaul",
     "politicianChamber": null,
@@ -988,7 +988,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_M001157_431265_1759601101748_jw9wgl",
+    "tradeId": "trade_M001157_431265_1759601329076_bjwt91",
     "politicianId": "M001157",
     "politicianName": "Michael McCaul",
     "politicianChamber": null,
@@ -1007,7 +1007,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_M001157_435639_1759601101748_2hkgei",
+    "tradeId": "trade_M001157_435639_1759601329076_4el0ky",
     "politicianId": "M001157",
     "politicianName": "Michael McCaul",
     "politicianChamber": null,
@@ -1026,7 +1026,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_M001157_435639_1759601101748_xykijt",
+    "tradeId": "trade_M001157_435639_1759601329076_wz41kd",
     "politicianId": "M001157",
     "politicianName": "Michael McCaul",
     "politicianChamber": null,
@@ -1045,7 +1045,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_M001157_435639_1759601101748_vxz5ct",
+    "tradeId": "trade_M001157_435639_1759601329076_tulm77",
     "politicianId": "M001157",
     "politicianName": "Michael McCaul",
     "politicianChamber": null,
@@ -1064,7 +1064,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_M001157_435639_1759601101748_sylxmf",
+    "tradeId": "trade_M001157_435639_1759601329076_i18hye",
     "politicianId": "M001157",
     "politicianName": "Michael McCaul",
     "politicianChamber": null,
@@ -1083,7 +1083,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_M001157_435639_1759601101748_0pckfv",
+    "tradeId": "trade_M001157_435639_1759601329076_86syer",
     "politicianId": "M001157",
     "politicianName": "Michael McCaul",
     "politicianChamber": null,
@@ -1102,7 +1102,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_M001157_432162_1759601101748_ohjzh2",
+    "tradeId": "trade_M001157_432162_1759601329076_0q6j7w",
     "politicianId": "M001157",
     "politicianName": "Michael McCaul",
     "politicianChamber": null,
@@ -1121,7 +1121,7 @@
     "detailUrl": null
   },
   {
-    "tradeId": "trade_M001157_2301564_1759601101748_xt6iuy",
+    "tradeId": "trade_M001157_2301564_1759601329076_d600jb",
     "politicianId": "M001157",
     "politicianName": "Michael McCaul",
     "politicianChamber": null,
