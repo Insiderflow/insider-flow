@@ -202,7 +202,7 @@ export default async function IssuerDetailPage({
           <IssuerTimelineChart 
             trades={allTrades?.map(trade => ({
               id: trade.id,
-              traded_at: trade.traded_at,
+              traded_at: trade.traded_at.toISOString(),
               type: trade.type as 'buy' | 'sell' | 'exchange',
               politician: {
                 id: trade.Politician.id,

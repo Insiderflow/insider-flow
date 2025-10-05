@@ -43,21 +43,13 @@ interface DailyData {
 
 export default function IssuerTimelineChart({ trades, issuerName }: IssuerTimelineChartProps) {
   const [hoveredPoint, setHoveredPoint] = useState<ChartPoint | null>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const chartRef = useRef<HTMLDivElement>(null);
   const [chartPoints, setChartPoints] = useState<ChartPoint[]>([]);
 
-  // Add error handling for invalid data
-  if (!trades || !Array.isArray(trades)) {
-    return (
-      <div className="bg-gray-800 border border-gray-600 rounded-lg p-8 text-center">
-        <p className="text-gray-400">無法載入交易數據</p>
-      </div>
-    );
-  }
-
   // Process data to create daily aggregates
   const processData = () => {
+    if (!trades || !Array.isArray(trades)) return [];
+    
     const tradesByDate = trades.reduce((acc, trade) => {
       try {
         const date = new Date(trade.traded_at);
@@ -139,6 +131,15 @@ export default function IssuerTimelineChart({ trades, issuerName }: IssuerTimeli
 
     setChartPoints(points);
   }, [dailyData]);
+
+  // Add error handling for invalid data
+  if (!trades || !Array.isArray(trades)) {
+    return (
+      <div className="bg-gray-800 border border-gray-600 rounded-lg p-8 text-center">
+        <p className="text-gray-400">無法載入交易數據</p>
+      </div>
+    );
+  }
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!chartRef.current || chartPoints.length === 0) return;
