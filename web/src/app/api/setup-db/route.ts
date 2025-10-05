@@ -1,17 +1,17 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import { execSync } from 'child_process';
 
 const prisma = new PrismaClient();
 
-export async function POST(_request: NextRequest) {
+export async function POST() {
   try {
     // First, try to run migrations
     console.log('Running Prisma migrations...');
     try {
       execSync('npx prisma migrate deploy', { stdio: 'inherit' });
       console.log('Prisma migrations completed successfully');
-    } catch (migrateError) {
+    } catch {
       console.log('Migration failed, trying to push schema directly...');
       // If migrations fail, try to push the schema directly
       execSync('npx prisma db push', { stdio: 'inherit' });

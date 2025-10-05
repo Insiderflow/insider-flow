@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { getCurrentLanguage, setLanguage, type Language } from '@/lib/languageUtils';
 
 export default function LanguageToggle() {

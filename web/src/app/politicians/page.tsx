@@ -10,7 +10,7 @@ type Row = { id: string; name: string; party: string | null; chamber: string | n
 
 export default async function PoliticiansPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   const sp = await searchParams;
-  const _user = await getSessionUser();
+  await getSessionUser();
   const chamber = typeof sp.chamber === 'string' ? sp.chamber : '';
   const searchName = typeof sp.name === 'string' ? sp.name : '';
   const allowedSort = new Set(['name', 'trades', 'issuers', 'volume']);
@@ -81,7 +81,7 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
     politicians = sortedPoliticians.slice((page - 1) * pageSize, page * pageSize);
   } else {
     // For other sorting fields, use database sorting
-    const orderBy: any = {};
+    const orderBy: Record<string, any> = {};
     if (sortKey === 'trades') {
       orderBy.Trade = { _count: order };
     } else if (sortKey === 'name') {

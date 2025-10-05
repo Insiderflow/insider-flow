@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { getSessionUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { cookies } from 'next/headers';
 
-export async function POST(_request: NextRequest) {
+export async function POST() {
   try {
     const user = await getSessionUser();
     if (!user) {

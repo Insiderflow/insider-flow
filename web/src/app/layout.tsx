@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Script from "next/script";
 import { getSessionUser } from '@/lib/auth';
 import LanguageToggle from '@/components/LanguageToggle';
 import LanguageInitializer from '@/components/LanguageInitializer';
@@ -34,8 +35,9 @@ export default async function RootLayout({
     <html lang="zh-Hant" suppressHydrationWarning>
       <head>
         {/* Google tag (gtag.js) */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XNQRFHM8EV"></script>
-        <script
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-XNQRFHM8EV" />
+        <Script
+          id="google-analytics"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
@@ -72,6 +74,14 @@ export default async function RootLayout({
                 <Link className="text-white hover:text-blue-300 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none rounded transition-colors duration-200" href="/issuers" aria-label="Issuers page">
                   <span className="zh-Hant">發行商</span>
                   <span className="zh-Hans hidden">发行商</span>
+                </Link>
+                <Link className="text-white hover:text-blue-300 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none rounded transition-colors duration-200" href="/institutional" aria-label="Institutional page">
+                  <span className="zh-Hant">企業</span>
+                  <span className="zh-Hans hidden">企业</span>
+                </Link>
+                <Link className="text-white hover:text-blue-300 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none rounded transition-colors duration-200" href="/sec-data" aria-label="SEC Data page">
+                  <span className="zh-Hant">SEC數據</span>
+                  <span className="zh-Hans hidden">SEC数据</span>
                 </Link>
               </nav>
               

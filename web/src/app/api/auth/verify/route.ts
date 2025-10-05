@@ -10,13 +10,13 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'Verification token is required' }, { status: 400 });
     }
 
-    const user = await verifyEmail(token);
+    await verifyEmail(token);
 
     // Redirect to verification success page
     const baseUrl = process.env.NEXTAUTH_URL || 'https://insiderflow.asia';
     return NextResponse.redirect(new URL('/verification-success', baseUrl));
 
-  } catch (error) {
+  } catch {
     // Redirect to verification error page
     const baseUrl = process.env.NEXTAUTH_URL || 'https://insiderflow.asia';
     return NextResponse.redirect(new URL('/verification-error', baseUrl));

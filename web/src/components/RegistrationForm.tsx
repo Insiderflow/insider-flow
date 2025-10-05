@@ -7,7 +7,7 @@ interface RegistrationFormProps {
   next: string;
 }
 
-export default function RegistrationForm({ next: _next }: RegistrationFormProps) {
+export default function RegistrationForm({ next }: RegistrationFormProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
