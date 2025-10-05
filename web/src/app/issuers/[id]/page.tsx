@@ -64,6 +64,9 @@ export default async function IssuerDetailPage({
   const allTrades = await prisma.trade.findMany({
     where: { issuer_id: id },
     include: { Politician: true }
+  }).catch(error => {
+    console.error('Error fetching trades for issuer:', error);
+    return [];
   });
 
   const trades = issuer.Trade; // Current page trades
@@ -197,7 +200,7 @@ export default async function IssuerDetailPage({
         {/* Timeline Chart */}
         <div className="mb-6">
           <IssuerTimelineChart 
-            trades={allTrades.map(trade => ({
+            trades={allTrades?.map(trade => ({
               id: trade.id,
               traded_at: trade.traded_at,
               type: trade.type as 'buy' | 'sell' | 'exchange',
@@ -210,7 +213,7 @@ export default async function IssuerDetailPage({
               size_min: trade.size_min ? Number(trade.size_min) : undefined,
               size_max: trade.size_max ? Number(trade.size_max) : undefined,
               price: trade.price ? Number(trade.price) : undefined
-            }))}
+            })) || []}
             issuerName={issuer.name}
           />
         </div>

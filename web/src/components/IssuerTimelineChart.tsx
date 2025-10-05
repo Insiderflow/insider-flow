@@ -34,15 +34,32 @@ export default function IssuerTimelineChart({ trades, issuerName }: IssuerTimeli
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const chartRef = useRef<HTMLDivElement>(null);
 
+  // Add error handling for invalid data
+  if (!trades || !Array.isArray(trades)) {
+    return (
+      <div className="bg-gray-800 border border-gray-600 rounded-lg p-8 text-center">
+        <p className="text-gray-400">無法載入交易數據</p>
+      </div>
+    );
+  }
+
   // Group trades by date
   const tradesByDate = trades.reduce((acc, trade) => {
-    const date = new Date(trade.traded_at);
-    const dateKey = date.toISOString().split('T')[0];
-    
-    if (!acc[dateKey]) {
-      acc[dateKey] = [];
+    try {
+      const date = new Date(trade.traded_at);
+      if (isNaN(date.getTime())) {
+        console.warn('Invalid date for trade:', trade.traded_at);
+        return acc;
+      }
+      const dateKey = date.toISOString().split('T')[0];
+      
+      if (!acc[dateKey]) {
+        acc[dateKey] = [];
+      }
+      acc[dateKey].push(trade);
+    } catch (error) {
+      console.warn('Error processing trade date:', error);
     }
-    acc[dateKey].push(trade);
     
     return acc;
   }, {} as Record<string, TradeData[]>);
