@@ -97,19 +97,9 @@ export default function IssuerTimelineChart({ trades, issuerName }: IssuerTimeli
 
   const dailyData = processData();
 
-  // Debug logging
-  console.log('Timeline Chart Debug:', {
-    tradesCount: trades.length,
-    dailyDataCount: dailyData.length,
-    dailyData: dailyData.slice(0, 3) // First 3 entries for debugging
-  });
-
   // Calculate chart dimensions and positions
   useEffect(() => {
-    if (!chartRef.current || dailyData.length === 0) {
-      console.log('Timeline Chart: No data or ref, dailyData.length:', dailyData.length);
-      return;
-    }
+    if (!chartRef.current || dailyData.length === 0) return;
 
     const chartWidth = chartRef.current.offsetWidth;
     const chartHeight = 200;

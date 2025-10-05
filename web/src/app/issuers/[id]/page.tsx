@@ -69,19 +69,6 @@ export default async function IssuerDetailPage({
     return [];
   });
 
-  // Debug logging
-  console.log('Issuer Page Debug:', {
-    issuerId: id,
-    allTradesCount: allTrades.length,
-    sampleTrade: allTrades[0] ? {
-      id: allTrades[0].id,
-      traded_at: allTrades[0].traded_at,
-      type: allTrades[0].type,
-      politician: allTrades[0].Politician.name,
-      size_min: allTrades[0].size_min,
-      size_max: allTrades[0].size_max
-    } : null
-  });
 
   const trades = issuer.Trade; // Current page trades
   const politicians = new Set(allTrades.map(t => t.Politician.id)).size;
