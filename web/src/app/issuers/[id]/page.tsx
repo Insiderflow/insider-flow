@@ -5,6 +5,7 @@ import LoadingWrapper from '@/components/LoadingWrapper';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import PoliticianProfileImage from '@/components/PoliticianProfileImage';
 import IssuerTradesTable from '@/components/IssuerTradesTable';
+import IssuerTimelineChart from '@/components/IssuerTimelineChart';
 import WatchlistButton from '@/components/WatchlistButton';
 import { getSessionUser } from '@/lib/auth';
 
@@ -63,7 +64,11 @@ export default async function IssuerDetailPage({
   const allTrades = await prisma.trade.findMany({
     where: { issuer_id: id },
     include: { Politician: true }
+  }).catch(error => {
+    console.error('Error fetching trades for issuer:', error);
+    return [];
   });
+
 
   const trades = issuer.Trade; // Current page trades
   const politicians = new Set(allTrades.map(t => t.Politician.id)).size;
@@ -191,6 +196,27 @@ export default async function IssuerDetailPage({
               <div className="text-sm text-gray-400">最後交易</div>
             </div>
           </div>
+        </div>
+
+        {/* Timeline Chart */}
+        <div className="mb-6">
+          <IssuerTimelineChart 
+            trades={allTrades?.map(trade => ({
+              id: trade.id,
+              traded_at: trade.traded_at.toISOString(),
+              type: trade.type as 'buy' | 'sell' | 'exchange',
+              politician: {
+                id: trade.Politician.id,
+                name: trade.Politician.name,
+                party: trade.Politician.party,
+                chamber: trade.Politician.chamber
+              },
+              size_min: trade.size_min ? Number(trade.size_min) : undefined,
+              size_max: trade.size_max ? Number(trade.size_max) : undefined,
+              price: trade.price ? Number(trade.price) : undefined
+            })) || []}
+            issuerName={issuer.name}
+          />
         </div>
 
         {/* Party Breakdown */}

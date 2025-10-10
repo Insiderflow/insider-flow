@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
     const res = NextResponse.redirect(new URL('/', req.url));
     res.cookies.set('session', '', { maxAge: 0, path: '/' });
     return res;
-    } catch (_error) {
+    } catch {
     return NextResponse.json({ error: 'Logout failed' }, { status: 500 });
   }
 }
