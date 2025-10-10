@@ -151,7 +151,7 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
                 </tr>
               </thead>
               <tbody className="bg-gray-800 divide-y divide-gray-700">
-                {company.transactions.map((transaction) => (
+                {company.transactions.map((transaction: any) => (
                   <tr key={transaction.id} className="hover:bg-gray-700">
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                       {new Date(transaction.transactionDate).toLocaleDateString()}
