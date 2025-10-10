@@ -267,7 +267,7 @@ export default async function IssuerDetailPage({
                   </div>
                   <div className="flex items-center gap-3">
                     {user && (
-                      <WatchlistButton politicianId={politician.id} initialInWatchlist={false} />
+                      <WatchlistButton type="politician" politicianId={politician.id} />
                     )}
                     <span className="text-gray-400">{politician.count}</span>
                   </div>
