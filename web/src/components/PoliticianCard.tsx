@@ -145,7 +145,7 @@ export default function PoliticianCard({ politician, showWatchlistButton = true,
           </div>
           {showWatchlistButton && (
             <div className="mt-3 flex justify-center">
-              <WatchlistButton politicianId={politician.id} initialInWatchlist={initialInWatchlist} />
+              <WatchlistButton type="politician" politicianId={politician.id} />
             </div>
           )}
         </div>
