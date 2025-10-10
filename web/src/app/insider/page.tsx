@@ -298,14 +298,14 @@ export default async function InsiderPage({ searchParams }: { searchParams: Prom
               <AutocompleteInput
                 name="qc"
                 placeholder="搜索公司..."
-                options={companyOptions}
-                defaultValue={qCompany}
+                searchPath="/api/companies/search"
+                initialValue={qCompany}
               />
               <AutocompleteInput
                 name="qo"
                 placeholder="搜索交易者..."
-                options={ownerOptions}
-                defaultValue={qOwner}
+                searchPath="/api/owners/search"
+                initialValue={qOwner}
               />
               <select
                 name="type"
