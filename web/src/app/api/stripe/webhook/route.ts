@@ -6,7 +6,7 @@ export const config = { api: { bodyParser: false } } as const;
 
 export async function POST(req: NextRequest) {
   const secret = process.env.STRIPE_WEBHOOK_SECRET!;
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2024-06-20' });
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2025-09-30.clover' });
   const payload = await req.text();
   const sig = req.headers.get('stripe-signature') as string;
 

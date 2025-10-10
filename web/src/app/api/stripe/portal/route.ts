@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.redirect(new URL('/account?error=no_subscription', req.url));
     }
 
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2024-06-20' });
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2025-09-30.clover' });
 
     const portalSession = await stripe.billingPortal.sessions.create({
       customer: user.stripe_customer_id,

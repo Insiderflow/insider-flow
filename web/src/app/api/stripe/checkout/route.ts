@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
     const { priceId } = await req.json();
     if (!priceId) return NextResponse.json({ error: 'priceId required' }, { status: 400 });
 
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2024-06-20' });
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2025-09-30.clover' });
 
     // Ensure customer
     const dbUser = await prisma.user.findUnique({ where: { id: user.id }, select: { stripe_customer_id: true, email: true } });
