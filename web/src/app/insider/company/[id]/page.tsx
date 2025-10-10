@@ -4,9 +4,9 @@ import { notFound } from 'next/navigation';
 import WatchlistButton from '@/components/WatchlistButton';
 
 interface CompanyPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export default async function CompanyPage({ params }: CompanyPageProps) {

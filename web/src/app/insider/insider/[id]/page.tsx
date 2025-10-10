@@ -5,9 +5,9 @@ import WatchlistButton from '@/components/WatchlistButton';
 import { translateTitle } from '@/lib/titleI18n';
 
 interface InsiderPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export default async function InsiderPage({ params }: InsiderPageProps) {
