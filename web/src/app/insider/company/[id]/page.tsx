@@ -33,7 +33,7 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
 
   // Calculate stats
   const totalTransactions = company.transactions.length;
-  const totalValue = company.transactions.reduce((sum, t) => 
+  const totalValue = company.transactions.reduce((sum: number, t: any) => 
     sum + (t.valueNumeric ? Number(t.valueNumeric) : 0), 0
   );
   const uniqueInsiders = new Set(company.transactions.map(t => t.owner.id)).size;

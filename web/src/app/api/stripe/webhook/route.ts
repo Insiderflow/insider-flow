@@ -35,14 +35,14 @@ export async function POST(req: NextRequest) {
 
         if (user) {
           // Ensure we persist the Stripe customer/subscription IDs and set membership
-          const sub = subscriptionId ? await stripe.subscriptions.retrieve(subscriptionId) : null;
+          const sub = subscriptionId ? await stripe.subscriptions.retrieve(subscriptionId) as any : null;
           await prisma.user.update({
             where: { id: user.id },
             data: {
               stripe_customer_id: user.stripe_customer_id || customerId || undefined,
               stripe_subscription_id: subscriptionId || undefined,
               membership_tier: 'PAID',
-              membership_expires_at: sub?.data?.current_period_end ? new Date(sub.data.current_period_end * 1000) : null,
+              membership_expires_at: sub?.current_period_end ? new Date(sub.current_period_end * 1000) : null,
             },
           });
         }
@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
             where: { id: user.id },
             data: {
               membership_tier: isActive ? 'PAID' : 'FREE',
-              membership_expires_at: sub.current_period_end ? new Date(sub.current_period_end * 1000) : null,
+              membership_expires_at: (sub as any)?.current_period_end ? new Date((sub as any).current_period_end * 1000) : null,
               stripe_subscription_id: sub.id,
             },
           });
