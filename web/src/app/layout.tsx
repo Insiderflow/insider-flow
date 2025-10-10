@@ -73,6 +73,10 @@ export default async function RootLayout({
                   <span className="zh-Hant">發行商</span>
                   <span className="zh-Hans hidden">发行商</span>
                 </Link>
+                <Link className="text-white hover:text-blue-300 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none rounded transition-colors duration-200" href="/insider" aria-label="Insider page">
+                  <span className="zh-Hant">內幕交易</span>
+                  <span className="zh-Hans hidden">内幕交易</span>
+                </Link>
               </nav>
               
               {/* Global Search */}

@@ -1,0 +1,354 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Issuer {
+  id           String         @id
+  ticker       String?        @unique
+  name         String
+  sector       String?
+  country      String?
+  created_at   DateTime       @default(now())
+  Holdings13F  Holdings13F[]
+  PriceHistory PriceHistory[]
+  Trade        Trade[]
+
+  @@index([ticker])
+}
+
+model Politician {
+  id         String      @id
+  name       String
+  party      String?
+  chamber    String?
+  state      String?
+  created_at DateTime    @default(now())
+  Trade      Trade[]
+  Watchlist  Watchlist[]
+}
+
+model Session {
+  id         String   @id
+  user_id    String
+  token      String   @unique
+  expires_at DateTime
+  created_at DateTime @default(now())
+  user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@index([token])
+  @@index([expires_at])
+}
+
+model Trade {
+  id               String     @id
+  politician_id    String
+  issuer_id        String
+  published_at     DateTime?
+  traded_at        DateTime
+  filed_after_days Int?
+  owner            String?
+  type             String
+  size_min         Decimal?
+  size_max         Decimal?
+  price            Decimal?
+  source_url       String?
+  raw              Json?
+  created_at       DateTime   @default(now())
+  Issuer           Issuer     @relation(fields: [issuer_id], references: [id])
+  Politician       Politician @relation(fields: [politician_id], references: [id])
+
+  @@index([issuer_id, traded_at(sort: Desc)])
+  @@index([politician_id, traded_at(sort: Desc)])
+  @@index([traded_at(sort: Desc)])
+  @@index([type])
+}
+
+model User {
+  id                       String      @id
+  email                    String      @unique
+  password_hash            String
+  email_verified           Boolean     @default(false)
+  email_verification_token String?     @unique
+  password_reset_token     String?     @unique
+  password_reset_expires   DateTime?
+  created_at               DateTime    @default(now())
+  updated_at               DateTime
+  notification_settings    Json?
+  Session                  Session[]
+  Watchlist                Watchlist[]
+}
+
+model OpenInsiderCompany {
+  id           String                   @id @default(cuid())
+  ticker       String                   @unique
+  name         String
+  createdAt    DateTime                 @default(now()) @map("created_at")
+  updatedAt    DateTime                 @updatedAt @map("updated_at")
+  transactions OpenInsiderTransaction[]
+
+  @@map("openinsider_companies")
+}
+
+model OpenInsiderOwner {
+  id            String                   @id @default(cuid())
+  name          String                   @unique
+  title         String?
+  isInstitution Boolean                  @default(false)
+  createdAt     DateTime                 @default(now()) @map("created_at")
+  updatedAt     DateTime                 @updatedAt @map("updated_at")
+  transactions  OpenInsiderTransaction[]
+
+  @@map("openinsider_owners")
+}
+
+model OpenInsiderTransaction {
+  id              String             @id @default(cuid())
+  transactionDate DateTime           @map("transaction_date")
+  tradeDate       DateTime           @map("trade_date")
+  transactionType String             @map("transaction_type")
+  lastPrice       Decimal?           @map("last_price")
+  quantity        String
+  sharesHeld      String             @map("shares_held")
+  owned           String
+  value           String
+  valueNumeric    Decimal?           @map("value_numeric")
+  companyId       String             @map("company_id")
+  ownerId         String             @map("owner_id")
+  createdAt       DateTime           @default(now()) @map("created_at")
+  updatedAt       DateTime           @updatedAt @map("updated_at")
+  company         OpenInsiderCompany @relation(fields: [companyId], references: [id])
+  owner           OpenInsiderOwner   @relation(fields: [ownerId], references: [id])
+
+  @@index([transactionDate(sort: Desc)])
+  @@index([tradeDate(sort: Desc)])
+  @@index([companyId])
+  @@index([ownerId])
+  @@index([transactionType])
+  @@map("openinsider_transactions")
+}
+
+model EmailVerificationToken {
+  id         String   @id
+  email      String
+  token      String   @unique
+  expires_at DateTime
+  created_at DateTime @default(now())
+
+  @@index([expires_at])
+  @@index([token])
+}
+
+model Fund {
+  id                      String      @id
+  cik                     String      @unique
+  name                    String
+  fund_type               String?
+  aum                     Decimal?
+  fund_rating             Int?
+  total_holdings          Int?
+  total_portfolio_value   Decimal?
+  average_position_size   Decimal?
+  largest_position        Decimal?
+  largest_position_symbol String?
+  concentration_risk      Decimal?
+  diversification_score   Decimal?
+  portfolio_change_pct    Decimal?
+  new_positions           Int?
+  closed_positions        Int?
+  created_at              DateTime    @default(now())
+  updated_at              DateTime
+  SECFiling               SECFiling[]
+
+  @@index([aum(sort: Desc)])
+  @@index([cik])
+  @@index([fund_rating])
+  @@index([name])
+}
+
+model Holdings13F {
+  id                   String    @id
+  filing_id            String
+  symbol               String
+  company_name         String
+  cusip                String?
+  shares_held          BigInt
+  market_value         Decimal
+  percent_of_portfolio Decimal
+  percent_of_class     Decimal?
+  shares_held_prior    BigInt?
+  shares_change        BigInt?
+  shares_change_pct    Decimal?
+  is_new_position      Boolean   @default(false)
+  is_closed_position   Boolean   @default(false)
+  is_increased         Boolean   @default(false)
+  is_decreased         Boolean   @default(false)
+  is_options           Boolean   @default(false)
+  calls_puts           Json?
+  sector               String?
+  industry             String?
+  market_cap           Decimal?
+  pe_ratio             Decimal?
+  dividend_yield       Decimal?
+  created_at           DateTime  @default(now())
+  SECFiling            SECFiling @relation(fields: [filing_id], references: [id], onDelete: Cascade)
+  Issuer               Issuer    @relation(fields: [symbol], references: [ticker])
+
+  @@index([filing_id])
+  @@index([is_closed_position])
+  @@index([is_new_position])
+  @@index([market_value(sort: Desc)])
+  @@index([symbol])
+}
+
+model InsiderTrade {
+  id                      String    @id
+  filing_id               String
+  insider_name            String
+  insider_title           String?
+  insider_relationship    String?
+  transaction_code        String?
+  transaction_date        DateTime?
+  shares_traded           BigInt
+  price_per_share         Decimal?
+  total_value             Decimal?
+  ownership_after         BigInt?
+  ownership_after_percent Decimal?
+  shares_underlying       BigInt?
+  exercise_price          Decimal?
+  expiration_date         DateTime?
+  underlying_security     String?
+  transaction_nature      String?
+  acquisition_disposition String?
+  amount_code             String?
+  equity_swap             Boolean   @default(false)
+  shares_held_directly    BigInt?
+  shares_held_indirectly  BigInt?
+  transaction_category    String?
+  calculated_total_value  Decimal?
+  is_acquisition          Boolean   @default(false)
+  is_disposition          Boolean   @default(false)
+  trade_size_category     String?
+  price_category          String?
+  ownership_impact        String?
+  created_at              DateTime  @default(now())
+  SECFiling               SECFiling @relation(fields: [filing_id], references: [id], onDelete: Cascade)
+
+  @@index([filing_id])
+  @@index([insider_name])
+  @@index([shares_traded(sort: Desc)])
+  @@index([transaction_code])
+  @@index([transaction_date(sort: Desc)])
+}
+
+model Ownership13D {
+  id                         String    @id
+  filing_id                  String
+  ownership_type             String
+  purpose                    String?
+  shares_owned               BigInt
+  shares_owned_prior         BigInt?
+  ownership_percentage       Decimal
+  ownership_percentage_prior Decimal?
+  voting_power               Decimal?
+  dispositive_power          Decimal?
+  shares_beneficially_owned  BigInt?
+  shares_sole_voting         BigInt?
+  shares_shared_voting       BigInt?
+  shares_sole_dispositive    BigInt?
+  shares_shared_dispositive  BigInt?
+  purpose_category           String?
+  shares_change              BigInt?
+  shares_change_pct          Decimal?
+  ownership_change           Decimal?
+  ownership_change_pct       Decimal?
+  is_increased               Boolean   @default(false)
+  is_decreased               Boolean   @default(false)
+  is_new_position            Boolean   @default(false)
+  is_closed_position         Boolean   @default(false)
+  created_at                 DateTime  @default(now())
+  SECFiling                  SECFiling @relation(fields: [filing_id], references: [id], onDelete: Cascade)
+
+  @@index([filing_id])
+  @@index([ownership_type])
+  @@index([shares_owned(sort: Desc)])
+}
+
+model PasswordResetToken {
+  id         String   @id
+  email      String
+  token      String   @unique
+  expires_at DateTime
+  created_at DateTime @default(now())
+
+  @@index([expires_at])
+  @@index([token])
+}
+
+model PriceHistory {
+  id              String   @id
+  symbol          String
+  date            DateTime
+  open            Decimal?
+  high            Decimal?
+  low             Decimal?
+  close           Decimal
+  volume          BigInt?
+  adjusted_close  Decimal?
+  price_change_1d Decimal?
+  price_change_1w Decimal?
+  price_change_1m Decimal?
+  volume_avg_30d  Decimal?
+  high_52w        Decimal?
+  low_52w         Decimal?
+  created_at      DateTime @default(now())
+  Issuer          Issuer   @relation(fields: [symbol], references: [ticker])
+
+  @@unique([symbol, date])
+  @@index([date(sort: Desc)])
+  @@index([symbol])
+}
+
+model SECFiling {
+  id               String         @id
+  accession_number String         @unique
+  cik              String
+  company_name     String
+  form_type        String
+  filing_date      DateTime
+  document_url     String?
+  html_url         String?
+  txt_url          String?
+  xbrl_url         String?
+  raw_data         Json?
+  created_at       DateTime       @default(now())
+  updated_at       DateTime
+  Holdings13F      Holdings13F[]
+  InsiderTrade     InsiderTrade[]
+  Ownership13D     Ownership13D[]
+  Fund             Fund           @relation(fields: [cik], references: [cik])
+
+  @@index([cik])
+  @@index([company_name])
+  @@index([filing_date(sort: Desc)])
+  @@index([form_type])
+}
+
+model Watchlist {
+  id            String     @id
+  user_id       String
+  politician_id String
+  created_at    DateTime   @default(now())
+  Politician    Politician @relation(fields: [politician_id], references: [id], onDelete: Cascade)
+  User          User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@unique([user_id, politician_id])
+  @@index([politician_id])
+  @@index([user_id])
+}
+
+

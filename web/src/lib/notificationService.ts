@@ -86,10 +86,12 @@ function getEmailContent(notification: NotificationData): string {
     case 'newTrade':
       return `
         <h2>新交易通知</h2>
-        <p>有新的國會議員交易被記錄：</p>
+        <p>有新交易被記錄：</p>
         <ul>
-          <li>政治家: ${(notification.data as TradeData).politician.name}</li>
-          <li>發行商: ${(notification.data as TradeData).issuer.name}</li>
+          ${(notification.data as any).politician?.name ? `<li>交易者: ${(notification.data as any).politician.name}</li>` : ''}
+          ${(notification.data as any).owner?.name ? `<li>內部人: ${(notification.data as any).owner.name}</li>` : ''}
+          ${(notification.data as any).issuer?.name ? `<li>發行商: ${(notification.data as any).issuer.name}</li>` : ''}
+          ${(notification.data as any).issuer?.ticker ? `<li>股票代碼: ${(notification.data as any).issuer.ticker}</li>` : ''}
           <li>類型: ${(notification.data as TradeData).type}</li>
           <li>交易日期: ${(notification.data as TradeData).tradedAt}</li>
         </ul>
@@ -99,13 +101,16 @@ function getEmailContent(notification: NotificationData): string {
     case 'watchlistUpdate':
       return `
         <h2>觀察名單更新</h2>
-        <p>您關注的政治家 ${(notification.data as TradeData).politician.name} 有新交易：</p>
+        <p>您關注的對象有新交易：</p>
         <ul>
-          <li>發行商: ${(notification.data as TradeData).issuer.name}</li>
+          ${(notification.data as any).politician?.name ? `<li>政治家: ${(notification.data as any).politician.name}</li>` : ''}
+          ${(notification.data as any).owner?.name ? `<li>內部人: ${(notification.data as any).owner.name}</li>` : ''}
+          ${(notification.data as any).issuer?.name ? `<li>發行商: ${(notification.data as any).issuer.name}</li>` : ''}
+          ${(notification.data as any).issuer?.ticker ? `<li>股票代碼: ${(notification.data as any).issuer.ticker}</li>` : ''}
           <li>類型: ${(notification.data as TradeData).type}</li>
           <li>交易日期: ${(notification.data as TradeData).tradedAt}</li>
         </ul>
-        <p><a href="https://insiderflow.com/politicians/${(notification.data as TradeData).politician.id}">查看政治家詳情</a></p>
+        ${((notification.data as any).politician?.id ? `<p><a href="https://insiderflow.com/politicians/${(notification.data as any).politician.id}">查看政治家詳情</a></p>` : '')}
       `;
     
     case 'weeklyDigest':
@@ -158,43 +163,67 @@ export async function processNewTrade(trade: TradeData) {
 // Helper function to send notification for watchlist updates
 export async function notifyWatchlistUpdate(trade: TradeData) {
   try {
-    // Find users who have this politician in their watchlist AND have watchlist notifications enabled
-    const users = await prisma.user.findMany({
+    // Politician-based
+    const usersByPolitician = await prisma.user.findMany({
       where: {
         email_verified: true,
-        notification_settings: {
-          path: ['watchlistUpdates'],
-          equals: true,
-        },
-        UserWatchlist: {
-          some: {
-            politician_id: trade.politician.id
-          }
-        }
+        notification_settings: { path: ['watchlistUpdates'], equals: true },
+        UserWatchlist: { some: { watchlist_type: 'politician', politician_id: (trade as any).politician?.id } },
       },
-      include: {
-        UserWatchlist: {
-          where: {
-            politician_id: trade.politician.id
-          }
-        }
-      }
+      select: { email: true },
     });
 
-    // Send email to each user who watches this politician
-    for (const user of users) {
-      await sendNotificationEmail(user.email, {
+    // Company-based (issuer)
+    const usersByCompany = await prisma.user.findMany({
+      where: {
+        email_verified: true,
+        notification_settings: { path: ['watchlistUpdates'], equals: true },
+        UserWatchlist: { some: { watchlist_type: 'company', company_id: (trade as any).issuer?.id } },
+      },
+      select: { email: true },
+    });
+
+    // Owner-based (insider)
+    const usersByOwner = await prisma.user.findMany({
+      where: {
+        email_verified: true,
+        notification_settings: { path: ['watchlistUpdates'], equals: true },
+        UserWatchlist: { some: { watchlist_type: 'owner', owner_id: (trade as any).owner?.id } },
+      },
+      select: { email: true },
+    });
+
+    // Ticker-based
+    const usersByTicker = await prisma.user.findMany({
+      where: {
+        email_verified: true,
+        notification_settings: { path: ['watchlistUpdates'], equals: true },
+        UserWatchlist: { some: { watchlist_type: 'stock', ticker: (trade as any).issuer?.ticker } },
+      },
+      select: { email: true },
+    });
+
+    const emails = Array.from(new Set([
+      ...usersByPolitician.map(u => u.email),
+      ...usersByCompany.map(u => u.email),
+      ...usersByOwner.map(u => u.email),
+      ...usersByTicker.map(u => u.email),
+    ].filter(Boolean)));
+
+    for (const email of emails) {
+      await sendNotificationEmail(email, {
         type: 'watchlistUpdate',
         data: {
-          politician: { name: trade.politician.name, id: trade.politician.id },
-          issuer: { name: trade.issuer.name },
-          type: trade.type,
-          tradedAt: trade.tradedAt,
-        },
+          politician: (trade as any).politician ? { name: (trade as any).politician.name, id: (trade as any).politician.id } : undefined,
+          owner: (trade as any).owner ? { name: (trade as any).owner.name, id: (trade as any).owner.id } : undefined,
+          issuer: (trade as any).issuer ? { name: (trade as any).issuer.name, id: (trade as any).issuer.id, ticker: (trade as any).issuer.ticker } : undefined,
+          type: (trade as any).type,
+          tradedAt: (trade as any).tradedAt,
+        } as any,
       });
     }
 
-    console.log(`Sent watchlist notification for ${trade.politician.name} to ${users.length} users`);
+    console.log(`Sent watchlist notifications for trade to ${emails.length} users`);
   } catch (error) {
     console.error('Error sending watchlist notifications:', error);
   }

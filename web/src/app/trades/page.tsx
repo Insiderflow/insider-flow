@@ -198,10 +198,7 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
               <span className="zh-Hans hidden">类型</span>
             </span>
             <select name="type" defaultValue={typeFilter} className="border border-gray-600 p-1 bg-gray-800 text-white text-xs sm:text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200" aria-label="Trade type filter">
-              <option value="">
-                <span className="zh-Hant">全部</span>
-                <span className="zh-Hans hidden">全部</span>
-              </option>
+              <option value="">全部</option>
             <option value="buy">
               <span className="zh-Hant">買入</span>
               <span className="zh-Hans hidden">买入</span>

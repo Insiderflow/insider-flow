@@ -1,57 +1,177 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface WatchlistButtonProps {
-  politicianId: string;
-  initialInWatchlist?: boolean;
+  userId?: string;
+  type: 'politician' | 'company' | 'owner' | 'stock';
+  politicianId?: string;
+  companyId?: string;
+  ownerId?: string;
+  ticker?: string;
+  className?: string;
 }
 
-export default function WatchlistButton({ politicianId, initialInWatchlist = false }: WatchlistButtonProps) {
-  const [inWatchlist, setInWatchlist] = useState<boolean>(initialInWatchlist);
-  const [loading, setLoading] = useState<boolean>(false);
+export default function WatchlistButton({ 
+  userId, 
+  type, 
+  politicianId, 
+  companyId, 
+  ownerId, 
+  ticker,
+  className = '' 
+}: WatchlistButtonProps) {
+  const [isWatching, setIsWatching] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  async function toggleWatchlist() {
-    if (loading) return;
-    setLoading(true);
+  useEffect(() => {
+    // Detect login via session-based API (200 -> logged in, 401 -> not logged in)
+    const checkAuth = async () => {
+      try {
+        const params = new URLSearchParams({ type });
+        if (politicianId) params.set('politicianId', politicianId);
+        if (companyId) params.set('companyId', companyId);
+        if (ownerId) params.set('ownerId', ownerId);
+        if (ticker) params.set('ticker', ticker);
+
+        const res = await fetch(`/api/watchlist?${params.toString()}`);
+        if (res.status === 200) {
+          setIsLoggedIn(true);
+          const data = await res.json();
+          setIsWatching(data.watchlist && data.watchlist.length > 0);
+        } else if (res.status === 401) {
+          setIsLoggedIn(false);
+        } else {
+          // treat non-401 as logged in but no items
+          setIsLoggedIn(true);
+        }
+      } catch (_e) {
+        setIsLoggedIn(false);
+      }
+    };
+    
+    checkAuth();
+  }, [userId]);
+
+  const checkWatchlistStatus = async () => {
     try {
-      const method = inWatchlist ? 'DELETE' : 'POST';
-      const res = await fetch('/api/watchlist', {
-        method,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ politicianId })
-      });
-      if (!res.ok) throw new Error('Failed');
-      setInWatchlist(!inWatchlist);
-    } catch {
-      // no-op for now
-    } finally {
-      setLoading(false);
+      const params = new URLSearchParams({ type });
+      if (politicianId) params.set('politicianId', politicianId);
+      if (companyId) params.set('companyId', companyId);
+      if (ownerId) params.set('ownerId', ownerId);
+      if (ticker) params.set('ticker', ticker);
+
+      const response = await fetch(`/api/watchlist?${params.toString()}`);
+      if (response.status !== 200) return;
+      const data = await response.json();
+      setIsWatching(data.watchlist && data.watchlist.length > 0);
+    } catch (error) {
+      console.error('Error checking watchlist status:', error);
     }
+  };
+
+  const handleToggleWatchlist = async () => {
+    if (!isLoggedIn) {
+      alert('Please log in to add items to your watchlist');
+      return;
+    }
+
+    setIsLoading(true);
+    
+    try {
+      if (isWatching) {
+        // Remove from watchlist
+        const params = new URLSearchParams({ type });
+        if (politicianId) params.set('politicianId', politicianId);
+        if (companyId) params.set('companyId', companyId);
+        if (ownerId) params.set('ownerId', ownerId);
+        if (ticker) params.set('ticker', ticker);
+
+        await fetch(`/api/watchlist?${params}`, { method: 'DELETE' });
+        setIsWatching(false);
+      } else {
+        // Add to watchlist
+        const response = await fetch('/api/watchlist', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            type,
+            politicianId,
+            companyId,
+            ownerId,
+            ticker,
+          }),
+        });
+
+        if (response.ok) {
+          setIsWatching(true);
+        } else {
+          const error = await response.json();
+          alert(error.error || 'Failed to add to watchlist');
+        }
+      }
+    } catch (error) {
+      console.error('Error toggling watchlist:', error);
+      alert('An error occurred. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  if (!isLoggedIn) {
+    return (
+      <button
+        onClick={() => alert('Please log in to add items to your watchlist')}
+        className={`inline-flex items-center px-3 py-2 bg-gray-600 hover:bg-gray-700 text-white text-sm font-medium rounded-md transition-colors duration-200 ${className}`}
+      >
+        <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+        </svg>
+        <span className="zh-Hant">加入關注</span>
+        <span className="zh-Hans hidden">加入关注</span>
+      </button>
+    );
   }
 
   return (
     <button
-      onClick={toggleWatchlist}
-      disabled={loading}
-      aria-label={inWatchlist ? '移除觀察名單' : '加入觀察名單'}
-      className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold shadow-sm border transition-colors duration-200 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none disabled:opacity-60 ${inWatchlist ? 'bg-green-600 hover:bg-green-500 text-white border-green-500' : 'bg-white hover:bg-purple-50 text-purple-700 border-gray-200'}`}
+      onClick={handleToggleWatchlist}
+      disabled={isLoading}
+      className={`inline-flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors duration-200 ${
+        isWatching
+          ? 'bg-red-600 hover:bg-red-700 text-white'
+          : 'bg-blue-600 hover:bg-blue-700 text-white'
+      } disabled:opacity-50 disabled:cursor-not-allowed ${className}`}
     >
-      {loading ? (
-        <span className="inline-flex items-center gap-2"><span className="h-4 w-4 border-2 border-current border-t-transparent rounded-full animate-spin"/> 處理中…</span>
-      ) : inWatchlist ? (
-        <span className="inline-flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.802 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.802-2.034a1 1 0 00-1.176 0l-2.802 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81H7.03a1 1 0 00.95-.69l1.07-3.292z"/></svg>
-          已在觀察名單
-        </span>
+      {isLoading ? (
+        <>
+          <svg className="animate-spin -ml-1 mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          <span className="zh-Hant">處理中...</span>
+          <span className="zh-Hans hidden">处理中...</span>
+        </>
+      ) : isWatching ? (
+        <>
+          <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>
+          <span className="zh-Hant">已關注</span>
+          <span className="zh-Hans hidden">已关注</span>
+        </>
       ) : (
-        <span className="inline-flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path d="M6.32 2.577A49.255 49.255 0 0112 2c1.928 0 3.83.12 5.68.577a3.75 3.75 0 012.743 2.743C20.88 7.17 21 9.072 21 11c0 1.928-.12 3.83-.577 5.68a3.75 3.75 0 01-2.743 2.743A49.255 49.255 0 0112 20a49.255 49.255 0 01-5.68-.577 3.75 3.75 0 01-2.743-2.743A49.255 49.255 0 013 11c0-1.928.12-3.83.577-5.68a3.75 3.75 0 012.743-2.743z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-          加入觀察名單
-        </span>
+        <>
+          <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+          </svg>
+          <span className="zh-Hant">加入關注</span>
+          <span className="zh-Hans hidden">加入关注</span>
+        </>
       )}
     </button>
   );
 }
-
-

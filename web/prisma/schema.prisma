@@ -36,7 +36,7 @@ model Session {
   token      String   @unique
   expires_at DateTime
   created_at DateTime @default(now())
-  User       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@index([token])
   @@index([user_id])
@@ -72,16 +72,95 @@ model User {
   created_at               DateTime        @default(now())
   updated_at               DateTime
   notification_settings    Json?
+  membership_tier          MembershipTier  @default(FREE)
+  membership_expires_at    DateTime?
+  stripe_customer_id       String?
+  stripe_subscription_id   String?
   Session                  Session[]
   UserWatchlist            UserWatchlist[]
 }
 
+enum MembershipTier {
+  FREE
+  PAID
+}
+
 model UserWatchlist {
+  id            String   @id @default(cuid())
   user_id       String
-  politician_id String
-  created_at    DateTime   @default(now())
-  Politician    Politician @relation(fields: [politician_id], references: [id], onDelete: Cascade)
+  politician_id String?
+  company_id    String?
+  owner_id      String?
+  ticker        String?
+  watchlist_type String  // 'politician', 'company', 'owner', 'stock'
+  created_at    DateTime @default(now())
+  
+  Politician    Politician? @relation(fields: [politician_id], references: [id], onDelete: Cascade)
+  Company       OpenInsiderCompany? @relation(fields: [company_id], references: [id], onDelete: Cascade)
+  Owner         OpenInsiderOwner? @relation(fields: [owner_id], references: [id], onDelete: Cascade)
   User          User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
-  @@id([user_id, politician_id])
+  @@index([user_id])
+  @@index([watchlist_type])
+  @@unique([user_id, politician_id, watchlist_type])
+  @@unique([user_id, company_id, watchlist_type])
+  @@unique([user_id, owner_id, watchlist_type])
+  @@unique([user_id, ticker, watchlist_type])
+}
+
+// OpenInsider Data Models
+model OpenInsiderCompany {
+  id          String   @id @default(cuid())
+  ticker      String   @unique
+  name        String
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  
+  transactions OpenInsiderTransaction[]
+  watchlists   UserWatchlist[]
+  
+  @@map("openinsider_companies")
+}
+
+model OpenInsiderOwner {
+  id            String   @id @default(cuid())
+  name          String   @unique
+  title         String?
+  isInstitution Boolean  @default(false)
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+  
+  transactions OpenInsiderTransaction[]
+  watchlists   UserWatchlist[]
+  
+  @@map("openinsider_owners")
+}
+
+model OpenInsiderTransaction {
+  id                String   @id @default(cuid())
+  transactionDate   DateTime @map("transaction_date")
+  tradeDate         DateTime @map("trade_date")
+  transactionType   String   @map("transaction_type")
+  lastPrice         Decimal? @map("last_price")
+  quantity          String
+  sharesHeld        String   @map("shares_held")
+  owned             String
+  value             String
+  valueNumeric      Decimal? @map("value_numeric")
+  
+  companyId         String   @map("company_id")
+  company           OpenInsiderCompany @relation(fields: [companyId], references: [id])
+  
+  ownerId           String   @map("owner_id")
+  owner             OpenInsiderOwner @relation(fields: [ownerId], references: [id])
+  
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
+  
+  @@index([transactionDate(sort: Desc)])
+  @@index([tradeDate(sort: Desc)])
+  @@index([companyId])
+  @@index([ownerId])
+  @@index([transactionType])
+  @@map("openinsider_transactions")
 }
