@@ -186,7 +186,7 @@ export default async function PoliticianDetailPage({
                 </span>
               </div>
             {/* Watchlist button */}
-            <WatchlistButton politicianId={politician.id} />
+            <WatchlistButton type="politician" politicianId={politician.id} />
             </div>
           </div>
 
