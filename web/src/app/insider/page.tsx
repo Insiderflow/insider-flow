@@ -545,7 +545,7 @@ export default async function InsiderPage({ searchParams }: { searchParams: Prom
 
         {/* Last Updated */}
         <div className="mt-8 text-center text-gray-400">
-          <LastUpdated />
+          <LastUpdated timestamp={new Date().toISOString()} />
         </div>
       </div>
     </div>
