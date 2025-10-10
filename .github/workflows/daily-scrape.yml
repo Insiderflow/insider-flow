@@ -2,8 +2,11 @@ name: Daily Data Scrape
 
 on:
   schedule:
-    # Run every day at 6 AM UTC (2 AM EST)
-    - cron: '0 6 * * *'
+    # Run at 9pm, 10pm, and 1am HKT (Hong Kong Time)
+    # 9pm HKT = 1pm UTC, 10pm HKT = 2pm UTC, 1am HKT = 5pm UTC (previous day)
+    - cron: '0 13 * * *'  # 9pm HKT
+    - cron: '0 14 * * *'  # 10pm HKT  
+    - cron: '0 17 * * *'  # 1am HKT
   workflow_dispatch: # Allow manual trigger
 
 jobs:

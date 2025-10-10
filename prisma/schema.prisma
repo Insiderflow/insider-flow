@@ -319,3 +319,58 @@ model PriceHistory {
   @@index([symbol])
   @@index([date(sort: Desc)])
 }
+
+// OpenInsider Data Models
+model OpenInsiderCompany {
+  id          String   @id @default(cuid())
+  ticker      String   @unique
+  name        String
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  
+  transactions OpenInsiderTransaction[]
+  
+  @@map("openinsider_companies")
+}
+
+model OpenInsiderOwner {
+  id            String   @id @default(cuid())
+  name          String   @unique
+  title         String?
+  isInstitution Boolean  @default(false)
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+  
+  transactions OpenInsiderTransaction[]
+  
+  @@map("openinsider_owners")
+}
+
+model OpenInsiderTransaction {
+  id                String   @id @default(cuid())
+  transactionDate   DateTime @map("transaction_date")
+  tradeDate         DateTime @map("trade_date")
+  transactionType   String   @map("transaction_type")
+  lastPrice         Decimal? @map("last_price")
+  quantity          String
+  sharesHeld        String   @map("shares_held")
+  owned             String
+  value             String
+  valueNumeric      Decimal? @map("value_numeric")
+  
+  companyId         String   @map("company_id")
+  company           OpenInsiderCompany @relation(fields: [companyId], references: [id])
+  
+  ownerId           String   @map("owner_id")
+  owner             OpenInsiderOwner @relation(fields: [ownerId], references: [id])
+  
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
+  
+  @@index([transactionDate(sort: Desc)])
+  @@index([tradeDate(sort: Desc)])
+  @@index([companyId])
+  @@index([ownerId])
+  @@index([transactionType])
+  @@map("openinsider_transactions")
+}
