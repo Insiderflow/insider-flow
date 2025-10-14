@@ -26,7 +26,12 @@ jobs:
     - name: Install dependencies
       run: |
         cd web
-        npm install
+        npm ci
+
+    - name: Install Playwright browsers and system dependencies
+      run: |
+        cd web
+        npx playwright install --with-deps
         
     - name: Run daily scrape
       env:
