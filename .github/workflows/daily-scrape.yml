@@ -28,6 +28,11 @@ jobs:
         cd web
         npm ci
 
+    - name: Add Playwright npm package (no save)
+      run: |
+        cd web
+        npm i playwright@^1 --no-save
+
     - name: Install Playwright browsers and system dependencies
       run: |
         cd web
