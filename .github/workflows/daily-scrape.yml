@@ -12,6 +12,9 @@ on:
 jobs:
   scrape:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
     
     steps:
     - name: Checkout code
@@ -25,22 +28,18 @@ jobs:
         
     - name: Install dependencies
       run: |
-        cd web
-        npm ci --include=prod
+        npm ci
 
     - name: Install Playwright npm package
       run: |
-        cd web
         npm i playwright@^1
 
     - name: Install Playwright browsers and system dependencies
       run: |
-        cd web
         npx playwright install --with-deps
 
     - name: Verify Playwright is installed
       run: |
-        cd web
         npm ls playwright || true
         node -e "console.log('playwright path:', require.resolve('playwright'))"
         ls -la node_modules/playwright || true
@@ -49,7 +48,6 @@ jobs:
       env:
         DATABASE_URL: ${{ secrets.DATABASE_URL }}
       run: |
-        cd web
         node scripts/daily-scrape.js
         
     - name: Notify on success
