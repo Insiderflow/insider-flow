@@ -26,7 +26,7 @@ jobs:
     - name: Install dependencies
       run: |
         cd web
-        npm ci
+        npm ci --include=prod
 
     - name: Add Playwright npm package (no save)
       run: |
@@ -37,6 +37,12 @@ jobs:
       run: |
         cd web
         npx playwright install --with-deps
+
+    - name: Verify Playwright is installed
+      run: |
+        cd web
+        node -e "console.log('playwright path:', require.resolve('playwright'))"
+        ls -la node_modules/playwright || true
         
     - name: Run daily scrape
       env:
