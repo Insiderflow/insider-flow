@@ -17,6 +17,7 @@
     "bcryptjs": "^3.0.2",
     "buffer": "^6.0.3",
     "chart.js": "^4.5.0",
+    "playwright": "^1.48.0",
     "next": "15.5.3",
     "node-fetch": "^3.3.2",
     "react": "19.1.0",
