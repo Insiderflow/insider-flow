@@ -21,17 +21,17 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '18'
-        cache: 'npm'
+        # Disable caching to avoid stale node_modules across runs
         
     - name: Install dependencies
       run: |
         cd web
         npm ci --include=prod
 
-    - name: Add Playwright npm package (no save)
+    - name: Install Playwright npm package
       run: |
         cd web
-        npm i playwright@^1 --no-save
+        npm i playwright@^1
 
     - name: Install Playwright browsers and system dependencies
       run: |
@@ -41,6 +41,7 @@ jobs:
     - name: Verify Playwright is installed
       run: |
         cd web
+        npm ls playwright || true
         node -e "console.log('playwright path:', require.resolve('playwright'))"
         ls -la node_modules/playwright || true
         
