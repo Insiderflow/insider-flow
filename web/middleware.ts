@@ -9,7 +9,9 @@ export function middleware(req: NextRequest) {
     pathname.startsWith('/favicon') ||
     pathname.startsWith('/api/register') ||
     pathname.startsWith('/api/logout') ||
-    pathname.startsWith('/register')
+    pathname.startsWith('/register') ||
+    pathname.startsWith('/api/auth') ||
+    pathname.startsWith('/auth/signin')
   ) {
     return NextResponse.next();
   }

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import RegistrationForm from '@/components/RegistrationForm';
+import OAuthButtons from '@/components/OAuthButtons';
 
 export const dynamic = 'force-dynamic';
 
@@ -17,6 +18,8 @@ export default async function RegisterPage({ searchParams }: { searchParams: Pro
         
         <div className="border border-gray-600 bg-gray-800 rounded-lg p-6 shadow-md">
           <RegistrationForm next={next} />
+          <div className="my-4 h-px bg-gray-700" />
+          <OAuthButtons />
         </div>
         
         <div className="text-center">
