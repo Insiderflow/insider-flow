@@ -66,10 +66,10 @@ export default function PoliticianCard({ politician, showWatchlistButton = true,
           </div>
         </a>
         
-        {/* Name */}
+        {/* Name - Anonymized */}
         <div className="flex items-center justify-center gap-2 mb-1">
           <a href={`/politicians/${politician.id}`} className="text-white font-semibold text-lg hover:text-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded">
-            {politician.name}
+            {politician.name.split(' ').map(n => n[0]).join('.')}
           </a>
         </div>
         <p className="text-gray-300 text-sm">
