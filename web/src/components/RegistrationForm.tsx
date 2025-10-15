@@ -64,7 +64,7 @@ export default function RegistrationForm({ next }: RegistrationFormProps) {
       
       <form onSubmit={handleSubmit} className="space-y-3">
         <label className="block">
-          <span className="text-sm text-gray-400">Email</span>
+          <span className="text-sm text-gray-400">電郵</span>
           <input
             name="email"
             type="email"
@@ -72,12 +72,12 @@ export default function RegistrationForm({ next }: RegistrationFormProps) {
             onChange={(e) => setEmail(e.target.value)}
             required
             className="border border-gray-600 p-2 w-full bg-gray-800 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200"
-            placeholder="Enter your email address"
+            placeholder="請輸入您的電郵"
             disabled={isLoading}
           />
         </label>
         <label className="block">
-          <span className="text-sm text-gray-400">Password</span>
+          <span className="text-sm text-gray-400">密碼</span>
           <input
             name="password"
             type="password"
@@ -85,12 +85,12 @@ export default function RegistrationForm({ next }: RegistrationFormProps) {
             onChange={(e) => setPassword(e.target.value)}
             required
             className="border border-gray-600 p-2 w-full bg-gray-800 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200"
-            placeholder="At least 8 characters"
+            placeholder="至少 8 個字元"
             disabled={isLoading}
           />
         </label>
         <label className="block">
-          <span className="text-sm text-gray-400">Confirm Password</span>
+          <span className="text-sm text-gray-400">確認密碼</span>
           <input
             name="confirm"
             type="password"
@@ -98,7 +98,7 @@ export default function RegistrationForm({ next }: RegistrationFormProps) {
             onChange={(e) => setConfirm(e.target.value)}
             required
             className="border border-gray-600 p-2 w-full bg-gray-800 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200"
-            placeholder="Retype password"
+            placeholder="請再次輸入密碼"
             disabled={isLoading}
           />
         </label>
@@ -107,7 +107,7 @@ export default function RegistrationForm({ next }: RegistrationFormProps) {
           disabled={isLoading}
           className="bg-white text-purple-600 border border-white px-4 py-2 rounded hover:bg-purple-100 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {isLoading ? 'Registering...' : 'Continue'}
+          {isLoading ? '註冊中…' : '繼續'}
         </button>
       </form>
     </div>

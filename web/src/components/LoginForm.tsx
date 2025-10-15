@@ -93,7 +93,7 @@ export default function LoginForm({ next }: LoginFormProps) {
       )}
       <form onSubmit={handleSubmit} className="space-y-3">
         <label className="block">
-          <span className="text-sm text-gray-400">Email</span>
+          <span className="text-sm text-gray-400">電郵</span>
           <input
             type="email"
             value={email}
@@ -105,7 +105,7 @@ export default function LoginForm({ next }: LoginFormProps) {
           />
         </label>
         <label className="block">
-          <span className="text-sm text-gray-400">Password</span>
+          <span className="text-sm text-gray-400">密碼</span>
           <input
             type="password"
             value={password}
@@ -122,9 +122,9 @@ export default function LoginForm({ next }: LoginFormProps) {
             disabled={isLoading}
             className="bg-white text-purple-600 border border-white px-4 py-2 rounded hover:bg-purple-100 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isLoading ? 'Signing in...' : 'Sign in'}
+            {isLoading ? '登入中…' : '登入'}
           </button>
-          <a href="/forgot-password" className="text-blue-300 hover:text-blue-100 underline text-sm focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none rounded transition-colors duration-200">Forgot Password?</a>
+          <a href="/forgot-password" className="text-blue-300 hover:text-blue-100 underline text-sm focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none rounded transition-colors duration-200">忘記密碼？</a>
         </div>
       </form>
     </div>
