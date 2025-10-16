@@ -22,7 +22,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
         gte: new Date('2020-01-01') // Only trades from 2020 onwards
       },
     },
-    orderBy: { traded_at: 'desc' },
+    orderBy: { published_at: 'desc' },
     take: 5,
     include: { Politician: true, Issuer: true },
   });
