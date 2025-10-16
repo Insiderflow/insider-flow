@@ -13,8 +13,8 @@ async function scrapeTrades() {
   try {
     console.log('🚀 Starting to scrape latest trades from Capitol Trades...');
     
-    // Scrape first 5 pages
-    for (let pageNum = 1; pageNum <= 5; pageNum++) {
+    // Scrape first 20 pages to get more recent trades
+    for (let pageNum = 1; pageNum <= 20; pageNum++) {
       console.log(`📄 Scraping page ${pageNum}...`);
       
       const url = `https://www.capitoltrades.com/trades?page=${pageNum}`;
