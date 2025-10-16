@@ -13,11 +13,10 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
   const sp = await searchParams;
   const verified = sp.verified === 'true';
   const verificationError = sp.verification;
-  // Get the latest 5 trades (excluding Michael McCaul and future dates)
+  // Get the latest 5 trades (excluding future dates)
   const now = new Date();
   const latestTrades = await prisma.trade.findMany({
     where: {
-      Politician: { name: { not: 'Michael McCaul' } },
       traded_at: { 
         lte: now, // Only trades up to today
         gte: new Date('2020-01-01') // Only trades from 2020 onwards
