@@ -13,19 +13,77 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
   const sp = await searchParams;
   const verified = sp.verified === 'true';
   const verificationError = sp.verification;
-  // Get the latest 5 trades (excluding future dates)
+  // Latest trades: pull from past 7 days (by published_at), then randomize with diverse politicians
   const now = new Date();
-  const latestTrades = await prisma.trade.findMany({
+  const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+  
+  // First try to get trades from last 7 days
+  let recentTradesPool = await prisma.trade.findMany({
     where: {
-      traded_at: { 
-        lte: now, // Only trades up to today
-        gte: new Date('2020-01-01') // Only trades from 2020 onwards
+      published_at: {
+        gte: sevenDaysAgo,
+        lte: now
       },
     },
     orderBy: { published_at: 'desc' },
-    take: 5,
+    take: 200, // Increased pool size
     include: { Politician: true, Issuer: true },
   });
+
+  // If we don't have enough trades from last 7 days, expand to last 30 days
+  if (recentTradesPool.length < 20) {
+    const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+    recentTradesPool = await prisma.trade.findMany({
+      where: {
+        published_at: {
+          gte: thirtyDaysAgo,
+          lte: now
+        },
+      },
+      orderBy: { published_at: 'desc' },
+      take: 200,
+      include: { Politician: true, Issuer: true },
+    });
+  }
+
+  // Shuffle helper
+  function shuffleArray<T>(arr: T[]): T[] {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  // Prefer diversity: pick at most one trade per politician, randomized
+  const byPolitician = new Map<string, typeof recentTradesPool[number]>();
+  for (const t of recentTradesPool) {
+    if (!byPolitician.has(t.politician_id)) {
+      byPolitician.set(t.politician_id, t);
+    }
+  }
+  const diversified = shuffleArray(Array.from(byPolitician.values())).slice(0, 5);
+  
+  // Fallback: if less than 5 unique politicians, fill from pool randomly
+  let latestTrades = diversified.length < 5
+    ? [...diversified, ...shuffleArray(recentTradesPool.filter(t => !byPolitician.has(t.politician_id))).slice(0, 5 - diversified.length)]
+    : diversified;
+
+  // Final fallback: if we still don't have 5 trades, get any recent trades
+  if (latestTrades.length < 5) {
+    const fallbackTrades = await prisma.trade.findMany({
+      where: {
+        published_at: { not: null }
+      },
+      orderBy: { published_at: 'desc' },
+      take: 10,
+      include: { Politician: true, Issuer: true },
+    });
+    
+    const fallbackShuffled = shuffleArray(fallbackTrades);
+    latestTrades = [...latestTrades, ...fallbackShuffled.slice(0, 5 - latestTrades.length)];
+  }
 
   // Top 5 most active politicians (by trade count) with latest trade date
   const topPoliticiansGrouped = await prisma.trade.groupBy({
