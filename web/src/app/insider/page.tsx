@@ -229,13 +229,9 @@ export default async function InsiderPage({ searchParams }: { searchParams: Prom
           <div className="flex justify-between items-start mb-4">
             <div>
               <h1 className="text-4xl font-bold mb-2">
-                <span className="zh-Hant">內幕交易</span>
-                <span className="zh-Hans hidden">内幕交易</span>
+                <span className="zh-Hant">企業交易</span>
+                <span className="zh-Hans hidden">企业交易</span>
               </h1>
-              <p className="text-gray-300 text-lg">
-                <span className="zh-Hant">來自 OpenInsider 的內幕交易數據</span>
-                <span className="zh-Hans hidden">来自 OpenInsider 的内幕交易数据</span>
-              </p>
             </div>
             <div className="flex space-x-4">
               <Link 

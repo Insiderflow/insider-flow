@@ -147,16 +147,16 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
       <section className="rounded-xl overflow-hidden hero-gradient">
         <div className="px-8 py-16 text-center">
           <h1 className="text-4xl md:text-5xl font-extrabold mb-4 text-white">
-            <span className="zh-Hant">國會交易追蹤</span>
-            <span className="zh-Hans hidden">国会交易追踪</span>
+            <span className="zh-Hant">CEO 內線交易追蹤</span>
+            <span className="zh-Hans hidden">CEO 内线交易追踪</span>
           </h1>
           <p className="text-white/90 mb-6">
-            <span className="zh-Hant">追蹤國會議員的股票交易，為您的投資研究提供寶貴洞察</span>
-            <span className="zh-Hans hidden">追踪国会议员的股票交易，为您的投资研究提供宝贵洞察</span>
+            <span className="zh-Hant">最新企業買賣 即時知道　$10/月 快人一步</span>
+            <span className="zh-Hans hidden">最新企业买卖 即时知道　$10/月 快人一步</span>
           </p>
-          <Link href="/register" className="inline-block bg-white text-purple-600 border border-white font-semibold px-5 py-2 rounded shadow hover:bg-purple-100 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none transition-colors duration-200" aria-label="Subscribe for free">
-            <span className="zh-Hant">免費訂閱 →</span>
-            <span className="zh-Hans hidden">免费订阅 →</span>
+          <Link href="/upgrade?reason=paid_required" className="inline-block bg-white text-purple-600 border border-white font-semibold px-5 py-2 rounded shadow hover:bg-purple-100 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none transition-colors duration-200" aria-label="Upgrade">
+            <span className="zh-Hant">立即升級 →</span>
+            <span className="zh-Hans hidden">立即升级 →</span>
           </Link>
         </div>
       </section>
