@@ -47,9 +47,6 @@ export const authOptions: NextAuthOptions = {
     async session(message) {
       console.log("[nextauth] session", { sessionUser: message.session?.user });
     },
-    async error(message) {
-      console.error("[nextauth] error", message);
-    },
   },
   secret: process.env.NEXTAUTH_SECRET,
 };
