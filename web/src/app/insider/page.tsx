@@ -70,7 +70,7 @@ export default async function InsiderPage({ searchParams }: { searchParams: Prom
   const sp = await searchParams;
   const pageSize = 50;
   const page = Math.max(1, Number(typeof sp.page === 'string' ? sp.page : 1) || 1);
-  const allowedSort = new Set(['transactionDate', 'tradeDate', 'valueNumeric', 'lastPrice']);
+  const allowedSort = new Set(['transactionDate', 'transactionDate', 'valueNumeric', 'lastPrice']);
   const order = (typeof sp.order === 'string' && sp.order.toLowerCase() === 'asc') ? 'asc' : 'desc';
   const sortKeyRaw = typeof sp.sort === 'string' ? sp.sort : 'transactionDate';
   const sortKey = allowedSort.has(sortKeyRaw) ? sortKeyRaw : 'transactionDate';
@@ -329,7 +329,7 @@ export default async function InsiderPage({ searchParams }: { searchParams: Prom
             <ExportButton 
               data={transactions.map(t => ({
                 transactionDate: t.transactionDate,
-                tradeDate: t.tradeDate,
+                transactionDate: t.transactionDate,
                 ticker: t.company.ticker,
                 companyName: t.company.name,
                 ownerName: t.owner.name,
@@ -368,7 +368,7 @@ export default async function InsiderPage({ searchParams }: { searchParams: Prom
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
                     <SortableHeader 
-                      field="tradeDate" 
+                      field="transactionDate" 
                       currentSort={sortKey} 
                       currentOrder={order}
                       label="交易日期"
@@ -443,7 +443,7 @@ export default async function InsiderPage({ searchParams }: { searchParams: Prom
                       {new Date(transaction.transactionDate).toLocaleDateString()}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                      {new Date(transaction.tradeDate).toLocaleDateString()}
+                      {new Date(transaction.transactionDate).toLocaleDateString()}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-white font-medium">
                       {transaction.company.ticker}

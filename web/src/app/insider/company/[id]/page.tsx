@@ -175,7 +175,7 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
                       {new Date(transaction.transactionDate).toLocaleDateString()}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                      {new Date(transaction.tradeDate).toLocaleDateString()}
+                      {new Date(transaction.transactionDate).toLocaleDateString()}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                       <Link 
