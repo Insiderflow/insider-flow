@@ -12,6 +12,8 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   session: { strategy: "jwt" },
+  trustHost: true,
+  debug: true,
   pages: {
     signIn: "/login",
     error: "/login?error=OAuthSignIn",
@@ -30,6 +32,23 @@ export const authOptions: NextAuthOptions = {
         (session.user as any).id = token.id as string;
       }
       return session;
+    },
+  },
+  events: {
+    async signIn(message) {
+      console.log("[nextauth] signIn", { userId: (message.user as any)?.id, provider: message.account?.provider });
+    },
+    async createUser(message) {
+      console.log("[nextauth] createUser", { userId: (message.user as any)?.id, email: message.user?.email });
+    },
+    async linkAccount(message) {
+      console.log("[nextauth] linkAccount", { userId: message.user?.id, provider: message.account?.provider });
+    },
+    async session(message) {
+      console.log("[nextauth] session", { sessionUser: message.session?.user });
+    },
+    async error(message) {
+      console.error("[nextauth] error", message);
     },
   },
   secret: process.env.NEXTAUTH_SECRET,
