@@ -45,8 +45,8 @@ export async function POST(req: NextRequest) {
           if (subscriptionId) {
             try {
               const sub = await stripe.subscriptions.retrieve(subscriptionId);
-              // Use type assertion to access current_period_end property
-              membershipExpiresAt = (sub as StripeSubscriptionWithPeriod).current_period_end ? new Date((sub as StripeSubscriptionWithPeriod).current_period_end * 1000) : null;
+              // Access the subscription data from the response
+              membershipExpiresAt = (sub as unknown as StripeSubscriptionWithPeriod).current_period_end ? new Date((sub as unknown as StripeSubscriptionWithPeriod).current_period_end * 1000) : null;
             } catch (error) {
               console.error('Failed to retrieve subscription:', error);
             }
@@ -76,7 +76,7 @@ export async function POST(req: NextRequest) {
             where: { id: user.id },
             data: {
               membership_tier: isActive ? 'PAID' : 'FREE',
-              membership_expires_at: (sub as StripeSubscriptionWithPeriod).current_period_end ? new Date((sub as StripeSubscriptionWithPeriod).current_period_end * 1000) : null,
+              membership_expires_at: (sub as unknown as StripeSubscriptionWithPeriod).current_period_end ? new Date((sub as unknown as StripeSubscriptionWithPeriod).current_period_end * 1000) : null,
               stripe_subscription_id: sub.id,
             },
           });
