@@ -87,20 +87,28 @@ async function main() {
     await prisma.openInsiderCompany.deleteMany();
     await prisma.openInsiderOwner.deleteMany();
 
-    // Insert companies
+    // Insert companies in batches
     console.log('📊 Inserting companies...');
-    for (const [ticker, company] of companies) {
-      await prisma.openInsiderCompany.create({
-        data: company
+    const companyArray = Array.from(companies.values());
+    const companyBatchSize = 500;
+    for (let i = 0; i < companyArray.length; i += companyBatchSize) {
+      const batch = companyArray.slice(i, i + companyBatchSize);
+      await prisma.openInsiderCompany.createMany({
+        data: batch
       });
+      console.log(`Inserted companies batch ${Math.floor(i/companyBatchSize) + 1}/${Math.ceil(companyArray.length/companyBatchSize)}`);
     }
 
-    // Insert owners
+    // Insert owners in batches
     console.log('👥 Inserting owners...');
-    for (const [name, owner] of owners) {
-      await prisma.openInsiderOwner.create({
-        data: owner
+    const ownerArray = Array.from(owners.values());
+    const ownerBatchSize = 500;
+    for (let i = 0; i < ownerArray.length; i += ownerBatchSize) {
+      const batch = ownerArray.slice(i, i + ownerBatchSize);
+      await prisma.openInsiderOwner.createMany({
+        data: batch
       });
+      console.log(`Inserted owners batch ${Math.floor(i/ownerBatchSize) + 1}/${Math.ceil(ownerArray.length/ownerBatchSize)}`);
     }
 
     // Get company and owner IDs

@@ -67,62 +67,48 @@ async function importScrapedTrades() {
           }
         });
         
-        // Create or update the trade
-        const existingTrade = await prisma.trade.findUnique({
-          where: { id: trade.tradeId }
+        // Check for existing trade by content (not just ID) to prevent duplicates
+        const existingTrade = await prisma.trade.findFirst({
+          where: {
+            politician_id: trade.politicianId,
+            issuer_id: trade.issuerId,
+            traded_at: new Date(trade.tradedAt),
+            type: trade.type,
+            price: trade.price ? parseFloat(trade.price) : null
+          }
         });
         
         if (existingTrade) {
-          // Update existing trade
-          await prisma.trade.update({
-            where: { id: trade.tradeId },
-            data: {
-              politician_id: trade.politicianId,
-              issuer_id: trade.issuerId,
-              traded_at: new Date(trade.tradedAt),
-              type: trade.type,
-              size_min: trade.sizeMin ? parseFloat(trade.sizeMin) : null,
-              size_max: trade.sizeMax ? parseFloat(trade.sizeMax) : null,
-              price: trade.price ? parseFloat(trade.price) : null,
-              published_at: trade.publishedAt ? new Date(trade.publishedAt) : null,
-              filed_after_days: trade.filedAfterDays ? parseInt(trade.filedAfterDays) : null,
-              owner: trade.owner || 'unknown',
-              source_url: trade.detailUrl || null,
-              raw: {
-                politicianName: trade.politicianName,
-                issuerName: trade.issuerName,
-                sizeText: trade.sizeText,
-                ticker: trade.ticker
-              }
-            }
-          });
-          updated++;
-        } else {
-          // Create new trade
-          const newTrade = await prisma.trade.create({
-            data: {
-              id: trade.tradeId,
-              politician_id: trade.politicianId,
-              issuer_id: trade.issuerId,
-              traded_at: new Date(trade.tradedAt),
-              type: trade.type,
-              size_min: trade.sizeMin ? parseFloat(trade.sizeMin) : null,
-              size_max: trade.sizeMax ? parseFloat(trade.sizeMax) : null,
-              price: trade.price ? parseFloat(trade.price) : null,
-              published_at: trade.publishedAt ? new Date(trade.publishedAt) : null,
-              filed_after_days: trade.filedAfterDays ? parseInt(trade.filedAfterDays) : null,
-              owner: trade.owner || 'unknown',
-              source_url: trade.detailUrl || null,
-              raw: {
-                politicianName: trade.politicianName,
-                issuerName: trade.issuerName,
-                sizeText: trade.sizeText,
-                ticker: trade.ticker
-              }
-            }
-          });
-          imported++;
+          // Skip duplicate trade
+          console.log(`⚠️  Skipping duplicate trade: ${trade.politicianName} - ${trade.type} - ${trade.issuerName} - ${new Date(trade.tradedAt).toISOString().split('T')[0]}`);
+          skipped++;
+          continue;
         }
+        
+        // Create new trade (no duplicates found)
+        const newTrade = await prisma.trade.create({
+          data: {
+            id: trade.tradeId,
+            politician_id: trade.politicianId,
+            issuer_id: trade.issuerId,
+            traded_at: new Date(trade.tradedAt),
+            type: trade.type,
+            size_min: trade.sizeMin ? parseFloat(trade.sizeMin) : null,
+            size_max: trade.sizeMax ? parseFloat(trade.sizeMax) : null,
+            price: trade.price ? parseFloat(trade.price) : null,
+            published_at: trade.publishedAt ? new Date(trade.publishedAt) : null,
+            filed_after_days: trade.filedAfterDays ? parseInt(trade.filedAfterDays) : null,
+            owner: trade.owner || 'unknown',
+            source_url: trade.detailUrl || null,
+            raw: {
+              politicianName: trade.politicianName,
+              issuerName: trade.issuerName,
+              sizeText: trade.sizeText,
+              ticker: trade.ticker
+            }
+          }
+        });
+        imported++;
         
         console.log(`✅ Processed: ${trade.politicianName} - ${trade.type} - ${trade.issuerName} - ${new Date(trade.tradedAt).toISOString().split('T')[0]}`);
         
