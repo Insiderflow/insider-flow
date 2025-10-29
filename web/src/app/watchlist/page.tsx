@@ -61,7 +61,7 @@ export default async function WatchlistPage() {
   try {
     watchlist = await prisma.userWatchlist.findMany({
       where: { user_id: userId },
-      include: { Politician: true, Company: true, Owner: true },
+      include: { Politician: true },
       orderBy: { created_at: 'desc' },
     });
   } catch {
@@ -152,8 +152,8 @@ export default async function WatchlistPage() {
                   <div key={item.id} className="bg-gray-700 rounded-lg p-4">
                     <div className="flex justify-between items-start">
                       <div>
-                        <h3 className="font-semibold text-lg">{item.Company?.name}</h3>
-                        <p className="text-gray-300 text-sm">{item.Company?.ticker}</p>
+                        <h3 className="font-semibold text-lg">{item.ticker || 'Unknown Company'}</h3>
+                        <p className="text-gray-300 text-sm">Company ID: {item.company_id}</p>
                       </div>
                       <WatchlistButton 
                         type="company"
@@ -188,8 +188,8 @@ export default async function WatchlistPage() {
                   <div key={item.id} className="bg-gray-700 rounded-lg p-4">
                     <div className="flex justify-between items-start">
                       <div>
-                        <h3 className="font-semibold text-lg">{item.Owner?.name}</h3>
-                        <p className="text-gray-300 text-sm">{item.Owner?.title}</p>
+                        <h3 className="font-semibold text-lg">Owner ID: {item.owner_id}</h3>
+                        <p className="text-gray-300 text-sm">Owner Type</p>
                       </div>
                       <WatchlistButton 
                         type="owner"
