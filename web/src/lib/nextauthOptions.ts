@@ -12,7 +12,6 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   session: { strategy: "jwt" },
-  trustHost: true,
   debug: true,
   pages: {
     signIn: "/login",
