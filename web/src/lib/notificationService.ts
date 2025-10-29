@@ -142,7 +142,7 @@ export async function notifyNewTrade(trade: TradeData) {
     type: 'newTrade',
     data: {
       politician: trade.politician ? { name: trade.politician.name, id: trade.politician.id } : undefined,
-      issuer: trade.issuer ? { name: trade.issuer.name } : undefined,
+      issuer: trade.issuer ? { name: trade.issuer.name, id: trade.issuer.id } : undefined,
       type: trade.type,
       tradedAt: trade.tradedAt,
     },
