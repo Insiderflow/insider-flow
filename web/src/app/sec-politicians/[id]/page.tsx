@@ -16,8 +16,6 @@ export default async function SECPoliticianDetailPage({
   searchParams: Promise<Record<string, string | string[] | undefined>> 
 }) {
   const { id } = await params;
-  const sp = await searchParams;
-  const user = await getSessionUser();
   
   // Get politician details
   const politician = await prisma.politician.findUnique({

@@ -3,13 +3,7 @@ import { getSessionUser } from '@/lib/auth';
 
 export const dynamic = 'force-dynamic';
 
-export default async function InstitutionalPage({ 
-  searchParams 
-}: { 
-  searchParams: Promise<Record<string, string | string[] | undefined>> 
-}) {
-  const user = await getSessionUser();
-
+export default async function InstitutionalPage() {
   return (
     <div className="min-h-screen bg-gray-900">
       <main className="p-4">

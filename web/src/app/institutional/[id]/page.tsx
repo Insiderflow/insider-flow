@@ -6,12 +6,7 @@ interface InstitutionalDetailPageProps {
   params: Promise<{ id: string }>;
 }
 
-export default async function InstitutionalDetailPage({ 
-  params, 
-  searchParams 
-}: InstitutionalDetailPageProps & { 
-  searchParams: Promise<Record<string, string | string[] | undefined>> 
-}) {
+export default async function InstitutionalDetailPage() {
   // Temporarily redirect to politicians page until institutional data is properly set up
   redirect('/politicians');
 }

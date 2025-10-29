@@ -2,9 +2,7 @@ import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
 import ClearFiltersButton from '@/components/ClearFiltersButton';
 import AutocompleteInput from '@/components/AutocompleteInput';
-import LoadingWrapper from '@/components/LoadingWrapper';
-import { StatsCardSkeleton, TableSkeleton } from '@/components/SkeletonLoader';
-import LastUpdated, { DataFreshnessIndicator } from '@/components/LastUpdated';
+import LastUpdated from '@/components/LastUpdated';
 import { translateTitle } from '@/lib/titleI18n';
 import { translateTxnType } from '@/lib/transactionTypeI18n';
 import FilterCategories from './FilterCategories';
@@ -213,11 +211,6 @@ export default async function InsiderPage({ searchParams }: { searchParams: Prom
     }),
   ]);
 
-  const companyOptions = companies.map(c => ({ value: c.name, label: `${c.name} (${c.ticker})` }));
-  const ownerOptions = owners.map(o => ({ 
-    value: o.name, 
-    label: `${o.name}${o.isInstitution ? ' (Institution)' : ''}` 
-  }));
 
   const transactionTypes = ['P', 'S', 'A', 'D', 'G', 'M', 'F', 'I', 'J', 'K', 'L', 'N', 'O', 'W', 'X', 'Z'];
 

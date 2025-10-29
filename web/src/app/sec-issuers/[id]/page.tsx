@@ -16,8 +16,6 @@ export default async function SECIssuerDetailPage({
   searchParams: Promise<Record<string, string | string[] | undefined>> 
 }) {
   const { id } = await params;
-  const sp = await searchParams;
-  const user = await getSessionUser();
   
   // Get issuer details
   const issuer = await prisma.issuer.findUnique({

@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { getSessionUser } from '@/lib/auth';
 
 export const dynamic = 'force-dynamic';
 

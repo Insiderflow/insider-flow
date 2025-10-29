@@ -19,7 +19,7 @@ export default function Upgrade() {
       } else {
         alert(data.error || 'Checkout failed');
       }
-    } catch (error) {
+    } catch {
       alert('Checkout failed. Please try again.');
     } finally {
       setLoading(null);

@@ -64,7 +64,7 @@ export default async function WatchlistPage() {
       include: { Politician: true, Company: true, Owner: true },
       orderBy: { created_at: 'desc' },
     });
-  } catch (e) {
+  } catch {
     // Soft-fail with empty watchlist to avoid page collapse
     watchlist = [];
   }
