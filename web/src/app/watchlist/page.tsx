@@ -54,9 +54,14 @@ export default async function WatchlistPage() {
     watchlist_type: string;
     ticker: string | null;
     created_at: Date;
-    Politician: unknown;
-    Company: unknown;
-    Owner: unknown;
+    Politician: {
+      name: string;
+      id: string;
+      created_at: Date;
+      party: string | null;
+      chamber: string | null;
+      state: string | null;
+    } | null;
   }> = [];
   try {
     watchlist = await prisma.userWatchlist.findMany({
