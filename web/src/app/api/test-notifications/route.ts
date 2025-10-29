@@ -18,7 +18,8 @@ export async function POST(request: NextRequest) {
         id: politicianId
       },
       issuer: {
-        name: issuerName
+        name: issuerName,
+        id: 'test-issuer-id'
       },
       type: type,
       tradedAt: tradedAt
