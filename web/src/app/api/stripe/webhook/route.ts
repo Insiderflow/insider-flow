@@ -36,14 +36,23 @@ export async function POST(req: NextRequest) {
 
         if (user) {
           // Ensure we persist the Stripe customer/subscription IDs and set membership
-          const sub = subscriptionId ? await stripe.subscriptions.retrieve(subscriptionId) : null;
+          let membershipExpiresAt = null;
+          if (subscriptionId) {
+            try {
+              const sub = await stripe.subscriptions.retrieve(subscriptionId);
+              membershipExpiresAt = sub.current_period_end ? new Date(sub.current_period_end * 1000) : null;
+            } catch (error) {
+              console.error('Failed to retrieve subscription:', error);
+            }
+          }
+          
           await prisma.user.update({
             where: { id: user.id },
             data: {
               stripe_customer_id: user.stripe_customer_id || customerId || undefined,
               stripe_subscription_id: subscriptionId || undefined,
               membership_tier: 'PAID',
-              membership_expires_at: sub?.current_period_end ? new Date(sub.current_period_end * 1000) : null,
+              membership_expires_at: membershipExpiresAt,
             },
           });
         }

@@ -35,7 +35,7 @@ const authOptions: NextAuthOptions = {
     error: "/login?error=OAuthSignIn"
   },
   callbacks: {
-    async signIn({ user, account, profile }) {
+    async signIn({ account }) {
       if (account?.provider === "google") {
         // Allow Google sign-in
         return true;
