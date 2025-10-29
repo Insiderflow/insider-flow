@@ -20,10 +20,14 @@ export default async function InsiderPage({ params }: InsiderPageProps) {
     transactions: Array<{
       id: string;
       transactionDate: Date;
+      tradeDate: Date;
       transactionType: string;
       quantity: string;
+      sharesHeld: string;
+      owned: string;
       value: string;
       valueNumeric: Decimal | null;
+      lastPrice: Decimal | null;
       company: {
         id: string;
         ticker: string;

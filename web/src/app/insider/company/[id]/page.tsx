@@ -19,10 +19,14 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
     transactions: Array<{
       id: string;
       transactionDate: Date;
+      tradeDate: Date;
       transactionType: string;
       quantity: string;
+      sharesHeld: string;
+      owned: string;
       value: string;
       valueNumeric: Decimal | null;
+      lastPrice: Decimal | null;
       owner: {
         id: string;
         name: string;
