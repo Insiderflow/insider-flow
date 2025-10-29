@@ -162,7 +162,7 @@ export default async function WatchlistPage() {
                       </div>
                       <WatchlistButton 
                         type="company"
-                        companyId={item.company_id}
+                        companyId={item.company_id || undefined}
                         className="text-xs"
                       />
                     </div>
@@ -198,7 +198,7 @@ export default async function WatchlistPage() {
                       </div>
                       <WatchlistButton 
                         type="owner"
-                        ownerId={item.owner_id}
+                        ownerId={item.owner_id || undefined}
                         className="text-xs"
                       />
                     </div>
