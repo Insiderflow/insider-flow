@@ -1,5 +1,11 @@
 'use client';
 
+interface FilterItem {
+  key: string;
+  label: string;
+  color: string;
+}
+
 interface FilterCategoriesProps {
   currentFilter: string;
 }
@@ -41,7 +47,7 @@ export default function FilterCategories({ currentFilter }: FilterCategoriesProp
     window.location.href = '/insider';
   };
 
-  const renderFilterButton = (filter: any) => {
+  const renderFilterButton = (filter: FilterItem) => {
     const isActive = currentFilter === filter.key;
     const colorClasses = {
       blue: isActive ? 'bg-blue-700 text-white ring-2 ring-blue-400' : 'bg-blue-600 hover:bg-blue-700 text-white',

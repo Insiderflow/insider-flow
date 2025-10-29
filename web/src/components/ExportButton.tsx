@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 interface ExportButtonProps {
-  data: any[];
+  data: Record<string, unknown>[];
   filename?: string;
   className?: string;
 }
