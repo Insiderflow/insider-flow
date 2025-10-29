@@ -43,6 +43,7 @@ interface DailyData {
 
 export default function IssuerTimelineChart({ trades, issuerName }: IssuerTimelineChartProps) {
   const [hoveredPoint, setHoveredPoint] = useState<ChartPoint | null>(null);
+  const [mousePosition, setMousePosition] = useState<{ x: number; y: number } | null>(null);
   const chartRef = useRef<HTMLDivElement>(null);
   const [chartPoints, setChartPoints] = useState<ChartPoint[]>([]);
 
