@@ -17,6 +17,7 @@ export default async function InsiderPage({ params }: InsiderPageProps) {
     id: string;
     name: string;
     title: string | null;
+    isInstitution: boolean;
     transactions: Array<{
       id: string;
       transactionDate: Date;
