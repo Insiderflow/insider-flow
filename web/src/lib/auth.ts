@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs';
-import { cookies, headers } from 'next/headers';
+import { cookies } from 'next/headers';
 import { prisma } from './prisma';
 import { sendPasswordResetEmail } from './email';
 import crypto from 'crypto';
@@ -43,15 +43,11 @@ export async function getSessionUser() {
   const sessionToken = cookieStore.get('session')?.value;
 
   if (!sessionToken) {
-    // Fallback to NextAuth session
-    try {
-      const session = await getServerSession({ headers: headers(), cookies: cookieStore } as any, authOptions as any);
-      if (session?.user?.email) {
-        const user = await prisma.user.findUnique({ where: { email: session.user.email } });
-        return user;
-      }
-    } catch {
-      // ignore
+    // Fallback to NextAuth session (App Router usage)
+    const session = await getServerSession(authOptions as any);
+    if (session?.user?.email) {
+      const user = await prisma.user.findUnique({ where: { email: session.user.email } });
+      return user;
     }
     return null;
   }
