@@ -1,8 +1,10 @@
 import bcrypt from 'bcryptjs';
-import { cookies } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 import { prisma } from './prisma';
 import { sendPasswordResetEmail } from './email';
 import crypto from 'crypto';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
 // const SESSION_SECRET = process.env.SESSION_SECRET || 'fallback-secret-for-development';
 const SESSION_DURATION = 30 * 24 * 60 * 60 * 1000; // 30 days
@@ -41,6 +43,16 @@ export async function getSessionUser() {
   const sessionToken = cookieStore.get('session')?.value;
 
   if (!sessionToken) {
+    // Fallback to NextAuth session
+    try {
+      const session = await getServerSession({ headers: headers(), cookies: cookieStore } as any, authOptions as any);
+      if (session?.user?.email) {
+        const user = await prisma.user.findUnique({ where: { email: session.user.email } });
+        return user;
+      }
+    } catch {
+      // ignore
+    }
     return null;
   }
 
