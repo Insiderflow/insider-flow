@@ -20,7 +20,7 @@ interface PoliticianCardProps {
   initialInWatchlist?: boolean;
 }
 
-export default function PoliticianCard({ politician, showWatchlistButton = true, initialInWatchlist = false }: PoliticianCardProps) {
+export default function PoliticianCard({ politician, showWatchlistButton = true }: PoliticianCardProps) {
   const [imageError, setImageError] = useState(false);
   const [mounted, setMounted] = useState(false);
 

@@ -18,7 +18,7 @@ export async function POST(_req: NextRequest) {
     for (const t of rows) {
       await processNewTrade({
         politician: { id: t.ownerId, name: t.owner?.name || '' }, // reuse TradeData contract
-        owner: t.owner ? { id: t.ownerId, name: t.owner.name } : undefined,
+        owner: t.owner ? { name: t.owner.name, id: t.ownerId } : undefined,
         issuer: { id: t.companyId, name: t.company?.name || '', ticker: t.company?.ticker || '' },
         type: t.transactionType,
         tradedAt: t.tradeDate.toISOString(),

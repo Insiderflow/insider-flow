@@ -8,10 +8,12 @@ interface TradeData {
   };
   owner?: {
     name: string;
+    id: string;
   };
   issuer?: {
     name: string;
     ticker?: string;
+    id: string;
   };
   type: string;
   tradedAt: string;
@@ -172,7 +174,7 @@ export async function notifyWatchlistUpdate(trade: TradeData) {
       where: {
         email_verified: true,
         notification_settings: { path: ['watchlistUpdates'], equals: true },
-        UserWatchlist: { some: { watchlist_type: 'politician', politician_id: (trade as any).politician?.id } },
+        UserWatchlist: { some: { watchlist_type: 'politician', politician_id: trade.politician?.id } },
       },
       select: { email: true },
     });
@@ -182,7 +184,7 @@ export async function notifyWatchlistUpdate(trade: TradeData) {
       where: {
         email_verified: true,
         notification_settings: { path: ['watchlistUpdates'], equals: true },
-        UserWatchlist: { some: { watchlist_type: 'company', company_id: (trade as any).issuer?.id } },
+        UserWatchlist: { some: { watchlist_type: 'company', company_id: trade.issuer?.id } },
       },
       select: { email: true },
     });
@@ -192,7 +194,7 @@ export async function notifyWatchlistUpdate(trade: TradeData) {
       where: {
         email_verified: true,
         notification_settings: { path: ['watchlistUpdates'], equals: true },
-        UserWatchlist: { some: { watchlist_type: 'owner', owner_id: (trade as any).owner?.id } },
+        UserWatchlist: { some: { watchlist_type: 'owner', owner_id: trade.owner?.id } },
       },
       select: { email: true },
     });
@@ -202,7 +204,7 @@ export async function notifyWatchlistUpdate(trade: TradeData) {
       where: {
         email_verified: true,
         notification_settings: { path: ['watchlistUpdates'], equals: true },
-        UserWatchlist: { some: { watchlist_type: 'stock', ticker: (trade as any).issuer?.ticker } },
+        UserWatchlist: { some: { watchlist_type: 'stock', ticker: trade.issuer?.ticker } },
       },
       select: { email: true },
     });
@@ -218,12 +220,12 @@ export async function notifyWatchlistUpdate(trade: TradeData) {
       await sendNotificationEmail(email, {
         type: 'watchlistUpdate',
         data: {
-          politician: (trade as any).politician ? { name: (trade as any).politician.name, id: (trade as any).politician.id } : undefined,
-          owner: (trade as any).owner ? { name: (trade as any).owner.name, id: (trade as any).owner.id } : undefined,
-          issuer: (trade as any).issuer ? { name: (trade as any).issuer.name, id: (trade as any).issuer.id, ticker: (trade as any).issuer.ticker } : undefined,
-          type: (trade as any).type,
-          tradedAt: (trade as any).tradedAt,
-        } as any,
+          politician: trade.politician ? { name: trade.politician.name, id: trade.politician.id } : undefined,
+          owner: trade.owner ? { name: trade.owner.name, id: trade.owner.id } : undefined,
+          issuer: trade.issuer ? { name: trade.issuer.name, id: trade.issuer.id, ticker: trade.issuer.ticker } : undefined,
+          type: trade.type,
+          tradedAt: trade.tradedAt,
+        },
       });
     }
 

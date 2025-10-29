@@ -46,30 +46,13 @@ export default function WatchlistButton({
           // treat non-401 as logged in but no items
           setIsLoggedIn(true);
         }
-      } catch (_e) {
+      } catch {
         setIsLoggedIn(false);
       }
     };
     
     checkAuth();
-  }, [userId]);
-
-  const checkWatchlistStatus = async () => {
-    try {
-      const params = new URLSearchParams({ type });
-      if (politicianId) params.set('politicianId', politicianId);
-      if (companyId) params.set('companyId', companyId);
-      if (ownerId) params.set('ownerId', ownerId);
-      if (ticker) params.set('ticker', ticker);
-
-      const response = await fetch(`/api/watchlist?${params.toString()}`);
-      if (response.status !== 200) return;
-      const data = await response.json();
-      setIsWatching(data.watchlist && data.watchlist.length > 0);
-    } catch (error) {
-      console.error('Error checking watchlist status:', error);
-    }
-  };
+  }, [userId, companyId, ownerId, politicianId, ticker, type]);
 
   const handleToggleWatchlist = async () => {
     if (!isLoggedIn) {

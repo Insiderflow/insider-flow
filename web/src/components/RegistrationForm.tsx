@@ -3,11 +3,9 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-interface RegistrationFormProps {
-  next: string;
-}
+interface RegistrationFormProps {}
 
-export default function RegistrationForm({ next }: RegistrationFormProps) {
+export default function RegistrationForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
