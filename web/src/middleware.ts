@@ -10,8 +10,14 @@ export async function middleware(req: NextRequest) {
 
   if (!requiresAuth && !requiresPaid) return NextResponse.next();
 
-  const sessionToken = (await cookies()).get('session')?.value;
-  if (!sessionToken) return NextResponse.redirect(new URL('/login?next=' + encodeURIComponent(req.nextUrl.pathname), req.url));
+  const cookieStore = await cookies();
+  const sessionToken =
+    cookieStore.get('session')?.value ||
+    cookieStore.get('__Secure-next-auth.session-token')?.value ||
+    cookieStore.get('next-auth.session-token')?.value;
+  if (!sessionToken) {
+    return NextResponse.redirect(new URL('/login?next=' + encodeURIComponent(req.nextUrl.pathname), req.url));
+  }
 
   // Only check cookie presence here; actual auth/paid checks handled server-side to keep middleware edge-safe
 
