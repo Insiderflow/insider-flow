@@ -40,8 +40,8 @@ export async function POST(req: NextRequest) {
           if (subscriptionId) {
             try {
               const sub = await stripe.subscriptions.retrieve(subscriptionId);
-              // Cast to Subscription type to access properties
-              membershipExpiresAt = (sub as Stripe.Subscription).current_period_end ? new Date((sub as Stripe.Subscription).current_period_end * 1000) : null;
+              // Use type assertion to access current_period_end property
+              membershipExpiresAt = (sub as any).current_period_end ? new Date((sub as any).current_period_end * 1000) : null;
             } catch (error) {
               console.error('Failed to retrieve subscription:', error);
             }
