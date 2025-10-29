@@ -237,7 +237,7 @@ export default async function WatchlistPage() {
                       </div>
                       <WatchlistButton 
                         type="stock"
-                        ticker={item.ticker}
+                        ticker={item.ticker || undefined}
                         className="text-xs"
                       />
                     </div>
