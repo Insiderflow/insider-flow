@@ -27,7 +27,7 @@ export async function createSession(user_id: string): Promise<string> {
   const token = generateToken();
   const expiresAt = new Date(Date.now() + SESSION_DURATION);
 
-  await prisma.session.create({
+  await prisma.legacySession.create({
     data: {
       id: token,
       user_id,
@@ -53,7 +53,7 @@ export async function getSessionUser() {
     return null;
   }
 
-  const session = await prisma.session.findUnique({
+  const session = await prisma.legacySession.findUnique({
     where: { token: sessionToken },
     include: { user: true },
   });
@@ -78,7 +78,7 @@ export async function logout() {
   const sessionToken = cookieStore.get('session')?.value;
 
   if (sessionToken) {
-    await prisma.session.deleteMany({
+    await prisma.legacySession.deleteMany({
       where: { token: sessionToken },
     });
   }

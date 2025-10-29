@@ -30,7 +30,7 @@ model Politician {
   UserWatchlist UserWatchlist[]
 }
 
-model Session {
+model LegacySession {
   id         String   @id
   user_id    String
   token      String   @unique
@@ -40,6 +40,7 @@ model Session {
 
   @@index([token])
   @@index([user_id])
+  @@map("Session")
 }
 
 model Trade {
@@ -64,6 +65,9 @@ model Trade {
 model User {
   id                       String          @id
   email                    String          @unique
+  name                     String?
+  image                    String?
+  emailVerified            DateTime?
   password_hash            String?
   email_verified           Boolean         @default(false)
   email_verification_token String?
@@ -76,10 +80,10 @@ model User {
   membership_expires_at    DateTime?
   stripe_customer_id       String?
   stripe_subscription_id   String?
-  Session                  Session[]
+  LegacySession            LegacySession[]
   UserWatchlist            UserWatchlist[]
   accounts                 Account[]
-  sessions                 NextAuthSession[]
+  sessions                 Session[]
 }
 
 enum MembershipTier {
@@ -188,7 +192,7 @@ model Account {
   @@map("accounts")
 }
 
-model NextAuthSession {
+model Session {
   id           String   @id @default(cuid())
   sessionToken String   @unique @map("session_token")
   userId       String   @map("user_id")
