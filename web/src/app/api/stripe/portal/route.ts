@@ -21,8 +21,9 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.redirect(portalSession.url);
-  } catch (error: any) {
-    console.error('Portal creation error:', error);
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error('Portal creation error:', errorMessage);
     return NextResponse.redirect(new URL('/account?error=portal_failed', req.url));
   }
 }

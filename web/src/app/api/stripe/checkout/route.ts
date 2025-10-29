@@ -31,8 +31,9 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json({ url: session.url });
-  } catch (e: any) {
-    console.error('checkout error', e);
+  } catch (e: unknown) {
+    const errorMessage = e instanceof Error ? e.message : 'Unknown error';
+    console.error('checkout error', errorMessage);
     return NextResponse.json({ error: 'checkout failed' }, { status: 500 });
   }
 }

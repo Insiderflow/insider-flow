@@ -14,7 +14,14 @@ export async function GET(request: NextRequest) {
     const user = await getSessionUser();
     if (!user) return NextResponse.json({ error: '請先登入' }, { status: 401 });
 
-    const where: any = { user_id: user.id };
+    const where: {
+      user_id: string;
+      watchlist_type?: string;
+      politician_id?: string | null;
+      company_id?: string | null;
+      owner_id?: string | null;
+      ticker?: string | null;
+    } = { user_id: user.id };
     if (type) {
       where.watchlist_type = type;
     }
@@ -118,7 +125,14 @@ export async function DELETE(request: NextRequest) {
     const ticker = searchParams.get('ticker');
     if (!type) return NextResponse.json({ error: 'Type required' }, { status: 400 });
 
-    const where: any = {
+    const where: {
+      user_id: string;
+      watchlist_type: string;
+      politician_id?: string | null;
+      company_id?: string | null;
+      owner_id?: string | null;
+      ticker?: string | null;
+    } = {
       user_id: user.id,
       watchlist_type: type,
     };
