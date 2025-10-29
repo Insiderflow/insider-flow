@@ -41,7 +41,7 @@ export default async function InsiderPage({ params }: InsiderPageProps) {
         },
       },
     });
-  } catch (_e) {
+  } catch {
     insider = null;
   }
 

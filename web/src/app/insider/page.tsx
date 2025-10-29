@@ -199,17 +199,11 @@ export default async function InsiderPage({ searchParams }: { searchParams: Prom
 
   const totalPages = Math.ceil(totalCount / pageSize);
 
-  // Get unique companies and owners for autocomplete
-  const [companies, owners] = await Promise.all([
-    prisma.openInsiderCompany.findMany({
-      select: { name: true, ticker: true },
-      orderBy: { name: 'asc' },
-    }),
-    prisma.openInsiderOwner.findMany({
-      select: { name: true, isInstitution: true },
-      orderBy: { name: 'asc' },
-    }),
-  ]);
+  // Get unique companies for autocomplete
+  const companies = await prisma.openInsiderCompany.findMany({
+    select: { name: true, ticker: true },
+    orderBy: { name: 'asc' },
+  });
 
 
   const transactionTypes = ['P', 'S', 'A', 'D', 'G', 'M', 'F', 'I', 'J', 'K', 'L', 'N', 'O', 'W', 'X', 'Z'];

@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
 import { notFound } from 'next/navigation';
-import { getSessionUser } from '@/lib/auth';
 
 export const dynamic = 'force-dynamic';
 
@@ -10,11 +9,8 @@ interface SECPoliticianDetailPageProps {
 }
 
 export default async function SECPoliticianDetailPage({ 
-  params, 
-  searchParams 
-}: SECPoliticianDetailPageProps & { 
-  searchParams: Promise<Record<string, string | string[] | undefined>> 
-}) {
+  params
+}: SECPoliticianDetailPageProps) {
   const { id } = await params;
   
   // Get politician details

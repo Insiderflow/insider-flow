@@ -4,7 +4,7 @@ import { processNewTrade } from '@/lib/notificationService';
 
 export const dynamic = 'force-dynamic';
 
-export async function POST(_req: NextRequest) {
+export async function POST() {
   try {
     // Process trades in the last 10 minutes
     const since = new Date(Date.now() - 10 * 60 * 1000);

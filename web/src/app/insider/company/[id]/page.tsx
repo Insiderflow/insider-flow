@@ -40,7 +40,7 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
         },
       },
     });
-  } catch (_e) {
+  } catch {
     company = null;
   }
 

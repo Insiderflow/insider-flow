@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
 import { notFound } from 'next/navigation';
-import { getSessionUser } from '@/lib/auth';
 
 export const dynamic = 'force-dynamic';
 
@@ -10,11 +9,8 @@ interface SECIssuerDetailPageProps {
 }
 
 export default async function SECIssuerDetailPage({ 
-  params, 
-  searchParams 
-}: SECIssuerDetailPageProps & { 
-  searchParams: Promise<Record<string, string | string[] | undefined>> 
-}) {
+  params
+}: SECIssuerDetailPageProps) {
   const { id } = await params;
   
   // Get issuer details
