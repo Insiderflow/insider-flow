@@ -2,6 +2,11 @@ import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { prisma } from '@/lib/prisma';
 
+// Extend Stripe Subscription type to include current_period_end
+interface StripeSubscriptionWithPeriod extends Stripe.Subscription {
+  current_period_end: number;
+}
+
 export const config = { api: { bodyParser: false } };
 
 export async function POST(req: NextRequest) {
@@ -41,7 +46,7 @@ export async function POST(req: NextRequest) {
             try {
               const sub = await stripe.subscriptions.retrieve(subscriptionId);
               // Use type assertion to access current_period_end property
-              membershipExpiresAt = (sub as any).current_period_end ? new Date((sub as any).current_period_end * 1000) : null;
+              membershipExpiresAt = (sub as StripeSubscriptionWithPeriod).current_period_end ? new Date((sub as StripeSubscriptionWithPeriod).current_period_end * 1000) : null;
             } catch (error) {
               console.error('Failed to retrieve subscription:', error);
             }
@@ -71,7 +76,7 @@ export async function POST(req: NextRequest) {
             where: { id: user.id },
             data: {
               membership_tier: isActive ? 'PAID' : 'FREE',
-              membership_expires_at: sub.current_period_end ? new Date(sub.current_period_end * 1000) : null,
+              membership_expires_at: (sub as StripeSubscriptionWithPeriod).current_period_end ? new Date((sub as StripeSubscriptionWithPeriod).current_period_end * 1000) : null,
               stripe_subscription_id: sub.id,
             },
           });
