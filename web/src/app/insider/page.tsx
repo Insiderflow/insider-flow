@@ -329,7 +329,6 @@ export default async function InsiderPage({ searchParams }: { searchParams: Prom
             <ExportButton 
               data={transactions.map(t => ({
                 transactionDate: t.transactionDate,
-                transactionDate: t.transactionDate,
                 ticker: t.company.ticker,
                 companyName: t.company.name,
                 ownerName: t.owner.name,
