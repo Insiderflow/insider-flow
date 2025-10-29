@@ -94,10 +94,10 @@ function getEmailContent(notification: NotificationData): string {
         <h2>新交易通知</h2>
         <p>有新交易被記錄：</p>
         <ul>
-          ${(notification.data as TradeData).politician?.name ? `<li>交易者: ${(notification.data as TradeData).politician.name}</li>` : ''}
-          ${(notification.data as TradeData).owner?.name ? `<li>內部人: ${(notification.data as TradeData).owner.name}</li>` : ''}
-          ${(notification.data as TradeData).issuer?.name ? `<li>發行商: ${(notification.data as TradeData).issuer.name}</li>` : ''}
-          ${(notification.data as TradeData).issuer?.ticker ? `<li>股票代碼: ${(notification.data as TradeData).issuer.ticker}</li>` : ''}
+          ${(notification.data as TradeData).politician?.name ? `<li>交易者: ${(notification.data as TradeData).politician?.name}</li>` : ''}
+          ${(notification.data as TradeData).owner?.name ? `<li>內部人: ${(notification.data as TradeData).owner?.name}</li>` : ''}
+          ${(notification.data as TradeData).issuer?.name ? `<li>發行商: ${(notification.data as TradeData).issuer?.name}</li>` : ''}
+          ${(notification.data as TradeData).issuer?.ticker ? `<li>股票代碼: ${(notification.data as TradeData).issuer?.ticker}</li>` : ''}
           <li>類型: ${(notification.data as TradeData).type}</li>
           <li>交易日期: ${(notification.data as TradeData).tradedAt}</li>
         </ul>
