@@ -4,7 +4,7 @@ import { prisma } from './prisma';
 import { sendPasswordResetEmail } from './email';
 import crypto from 'crypto';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from '@/lib/nextauthOptions';
 
 // const SESSION_SECRET = process.env.SESSION_SECRET || 'fallback-secret-for-development';
 const SESSION_DURATION = 30 * 24 * 60 * 60 * 1000; // 30 days
