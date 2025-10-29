@@ -17,7 +17,7 @@ export default async function RegisterPage({ searchParams }: { searchParams: Pro
         </div>
         
         <div className="border border-gray-600 bg-gray-800 rounded-lg p-6 shadow-md">
-          <RegistrationForm next={next} />
+          <RegistrationForm />
           <div className="my-4 h-px bg-gray-700" />
           <OAuthButtons />
         </div>
