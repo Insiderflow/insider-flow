@@ -4,6 +4,7 @@ import { prisma } from './prisma';
 import { sendPasswordResetEmail } from './email';
 import crypto from 'crypto';
 import { getServerSession } from 'next-auth';
+import type { Session } from 'next-auth';
 import { authOptions } from '@/lib/nextauthOptions';
 
 // const SESSION_SECRET = process.env.SESSION_SECRET || 'fallback-secret-for-development';
@@ -44,8 +45,8 @@ export async function getSessionUser() {
 
   if (!sessionToken) {
     // Fallback to NextAuth session (App Router usage)
-    const session = await getServerSession(authOptions as any);
-    if (session?.user?.email) {
+    const session = (await getServerSession(authOptions)) as Session | null;
+    if (session && session.user && session.user.email) {
       const user = await prisma.user.findUnique({ where: { email: session.user.email } });
       return user;
     }
