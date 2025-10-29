@@ -179,7 +179,7 @@ export default async function InsiderPage({ searchParams }: { searchParams: Prom
   if (isInstitutionFilter === 'true') where.owner = { is: { isInstitution: true } };
   if (isInstitutionFilter === 'false') where.owner = { is: { isInstitution: false } };
 
-  const [transactions, totalCount, stats] = await Promise.all([
+  const [transactions, totalCount, stats, latestTransaction] = await Promise.all([
     prisma.openInsiderTransaction.findMany({
       where,
       orderBy,
@@ -194,6 +194,10 @@ export default async function InsiderPage({ searchParams }: { searchParams: Prom
     prisma.openInsiderTransaction.aggregate({
       _count: { id: true },
       _sum: { valueNumeric: true },
+    }),
+    prisma.openInsiderTransaction.findFirst({
+      orderBy: { transactionDate: 'desc' },
+      select: { transactionDate: true },
     }),
   ]);
 
@@ -527,7 +531,7 @@ export default async function InsiderPage({ searchParams }: { searchParams: Prom
 
         {/* Last Updated */}
         <div className="mt-8 text-center text-gray-400">
-          <LastUpdated timestamp={new Date().toISOString()} />
+          <LastUpdated timestamp={latestTransaction?.transactionDate?.toISOString() || new Date().toISOString()} />
         </div>
       </div>
     </div>
