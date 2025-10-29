@@ -22,7 +22,7 @@ export async function POST(_req: NextRequest) {
         issuer: { id: t.companyId, name: t.company?.name || '', ticker: t.company?.ticker || '' },
         type: t.transactionType,
         tradedAt: t.tradeDate.toISOString(),
-      } as any);
+      });
     }
 
     return NextResponse.json({ processed: rows.length });

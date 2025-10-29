@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
               stripe_customer_id: user.stripe_customer_id || customerId || undefined,
               stripe_subscription_id: subscriptionId || undefined,
               membership_tier: 'PAID',
-              membership_expires_at: sub?.current_period_end ? new Date(sub.current_period_end * 1000) : null,
+              membership_expires_at: sub?.current_period_end ? new Date((sub as any).current_period_end * 1000) : null,
             },
           });
         }

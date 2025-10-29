@@ -45,7 +45,19 @@ export default async function WatchlistPage() {
   }
 
   // Authenticated path with DB access, guarded in try/catch
-  let watchlist: Array<any> = [];
+  let watchlist: Array<{
+    id: string;
+    user_id: string;
+    politician_id: string | null;
+    company_id: string | null;
+    owner_id: string | null;
+    watchlist_type: string;
+    ticker: string | null;
+    created_at: Date;
+    Politician: unknown;
+    Company: unknown;
+    Owner: unknown;
+  }> = [];
   try {
     watchlist = await prisma.userWatchlist.findMany({
       where: { user_id: userId },
