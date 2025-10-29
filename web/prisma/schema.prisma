@@ -70,7 +70,7 @@ model User {
   password_reset_token     String?
   password_reset_expires   DateTime?
   created_at               DateTime        @default(now())
-  updated_at               DateTime
+  updated_at               DateTime        @updatedAt
   notification_settings    Json?
   membership_tier          MembershipTier  @default(FREE)
   membership_expires_at    DateTime?
