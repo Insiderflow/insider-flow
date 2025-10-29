@@ -74,16 +74,16 @@ export async function requireAuth() {
 }
 
 export async function logout() {
-  const cookieStore = await cookies();
-  const sessionToken = cookieStore.get('session')?.value;
-
-  if (sessionToken) {
-    await prisma.legacySession.deleteMany({
-      where: { token: sessionToken },
-    });
+  try {
+    const cookieStore = await cookies();
+    const sessionToken = cookieStore.get('session')?.value;
+    if (sessionToken) {
+      await prisma.legacySession.deleteMany({ where: { token: sessionToken } });
+    }
+    cookieStore.delete('session');
+  } catch {
+    // Swallow errors on logout to avoid surfacing 500s
   }
-
-  cookieStore.delete('session');
 }
 
 export async function createUser(email: string, password: string) {
