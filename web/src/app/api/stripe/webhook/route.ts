@@ -13,8 +13,9 @@ export async function POST(req: NextRequest) {
   let event: Stripe.Event;
   try {
     event = stripe.webhooks.constructEvent(payload, sig, secret);
-  } catch (err: any) {
-    console.error('Webhook signature verification failed.', err.message);
+  } catch (err: unknown) {
+    const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+    console.error('Webhook signature verification failed.', errorMessage);
     return NextResponse.json({ error: 'invalid signature' }, { status: 400 });
   }
 
@@ -35,7 +36,7 @@ export async function POST(req: NextRequest) {
 
         if (user) {
           // Ensure we persist the Stripe customer/subscription IDs and set membership
-          const sub = subscriptionId ? await stripe.subscriptions.retrieve(subscriptionId) as any : null;
+          const sub = subscriptionId ? await stripe.subscriptions.retrieve(subscriptionId) : null;
           await prisma.user.update({
             where: { id: user.id },
             data: {
@@ -60,7 +61,7 @@ export async function POST(req: NextRequest) {
             where: { id: user.id },
             data: {
               membership_tier: isActive ? 'PAID' : 'FREE',
-              membership_expires_at: (sub as any)?.current_period_end ? new Date((sub as any).current_period_end * 1000) : null,
+              membership_expires_at: sub.current_period_end ? new Date(sub.current_period_end * 1000) : null,
               stripe_subscription_id: sub.id,
             },
           });
@@ -68,8 +69,9 @@ export async function POST(req: NextRequest) {
         break;
       }
     }
-  } catch (e: any) {
-    console.error('Webhook handler error', e);
+  } catch (e: unknown) {
+    const errorMessage = e instanceof Error ? e.message : 'Unknown error';
+    console.error('Webhook handler error', errorMessage);
     return NextResponse.json({ error: 'handler failed' }, { status: 500 });
   }
 

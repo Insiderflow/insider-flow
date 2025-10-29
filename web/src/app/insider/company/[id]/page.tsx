@@ -11,7 +11,24 @@ interface CompanyPageProps {
 
 export default async function CompanyPage({ params }: CompanyPageProps) {
   const { id } = await params;
-  let company: any = null;
+  let company: {
+    id: string;
+    ticker: string;
+    name: string;
+    transactions: Array<{
+      id: string;
+      transactionDate: Date;
+      transactionType: string;
+      quantity: string;
+      value: string;
+      valueNumeric: number | null;
+      owner: {
+        id: string;
+        name: string;
+        title: string | null;
+      };
+    }>;
+  } | null = null;
   try {
     company = await prisma.openInsiderCompany.findUnique({
       where: { id },
@@ -33,10 +50,10 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
 
   // Calculate stats
   const totalTransactions = company.transactions.length;
-  const totalValue = company.transactions.reduce((sum: number, t: any) => 
+  const totalValue = company.transactions.reduce((sum: number, t) =>
     sum + (t.valueNumeric ? Number(t.valueNumeric) : 0), 0
   );
-  const uniqueInsiders = new Set(company.transactions.map((t: any) => t.owner.id)).size;
+  const uniqueInsiders = new Set(company.transactions.map((t) => t.owner.id)).size;
 
   return (
     <div className="min-h-screen bg-gray-900 text-white">
@@ -151,7 +168,7 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
                 </tr>
               </thead>
               <tbody className="bg-gray-800 divide-y divide-gray-700">
-                {company.transactions.map((transaction: any) => (
+                {company.transactions.map((transaction) => (
                   <tr key={transaction.id} className="hover:bg-gray-700">
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                       {new Date(transaction.transactionDate).toLocaleDateString()}

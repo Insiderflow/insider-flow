@@ -20,6 +20,11 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: '新密碼至少需要8個字符' }, { status: 400 });
     }
 
+    // Check if user has a password (not OAuth user)
+    if (!user.password_hash) {
+      return NextResponse.json({ error: 'OAuth 用戶無法更改密碼' }, { status: 400 });
+    }
+
     // Verify current password
     const isCurrentPasswordValid = await verifyPassword(currentPassword, user.password_hash);
     if (!isCurrentPasswordValid) {

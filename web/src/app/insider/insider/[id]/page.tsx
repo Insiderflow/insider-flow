@@ -12,7 +12,24 @@ interface InsiderPageProps {
 
 export default async function InsiderPage({ params }: InsiderPageProps) {
   const { id } = await params;
-  let insider: any = null;
+  let insider: {
+    id: string;
+    name: string;
+    title: string | null;
+    transactions: Array<{
+      id: string;
+      transactionDate: Date;
+      transactionType: string;
+      quantity: string;
+      value: string;
+      valueNumeric: number | null;
+      company: {
+        id: string;
+        ticker: string;
+        name: string;
+      };
+    }>;
+  } | null = null;
   try {
     insider = await prisma.openInsiderOwner.findUnique({
       where: { id },
@@ -34,18 +51,18 @@ export default async function InsiderPage({ params }: InsiderPageProps) {
 
   // Calculate stats
   const totalTransactions = insider.transactions.length;
-  const totalValue = insider.transactions.reduce((sum: number, t: any) => 
+  const totalValue = insider.transactions.reduce((sum: number, t) => 
     sum + (t.valueNumeric ? Number(t.valueNumeric) : 0), 0
   );
-  const uniqueCompanies = new Set(insider.transactions.map((t: any) => t.company.id)).size;
+  const uniqueCompanies = new Set(insider.transactions.map((t) => t.company.id)).size;
 
   // Calculate purchase vs sale stats
-  const purchases = insider.transactions.filter((t: any) => t.transactionType.includes('Purchase'));
-  const sales = insider.transactions.filter((t: any) => t.transactionType.includes('Sale'));
-  const purchaseValue = purchases.reduce((sum: number, t: any) => 
+  const purchases = insider.transactions.filter((t) => t.transactionType.includes('Purchase'));
+  const sales = insider.transactions.filter((t) => t.transactionType.includes('Sale'));
+  const purchaseValue = purchases.reduce((sum: number, t) => 
     sum + (t.valueNumeric ? Number(t.valueNumeric) : 0), 0
   );
-  const saleValue = sales.reduce((sum: number, t: any) => 
+  const saleValue = sales.reduce((sum: number, t) => 
     sum + (t.valueNumeric ? Number(t.valueNumeric) : 0), 0
   );
 
@@ -193,7 +210,7 @@ export default async function InsiderPage({ params }: InsiderPageProps) {
                 </tr>
               </thead>
               <tbody className="bg-gray-800 divide-y divide-gray-700">
-                {insider.transactions.map((transaction: any) => (
+                {insider.transactions.map((transaction) => (
                   <tr key={transaction.id} className="hover:bg-gray-700">
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                       {new Date(transaction.transactionDate).toLocaleDateString()}

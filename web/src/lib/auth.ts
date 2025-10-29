@@ -134,6 +134,11 @@ export async function login(email: string, password: string) {
     throw new Error('Invalid credentials');
   }
 
+  // Check if user has a password (not OAuth user)
+  if (!user.password_hash) {
+    throw new Error('請使用 Google 登入');
+  }
+
   const isValidPassword = await verifyPassword(password, user.password_hash);
   if (!isValidPassword) {
     throw new Error('Invalid credentials');
@@ -150,6 +155,12 @@ export async function requestPasswordReset(email: string) {
   });
 
   if (!user) {
+    // Don't reveal if user exists or not
+    return;
+  }
+
+  // Check if user has a password (not OAuth user)
+  if (!user.password_hash) {
     // Don't reveal if user exists or not
     return;
   }
