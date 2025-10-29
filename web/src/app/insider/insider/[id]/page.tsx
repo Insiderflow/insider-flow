@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
 import { notFound } from 'next/navigation';
 import WatchlistButton from '@/components/WatchlistButton';
+import { Decimal } from '@prisma/client/runtime/library';
 import { translateTitle } from '@/lib/titleI18n';
 
 interface InsiderPageProps {
@@ -22,7 +23,7 @@ export default async function InsiderPage({ params }: InsiderPageProps) {
       transactionType: string;
       quantity: string;
       value: string;
-      valueNumeric: number | null;
+      valueNumeric: Decimal | null;
       company: {
         id: string;
         ticker: string;

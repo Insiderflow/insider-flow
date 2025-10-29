@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
 import { notFound } from 'next/navigation';
 import WatchlistButton from '@/components/WatchlistButton';
+import { Decimal } from '@prisma/client/runtime/library';
 
 interface CompanyPageProps {
   params: Promise<{
@@ -21,7 +22,7 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
       transactionType: string;
       quantity: string;
       value: string;
-      valueNumeric: number | null;
+      valueNumeric: Decimal | null;
       owner: {
         id: string;
         name: string;
