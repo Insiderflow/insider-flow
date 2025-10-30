@@ -26,6 +26,16 @@ jobs:
         node-version: '18'
         # Disable caching to avoid stale node_modules across runs
         
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests beautifulsoup4 pandas pyyaml retry tqdm || true
+        
     - name: Install dependencies
       run: |
         npm ci
@@ -43,8 +53,28 @@ jobs:
         npm ls playwright || true
         node -e "console.log('playwright path:', require.resolve('playwright'))"
         ls -la node_modules/playwright || true
+    
+    - name: Run OpenInsider scraper
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      run: |
+        echo "📊 Running OpenInsider scraper..."
+        # Try multiple paths since we don't know exact repo structure
+        if [ -f "../../openinsiderData/openinsider_scraper.py" ]; then
+          cd ../../openinsiderData
+          python3 openinsider_scraper.py || echo "⚠️ OpenInsider scraper failed, continuing..."
+        elif [ -f "../openinsiderData/openinsider_scraper.py" ]; then
+          cd ../openinsiderData
+          python3 openinsider_scraper.py || echo "⚠️ OpenInsider scraper failed, continuing..."
+        elif [ -f "openinsiderData/openinsider_scraper.py" ]; then
+          cd openinsiderData
+          python3 openinsider_scraper.py || echo "⚠️ OpenInsider scraper failed, continuing..."
+        else
+          echo "⚠️ OpenInsider scraper not found in expected locations, skipping..."
+          echo "   Searched: ../../openinsiderData, ../openinsiderData, ./openinsiderData"
+        fi
         
-    - name: Run daily scrape
+    - name: Run daily scrape (Capitol Trades)
       env:
         DATABASE_URL: ${{ secrets.DATABASE_URL }}
       run: |

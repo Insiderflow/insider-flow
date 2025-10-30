@@ -8,16 +8,16 @@ export default function Upgrade() {
   const startCheckout = async (priceId: string, planName: string) => {
     setLoading(planName);
     try {
-      const res = await fetch('/api/stripe/checkout', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ priceId }),
-      });
-      const data = await res.json();
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        alert(data.error || 'Checkout failed');
+    const res = await fetch('/api/stripe/checkout', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ priceId }),
+    });
+    const data = await res.json();
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      alert(data.error || 'Checkout failed');
       }
     } catch {
       alert('Checkout failed. Please try again.');

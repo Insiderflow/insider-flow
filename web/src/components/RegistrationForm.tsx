@@ -35,8 +35,8 @@ export default function RegistrationForm() {
       });
 
       if (response.ok) {
-        // Redirect to verify-sent page
-        router.push('/verify-sent');
+        // Auto-login cookie is set by the API. Go home immediately.
+        router.push('/');
       } else {
         // Handle error response
         const data = await response.json();

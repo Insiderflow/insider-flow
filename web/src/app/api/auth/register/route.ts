@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createUser } from '@/lib/auth';
-import { sendVerificationEmail } from '@/lib/emailService';
+import { createUser, createSession } from '@/lib/auth';
+import { prisma } from '@/lib/prisma';
 
 export async function POST(req: NextRequest) {
   try {
@@ -16,30 +16,26 @@ export async function POST(req: NextRequest) {
 
     const user = await createUser(email, password);
 
-    // Send verification email
-    let emailSent = false;
-    let emailError = null;
-    try {
-      await sendVerificationEmail(email, user.email_verification_token!);
-      emailSent = true;
-    } catch (error) {
-      console.error('Failed to send verification email:', error);
-      emailError = error instanceof Error ? error.message : 'Unknown error';
-    }
-
-    return NextResponse.json({ 
-      message: emailSent 
-        ? 'Registration successful! Please check your email to verify your account.'
-        : 'Registration successful, but email verification failed. Please contact support.',
-      user_id: user.id,
-      email_sent: emailSent,
-      email_error: emailError,
-      debug: {
-        sendgrid_key: process.env.SENDGRID_API_KEY ? 'Set' : 'Missing',
-        sendgrid_from: process.env.SENDGRID_FROM_EMAIL || 'Missing',
-        nextauth_url: process.env.NEXTAUTH_URL || 'Missing'
-      }
+    // Immediately mark verified and clear token
+    await prisma.user.update({
+      where: { id: user.id },
+      data: { email_verified: true, email_verification_token: null },
     });
+
+    // Auto-login: create session and set cookie
+    const sessionToken = await createSession(user.id);
+    const res = NextResponse.json({
+      message: 'Registration successful. You are now logged in.',
+      user_id: user.id,
+    });
+    res.cookies.set('session', sessionToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 30 * 24 * 60 * 60,
+      path: '/',
+    });
+    return res;
 
   } catch (error) {
     if (error instanceof Error) {
