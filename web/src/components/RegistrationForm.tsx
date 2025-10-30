@@ -35,8 +35,8 @@ export default function RegistrationForm() {
       });
 
       if (response.ok) {
-        // Auto-login cookie is set by the API. Go home immediately.
-        router.push('/');
+        // Go to success page with instruction to login
+        router.push('/register-success');
       } else {
         // Handle error response
         const data = await response.json();

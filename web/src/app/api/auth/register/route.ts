@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createUser, createSession } from '@/lib/auth';
+import { createUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
 export async function POST(req: NextRequest) {
@@ -22,20 +22,11 @@ export async function POST(req: NextRequest) {
       data: { email_verified: true, email_verification_token: null },
     });
 
-    // Auto-login: create session and set cookie
-    const sessionToken = await createSession(user.id);
-    const res = NextResponse.json({
-      message: 'Registration successful. You are now logged in.',
+    // Do NOT auto-login; client will redirect to a success screen
+    return NextResponse.json({
+      message: 'Registration successful. Please login with your email and password.',
       user_id: user.id,
     });
-    res.cookies.set('session', sessionToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      maxAge: 30 * 24 * 60 * 60,
-      path: '/',
-    });
-    return res;
 
   } catch (error) {
     if (error instanceof Error) {
