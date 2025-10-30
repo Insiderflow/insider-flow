@@ -43,7 +43,6 @@ interface DailyData {
 
 export default function IssuerTimelineChart({ trades, issuerName }: IssuerTimelineChartProps) {
   const [hoveredPoint, setHoveredPoint] = useState<ChartPoint | null>(null);
-  const [mousePosition, setMousePosition] = useState<{ x: number; y: number } | null>(null);
   const chartRef = useRef<HTMLDivElement>(null);
   const [chartPoints, setChartPoints] = useState<ChartPoint[]>([]);
 
@@ -148,8 +147,6 @@ export default function IssuerTimelineChart({ trades, issuerName }: IssuerTimeli
     const rect = chartRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    
-    setMousePosition({ x, y });
     
     // Find closest point
     const closestPoint = chartPoints.reduce((closest, point) => {

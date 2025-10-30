@@ -2,9 +2,7 @@ import RegistrationForm from '@/components/RegistrationForm';
 
 export const dynamic = 'force-dynamic';
 
-export default async function RegisterPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
-  const sp = await searchParams;
-  const next = typeof sp.next === 'string' ? sp.next : '/';
+export default async function RegisterPage() {
   
   return (
     <div className="min-h-screen bg-gray-900 flex items-center justify-center">
