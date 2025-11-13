@@ -1,7 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import LoadingWrapper from '@/components/LoadingWrapper';
 import PoliticianCard from '@/components/PoliticianCard';
-import { getSessionUser } from '@/lib/auth';
 import { StatsCardSkeleton, PoliticianCardSkeleton } from '@/components/SkeletonLoader';
 import LastUpdated, { DataFreshnessIndicator } from '@/components/LastUpdated';
 import { getCurrentUserWithTier, isPaid } from '@/lib/membership';
