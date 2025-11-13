@@ -4,13 +4,18 @@ import PoliticianCard from '@/components/PoliticianCard';
 import { getSessionUser } from '@/lib/auth';
 import { StatsCardSkeleton, PoliticianCardSkeleton } from '@/components/SkeletonLoader';
 import LastUpdated, { DataFreshnessIndicator } from '@/components/LastUpdated';
+import { getCurrentUserWithTier, isPaid } from '@/lib/membership';
+import { redirect } from 'next/navigation';
 export const dynamic = 'force-dynamic';
 
 type Row = { id: string; name: string; party: string | null; chamber: string | null; trades: number; issuers: number; volume: number; lastTraded: Date | null };
 
 export default async function PoliticiansPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   const sp = await searchParams;
-  await getSessionUser();
+  const me = await getCurrentUserWithTier();
+  if (!isPaid(me)) {
+    redirect('/upgrade?reason=paid_required');
+  }
   const chamber = typeof sp.chamber === 'string' ? sp.chamber : '';
   const searchName = typeof sp.name === 'string' ? sp.name : '';
   const allowedSort = new Set(['name', 'trades', 'issuers', 'volume']);

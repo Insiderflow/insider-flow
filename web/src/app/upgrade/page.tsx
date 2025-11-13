@@ -6,20 +6,33 @@ export default function Upgrade() {
   const [loading, setLoading] = useState<string | null>(null);
 
   const startCheckout = async (priceId: string, planName: string) => {
+    if (!priceId) {
+      alert('Price ID is missing. Please contact support.');
+      return;
+    }
+    
     setLoading(planName);
     try {
-    const res = await fetch('/api/stripe/checkout', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ priceId }),
-    });
-    const data = await res.json();
-    if (data.url) {
-      window.location.href = data.url;
-    } else {
-      alert(data.error || 'Checkout failed');
+      const res = await fetch('/api/stripe/checkout', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ priceId }),
+      });
+      const data = await res.json();
+      
+      if (!res.ok) {
+        console.error('Checkout error:', data);
+        alert(data.details || data.error || 'Checkout failed');
+        return;
       }
-    } catch {
+      
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert(data.error || 'Checkout failed');
+      }
+    } catch (err) {
+      console.error('Checkout request failed:', err);
       alert('Checkout failed. Please try again.');
     } finally {
       setLoading(null);
@@ -32,7 +45,7 @@ export default function Upgrade() {
       nameEn: 'Monthly',
       price: 'US$ 10',
       period: '/月',
-      priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_MONTHLY!,
+      priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_MONTHLY || '',
       popular: false,
       features: [
         '完整內幕交易數據',
@@ -47,7 +60,7 @@ export default function Upgrade() {
       nameEn: 'Yearly',
       price: 'US$ 100',
       period: '/年',
-      priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_YEARLY!,
+      priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_YEARLY || '',
       popular: true,
       features: [
         '完整內幕交易數據',
@@ -59,7 +72,7 @@ export default function Upgrade() {
         '優先客戶支援'
       ]
     }
-  ];
+  ].filter(plan => plan.priceId); // Filter out plans with missing price IDs
 
   return (
     <div className="min-h-screen bg-gray-900 text-white">
@@ -102,6 +115,19 @@ export default function Upgrade() {
                   <span className="text-5xl font-bold">{plan.price}</span>
                   <span className="text-gray-400 ml-2">{plan.period}</span>
                 </div>
+                {plan.name === '月方案' && (
+                  <div className="mb-3">
+                    <p className="text-yellow-400 text-sm font-bold mb-1">
+                      <span className="zh-Hant">限時優惠</span>
+                      <span className="zh-Hans hidden">限时优惠</span>
+                    </p>
+                    <p className="text-yellow-300 text-base font-semibold">
+                      <span className="zh-Hant">一個月試用優惠碼</span>
+                      <span className="zh-Hans hidden">一个月试用优惠码</span>
+                      <span className="bg-yellow-400 text-gray-900 px-2 py-1 rounded font-bold ml-2">1month</span>
+                    </p>
+                  </div>
+                )}
                 {plan.popular && (
                   <p className="text-green-400 text-sm font-medium">
                     <span className="zh-Hant">相比月方案節省 17% (US$ 20)</span>

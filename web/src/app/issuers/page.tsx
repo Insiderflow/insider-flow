@@ -3,11 +3,17 @@ import LoadingWrapper from '@/components/LoadingWrapper';
 import SortableIssuersTable from '@/components/SortableIssuersTable';
 import { StatsCardSkeleton, IssuerCardSkeleton } from '@/components/SkeletonLoader';
 import LastUpdated, { DataFreshnessIndicator } from '@/components/LastUpdated';
+import { getCurrentUserWithTier, isPaid } from '@/lib/membership';
+import { redirect } from 'next/navigation';
 export const dynamic = 'force-dynamic';
 
 type Row = { id: string; name: string; ticker: string | null; trades: number; politicians: number; volume: number };
 
 export default async function IssuersPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
+  const me = await getCurrentUserWithTier();
+  if (!isPaid(me)) {
+    redirect('/upgrade?reason=paid_required');
+  }
   const sp = await searchParams;
   const allowedSort = new Set(['name', 'trades', 'politicians', 'volume']);
   const sortKeyRaw = typeof sp.sort === 'string' ? sp.sort : 'trades';

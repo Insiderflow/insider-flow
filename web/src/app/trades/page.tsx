@@ -6,10 +6,16 @@ import SortableTradesTable from '@/components/SortableTradesTable';
 import LoadingWrapper from '@/components/LoadingWrapper';
 import { StatsCardSkeleton, TableSkeleton } from '@/components/SkeletonLoader';
 import LastUpdated, { DataFreshnessIndicator } from '@/components/LastUpdated';
+import { getCurrentUserWithTier, isPaid } from '@/lib/membership';
+import { redirect } from 'next/navigation';
 
 export const dynamic = 'force-dynamic';
 
 export default async function TradesPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
+  const me = await getCurrentUserWithTier();
+  if (!isPaid(me)) {
+    redirect('/upgrade?reason=paid_required');
+  }
   const sp = await searchParams;
   const pageSize = 50;
   const page = Math.max(1, Number(typeof sp.page === 'string' ? sp.page : 1) || 1);

@@ -1,12 +1,13 @@
 import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import LoadingWrapper from '@/components/LoadingWrapper';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import PoliticianProfileImage from '@/components/PoliticianProfileImage';
 import PoliticianTradesTable from '@/components/PoliticianTradesTable';
 import WatchlistButton from '@/components/WatchlistButton';
 import PortfolioChart from '@/components/PortfolioChart';
+import { getCurrentUserWithTier, isPaid } from '@/lib/membership';
 
 export const dynamic = 'force-dynamic';
 
@@ -21,6 +22,10 @@ export default async function PoliticianDetailPage({
   searchParams: Promise<Record<string, string | string[] | undefined>> 
 }) {
   const { id } = await params;
+  const me = await getCurrentUserWithTier();
+  if (!isPaid(me)) {
+    redirect('/upgrade?reason=paid_required');
+  }
   const sp = await searchParams;
   
   // Pagination and sorting parameters

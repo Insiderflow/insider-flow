@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import LoadingWrapper from '@/components/LoadingWrapper';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import PoliticianProfileImage from '@/components/PoliticianProfileImage';
@@ -8,6 +8,7 @@ import IssuerTradesTable from '@/components/IssuerTradesTable';
 import IssuerTimelineChart from '@/components/IssuerTimelineChart';
 import WatchlistButton from '@/components/WatchlistButton';
 import { getSessionUser } from '@/lib/auth';
+import { getCurrentUserWithTier, isPaid } from '@/lib/membership';
 
 export const dynamic = 'force-dynamic';
 
@@ -23,6 +24,10 @@ export default async function IssuerDetailPage({
 }) {
   const { id } = await params;
   const sp = await searchParams;
+  const me = await getCurrentUserWithTier();
+  if (!isPaid(me)) {
+    redirect('/upgrade?reason=paid_required');
+  }
   const user = await getSessionUser();
   
   // Pagination and sorting parameters
