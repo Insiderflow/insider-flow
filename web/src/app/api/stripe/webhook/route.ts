@@ -4,9 +4,7 @@ import { prisma } from '@/lib/prisma';
 
 export const dynamic = 'force-dynamic';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
-  apiVersion: '2024-11-20.acacia',
-});
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '');
 
 export async function POST(req: NextRequest) {
   const body = await req.text();
@@ -50,13 +48,8 @@ export async function POST(req: NextRequest) {
 
           // Get subscription details to determine period
           const subscription = await stripe.subscriptions.retrieve(subscriptionId);
-          const priceId = subscription.items.data[0]?.price.id;
           
-          // Determine if it's yearly or monthly based on price ID
-          const isYearly = priceId === process.env.NEXT_PUBLIC_STRIPE_PRICE_YEARLY;
-          const periodDays = isYearly ? 365 : 30;
-          
-          // Calculate expiration date
+          // Calculate expiration date from subscription period end
           const currentPeriodEnd = new Date(subscription.current_period_end * 1000);
 
           // Find user by Stripe customer ID
