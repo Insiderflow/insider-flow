@@ -85,7 +85,8 @@ export async function POST(req: NextRequest) {
             ? subscription.customer 
             : subscription.customer.id;
           
-          const currentPeriodEnd = new Date(subscription.current_period_end * 1000);
+          // Access property with type assertion as Stripe types may not be fully accurate
+          const currentPeriodEnd = new Date((subscription as any).current_period_end * 1000);
 
           const user = await prisma.user.findFirst({
             where: { stripe_customer_id: customerId },
