@@ -47,7 +47,7 @@ export async function POST(req: NextRequest) {
           const subscriptionId = typeof session.subscription === 'string' ? session.subscription : session.subscription.id;
 
           // Get subscription details to determine period
-          const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+          const subscription = await stripe.subscriptions.retrieve(subscriptionId) as Stripe.Subscription;
           
           // Calculate expiration date from subscription period end
           const currentPeriodEnd = new Date(subscription.current_period_end * 1000);
@@ -144,7 +144,7 @@ export async function POST(req: NextRequest) {
             ? invoice.subscription 
             : invoice.subscription.id;
           
-          const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+          const subscription = await stripe.subscriptions.retrieve(subscriptionId) as Stripe.Subscription;
           const customerId = typeof subscription.customer === 'string' 
             ? subscription.customer 
             : subscription.customer.id;
