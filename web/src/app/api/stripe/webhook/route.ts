@@ -47,14 +47,11 @@ export async function POST(req: NextRequest) {
           const subscriptionId = typeof session.subscription === 'string' ? session.subscription : session.subscription.id;
 
           // Get subscription details to determine period
-          const subscription = await stripe.subscriptions.retrieve(subscriptionId, {
-            expand: ['latest_invoice'],
-          });
+          const subscription = await stripe.subscriptions.retrieve(subscriptionId);
           
           // Calculate expiration date from subscription period end
-          // Use type assertion since retrieve returns the correct type but TypeScript may not infer it
-          const sub = subscription as unknown as Stripe.Subscription;
-          const currentPeriodEnd = new Date(sub.current_period_end * 1000);
+          // Access property directly as the Stripe SDK returns the correct object
+          const currentPeriodEnd = new Date((subscription as any).current_period_end * 1000);
 
           // Find user by Stripe customer ID
           const user = await prisma.user.findFirst({
@@ -149,13 +146,12 @@ export async function POST(req: NextRequest) {
             : invoice.subscription.id;
           
           const subscription = await stripe.subscriptions.retrieve(subscriptionId);
-          // Use type assertion since retrieve returns the correct type but TypeScript may not infer it
-          const sub = subscription as unknown as Stripe.Subscription;
-          const customerId = typeof sub.customer === 'string' 
-            ? sub.customer 
-            : sub.customer.id;
+          // Access properties directly as the Stripe SDK returns the correct object
+          const customerId = typeof (subscription as any).customer === 'string' 
+            ? (subscription as any).customer 
+            : (subscription as any).customer.id;
           
-          const currentPeriodEnd = new Date(sub.current_period_end * 1000);
+          const currentPeriodEnd = new Date((subscription as any).current_period_end * 1000);
 
           const user = await prisma.user.findFirst({
             where: { stripe_customer_id: customerId },
