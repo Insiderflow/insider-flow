@@ -141,10 +141,12 @@ export async function POST(req: NextRequest) {
         const invoice = event.data.object as Stripe.Invoice;
         console.log('Processing invoice.payment_succeeded:', invoice.id);
 
-        if (invoice.subscription) {
-          const subscriptionId = typeof invoice.subscription === 'string' 
-            ? invoice.subscription 
-            : invoice.subscription.id;
+        // Access subscription property with type assertion
+        const invoiceSubscription = (invoice as any).subscription;
+        if (invoiceSubscription) {
+          const subscriptionId = typeof invoiceSubscription === 'string' 
+            ? invoiceSubscription 
+            : invoiceSubscription.id;
           
           const subscription = await stripe.subscriptions.retrieve(subscriptionId);
           // Access properties directly as the Stripe SDK returns the correct object
