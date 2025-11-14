@@ -61,6 +61,9 @@ export async function POST(req: NextRequest) {
       cancel_url: `${req.nextUrl.origin}/upgrade?status=cancel`,
       allow_promotion_codes: true,
       payment_method_types: ['card'],
+      metadata: {
+        user_id: user.id,
+      },
     });
 
     console.log('Checkout session created:', session.id);
