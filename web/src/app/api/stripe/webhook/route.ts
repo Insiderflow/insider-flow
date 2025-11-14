@@ -47,10 +47,14 @@ export async function POST(req: NextRequest) {
           const subscriptionId = typeof session.subscription === 'string' ? session.subscription : session.subscription.id;
 
           // Get subscription details to determine period
-          const subscription = await stripe.subscriptions.retrieve(subscriptionId) as Stripe.Subscription;
+          const subscription = await stripe.subscriptions.retrieve(subscriptionId, {
+            expand: ['latest_invoice'],
+          });
           
           // Calculate expiration date from subscription period end
-          const currentPeriodEnd = new Date(subscription.current_period_end * 1000);
+          // Use type assertion since retrieve returns the correct type but TypeScript may not infer it
+          const sub = subscription as unknown as Stripe.Subscription;
+          const currentPeriodEnd = new Date(sub.current_period_end * 1000);
 
           // Find user by Stripe customer ID
           const user = await prisma.user.findFirst({
@@ -144,12 +148,14 @@ export async function POST(req: NextRequest) {
             ? invoice.subscription 
             : invoice.subscription.id;
           
-          const subscription = await stripe.subscriptions.retrieve(subscriptionId) as Stripe.Subscription;
-          const customerId = typeof subscription.customer === 'string' 
-            ? subscription.customer 
-            : subscription.customer.id;
+          const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+          // Use type assertion since retrieve returns the correct type but TypeScript may not infer it
+          const sub = subscription as unknown as Stripe.Subscription;
+          const customerId = typeof sub.customer === 'string' 
+            ? sub.customer 
+            : sub.customer.id;
           
-          const currentPeriodEnd = new Date(subscription.current_period_end * 1000);
+          const currentPeriodEnd = new Date(sub.current_period_end * 1000);
 
           const user = await prisma.user.findFirst({
             where: { stripe_customer_id: customerId },
