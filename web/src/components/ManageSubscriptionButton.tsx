@@ -5,17 +5,20 @@ import { useState } from 'react';
 export default function ManageSubscriptionButton() {
   const [loading, setLoading] = useState(false);
 
-  const handleManageSubscription = async () => {
+  const handleManageSubscription = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
     setLoading(true);
     try {
       const res = await fetch('/api/stripe/portal', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
+        credentials: 'include', // Include cookies for auth
       });
 
-      const data = await res.json();
-
       if (!res.ok) {
+        const data = await res.json().catch(() => ({ error: 'Unknown error' }));
         console.error('Portal error:', data);
         const errorMsg = data.error === 'no_subscription' 
           ? '您目前沒有有效的訂閱。請先升級會員。'
@@ -25,18 +28,23 @@ export default function ManageSubscriptionButton() {
           ? '支付系統配置錯誤，請聯繫客服。'
           : '無法開啟訂閱管理頁面，請稍後再試';
         alert(errorMsg);
+        setLoading(false);
         return;
       }
 
+      const data = await res.json();
+      console.log('Portal response:', data);
+
       if (data.url) {
-        window.location.href = data.url;
+        // Use window.location.replace to avoid back button issues
+        window.location.replace(data.url);
       } else {
         alert('無法取得訂閱管理頁面連結，請稍後再試');
+        setLoading(false);
       }
     } catch (err) {
       console.error('Portal request failed:', err);
       alert('無法開啟訂閱管理頁面，請稍後再試');
-    } finally {
       setLoading(false);
     }
   };
