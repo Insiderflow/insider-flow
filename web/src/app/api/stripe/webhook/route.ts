@@ -93,7 +93,8 @@ export async function POST(req: NextRequest) {
             const subscription = await stripe.subscriptions.retrieve(subscriptionId);
             
             // Calculate expiration date from subscription period end
-            const currentPeriodEnd = new Date(subscription.current_period_end * 1000);
+            // Access property with type assertion as Stripe types may not be fully accurate
+            const currentPeriodEnd = new Date((subscription as any).current_period_end * 1000);
 
             await prisma.user.update({
               where: { id: user.id },
