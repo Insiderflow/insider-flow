@@ -66,3 +66,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'portal_failed', details: errorMessage }, { status: 500 });
   }
 }
+
+export async function GET() {
+  return NextResponse.json({ 
+    error: 'Method not allowed',
+    message: 'Please use POST method to create a portal session'
+  }, { status: 405 });
+}
