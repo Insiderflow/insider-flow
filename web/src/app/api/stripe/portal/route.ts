@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
   try {
     const sessionUser = await getSessionUser();
     if (!sessionUser) {
-      return NextResponse.redirect(new URL('/login', req.url));
+      return NextResponse.json({ error: 'login required' }, { status: 401 });
     }
 
     // Get full user data from database including stripe_customer_id
@@ -24,17 +24,17 @@ export async function POST(req: NextRequest) {
 
     if (!user) {
       console.error('User not found in database:', sessionUser.id);
-      return NextResponse.redirect(new URL('/account?error=user_not_found', req.url));
+      return NextResponse.json({ error: 'user_not_found' }, { status: 404 });
     }
 
     if (!user.stripe_customer_id) {
       console.error('User has no Stripe customer ID:', user.id);
-      return NextResponse.redirect(new URL('/account?error=no_subscription', req.url));
+      return NextResponse.json({ error: 'no_subscription' }, { status: 400 });
     }
 
     if (!process.env.STRIPE_SECRET_KEY) {
       console.error('STRIPE_SECRET_KEY is missing');
-      return NextResponse.redirect(new URL('/account?error=payment_config', req.url));
+      return NextResponse.json({ error: 'payment_config' }, { status: 500 });
     }
 
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
       await stripe.customers.retrieve(user.stripe_customer_id);
     } catch (stripeError) {
       console.error('Stripe customer not found:', user.stripe_customer_id, stripeError);
-      return NextResponse.redirect(new URL('/account?error=invalid_customer', req.url));
+      return NextResponse.json({ error: 'invalid_customer' }, { status: 400 });
     }
 
     // Create billing portal session
@@ -54,13 +54,15 @@ export async function POST(req: NextRequest) {
     });
 
     console.log('Portal session created for user:', user.id, 'URL:', portalSession.url);
-    return NextResponse.redirect(portalSession.url);
+    
+    // Return JSON with URL for client-side redirect (more reliable than server redirect)
+    return NextResponse.json({ url: portalSession.url });
   } catch (error: unknown) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     console.error('Portal creation error:', errorMessage);
     if (error instanceof Error && error.stack) {
       console.error('Error stack:', error.stack);
     }
-    return NextResponse.redirect(new URL('/account?error=portal_failed', req.url));
+    return NextResponse.json({ error: 'portal_failed', details: errorMessage }, { status: 500 });
   }
 }

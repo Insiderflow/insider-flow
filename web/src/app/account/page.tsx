@@ -1,6 +1,7 @@
 import { getSessionUser } from '@/lib/auth';
 import EmailNotificationSettings from '@/components/EmailNotificationSettings';
 import PasswordChangeForm from '@/components/PasswordChangeForm';
+import ManageSubscriptionButton from '@/components/ManageSubscriptionButton';
 
 export const dynamic = 'force-dynamic';
 
@@ -198,15 +199,7 @@ export default async function AccountPage({
                     <span className="zh-Hans hidden">取消或修改您的订阅设置</span>
                   </p>
                 </div>
-                <form action="/api/stripe/portal" method="post">
-                  <button 
-                    type="submit"
-                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none transition-colors duration-200"
-                  >
-                    <span className="zh-Hant">管理訂閱</span>
-                    <span className="zh-Hans hidden">管理订阅</span>
-                  </button>
-                </form>
+                <ManageSubscriptionButton />
               </div>
             </div>
           </div>
