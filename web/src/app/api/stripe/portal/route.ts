@@ -39,19 +39,51 @@ export async function POST(req: NextRequest) {
 
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-    // Verify customer exists in Stripe
+    // Verify customer exists in Stripe and check for active subscriptions
+    let hasActiveSubscription = false;
     try {
-      await stripe.customers.retrieve(user.stripe_customer_id);
+      const customer = await stripe.customers.retrieve(user.stripe_customer_id);
+      
+      // Check if customer has active subscriptions
+      if (user.stripe_subscription_id) {
+        try {
+          const subscription = await stripe.subscriptions.retrieve(user.stripe_subscription_id);
+          hasActiveSubscription = subscription.status === 'active' || subscription.status === 'trialing';
+          console.log(`User ${user.id} has ${hasActiveSubscription ? 'active' : 'inactive'} subscription: ${subscription.status}`);
+        } catch (subError) {
+          console.log(`Subscription ${user.stripe_subscription_id} not found, checking all subscriptions for customer`);
+        }
+      }
+      
+      // If no subscription ID in DB, check all subscriptions for this customer
+      if (!hasActiveSubscription) {
+        const subscriptions = await stripe.subscriptions.list({
+          customer: user.stripe_customer_id,
+          status: 'active',
+          limit: 1,
+        });
+        hasActiveSubscription = subscriptions.data.length > 0;
+        if (hasActiveSubscription && !user.stripe_subscription_id) {
+          // Update user with subscription ID
+          await prisma.user.update({
+            where: { id: user.id },
+            data: { stripe_subscription_id: subscriptions.data[0].id },
+          });
+        }
+      }
     } catch (stripeError) {
       console.error('Stripe customer not found:', user.stripe_customer_id, stripeError);
       return NextResponse.json({ error: 'invalid_customer' }, { status: 400 });
     }
 
     // Create billing portal session
+    // The portal will automatically show subscription management if customer has active subscription
     const portalSession = await stripe.billingPortal.sessions.create({
       customer: user.stripe_customer_id,
       return_url: `${req.nextUrl.origin}/account`,
     });
+    
+    console.log(`Portal session created for user ${user.id}, has active subscription: ${hasActiveSubscription}`);
 
     console.log('Portal session created for user:', user.id, 'URL:', portalSession.url);
     
