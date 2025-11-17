@@ -21,6 +21,42 @@ export default async function AccountPage() {
           <span className="zh-Hans hidden">账户设置</span>
         </h1>
         
+        {/* Error Messages */}
+        {error && (
+          <div className="mb-6 bg-red-900 border border-red-600 rounded-lg p-4">
+            <p className="text-red-200">
+              {error === 'no_subscription' && (
+                <span className="zh-Hant">您目前沒有有效的訂閱。請先升級會員。</span>
+              )}
+              {error === 'payment_config' && (
+                <span className="zh-Hant">支付系統配置錯誤，請聯繫客服。</span>
+              )}
+              {error === 'portal_failed' && (
+                <span className="zh-Hant">無法開啟訂閱管理頁面，請聯繫客服或稍後再試。</span>
+              )}
+              {error === 'user_not_found' && (
+                <span className="zh-Hant">找不到用戶資料，請重新登入。</span>
+              )}
+              {error === 'invalid_customer' && (
+                <span className="zh-Hant">Stripe 客戶資料無效，請聯繫客服。</span>
+              )}
+              {!['no_subscription', 'payment_config', 'portal_failed', 'user_not_found', 'invalid_customer'].includes(error) && (
+                <span className="zh-Hant">發生錯誤：{error}</span>
+              )}
+            </p>
+          </div>
+        )}
+        
+        {/* Success Messages */}
+        {status === 'success' && (
+          <div className="mb-6 bg-green-900 border border-green-600 rounded-lg p-4">
+            <p className="text-green-200">
+              <span className="zh-Hant">訂閱成功！歡迎成為付費會員。</span>
+              <span className="zh-Hans hidden">订阅成功！欢迎成为付费会员。</span>
+            </p>
+          </div>
+        )}
+        
         {/* Membership Status */}
         <div className="mb-6 bg-gray-800 border border-gray-600 rounded-lg p-6">
           <h2 className="text-xl font-semibold text-white mb-4">

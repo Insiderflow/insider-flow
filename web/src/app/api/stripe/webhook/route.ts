@@ -41,24 +41,60 @@ export async function POST(req: NextRequest) {
       case 'checkout.session.completed': {
         const session = event.data.object as Stripe.Checkout.Session;
         console.log('Processing checkout.session.completed:', session.id);
+        console.log('Session details:', {
+          mode: session.mode,
+          customer: session.customer,
+          subscription: session.subscription,
+          metadata: session.metadata,
+        });
 
-        if (session.mode === 'subscription' && session.customer && session.subscription) {
-          const customerId = typeof session.customer === 'string' ? session.customer : session.customer.id;
-          const subscriptionId = typeof session.subscription === 'string' ? session.subscription : session.subscription.id;
+        // Try to find user by customer ID first
+        let user = null;
+        let customerId: string | null = null;
 
-          // Get subscription details to determine period
-          const subscription = await stripe.subscriptions.retrieve(subscriptionId);
-          
-          // Calculate expiration date from subscription period end
-          // Access property directly as the Stripe SDK returns the correct object
-          const currentPeriodEnd = new Date((subscription as any).current_period_end * 1000);
-
-          // Find user by Stripe customer ID
-          const user = await prisma.user.findFirst({
+        if (session.customer) {
+          customerId = typeof session.customer === 'string' ? session.customer : session.customer.id;
+          user = await prisma.user.findFirst({
             where: { stripe_customer_id: customerId },
           });
+        }
 
-          if (user) {
+        // Fallback: try to find user by metadata if customer lookup fails
+        if (!user && session.metadata?.user_id) {
+          console.log('User not found by customer ID, trying metadata user_id:', session.metadata.user_id);
+          user = await prisma.user.findUnique({
+            where: { id: session.metadata.user_id },
+          });
+          
+          // If we found user but they don't have customer_id, update it
+          if (user && customerId) {
+            await prisma.user.update({
+              where: { id: user.id },
+              data: { stripe_customer_id: customerId },
+            });
+            console.log(`✅ Updated user ${user.id} with customer ID ${customerId}`);
+          }
+        }
+
+        if (!user) {
+          console.error(`❌ User not found for customer ${customerId || 'unknown'} or metadata ${session.metadata?.user_id || 'none'}`);
+          // Don't return error - let other webhooks handle it
+          break;
+        }
+
+        // Handle subscription mode
+        if (session.mode === 'subscription' && session.subscription) {
+          const subscriptionId = typeof session.subscription === 'string' 
+            ? session.subscription 
+            : session.subscription.id;
+
+          try {
+            // Get subscription details to determine period
+            const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+            
+            // Calculate expiration date from subscription period end
+            const currentPeriodEnd = new Date(subscription.current_period_end * 1000);
+
             await prisma.user.update({
               where: { id: user.id },
               data: {
@@ -68,9 +104,31 @@ export async function POST(req: NextRequest) {
               },
             });
             console.log(`✅ Updated membership for user ${user.id} to PAID, expires ${currentPeriodEnd.toISOString()}`);
-          } else {
-            console.error(`❌ User not found for customer ${customerId}`);
+          } catch (subError) {
+            console.error(`❌ Error retrieving subscription ${subscriptionId}:`, subError);
+            // Still update to PAID but without expiration date
+            await prisma.user.update({
+              where: { id: user.id },
+              data: {
+                membership_tier: 'PAID',
+                stripe_subscription_id: subscriptionId,
+              },
+            });
+            console.log(`✅ Updated membership for user ${user.id} to PAID (without expiration date)`);
           }
+        } else if (session.mode === 'payment') {
+          // One-time payment - set to PAID for 1 year (or based on price)
+          const oneYearFromNow = new Date();
+          oneYearFromNow.setFullYear(oneYearFromNow.getFullYear() + 1);
+          
+          await prisma.user.update({
+            where: { id: user.id },
+            data: {
+              membership_tier: 'PAID',
+              membership_expires_at: oneYearFromNow,
+            },
+          });
+          console.log(`✅ Updated membership for user ${user.id} to PAID (one-time payment), expires ${oneYearFromNow.toISOString()}`);
         }
         break;
       }
@@ -181,15 +239,26 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ received: true });
   } catch (error) {
     console.error('Error processing webhook:', error);
+    // Log full error details for debugging
+    if (error instanceof Error) {
+      console.error('Error stack:', error.stack);
+      console.error('Error message:', error.message);
+    }
+    // Still return 200 to Stripe so it doesn't retry (we'll handle manually)
     return NextResponse.json(
-      { error: 'Webhook processing failed' },
-      { status: 500 }
+      { error: 'Webhook processing failed', details: error instanceof Error ? error.message : String(error) },
+      { status: 200 } // Return 200 so Stripe doesn't keep retrying
     );
   }
 }
 
 export async function GET() {
-  return NextResponse.json({ ok: true, message: 'Stripe webhook endpoint is active' });
+  return NextResponse.json({ 
+    ok: true, 
+    message: 'Stripe webhook endpoint is active',
+    webhook_secret_configured: !!process.env.STRIPE_WEBHOOK_SECRET,
+    stripe_key_configured: !!process.env.STRIPE_SECRET_KEY
+  });
 }
 
 
