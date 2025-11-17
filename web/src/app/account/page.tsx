@@ -4,8 +4,16 @@ import PasswordChangeForm from '@/components/PasswordChangeForm';
 
 export const dynamic = 'force-dynamic';
 
-export default async function AccountPage() {
+export default async function AccountPage({ 
+  searchParams 
+}: { 
+  searchParams: Promise<Record<string, string | string[] | undefined>> 
+}) {
   const user = await getSessionUser();
+  const params = await searchParams;
+  const error = typeof params.error === 'string' ? params.error : null;
+  const status = typeof params.status === 'string' ? params.status : null;
+  
   if (!user) {
     return (
       <div className="min-h-screen bg-gray-900 flex items-center justify-center">
