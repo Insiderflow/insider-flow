@@ -1,0 +1,45 @@
+name: Pre-calculate Portfolio Data
+
+on:
+  schedule:
+    # Run daily at 2 AM UTC (10 AM HKT)
+    - cron: '0 2 * * *'
+  workflow_dispatch: # Allows manual trigger
+
+jobs:
+  precalculate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Generate Prisma client
+      run: npx prisma generate
+
+    - name: Pre-calculate Portfolio Data
+      run: node scripts/precalculate-portfolio-data.js
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      
+    - name: Commit and push cache file
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add portfolio_cache.json
+        git diff --staged --quiet || git commit -m "Update portfolio cache [skip ci]"
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
