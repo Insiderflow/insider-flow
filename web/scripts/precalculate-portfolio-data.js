@@ -11,7 +11,7 @@ const prisma = new PrismaClient();
 // Price cache
 const priceCache = new Map();
 
-// Fetch from Yahoo Finance
+// Fetch from Yahoo Finance with better error handling
 async function fetchYahooFinance(ticker, period1, period2) {
   try {
     const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}?period1=${period1}&period2=${period2}&interval=1d`;
@@ -21,15 +21,31 @@ async function fetchYahooFinance(ticker, period1, period2) {
       },
     });
     
-    if (!response.ok) return null;
+    if (!response.ok) {
+      // Check if it's a rate limit
+      if (response.status === 429 || response.statusText.includes('Too Many')) {
+        return null; // Will trigger fallback
+      }
+      return null;
+    }
+    
     const data = await response.json();
+    
+    // Check for rate limit in response body
+    if (data.error || data.message?.includes('Too Many')) {
+      return null;
+    }
     
     if (data.chart?.result?.[0]) {
       const result = data.chart.result[0];
       if (result.indicators?.quote?.[0]) {
         const quotes = result.indicators.quote[0];
         if (quotes.close && quotes.close.length > 0) {
-          return quotes.close;
+          // Filter out null values
+          const validPrices = quotes.close.filter(p => p !== null && p > 0);
+          if (validPrices.length > 0) {
+            return validPrices;
+          }
         }
       }
     }
@@ -74,26 +90,31 @@ async function getSP500Price(date) {
   // Try multiple sources in order
   let price = null;
   
-  // Source 1: Yahoo Finance (^GSPC) - try first but often rate-limited
+  // Source 1: Try SPY ETF first (more reliable, less rate-limited than ^GSPC)
+  // SPY tracks S&P 500 closely and is more stable for API calls
   try {
-    const prices = await fetchYahooFinance('^GSPC', timestamp, timestamp + 86400);
-    if (prices && prices.length > 0 && prices[prices.length - 1] > 0) {
-      price = prices[prices.length - 1];
+    const spyPrices = await fetchYahooFinance('SPY', timestamp, timestamp + 86400);
+    if (spyPrices && Array.isArray(spyPrices) && spyPrices.length > 0) {
+      const lastPrice = spyPrices[spyPrices.length - 1];
+      if (lastPrice && lastPrice > 0) {
+        price = lastPrice;
+        // SPY price is used directly - for % returns it's equivalent to S&P 500 index
+      }
     }
   } catch (error) {
     // Continue to next source
   }
   
-  // Source 2: SPY ETF (tracks S&P 500 closely, more reliable than ^GSPC)
-  // Use SPY as primary fallback since it's more stable
+  // Source 2: Yahoo Finance (^GSPC) - fallback if SPY fails
   if (!price) {
     try {
       await new Promise(resolve => setTimeout(resolve, 500)); // Rate limit
-      const spyPrices = await fetchYahooFinance('SPY', timestamp, timestamp + 86400);
-      if (spyPrices && spyPrices.length > 0 && spyPrices[spyPrices.length - 1] > 0) {
-        price = spyPrices[spyPrices.length - 1];
-        // Note: We use SPY price directly for relative returns calculation
-        // SPY tracks S&P 500 at ~1/10th scale, but for % returns it's equivalent
+      const prices = await fetchYahooFinance('^GSPC', timestamp, timestamp + 86400);
+      if (prices && Array.isArray(prices) && prices.length > 0) {
+        const lastPrice = prices[prices.length - 1];
+        if (lastPrice && lastPrice > 0) {
+          price = lastPrice;
+        }
       }
     } catch (error) {
       // Continue to next source
