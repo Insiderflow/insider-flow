@@ -184,20 +184,13 @@ async function calculatePortfolioData(politicianId, politicianName) {
     const politicianReturns = [];
     const sp500Returns = [];
     
-    // Get S&P 500 starting price (with retry and better error handling)
-    let sp500StartPrice = null;
-    let retries = 3;
-    while (retries > 0 && !sp500StartPrice) {
-      sp500StartPrice = await getSP500Price(startDate);
-      if (!sp500StartPrice) {
-        retries--;
-        console.log(`  ⚠️  S&P 500 start price fetch failed, retries left: ${retries}`);
-        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second before retry
-      }
-    }
+    // Get S&P 500 starting price (with multiple fallback sources built-in)
+    const sp500StartPrice = await getSP500Price(startDate);
     
     if (!sp500StartPrice) {
-      console.log(`  ⚠️  Could not fetch S&P 500 start price, using fallback calculation`);
+      console.log(`  ⚠️  Could not fetch S&P 500 start price from any source, will calculate relative returns`);
+    } else {
+      console.log(`  ✅ S&P 500 start price: $${sp500StartPrice.toFixed(2)}`);
     }
     
     // Process each month
