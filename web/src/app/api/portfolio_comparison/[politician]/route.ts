@@ -152,28 +152,40 @@ async function handleRequest(
     
     // Try to load from cache first (only if file exists and is accessible)
     let cachedData = null;
+    const portfolioCache = loadCachedData();
+    
     try {
-      const cache = loadCachedData();
-      
-      if (cache.size === 0) {
-        console.log(`Cache is empty for ${politician}`);
+      if (portfolioCache.size === 0) {
+        console.log(`⚠️  Cache is empty for ${politician}`);
       } else {
         // First try exact name match
-        for (const [, data] of cache.entries()) {
+        for (const [, data] of portfolioCache.entries()) {
           if (data.politician_name?.toLowerCase() === politician.toLowerCase()) {
             cachedData = data;
+            console.log(`✅ Exact match found: ${data.politician_name}`);
             break;
           }
         }
         
         // If not found, try partial match
         if (!cachedData) {
-          for (const [, data] of cache.entries()) {
-            if (data.politician_name?.toLowerCase().includes(politician.toLowerCase()) || 
-                politician.toLowerCase().includes(data.politician_name?.toLowerCase() || '')) {
+          const politicianLower = politician.toLowerCase().trim();
+          for (const [, data] of portfolioCache.entries()) {
+            const cacheNameLower = data.politician_name?.toLowerCase().trim() || '';
+            if (cacheNameLower.includes(politicianLower) || politicianLower.includes(cacheNameLower)) {
               cachedData = data;
+              console.log(`✅ Partial match found: ${data.politician_name} for ${politician}`);
               break;
             }
+          }
+        }
+        
+        // If still not found, try by ID (in case politician parameter is an ID)
+        if (!cachedData) {
+          const cacheById = portfolioCache.get(politician);
+          if (cacheById && cacheById.data) {
+            cachedData = cacheById;
+            console.log(`✅ Found by ID: ${politician}`);
           }
         }
       }
@@ -232,23 +244,7 @@ async function handleRequest(
           cached_at: cachedData.updated_at
         });
       } else {
-        console.log(`⚠️  No valid cached data found for ${politician}`);
-        // Try to find by ID if politician name was passed as ID
-        if (!cachedData) {
-          // Check if politician parameter might be an ID
-          const cacheById = portfolioCache.get(politician);
-          if (cacheById && cacheById.data && cacheById.data.dates && cacheById.data.dates.length > 0) {
-            console.log(`✅ Found cached data by ID for ${politician}`);
-            return NextResponse.json({
-              dates: cacheById.data.dates,
-              politician_returns: cacheById.data.politician_returns,
-              sp500_returns: cacheById.data.sp500_returns,
-              trades: [],
-              cached: true,
-              cached_at: cacheById.updated_at
-            });
-          }
-        }
+        console.log(`⚠️  No valid cached data found for ${politician} (cachedData: ${!!cachedData}, hasData: ${!!cachedData?.data}, hasDates: ${!!cachedData?.data?.dates})`);
       }
     } catch (error) {
       console.error(`Error loading cache for ${politician}:`, error instanceof Error ? error.message : 'Unknown error');
