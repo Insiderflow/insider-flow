@@ -205,17 +205,23 @@ export default function MiniPortfolioChart({ politician, className = "" }: MiniP
   };
 
   // Calculate performance vs S&P 500
-  // Find the last non-zero return (skip trailing zeros which indicate incomplete data)
-  const getLastNonZeroReturn = (returns: number[]): number => {
-    for (let i = returns.length - 1; i >= 0; i--) {
-      if (returns[i] !== 0) {
-        return returns[i];
+  // Use the last value from the chart data (rightmost point) to match what's visually shown
+  // If the last value is 0, find the last non-zero value from the full dataset
+  const getLastValidReturn = (chartReturns: number[], allReturns: number[]): number => {
+    const lastChartValue = chartReturns[chartReturns.length - 1] || 0;
+    if (lastChartValue !== 0) {
+      return lastChartValue;
+    }
+    // If last chart value is 0, find last non-zero from full dataset
+    for (let i = allReturns.length - 1; i >= 0; i--) {
+      if (allReturns[i] !== 0) {
+        return allReturns[i];
       }
     }
     return 0;
   };
   
-  const latestPoliticianReturn = getLastNonZeroReturn(recentData.politician_returns);
+  const latestPoliticianReturn = getLastValidReturn(recentData.politician_returns, data.politician_returns);
   const latestSp500Return = recentData.sp500_returns[recentData.sp500_returns.length - 1] || 0;
   const outperformance = latestPoliticianReturn - latestSp500Return;
 
