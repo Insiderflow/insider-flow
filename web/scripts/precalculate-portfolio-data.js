@@ -126,8 +126,21 @@ async function calculatePortfolioData(politicianId, politicianName) {
     const politicianReturns = [];
     const sp500Returns = [];
     
-    // Get S&P 500 starting price
-    const sp500StartPrice = await getSP500Price(startDate);
+    // Get S&P 500 starting price (with retry and better error handling)
+    let sp500StartPrice = null;
+    let retries = 3;
+    while (retries > 0 && !sp500StartPrice) {
+      sp500StartPrice = await getSP500Price(startDate);
+      if (!sp500StartPrice) {
+        retries--;
+        console.log(`  ⚠️  S&P 500 start price fetch failed, retries left: ${retries}`);
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second before retry
+      }
+    }
+    
+    if (!sp500StartPrice) {
+      console.log(`  ⚠️  Could not fetch S&P 500 start price, using fallback calculation`);
+    }
     
     // Process each month
     for (let i = 0; i < dates.length; i++) {
@@ -139,7 +152,18 @@ async function calculatePortfolioData(politicianId, politicianName) {
       
       if (tradesUpToMonth.length === 0) {
         politicianReturns.push(i > 0 ? politicianReturns[i - 1] : 0);
-        sp500Returns.push(i > 0 ? sp500Returns[i - 1] : 0);
+        // For S&P 500, calculate from start date even if no trades
+        if (sp500StartPrice) {
+          const sp500MonthEndPrice = await getSP500Price(monthEnd);
+          if (sp500MonthEndPrice) {
+            const sp500Return = ((sp500MonthEndPrice - sp500StartPrice) / sp500StartPrice) * 100;
+            sp500Returns.push(sp500Return);
+          } else {
+            sp500Returns.push(i > 0 ? sp500Returns[i - 1] : 0);
+          }
+        } else {
+          sp500Returns.push(i > 0 ? sp500Returns[i - 1] : 0);
+        }
         continue;
       }
 
@@ -184,17 +208,39 @@ async function calculatePortfolioData(politicianId, politicianName) {
       const avgReturn = totalWeight > 0 ? totalWeightedReturn / totalWeight : (i > 0 ? politicianReturns[i - 1] : 0);
       politicianReturns.push(avgReturn);
 
-      // S&P 500 return
+      // S&P 500 return (with retry)
       if (sp500StartPrice) {
-        const sp500MonthEndPrice = await getSP500Price(monthEnd);
+        let sp500MonthEndPrice = null;
+        let retries = 2;
+        while (retries > 0 && !sp500MonthEndPrice) {
+          sp500MonthEndPrice = await getSP500Price(monthEnd);
+          if (!sp500MonthEndPrice) {
+            retries--;
+            await new Promise(resolve => setTimeout(resolve, 500)); // Wait 0.5 seconds before retry
+          }
+        }
+        
         if (sp500MonthEndPrice) {
           const sp500Return = ((sp500MonthEndPrice - sp500StartPrice) / sp500StartPrice) * 100;
           sp500Returns.push(sp500Return);
         } else {
+          // Use previous value if fetch fails
           sp500Returns.push(i > 0 ? sp500Returns[i - 1] : 0);
         }
       } else {
-        sp500Returns.push(i > 0 ? sp500Returns[i - 1] : 0);
+        // If we don't have start price, try to calculate from first available price
+        if (i === 0) {
+          // Try to get current S&P 500 price as baseline
+          const currentSP500 = await getSP500Price(new Date());
+          if (currentSP500) {
+            sp500StartPrice = currentSP500;
+            sp500Returns.push(0); // Start at 0%
+          } else {
+            sp500Returns.push(0);
+          }
+        } else {
+          sp500Returns.push(i > 0 ? sp500Returns[i - 1] : 0);
+        }
       }
     }
 
