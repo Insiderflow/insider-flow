@@ -38,15 +38,24 @@ async function fetchYahooFinance(ticker, period1, period2) {
     
     if (data.chart?.result?.[0]) {
       const result = data.chart.result[0];
+      
+      // Try to get price from quote indicators first
       if (result.indicators?.quote?.[0]) {
         const quotes = result.indicators.quote[0];
-        if (quotes.close && quotes.close.length > 0) {
-          // Filter out null values
-          const validPrices = quotes.close.filter(p => p !== null && p > 0);
-          if (validPrices.length > 0) {
-            return validPrices;
+        // Try close, then high, then low, then open
+        for (const field of ['close', 'high', 'low', 'open']) {
+          if (quotes[field] && Array.isArray(quotes[field]) && quotes[field].length > 0) {
+            const validPrices = quotes[field].filter(p => p !== null && p !== undefined && !isNaN(p) && p > 0);
+            if (validPrices.length > 0) {
+              return validPrices;
+            }
           }
         }
+      }
+      
+      // Fallback: use regularMarketPrice from meta if available (for current/latest prices)
+      if (result.meta?.regularMarketPrice && result.meta.regularMarketPrice > 0) {
+        return [result.meta.regularMarketPrice];
       }
     }
     return null;
