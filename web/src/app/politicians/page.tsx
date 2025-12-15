@@ -5,9 +5,11 @@ import { StatsCardSkeleton, PoliticianCardSkeleton } from '@/components/Skeleton
 import LastUpdated, { DataFreshnessIndicator } from '@/components/LastUpdated';
 import { getCurrentUserWithTier, isPaid } from '@/lib/membership';
 import { redirect } from 'next/navigation';
+import fs from 'fs';
+import path from 'path';
 export const dynamic = 'force-dynamic';
 
-type Row = { id: string; name: string; party: string | null; chamber: string | null; trades: number; issuers: number; volume: number; lastTraded: Date | null };
+type Row = { id: string; name: string; party: string | null; chamber: string | null; trades: number; issuers: number; volume: number; lastTraded: Date | null; performance?: number };
 
 export default async function PoliticiansPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   const sp = await searchParams;
@@ -17,7 +19,7 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
   }
   const chamber = typeof sp.chamber === 'string' ? sp.chamber : '';
   const searchName = typeof sp.name === 'string' ? sp.name : '';
-  const allowedSort = new Set(['name', 'trades', 'issuers', 'volume']);
+  const allowedSort = new Set(['name', 'trades', 'issuers', 'volume', 'performance']);
   const sortKeyRaw = typeof sp.sort === 'string' ? sp.sort : 'trades';
   const sortKey = allowedSort.has(sortKeyRaw) ? sortKeyRaw : 'trades';
   const order = (typeof sp.order === 'string' && sp.order.toLowerCase() === 'asc') ? 'asc' : 'desc';
@@ -35,10 +37,86 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
     }
   });
 
+  // Load portfolio cache for performance sorting
+  let portfolioCache: Map<string, { politician_name?: string; data?: { politician_returns: number[]; sp500_returns: number[] } }> = new Map();
+  if (sortKey === 'performance') {
+    try {
+      const cachePath = path.join(process.cwd(), 'portfolio_cache.json');
+      if (fs.existsSync(cachePath)) {
+        const cacheData = JSON.parse(fs.readFileSync(cachePath, 'utf8'));
+        portfolioCache = new Map(Object.entries(cacheData));
+      }
+    } catch (error) {
+      console.error('Error loading portfolio cache:', error);
+    }
+  }
+
+  // Helper function to calculate performance vs S&P 500
+  const getPerformance = (politicianId: string, politicianName: string): number => {
+    // Try to find by ID first
+    let cacheEntry = portfolioCache.get(politicianId);
+    
+    // If not found by ID, search by name
+    if (!cacheEntry) {
+      for (const [, data] of portfolioCache.entries()) {
+        if (data.politician_name?.toLowerCase() === politicianName.toLowerCase()) {
+          cacheEntry = data;
+          break;
+        }
+      }
+    }
+    
+    if (!cacheEntry?.data) return 0;
+    
+    const { politician_returns, sp500_returns } = cacheEntry.data;
+    
+    // Find last non-zero return for politician
+    let latestPoliticianReturn = 0;
+    for (let i = politician_returns.length - 1; i >= 0; i--) {
+      if (politician_returns[i] !== 0) {
+        latestPoliticianReturn = politician_returns[i];
+        break;
+      }
+    }
+    
+    // Get last S&P 500 return
+    const latestSp500Return = sp500_returns[sp500_returns.length - 1] || 0;
+    
+    // Calculate outperformance
+    return latestPoliticianReturn - latestSp500Return;
+  };
+
   // Get politicians with their stats, sorted by the requested field
   let politicians;
   
-  if (sortKey === 'volume') {
+  if (sortKey === 'performance') {
+    // For performance sorting, load all politicians, calculate performance, then sort
+    const allPoliticians = await prisma.politician.findMany({
+      where: {
+        ...(whereChamber ? { chamber: whereChamber } : {}),
+        ...(searchName ? { name: { contains: searchName, mode: 'insensitive' } } : {})
+      },
+      include: {
+        _count: {
+          select: {
+            Trade: true
+          }
+        }
+      }
+    });
+    
+    // Calculate performance for each politician and sort
+    const politiciansWithPerformance = allPoliticians.map(p => ({
+      ...p,
+      performance: getPerformance(p.id, p.name)
+    }));
+    
+    const sortedPoliticians = politiciansWithPerformance.sort((a, b) => {
+      return order === 'asc' ? a.performance - b.performance : b.performance - a.performance;
+    });
+    
+    politicians = sortedPoliticians.slice((page - 1) * pageSize, page * pageSize);
+  } else if (sortKey === 'volume') {
     // For volume sorting, we need to calculate volume first, then sort
     const allPoliticians = await prisma.politician.findMany({
       where: {
@@ -174,6 +252,10 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
 
   // Transform to the expected format (optimized - no trade data loaded)
   const rows: Row[] = politicians.map(politician => {
+    const performance = sortKey === 'performance' && 'performance' in politician 
+      ? (politician as typeof politician & { performance: number }).performance 
+      : getPerformance(politician.id, politician.name);
+    
     return {
       id: politician.id,
       name: politician.name,
@@ -182,7 +264,8 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
       trades: politician._count.Trade,
       issuers: issuerCountMap.get(politician.id) || 0,
       volume: volumeMap.get(politician.id) || 0,
-      lastTraded: lastTradeMap.get(politician.id) || null
+      lastTraded: lastTradeMap.get(politician.id) || null,
+      performance
     };
   });
   const [tradeCount, polCount, issuerCount, lastTradeDate] = await Promise.all([
@@ -284,6 +367,10 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
               <option value="volume">
                 <span className="zh-Hant">交易金額</span>
                 <span className="zh-Hans hidden">交易金额</span>
+              </option>
+              <option value="performance">
+                <span className="zh-Hant">表現 vs S&P 500</span>
+                <span className="zh-Hans hidden">表现 vs S&P 500</span>
               </option>
               <option value="name">
                 <span className="zh-Hant">姓名</span>
