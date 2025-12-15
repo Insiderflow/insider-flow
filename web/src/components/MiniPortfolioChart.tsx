@@ -205,7 +205,17 @@ export default function MiniPortfolioChart({ politician, className = "" }: MiniP
   };
 
   // Calculate performance vs S&P 500
-  const latestPoliticianReturn = recentData.politician_returns[recentData.politician_returns.length - 1] || 0;
+  // Find the last non-zero return (skip trailing zeros which indicate incomplete data)
+  const getLastNonZeroReturn = (returns: number[]): number => {
+    for (let i = returns.length - 1; i >= 0; i--) {
+      if (returns[i] !== 0) {
+        return returns[i];
+      }
+    }
+    return 0;
+  };
+  
+  const latestPoliticianReturn = getLastNonZeroReturn(recentData.politician_returns);
   const latestSp500Return = recentData.sp500_returns[recentData.sp500_returns.length - 1] || 0;
   const outperformance = latestPoliticianReturn - latestSp500Return;
 
