@@ -101,13 +101,33 @@ async function getSP500Price(date) {
   
   // Source 1: Try SPY ETF first (more reliable, less rate-limited than ^GSPC)
   // SPY tracks S&P 500 closely and is more stable for API calls
+  // Use direct fetch to get meta price (more reliable)
   try {
-    const spyPrices = await fetchYahooFinance('SPY', timestamp, timestamp + 86400);
-    if (spyPrices && Array.isArray(spyPrices) && spyPrices.length > 0) {
-      const lastPrice = spyPrices[spyPrices.length - 1];
-      if (lastPrice && lastPrice > 0) {
-        price = lastPrice;
-        // SPY price is used directly - for % returns it's equivalent to S&P 500 index
+    const url = `https://query1.finance.yahoo.com/v8/finance/chart/SPY?period1=${timestamp}&period2=${timestamp + 86400}&interval=1d`;
+    const response = await fetch(url, {
+      headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' },
+    });
+    if (response.ok) {
+      const data = await response.json();
+      // Try quote indicators first
+      if (data.chart?.result?.[0]?.indicators?.quote?.[0]) {
+        const quotes = data.chart.result[0].indicators.quote[0];
+        for (const field of ['close', 'high', 'low', 'open']) {
+          if (quotes[field] && Array.isArray(quotes[field]) && quotes[field].length > 0) {
+            const validPrices = quotes[field].filter(p => p !== null && p !== undefined && !isNaN(p) && p > 0);
+            if (validPrices.length > 0) {
+              price = validPrices[validPrices.length - 1];
+              break;
+            }
+          }
+        }
+      }
+      // Fallback to meta price (this is what works for SPY)
+      if (!price && data.chart?.result?.[0]?.meta?.regularMarketPrice) {
+        const metaPrice = data.chart.result[0].meta.regularMarketPrice;
+        if (metaPrice > 0) {
+          price = metaPrice;
+        }
       }
     }
   } catch (error) {
