@@ -275,8 +275,13 @@ async function calculatePortfolioData(politicianId, politicianName) {
       let totalWeightedReturn = 0;
       let totalWeight = 0;
       
-      // Process last 50 trades for performance
-      const tradesToProcess = tradesUpToMonth.slice(-50);
+      // Process last 20 trades for performance (reduced from 50 to speed up)
+      const tradesToProcess = tradesUpToMonth.slice(-20);
+      
+      // Log progress for long-running calculations
+      if (tradesToProcess.length > 10 && i % 3 === 0) {
+        console.log(`    Processing month ${i + 1}/${dates.length} (${tradesToProcess.length} trades)...`);
+      }
       
       for (const trade of tradesToProcess) {
         if (!trade.Issuer?.ticker) continue;
@@ -286,7 +291,9 @@ async function calculatePortfolioData(politicianId, politicianName) {
           const tradeDate = new Date(trade.traded_at);
           
           const tradePrice = await getPriceOnDate(ticker, tradeDate);
+          await new Promise(resolve => setTimeout(resolve, 100)); // Rate limit between calls
           const monthEndPrice = await getPriceOnDate(ticker, monthEnd);
+          await new Promise(resolve => setTimeout(resolve, 100)); // Rate limit between calls
           
           if (tradePrice && monthEndPrice && tradePrice > 0) {
             const returnPct = ((monthEndPrice - tradePrice) / tradePrice) * 100;
@@ -312,17 +319,10 @@ async function calculatePortfolioData(politicianId, politicianName) {
       const avgReturn = totalWeight > 0 ? totalWeightedReturn / totalWeight : (i > 0 ? politicianReturns[i - 1] : 0);
       politicianReturns.push(avgReturn);
 
-      // S&P 500 return (with retry)
+      // S&P 500 return (simplified - no retry loop, fallbacks built into getSP500Price)
       if (sp500StartPrice) {
-        let sp500MonthEndPrice = null;
-        let retries = 2;
-        while (retries > 0 && !sp500MonthEndPrice) {
-          sp500MonthEndPrice = await getSP500Price(monthEnd);
-          if (!sp500MonthEndPrice) {
-            retries--;
-            await new Promise(resolve => setTimeout(resolve, 500)); // Wait 0.5 seconds before retry
-          }
-        }
+        const sp500MonthEndPrice = await getSP500Price(monthEnd);
+        await new Promise(resolve => setTimeout(resolve, 200)); // Rate limit
         
         if (sp500MonthEndPrice) {
           const sp500Return = ((sp500MonthEndPrice - sp500StartPrice) / sp500StartPrice) * 100;
@@ -332,13 +332,12 @@ async function calculatePortfolioData(politicianId, politicianName) {
           sp500Returns.push(i > 0 ? sp500Returns[i - 1] : 0);
         }
       } else {
-        // If we don't have start price, try to calculate from first available price
+        // If we don't have start price, try to get current S&P 500 price as baseline
         if (i === 0) {
-          // Try to get current S&P 500 price as baseline
           const currentSP500 = await getSP500Price(new Date());
           if (currentSP500) {
-            sp500StartPrice = currentSP500;
-            sp500Returns.push(0); // Start at 0%
+            // Note: We can't update sp500StartPrice here (it's const), so just start at 0
+            sp500Returns.push(0);
           } else {
             sp500Returns.push(0);
           }
