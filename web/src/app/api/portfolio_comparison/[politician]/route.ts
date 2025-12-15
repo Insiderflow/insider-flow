@@ -105,9 +105,20 @@ function loadCachedData(): Map<string, any> {
       return new Map(Object.entries(data));
     }
   } catch (error) {
-    console.error('Error loading cache:', error);
+    console.error('Error loading cache (will use on-demand calculation):', error);
+    // Silently fail - will use on-demand calculation
   }
   return new Map();
+}
+
+// Add timeout wrapper for the entire request
+async function withTimeout<T>(promise: Promise<T>, timeoutMs: number): Promise<T> {
+  return Promise.race([
+    promise,
+    new Promise<T>((_, reject) => 
+      setTimeout(() => reject(new Error('Request timeout')), timeoutMs)
+    )
+  ]);
 }
 
 export async function GET(
@@ -115,43 +126,99 @@ export async function GET(
   { params }: { params: Promise<{ politician: string }> }
 ) {
   try {
-    const { politician } = await params;
+    // Wrap entire handler in timeout (30 seconds max)
+    return await withTimeout(handleRequest(request, params), 30000);
+  } catch (error) {
+    console.error('Portfolio comparison API error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     
-    // Try to load from cache first
-    const cache = loadCachedData();
+    return NextResponse.json(
+      { 
+        error: 'Failed to load portfolio data',
+        message: process.env.NODE_ENV === 'development' ? errorMessage : 'Please try again later. If the issue persists, the data may still be calculating.'
+      },
+      { status: 500 }
+    );
+  }
+}
+
+async function handleRequest(
+  request: NextRequest,
+  { params }: { params: Promise<{ politician: string }> }
+): Promise<NextResponse> {
+  const { politician } = await params;
+  const { searchParams } = new URL(request.url);
+  const startDate = searchParams.get('start_date');
+  const chinaFilter = searchParams.get('china_filter') === 'true';
     
-    // Find politician in cache
+    // Try to load from cache first (only if file exists and is accessible)
     let cachedData = null;
-    for (const [id, data] of cache.entries()) {
-      if (data.politician_name?.toLowerCase().includes(politician.toLowerCase())) {
-        cachedData = data;
-        break;
-      }
-    }
-    
-    // If cached data exists and is recent (less than 24 hours old), use it
-    if (cachedData && cachedData.data) {
-      const cacheAge = new Date().getTime() - new Date(cachedData.updated_at).getTime();
-      const maxAge = 24 * 60 * 60 * 1000; // 24 hours
+    try {
+      const cache = loadCachedData();
       
-      if (cacheAge < maxAge) {
-        console.log(`Using cached data for ${politician} (age: ${Math.round(cacheAge / 1000 / 60)} minutes)`);
-        return NextResponse.json({
-          dates: cachedData.data.dates,
-          politician_returns: cachedData.data.politician_returns,
-          sp500_returns: cachedData.data.sp500_returns,
-          trades: [], // Will be fetched separately if needed
-          cached: true,
-          cached_at: cachedData.updated_at
-        });
+      // Find politician in cache
+      for (const [id, data] of cache.entries()) {
+        if (data.politician_name?.toLowerCase().includes(politician.toLowerCase())) {
+          cachedData = data;
+          break;
+        }
       }
+      
+      // If cached data exists and is recent (less than 24 hours old), use it
+      if (cachedData && cachedData.data) {
+        const cacheAge = new Date().getTime() - new Date(cachedData.updated_at).getTime();
+        const maxAge = 24 * 60 * 60 * 1000; // 24 hours
+        
+        if (cacheAge < maxAge) {
+          console.log(`Using cached data for ${politician} (age: ${Math.round(cacheAge / 1000 / 60)} minutes)`);
+          
+          // Still fetch trades for the response
+          const politicianData = await prisma.politician.findFirst({
+            where: { name: { contains: politician, mode: 'insensitive' } },
+            include: {
+              Trade: {
+                where: {
+                  Issuer: { ticker: { not: null } }
+                },
+                include: {
+                  Issuer: {
+                    select: {
+                      ticker: true,
+                      name: true
+                    }
+                  }
+                },
+                orderBy: { traded_at: 'desc' },
+                take: 20
+              }
+            }
+          });
+          
+          const formattedTrades = politicianData?.Trade.map(trade => ({
+            issuer_name: trade.Issuer?.name || 'Unknown',
+            ticker: trade.Issuer?.ticker || 'N/A',
+            buy_sell: trade.type || 'Unknown',
+            trade_amount: trade.size_max ? `$${Number(trade.size_max).toLocaleString()}` : 'N/A',
+            filled_date: trade.traded_at.toISOString().split('T')[0]
+          })) || [];
+          
+          return NextResponse.json({
+            dates: cachedData.data.dates,
+            politician_returns: cachedData.data.politician_returns,
+            sp500_returns: cachedData.data.sp500_returns,
+            trades: formattedTrades,
+            cached: true,
+            cached_at: cachedData.updated_at
+          });
+        }
+      }
+    } catch (cacheError) {
+      console.log(`Cache not available for ${politician}, using on-demand calculation`);
+      // Continue to on-demand calculation
     }
     
     // If no cache or cache is stale, calculate on-demand (fallback)
-    console.log(`Calculating on-demand for ${politician} (no cache or cache expired)`);
-    const { searchParams } = new URL(request.url);
-    const startDate = searchParams.get('start_date');
-    const chinaFilter = searchParams.get('china_filter') === 'true';
+    // Note: startDate and chinaFilter already extracted above
 
     // Get politician info and earliest trade date
     const politicianData = await prisma.politician.findFirst({
@@ -238,9 +305,16 @@ export async function GET(
     const politicianReturns: number[] = [];
     const sp500Returns: number[] = [];
     
-    // Get S&P 500 starting price
-    const sp500StartPrice = await getSP500Price(actualStartDate);
-    await new Promise(resolve => setTimeout(resolve, 100)); // Rate limit
+    // Get S&P 500 starting price (with timeout)
+    let sp500StartPrice: number | null = null;
+    try {
+      sp500StartPrice = await Promise.race([
+        getSP500Price(actualStartDate),
+        new Promise<null>((resolve) => setTimeout(() => resolve(null), 5000)) // 5 second timeout
+      ]);
+    } catch (error) {
+      console.error('Error fetching S&P 500 start price:', error);
+    }
     
     // Process each month
     for (let i = 0; i < dates.length; i++) {
@@ -264,8 +338,8 @@ export async function GET(
       let totalWeight = 0;
       let validTradeCount = 0;
 
-      // Process trades (limit to avoid too many API calls)
-      const tradesToProcess = tradesUpToMonth.slice(-50); // Last 50 trades for performance
+      // Process trades (limit to avoid too many API calls and timeouts)
+      const tradesToProcess = tradesUpToMonth.slice(-10); // Last 10 trades for performance
       
       for (const trade of tradesToProcess) {
         if (!trade.Issuer?.ticker) continue;
@@ -274,12 +348,18 @@ export async function GET(
           const ticker = trade.Issuer.ticker;
           const tradeDate = new Date(trade.traded_at);
           
-          // Get price on trade date
-          const tradePrice = await getPriceOnDate(ticker, tradeDate);
+          // Get price on trade date (with timeout)
+          const tradePrice = await Promise.race([
+            getPriceOnDate(ticker, tradeDate),
+            new Promise<null>((resolve) => setTimeout(() => resolve(null), 2000)) // 2 second timeout
+          ]);
           await new Promise(resolve => setTimeout(resolve, 50)); // Rate limit
           
-          // Get price at end of month
-          const monthEndPrice = await getPriceOnDate(ticker, monthEnd);
+          // Get price at end of month (with timeout)
+          const monthEndPrice = await Promise.race([
+            getPriceOnDate(ticker, monthEnd),
+            new Promise<null>((resolve) => setTimeout(() => resolve(null), 2000)) // 2 second timeout
+          ]);
           await new Promise(resolve => setTimeout(resolve, 50)); // Rate limit
           
           if (tradePrice && monthEndPrice && tradePrice > 0) {
@@ -311,15 +391,22 @@ export async function GET(
       const avgReturn = totalWeight > 0 ? totalWeightedReturn / totalWeight : 0;
       politicianReturns.push(avgReturn);
 
-      // Calculate S&P 500 return for this month
+      // Calculate S&P 500 return for this month (with timeout)
       if (sp500StartPrice) {
-        const sp500MonthEndPrice = await getSP500Price(monthEnd);
-        await new Promise(resolve => setTimeout(resolve, 50)); // Rate limit
-        
-        if (sp500MonthEndPrice) {
-          const sp500Return = ((sp500MonthEndPrice - sp500StartPrice) / sp500StartPrice) * 100;
-          sp500Returns.push(sp500Return);
-        } else {
+        try {
+          const sp500MonthEndPrice = await Promise.race([
+            getSP500Price(monthEnd),
+            new Promise<null>((resolve) => setTimeout(() => resolve(null), 3000)) // 3 second timeout
+          ]);
+          await new Promise(resolve => setTimeout(resolve, 50)); // Rate limit
+          
+          if (sp500MonthEndPrice) {
+            const sp500Return = ((sp500MonthEndPrice - sp500StartPrice) / sp500StartPrice) * 100;
+            sp500Returns.push(sp500Return);
+          } else {
+            sp500Returns.push(i > 0 ? sp500Returns[i - 1] : 0);
+          }
+        } catch (error) {
           sp500Returns.push(i > 0 ? sp500Returns[i - 1] : 0);
         }
       } else {
@@ -336,6 +423,14 @@ export async function GET(
       filled_date: trade.traded_at.toISOString().split('T')[0]
     }));
 
+    // Ensure we have data for all dates (fill missing with zeros if needed)
+    while (politicianReturns.length < dates.length) {
+      politicianReturns.push(0);
+    }
+    while (sp500Returns.length < dates.length) {
+      sp500Returns.push(0);
+    }
+
     return NextResponse.json({
       dates,
       politician_returns: politicianReturns,
@@ -343,12 +438,4 @@ export async function GET(
       trades: formattedTrades,
       cached: false
     });
-
-  } catch (error) {
-    console.error('Portfolio comparison API error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error', details: error instanceof Error ? error.message : 'Unknown error' },
-      { status: 500 }
-    );
-  }
 }
