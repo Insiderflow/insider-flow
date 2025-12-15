@@ -61,7 +61,7 @@ async function getPriceOnDate(ticker, date) {
   return price;
 }
 
-// Get S&P 500 price
+// Get S&P 500 price with multiple fallback sources
 async function getSP500Price(date) {
   const cacheKey = `SP500_${date.toISOString().split('T')[0]}`;
   if (priceCache.has(cacheKey)) {
@@ -69,15 +69,73 @@ async function getSP500Price(date) {
   }
   
   const timestamp = Math.floor(date.getTime() / 1000);
-  const prices = await fetchYahooFinance('^GSPC', timestamp, timestamp + 86400);
+  const dateStr = date.toISOString().split('T')[0];
   
+  // Try multiple sources in order
   let price = null;
-  if (prices && prices.length > 0) {
-    price = prices[prices.length - 1];
+  
+  // Source 1: Yahoo Finance (^GSPC)
+  try {
+    const prices = await fetchYahooFinance('^GSPC', timestamp, timestamp + 86400);
+    if (prices && prices.length > 0) {
+      price = prices[prices.length - 1];
+    }
+  } catch (error) {
+    // Continue to next source
+  }
+  
+  // Source 2: If Yahoo fails, try SPY ETF (tracks S&P 500 closely)
+  if (!price) {
+    try {
+      await new Promise(resolve => setTimeout(resolve, 200)); // Rate limit
+      const spyPrices = await fetchYahooFinance('SPY', timestamp, timestamp + 86400);
+      if (spyPrices && spyPrices.length > 0) {
+        price = spyPrices[spyPrices.length - 1];
+      }
+    } catch (error) {
+      // Continue to next source
+    }
+  }
+  
+  // Source 3: Alpha Vantage (free tier: 5 calls/min, 500 calls/day)
+  // Note: Requires API key in ALPHA_VANTAGE_API_KEY env var
+  if (!price && process.env.ALPHA_VANTAGE_API_KEY) {
+    try {
+      await new Promise(resolve => setTimeout(resolve, 200)); // Rate limit
+      const avUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=SPY&apikey=${process.env.ALPHA_VANTAGE_API_KEY}&outputsize=compact`;
+      const response = await fetch(avUrl);
+      if (response.ok) {
+        const data = await response.json();
+        if (data['Time Series (Daily)'] && data['Time Series (Daily)'][dateStr]) {
+          price = parseFloat(data['Time Series (Daily)'][dateStr]['4. close']);
+        }
+      }
+    } catch (error) {
+      // Continue to next source
+    }
+  }
+  
+  // Source 4: FRED (Federal Reserve Economic Data) - S&P 500 index
+  // This is free and reliable but may have delays
+  if (!price) {
+    try {
+      await new Promise(resolve => setTimeout(resolve, 200)); // Rate limit
+      // FRED uses SP500 as the series ID
+      const fredUrl = `https://api.stlouisfed.org/fred/series/observations?series_id=SP500&api_key=${process.env.FRED_API_KEY || 'demo'}&file_type=json&observation_start=${dateStr}&observation_end=${dateStr}`;
+      const response = await fetch(fredUrl);
+      if (response.ok) {
+        const data = await response.json();
+        if (data.observations && data.observations.length > 0 && data.observations[0].value !== '.') {
+          price = parseFloat(data.observations[0].value);
+        }
+      }
+    } catch (error) {
+      // All sources failed
+    }
   }
   
   priceCache.set(cacheKey, price);
-  await new Promise(resolve => setTimeout(resolve, 50));
+  await new Promise(resolve => setTimeout(resolve, 100)); // Rate limit
   return price;
 }
 
