@@ -365,11 +365,20 @@ async function precalculateAllPortfolios() {
     let successCount = 0;
     let errorCount = 0;
 
+    const overallStartTime = Date.now();
+    
     for (const politician of politicians) {
       processed++;
-      console.log(`[${processed}/${politicians.length}] Processing ${politician.name}...`);
+      const startTime = Date.now();
+      console.log(`\n[${processed}/${politicians.length}] Processing ${politician.name}...`);
       
       const data = await calculatePortfolioData(politician.id, politician.name);
+      
+      const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+      const remaining = politicians.length - processed;
+      const avgTimePerPolitician = (Date.now() - overallStartTime) / processed;
+      const estimatedRemainingMinutes = ((avgTimePerPolitician * remaining) / 1000 / 60).toFixed(1);
+      const progressPercent = ((processed / politicians.length) * 100).toFixed(1);
       
       if (data) {
         results.set(politician.id, {
@@ -379,15 +388,20 @@ async function precalculateAllPortfolios() {
           updated_at: new Date()
         });
         successCount++;
-        console.log(`  ✅ Calculated ${data.dates.length} months of data`);
+        const politicianValidReturns = data.politician_returns.filter(r => r !== 0).length;
+        const sp500ValidReturns = data.sp500_returns.filter(r => r !== 0).length;
+        const sp500Status = sp500ValidReturns > 0 ? '✅' : '⚠️';
+        console.log(`  ${sp500Status} Calculated ${data.dates.length} months | Politician: ${politicianValidReturns} valid | S&P 500: ${sp500ValidReturns} valid`);
+        console.log(`  ⏱️  Took ${elapsed}s | Est. remaining: ~${estimatedRemainingMinutes} min | Progress: ${progressPercent}%`);
       } else {
         errorCount++;
+        console.log(`  ❌ Failed to calculate data`);
       }
       
       // Save to file periodically (every 10 politicians)
       if (processed % 10 === 0) {
         await saveResults(results);
-        console.log(`\n💾 Saved progress (${processed}/${politicians.length})`);
+        console.log(`\n💾 Saved progress (${processed}/${politicians.length} - ${progressPercent}%)`);
       }
     }
 
