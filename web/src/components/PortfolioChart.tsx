@@ -110,13 +110,29 @@ export default function PortfolioChart({ politician }: PortfolioChartProps) {
   }
 
   if (error) {
+    // Check if it's a network/timeout error or data not available
+    const isNetworkError = error.includes('timeout') || error.includes('network') || error.includes('Failed to fetch');
+    const isDataUnavailable = error.includes('not available') || error.includes('still being calculated');
+    
     return (
       <div className="bg-gray-800 rounded-lg p-6 text-center">
         <div className="text-red-500 mb-2">
           <span className="zh-Hant">載入圖表時發生錯誤</span>
           <span className="zh-Hans hidden">载入图表时发生错误</span>
         </div>
-        <div className="text-gray-400 text-sm">{error}</div>
+        <div className="text-gray-400 text-sm mb-2">{error}</div>
+        {isDataUnavailable && (
+          <div className="text-gray-500 text-xs mt-2">
+            <span className="zh-Hant">數據正在計算中，請稍後再試</span>
+            <span className="zh-Hans hidden">数据正在计算中，请稍后再试</span>
+          </div>
+        )}
+        {isNetworkError && (
+          <div className="text-gray-500 text-xs mt-2">
+            <span className="zh-Hant">請檢查網路連線或稍後再試</span>
+            <span className="zh-Hans hidden">请检查网络连线或稍后再试</span>
+          </div>
+        )}
       </div>
     );
   }
