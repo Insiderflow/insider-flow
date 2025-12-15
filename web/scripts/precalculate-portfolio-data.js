@@ -74,23 +74,26 @@ async function getSP500Price(date) {
   // Try multiple sources in order
   let price = null;
   
-  // Source 1: Yahoo Finance (^GSPC)
+  // Source 1: Yahoo Finance (^GSPC) - try first but often rate-limited
   try {
     const prices = await fetchYahooFinance('^GSPC', timestamp, timestamp + 86400);
-    if (prices && prices.length > 0) {
+    if (prices && prices.length > 0 && prices[prices.length - 1] > 0) {
       price = prices[prices.length - 1];
     }
   } catch (error) {
     // Continue to next source
   }
   
-  // Source 2: If Yahoo fails, try SPY ETF (tracks S&P 500 closely)
+  // Source 2: SPY ETF (tracks S&P 500 closely, more reliable than ^GSPC)
+  // Use SPY as primary fallback since it's more stable
   if (!price) {
     try {
-      await new Promise(resolve => setTimeout(resolve, 200)); // Rate limit
+      await new Promise(resolve => setTimeout(resolve, 500)); // Rate limit
       const spyPrices = await fetchYahooFinance('SPY', timestamp, timestamp + 86400);
-      if (spyPrices && spyPrices.length > 0) {
+      if (spyPrices && spyPrices.length > 0 && spyPrices[spyPrices.length - 1] > 0) {
         price = spyPrices[spyPrices.length - 1];
+        // Note: We use SPY price directly for relative returns calculation
+        // SPY tracks S&P 500 at ~1/10th scale, but for % returns it's equivalent
       }
     } catch (error) {
       // Continue to next source
