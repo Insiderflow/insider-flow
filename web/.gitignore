@@ -39,4 +39,4 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-portfolio_cache.json
+# portfolio_cache.json - Now committed to repo for production use
