@@ -29,7 +29,7 @@ async function fetchYahooFinance(ticker: string, period1: number, period2: numbe
       }
     }
     return null;
-  } catch (error) {
+  } catch {
     return null;
   }
 }
@@ -55,27 +55,27 @@ async function getPriceOnDate(ticker: string, date: Date): Promise<number | null
   return price;
 }
 
-// Get current stock price
-async function getCurrentPrice(ticker: string): Promise<number | null> {
-  if (!ticker) return null;
-  
-  const cacheKey = `${ticker}_current`;
-  if (priceCache.has(cacheKey)) {
-    return priceCache.get(cacheKey) || null;
-  }
-  
-  const now = Math.floor(Date.now() / 1000);
-  const oneDayAgo = now - 86400;
-  const prices = await fetchYahooFinance(ticker, oneDayAgo, now);
-  
-  let price = null;
-  if (prices && prices.length > 0) {
-    price = prices[prices.length - 1];
-  }
-  
-  priceCache.set(cacheKey, price);
-  return price;
-}
+// Get current stock price (unused but kept for potential future use)
+// async function getCurrentPrice(ticker: string): Promise<number | null> {
+//   if (!ticker) return null;
+//   
+//   const cacheKey = `${ticker}_current`;
+//   if (priceCache.has(cacheKey)) {
+//     return priceCache.get(cacheKey) || null;
+//   }
+//   
+//   const now = Math.floor(Date.now() / 1000);
+//   const oneDayAgo = now - 86400;
+//   const prices = await fetchYahooFinance(ticker, oneDayAgo, now);
+//   
+//   let price = null;
+//   if (prices && prices.length > 0) {
+//     price = prices[prices.length - 1];
+//   }
+//   
+//   priceCache.set(cacheKey, price);
+//   return price;
+// }
 
 // Get S&P 500 price on a date
 async function getSP500Price(date: Date): Promise<number | null> {
@@ -97,7 +97,7 @@ async function getSP500Price(date: Date): Promise<number | null> {
 }
 
 // Load cached portfolio data
-function loadCachedData(): Map<string, any> {
+function loadCachedData(): Map<string, { politician_name?: string; data?: { dates: string[]; politician_returns: number[]; sp500_returns: number[] }; updated_at: string }> {
   try {
     const cachePath = path.join(process.cwd(), 'portfolio_cache.json');
     if (fs.existsSync(cachePath)) {
@@ -127,7 +127,7 @@ export async function GET(
 ) {
   try {
     // Wrap entire handler in timeout (30 seconds max)
-    return await withTimeout(handleRequest(request, params), 30000);
+    return await withTimeout(handleRequest(request, { params }), 30000);
   } catch (error) {
     console.error('Portfolio comparison API error:', error);
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
@@ -157,7 +157,7 @@ async function handleRequest(
       const cache = loadCachedData();
       
       // Find politician in cache
-      for (const [id, data] of cache.entries()) {
+      for (const [, data] of cache.entries()) {
         if (data.politician_name?.toLowerCase().includes(politician.toLowerCase())) {
           cachedData = data;
           break;
@@ -212,7 +212,7 @@ async function handleRequest(
           });
         }
       }
-    } catch (cacheError) {
+    } catch {
       console.log(`Cache not available for ${politician}, using on-demand calculation`);
       // Continue to on-demand calculation
     }
@@ -336,7 +336,6 @@ async function handleRequest(
       // Calculate cumulative portfolio return up to this month
       let totalWeightedReturn = 0;
       let totalWeight = 0;
-      let validTradeCount = 0;
 
       // Process trades (limit to avoid too many API calls and timeouts)
       const tradesToProcess = tradesUpToMonth.slice(-10); // Last 10 trades for performance
@@ -379,7 +378,6 @@ async function handleRequest(
             
             totalWeightedReturn += adjustedReturn * weight;
             totalWeight += weight;
-            validTradeCount++;
           }
         } catch (error) {
           // Skip on error
@@ -406,7 +404,7 @@ async function handleRequest(
           } else {
             sp500Returns.push(i > 0 ? sp500Returns[i - 1] : 0);
           }
-        } catch (error) {
+        } catch {
           sp500Returns.push(i > 0 ? sp500Returns[i - 1] : 0);
         }
       } else {
