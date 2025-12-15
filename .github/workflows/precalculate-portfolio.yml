@@ -2,7 +2,7 @@ name: Pre-calculate Portfolio Data
 
 on:
   schedule:
-    # Run daily at 2 AM UTC (10 AM HKT)
+    # Run daily at 2 AM UTC (10 AM HKT) to update portfolio cache with latest data
     - cron: '0 2 * * *'
   workflow_dispatch: # Allows manual trigger
 
