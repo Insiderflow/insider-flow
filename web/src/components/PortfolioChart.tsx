@@ -66,9 +66,26 @@ export default function PortfolioChart({ politician }: PortfolioChartProps) {
           `/api/portfolio_comparison/${encodeURIComponent(politician)}?${params.toString()}`
         );
         
+        // Check if response has error
+        if (response.data.error) {
+          throw new Error(response.data.message || response.data.error);
+        }
+        
+        // Check if data is valid
+        if (!response.data.dates || !response.data.politician_returns || !response.data.sp500_returns) {
+          throw new Error('Invalid data format received');
+        }
+        
         setData(response.data);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Unknown error');
+        const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+        // Check if it's an axios error with response
+        if (axios.isAxiosError(err) && err.response) {
+          const responseError = err.response.data?.message || err.response.data?.error || errorMessage;
+          setError(responseError);
+        } else {
+          setError(errorMessage);
+        }
         console.error('Portfolio chart error:', err);
       } finally {
         setLoading(false);

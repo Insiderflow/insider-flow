@@ -155,64 +155,103 @@ async function handleRequest(
     try {
       const cache = loadCachedData();
       
-      // Find politician in cache
-      for (const [, data] of cache.entries()) {
-        if (data.politician_name?.toLowerCase().includes(politician.toLowerCase())) {
-          cachedData = data;
-          break;
+      if (cache.size === 0) {
+        console.log(`Cache is empty for ${politician}`);
+      } else {
+        // First try exact name match
+        for (const [, data] of cache.entries()) {
+          if (data.politician_name?.toLowerCase() === politician.toLowerCase()) {
+            cachedData = data;
+            break;
+          }
+        }
+        
+        // If not found, try partial match
+        if (!cachedData) {
+          for (const [, data] of cache.entries()) {
+            if (data.politician_name?.toLowerCase().includes(politician.toLowerCase()) || 
+                politician.toLowerCase().includes(data.politician_name?.toLowerCase() || '')) {
+              cachedData = data;
+              break;
+            }
+          }
         }
       }
       
-      // If cached data exists and is recent (less than 24 hours old), use it
-      if (cachedData && cachedData.data) {
-        const cacheAge = new Date().getTime() - new Date(cachedData.updated_at).getTime();
-        const maxAge = 24 * 60 * 60 * 1000; // 24 hours
+      // If cached data exists, use it (removed 24-hour age check for now)
+      if (cachedData && cachedData.data && cachedData.data.dates && cachedData.data.dates.length > 0) {
+        console.log(`✅ Using cached data for ${politician} (found: ${cachedData.politician_name})`);
         
-        if (cacheAge < maxAge) {
-          console.log(`Using cached data for ${politician} (age: ${Math.round(cacheAge / 1000 / 60)} minutes)`);
-          
-          // Still fetch trades for the response
-          const politicianData = await prisma.politician.findFirst({
-            where: { name: { contains: politician, mode: 'insensitive' } },
-            include: {
-              Trade: {
-                where: {
-                  Issuer: { ticker: { not: null } }
-                },
-                include: {
-                  Issuer: {
-                    select: {
-                      ticker: true,
-                      name: true
+        // Still fetch trades for the response (with timeout)
+        let formattedTrades = [];
+        try {
+          const politicianData = await Promise.race([
+            prisma.politician.findFirst({
+              where: { name: { contains: politician, mode: 'insensitive' } },
+              include: {
+                Trade: {
+                  where: {
+                    Issuer: { ticker: { not: null } }
+                  },
+                  include: {
+                    Issuer: {
+                      select: {
+                        ticker: true,
+                        name: true
+                      }
                     }
-                  }
-                },
-                orderBy: { traded_at: 'desc' },
-                take: 20
+                  },
+                  orderBy: { traded_at: 'desc' },
+                  take: 20
+                }
               }
-            }
-          });
+            }),
+            new Promise<null>((resolve) => setTimeout(() => resolve(null), 5000)) // 5 second timeout
+          ]);
           
-          const formattedTrades = politicianData?.Trade.map(trade => ({
-            issuer_name: trade.Issuer?.name || 'Unknown',
-            ticker: trade.Issuer?.ticker || 'N/A',
-            buy_sell: trade.type || 'Unknown',
-            trade_amount: trade.size_max ? `$${Number(trade.size_max).toLocaleString()}` : 'N/A',
-            filled_date: trade.traded_at.toISOString().split('T')[0]
-          })) || [];
-          
-          return NextResponse.json({
-            dates: cachedData.data.dates,
-            politician_returns: cachedData.data.politician_returns,
-            sp500_returns: cachedData.data.sp500_returns,
-            trades: formattedTrades,
-            cached: true,
-            cached_at: cachedData.updated_at
-          });
+          if (politicianData) {
+            formattedTrades = politicianData.Trade.map(trade => ({
+              issuer_name: trade.Issuer?.name || 'Unknown',
+              ticker: trade.Issuer?.ticker || 'N/A',
+              buy_sell: trade.type || 'Unknown',
+              trade_amount: trade.size_max ? `$${Number(trade.size_max).toLocaleString()}` : 'N/A',
+              filled_date: trade.traded_at.toISOString().split('T')[0]
+            }));
+          }
+        } catch (tradeError) {
+          console.error(`Error fetching trades for ${politician}:`, tradeError);
+          // Continue without trades
+        }
+        
+        return NextResponse.json({
+          dates: cachedData.data.dates,
+          politician_returns: cachedData.data.politician_returns,
+          sp500_returns: cachedData.data.sp500_returns,
+          trades: formattedTrades,
+          cached: true,
+          cached_at: cachedData.updated_at
+        });
+      } else {
+        console.log(`⚠️  No valid cached data found for ${politician}`);
+        // Try to find by ID if politician name was passed as ID
+        if (!cachedData) {
+          // Check if politician parameter might be an ID
+          const cacheById = portfolioCache.get(politician);
+          if (cacheById && cacheById.data && cacheById.data.dates && cacheById.data.dates.length > 0) {
+            console.log(`✅ Found cached data by ID for ${politician}`);
+            return NextResponse.json({
+              dates: cacheById.data.dates,
+              politician_returns: cacheById.data.politician_returns,
+              sp500_returns: cacheById.data.sp500_returns,
+              trades: [],
+              cached: true,
+              cached_at: cacheById.updated_at
+            });
+          }
         }
       }
-    } catch {
-      console.log(`Cache not available for ${politician}, using on-demand calculation`);
+    } catch (error) {
+      console.error(`Error loading cache for ${politician}:`, error instanceof Error ? error.message : 'Unknown error');
       // Continue to on-demand calculation
     }
     
