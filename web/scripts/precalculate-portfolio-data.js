@@ -181,7 +181,7 @@ async function calculatePortfolioData(politicianId, politicianName) {
         }
       }
 
-      const avgReturn = totalWeight > 0 ? totalWeightedReturn / totalWeight : 0;
+      const avgReturn = totalWeight > 0 ? totalWeightedReturn / totalWeight : (i > 0 ? politicianReturns[i - 1] : 0);
       politicianReturns.push(avgReturn);
 
       // S&P 500 return
@@ -194,7 +194,7 @@ async function calculatePortfolioData(politicianId, politicianName) {
           sp500Returns.push(i > 0 ? sp500Returns[i - 1] : 0);
         }
       } else {
-        sp500Returns.push(0);
+        sp500Returns.push(i > 0 ? sp500Returns[i - 1] : 0);
       }
     }
 
