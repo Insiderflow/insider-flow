@@ -104,8 +104,7 @@ function loadCachedData(): Map<string, { politician_name?: string; data?: { date
       const data = JSON.parse(fs.readFileSync(cachePath, 'utf8'));
       return new Map(Object.entries(data));
     }
-  } catch (error) {
-    console.error('Error loading cache (will use on-demand calculation):', error);
+  } catch {
     // Silently fail - will use on-demand calculation
   }
   return new Map();
@@ -381,7 +380,7 @@ async function handleRequest(
           }
         } catch (error) {
           // Skip on error
-          console.error(`Error processing trade for ${trade.Issuer?.ticker}:`, error);
+          console.error(`Error processing trade for ${trade.Issuer?.ticker}:`, error instanceof Error ? error.message : 'Unknown error');
         }
       }
 
