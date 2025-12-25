@@ -5,6 +5,12 @@ on:
     # Run daily at 9am HKT (1am UTC)
     - cron: '0 1 * * *'
   workflow_dispatch: # Allow manual trigger
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/daily-newsletter.yml'
+      - 'web/scripts/send-daily-newsletter.js'
 
 jobs:
   send-newsletter:

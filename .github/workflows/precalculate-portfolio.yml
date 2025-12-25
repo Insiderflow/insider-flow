@@ -5,6 +5,12 @@ on:
     # Run daily at 2 AM UTC (10 AM HKT) to update portfolio cache with latest data
     - cron: '0 2 * * *'
   workflow_dispatch: # Allows manual trigger
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/precalculate-portfolio.yml'
+      - 'web/scripts/precalculate-portfolio-data.js'
 
 jobs:
   precalculate:
