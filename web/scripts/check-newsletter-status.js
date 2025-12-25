@@ -24,14 +24,13 @@ async function checkNewsletterStatus() {
   // Check paid members
   try {
     const now = new Date();
-    const paidMembers = await prisma.user.findMany({
+    const allPaid = await prisma.user.findMany({
       where: {
         membership_tier: 'PAID',
         OR: [
           { membership_expires_at: null },
           { membership_expires_at: { gt: now } }
-        ],
-        email: { not: { equals: null } }
+        ]
       },
       select: {
         id: true,
@@ -40,6 +39,8 @@ async function checkNewsletterStatus() {
         membership_expires_at: true
       }
     });
+    // Filter out users without email addresses
+    const paidMembers = allPaid.filter(u => u.email && u.email.trim().length > 0);
     console.log(`\n👥 Paid Members: ${paidMembers.length}`);
     if (paidMembers.length > 0) {
       console.log('   Sample members:');

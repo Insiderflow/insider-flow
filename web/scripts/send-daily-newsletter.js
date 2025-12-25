@@ -167,14 +167,13 @@ function renderHtml(trades, dateLabel) {
 
 async function getActivePaidMembers() {
   const now = new Date();
-  return await prisma.user.findMany({
+  const allPaid = await prisma.user.findMany({
     where: {
       membership_tier: 'PAID',
       OR: [
         { membership_expires_at: null },
         { membership_expires_at: { gt: now } }
-      ],
-      email: { not: { equals: null } }
+      ]
     },
     select: {
       id: true,
@@ -182,6 +181,8 @@ async function getActivePaidMembers() {
       name: true
     }
   });
+  // Filter out users without email addresses
+  return allPaid.filter(u => u.email && u.email.trim().length > 0);
 }
 
 async function sendEmailBatch(emails, subject, html, fromEmail, fromName) {
