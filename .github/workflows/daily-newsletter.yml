@@ -1,0 +1,45 @@
+name: Daily Newsletter
+
+on:
+  schedule:
+    # Run daily at 9am HKT (1am UTC)
+    - cron: '0 1 * * *'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  send-newsletter:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: web/package-lock.json
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Generate Prisma Client
+      run: npx prisma generate
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        
+    - name: Send Daily Newsletter
+      run: node scripts/send-daily-newsletter.js
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+        SENDGRID_FROM_EMAIL: ${{ secrets.SENDGRID_FROM_EMAIL || secrets.NEWSLETTER_FROM_EMAIL || 'team@insiderflow.asia' }}
+        NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL || 'https://insiderflow.asia' }}
+        NEWSLETTER_FROM_EMAIL: ${{ secrets.NEWSLETTER_FROM_EMAIL || secrets.SENDGRID_FROM_EMAIL || 'team@insiderflow.asia' }}
+        NEWSLETTER_FROM_NAME: ${{ secrets.NEWSLETTER_FROM_NAME || 'Insider Flow' }}
+        NEWSLETTER_CTA_URL: ${{ secrets.NEWSLETTER_CTA_URL || 'https://insiderflow.asia' }}
+
