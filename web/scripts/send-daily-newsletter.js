@@ -1,15 +1,22 @@
 /*
- Minimal daily newsletter sender (Chinese), targeting a single test recipient.
- - Selects new trades in the Hong Kong day window (HKT) based on created_at
+ Daily newsletter sender for paid members (Chinese).
+ - Selects new trades in the Hong Kong day window (HKT) based on traded_at
  - Renders concise HTML digest in Chinese
- - Sends via SendGrid if SENDGRID_API_KEY is present; otherwise dry-run prints preview
- - Usage: node scripts/send-daily-newsletter.js [testEmail]
+ - Sends to all active paid members via SendGrid
+ - Usage: node scripts/send-daily-newsletter.js [testEmail] (optional test mode)
 */
+
+// Load environment variables from .env.local
+require('dotenv').config({ path: '.env.local' });
 
 const { PrismaClient } = require('@prisma/client');
 const sgMail = require('@sendgrid/mail');
 
 const prisma = new PrismaClient();
+
+// Rate limiting: SendGrid allows 100 emails/second, we'll use 50/sec to be safe
+const BATCH_SIZE = 50;
+const BATCH_DELAY_MS = 1000; // 1 second between batches
 
 function getHktWindowUtc(now = new Date()) {
   // Compute today's start/end in HKT and convert to UTC for DB filter
@@ -43,6 +50,48 @@ function escapeHtml(str) {
     .replace(/'/g, '&#39;');
 }
 
+function cleanPoliticianName(name) {
+  if (!name) return '-';
+  
+  // Remove common metadata patterns that might be concatenated
+  // Patterns like: "Name Democrat", "Name Republican", "Name New York", "Name Trades", etc.
+  let cleaned = name.trim();
+  
+  // First, add spaces before capital letters that follow lowercase (handle "DemocratNew" -> "Democrat New")
+  cleaned = cleaned.replace(/([a-z])([A-Z])/g, '$1 $2');
+  
+  // Remove party names (with or without spaces)
+  cleaned = cleaned.replace(/\s*(Democrat|Republican|Independent|Libertarian|Green|Other)\s*/gi, ' ');
+  
+  // Remove state names (common US states - handle multi-word states first)
+  const multiWordStates = ['New York', 'New Hampshire', 'New Jersey', 'New Mexico', 'North Carolina', 'North Dakota', 'South Carolina', 'South Dakota', 'West Virginia', 'Rhode Island'];
+  multiWordStates.forEach(state => {
+    cleaned = cleaned.replace(new RegExp(`\\s*${state}\\s*`, 'gi'), ' ');
+  });
+  
+  const singleWordStates = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'Wisconsin', 'Wyoming'];
+  singleWordStates.forEach(state => {
+    cleaned = cleaned.replace(new RegExp(`\\s*${state}\\s*`, 'gi'), ' ');
+  });
+  
+  // Remove metadata patterns like "Trades123", "Issuers456", "Volume", "Last Traded"
+  cleaned = cleaned.replace(/\s*(Trades|Issuers|Volume|Last\s+Traded)[\d\w\s,.-]*$/gi, '');
+  
+  // Remove numbers and special patterns at the end
+  cleaned = cleaned.replace(/\s+\d+[\d,.\w\s]*$/, '');
+  
+  // Clean up multiple spaces
+  cleaned = cleaned.replace(/\s+/g, ' ').trim();
+  
+  // Take only the first 4 words (typically: First Middle Last Suffix)
+  const words = cleaned.split(/\s+/).filter(w => w.length > 0);
+  if (words.length > 4) {
+    cleaned = words.slice(0, 4).join(' ');
+  }
+  
+  return cleaned.trim() || name.trim().split(/\s+/).slice(0, 3).join(' ') || '-';
+}
+
 function renderHtml(trades, dateLabel) {
   const ctaUrl = process.env.NEWSLETTER_CTA_URL || 'https://insiderflow.asia';
   if (!trades.length) {
@@ -51,24 +100,36 @@ function renderHtml(trades, dateLabel) {
   <h2 style="margin:0 0 12px;">【每日內幕交易】${escapeHtml(dateLabel)}</h2>
   <p>今日沒有新增內幕交易。</p>
   <p><a href="${escapeHtml(ctaUrl)}" target="_blank" style="display:inline-block; background:#111; color:#fff; text-decoration:none; padding:10px 14px; border-radius:6px;">查看更多交易，請點此</a></p>
-  <p style="color:#666; font-size:12px;">此為測試郵件。</p>
+  <p style="color:#666; font-size:12px;">感謝您訂閱 Insider Flow 每日內幕交易報告。</p>
   <hr style="border:none;border-top:1px solid #eee; margin:16px 0;" />
   <div style="color:#999; font-size:12px;">若不想再收到此訊息，請於帳戶關閉訂閱。</div>
 </div>`;
   }
 
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || process.env.NEWSLETTER_CTA_URL || 'https://insiderflow.asia';
+  
   const items = trades.map(t => {
     const ticker = t.issuer_ticker || (t.raw?.ticker) || '-';
     const company = t.issuer_name || (t.raw?.issuerName) || '-';
-    const pol = t.politician_name || (t.raw?.politicianName) || '-';
+    const polRaw = t.politician_name || (t.raw?.politicianName) || '-';
+    const pol = cleanPoliticianName(polRaw);
     const type = t.type;
     const sizeText = (t.raw?.sizeText) || `${t.size_min || ''}-${t.size_max || ''}`;
     const tradedAt = t.traded_at ? formatDate(t.traded_at) : '-';
+    
+    // Create clickable links
+    const tickerLink = t.issuer_id ? `${baseUrl}/issuers/${t.issuer_id}` : '#';
+    const politicianLink = t.politician_id ? `${baseUrl}/politicians/${t.politician_id}` : '#';
+    
     return `
     <tr>
-      <td style="padding:8px 6px;">${escapeHtml(ticker)}</td>
+      <td style="padding:8px 6px;">
+        ${t.issuer_id ? `<a href="${escapeHtml(tickerLink)}" target="_blank" style="color:#6366f1; text-decoration:none; font-weight:500;">${escapeHtml(ticker)}</a>` : escapeHtml(ticker)}
+      </td>
       <td style="padding:8px 6px;">${escapeHtml(company)}</td>
-      <td style="padding:8px 6px;">${escapeHtml(pol)}</td>
+      <td style="padding:8px 6px;">
+        ${t.politician_id ? `<a href="${escapeHtml(politicianLink)}" target="_blank" style="color:#6366f1; text-decoration:none; font-weight:500;">${escapeHtml(pol)}</a>` : escapeHtml(pol)}
+      </td>
       <td style="padding:8px 6px;">${escapeHtml(type)}</td>
       <td style="padding:8px 6px; white-space:nowrap;">${escapeHtml(sizeText)}</td>
       <td style="padding:8px 6px; white-space:nowrap;">${escapeHtml(tradedAt)}</td>
@@ -97,23 +158,87 @@ function renderHtml(trades, dateLabel) {
   <p style="margin:16px 0 0;">
     <a href="${escapeHtml(ctaUrl)}" target="_blank" style="display:inline-block; background:#111; color:#fff; text-decoration:none; padding:10px 14px; border-radius:6px;">查看更多交易，請點此</a>
   </p>
-  <p style="color:#666; font-size:12px;">此為測試郵件（單一收件者）。</p>
+  <p style="color:#666; font-size:12px;">感謝您訂閱 Insider Flow 每日內幕交易報告。</p>
   <hr style="border:none;border-top:1px solid #eee; margin:16px 0;" />
   <div style="color:#999; font-size:12px;">若不想再收到此訊息，請於帳戶關閉訂閱。</div>
   
 </div>`;
 }
 
+async function getActivePaidMembers() {
+  const now = new Date();
+  return await prisma.user.findMany({
+    where: {
+      membership_tier: 'PAID',
+      OR: [
+        { membership_expires_at: null },
+        { membership_expires_at: { gt: now } }
+      ],
+      email: { not: { equals: null } }
+    },
+    select: {
+      id: true,
+      email: true,
+      name: true
+    }
+  });
+}
+
+async function sendEmailBatch(emails, subject, html, fromEmail, fromName) {
+  const messages = emails.map(email => ({
+    to: email,
+    from: {
+      email: fromEmail,
+      name: fromName
+    },
+    subject,
+    html
+  }));
+
+  try {
+    await sgMail.send(messages);
+    return { success: emails.length, failed: 0 };
+  } catch (err) {
+    console.error('SendGrid batch error:', err?.response?.body || err.message);
+    // Try sending individually if batch fails
+    let success = 0;
+    let failed = 0;
+    for (const email of emails) {
+      try {
+        await sgMail.send({
+          to: email,
+          from: { email: fromEmail, name: fromName },
+          subject,
+          html
+        });
+        success++;
+      } catch (e) {
+        console.error(`Failed to send to ${email}:`, e?.response?.body || e.message);
+        failed++;
+      }
+    }
+    return { success, failed };
+  }
+}
+
 async function main() {
-  const targetEmail = process.argv[2] || process.env.TEST_NEWSLETTER_EMAIL || 'outcastghostmanagement@gmail.com';
+  const testEmail = process.argv[2] || process.env.TEST_NEWSLETTER_EMAIL;
   const sendgridKey = process.env.SENDGRID_API_KEY;
 
-  const { startUtc, endUtc, startHkt } = getHktWindowUtc();
+  // For testing: use a specific date with actual trades
+  const useTestDate = process.argv[3] === '--test-date' || process.env.USE_TEST_DATE === 'true';
+  let targetDate = new Date();
+  if (useTestDate) {
+    // Use November 14, 2024 which has trades (stored at 16:00 UTC = midnight HKT Nov 15)
+    targetDate = new Date('2024-11-14T12:00:00Z');
+  }
+
+  const { startUtc, endUtc, startHkt } = getHktWindowUtc(targetDate);
   const dateLabel = formatDate(startHkt);
 
-  console.log(`HKT window (UTC): ${startUtc.toISOString()} ~ ${endUtc.toISOString()}`);
+  console.log(`📅 HKT window (UTC): ${startUtc.toISOString()} ~ ${endUtc.toISOString()}`);
 
-  // Fetch new trades created today (HKT window) with issuer/politician via SQL join
+  // Fetch new trades traded today (HKT window) with issuer/politician via SQL join
   const trades = await prisma.$queryRaw`
     SELECT 
       t.id,
@@ -140,13 +265,19 @@ async function main() {
     LIMIT 200
   `;
 
+  console.log(`📊 Found ${trades.length} new trades for ${dateLabel}`);
+
   const html = renderHtml(trades, dateLabel);
   const subject = `【每日內幕交易】${dateLabel} 新增 ${trades.length} 筆`;
 
   if (!sendgridKey) {
-    console.log('SENDGRID_API_KEY not set. Dry run preview below:');
+    console.log('⚠️  SENDGRID_API_KEY not set. Dry run preview below:');
     console.log('Subject:', subject);
-    console.log('To:', targetEmail);
+    if (testEmail) {
+      console.log('Test To:', testEmail);
+    } else {
+      console.log('Would send to all paid members');
+    }
     console.log('HTML preview (first 1000 chars):');
     console.log(html.slice(0, 1000));
     return;
@@ -157,21 +288,59 @@ async function main() {
   const fromEmail = process.env.NEWSLETTER_FROM_EMAIL || 'team@insiderflow.asia';
   const fromName = process.env.NEWSLETTER_FROM_NAME || 'Insider Flow';
 
-  const msg = {
-    to: targetEmail,
-    from: {
-      email: fromEmail,
-      name: fromName
-    },
-    subject,
-    html
-  };
+  // Test mode: send to single email
+  if (testEmail) {
+    console.log(`🧪 Test mode: sending to ${testEmail}`);
+    try {
+      const res = await sgMail.send({
+        to: testEmail,
+        from: { email: fromEmail, name: fromName },
+        subject,
+        html
+      });
+      console.log('✅ Test email sent. Status:', res?.[0]?.statusCode);
+    } catch (err) {
+      console.error('❌ SendGrid error:', err?.response?.body || err.message);
+      process.exitCode = 1;
+    }
+    return;
+  }
 
-  try {
-    const res = await sgMail.send(msg);
-    console.log('Email sent. Status:', res?.[0]?.statusCode);
-  } catch (err) {
-    console.error('SendGrid error:', err?.response?.body || err.message);
+  // Production mode: send to all paid members
+  const members = await getActivePaidMembers();
+  console.log(`👥 Found ${members.length} active paid members`);
+
+  if (members.length === 0) {
+    console.log('⚠️  No paid members to send to');
+    return;
+  }
+
+  const emails = members.map(m => m.email).filter(Boolean);
+  console.log(`📧 Sending to ${emails.length} members in batches of ${BATCH_SIZE}...`);
+
+  let totalSuccess = 0;
+  let totalFailed = 0;
+
+  // Send in batches to respect rate limits
+  for (let i = 0; i < emails.length; i += BATCH_SIZE) {
+    const batch = emails.slice(i, i + BATCH_SIZE);
+    console.log(`📤 Sending batch ${Math.floor(i / BATCH_SIZE) + 1}/${Math.ceil(emails.length / BATCH_SIZE)} (${batch.length} emails)...`);
+    
+    const result = await sendEmailBatch(batch, subject, html, fromEmail, fromName);
+    totalSuccess += result.success;
+    totalFailed += result.failed;
+
+    // Wait between batches (except for the last one)
+    if (i + BATCH_SIZE < emails.length) {
+      await new Promise(resolve => setTimeout(resolve, BATCH_DELAY_MS));
+    }
+  }
+
+  console.log(`\n✅ Newsletter sent!`);
+  console.log(`   Success: ${totalSuccess}`);
+  console.log(`   Failed: ${totalFailed}`);
+  
+  if (totalFailed > 0) {
     process.exitCode = 1;
   }
 }

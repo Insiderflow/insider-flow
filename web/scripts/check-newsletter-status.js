@@ -31,7 +31,7 @@ async function checkNewsletterStatus() {
           { membership_expires_at: null },
           { membership_expires_at: { gt: now } }
         ],
-        email: { not: null }
+        email: { not: { equals: null } }
       },
       select: {
         id: true,
