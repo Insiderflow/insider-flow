@@ -239,7 +239,9 @@ async function main() {
 
   console.log(`📅 HKT window (UTC): ${startUtc.toISOString()} ~ ${endUtc.toISOString()}`);
 
-  // Fetch new trades traded today (HKT window) with issuer/politician via SQL join
+  // Fetch new trades created today (HKT window) with issuer/politician via SQL join
+  // Use created_at to show trades that were added to the database today
+  // This catches newly scraped/imported trades regardless of their original published_at date
   const trades = await prisma.$queryRaw`
     SELECT 
       t.id,
@@ -261,12 +263,12 @@ async function main() {
     FROM "Trade" t
     LEFT JOIN "Issuer" i ON i.id = t.issuer_id
     LEFT JOIN "Politician" p ON p.id = t.politician_id
-    WHERE t.traded_at >= ${startUtc} AND t.traded_at < ${endUtc}
-    ORDER BY t.traded_at DESC NULLS LAST, t.created_at DESC
+    WHERE t.created_at >= ${startUtc} AND t.created_at < ${endUtc}
+    ORDER BY t.created_at DESC NULLS LAST
     LIMIT 200
   `;
 
-  console.log(`📊 Found ${trades.length} new trades for ${dateLabel}`);
+  console.log(`📊 Found ${trades.length} new trades added on ${dateLabel}`);
 
   const html = renderHtml(trades, dateLabel);
   const subject = `【每日內幕交易】${dateLabel} 新增 ${trades.length} 筆`;
