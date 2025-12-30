@@ -62,3 +62,19 @@ async function checkNVCTTrade() {
 }
 
 checkNVCTTrade();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

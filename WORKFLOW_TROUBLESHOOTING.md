@@ -75,3 +75,4 @@ node scripts/precalculate-portfolio-data.js
 4. Look for any error messages in the Actions tab
 5. Try creating a simple test workflow to verify Actions is enabled
 
+

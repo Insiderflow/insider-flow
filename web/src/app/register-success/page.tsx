@@ -20,3 +20,19 @@ export default function RegisterSuccessPage() {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

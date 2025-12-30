@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 
 interface LoginFormProps {
   next: string;
@@ -15,7 +14,6 @@ export default function LoginForm({ next }: LoginFormProps) {
   const [resendMsg, setResendMsg] = useState('');
   const [resending, setResending] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,9 +26,11 @@ export default function LoginForm({ next }: LoginFormProps) {
         body: JSON.stringify({ email, password }),
       });
       if (res.ok) {
-        // Navigate and force a refresh so the server layout re-reads session
-        router.replace(next);
-        router.refresh();
+        // Use window.location for more reliable redirect on mobile
+        // Small delay to ensure cookie is set
+        setTimeout(() => {
+          window.location.href = next;
+        }, 100);
       } else {
         const data = await res.json();
         if (res.status === 403 && (data.error || '').toLowerCase().includes('not verified')) {

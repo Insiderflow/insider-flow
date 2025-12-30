@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import LoginForm from '@/components/LoginForm';
-import OAuthButtons from '@/components/OAuthButtons';
 
 export const dynamic = 'force-dynamic';
 
@@ -16,8 +15,6 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
         </div>
         <div className="border border-gray-600 bg-gray-800 rounded-lg p-6 shadow-md">
           <LoginForm next={next} />
-          <div className="my-4 h-px bg-gray-700" />
-          <OAuthButtons />
         </div>
         <div className="text-center">
           <p className="text-sm text-gray-400">

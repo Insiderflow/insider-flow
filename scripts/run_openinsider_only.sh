@@ -42,3 +42,19 @@ const prisma = new PrismaClient();
 echo "[$TIMESTAMP] OpenInsider-only import complete" >> "$LOG_FILE"
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -17,3 +17,19 @@ export async function GET() {
     return NextResponse.json({ error: 'Failed to fetch latest date' }, { status: 500 });
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

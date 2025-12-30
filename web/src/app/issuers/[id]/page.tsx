@@ -6,6 +6,7 @@ import LoadingSpinner from '@/components/LoadingSpinner';
 import PoliticianProfileImage from '@/components/PoliticianProfileImage';
 import IssuerTradesTable from '@/components/IssuerTradesTable';
 import IssuerTimelineChart from '@/components/IssuerTimelineChart';
+import PoliticianTradeCandlestickChart from '@/components/PoliticianTradeCandlestickChart';
 import WatchlistButton from '@/components/WatchlistButton';
 import { getSessionUser } from '@/lib/auth';
 import { getCurrentUserWithTier, isPaid } from '@/lib/membership';
@@ -66,12 +67,17 @@ export default async function IssuerDetailPage({
   });
 
   // Calculate stats from all trades (not just current page)
+  // Use paginated trades as fallback if database query fails
   const allTrades = await prisma.trade.findMany({
     where: { issuer_id: id },
     include: { Politician: true }
   }).catch(error => {
-    console.error('Error fetching trades for issuer:', error);
-    return [];
+    console.error('Error fetching all trades for issuer:', error);
+    // Fallback to paginated trades if full query fails
+    return trades.map(t => ({
+      ...t,
+      Politician: t.Politician
+    }));
   });
 
 
@@ -223,6 +229,31 @@ export default async function IssuerDetailPage({
             issuerName={issuer.name}
           />
         </div>
+
+        {/* Candlestick Chart with Politician Trade Markers - LOCAL TESTING ONLY */}
+        {issuer.ticker && (allTrades && allTrades.length > 0) && (
+          <div className="mb-6">
+            <PoliticianTradeCandlestickChart
+              ticker={issuer.ticker}
+              trades={allTrades.map(trade => ({
+                id: trade.id,
+                traded_at: trade.traded_at.toISOString(),
+                type: trade.type as 'buy' | 'sell' | 'exchange',
+                politician: {
+                  id: trade.Politician.id,
+                  name: trade.Politician.name,
+                  party: trade.Politician.party,
+                  chamber: trade.Politician.chamber
+                },
+                size_min: trade.size_min ? Number(trade.size_min) : undefined,
+                size_max: trade.size_max ? Number(trade.size_max) : undefined,
+                price: trade.price ? Number(trade.price) : undefined,
+                published_at: trade.published_at?.toISOString() || null
+              }))}
+              issuerName={issuer.name}
+            />
+          </div>
+        )}
 
         {/* Party Breakdown */}
         <div className="mb-6">

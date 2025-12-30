@@ -40,3 +40,19 @@ export function translateTxnType(value: string | null | undefined, locale: Local
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
