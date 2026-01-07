@@ -19,7 +19,7 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
   }
   const chamber = typeof sp.chamber === 'string' ? sp.chamber : '';
   const searchName = typeof sp.name === 'string' ? sp.name : '';
-  const allowedSort = new Set(['name', 'trades', 'issuers', 'volume', 'performance']);
+  const allowedSort = new Set(['name', 'trades', 'issuers', 'volume', 'performance', 'portfolio']);
   const sortKeyRaw = typeof sp.sort === 'string' ? sp.sort : 'trades';
   const sortKey = allowedSort.has(sortKeyRaw) ? sortKeyRaw : 'trades';
   const order = (typeof sp.order === 'string' && sp.order.toLowerCase() === 'asc') ? 'asc' : 'desc';
@@ -37,9 +37,9 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
     }
   });
 
-  // Load portfolio cache for performance sorting
+  // Load portfolio cache for performance and portfolio sorting
   let portfolioCache: Map<string, { politician_name?: string; data?: { politician_returns: number[]; sp500_returns: number[] } }> = new Map();
-  if (sortKey === 'performance') {
+  if (sortKey === 'performance' || sortKey === 'portfolio') {
     try {
       const cachePath = path.join(process.cwd(), 'portfolio_cache.json');
       if (fs.existsSync(cachePath)) {
@@ -86,6 +86,35 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
     return latestPoliticianReturn - latestSp500Return;
   };
 
+  // Helper function to get portfolio return (actual return, not vs S&P 500)
+  const getPortfolioReturn = (politicianId: string, politicianName: string): number => {
+    // Try to find by ID first
+    let cacheEntry = portfolioCache.get(politicianId);
+    
+    // If not found by ID, search by name
+    if (!cacheEntry) {
+      for (const [, data] of portfolioCache.entries()) {
+        if (data.politician_name?.toLowerCase() === politicianName.toLowerCase()) {
+          cacheEntry = data;
+          break;
+        }
+      }
+    }
+    
+    if (!cacheEntry?.data) return 0;
+    
+    const { politician_returns } = cacheEntry.data;
+    
+    // Find last non-zero return for politician (this is the actual portfolio return)
+    for (let i = politician_returns.length - 1; i >= 0; i--) {
+      if (politician_returns[i] !== 0) {
+        return politician_returns[i];
+      }
+    }
+    
+    return 0;
+  };
+
   // Get politicians with their stats, sorted by the requested field
   let politicians;
   
@@ -113,6 +142,33 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
     
     const sortedPoliticians = politiciansWithPerformance.sort((a, b) => {
       return order === 'asc' ? a.performance - b.performance : b.performance - a.performance;
+    });
+    
+    politicians = sortedPoliticians.slice((page - 1) * pageSize, page * pageSize);
+  } else if (sortKey === 'portfolio') {
+    // For portfolio sorting, load all politicians, calculate portfolio return, then sort
+    const allPoliticians = await prisma.politician.findMany({
+      where: {
+        ...(whereChamber ? { chamber: whereChamber } : {}),
+        ...(searchName ? { name: { contains: searchName, mode: 'insensitive' } } : {})
+      },
+      include: {
+        _count: {
+          select: {
+            Trade: true
+          }
+        }
+      }
+    });
+    
+    // Calculate portfolio return for each politician and sort
+    const politiciansWithPortfolio = allPoliticians.map(p => ({
+      ...p,
+      portfolioReturn: getPortfolioReturn(p.id, p.name)
+    }));
+    
+    const sortedPoliticians = politiciansWithPortfolio.sort((a, b) => {
+      return order === 'asc' ? a.portfolioReturn - b.portfolioReturn : b.portfolioReturn - a.portfolioReturn;
     });
     
     politicians = sortedPoliticians.slice((page - 1) * pageSize, page * pageSize);
@@ -252,9 +308,15 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
 
   // Transform to the expected format (optimized - no trade data loaded)
   const rows: Row[] = politicians.map(politician => {
-    const performance = sortKey === 'performance' && 'performance' in politician 
-      ? (politician as typeof politician & { performance: number }).performance 
-      : getPerformance(politician.id, politician.name);
+    let performance = 0;
+    if (sortKey === 'performance' && 'performance' in politician) {
+      performance = (politician as typeof politician & { performance: number }).performance;
+    } else if (sortKey === 'portfolio' && 'portfolioReturn' in politician) {
+      // For portfolio sorting, we still calculate performance for display, but sorting was done by portfolio return
+      performance = getPerformance(politician.id, politician.name);
+    } else {
+      performance = getPerformance(politician.id, politician.name);
+    }
     
     return {
       id: politician.id,
@@ -367,6 +429,10 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
               <option value="volume">
                 <span className="zh-Hant">交易金額</span>
                 <span className="zh-Hans hidden">交易金额</span>
+              </option>
+              <option value="portfolio">
+                <span className="zh-Hant">投資組合表現</span>
+                <span className="zh-Hans hidden">投资组合表现</span>
               </option>
               <option value="performance">
                 <span className="zh-Hant">表現 vs S&P 500</span>
