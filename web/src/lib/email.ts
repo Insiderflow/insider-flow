@@ -7,32 +7,67 @@ const DISABLE_EMAIL = process.env.DISABLE_EMAIL === 'true';
 type EmailResponse = { ok: true } | Record<string, unknown>;
 
 export async function sendEmail(to: string, subject: string, html: string): Promise<EmailResponse> {
-  // No-op in development or when disabled/missing config
-  if (DISABLE_EMAIL || process.env.NODE_ENV !== 'production' || !GRIDSEND_API_KEY || !EMAIL_FROM) {
-    console.log('[email noop]', { to, subject });
-    return { ok: true };
+  // Check configuration
+  if (DISABLE_EMAIL) {
+    console.warn('[email disabled] DISABLE_EMAIL is set to true', { to, subject });
+    throw new Error('Email sending is disabled');
   }
-  const response = await fetch('https://api.gridsend.com/v1/send', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${GRIDSEND_API_KEY}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      from: EMAIL_FROM,
+
+  if (process.env.NODE_ENV !== 'production') {
+    console.warn('[email skipped] Not in production mode', { to, subject, nodeEnv: process.env.NODE_ENV });
+    // In development, log but don't throw - allow testing
+    return { ok: true, skipped: true, reason: 'development' };
+  }
+
+  if (!GRIDSEND_API_KEY) {
+    console.error('[email error] GRIDSEND_API_KEY is missing', { to, subject });
+    throw new Error('GRIDSEND_API_KEY is not configured');
+  }
+
+  if (!EMAIL_FROM) {
+    console.error('[email error] EMAIL_FROM is missing', { to, subject });
+    throw new Error('EMAIL_FROM is not configured');
+  }
+
+  try {
+    console.log('[email sending]', { to, subject, from: EMAIL_FROM });
+    const response = await fetch('https://api.gridsend.com/v1/send', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${GRIDSEND_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: EMAIL_FROM,
+        to,
+        subject,
+        html,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('[email error] GridSend API error', { 
+        status: response.status, 
+        statusText: response.statusText,
+        error: errorText,
+        to,
+        subject
+      });
+      throw new Error(`Failed to send email: ${response.status} ${response.statusText} - ${errorText}`);
+    }
+
+    const json = (await response.json()) as Record<string, unknown>;
+    console.log('[email sent]', { to, subject, response: json });
+    return json;
+  } catch (error) {
+    console.error('[email exception]', { 
+      error: error instanceof Error ? error.message : String(error),
       to,
-      subject,
-      html,
-    }),
-  });
-
-  if (!response.ok) {
-    const error = await response.text();
-    throw new Error(`Failed to send email: ${error}`);
+      subject
+    });
+    throw error;
   }
-
-  const json = (await response.json()) as Record<string, unknown>;
-  return json;
 }
 
 export async function sendVerificationEmail(email: string, token: string) {

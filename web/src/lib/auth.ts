@@ -165,27 +165,41 @@ export async function requestPasswordReset(email: string) {
 
   if (!user) {
     // Don't reveal if user exists or not
+    console.log('[password reset] User not found', { email });
     return;
   }
 
   // Check if user has a password (not OAuth user)
   if (!user.password_hash) {
     // Don't reveal if user exists or not
+    console.log('[password reset] User has no password (OAuth user)', { email, userId: user.id });
     return;
   }
 
   const resetToken = generateToken();
   const expiresAt = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
 
-  await prisma.user.update({
-    where: { id: user.id },
-    data: {
-      password_reset_token: resetToken,
-      password_reset_expires: expiresAt,
-    },
-  });
+  try {
+    await prisma.user.update({
+      where: { id: user.id },
+      data: {
+        password_reset_token: resetToken,
+        password_reset_expires: expiresAt,
+      },
+    });
 
-  await sendPasswordResetEmail(email, resetToken);
+    console.log('[password reset] Token generated', { email, userId: user.id, expiresAt });
+    await sendPasswordResetEmail(email, resetToken);
+    console.log('[password reset] Email sent successfully', { email });
+  } catch (error) {
+    console.error('[password reset] Failed to send email', { 
+      email, 
+      userId: user.id,
+      error: error instanceof Error ? error.message : String(error)
+    });
+    // Re-throw so the API route can handle it
+    throw error;
+  }
 }
 
 export async function resetPassword(token: string, newPassword: string) {
