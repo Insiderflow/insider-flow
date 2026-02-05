@@ -195,7 +195,13 @@ async function handleRequest(
         console.log(`✅ Using cached data for ${politician} (found: ${cachedData.politician_name})`);
         
         // Still fetch trades for the response (with timeout)
-        let formattedTrades = [];
+        let formattedTrades: Array<{
+          issuer_name: string;
+          ticker: string;
+          buy_sell: string;
+          trade_amount: string;
+          filled_date: string;
+        }> = [];
         try {
           const politicianData = await Promise.race([
             prisma.politician.findFirst({
