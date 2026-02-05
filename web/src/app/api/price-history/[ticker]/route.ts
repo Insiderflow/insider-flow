@@ -15,7 +15,13 @@ export async function GET(
       return NextResponse.json({ error: 'Ticker is required' }, { status: 400 });
     }
 
-    const where: any = {
+    const where: {
+      symbol: string;
+      date?: {
+        gte?: Date;
+        lte?: Date;
+      };
+    } = {
       symbol: ticker,
     };
 
@@ -32,7 +38,7 @@ export async function GET(
 
     // Check if priceHistory model exists in Prisma schema
     // If not, return empty array to trigger Yahoo Finance fallback
-    let formatted: Array<{
+    const formatted: Array<{
       date: string;
       open: number | null;
       high: number | null;
@@ -42,30 +48,35 @@ export async function GET(
     }> = [];
 
     try {
-      // @ts-expect-error - priceHistory model may not exist in schema
-      const priceHistory = await prisma.priceHistory.findMany({
-        where,
-        orderBy: { date: 'asc' },
-      });
+      // Check if priceHistory exists on prisma client
+      if ('priceHistory' in prisma && typeof (prisma as Record<string, unknown>).priceHistory === 'object') {
+        const priceHistoryModel = (prisma as Record<string, { findMany: (args: unknown) => Promise<unknown[]> }>).priceHistory;
+        const priceHistory = await priceHistoryModel.findMany({
+          where,
+          orderBy: { date: 'asc' },
+        }) as Array<{
+          date: Date;
+          open: unknown;
+          high: unknown;
+          low: unknown;
+          close: unknown;
+          volume: unknown;
+        }>;
 
-      formatted = priceHistory.map((ph: {
-        date: Date;
-        open: unknown;
-        high: unknown;
-        low: unknown;
-        close: unknown;
-        volume: unknown;
-      }) => ({
-        date: ph.date.toISOString().split('T')[0],
-        open: ph.open ? Number(ph.open) : null,
-        high: ph.high ? Number(ph.high) : null,
-        low: ph.low ? Number(ph.low) : null,
-        close: Number(ph.close),
-        volume: ph.volume ? Number(ph.volume) : null,
-      }));
+        formatted.push(...priceHistory.map((ph) => ({
+          date: ph.date.toISOString().split('T')[0],
+          open: ph.open ? Number(ph.open) : null,
+          high: ph.high ? Number(ph.high) : null,
+          low: ph.low ? Number(ph.low) : null,
+          close: Number(ph.close),
+          volume: ph.volume ? Number(ph.volume) : null,
+        })));
+      } else {
+        console.log('PriceHistory model not available in Prisma schema, returning empty data for Yahoo Finance fallback');
+      }
     } catch (modelError) {
       // Model doesn't exist or other error - return empty array to trigger fallback
-      console.log('PriceHistory model not available, returning empty data for Yahoo Finance fallback');
+      console.log('PriceHistory query error, returning empty data for Yahoo Finance fallback:', modelError);
     }
 
     return NextResponse.json({ data: formatted });
