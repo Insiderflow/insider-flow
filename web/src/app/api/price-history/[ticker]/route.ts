@@ -5,11 +5,16 @@ export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ ticker: string }> }
 ) {
+  let ticker: string | undefined;
+  let startDate: string | null = null;
+  let endDate: string | null = null;
+  
   try {
-    const { ticker } = await params;
+    const paramsData = await params;
+    ticker = paramsData.ticker;
     const { searchParams } = new URL(request.url);
-    const startDate = searchParams.get('startDate');
-    const endDate = searchParams.get('endDate');
+    startDate = searchParams.get('startDate');
+    endDate = searchParams.get('endDate');
 
     if (!ticker) {
       return NextResponse.json({ error: 'Ticker is required' }, { status: 400 });
