@@ -24,7 +24,8 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '18'
-        # Disable caching to avoid stale node_modules across runs
+        cache: 'npm'
+        cache-dependency-path: web/package-lock.json
         
     - name: Setup Python
       uses: actions/setup-python@v5
@@ -40,19 +41,9 @@ jobs:
       run: |
         npm ci
 
-    - name: Install Playwright npm package
-      run: |
-        npm i playwright@^1
-
     - name: Install Playwright browsers and system dependencies
       run: |
         npx playwright install --with-deps
-
-    - name: Verify Playwright is installed
-      run: |
-        npm ls playwright || true
-        node -e "console.log('playwright path:', require.resolve('playwright'))"
-        ls -la node_modules/playwright || true
     
     - name: Run OpenInsider scraper
       env:

@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 const LOOKBACK_DAYS = 14;
 const MAX_SIGNALS = 120;
 const READ_ALERT_RETENTION_DAYS = 45;
+const SYNC_CONCURRENCY = 8;
 
 function startLookbackDate() {
   return new Date(Date.now() - LOOKBACK_DAYS * 24 * 60 * 60 * 1000);
@@ -70,32 +71,22 @@ export async function syncUserAlerts(userId: string) {
       take: MAX_SIGNALS,
     });
 
-    await Promise.all(
-      matchedTrades.map((trade) =>
-        prisma.alert.upsert({
-          where: {
-            user_id_source_key: {
-              user_id: userId,
-              source_key: `trade:${trade.id}`,
-            },
-          },
-          create: {
-            user_id: userId,
-            source_key: `trade:${trade.id}`,
-            type: "watchlist",
-            title: formatPoliticianTitle(
-              trade.Politician?.name || "Politician",
-              trade.Issuer?.ticker || "-",
-              trade.type,
-            ),
-            body: formatPoliticianBody(trade.Issuer?.name || "Unknown issuer", trade.traded_at),
-            ticker: trade.Issuer?.ticker || null,
-            timestamp: trade.traded_at,
-          },
-          update: {},
-        }),
-      ),
-    );
+    await prisma.alert.createMany({
+      data: matchedTrades.map((trade) => ({
+        user_id: userId,
+        source_key: `trade:${trade.id}`,
+        type: "watchlist",
+        title: formatPoliticianTitle(
+          trade.Politician?.name || "Politician",
+          trade.Issuer?.ticker || "-",
+          trade.type,
+        ),
+        body: formatPoliticianBody(trade.Issuer?.name || "Unknown issuer", trade.traded_at),
+        ticker: trade.Issuer?.ticker || null,
+        timestamp: trade.traded_at,
+      })),
+      skipDuplicates: true,
+    });
   }
 
   if (companyIds.length || ownerIds.length || stockTickers.length) {
@@ -116,32 +107,22 @@ export async function syncUserAlerts(userId: string) {
       take: MAX_SIGNALS,
     });
 
-    await Promise.all(
-      matchedTransactions.map((transaction) =>
-        prisma.alert.upsert({
-          where: {
-            user_id_source_key: {
-              user_id: userId,
-              source_key: `oi:${transaction.id}`,
-            },
-          },
-          create: {
-            user_id: userId,
-            source_key: `oi:${transaction.id}`,
-            type: "corporate",
-            title: formatCorporateTitle(
-              transaction.owner?.name || "Insider",
-              transaction.company?.ticker || "-",
-              transaction.transactionType,
-            ),
-            body: formatCorporateBody(transaction.company?.name || "Unknown company", transaction.tradeDate),
-            ticker: transaction.company?.ticker || null,
-            timestamp: transaction.tradeDate,
-          },
-          update: {},
-        }),
-      ),
-    );
+    await prisma.alert.createMany({
+      data: matchedTransactions.map((transaction) => ({
+        user_id: userId,
+        source_key: `oi:${transaction.id}`,
+        type: "corporate",
+        title: formatCorporateTitle(
+          transaction.owner?.name || "Insider",
+          transaction.company?.ticker || "-",
+          transaction.transactionType,
+        ),
+        body: formatCorporateBody(transaction.company?.name || "Unknown company", transaction.tradeDate),
+        ticker: transaction.company?.ticker || null,
+        timestamp: transaction.tradeDate,
+      })),
+      skipDuplicates: true,
+    });
   }
 }
 
@@ -152,9 +133,12 @@ export async function syncAllUserAlerts() {
   });
 
   let syncedUsers = 0;
-  for (const row of usersWithWatchlist) {
-    await syncUserAlerts(row.user_id);
-    syncedUsers += 1;
+  let cursor = 0;
+  while (cursor < usersWithWatchlist.length) {
+    const batch = usersWithWatchlist.slice(cursor, cursor + SYNC_CONCURRENCY);
+    await Promise.all(batch.map((row) => syncUserAlerts(row.user_id)));
+    syncedUsers += batch.length;
+    cursor += SYNC_CONCURRENCY;
   }
 
   return { syncedUsers };

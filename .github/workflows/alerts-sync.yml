@@ -20,6 +20,9 @@ jobs:
           fi
 
           response=$(curl -sS -w "\n%{http_code}" -X POST "$ALERTS_SYNC_URL" \
+            --max-time 60 \
+            --retry 2 \
+            --retry-delay 2 \
             -H "x-alerts-sync-secret: $ALERTS_SYNC_SECRET")
 
           body=$(echo "$response" | sed '$d')
