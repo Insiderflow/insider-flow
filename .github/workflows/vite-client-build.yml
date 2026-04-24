@@ -1,0 +1,27 @@
+name: Vite client build
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "mindful-trade-signal-flow/**"
+      - ".github/workflows/vite-client-build.yml"
+  pull_request:
+    paths:
+      - "mindful-trade-signal-flow/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mindful-trade-signal-flow
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: mindful-trade-signal-flow/package-lock.json
+      - name: Install and build
+        run: npm ci && npm run build

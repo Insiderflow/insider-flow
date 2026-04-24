@@ -24,6 +24,6 @@ npm run dev
 
 ## Production
 
-Build static assets with `npm run build`; deploy `dist/` to any static host. Set `VITE_API_BASE_URL` to your public Next API origin if the UI is on another domain; configure CORS on the server.
+Build with `npm run build`; deploy the `dist/` folder. **Vercel:** connect the repo with root directory `mindful-trade-signal-flow` (or import this folder); `vercel.json` is included. Set **`VITE_API_BASE_URL`** to your public API origin (e.g. `https://www.insiderflow.asia`) so the browser calls the API cross-origin. The Next server must list that static origin in **`CORS_ALLOWED_ORIGINS`** (already supported in `web` middleware).
 
-**Password reset emails** are sent by the Next app: set `NEXT_PUBLIC_BASE_URL` on the server to the URL where users can open reset links (your deployed Next or marketing site with `/reset-password` if applicable).
+**Password reset emails** use Next’s `NEXT_PUBLIC_BASE_URL` (see `web/.env.template`).
