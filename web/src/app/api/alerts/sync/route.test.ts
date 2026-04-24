@@ -1,18 +1,11 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-const syncAllUserAlertsMock = vi.fn();
-const pruneOldReadAlertsMock = vi.fn();
-const tryAcquireAlertsSyncLockMock = vi.fn();
-const releaseAlertsSyncLockMock = vi.fn();
+const runAlertsSyncJobMock = vi.fn();
+const getAlertsSyncStateMock = vi.fn();
 
-vi.mock('@/lib/alerts', () => ({
-  syncAllUserAlerts: syncAllUserAlertsMock,
-  pruneOldReadAlerts: pruneOldReadAlertsMock,
-}));
-
-vi.mock('@/lib/alertsSyncLock', () => ({
-  tryAcquireAlertsSyncLock: tryAcquireAlertsSyncLockMock,
-  releaseAlertsSyncLock: releaseAlertsSyncLockMock,
+vi.mock('@/lib/alertsSyncJob', () => ({
+  runAlertsSyncJob: runAlertsSyncJobMock,
+  getAlertsSyncState: getAlertsSyncStateMock,
 }));
 
 describe('POST /api/alerts/sync', () => {
@@ -31,12 +24,15 @@ describe('POST /api/alerts/sync', () => {
 
     expect(res.status).toBe(401);
     expect(data.error).toBe('Unauthorized');
-    expect(tryAcquireAlertsSyncLockMock).not.toHaveBeenCalled();
+    expect(runAlertsSyncJobMock).not.toHaveBeenCalled();
   });
 
   it('returns 202 and skips when a sync is already running', async () => {
     const { POST } = await import('./route');
-    tryAcquireAlertsSyncLockMock.mockResolvedValue(false);
+    runAlertsSyncJobMock.mockResolvedValue({
+      skipped: true,
+      reason: 'alerts sync already in progress',
+    });
 
     const req = new Request('http://localhost/api/alerts/sync', {
       method: 'POST',
@@ -52,18 +48,22 @@ describe('POST /api/alerts/sync', () => {
       skipped: true,
       reason: 'alerts sync already in progress',
     });
-    expect(syncAllUserAlertsMock).not.toHaveBeenCalled();
-    expect(pruneOldReadAlertsMock).not.toHaveBeenCalled();
-    expect(releaseAlertsSyncLockMock).not.toHaveBeenCalled();
+    expect(runAlertsSyncJobMock).toHaveBeenCalledTimes(1);
   });
 
   it('runs sync and releases lock on success', async () => {
     const { POST } = await import('./route');
-    tryAcquireAlertsSyncLockMock.mockResolvedValue(true);
-    syncAllUserAlertsMock.mockResolvedValue({ syncedUsers: 5 });
-    pruneOldReadAlertsMock.mockResolvedValue({
-      deletedAlerts: 2,
-      cutoff: new Date('2026-01-01T00:00:00.000Z'),
+    runAlertsSyncJobMock.mockResolvedValue({ skipped: false });
+    getAlertsSyncStateMock.mockReturnValue({
+      inProgress: false,
+      lastRunAt: '2026-01-01T00:00:00.000Z',
+      lastResult: {
+        syncedUsers: 5,
+        deletedOldReadAlerts: 2,
+        elapsedMs: 123,
+        retentionCutoff: '2026-01-01T00:00:00.000Z',
+      },
+      lastError: null,
     });
 
     const req = new Request('http://localhost/api/alerts/sync', {
@@ -79,13 +79,13 @@ describe('POST /api/alerts/sync', () => {
     expect(data.syncedUsers).toBe(5);
     expect(data.deletedOldReadAlerts).toBe(2);
     expect(data.retentionCutoff).toBe('2026-01-01T00:00:00.000Z');
-    expect(releaseAlertsSyncLockMock).toHaveBeenCalledTimes(1);
+    expect(data.elapsedMs).toBe(123);
+    expect(data.lastRunAt).toBe('2026-01-01T00:00:00.000Z');
   });
 
-  it('returns 500 and still releases lock on failure', async () => {
+  it('returns 500 when sync job throws', async () => {
     const { POST } = await import('./route');
-    tryAcquireAlertsSyncLockMock.mockResolvedValue(true);
-    syncAllUserAlertsMock.mockRejectedValue(new Error('sync crashed'));
+    runAlertsSyncJobMock.mockRejectedValue(new Error('sync crashed'));
 
     const req = new Request('http://localhost/api/alerts/sync', {
       method: 'POST',
@@ -97,6 +97,5 @@ describe('POST /api/alerts/sync', () => {
 
     expect(res.status).toBe(500);
     expect(data.error).toBe('failed');
-    expect(releaseAlertsSyncLockMock).toHaveBeenCalledTimes(1);
   });
 });

@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { pruneOldReadAlerts, syncAllUserAlerts } from "@/lib/alerts";
-import { releaseAlertsSyncLock, tryAcquireAlertsSyncLock } from "@/lib/alertsSyncLock";
+import { getAlertsSyncState, runAlertsSyncJob } from "@/lib/alertsSyncJob";
 
 export const dynamic = "force-dynamic";
 
@@ -12,42 +11,32 @@ function isAuthorized(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  let lockAcquired = false;
   try {
     if (!isAuthorized(request)) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    lockAcquired = await tryAcquireAlertsSyncLock();
-    if (!lockAcquired) {
+    const result = await runAlertsSyncJob();
+    if (result.skipped) {
       return NextResponse.json(
-        { ok: true, skipped: true, reason: "alerts sync already in progress" },
+        { ok: true, skipped: true, reason: result.reason },
         { status: 202 },
       );
     }
 
-    const startedAt = Date.now();
-    const result = await syncAllUserAlerts();
-    const pruned = await pruneOldReadAlerts();
-    const elapsedMs = Date.now() - startedAt;
+    const state = getAlertsSyncState();
+    const lastResult = state.lastResult;
 
     return NextResponse.json({
       ok: true,
-      syncedUsers: result.syncedUsers,
-      deletedOldReadAlerts: pruned.deletedAlerts,
-      retentionCutoff: pruned.cutoff.toISOString(),
-      elapsedMs,
+      syncedUsers: lastResult?.syncedUsers ?? 0,
+      deletedOldReadAlerts: lastResult?.deletedOldReadAlerts ?? 0,
+      retentionCutoff: lastResult?.retentionCutoff ?? null,
+      elapsedMs: lastResult?.elapsedMs ?? 0,
+      lastRunAt: state.lastRunAt,
     });
   } catch (error) {
     console.error("alerts sync error", error);
     return NextResponse.json({ error: "failed" }, { status: 500 });
-  } finally {
-    if (lockAcquired) {
-      try {
-        await releaseAlertsSyncLock();
-      } catch (unlockError) {
-        console.error("alerts sync unlock error", unlockError);
-      }
-    }
   }
 }

@@ -2,6 +2,7 @@ import { getSessionUser } from '@/lib/auth';
 import EmailNotificationSettings from '@/components/EmailNotificationSettings';
 import PasswordChangeForm from '@/components/PasswordChangeForm';
 import ManageSubscriptionButton from '@/components/ManageSubscriptionButton';
+import AlertsSyncPanel from '@/components/AlertsSyncPanel';
 
 export const dynamic = 'force-dynamic';
 
@@ -241,6 +242,8 @@ export default async function AccountPage({
             </div>
           </div>
         </div>
+
+        <AlertsSyncPanel />
       </main>
     </div>
   );
