@@ -2,11 +2,16 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { getSessionUser } from '@/lib/auth';
 
+function normalizeWatchlistType(type: string | null) {
+  if (!type) return type;
+  return type === 'ticker' ? 'stock' : type;
+}
+
 // GET - Get user's watchlist
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const type = searchParams.get('type'); // 'politician', 'company', 'owner', 'stock'
+    const type = normalizeWatchlistType(searchParams.get('type')); // 'politician', 'company', 'owner', 'stock'
     const politicianId = searchParams.get('politicianId');
     const companyId = searchParams.get('companyId');
     const ownerId = searchParams.get('ownerId');
@@ -53,7 +58,8 @@ export async function POST(request: NextRequest) {
     const user = await getSessionUser();
     if (!user) return NextResponse.json({ error: '請先登入' }, { status: 401 });
     const body = await request.json();
-    const { type, politicianId, companyId, ownerId, ticker } = body;
+    const { type: rawType, politicianId, companyId, ownerId, ticker } = body;
+    const type = normalizeWatchlistType(rawType);
 
     if (!type) {
       return NextResponse.json({ error: 'Type required' }, { status: 400 });
@@ -118,7 +124,7 @@ export async function DELETE(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const user = await getSessionUser();
     if (!user) return NextResponse.json({ error: '請先登入' }, { status: 401 });
-    const type = searchParams.get('type');
+    const type = normalizeWatchlistType(searchParams.get('type'));
     const politicianId = searchParams.get('politicianId');
     const companyId = searchParams.get('companyId');
     const ownerId = searchParams.get('ownerId');

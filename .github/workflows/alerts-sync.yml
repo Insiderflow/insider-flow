@@ -1,0 +1,34 @@
+name: Alerts Sync
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+jobs:
+  sync-alerts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger alerts sync endpoint
+        env:
+          ALERTS_SYNC_URL: ${{ secrets.ALERTS_SYNC_URL }}
+          ALERTS_SYNC_SECRET: ${{ secrets.ALERTS_SYNC_SECRET }}
+        run: |
+          if [ -z "$ALERTS_SYNC_URL" ] || [ -z "$ALERTS_SYNC_SECRET" ]; then
+            echo "Missing ALERTS_SYNC_URL or ALERTS_SYNC_SECRET secret"
+            exit 1
+          fi
+
+          response=$(curl -sS -w "\n%{http_code}" -X POST "$ALERTS_SYNC_URL" \
+            -H "x-alerts-sync-secret: $ALERTS_SYNC_SECRET")
+
+          body=$(echo "$response" | sed '$d')
+          status=$(echo "$response" | tail -n1)
+
+          echo "HTTP status: $status"
+          echo "Response: $body"
+
+          if [ "$status" -lt 200 ] || [ "$status" -ge 300 ]; then
+            echo "Alerts sync failed"
+            exit 1
+          fi

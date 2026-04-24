@@ -61,6 +61,8 @@ export default async function IssuerDetailPage({
     notFound();
   }
 
+  const trades = issuer.Trade; // Current page trades
+
   // Get total count for pagination
   const totalTrades = await prisma.trade.count({
     where: { issuer_id: id }
@@ -68,20 +70,14 @@ export default async function IssuerDetailPage({
 
   // Calculate stats from all trades (not just current page)
   // Use paginated trades as fallback if database query fails
-  const allTrades = await prisma.trade.findMany({
+  const allTrades: typeof trades = await prisma.trade.findMany({
     where: { issuer_id: id },
-    include: { Politician: true }
-  }).catch(error => {
+    include: { Politician: true },
+  }).catch((error) => {
     console.error('Error fetching all trades for issuer:', error);
-    // Fallback to paginated trades if full query fails
-    return trades.map(t => ({
-      ...t,
-      Politician: t.Politician
-    }));
+    // Fallback to current paginated trades if full query fails
+    return trades;
   });
-
-
-  const trades = issuer.Trade; // Current page trades
   const politicians = new Set(allTrades.map(t => t.Politician.id)).size;
   const volume = allTrades.reduce((sum, trade) => {
     const avgSize = trade.size_min && trade.size_max ? 

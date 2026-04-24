@@ -80,6 +80,7 @@ model User {
   membership_expires_at    DateTime?
   stripe_customer_id       String?
   stripe_subscription_id   String?
+  alerts                   Alert[]
   LegacySession            LegacySession[]
   UserWatchlist            UserWatchlist[]
   accounts                 Account[]
@@ -89,6 +90,33 @@ model User {
 enum MembershipTier {
   FREE
   PAID
+}
+
+enum AlertType {
+  notable_trade
+  politician
+  watchlist
+  corporate
+}
+
+model Alert {
+  id         String    @id @default(cuid())
+  user_id    String
+  type       AlertType @default(watchlist)
+  title      String
+  body       String
+  ticker     String?
+  timestamp  DateTime  @default(now())
+  read       Boolean   @default(false)
+  read_at    DateTime?
+  source_key String
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@unique([user_id, source_key])
+  @@index([user_id, read, timestamp(sort: Desc)])
 }
 
 model UserWatchlist {

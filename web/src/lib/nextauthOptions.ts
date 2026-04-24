@@ -12,7 +12,7 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   session: { strategy: "jwt" },
-  debug: true,
+  debug: process.env.NEXTAUTH_DEBUG === "true",
   pages: {
     signIn: "/login",
     error: "/login?error=OAuthSignIn",
