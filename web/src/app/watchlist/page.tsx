@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import { getSessionUser } from '@/lib/auth';
+import StateNotice from '@/components/StateNotice';
 
 export const dynamic = 'force-dynamic';
 import Link from 'next/link';
@@ -63,6 +64,7 @@ export default async function WatchlistPage() {
       state: string | null;
     } | null;
   }> = [];
+  let loadError = false;
   try {
     watchlist = await prisma.userWatchlist.findMany({
       where: { user_id: userId },
@@ -72,6 +74,7 @@ export default async function WatchlistPage() {
   } catch {
     // Soft-fail with empty watchlist to avoid page collapse
     watchlist = [];
+    loadError = true;
   }
 
   const groupedWatchlist = {
@@ -145,6 +148,14 @@ export default async function WatchlistPage() {
 
         {/* Watchlist Items */}
         <div className="space-y-8">
+          {loadError && (
+            <StateNotice
+              tone="warning"
+              title="部分資料載入失敗"
+              description="關注清單讀取遇到暫時問題，畫面可能不完整。請稍後重新整理。"
+            />
+          )}
+
           {/* Companies */}
           {groupedWatchlist.companies.length > 0 && (
             <div className="bg-gray-800 rounded-lg p-6">
@@ -258,24 +269,19 @@ export default async function WatchlistPage() {
 
           {/* Empty State */}
           {watchlist.length === 0 && (
-            <div className="bg-gray-800 rounded-lg p-12 text-center">
-              <div className="text-gray-400 text-6xl mb-4">📋</div>
-              <h3 className="text-xl font-semibold mb-2">
-                <span className="zh-Hant">您的關注清單是空的</span>
-                <span className="zh-Hans hidden">您的关注清单是空的</span>
-              </h3>
-              <p className="text-gray-400 mb-6">
-                <span className="zh-Hant">開始關注您感興趣的政治人物、公司和內部人</span>
-                <span className="zh-Hans hidden">开始关注您感兴趣的政治人物、公司和内部人</span>
-              </p>
-              <Link 
-                href="/insider"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md transition-colors duration-200"
-              >
-                <span className="zh-Hant">瀏覽內幕交易</span>
-                <span className="zh-Hans hidden">浏览内幕交易</span>
-              </Link>
-            </div>
+            <StateNotice
+              title="您的關注清單目前是空的"
+              description="開始關注政治人物、公司、內部人或股票後，這裡會顯示所有追蹤項目。"
+              actions={
+                <Link
+                  href="/insider"
+                  className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors duration-200"
+                >
+                  <span className="zh-Hant">瀏覽內幕交易</span>
+                  <span className="zh-Hans hidden">浏览内幕交易</span>
+                </Link>
+              }
+            />
           )}
         </div>
       </div>

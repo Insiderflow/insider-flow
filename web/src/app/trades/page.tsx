@@ -3,11 +3,10 @@ import { prisma } from '@/lib/prisma';
 import ClearFiltersButton from '@/components/ClearFiltersButton';
 import AutocompleteInput from '@/components/AutocompleteInput';
 import SortableTradesTable from '@/components/SortableTradesTable';
-import LoadingWrapper from '@/components/LoadingWrapper';
-import { StatsCardSkeleton, TableSkeleton } from '@/components/SkeletonLoader';
 import LastUpdated, { DataFreshnessIndicator } from '@/components/LastUpdated';
 import { getCurrentUserWithTier, isPaid } from '@/lib/membership';
 import { redirect } from 'next/navigation';
+import StateNotice from '@/components/StateNotice';
 
 export const dynamic = 'force-dynamic';
 
@@ -114,33 +113,27 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
           <span className="zh-Hans hidden">追踪国会股票交易动态</span>
         </p>
         <section className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
-          <LoadingWrapper fallback={<StatsCardSkeleton />}>
-            <div className="border border-gray-600 bg-gray-800 p-2 sm:p-4 rounded shadow-md">
-              <div className="text-xs text-white">
-                <span className="zh-Hant">總交易</span>
-                <span className="zh-Hans hidden">总交易</span>
-              </div>
-              <div className="text-lg sm:text-xl font-semibold text-white">{tradeCount}</div>
+          <div className="border border-gray-600 bg-gray-800 p-2 sm:p-4 rounded shadow-md">
+            <div className="text-xs text-white">
+              <span className="zh-Hant">總交易</span>
+              <span className="zh-Hans hidden">总交易</span>
             </div>
-          </LoadingWrapper>
-          <LoadingWrapper fallback={<StatsCardSkeleton />}>
-            <div className="border border-gray-600 bg-gray-800 p-2 sm:p-4 rounded shadow-md">
-              <div className="text-xs text-white">
-                <span className="zh-Hant">政治家</span>
-                <span className="zh-Hans hidden">政治家</span>
-              </div>
-              <div className="text-lg sm:text-xl font-semibold text-white">{polCount}</div>
+            <div className="text-lg sm:text-xl font-semibold text-white">{tradeCount}</div>
+          </div>
+          <div className="border border-gray-600 bg-gray-800 p-2 sm:p-4 rounded shadow-md">
+            <div className="text-xs text-white">
+              <span className="zh-Hant">政治家</span>
+              <span className="zh-Hans hidden">政治家</span>
             </div>
-          </LoadingWrapper>
-          <LoadingWrapper fallback={<StatsCardSkeleton />}>
-            <div className="border border-gray-600 bg-gray-800 p-2 sm:p-4 rounded shadow-md">
-              <div className="text-xs text-white">
-                <span className="zh-Hant">發行商</span>
-                <span className="zh-Hans hidden">发行商</span>
-              </div>
-              <div className="text-lg sm:text-xl font-semibold text-white">{issuerCount}</div>
+            <div className="text-lg sm:text-xl font-semibold text-white">{polCount}</div>
+          </div>
+          <div className="border border-gray-600 bg-gray-800 p-2 sm:p-4 rounded shadow-md">
+            <div className="text-xs text-white">
+              <span className="zh-Hant">發行商</span>
+              <span className="zh-Hans hidden">发行商</span>
             </div>
-          </LoadingWrapper>
+            <div className="text-lg sm:text-xl font-semibold text-white">{issuerCount}</div>
+          </div>
         </section>
         <div className="flex items-center justify-between mb-3">
           <div className="text-xs text-gray-300">
@@ -268,7 +261,13 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
             <span className="zh-Hans hidden">应用</span>
           </button>
         </form>
-        <LoadingWrapper fallback={<TableSkeleton rows={10} />}>
+        {trades.length === 0 ? (
+          <StateNotice
+            title="查無符合條件的交易"
+            description="請調整篩選條件，或清除目前篩選重新查看所有交易。"
+            actions={<ClearFiltersButton formId="trades-filters" />}
+          />
+        ) : (
           <SortableTradesTable
             trades={trades.map((t) => ({
               id: t.id,
@@ -283,7 +282,7 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
               price: t.price ? new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 }).format(Number(t.price)) : '',
             }))}
           />
-        </LoadingWrapper>
+        )}
       </main>
     </div>
   );
