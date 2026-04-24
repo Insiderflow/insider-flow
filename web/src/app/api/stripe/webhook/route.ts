@@ -5,8 +5,6 @@ import { getInvoiceSubscriptionId, getSubscriptionPeriodEnd } from '@/lib/stripe
 
 export const dynamic = 'force-dynamic';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '');
-
 export async function POST(req: NextRequest) {
   const body = await req.text();
   const signature = req.headers.get('stripe-signature');
@@ -20,6 +18,13 @@ export async function POST(req: NextRequest) {
     console.error('STRIPE_WEBHOOK_SECRET is not set');
     return NextResponse.json({ error: 'Webhook secret not configured' }, { status: 500 });
   }
+
+  if (!process.env.STRIPE_SECRET_KEY) {
+    console.error('STRIPE_SECRET_KEY is not set');
+    return NextResponse.json({ error: 'Stripe secret key not configured' }, { status: 500 });
+  }
+
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
   let event: Stripe.Event;
 
