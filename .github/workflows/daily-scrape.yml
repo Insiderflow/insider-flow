@@ -35,7 +35,7 @@ jobs:
     - name: Install Python dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install requests beautifulsoup4 pandas pyyaml retry tqdm || true
+        pip install requests beautifulsoup4 pandas pyyaml retry tqdm
         
     - name: Install dependencies
       run: |
@@ -50,20 +50,22 @@ jobs:
         DATABASE_URL: ${{ secrets.DATABASE_URL }}
       run: |
         echo "📊 Running OpenInsider scraper..."
-        # Try multiple paths since we don't know exact repo structure
+        SCRAPER_PATH=""
         if [ -f "../../openinsiderData/openinsider_scraper.py" ]; then
-          cd ../../openinsiderData
-          python3 openinsider_scraper.py || echo "⚠️ OpenInsider scraper failed, continuing..."
+          SCRAPER_PATH="../../openinsiderData/openinsider_scraper.py"
         elif [ -f "../openinsiderData/openinsider_scraper.py" ]; then
-          cd ../openinsiderData
-          python3 openinsider_scraper.py || echo "⚠️ OpenInsider scraper failed, continuing..."
+          SCRAPER_PATH="../openinsiderData/openinsider_scraper.py"
         elif [ -f "openinsiderData/openinsider_scraper.py" ]; then
-          cd openinsiderData
-          python3 openinsider_scraper.py || echo "⚠️ OpenInsider scraper failed, continuing..."
-        else
-          echo "⚠️ OpenInsider scraper not found in expected locations, skipping..."
-          echo "   Searched: ../../openinsiderData, ../openinsiderData, ./openinsiderData"
+          SCRAPER_PATH="openinsiderData/openinsider_scraper.py"
         fi
+
+        if [ -z "$SCRAPER_PATH" ]; then
+          echo "❌ OpenInsider scraper not found in expected locations"
+          echo "   Searched: ../../openinsiderData/openinsider_scraper.py, ../openinsiderData/openinsider_scraper.py, openinsiderData/openinsider_scraper.py"
+          exit 1
+        fi
+
+        python3 "$SCRAPER_PATH"
         
     - name: Run daily scrape (Capitol Trades)
       env:
