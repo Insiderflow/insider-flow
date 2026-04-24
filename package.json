@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "check:mirror": "bash ./scripts/check_vite_mirror_sync.sh"
+  },
   "dependencies": {
     "@prisma/client": "^6.16.2",
     "axios": "^1.12.2",
