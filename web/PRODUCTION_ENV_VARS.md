@@ -3,8 +3,8 @@
 Copy these environment variables to your **Render** web service (or any host running this Next app with the same shape of secrets):
 
 ```bash
-# Database
-DATABASE_URL="postgresql://neondb_owner:npg_sXci4KyhLrO9@ep-old-block-ad8jrimc-pooler.c-2.us-east-1.aws.neon.tech/neondb?channel_binding=require&sslmode=require"
+# Database (use the connection string from Neon dashboard; do not commit the real value)
+DATABASE_URL="postgresql://USER:PASSWORD@YOUR-NEON-HOST.neon.tech/neondb?sslmode=require"
 
 # Session Management
 SESSION_SECRET="your-32-character-secret-key-here"
