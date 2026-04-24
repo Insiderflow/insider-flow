@@ -1,12 +1,12 @@
 import { prisma } from '@/lib/prisma';
-import LoadingWrapper from '@/components/LoadingWrapper';
 import PoliticianCard from '@/components/PoliticianCard';
-import { StatsCardSkeleton, PoliticianCardSkeleton } from '@/components/SkeletonLoader';
 import LastUpdated, { DataFreshnessIndicator } from '@/components/LastUpdated';
 import { getCurrentUserWithTier, isPaid } from '@/lib/membership';
 import { redirect } from 'next/navigation';
 import fs from 'fs';
 import path from 'path';
+import StateNotice from '@/components/StateNotice';
+import Link from 'next/link';
 export const dynamic = 'force-dynamic';
 
 type Row = { id: string; name: string; party: string | null; chamber: string | null; trades: number; issuers: number; volume: number; lastTraded: Date | null; performance?: number };
@@ -359,33 +359,27 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
           </div>
         </div>
         <section className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
-          <LoadingWrapper fallback={<StatsCardSkeleton />}>
-            <div className="border border-gray-600 bg-gray-800 p-2 sm:p-4 rounded shadow-md">
-              <div className="text-xs text-white">
-                <span className="zh-Hant">交易</span>
-                <span className="zh-Hans hidden">交易</span>
-              </div>
-              <div className="text-lg sm:text-xl font-semibold text-white">{tradeCount}</div>
+          <div className="border border-gray-600 bg-gray-800 p-2 sm:p-4 rounded shadow-md">
+            <div className="text-xs text-white">
+              <span className="zh-Hant">交易</span>
+              <span className="zh-Hans hidden">交易</span>
             </div>
-          </LoadingWrapper>
-          <LoadingWrapper fallback={<StatsCardSkeleton />}>
-            <div className="border border-gray-600 bg-gray-800 p-2 sm:p-4 rounded shadow-md">
-              <div className="text-xs text-white">
-                <span className="zh-Hant">政治家</span>
-                <span className="zh-Hans hidden">政治家</span>
-              </div>
-              <div className="text-lg sm:text-xl font-semibold text-white">{polCount}</div>
+            <div className="text-lg sm:text-xl font-semibold text-white">{tradeCount}</div>
+          </div>
+          <div className="border border-gray-600 bg-gray-800 p-2 sm:p-4 rounded shadow-md">
+            <div className="text-xs text-white">
+              <span className="zh-Hant">政治家</span>
+              <span className="zh-Hans hidden">政治家</span>
             </div>
-          </LoadingWrapper>
-          <LoadingWrapper fallback={<StatsCardSkeleton />}>
-            <div className="border border-gray-600 bg-gray-800 p-2 sm:p-4 rounded shadow-md">
-              <div className="text-xs text-white">
-                <span className="zh-Hant">發行商</span>
-                <span className="zh-Hans hidden">发行商</span>
-              </div>
-              <div className="text-lg sm:text-xl font-semibold text-white">{issuerCount}</div>
+            <div className="text-lg sm:text-xl font-semibold text-white">{polCount}</div>
+          </div>
+          <div className="border border-gray-600 bg-gray-800 p-2 sm:p-4 rounded shadow-md">
+            <div className="text-xs text-white">
+              <span className="zh-Hant">發行商</span>
+              <span className="zh-Hans hidden">发行商</span>
             </div>
-          </LoadingWrapper>
+            <div className="text-lg sm:text-xl font-semibold text-white">{issuerCount}</div>
+          </div>
         </section>
         <form className="flex flex-col sm:flex-row gap-3 mb-3" method="get">
           <label className="text-xs sm:text-sm flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 text-white">
@@ -503,19 +497,26 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
           )}
         </div>
         
-        <LoadingWrapper fallback={
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {Array.from({ length: 8 }).map((_, index) => (
-              <PoliticianCardSkeleton key={index} />
-            ))}
-          </div>
-        }>
+        {rows.length === 0 ? (
+          <StateNotice
+            title="沒有符合條件的政治家"
+            description="請調整搜尋或議院篩選條件後重試。"
+            actions={
+              <Link
+                href="/politicians"
+                className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors duration-200"
+              >
+                清除篩選
+              </Link>
+            }
+          />
+        ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {rows.map((politician) => (
               <PoliticianCard key={politician.id} politician={politician} showWatchlistButton={true} initialInWatchlist={false} />
             ))}
           </div>
-        </LoadingWrapper>
+        )}
       </main>
     </div>
   );

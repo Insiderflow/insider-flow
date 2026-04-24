@@ -1,10 +1,9 @@
 import { prisma } from '@/lib/prisma';
-import LoadingWrapper from '@/components/LoadingWrapper';
 import SortableIssuersTable from '@/components/SortableIssuersTable';
-import { StatsCardSkeleton, IssuerCardSkeleton } from '@/components/SkeletonLoader';
 import LastUpdated, { DataFreshnessIndicator } from '@/components/LastUpdated';
 import { getCurrentUserWithTier, isPaid } from '@/lib/membership';
 import { redirect } from 'next/navigation';
+import StateNotice from '@/components/StateNotice';
 export const dynamic = 'force-dynamic';
 
 type Row = { id: string; name: string; ticker: string | null; trades: number; politicians: number; volume: number };
@@ -98,33 +97,27 @@ export default async function IssuersPage({ searchParams }: { searchParams: Prom
           </div>
         </div>
         <section className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
-          <LoadingWrapper fallback={<StatsCardSkeleton />}>
-            <div className="border border-gray-600 bg-gray-800 p-2 sm:p-4 rounded shadow-md">
-              <div className="text-xs text-white">
-                <span className="zh-Hant">總交易</span>
-                <span className="zh-Hans hidden">总交易</span>
-              </div>
-              <div className="text-lg sm:text-xl font-semibold text-white">{tradeCount}</div>
+          <div className="border border-gray-600 bg-gray-800 p-2 sm:p-4 rounded shadow-md">
+            <div className="text-xs text-white">
+              <span className="zh-Hant">總交易</span>
+              <span className="zh-Hans hidden">总交易</span>
             </div>
-          </LoadingWrapper>
-          <LoadingWrapper fallback={<StatsCardSkeleton />}>
-            <div className="border border-gray-600 bg-gray-800 p-2 sm:p-4 rounded shadow-md">
-              <div className="text-xs text-white">
-                <span className="zh-Hant">政治家</span>
-                <span className="zh-Hans hidden">政治家</span>
-              </div>
-              <div className="text-lg sm:text-xl font-semibold text-white">{polCount}</div>
+            <div className="text-lg sm:text-xl font-semibold text-white">{tradeCount}</div>
+          </div>
+          <div className="border border-gray-600 bg-gray-800 p-2 sm:p-4 rounded shadow-md">
+            <div className="text-xs text-white">
+              <span className="zh-Hant">政治家</span>
+              <span className="zh-Hans hidden">政治家</span>
             </div>
-          </LoadingWrapper>
-          <LoadingWrapper fallback={<StatsCardSkeleton />}>
-            <div className="border border-gray-600 bg-gray-800 p-2 sm:p-4 rounded shadow-md">
-              <div className="text-xs text-white">
-                <span className="zh-Hant">發行商</span>
-                <span className="zh-Hans hidden">发行商</span>
-              </div>
-              <div className="text-lg sm:text-xl font-semibold text-white">{issuerCount}</div>
+            <div className="text-lg sm:text-xl font-semibold text-white">{polCount}</div>
+          </div>
+          <div className="border border-gray-600 bg-gray-800 p-2 sm:p-4 rounded shadow-md">
+            <div className="text-xs text-white">
+              <span className="zh-Hant">發行商</span>
+              <span className="zh-Hans hidden">发行商</span>
             </div>
-          </LoadingWrapper>
+            <div className="text-lg sm:text-xl font-semibold text-white">{issuerCount}</div>
+          </div>
         </section>
         <div className="flex items-center justify-between mb-3">
           <div className="text-xs text-gray-300">
@@ -170,11 +163,12 @@ export default async function IssuersPage({ searchParams }: { searchParams: Prom
             <span className="zh-Hans hidden">应用</span>
           </button>
         </form>
-        <LoadingWrapper fallback={<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {Array.from({ length: 6 }).map((_, index) => (
-            <IssuerCardSkeleton key={index} />
-          ))}
-        </div>}>
+        {rows.length === 0 ? (
+          <StateNotice
+            title="沒有可顯示的發行商資料"
+            description="目前沒有符合條件的發行商，請調整排序或稍後再試。"
+          />
+        ) : (
           <SortableIssuersTable
             issuers={rows.map((r) => ({
               id: r.id,
@@ -185,7 +179,7 @@ export default async function IssuersPage({ searchParams }: { searchParams: Prom
               volume: new Intl.NumberFormat('en-US').format(Math.round(r.volume)),
             }))}
           />
-        </LoadingWrapper>
+        )}
       </main>
     </div>
   );
