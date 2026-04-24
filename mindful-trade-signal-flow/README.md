@@ -45,6 +45,10 @@ From repo root (`insider-flow`), run:
 
 ```bash
 npm run check:mirror
+npm run sync:mirror
+npm run hooks:install
 ```
 
-If drift is detected, sync mirror back to source with the command printed by the checker.
+- `check:mirror` reports drift.
+- `sync:mirror` syncs mirror -> monorepo source.
+- `hooks:install` installs a local non-blocking pre-commit warning if drift exists.
