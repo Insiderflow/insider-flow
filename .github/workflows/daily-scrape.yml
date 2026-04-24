@@ -9,9 +9,14 @@ on:
     - cron: '0 17 * * *'  # 1am HKT
   workflow_dispatch: # Allow manual trigger
 
+concurrency:
+  group: daily-scrape
+  cancel-in-progress: true
+
 jobs:
   scrape:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     defaults:
       run:
         working-directory: web
@@ -23,7 +28,7 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '18'
+        node-version: '20'
         cache: 'npm'
         cache-dependency-path: web/package-lock.json
         
@@ -80,3 +85,16 @@ jobs:
     - name: Notify on failure
       if: failure()
       run: echo "❌ Daily scrape failed"
+
+    - name: Send failure alert webhook (optional)
+      if: failure()
+      env:
+        CI_ALERT_WEBHOOK_URL: ${{ secrets.CI_ALERT_WEBHOOK_URL }}
+      run: |
+        if [ -z "$CI_ALERT_WEBHOOK_URL" ]; then
+          echo "No CI_ALERT_WEBHOOK_URL configured; skipping external alert."
+          exit 0
+        fi
+        curl -X POST "$CI_ALERT_WEBHOOK_URL" \
+          -H "Content-Type: application/json" \
+          -d "{\"text\":\"Daily scrape failed for ${GITHUB_REPOSITORY} on ${GITHUB_REF_NAME}. Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}\"}"

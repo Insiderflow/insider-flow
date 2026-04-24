@@ -12,9 +12,14 @@ on:
       - '.github/workflows/precalculate-portfolio.yml'
       - 'web/scripts/precalculate-portfolio-data.js'
 
+concurrency:
+  group: precalculate-portfolio
+  cancel-in-progress: true
+
 jobs:
   precalculate:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     defaults:
       run:
         working-directory: web
@@ -47,4 +52,17 @@ jobs:
         name: portfolio-cache
         path: web/portfolio_cache.json
         if-no-files-found: error
+
+    - name: Send failure alert webhook (optional)
+      if: failure()
+      env:
+        CI_ALERT_WEBHOOK_URL: ${{ secrets.CI_ALERT_WEBHOOK_URL }}
+      run: |
+        if [ -z "$CI_ALERT_WEBHOOK_URL" ]; then
+          echo "No CI_ALERT_WEBHOOK_URL configured; skipping external alert."
+          exit 0
+        fi
+        curl -X POST "$CI_ALERT_WEBHOOK_URL" \
+          -H "Content-Type: application/json" \
+          -d "{\"text\":\"Portfolio precalculate failed for ${GITHUB_REPOSITORY} on ${GITHUB_REF_NAME}. Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}\"}"
 
