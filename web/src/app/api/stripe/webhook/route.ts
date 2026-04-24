@@ -245,10 +245,10 @@ export async function POST(req: NextRequest) {
       console.error('Error stack:', error.stack);
       console.error('Error message:', error.message);
     }
-    // Still return 200 to Stripe so it doesn't retry (we'll handle manually)
+    // Return non-2xx so Stripe retries transient failures.
     return NextResponse.json(
       { error: 'Webhook processing failed', details: error instanceof Error ? error.message : String(error) },
-      { status: 200 } // Return 200 so Stripe doesn't keep retrying
+      { status: 500 }
     );
   }
 }
