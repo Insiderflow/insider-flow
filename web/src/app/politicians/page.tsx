@@ -7,6 +7,10 @@ import fs from 'fs';
 import path from 'path';
 import StateNotice from '@/components/StateNotice';
 import Link from 'next/link';
+import { actionStyles } from '@/components/actionStyles';
+import { fieldControlStyles, fieldLabelStyles } from '@/components/formStyles';
+import { statSurfaceStyles } from '@/components/surfaceStyles';
+import { mutedLabelStyles, pageTitleStyles } from '@/components/typographyStyles';
 export const dynamic = 'force-dynamic';
 
 type Row = { id: string; name: string; party: string | null; chamber: string | null; trades: number; issuers: number; volume: number; lastTraded: Date | null; performance?: number };
@@ -343,12 +347,12 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
     <div className="min-h-screen bg-gray-900">
       <main className="p-4">
         <div className="flex justify-between items-center mb-4">
-          <h1 className="text-xl sm:text-2xl font-semibold text-white">
+          <h1 className={pageTitleStyles()}>
             <span className="zh-Hant">政治家</span>
             <span className="zh-Hans hidden">政治家</span>
           </h1>
           <div className="flex items-center gap-4">
-            <div className="text-sm text-gray-400">
+            <div className={`text-sm ${mutedLabelStyles()}`}>
               <span className="zh-Hant">顯示 {totalPoliticians} 位政治家 (第 {page} 頁，共 {Math.ceil(totalPoliticians / pageSize)} 頁)</span>
               <span className="zh-Hans hidden">显示 {totalPoliticians} 位政治家 (第 {page} 页，共 {Math.ceil(totalPoliticians / pageSize)} 页)</span>
             </div>
@@ -359,21 +363,21 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
           </div>
         </div>
         <section className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
-          <div className="border border-gray-600 bg-gray-800 p-2 sm:p-4 rounded shadow-md">
+          <div className={statSurfaceStyles()}>
             <div className="text-xs text-white">
               <span className="zh-Hant">交易</span>
               <span className="zh-Hans hidden">交易</span>
             </div>
             <div className="text-lg sm:text-xl font-semibold text-white">{tradeCount}</div>
           </div>
-          <div className="border border-gray-600 bg-gray-800 p-2 sm:p-4 rounded shadow-md">
+          <div className={statSurfaceStyles()}>
             <div className="text-xs text-white">
               <span className="zh-Hant">政治家</span>
               <span className="zh-Hans hidden">政治家</span>
             </div>
             <div className="text-lg sm:text-xl font-semibold text-white">{polCount}</div>
           </div>
-          <div className="border border-gray-600 bg-gray-800 p-2 sm:p-4 rounded shadow-md">
+          <div className={statSurfaceStyles()}>
             <div className="text-xs text-white">
               <span className="zh-Hant">發行商</span>
               <span className="zh-Hans hidden">发行商</span>
@@ -382,7 +386,7 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
           </div>
         </section>
         <form className="flex flex-col sm:flex-row gap-3 mb-3" method="get">
-          <label className="text-xs sm:text-sm flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 text-white">
+          <label className={fieldLabelStyles()}>
             <span className="w-full sm:w-auto text-gray-400">
               <span className="zh-Hant">搜尋姓名</span>
               <span className="zh-Hans hidden">搜索姓名</span>
@@ -391,27 +395,27 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
               name="name" 
               defaultValue={searchName} 
               placeholder="按姓名搜尋..."
-              className="border border-gray-600 p-1 bg-gray-800 text-white text-xs sm:text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200" 
+              className={fieldControlStyles()} 
               aria-label="Search by politician name"
             />
           </label>
-          <label className="text-xs sm:text-sm flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 text-white">
+          <label className={fieldLabelStyles()}>
             <span className="w-full sm:w-auto text-gray-400">
               <span className="zh-Hant">議院</span>
               <span className="zh-Hans hidden">议院</span>
             </span>
-            <select name="chamber" defaultValue={chamber} className="border border-gray-600 p-1 bg-gray-800 text-white text-xs sm:text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200" aria-label="Filter by chamber">
+            <select name="chamber" defaultValue={chamber} className={fieldControlStyles()} aria-label="Filter by chamber">
               <option value="">全部</option>
               <option value="House">眾議院</option>
               <option value="Senate">參議院</option>
             </select>
           </label>
-          <label className="text-xs sm:text-sm flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 text-white">
+          <label className={fieldLabelStyles()}>
             <span className="w-full sm:w-auto text-gray-400">
               <span className="zh-Hant">排序</span>
               <span className="zh-Hans hidden">排序</span>
             </span>
-            <select name="sort" defaultValue={sortKey} className="border border-gray-600 p-1 bg-gray-800 text-white text-xs sm:text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200" aria-label="Sort by">
+            <select name="sort" defaultValue={sortKey} className={fieldControlStyles()} aria-label="Sort by">
               <option value="trades">
                 <span className="zh-Hant">交易</span>
                 <span className="zh-Hans hidden">交易</span>
@@ -438,12 +442,12 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
               </option>
             </select>
           </label>
-          <label className="text-xs sm:text-sm flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 text-white">
+          <label className={fieldLabelStyles()}>
             <span className="w-full sm:w-auto text-gray-400">
               <span className="zh-Hant">方向</span>
               <span className="zh-Hans hidden">方向</span>
             </span>
-            <select name="order" defaultValue={order} className="border border-gray-600 p-1 bg-gray-800 text-white text-xs sm:text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200" aria-label="Sort order">
+            <select name="order" defaultValue={order} className={fieldControlStyles()} aria-label="Sort order">
               <option value="asc">
                 <span className="zh-Hant">升序</span>
                 <span className="zh-Hans hidden">升序</span>
@@ -454,7 +458,7 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
               </option>
             </select>
           </label>
-          <button className="border border-gray-600 px-3 py-1 text-xs sm:text-sm bg-gray-800 text-white hover:bg-gray-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none transition-colors duration-200" type="submit" aria-label="Apply filters">
+          <button className={actionStyles('ghost')} type="submit" aria-label="Apply filters">
             <span className="zh-Hant">套用</span>
             <span className="zh-Hans hidden">应用</span>
           </button>
@@ -471,7 +475,7 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
                 sort: sortKey,
                 order: order
               }).toString()}`}
-              className="px-3 py-1 bg-gray-700 text-white rounded hover:bg-gray-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none transition-colors duration-200"
+              className={actionStyles('ghost')}
             >
               <span className="zh-Hant">上一頁</span>
               <span className="zh-Hans hidden">上一页</span>
@@ -489,7 +493,7 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
                 sort: sortKey,
                 order: order
               }).toString()}`}
-              className="px-3 py-1 bg-gray-700 text-white rounded hover:bg-gray-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none transition-colors duration-200"
+              className={actionStyles('ghost')}
             >
               <span className="zh-Hant">下一頁</span>
               <span className="zh-Hans hidden">下一页</span>
@@ -504,7 +508,7 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
             actions={
               <Link
                 href="/politicians"
-                className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors duration-200"
+                className={actionStyles('primary')}
               >
                 清除篩選
               </Link>

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import MobileOptimizedTable from './MobileOptimizedTable';
+import { textLinkStyles } from './linkStyles';
 
 interface Issuer {
   id: string;
@@ -58,7 +59,7 @@ export default function SortableIssuersTable({ issuers }: SortableIssuersTablePr
       render: (value: unknown, row: { id: string }) => (
         <Link 
           href={`/issuers/${row.id}`}
-          className="text-blue-400 hover:text-blue-300 underline"
+          className={textLinkStyles('muted')}
         >
           {String(value)}
         </Link>

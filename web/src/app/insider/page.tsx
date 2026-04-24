@@ -10,6 +10,13 @@ import { getCurrentUserWithTier, isPaid } from '@/lib/membership';
 import { redirect } from 'next/navigation';
 import ExportButton from '@/components/ExportButton';
 import TableRowSkeleton from '@/components/TableRowSkeleton';
+import { actionStyles } from '@/components/actionStyles';
+import { badgeStyles } from '@/components/badgeStyles';
+import { fieldControlStyles } from '@/components/formStyles';
+import { textLinkStyles } from '@/components/linkStyles';
+import { panelSurfaceStyles } from '@/components/surfaceStyles';
+import { bodySubtextStyles, pageTitleStyles } from '@/components/typographyStyles';
+import { tableBodyStyles, tableHeaderCellStyles, tableHeaderStyles, tableRowStyles, tableWrapperStyles } from '@/components/tableStyles';
 
 // SortableHeader component
 function SortableHeader({ 
@@ -219,7 +226,7 @@ export default async function InsiderPage({ searchParams }: { searchParams: Prom
         <div className="mb-8">
           <div className="flex justify-between items-start mb-4">
             <div>
-              <h1 className="text-4xl font-bold mb-2">
+              <h1 className={`${pageTitleStyles()} mb-2`}>
                 <span className="zh-Hant">企業交易</span>
                 <span className="zh-Hans hidden">企业交易</span>
               </h1>
@@ -242,8 +249,8 @@ export default async function InsiderPage({ searchParams }: { searchParams: Prom
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-gray-800 rounded-lg p-6">
-            <h3 className="text-lg font-semibold text-gray-300 mb-2">
+          <div className={panelSurfaceStyles()}>
+            <h3 className={`text-lg font-semibold mb-2 ${bodySubtextStyles()}`}>
               <span className="zh-Hant">總交易數</span>
               <span className="zh-Hans hidden">总交易数</span>
             </h3>
@@ -251,8 +258,8 @@ export default async function InsiderPage({ searchParams }: { searchParams: Prom
               {totalCount.toLocaleString()}
             </p>
           </div>
-          <div className="bg-gray-800 rounded-lg p-6">
-            <h3 className="text-lg font-semibold text-gray-300 mb-2">
+          <div className={panelSurfaceStyles()}>
+            <h3 className={`text-lg font-semibold mb-2 ${bodySubtextStyles()}`}>
               <span className="zh-Hant">總價值</span>
               <span className="zh-Hans hidden">总价值</span>
             </h3>
@@ -260,8 +267,8 @@ export default async function InsiderPage({ searchParams }: { searchParams: Prom
               ${stats._sum.valueNumeric ? (Number(stats._sum.valueNumeric) / 1000000).toFixed(1) + 'M' : '0'}
             </p>
           </div>
-          <div className="bg-gray-800 rounded-lg p-6">
-            <h3 className="text-lg font-semibold text-gray-300 mb-2">
+          <div className={panelSurfaceStyles()}>
+            <h3 className={`text-lg font-semibold mb-2 ${bodySubtextStyles()}`}>
               <span className="zh-Hant">公司數</span>
               <span className="zh-Hans hidden">公司数</span>
             </h3>
@@ -275,7 +282,7 @@ export default async function InsiderPage({ searchParams }: { searchParams: Prom
         <FilterCategories currentFilter={filterCategory} />
 
         {/* Advanced Filters */}
-        <div className="bg-gray-800 rounded-lg p-6 mb-8">
+        <div className={`${panelSurfaceStyles()} mb-8`}>
           <h3 className="text-lg font-semibold text-white mb-4">
             <span className="zh-Hant">進階篩選</span>
             <span className="zh-Hans hidden">进阶筛选</span>
@@ -297,7 +304,7 @@ export default async function InsiderPage({ searchParams }: { searchParams: Prom
               <select
                 name="type"
                 defaultValue={typeFilter}
-                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className={fieldControlStyles('md')}
               >
                 <option value="">所有交易類型</option>
                 {transactionTypes.map(type => (
@@ -307,7 +314,7 @@ export default async function InsiderPage({ searchParams }: { searchParams: Prom
               <select
                 name="institution"
                 defaultValue={isInstitutionFilter}
-                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className={fieldControlStyles('md')}
               >
                 <option value="">所有交易者</option>
                 <option value="true">機構</option>
@@ -317,7 +324,7 @@ export default async function InsiderPage({ searchParams }: { searchParams: Prom
             <div className="flex justify-between items-center">
               <button
                 type="submit"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md transition-colors duration-200"
+                className={actionStyles('primary')}
               >
                 <span className="zh-Hant">篩選</span>
                 <span className="zh-Hans hidden">筛选</span>
@@ -328,7 +335,7 @@ export default async function InsiderPage({ searchParams }: { searchParams: Prom
         </div>
 
         {/* Export and Table Controls */}
-        <div className="bg-gray-800 rounded-lg p-4 mb-4 flex justify-between items-center">
+        <div className={`${panelSurfaceStyles('sm')} mb-4 flex justify-between items-center`}>
           <div className="flex items-center space-x-4">
             <ExportButton 
               data={transactions.map(t => ({
@@ -354,12 +361,12 @@ export default async function InsiderPage({ searchParams }: { searchParams: Prom
         </div>
 
         {/* Table */}
-        <div className="bg-gray-800 rounded-lg overflow-hidden">
-          <div className="overflow-x-auto">
+        <div className={`${panelSurfaceStyles('sm')} overflow-hidden`}>
+          <div className={tableWrapperStyles()}>
             <table className="w-full">
-              <thead className="bg-gray-700">
+              <thead className={tableHeaderStyles()}>
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                  <th className={tableHeaderCellStyles('md')}>
                     <SortableHeader 
                       field="transactionDate" 
                       currentSort={sortKey} 
@@ -369,7 +376,7 @@ export default async function InsiderPage({ searchParams }: { searchParams: Prom
                       searchParams={sp}
                     />
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                  <th className={tableHeaderCellStyles('md')}>
                     <SortableHeader 
                       field="transactionDate" 
                       currentSort={sortKey} 
@@ -379,27 +386,27 @@ export default async function InsiderPage({ searchParams }: { searchParams: Prom
                       searchParams={sp}
                     />
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                  <th className={tableHeaderCellStyles('md')}>
                     <span className="zh-Hant">股票代碼</span>
                     <span className="zh-Hans hidden">股票代码</span>
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                  <th className={tableHeaderCellStyles('md')}>
                     <span className="zh-Hant">公司名稱</span>
                     <span className="zh-Hans hidden">公司名称</span>
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                  <th className={tableHeaderCellStyles('md')}>
                     <span className="zh-Hant">內部人名稱</span>
                     <span className="zh-Hans hidden">内部人名称</span>
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                  <th className={tableHeaderCellStyles('md')}>
                     <span className="zh-Hant">職位</span>
                     <span className="zh-Hans hidden">职位</span>
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                  <th className={tableHeaderCellStyles('md')}>
                     <span className="zh-Hant">交易類型</span>
                     <span className="zh-Hans hidden">交易类型</span>
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                  <th className={tableHeaderCellStyles('md')}>
                     <SortableHeader 
                       field="lastPrice" 
                       currentSort={sortKey} 
@@ -409,19 +416,19 @@ export default async function InsiderPage({ searchParams }: { searchParams: Prom
                       searchParams={sp}
                     />
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                  <th className={tableHeaderCellStyles('md')}>
                     <span className="zh-Hant">數量</span>
                     <span className="zh-Hans hidden">数量</span>
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                  <th className={tableHeaderCellStyles('md')}>
                     <span className="zh-Hant">持有股數</span>
                     <span className="zh-Hans hidden">持有股数</span>
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                  <th className={tableHeaderCellStyles('md')}>
                     <span className="zh-Hant">持股變化</span>
                     <span className="zh-Hans hidden">持股变化</span>
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                  <th className={tableHeaderCellStyles('md')}>
                     <SortableHeader 
                       field="valueNumeric" 
                       currentSort={sortKey} 
@@ -433,7 +440,7 @@ export default async function InsiderPage({ searchParams }: { searchParams: Prom
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-gray-800 divide-y divide-gray-700">
+              <tbody className={tableBodyStyles()}>
                 {transactions.length === 0 ? (
                   // Show skeleton loading rows
                   Array.from({ length: 10 }).map((_, index) => (
@@ -441,7 +448,7 @@ export default async function InsiderPage({ searchParams }: { searchParams: Prom
                   ))
                 ) : (
                   transactions.map((transaction) => (
-                  <tr key={transaction.id} className="hover:bg-gray-700">
+                  <tr key={transaction.id} className={tableRowStyles()}>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                       {new Date(transaction.transactionDate).toLocaleDateString()}
                     </td>
@@ -454,7 +461,7 @@ export default async function InsiderPage({ searchParams }: { searchParams: Prom
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                   <Link
                     href={`/insider/company/${transaction.company.id}`}
-                    className="text-blue-400 hover:text-blue-300 hover:underline transition-colors duration-200"
+                    className={textLinkStyles('muted')}
                   >
                     {transaction.company.name}
                   </Link>
@@ -462,7 +469,7 @@ export default async function InsiderPage({ searchParams }: { searchParams: Prom
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                   <Link
                     href={`/insider/insider/${transaction.owner.id}`}
-                    className="text-blue-400 hover:text-blue-300 hover:underline transition-colors duration-200"
+                    className={textLinkStyles('muted')}
                   >
                     {transaction.owner.name}
                   </Link>
@@ -472,7 +479,7 @@ export default async function InsiderPage({ searchParams }: { searchParams: Prom
                   <span className="zh-Hans hidden">{translateTitle(transaction.owner.title, 'hans')}</span>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                  <span className={badgeStyles('neutral', 'sm')}>
                     <span className="zh-Hant">{translateTxnType(transaction.transactionType, 'hant')}</span>
                     <span className="zh-Hans hidden">{translateTxnType(transaction.transactionType, 'hans')}</span>
                   </span>

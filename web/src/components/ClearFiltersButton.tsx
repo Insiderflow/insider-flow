@@ -1,5 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
+import { actionStyles } from "@/components/actionStyles";
 
 type Props = {
   formId: string;
@@ -18,7 +19,7 @@ export default function ClearFiltersButton({ formId }: Props) {
   return (
     <button
       onClick={onClick}
-      className="inline-block bg-white text-[#007BFF] border border-[#007BFF] px-3 py-1 rounded text-sm hover:bg-[#007BFF] hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none transition-colors duration-200"
+      className={actionStyles("secondary")}
       aria-label="Clear all filters"
       type="button"
     >

@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { actionStyles } from '@/components/actionStyles';
+import { fieldControlStyles } from '@/components/formStyles';
 
 export default function RegistrationForm() {
   const [email, setEmail] = useState('');
@@ -67,7 +69,7 @@ export default function RegistrationForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="border border-gray-600 p-2 w-full bg-gray-800 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200"
+            className={fieldControlStyles('md')}
             placeholder="請輸入您的電郵"
             disabled={isLoading}
           />
@@ -80,7 +82,7 @@ export default function RegistrationForm() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="border border-gray-600 p-2 w-full bg-gray-800 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200"
+            className={fieldControlStyles('md')}
             placeholder="至少 8 個字元"
             disabled={isLoading}
           />
@@ -93,7 +95,7 @@ export default function RegistrationForm() {
             value={confirm}
             onChange={(e) => setConfirm(e.target.value)}
             required
-            className="border border-gray-600 p-2 w-full bg-gray-800 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200"
+            className={fieldControlStyles('md')}
             placeholder="請再次輸入密碼"
             disabled={isLoading}
           />
@@ -101,7 +103,7 @@ export default function RegistrationForm() {
         <button
           type="submit"
           disabled={isLoading}
-          className="bg-white text-purple-600 border border-white px-4 py-2 rounded hover:bg-purple-100 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          className={actionStyles('secondary')}
         >
           {isLoading ? '註冊中…' : '繼續'}
         </button>

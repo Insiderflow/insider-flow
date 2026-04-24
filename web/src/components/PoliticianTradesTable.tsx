@@ -2,6 +2,7 @@
 import ResponsiveTable from './ResponsiveTable';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { textLinkStyles } from './linkStyles';
 
 interface PoliticianTradeRow {
   issuer: string;
@@ -58,7 +59,7 @@ export default function PoliticianTradesTable({ data, politician_id, currentSort
           render: (value, row) => (
             <Link 
               href={`/issuers/${row.issuer_id}`}
-              className="text-blue-400 hover:text-blue-300 underline"
+              className={textLinkStyles('muted')}
             >
               {String(value)}
             </Link>

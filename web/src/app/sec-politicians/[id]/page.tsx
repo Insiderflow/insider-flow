@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
 import { notFound } from 'next/navigation';
+import { badgeStyles } from '@/components/badgeStyles';
+import { textLinkStyles } from '@/components/linkStyles';
 
 export const dynamic = 'force-dynamic';
 
@@ -66,16 +68,18 @@ export default async function SECPoliticianDetailPage({
               </div>
               <div className="flex flex-wrap gap-2 mb-3">
                 {politician.party && (
-                  <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                    politician.party === 'Republican' ? 'bg-red-500 text-white' :
-                    politician.party === 'Democratic' ? 'bg-blue-500 text-white' :
-                    'bg-gray-500 text-white'
-                  }`}>
+                  <span className={badgeStyles(
+                    politician.party === 'Republican'
+                      ? 'republican'
+                      : politician.party === 'Democratic'
+                        ? 'democrat'
+                        : 'neutral'
+                  )}>
                     {politician.party}
                   </span>
                 )}
                 {politician.chamber && (
-                  <span className="px-3 py-1 rounded-full text-sm font-medium bg-gray-600 text-white">
+                  <span className={badgeStyles('neutral')}>
                     {politician.chamber}
                   </span>
                 )}
@@ -157,7 +161,7 @@ export default async function SECPoliticianDetailPage({
                     <td className="py-3 px-2">
                       <Link 
                         href={`/issuers/${trade.issuer_id}`}
-                        className="text-blue-400 hover:text-blue-300 underline"
+                        className={textLinkStyles('muted')}
                       >
                         {trade.Issuer.name}
                       </Link>
@@ -172,11 +176,14 @@ export default async function SECPoliticianDetailPage({
                       {Number(trade.size_max || 0).toLocaleString()}
                     </td>
                     <td className="py-3 px-2 text-center">
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                        trade.type === 'Buy' ? 'bg-green-500 text-white' :
-                        trade.type === 'Sell' ? 'bg-red-500 text-white' :
-                        'bg-gray-500 text-white'
-                      }`}>
+                      <span className={badgeStyles(
+                        trade.type === 'Buy'
+                          ? 'success'
+                          : trade.type === 'Sell'
+                            ? 'danger'
+                            : 'neutral',
+                        'sm'
+                      )}>
                         {trade.type}
                       </span>
                     </td>

@@ -7,6 +7,11 @@ import HomePoliticianImage from '@/components/HomePoliticianImage';
 import { StatsCardSkeleton } from '@/components/SkeletonLoader';
 import LastUpdated, { DataFreshnessIndicator } from '@/components/LastUpdated';
 import PoliticianCard from '@/components/PoliticianCard';
+import { actionStyles } from '@/components/actionStyles';
+import { badgeStyles } from '@/components/badgeStyles';
+import { textLinkStyles } from '@/components/linkStyles';
+import { panelSurfaceStyles, statSurfaceStyles } from '@/components/surfaceStyles';
+import { bodySubtextStyles, mutedLabelStyles, sectionTitleStyles } from '@/components/typographyStyles';
 export const dynamic = 'force-dynamic';
 
 export default async function Home({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
@@ -154,7 +159,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
             <span className="zh-Hant">最新企業買賣 即時知道　$10/月 快人一步</span>
             <span className="zh-Hans hidden">最新企业买卖 即时知道　$10/月 快人一步</span>
           </p>
-          <Link href="/upgrade?reason=paid_required" className="inline-block bg-white text-purple-600 border border-white font-semibold px-5 py-2 rounded shadow hover:bg-purple-100 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none transition-colors duration-200" aria-label="Upgrade">
+          <Link href="/upgrade?reason=paid_required" className={actionStyles('secondary')} aria-label="Upgrade">
             <span className="zh-Hant">立即升級 →</span>
             <span className="zh-Hans hidden">立即升级 →</span>
           </Link>
@@ -205,7 +210,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
       {/* stats */}
       <section className="space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-white">
+          <h2 className={sectionTitleStyles()}>
             <span className="zh-Hant">數據概覽</span>
             <span className="zh-Hans hidden">数据概览</span>
           </h2>
@@ -216,7 +221,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <LoadingWrapper fallback={<StatsCardSkeleton />}>
-          <div className="border border-gray-600 bg-gray-800 p-2 sm:p-4 rounded shadow-md">
+          <div className={statSurfaceStyles()}>
             <div className="text-xs sm:text-sm text-white">
               <span className="zh-Hant">總交易</span>
               <span className="zh-Hans hidden">总交易</span>
@@ -225,7 +230,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
           </div>
         </LoadingWrapper>
         <LoadingWrapper fallback={<StatsCardSkeleton />}>
-          <div className="border border-gray-600 bg-gray-800 p-2 sm:p-4 rounded shadow-md">
+          <div className={statSurfaceStyles()}>
             <div className="text-xs sm:text-sm text-white">
               <span className="zh-Hant">政治家</span>
               <span className="zh-Hans hidden">政治家</span>
@@ -234,7 +239,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
           </div>
         </LoadingWrapper>
         <LoadingWrapper fallback={<StatsCardSkeleton />}>
-          <div className="border border-gray-600 bg-gray-800 p-2 sm:p-4 rounded shadow-md">
+          <div className={statSurfaceStyles()}>
             <div className="text-xs sm:text-sm text-white">
               <span className="zh-Hant">發行商</span>
               <span className="zh-Hans hidden">发行商</span>
@@ -247,19 +252,19 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
       {/* Latest Trades and Popular Politicians Cards */}
       <section className="space-y-8">
         {/* Latest Trades (5 cards) */}
-        <div className="bg-gray-800 border border-gray-600 rounded-xl shadow-md p-6">
+        <div className={`${panelSurfaceStyles()} rounded-xl shadow-md`}>
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h2 className="text-2xl font-bold text-white mb-1">
+              <h2 className={`${sectionTitleStyles()} text-2xl mb-1`}>
                 <span className="zh-Hant">🔥 最新交易</span>
                 <span className="zh-Hans hidden">🔥 最新交易</span>
               </h2>
-              <p className="text-sm text-gray-400">
+              <p className={`text-sm ${mutedLabelStyles()}`}>
                 <span className="zh-Hant">國會議員最新股票交易動態</span>
                 <span className="zh-Hans hidden">国会议员最新股票交易动态</span>
               </p>
             </div>
-            <Link href="/trades" className="text-blue-400 text-sm hover:text-blue-300 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none rounded bg-gray-700 px-3 py-2 rounded-lg hover:bg-gray-600 transition-colors">
+            <Link href="/trades" className={actionStyles('ghost')}>
               <span className="zh-Hant">查看所有 →</span>
               <span className="zh-Hans hidden">查看所有 →</span>
             </Link>
@@ -269,24 +274,25 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
               <div key={t.id} className="bg-gray-700 rounded-lg p-4 hover:shadow-lg transition-all duration-300 hover:bg-gray-600">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex flex-col">
-                    <span className="text-sm text-gray-300">
+                    <span className={`text-sm ${bodySubtextStyles()}`}>
                       <span className="zh-Hant">交易日期: {new Date(t.traded_at).toLocaleDateString('zh-TW')}</span>
                       <span className="zh-Hans hidden">交易日期: {new Date(t.traded_at).toLocaleDateString('zh-CN')}</span>
                     </span>
                     {t.published_at && (
-                      <span className="text-xs text-gray-400">
+                      <span className={`text-xs ${mutedLabelStyles()}`}>
                         <span className="zh-Hant">發布日期: {new Date(t.published_at).toLocaleDateString('zh-TW')}</span>
                         <span className="zh-Hans hidden">发布日期: {new Date(t.published_at).toLocaleDateString('zh-CN')}</span>
                       </span>
                     )}
                   </div>
-                  <span className={`text-xs px-2 py-1 rounded-full font-medium ${
-                    t.type.toLowerCase() === 'buy' 
-                      ? 'bg-green-600 text-white' 
-                      : t.type.toLowerCase() === 'sell' 
-                      ? 'bg-red-600 text-white' 
-                      : 'bg-blue-600 text-white'
-                  }`}>
+                  <span className={badgeStyles(
+                    t.type.toLowerCase() === 'buy'
+                      ? 'success'
+                      : t.type.toLowerCase() === 'sell'
+                        ? 'danger'
+                        : 'info',
+                    'sm'
+                  )}>
                     {t.type.toUpperCase()}
                   </span>
                 </div>
@@ -297,22 +303,22 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
                   </div>
                   <div className="flex-1">
                     <Link href={`/politicians/${t.Politician.id}`} className="text-white font-semibold hover:text-blue-300 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none rounded">{t.Politician.name}</Link>
-                    <div className="text-xs text-gray-300">{t.Politician.party} • {t.Politician.state}</div>
+                    <div className={`text-xs ${bodySubtextStyles()}`}>{t.Politician.party} • {t.Politician.state}</div>
                   </div>
                 </div>
 
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs text-gray-400">
+                    <span className={`text-xs ${mutedLabelStyles()}`}>
                       <span className="zh-Hant">發行商</span>
                       <span className="zh-Hans hidden">发行商</span>
                     </span>
-                    <Link href={`/issuers/${t.Issuer.id}`} className="text-white font-medium hover:text-blue-300 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none rounded text-sm">{t.Issuer.name}</Link>
+                    <Link href={`/issuers/${t.Issuer.id}`} className={`${textLinkStyles()} text-sm`}>{t.Issuer.name}</Link>
                   </div>
                   
                   {t.size_min && t.size_max && (
                     <div className="flex items-center justify-between">
-                      <span className="text-xs text-gray-400">
+                      <span className={`text-xs ${mutedLabelStyles()}`}>
                         <span className="zh-Hant">交易規模</span>
                         <span className="zh-Hans hidden">交易规模</span>
                       </span>
@@ -324,7 +330,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
                   
                   {t.price && (
                     <div className="flex items-center justify-between">
-                      <span className="text-xs text-gray-400">
+                      <span className={`text-xs ${mutedLabelStyles()}`}>
                         <span className="zh-Hant">價格</span>
                         <span className="zh-Hans hidden">价格</span>
                       </span>
@@ -338,13 +344,13 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
         </div>
 
         {/* Top Politicians (5 cards) */}
-        <div className="bg-gray-800 border border-gray-600 rounded-xl shadow-md p-6">
+        <div className={`${panelSurfaceStyles()} rounded-xl shadow-md`}>
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-bold text-white">
+            <h2 className={sectionTitleStyles()}>
               <span className="zh-Hant">熱門議員</span>
               <span className="zh-Hans hidden">热门议员</span>
             </h2>
-            <Link href="/politicians" className="text-blue-400 text-sm hover:text-blue-300 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none rounded">
+            <Link href="/politicians" className={`${textLinkStyles('muted')} text-sm`}>
               <span className="zh-Hant">查看所有</span>
               <span className="zh-Hans hidden">查看所有</span>
             </Link>

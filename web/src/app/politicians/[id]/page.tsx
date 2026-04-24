@@ -8,6 +8,8 @@ import PoliticianTradesTable from '@/components/PoliticianTradesTable';
 import WatchlistButton from '@/components/WatchlistButton';
 import PortfolioChart from '@/components/PortfolioChart';
 import { getCurrentUserWithTier, isPaid } from '@/lib/membership';
+import { badgeStyles } from '@/components/badgeStyles';
+import { navLinkButtonStyles, textLinkStyles } from '@/components/linkStyles';
 
 export const dynamic = 'force-dynamic';
 
@@ -176,17 +178,19 @@ export default async function PoliticianDetailPage({
                 {politician.name}
               </h1>
               <div className="flex flex-wrap gap-2 mb-3">
-                <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                  politician.party === 'Republican' ? 'bg-red-500 text-white' : 
-                  politician.party === 'Democrat' ? 'bg-blue-500 text-white' : 
-                  'bg-gray-500 text-white'
-                }`}>
+                <span className={badgeStyles(
+                  politician.party === 'Republican'
+                    ? 'republican'
+                    : politician.party === 'Democrat'
+                      ? 'democrat'
+                      : 'neutral'
+                )}>
                   {politician.party}
                 </span>
-                <span className="px-3 py-1 rounded-full text-sm font-medium bg-gray-600 text-white">
+                <span className={badgeStyles('neutral')}>
                   {politician.chamber}
                 </span>
-                <span className="px-3 py-1 rounded-full text-sm font-medium bg-gray-600 text-white">
+                <span className={badgeStyles('neutral')}>
                   {politician.state}
                 </span>
               </div>
@@ -231,7 +235,7 @@ export default async function PoliticianDetailPage({
                 <div key={index} className="flex justify-between items-center">
                   <Link 
                     href={`/issuers/${issuer.issuer_id}`}
-                    className="text-blue-400 hover:text-blue-300 underline text-white hover:text-blue-300"
+                    className={textLinkStyles('muted')}
                   >
                     {issuer.name}
                   </Link>
@@ -357,7 +361,7 @@ export default async function PoliticianDetailPage({
         <div className="mt-6">
           <Link 
             href="/politicians" 
-            className="inline-flex items-center px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors duration-200"
+            className={navLinkButtonStyles()}
           >
             ← 返回政治家列表
           </Link>

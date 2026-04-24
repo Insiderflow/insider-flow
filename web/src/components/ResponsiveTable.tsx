@@ -1,4 +1,16 @@
 "use client";
+import {
+  mobileMetaLabelStyles,
+  mobileTableCardStyles,
+  tableBodyStyles,
+  tableCellStyles,
+  tableHeaderCellStyles,
+  tableHeaderRowStyles,
+  tableHeaderStyles,
+  tableRowStyles,
+  tableSortButtonStyles,
+  tableWrapperStyles,
+} from './tableStyles';
 
 interface TableColumn<RowT extends object> {
   key: string;
@@ -20,16 +32,16 @@ export default function ResponsiveTable<RowT extends object>({ columns, data, cl
   return (
     <>
       {/* Desktop table */}
-      <div className="hidden sm:block overflow-x-auto rounded border border-gray-600 bg-gray-800 shadow-md">
+      <div className={`hidden sm:block ${tableWrapperStyles()}`}>
         <table className="min-w-full text-sm" role="table" aria-label="Data table">
-          <thead className="sticky top-0 bg-gray-700 border-b border-gray-600 z-10">
-            <tr className="text-left">
+          <thead className={tableHeaderStyles()}>
+            <tr className={tableHeaderRowStyles()}>
               {columns.map((col) => (
-                <th key={col.key} className="p-2 text-white" scope="col">
+                <th key={col.key} className={tableHeaderCellStyles()} scope="col">
                   {col.sortable && onSort ? (
                     <button
                       onClick={() => onSort(col.key)}
-                      className="flex items-center gap-1 hover:text-blue-300 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none rounded transition-colors duration-200"
+                      className={tableSortButtonStyles()}
                       aria-label={`Sort by ${col.label}`}
                     >
                       {col.label}
@@ -46,13 +58,13 @@ export default function ResponsiveTable<RowT extends object>({ columns, data, cl
               ))}
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-600">
+          <tbody className={tableBodyStyles()}>
             {data.map((row, index) => (
-              <tr key={index} className="hover:bg-gray-700 focus-within:bg-gray-700">
+              <tr key={index} className={tableRowStyles()}>
                 {columns.map((col) => {
                   const value = (row as unknown as Record<string, unknown>)[col.key] as unknown;
                   return (
-                    <td key={col.key} className="p-2 text-white">
+                    <td key={col.key} className={tableCellStyles()}>
                       {col.render ? col.render(value, row) : (value as React.ReactNode)}
                     </td>
                   );
@@ -66,7 +78,7 @@ export default function ResponsiveTable<RowT extends object>({ columns, data, cl
       {/* Mobile cards */}
       <div className="sm:hidden space-y-3" role="list" aria-label="Data list">
         {data.map((row, index) => (
-          <div key={index} className="border border-gray-600 bg-gray-800 rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow duration-200" role="listitem">
+          <div key={index} className={`${mobileTableCardStyles()} p-4`} role="listitem">
             <div className="space-y-3">
               {columns.map((col) => {
                 const value = (row as unknown as Record<string, unknown>)[col.key] as unknown;
@@ -75,7 +87,7 @@ export default function ResponsiveTable<RowT extends object>({ columns, data, cl
                 return (
                   <div key={col.key} className={`${isImportant ? 'pb-2 border-b border-gray-600' : ''} ${isImportant ? 'mb-3' : 'mb-2'} last:mb-0`}>
                     <div className="flex flex-col sm:flex-row sm:items-center gap-1">
-                      <span className="text-xs text-gray-400 font-medium uppercase tracking-wide" aria-label={`${col.label}:`}>
+                      <span className={mobileMetaLabelStyles()} aria-label={`${col.label}:`}>
                         {col.label}
                       </span>
                       <div className={`text-sm text-white ${isImportant ? 'font-semibold text-base' : ''}`}>

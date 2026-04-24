@@ -1,6 +1,7 @@
 "use client";
 import ResponsiveTable from './ResponsiveTable';
 import Link from 'next/link';
+import { textLinkStyles } from './linkStyles';
 
 interface IssuerTradeRow {
   politician: string;
@@ -26,7 +27,7 @@ export default function IssuerTradesTable({ data }: IssuerTradesTableProps) {
           render: (value, row) => (
             <Link 
               href={`/politicians/${row.politicianId}`}
-              className="text-blue-400 hover:text-blue-300 underline"
+              className={textLinkStyles('muted')}
             >
               {String(value)}
             </Link>

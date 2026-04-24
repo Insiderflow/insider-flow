@@ -1,6 +1,7 @@
 "use client";
 import ResponsiveTable from './ResponsiveTable';
 import Link from 'next/link';
+import { textLinkStyles } from './linkStyles';
 
 interface IssuerRow {
   id: string;
@@ -25,7 +26,7 @@ export default function IssuersTable({ data }: IssuersTableProps) {
           render: (value, row) => (
             <Link 
               href={`/issuers/${row.id}`}
-              className="text-blue-400 hover:text-blue-300 underline"
+              className={textLinkStyles('muted')}
             >
               {String(value)}
             </Link>

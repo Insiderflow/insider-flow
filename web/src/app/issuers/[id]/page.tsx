@@ -10,6 +10,8 @@ import PoliticianTradeCandlestickChart from '@/components/PoliticianTradeCandles
 import WatchlistButton from '@/components/WatchlistButton';
 import { getSessionUser } from '@/lib/auth';
 import { getCurrentUserWithTier, isPaid } from '@/lib/membership';
+import { badgeStyles } from '@/components/badgeStyles';
+import { navLinkButtonStyles, textLinkStyles } from '@/components/linkStyles';
 
 export const dynamic = 'force-dynamic';
 
@@ -165,12 +167,12 @@ export default async function IssuerDetailPage({
               )}
               <div className="flex flex-wrap gap-2 mb-3">
                 {issuer.sector && (
-                  <span className="px-3 py-1 rounded-full text-sm font-medium bg-blue-500 text-white">
+                  <span className={badgeStyles('info')}>
                     {issuer.sector}
                   </span>
                 )}
                 {issuer.country && (
-                  <span className="px-3 py-1 rounded-full text-sm font-medium bg-gray-600 text-white">
+                  <span className={badgeStyles('neutral')}>
                     {issuer.country}
                   </span>
                 )}
@@ -288,7 +290,7 @@ export default async function IssuerDetailPage({
                     <div>
                       <a 
                         href={`/politicians/${politician.id}`}
-                        className="text-blue-400 hover:text-blue-300 underline text-white hover:text-blue-300"
+                        className={textLinkStyles('muted')}
                       >
                         {politician.name}
                       </a>
@@ -399,7 +401,7 @@ export default async function IssuerDetailPage({
         <div className="mt-6">
           <Link 
             href="/issuers" 
-            className="inline-flex items-center px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors duration-200"
+            className={navLinkButtonStyles()}
           >
             ← 返回發行商列表
           </Link>

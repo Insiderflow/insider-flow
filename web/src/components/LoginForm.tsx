@@ -1,6 +1,10 @@
 "use client";
 
 import { useState } from 'react';
+import Link from 'next/link';
+import { actionStyles } from '@/components/actionStyles';
+import { fieldControlStyles } from '@/components/formStyles';
+import { textLinkStyles } from '@/components/linkStyles';
 
 interface LoginFormProps {
   next: string;
@@ -76,7 +80,7 @@ export default function LoginForm({ next }: LoginFormProps) {
         <div className="bg-yellow-100 text-yellow-800 border border-yellow-300 p-3 rounded text-sm flex items-center justify-between">
           <span>您的電郵尚未驗證。請點擊下方按鈕重新發送驗證電郵。</span>
           <button onClick={resendVerification} disabled={resending || !email}
-            className="ml-3 inline-flex items-center px-3 py-1.5 rounded bg-yellow-600 text-white hover:bg-yellow-500 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none disabled:opacity-60">
+            className={`ml-3 ${actionStyles('ghost')}`}>
             {resending ? 'Sending…' : 'Resend' }
           </button>
         </div>
@@ -99,7 +103,7 @@ export default function LoginForm({ next }: LoginFormProps) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="border border-gray-600 p-2 w-full bg-gray-800 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200"
+            className={fieldControlStyles('md')}
             placeholder="you@example.com"
             disabled={isLoading}
           />
@@ -111,7 +115,7 @@ export default function LoginForm({ next }: LoginFormProps) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="border border-gray-600 p-2 w-full bg-gray-800 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200"
+            className={fieldControlStyles('md')}
             placeholder="••••••••"
             disabled={isLoading}
           />
@@ -120,11 +124,11 @@ export default function LoginForm({ next }: LoginFormProps) {
           <button
             type="submit"
             disabled={isLoading}
-            className="bg-white text-purple-600 border border-white px-4 py-2 rounded hover:bg-purple-100 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            className={actionStyles('secondary')}
           >
             {isLoading ? '登入中…' : '登入'}
           </button>
-          <a href="/forgot-password" className="text-blue-300 hover:text-blue-100 underline text-sm focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none rounded transition-colors duration-200">忘記密碼？</a>
+          <Link href="/forgot-password" className={`${textLinkStyles()} text-sm`}>忘記密碼？</Link>
         </div>
       </form>
     </div>

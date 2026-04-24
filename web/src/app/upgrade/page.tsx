@@ -1,6 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+import { actionStyles } from '@/components/actionStyles';
+import { badgeStyles } from '@/components/badgeStyles';
+import { panelSurfaceStyles } from '@/components/surfaceStyles';
+import { bodySubtextStyles, pageTitleStyles, sectionTitleStyles } from '@/components/typographyStyles';
 
 export default function Upgrade() {
   const [loading, setLoading] = useState<string | null>(null);
@@ -79,11 +83,11 @@ export default function Upgrade() {
       <div className="max-w-6xl mx-auto px-4 py-12">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">
+          <h1 className={`${pageTitleStyles()} mb-4`}>
             <span className="zh-Hant">升級為付費會員</span>
             <span className="zh-Hans hidden">升级为付费会员</span>
           </h1>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+          <p className={`${bodySubtextStyles()} text-xl max-w-2xl mx-auto`}>
             <span className="zh-Hant">解鎖完整內幕交易數據，掌握政治人物和企業高層的股票交易動向</span>
             <span className="zh-Hans hidden">解锁完整内幕交易数据，掌握政治人物和企业高层的股票交易动向</span>
           </p>
@@ -94,7 +98,7 @@ export default function Upgrade() {
           {plans.map((plan) => (
             <div
               key={plan.name}
-              className={`relative bg-gray-800 border-2 rounded-xl p-8 ${
+              className={`relative ${panelSurfaceStyles('lg')} border-2 rounded-xl ${
                 plan.popular 
                   ? 'border-blue-500 shadow-2xl shadow-blue-500/20' 
                   : 'border-gray-600'
@@ -102,7 +106,7 @@ export default function Upgrade() {
             >
               {plan.popular && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-medium">
+                  <span className={badgeStyles('info')}>
                     <span className="zh-Hant">最受歡迎</span>
                     <span className="zh-Hans hidden">最受欢迎</span>
                   </span>
@@ -158,11 +162,11 @@ export default function Upgrade() {
               <button
                 onClick={() => startCheckout(plan.priceId, plan.nameEn)}
                 disabled={loading === plan.nameEn}
-                className={`w-full py-4 px-6 rounded-lg font-semibold text-lg transition-all duration-200 ${
+                className={`w-full py-4 px-6 rounded-lg font-semibold text-lg transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed ${
                   plan.popular
                     ? 'bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl'
                     : 'bg-gray-700 hover:bg-gray-600 text-white'
-                } ${loading === plan.nameEn ? 'opacity-50 cursor-not-allowed' : ''}`}
+                }`}
               >
                 {loading === plan.nameEn ? (
                   <span className="flex items-center justify-center">
@@ -186,37 +190,37 @@ export default function Upgrade() {
 
         {/* FAQ Section */}
         <div className="mt-16 max-w-3xl mx-auto">
-          <h2 className="text-2xl font-bold text-center mb-8">
+          <h2 className={`${sectionTitleStyles()} text-center mb-8`}>
             <span className="zh-Hant">常見問題</span>
             <span className="zh-Hans hidden">常见问题</span>
           </h2>
           <div className="space-y-6">
-            <div className="bg-gray-800 rounded-lg p-6">
+            <div className={panelSurfaceStyles()}>
               <h3 className="text-lg font-semibold mb-2">
                 <span className="zh-Hant">如何取消訂閱？</span>
                 <span className="zh-Hans hidden">如何取消订阅？</span>
               </h3>
-              <p className="text-gray-300">
+              <p className={bodySubtextStyles()}>
                 <span className="zh-Hant">您可以在帳戶設定中管理您的訂閱，隨時取消或修改。</span>
                 <span className="zh-Hans hidden">您可以在账户设置中管理您的订阅，随时取消或修改。</span>
               </p>
             </div>
-            <div className="bg-gray-800 rounded-lg p-6">
+            <div className={panelSurfaceStyles()}>
               <h3 className="text-lg font-semibold mb-2">
                 <span className="zh-Hant">付款安全嗎？</span>
                 <span className="zh-Hans hidden">付款安全吗？</span>
               </h3>
-              <p className="text-gray-300">
+              <p className={bodySubtextStyles()}>
                 <span className="zh-Hant">我們使用 Stripe 處理付款，符合最高安全標準。</span>
                 <span className="zh-Hans hidden">我们使用 Stripe 处理付款，符合最高安全标准。</span>
               </p>
             </div>
-            <div className="bg-gray-800 rounded-lg p-6">
+            <div className={panelSurfaceStyles()}>
               <h3 className="text-lg font-semibold mb-2">
                 <span className="zh-Hant">可以退款嗎？</span>
                 <span className="zh-Hans hidden">可以退款吗？</span>
               </h3>
-              <p className="text-gray-300">
+              <p className={bodySubtextStyles()}>
                 <span className="zh-Hant">我們提供 7 天退款保證，如有任何問題請聯繫客服。</span>
                 <span className="zh-Hans hidden">我们提供 7 天退款保证，如有任何问题请联系客服。</span>
               </p>

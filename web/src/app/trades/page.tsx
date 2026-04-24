@@ -7,6 +7,12 @@ import LastUpdated, { DataFreshnessIndicator } from '@/components/LastUpdated';
 import { getCurrentUserWithTier, isPaid } from '@/lib/membership';
 import { redirect } from 'next/navigation';
 import StateNotice from '@/components/StateNotice';
+import { actionStyles } from '@/components/actionStyles';
+import { fieldControlStyles, fieldLabelStyles } from '@/components/formStyles';
+import { statSurfaceStyles } from '@/components/surfaceStyles';
+import { bodySubtextStyles, pageTitleStyles } from '@/components/typographyStyles';
+import { badgeStyles } from '@/components/badgeStyles';
+import { textLinkStyles } from '@/components/linkStyles';
 
 export const dynamic = 'force-dynamic';
 
@@ -99,7 +105,7 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
     <div className="min-h-screen bg-gray-900">
       <main className="p-4">
         <div className="flex justify-between items-center mb-2">
-          <h1 className="text-xl sm:text-2xl font-semibold text-white">
+          <h1 className={pageTitleStyles()}>
             <span className="zh-Hant">股票交易</span>
             <span className="zh-Hans hidden">股票交易</span>
           </h1>
@@ -108,26 +114,26 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
             <LastUpdated timestamp={lastTradeDate} className="text-xs text-gray-400" />
           </div>
         </div>
-        <p className="text-gray-300 mb-4 text-sm sm:text-base">
+        <p className={`${bodySubtextStyles()} mb-4 text-sm sm:text-base`}>
           <span className="zh-Hant">追蹤國會股票交易動態</span>
           <span className="zh-Hans hidden">追踪国会股票交易动态</span>
         </p>
         <section className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
-          <div className="border border-gray-600 bg-gray-800 p-2 sm:p-4 rounded shadow-md">
+          <div className={statSurfaceStyles()}>
             <div className="text-xs text-white">
               <span className="zh-Hant">總交易</span>
               <span className="zh-Hans hidden">总交易</span>
             </div>
             <div className="text-lg sm:text-xl font-semibold text-white">{tradeCount}</div>
           </div>
-          <div className="border border-gray-600 bg-gray-800 p-2 sm:p-4 rounded shadow-md">
+          <div className={statSurfaceStyles()}>
             <div className="text-xs text-white">
               <span className="zh-Hant">政治家</span>
               <span className="zh-Hans hidden">政治家</span>
             </div>
             <div className="text-lg sm:text-xl font-semibold text-white">{polCount}</div>
           </div>
-          <div className="border border-gray-600 bg-gray-800 p-2 sm:p-4 rounded shadow-md">
+          <div className={statSurfaceStyles()}>
             <div className="text-xs text-white">
               <span className="zh-Hant">發行商</span>
               <span className="zh-Hans hidden">发行商</span>
@@ -141,11 +147,11 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
             <span className="zh-Hans hidden">第 {page} 页</span>
           </div>
           <div className="space-x-2">
-            <a href={prevHref} aria-disabled={!hasPrev} className={`inline-block px-3 py-1 rounded border transition-colors duration-200 ${hasPrev ? 'bg-white text-[#007BFF] border-[#007BFF] hover:bg-[#007BFF] hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none' : 'bg-gray-700 text-gray-400 border-gray-600 cursor-not-allowed'}`} aria-label="Previous page">
+            <a href={prevHref} aria-disabled={!hasPrev} className={`${actionStyles('secondary')} ${!hasPrev ? 'bg-gray-700 text-gray-400 border-gray-600 cursor-not-allowed hover:bg-gray-700 hover:text-gray-400' : ''}`} aria-label="Previous page">
               <span className="zh-Hant">上一頁</span>
               <span className="zh-Hans hidden">上一页</span>
             </a>
-            <a href={nextHref} aria-disabled={!hasNext} className={`inline-block px-3 py-1 rounded border transition-colors duration-200 ${hasNext ? 'bg-white text-[#007BFF] border-[#007BFF] hover:bg-[#007BFF] hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none' : 'bg-gray-700 text-gray-400 border-gray-600 cursor-not-allowed'}`} aria-label="Next page">
+            <a href={nextHref} aria-disabled={!hasNext} className={`${actionStyles('secondary')} ${!hasNext ? 'bg-gray-700 text-gray-400 border-gray-600 cursor-not-allowed hover:bg-gray-700 hover:text-gray-400' : ''}`} aria-label="Next page">
               <span className="zh-Hant">下一頁</span>
               <span className="zh-Hans hidden">下一页</span>
             </a>
@@ -155,48 +161,48 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
           <ClearFiltersButton formId="trades-filters" />
         </div>
         <form id="trades-filters" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-3" method="get">
-          <label className="text-xs sm:text-sm flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 text-white">
+          <label className={fieldLabelStyles()}>
             <span className="w-full sm:w-28 text-gray-400">
               <span className="zh-Hant">按政治家</span>
               <span className="zh-Hans hidden">按政治家</span>
             </span>
             <AutocompleteInput name="qp" initialValue={qPolitician} placeholder="Name" searchPath="/api/suggest/politicians" ariaLabel="Politician name filter" />
           </label>
-          <label className="text-xs sm:text-sm flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 text-white">
+          <label className={fieldLabelStyles()}>
             <span className="w-full sm:w-24 text-gray-400">
               <span className="zh-Hant">按發行商</span>
               <span className="zh-Hans hidden">按发行商</span>
             </span>
             <AutocompleteInput name="qi" initialValue={qIssuer} placeholder="公司/代碼" searchPath="/api/suggest/issuers" ariaLabel="Issuer name filter" />
           </label>
-          <label className="text-xs sm:text-sm flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 text-white">
+          <label className={fieldLabelStyles()}>
             <span className="w-full sm:w-auto text-gray-400">
               <span className="zh-Hant">排序</span>
               <span className="zh-Hans hidden">排序</span>
             </span>
-            <select name="sort" defaultValue={sortKey} className="border border-gray-600 p-1 bg-gray-800 text-white text-xs sm:text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200" aria-label="Sort by">
+            <select name="sort" defaultValue={sortKey} className={fieldControlStyles()} aria-label="Sort by">
               <option value="traded_at">交易日期</option>
               <option value="published_at">發布日期</option>
               <option value="price">價格</option>
               <option value="size_max">金額(上限)</option>
             </select>
           </label>
-          <label className="text-xs sm:text-sm flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 text-white">
+          <label className={fieldLabelStyles()}>
             <span className="w-full sm:w-auto text-gray-400">
               <span className="zh-Hant">方向</span>
               <span className="zh-Hans hidden">方向</span>
             </span>
-            <select name="order" defaultValue={order} className="border border-gray-600 p-1 bg-gray-800 text-white text-xs sm:text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200" aria-label="Sort order">
+            <select name="order" defaultValue={order} className={fieldControlStyles()} aria-label="Sort order">
               <option value="desc">新到舊</option>
               <option value="asc">舊到新</option>
             </select>
           </label>
-          <label className="text-xs sm:text-sm flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 text-white">
+          <label className={fieldLabelStyles()}>
             <span className="w-full sm:w-20 text-gray-400">
               <span className="zh-Hant">類型</span>
               <span className="zh-Hans hidden">类型</span>
             </span>
-            <select name="type" defaultValue={typeFilter} className="border border-gray-600 p-1 bg-gray-800 text-white text-xs sm:text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200" aria-label="Trade type filter">
+            <select name="type" defaultValue={typeFilter} className={fieldControlStyles()} aria-label="Trade type filter">
               <option value="">全部</option>
             <option value="buy">
               <span className="zh-Hant">買入</span>
@@ -208,12 +214,12 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
             </option>
           </select>
         </label>
-          <label className="text-xs sm:text-sm flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 text-white">
+          <label className={fieldLabelStyles()}>
             <span className="w-full sm:w-20 text-gray-400">
               <span className="zh-Hant">持有人</span>
               <span className="zh-Hans hidden">持有人</span>
             </span>
-            <select name="owner" defaultValue={ownerFilter} className="border border-gray-600 p-1 bg-gray-800 text-white text-xs sm:text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200" aria-label="Owner filter">
+            <select name="owner" defaultValue={ownerFilter} className={fieldControlStyles()} aria-label="Owner filter">
               <option value="">
                 <span className="zh-Hant">全部</span>
                 <span className="zh-Hans hidden">全部</span>
@@ -236,27 +242,27 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
               </option>
             </select>
           </label>
-          <label className="text-xs sm:text-sm flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 text-white">
+          <label className={fieldLabelStyles()}>
             <span className="w-full sm:w-28 text-gray-400">
               <span className="zh-Hant">金額範圍</span>
               <span className="zh-Hans hidden">金额范围</span>
             </span>
             <div className="flex gap-1">
-              <input name="smin" type="number" inputMode="numeric" placeholder="最低" defaultValue={size_min ?? ''} className="border border-gray-600 p-1 w-20 sm:w-24 bg-gray-800 text-white placeholder-gray-400 text-xs sm:text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200" aria-label="Minimum size" />
-              <input name="smax" type="number" inputMode="numeric" placeholder="最高" defaultValue={size_max ?? ''} className="border border-gray-600 p-1 w-20 sm:w-24 bg-gray-800 text-white placeholder-gray-400 text-xs sm:text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200" aria-label="Maximum size" />
+              <input name="smin" type="number" inputMode="numeric" placeholder="最低" defaultValue={size_min ?? ''} className={`${fieldControlStyles()} w-20 sm:w-24`} aria-label="Minimum size" />
+              <input name="smax" type="number" inputMode="numeric" placeholder="最高" defaultValue={size_max ?? ''} className={`${fieldControlStyles()} w-20 sm:w-24`} aria-label="Maximum size" />
             </div>
           </label>
-          <label className="text-xs sm:text-sm flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 text-white">
+          <label className={fieldLabelStyles()}>
             <span className="w-full sm:w-24 text-gray-400">
               <span className="zh-Hant">價格</span>
               <span className="zh-Hans hidden">价格</span>
             </span>
             <div className="flex gap-1">
-              <input name="pmin" type="number" step="0.01" placeholder="最低" defaultValue={priceMin ?? ''} className="border border-gray-600 p-1 w-20 sm:w-24 bg-gray-800 text-white placeholder-gray-400 text-xs sm:text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200" aria-label="Minimum price" />
-              <input name="pmax" type="number" step="0.01" placeholder="最高" defaultValue={priceMax ?? ''} className="border border-gray-600 p-1 w-20 sm:w-24 bg-gray-800 text-white placeholder-gray-400 text-xs sm:text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200" aria-label="Maximum price" />
+              <input name="pmin" type="number" step="0.01" placeholder="最低" defaultValue={priceMin ?? ''} className={`${fieldControlStyles()} w-20 sm:w-24`} aria-label="Minimum price" />
+              <input name="pmax" type="number" step="0.01" placeholder="最高" defaultValue={priceMax ?? ''} className={`${fieldControlStyles()} w-20 sm:w-24`} aria-label="Maximum price" />
             </div>
           </label>
-          <button className="bg-white text-purple-600 border border-white px-3 sm:px-4 py-2 rounded hover:bg-purple-100 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none text-xs sm:text-sm col-span-1 sm:col-span-2 lg:col-span-1 transition-colors duration-200" type="submit" aria-label="Apply filters">
+          <button className={`${actionStyles('secondary')} col-span-1 sm:col-span-2 lg:col-span-1`} type="submit" aria-label="Apply filters">
             <span className="zh-Hant">套用</span>
             <span className="zh-Hans hidden">应用</span>
           </button>
@@ -271,13 +277,13 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
           <SortableTradesTable
             trades={trades.map((t) => ({
               id: t.id,
-              politician: <Link className="text-blue-300 hover:text-blue-100 underline" href={`/politicians/${t.politician_id}`}>{t.Politician.name}</Link>,
-              issuer: <Link className="text-blue-300 hover:text-blue-100 underline" href={`/issuers/${t.issuer_id}`}>{t.Issuer.name}</Link>,
+              politician: <Link className={textLinkStyles()} href={`/politicians/${t.politician_id}`}>{t.Politician.name}</Link>,
+              issuer: <Link className={textLinkStyles()} href={`/issuers/${t.issuer_id}`}>{t.Issuer.name}</Link>,
               publishedAt: t.published_at ? new Date(t.published_at).toISOString().slice(0, 10) : '',
               tradedAt: new Date(t.traded_at).toISOString().slice(0, 10),
               filedAfterDays: t.filed_after_days ?? '',
               owner: t.owner ?? '',
-              type: <span className={`px-2 py-0.5 rounded text-xs ${t.type?.toUpperCase() === 'BUY' ? 'bg-green-600 text-white' : 'bg-red-600 text-white'}`}>{t.type}</span>,
+              type: <span className={badgeStyles(t.type?.toUpperCase() === 'BUY' ? 'success' : 'danger', 'xs')}>{t.type}</span>,
               size: t.size_min && t.size_max ? `${t.size_min.toString()}–${t.size_max.toString()}` : t.size_min ? t.size_min.toString() : '',
               price: t.price ? new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 }).format(Number(t.price)) : '',
             }))}

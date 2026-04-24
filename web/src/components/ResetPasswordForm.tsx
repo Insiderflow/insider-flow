@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { actionStyles } from '@/components/actionStyles';
+import { fieldControlStyles } from '@/components/formStyles';
 
 interface Props { token: string }
 
@@ -40,13 +42,13 @@ export default function ResetPasswordForm({ token }: Props) {
       {error && <div className="bg-white text-red-600 p-2 border border-red-200 rounded text-sm">{error}</div>}
       <label className="block">
         <span className="text-sm text-gray-400">New Password</span>
-        <input type="password" value={password} onChange={e=>setPassword(e.target.value)} required className="border border-gray-600 p-2 w-full bg-gray-800 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200" placeholder="At least 8 characters"/>
+        <input type="password" value={password} onChange={e=>setPassword(e.target.value)} required className={fieldControlStyles('md')} placeholder="At least 8 characters"/>
       </label>
       <label className="block">
         <span className="text-sm text-gray-400">Confirm Password</span>
-        <input type="password" value={confirm} onChange={e=>setConfirm(e.target.value)} required className="border border-gray-600 p-2 w-full bg-gray-800 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200" placeholder="Retype password"/>
+        <input type="password" value={confirm} onChange={e=>setConfirm(e.target.value)} required className={fieldControlStyles('md')} placeholder="Retype password"/>
       </label>
-      <button disabled={loading} className="bg-white text-purple-600 border border-white px-4 py-2 rounded hover:bg-purple-100 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none transition-colors duration-200 disabled:opacity-50">{loading ? 'Saving...' : 'Reset Password'}</button>
+      <button disabled={loading} className={actionStyles('secondary')}>{loading ? 'Saving...' : 'Reset Password'}</button>
     </form>
   );
 }

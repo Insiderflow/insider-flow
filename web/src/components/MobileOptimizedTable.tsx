@@ -1,6 +1,19 @@
 "use client";
 
 import { useState } from 'react';
+import {
+  mobileMetaLabelStyles,
+  mobileTableCardHeaderStyles,
+  mobileTableCardStyles,
+  tableBodyStyles,
+  tableCellStyles,
+  tableHeaderCellStyles,
+  tableHeaderRowStyles,
+  tableHeaderStyles,
+  tableRowStyles,
+  tableSortButtonStyles,
+  tableWrapperStyles,
+} from './tableStyles';
 
 interface TableColumn<RowT extends object> {
   key: string;
@@ -58,16 +71,16 @@ export default function MobileOptimizedTable<RowT extends object>({
   return (
     <>
       {/* Desktop table */}
-      <div className="hidden lg:block overflow-x-auto rounded border border-gray-600 bg-gray-800 shadow-md">
+      <div className={`hidden lg:block ${tableWrapperStyles()}`}>
         <table className="min-w-full text-sm" role="table" aria-label="Data table">
-          <thead className="sticky top-0 bg-gray-700 border-b border-gray-600 z-10">
-            <tr className="text-left">
+          <thead className={tableHeaderStyles()}>
+            <tr className={tableHeaderRowStyles()}>
               {columns.map((col) => (
-                <th key={col.key} className="p-3 text-white" scope="col">
+                <th key={col.key} className={tableHeaderCellStyles('md')} scope="col">
                   {col.sortable && onSort ? (
                     <button
                       onClick={() => onSort(col.key)}
-                      className="flex items-center gap-1 hover:text-blue-300 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none rounded transition-colors duration-200"
+                      className={tableSortButtonStyles()}
                       aria-label={`Sort by ${col.label}`}
                     >
                       {col.label}
@@ -84,13 +97,13 @@ export default function MobileOptimizedTable<RowT extends object>({
               ))}
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-600">
+          <tbody className={tableBodyStyles()}>
             {data.map((row, index) => (
-              <tr key={index} className="hover:bg-gray-700 focus-within:bg-gray-700">
+              <tr key={index} className={tableRowStyles()}>
                 {columns.map((col) => {
                   const value = (row as unknown as Record<string, unknown>)[col.key] as unknown;
                   return (
-                    <td key={col.key} className="p-3 text-white">
+                    <td key={col.key} className={tableCellStyles('md')}>
                       {col.render ? col.render(value, row) : (value as React.ReactNode)}
                     </td>
                   );
@@ -102,16 +115,16 @@ export default function MobileOptimizedTable<RowT extends object>({
       </div>
 
       {/* Tablet view (md) */}
-      <div className="hidden md:block lg:hidden overflow-x-auto rounded border border-gray-600 bg-gray-800 shadow-md">
+      <div className={`hidden md:block lg:hidden ${tableWrapperStyles()}`}>
         <table className="min-w-full text-sm" role="table" aria-label="Data table">
-          <thead className="sticky top-0 bg-gray-700 border-b border-gray-600 z-10">
-            <tr className="text-left">
+          <thead className={tableHeaderStyles()}>
+            <tr className={tableHeaderRowStyles()}>
               {getHighPriorityColumns().map((col) => (
-                <th key={col.key} className="p-3 text-white" scope="col">
+                <th key={col.key} className={tableHeaderCellStyles('md')} scope="col">
                   {col.sortable && onSort ? (
                     <button
                       onClick={() => onSort(col.key)}
-                      className="flex items-center gap-1 hover:text-blue-300 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none rounded transition-colors duration-200"
+                      className={tableSortButtonStyles()}
                       aria-label={`Sort by ${col.label}`}
                     >
                       {col.label}
@@ -128,13 +141,13 @@ export default function MobileOptimizedTable<RowT extends object>({
               ))}
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-600">
+          <tbody className={tableBodyStyles()}>
             {data.map((row, index) => (
-              <tr key={index} className="hover:bg-gray-700 focus-within:bg-gray-700">
+              <tr key={index} className={tableRowStyles()}>
                 {getHighPriorityColumns().map((col) => {
                   const value = (row as unknown as Record<string, unknown>)[col.key] as unknown;
                   return (
-                    <td key={col.key} className="p-3 text-white">
+                    <td key={col.key} className={tableCellStyles('md')}>
                       {col.render ? col.render(value, row) : (value as React.ReactNode)}
                     </td>
                   );
@@ -154,10 +167,10 @@ export default function MobileOptimizedTable<RowT extends object>({
           const lowPriorityCols = getLowPriorityColumns();
           
           return (
-            <div key={index} className="border border-gray-600 bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all duration-200" role="listitem">
+            <div key={index} className={mobileTableCardStyles()} role="listitem">
               {/* Card Header */}
               <div 
-                className="p-4 cursor-pointer hover:bg-gray-700 transition-colors duration-200"
+                className={mobileTableCardHeaderStyles()}
                 onClick={() => toggleCard(index)}
               >
                 <div className="flex items-center justify-between">
@@ -186,7 +199,7 @@ export default function MobileOptimizedTable<RowT extends object>({
                       const value = (row as unknown as Record<string, unknown>)[col.key] as unknown;
                       return (
                         <div key={col.key} className="text-right">
-                          <div className="text-xs text-gray-400">{col.label}</div>
+                          <div className={mobileMetaLabelStyles()}>{col.label}</div>
                           <div className="text-sm text-white font-medium">
                             {col.render ? col.render(value, row) : (value as React.ReactNode)}
                           </div>
@@ -216,7 +229,7 @@ export default function MobileOptimizedTable<RowT extends object>({
                       const value = (row as unknown as Record<string, unknown>)[col.key] as unknown;
                       return (
                         <div key={col.key} className="flex justify-between items-center">
-                          <span className="text-xs text-gray-400 font-medium uppercase tracking-wide">
+                          <span className={mobileMetaLabelStyles()}>
                             {col.label}
                           </span>
                           <div className="text-sm text-white text-right">
@@ -231,7 +244,7 @@ export default function MobileOptimizedTable<RowT extends object>({
                       const value = (row as unknown as Record<string, unknown>)[col.key] as unknown;
                       return (
                         <div key={col.key} className="flex justify-between items-center">
-                          <span className="text-xs text-gray-400 font-medium uppercase tracking-wide">
+                          <span className={mobileMetaLabelStyles()}>
                             {col.label}
                           </span>
                           <div className="text-sm text-white text-right">
