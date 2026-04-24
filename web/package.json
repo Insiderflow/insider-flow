@@ -7,7 +7,8 @@
     "build": "rm -rf .next && prisma generate && next build",
     "start": "next start",
     "lint": "eslint",
-    "prisma:generate": "prisma generate"
+    "prisma:generate": "prisma generate",
+    "test": "vitest run"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.7",
@@ -38,6 +39,7 @@
     "eslint-config-next": "15.5.3",
     "prisma": "^6.16.2",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.5"
   }
 }

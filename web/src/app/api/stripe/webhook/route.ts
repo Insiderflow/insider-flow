@@ -1,24 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { prisma } from '@/lib/prisma';
+import { getInvoiceSubscriptionId, getSubscriptionPeriodEnd } from '@/lib/stripeWebhook';
 
 export const dynamic = 'force-dynamic';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '');
-
-function getSubscriptionPeriodEnd(subscription: Stripe.Subscription): Date {
-  const periodEnd = (subscription as Stripe.Subscription & { current_period_end?: number }).current_period_end;
-  if (!periodEnd) {
-    throw new Error(`Missing current_period_end for subscription ${subscription.id}`);
-  }
-  return new Date(periodEnd * 1000);
-}
-
-function getInvoiceSubscriptionId(invoice: Stripe.Invoice): string | null {
-  const invoiceSubscription = (invoice as Stripe.Invoice & { subscription?: string | Stripe.Subscription | null }).subscription;
-  if (!invoiceSubscription) return null;
-  return typeof invoiceSubscription === 'string' ? invoiceSubscription : invoiceSubscription.id;
-}
 
 export async function POST(req: NextRequest) {
   const body = await req.text();
