@@ -17,6 +17,9 @@ jobs:
   scrape:
     runs-on: ubuntu-latest
     timeout-minutes: 45
+    permissions:
+      contents: read
+      issues: write
     defaults:
       run:
         working-directory: web
@@ -98,3 +101,47 @@ jobs:
         curl -X POST "$CI_ALERT_WEBHOOK_URL" \
           -H "Content-Type: application/json" \
           -d "{\"text\":\"Daily scrape failed for ${GITHUB_REPOSITORY} on ${GITHUB_REF_NAME}. Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}\"}"
+
+    - name: Create or update GitHub failure issue
+      if: failure()
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const title = "[CI] Daily scrape failure";
+          const runUrl = `${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`;
+          const body = [
+            "Scheduled daily scrape failed.",
+            "",
+            `- Workflow: ${process.env.GITHUB_WORKFLOW}`,
+            `- Branch: ${process.env.GITHUB_REF_NAME}`,
+            `- Run: ${runUrl}`,
+            `- Commit: ${process.env.GITHUB_SHA}`,
+            "",
+            "_This issue is auto-managed by CI._"
+          ].join("\n");
+
+          const { data: issues } = await github.rest.issues.listForRepo({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            state: "open",
+            labels: "ci-failure,daily-scrape",
+            per_page: 100
+          });
+
+          const existing = issues.find((i) => i.title === title);
+          if (existing) {
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: existing.number,
+              body
+            });
+          } else {
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title,
+              body,
+              labels: ["ci-failure", "daily-scrape"]
+            });
+          }
