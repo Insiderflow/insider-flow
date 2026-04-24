@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+    /* Light mode - clean finance look */
+    --background: 220 20% 97%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 14% 93%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 220 14% 93%;
+    --muted-foreground: 220 9% 46%;
+    --accent: 220 14% 93%;
+    --accent-foreground: 222 47% 11%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 13% 89%;
+    --input: 220 13% 89%;
+    --ring: 217 91% 60%;
+
+    /* Semantic finance colors */
+    --buy: 160 84% 39%;
+    --buy-foreground: 0 0% 100%;
+    --sell: 0 84% 60%;
+    --sell-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --info: 217 91% 60%;
+    --info-foreground: 0 0% 100%;
+    --neutral: 220 9% 46%;
+    --neutral-foreground: 0 0% 100%;
+
+    /* Surface levels */
+    --surface-1: 0 0% 100%;
+    --surface-2: 220 20% 97%;
+    --surface-3: 220 14% 93%;
+
+    --chart-1: 217 91% 60%;
+    --chart-2: 160 84% 39%;
+    --chart-3: 0 84% 60%;
+    --chart-4: 38 92% 50%;
+    --chart-5: 262 83% 58%;
+
+    --radius: 0.75rem;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 222 47% 11%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 14% 93%;
+    --sidebar-accent-foreground: 222 47% 11%;
+    --sidebar-border: 220 13% 89%;
+    --sidebar-ring: 217 91% 60%;
+  }
+
+  .dark {
+    --background: 222 47% 7%;
+    --foreground: 210 40% 96%;
+    --card: 222 41% 11%;
+    --card-foreground: 210 40% 96%;
+    --popover: 222 41% 11%;
+    --popover-foreground: 210 40% 96%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 222 35% 16%;
+    --secondary-foreground: 210 40% 96%;
+    --muted: 222 35% 16%;
+    --muted-foreground: 215 20% 55%;
+    --accent: 222 35% 16%;
+    --accent-foreground: 210 40% 96%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 222 30% 18%;
+    --input: 222 30% 18%;
+    --ring: 217 91% 60%;
+
+    /* Semantic finance colors - dark */
+    --buy: 160 84% 39%;
+    --buy-foreground: 0 0% 100%;
+    --sell: 0 72% 51%;
+    --sell-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --info: 217 91% 60%;
+    --info-foreground: 0 0% 100%;
+    --neutral: 215 20% 55%;
+    --neutral-foreground: 0 0% 100%;
+
+    /* Surface levels - dark */
+    --surface-1: 222 41% 11%;
+    --surface-2: 222 41% 14%;
+    --surface-3: 222 35% 18%;
+
+    --chart-1: 217 91% 60%;
+    --chart-2: 160 84% 39%;
+    --chart-3: 0 72% 51%;
+    --chart-4: 38 92% 50%;
+    --chart-5: 262 83% 58%;
+
+    --sidebar-background: 222 47% 7%;
+    --sidebar-foreground: 210 40% 96%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 222 35% 16%;
+    --sidebar-accent-foreground: 210 40% 96%;
+    --sidebar-border: 222 30% 18%;
+    --sidebar-ring: 217 91% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  /* Tabular numbers for financial data */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer utilities {
+  .text-buy {
+    color: hsl(var(--buy));
+  }
+  .text-sell {
+    color: hsl(var(--sell));
+  }
+  .text-warning-color {
+    color: hsl(var(--warning));
+  }
+  .bg-buy {
+    background-color: hsl(var(--buy));
+  }
+  .bg-sell {
+    background-color: hsl(var(--sell));
+  }
+  .bg-warning-color {
+    background-color: hsl(var(--warning));
+  }
+  .bg-buy\/10 {
+    background-color: hsl(var(--buy) / 0.1);
+  }
+  .bg-sell\/10 {
+    background-color: hsl(var(--sell) / 0.1);
+  }
+  .bg-warning\/10 {
+    background-color: hsl(var(--warning) / 0.1);
+  }
+  .bg-surface-1 {
+    background-color: hsl(var(--surface-1));
+  }
+  .bg-surface-2 {
+    background-color: hsl(var(--surface-2));
+  }
+  .bg-surface-3 {
+    background-color: hsl(var(--surface-3));
+  }
+  .border-buy {
+    border-color: hsl(var(--buy));
+  }
+  .border-sell {
+    border-color: hsl(var(--sell));
+  }
+
+  /* Smooth scroll for mobile */
+  .scroll-smooth {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  /* Hide scrollbar */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
