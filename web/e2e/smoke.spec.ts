@@ -1,0 +1,29 @@
+import { expect, test } from '@playwright/test';
+
+test('auth pages render and navigate', async ({ page }) => {
+  await page.goto('/login');
+  await expect(page.getByRole('heading', { name: '登入' })).toBeVisible();
+  await expect(page.getByLabel('電郵')).toBeVisible();
+  await expect(page.getByLabel('密碼')).toBeVisible();
+
+  await page.getByRole('link', { name: '建立帳戶' }).click();
+  await expect(page).toHaveURL(/\/register/);
+  await expect(page.getByRole('heading', { name: '歡迎加入' })).toBeVisible();
+
+  await page.goto('/forgot-password');
+  await expect(page.getByRole('heading', { name: '忘記密碼' })).toBeVisible();
+
+  await page.goto('/reset-password');
+  await expect(page.getByRole('heading', { name: '重設密碼' })).toBeVisible();
+});
+
+test('public product pages render', async ({ page }) => {
+  await page.goto('/upgrade');
+  await expect(page.getByRole('heading', { name: '升級為付費會員' })).toBeVisible();
+
+  await page.goto('/institutional');
+  await expect(page.getByRole('heading', { name: '機構投資者', exact: true })).toBeVisible();
+
+  await page.goto('/verify-sent');
+  await expect(page.getByText('謝謝 你的注册')).toBeVisible();
+});
