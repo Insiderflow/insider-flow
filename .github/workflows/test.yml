@@ -9,6 +9,11 @@ on:
 jobs:
   web-build:
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: postgresql://ci:ci@localhost:5432/ci
+      NEXTAUTH_SECRET: ci-nextauth-secret
+      SESSION_SECRET: ci-session-secret
+      MOBILE_AUTH_SECRET: ci-mobile-auth-secret
     defaults:
       run:
         working-directory: web
