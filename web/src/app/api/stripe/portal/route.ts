@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
     // Verify customer exists in Stripe and check for active subscriptions
     let hasActiveSubscription = false;
     try {
-      const customer = await stripe.customers.retrieve(user.stripe_customer_id);
+      await stripe.customers.retrieve(user.stripe_customer_id);
       
       // Check if customer has active subscriptions
       if (user.stripe_subscription_id) {
@@ -50,7 +50,7 @@ export async function POST(req: NextRequest) {
           const subscription = await stripe.subscriptions.retrieve(user.stripe_subscription_id);
           hasActiveSubscription = subscription.status === 'active' || subscription.status === 'trialing';
           console.log(`User ${user.id} has ${hasActiveSubscription ? 'active' : 'inactive'} subscription: ${subscription.status}`);
-        } catch (subError) {
+        } catch {
           console.log(`Subscription ${user.stripe_subscription_id} not found, checking all subscriptions for customer`);
         }
       }

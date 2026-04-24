@@ -6,6 +6,20 @@ export const dynamic = 'force-dynamic';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '');
 
+function getSubscriptionPeriodEnd(subscription: Stripe.Subscription): Date {
+  const periodEnd = (subscription as Stripe.Subscription & { current_period_end?: number }).current_period_end;
+  if (!periodEnd) {
+    throw new Error(`Missing current_period_end for subscription ${subscription.id}`);
+  }
+  return new Date(periodEnd * 1000);
+}
+
+function getInvoiceSubscriptionId(invoice: Stripe.Invoice): string | null {
+  const invoiceSubscription = (invoice as Stripe.Invoice & { subscription?: string | Stripe.Subscription | null }).subscription;
+  if (!invoiceSubscription) return null;
+  return typeof invoiceSubscription === 'string' ? invoiceSubscription : invoiceSubscription.id;
+}
+
 export async function POST(req: NextRequest) {
   const body = await req.text();
   const signature = req.headers.get('stripe-signature');
@@ -94,7 +108,7 @@ export async function POST(req: NextRequest) {
             
             // Calculate expiration date from subscription period end
             // Access property with type assertion as Stripe types may not be fully accurate
-            const currentPeriodEnd = new Date((subscription as any).current_period_end * 1000);
+            const currentPeriodEnd = getSubscriptionPeriodEnd(subscription);
 
             await prisma.user.update({
               where: { id: user.id },
@@ -145,7 +159,7 @@ export async function POST(req: NextRequest) {
             : subscription.customer.id;
           
           // Access property with type assertion as Stripe types may not be fully accurate
-          const currentPeriodEnd = new Date((subscription as any).current_period_end * 1000);
+          const currentPeriodEnd = getSubscriptionPeriodEnd(subscription);
 
           const user = await prisma.user.findFirst({
             where: { stripe_customer_id: customerId },
@@ -201,19 +215,15 @@ export async function POST(req: NextRequest) {
         console.log('Processing invoice.payment_succeeded:', invoice.id);
 
         // Access subscription property with type assertion
-        const invoiceSubscription = (invoice as any).subscription;
-        if (invoiceSubscription) {
-          const subscriptionId = typeof invoiceSubscription === 'string' 
-            ? invoiceSubscription 
-            : invoiceSubscription.id;
+        const subscriptionId = getInvoiceSubscriptionId(invoice);
+        if (subscriptionId) {
           
           const subscription = await stripe.subscriptions.retrieve(subscriptionId);
-          // Access properties directly as the Stripe SDK returns the correct object
-          const customerId = typeof (subscription as any).customer === 'string' 
-            ? (subscription as any).customer 
-            : (subscription as any).customer.id;
+          const customerId = typeof subscription.customer === 'string'
+            ? subscription.customer
+            : subscription.customer.id;
           
-          const currentPeriodEnd = new Date((subscription as any).current_period_end * 1000);
+          const currentPeriodEnd = getSubscriptionPeriodEnd(subscription);
 
           const user = await prisma.user.findFirst({
             where: { stripe_customer_id: customerId },

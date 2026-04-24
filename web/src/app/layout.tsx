@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Script from "next/script";
 import { getSessionUser } from '@/lib/auth';
 import LanguageToggle from '@/components/LanguageToggle';
 import LanguageInitializer from '@/components/LanguageInitializer';
@@ -34,17 +35,15 @@ export default async function RootLayout({
     <html lang="zh-Hant" suppressHydrationWarning>
       <head>
         {/* Google tag (gtag.js) */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XNQRFHM8EV"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-XNQRFHM8EV');
-            `,
-          }}
-        />
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-XNQRFHM8EV" />
+        <Script id="google-analytics">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-XNQRFHM8EV');
+          `}
+        </Script>
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <LanguageInitializer />

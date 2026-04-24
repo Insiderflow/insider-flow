@@ -62,7 +62,7 @@ export default function PoliticianTradeCandlestickChart({
       tradesCount: trades?.length || 0,
       issuerName,
     });
-  }, []);
+  }, [issuerName, ticker, trades?.length]);
   const [selectedTrade, setSelectedTrade] = useState<SelectedTrade | null>(null);
   const [tradeMarkers, setTradeMarkers] = useState<TradeMarker[]>([]);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -158,7 +158,7 @@ export default function PoliticianTradeCandlestickChart({
             let errorText = '';
             try {
               errorText = await yahooResponse.text();
-            } catch (e) {
+            } catch {
               errorText = 'Could not read error response';
             }
             console.error('PoliticianTradeCandlestickChart: Yahoo Finance API failed:', {
@@ -230,8 +230,6 @@ export default function PoliticianTradeCandlestickChart({
         setLoading(false);
       }
     };
-
-    fetchPriceHistory();
 
     fetchPriceHistory();
   }, [ticker, trades]);

@@ -12,11 +12,6 @@ import { authOptions } from '@/lib/nextauthOptions';
 const SESSION_DURATION = 30 * 24 * 60 * 60 * 1000; // 30 days
 const ACCESS_TOKEN_TTL_SECONDS = 15 * 60; // 15 minutes
 
-// Only warn in production, don't throw error
-if (!process.env.SESSION_SECRET && process.env.NODE_ENV === 'production') {
-  console.warn('WARNING: SESSION_SECRET not set in production, using fallback');
-}
-
 export async function hashPassword(password: string): Promise<string> {
   return bcrypt.hash(password, 12);
 }
@@ -290,7 +285,15 @@ function extractBearerToken(authHeader: string | null): string | null {
 }
 
 function getAccessTokenSecret() {
-  return process.env.MOBILE_AUTH_SECRET || process.env.SESSION_SECRET || 'fallback-mobile-secret-for-development';
+  const configuredSecret = process.env.MOBILE_AUTH_SECRET || process.env.SESSION_SECRET;
+  if (configuredSecret) return configuredSecret;
+
+  if (process.env.NODE_ENV === 'production') {
+    throw new Error('MOBILE_AUTH_SECRET or SESSION_SECRET must be set for mobile auth tokens');
+  }
+
+  console.warn('MOBILE_AUTH_SECRET and SESSION_SECRET are missing; using development fallback secret');
+  return 'fallback-mobile-secret-for-development';
 }
 
 function base64UrlEncode(input: string) {

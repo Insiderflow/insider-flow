@@ -1,18 +1,77 @@
-name: Test Workflow
+name: CI
 
 on:
-  workflow_dispatch: # Manual trigger only
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
 
 jobs:
-  test:
+  web-build:
     runs-on: ubuntu-latest
-    
+    defaults:
+      run:
+        working-directory: web
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Test
-      run: echo "✅ GitHub Actions is working!"
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Prisma generate
+        run: npm run prisma:generate
+
+      - name: Build web app
+        run: npm run build
+
+  mindful-trade-build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mindful-trade-signal-flow
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: mindful-trade-signal-flow/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Vite app
+        run: npm run build
+
+  repo-guard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install root dependencies
+        run: npm ci
+
+      - name: Check mirror sync
+        run: npm run check:mirror
 
 
 

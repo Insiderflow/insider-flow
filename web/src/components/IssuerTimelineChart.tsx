@@ -146,7 +146,6 @@ export default function IssuerTimelineChart({ trades, issuerName }: IssuerTimeli
     
     const rect = chartRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
     
     // Find closest point
     const closestPoint = chartPoints.reduce((closest, point) => {

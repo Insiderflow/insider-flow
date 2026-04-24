@@ -1,7 +1,11 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import GoogleProvider from "next-auth/providers/google";
 import type { NextAuthOptions } from "next-auth";
+import type { JWT } from "next-auth/jwt";
 import { prisma } from "@/lib/prisma";
+
+type JwtWithId = JWT & { id?: string };
+type SessionUserWithId = { id?: string };
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -23,12 +27,14 @@ export const authOptions: NextAuthOptions = {
       return true;
     },
     async jwt({ token, user }) {
-      if (user) token.id = (user as any).id;
-      return token;
+      const jwtToken = token as JwtWithId;
+      if (user && "id" in user) jwtToken.id = String(user.id);
+      return jwtToken;
     },
     async session({ session, token }) {
       if (token && session.user) {
-        (session.user as any).id = token.id as string;
+        const sessionUser = session.user as SessionUserWithId;
+        sessionUser.id = (token as JwtWithId).id;
       }
       return session;
     },
@@ -36,10 +42,10 @@ export const authOptions: NextAuthOptions = {
   events: process.env.NEXTAUTH_DEBUG === "true"
     ? {
         async signIn(message) {
-          console.log("[nextauth] signIn", { userId: (message.user as any)?.id, provider: message.account?.provider });
+          console.log("[nextauth] signIn", { userId: message.user?.id, provider: message.account?.provider });
         },
         async createUser(message) {
-          console.log("[nextauth] createUser", { userId: (message.user as any)?.id, email: message.user?.email });
+          console.log("[nextauth] createUser", { userId: message.user?.id, email: message.user?.email });
         },
         async linkAccount(message) {
           console.log("[nextauth] linkAccount", { userId: message.user?.id, provider: message.account?.provider });
