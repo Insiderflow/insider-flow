@@ -33,20 +33,22 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
-  events: {
-    async signIn(message) {
-      console.log("[nextauth] signIn", { userId: (message.user as any)?.id, provider: message.account?.provider });
-    },
-    async createUser(message) {
-      console.log("[nextauth] createUser", { userId: (message.user as any)?.id, email: message.user?.email });
-    },
-    async linkAccount(message) {
-      console.log("[nextauth] linkAccount", { userId: message.user?.id, provider: message.account?.provider });
-    },
-    async session(message) {
-      console.log("[nextauth] session", { sessionUser: message.session?.user });
-    },
-  },
+  events: process.env.NEXTAUTH_DEBUG === "true"
+    ? {
+        async signIn(message) {
+          console.log("[nextauth] signIn", { userId: (message.user as any)?.id, provider: message.account?.provider });
+        },
+        async createUser(message) {
+          console.log("[nextauth] createUser", { userId: (message.user as any)?.id, email: message.user?.email });
+        },
+        async linkAccount(message) {
+          console.log("[nextauth] linkAccount", { userId: message.user?.id, provider: message.account?.provider });
+        },
+        async session(message) {
+          console.log("[nextauth] session", { sessionUser: message.session?.user });
+        },
+      }
+    : {},
   secret: process.env.NEXTAUTH_SECRET,
 };
 
