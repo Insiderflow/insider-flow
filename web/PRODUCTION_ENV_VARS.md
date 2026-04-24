@@ -1,6 +1,6 @@
 # Production Environment Variables
 
-Copy these environment variables to your production deployment (Render, Vercel, etc.):
+Copy these environment variables to your **Render** web service (or any host running this Next app with the same shape of secrets):
 
 ```bash
 # Database

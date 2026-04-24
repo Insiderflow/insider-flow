@@ -22,7 +22,7 @@ npm run dev
 | `VITE_API_BASE_URL` | Usually empty; use full API origin for direct CORS calls |
 | `VITE_BACKEND_ORIGIN` | Dev proxy target for `/api` (e.g. `http://localhost:3005`) |
 
-## Production (this stack uses **Render**, not Vercel)
+## Production (Render)
 
 Your **Next API** already runs on **Render** (`web/`, e.g. `insiderflow/insider-flow` → build `cd web && …`) with the public site on **`https://www.insiderflow.asia`**.
 
