@@ -22,8 +22,15 @@ npm run dev
 | `VITE_API_BASE_URL` | Usually empty; use full API origin for direct CORS calls |
 | `VITE_BACKEND_ORIGIN` | Dev proxy target for `/api` (e.g. `http://localhost:3005`) |
 
-## Production
+## Production (this stack uses **Render**, not Vercel)
 
-Build with `npm run build`; deploy the `dist/` folder. **Vercel:** connect the repo with root directory `mindful-trade-signal-flow` (or import this folder); `vercel.json` is included. Set **`VITE_API_BASE_URL`** to your public API origin (e.g. `https://www.insiderflow.asia`) so the browser calls the API cross-origin. The Next server must list that static origin in **`CORS_ALLOWED_ORIGINS`** (already supported in `web` middleware).
+Your **Next API** already runs on **Render** (`web/`, e.g. `insiderflow/insider-flow` → build `cd web && …`) with the public site on **`https://www.insiderflow.asia`**.
 
-**Password reset emails** use Next’s `NEXT_PUBLIC_BASE_URL` (see `web/.env.template`).
+This **Vite** app is separate: build output is **`dist/`**. To host it on **Render** too, create a **Static Site** in the same Render account: connect the same GitHub repo, set **root directory** to `mindful-trade-signal-flow`, **build command** `npm install && npm run build`, **publish directory** `dist`. In that static site’s **Environment**, set:
+
+- **`VITE_API_BASE_URL`** = `https://www.insiderflow.asia` (your Next public URL, no trailing slash) if the static URL is on another hostname; leave empty only if you later put the SPA behind the same origin as the API.
+- **`VITE_AUTH_TRANSPORT`** = `web` or `mobile` as you use locally.
+
+On the **web (Next) Render service**, add the static site’s origin to **`CORS_ALLOWED_ORIGINS`** (comma-separated). That’s already implemented in `web/src/middleware.ts`.
+
+**Password reset emails** are built by Next; see `web/.env.template` / `NEXT_PUBLIC_BASE_URL`.
