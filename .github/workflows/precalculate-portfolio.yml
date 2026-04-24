@@ -46,7 +46,7 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add portfolio_cache.json
-        git diff --staged --quiet || git commit -m "Update portfolio cache [skip ci]"
+        git diff --staged --quiet || git commit -m "Update portfolio cache [skip ci] [skip render]"
         git push
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
