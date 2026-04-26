@@ -52,6 +52,8 @@ describe('GET /api/mobile/auth/me', () => {
         membership_tier: 'pro',
         membership_expires_at: '2026-12-01T00:00:00.000Z',
         subscription_status: 'active',
+        subscription_entitlement_id: null,
+        subscription_last_synced_at: null,
         billing_provider: 'stripe',
         created_date: '2026-01-01T00:00:00.000Z',
       },

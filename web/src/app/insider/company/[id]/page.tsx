@@ -5,7 +5,7 @@ import WatchlistButton from '@/components/WatchlistButton';
 import { Decimal } from '@prisma/client/runtime/library';
 import { backLinkStyles, textLinkStyles } from '@/components/linkStyles';
 import { panelSurfaceStyles } from '@/components/surfaceStyles';
-import { bodySubtextStyles, mutedLabelStyles, pageTitleStyles, sectionTitleStyles } from '@/components/typographyStyles';
+import { bodySubtextStyles, pageTitleStyles, sectionTitleStyles } from '@/components/typographyStyles';
 import { badgeStyles } from '@/components/badgeStyles';
 import { tableBodyStyles, tableHeaderCellStyles, tableHeaderStyles, tableRowStyles, tableWrapperStyles } from '@/components/tableStyles';
 

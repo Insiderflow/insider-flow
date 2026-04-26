@@ -8,6 +8,12 @@
     "start": "next start",
     "lint": "eslint",
     "prisma:generate": "prisma generate",
+    "release:check": "node scripts/release-check.mjs",
+    "release:check:dry": "node scripts/release-check.mjs --dry-run",
+    "release:check:local": "node scripts/release-check.mjs --dry-run --skip-health",
+    "release:check:ci": "node scripts/release-check.mjs --dry-run --skip-health --skip-prisma --skip-frontend-check",
+    "release:check:prod": "node scripts/release-check.mjs",
+    "release:fix-hints": "node scripts/release-check.mjs --dry-run --skip-health --fix-hints",
     "test": "vitest run",
     "test:e2e": "npm run build && playwright test",
     "test:e2e:smoke": "npm run build && playwright test e2e/smoke.spec.ts"

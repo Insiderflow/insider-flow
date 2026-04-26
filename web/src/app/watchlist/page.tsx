@@ -3,7 +3,7 @@ import { getSessionUser } from '@/lib/auth';
 import StateNotice from '@/components/StateNotice';
 import { actionStyles } from '@/components/actionStyles';
 import { panelSurfaceStyles } from '@/components/surfaceStyles';
-import { bodySubtextStyles, mutedLabelStyles, pageTitleStyles, sectionTitleStyles } from '@/components/typographyStyles';
+import { bodySubtextStyles, pageTitleStyles, sectionTitleStyles } from '@/components/typographyStyles';
 import { backLinkStyles, textLinkStyles } from '@/components/linkStyles';
 
 export const dynamic = 'force-dynamic';

@@ -34,3 +34,15 @@ The Next.js source repo is at [vercel/next.js](https://github.com/vercel/next.js
 Deploy this `web` app on **Render** as a **Web Service** (build/install from `web/`, `npm run build`, `npm start` or your account’s command). Set environment variables in the Render dashboard; use **`PRODUCTION_ENV_VARS.md`** as the checklist.
 
 For generic Next.js build/runtime requirements, see [Deploying a Next.js app](https://nextjs.org/docs/app/building-your-application/deploying).
+
+### Background jobs
+
+Subscription reliability depends on two internal scheduler endpoints:
+
+- `POST /api/internal/jobs/subscription-events`
+- `POST /api/internal/jobs/subscription-events/alerts`
+
+This repository includes a scheduler workflow at `.github/workflows/subscription-jobs.yml` (5-minute cadence). Configure GitHub secrets:
+
+- `INTERNAL_JOBS_BASE_URL` (public base URL)
+- `INTERNAL_JOBS_SECRET` (matches backend `INTERNAL_JOBS_SECRET`)

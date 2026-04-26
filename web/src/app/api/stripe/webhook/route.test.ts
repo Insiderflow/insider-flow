@@ -9,6 +9,11 @@ const prismaMock = {
     findUnique: vi.fn(),
     update: vi.fn(),
   },
+  subscriptionEvent: {
+    create: vi.fn(),
+    findUnique: vi.fn(),
+    update: vi.fn(),
+  },
 };
 
 vi.mock('stripe', () => {
@@ -35,6 +40,9 @@ describe('POST /api/stripe/webhook', () => {
     vi.clearAllMocks();
     process.env.STRIPE_WEBHOOK_SECRET = 'whsec_test';
     process.env.STRIPE_SECRET_KEY = 'sk_test';
+    prismaMock.subscriptionEvent.create.mockResolvedValue({ id: 'evt_db_1' });
+    prismaMock.subscriptionEvent.findUnique.mockResolvedValue({ retry_count: 0 });
+    prismaMock.subscriptionEvent.update.mockResolvedValue({});
   });
 
   it('returns 400 when stripe-signature header is missing', async () => {

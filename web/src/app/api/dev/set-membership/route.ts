@@ -24,7 +24,14 @@ export async function POST(req: NextRequest) {
   const expires = tier === 'PAID' && days ? new Date(Date.now() + days * 86400000) : null;
   await prisma.user.update({
     where: { id: user.id },
-    data: { membership_tier: tier === 'PAID' ? 'PAID' : 'FREE', membership_expires_at: expires },
+    data: {
+      membership_tier: tier === 'PAID' ? 'PAID' : 'FREE',
+      membership_expires_at: expires,
+      subscription_status: tier === 'PAID' ? 'active' : 'free',
+      billing_provider: tier === 'PAID' ? 'stripe' : null,
+      subscription_entitlement_id: null,
+      subscription_last_synced_at: new Date(),
+    },
   });
   return NextResponse.json({ ok: true });
 }

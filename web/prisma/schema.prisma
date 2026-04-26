@@ -78,9 +78,14 @@ model User {
   notification_settings    Json?
   membership_tier          MembershipTier  @default(FREE)
   membership_expires_at    DateTime?
+  subscription_status      String?
+  billing_provider         String?
+  subscription_entitlement_id String?
+  subscription_last_synced_at DateTime?
   stripe_customer_id       String?
   stripe_subscription_id   String?
   alerts                   Alert[]
+  subscription_audits      SubscriptionTransitionAudit[]
   LegacySession            LegacySession[]
   UserWatchlist            UserWatchlist[]
   accounts                 Account[]
@@ -237,4 +242,69 @@ model VerificationToken {
 
   @@unique([identifier, token])
   @@map("verification_tokens")
+}
+
+model SubscriptionEvent {
+  id           String   @id @default(cuid())
+  provider     String
+  event_key    String
+  event_type   String
+  status       String   @default("processing")
+  retry_count  Int      @default(0)
+  next_retry_at DateTime?
+  payload      Json?
+  processed_at DateTime?
+  error        String?
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+
+  @@unique([provider, event_key])
+  @@index([provider, status, created_at(sort: Desc)])
+  @@map("subscription_events")
+}
+
+model SubscriptionTransitionAudit {
+  id                       String   @id @default(cuid())
+  user_id                  String
+  source                   String
+  event_key                String?
+  event_type               String?
+  decision_reason          String
+  applied                  Boolean
+  previous_membership_tier String?
+  previous_subscription_status String?
+  previous_billing_provider String?
+  previous_expires_at      DateTime?
+  previous_entitlement_id  String?
+  incoming_provider        String
+  incoming_subscription_status String
+  incoming_expires_at      DateTime?
+  incoming_entitlement_id  String?
+  resulting_membership_tier String?
+  resulting_subscription_status String?
+  resulting_billing_provider String?
+  resulting_expires_at     DateTime?
+  resulting_entitlement_id String?
+  created_at               DateTime @default(now())
+
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@index([user_id, created_at(sort: Desc)])
+  @@index([created_at(sort: Desc)])
+  @@index([source, created_at(sort: Desc)])
+  @@map("subscription_transition_audits")
+}
+
+model OpsAlertNotification {
+  id           String   @id @default(cuid())
+  alert_key    String   @unique
+  severity     String
+  last_sent_at DateTime?
+  send_count   Int      @default(0)
+  last_payload Json?
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+
+  @@index([last_sent_at])
+  @@map("ops_alert_notifications")
 }
