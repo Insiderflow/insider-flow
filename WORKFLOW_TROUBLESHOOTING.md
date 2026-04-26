@@ -1,3 +1,139 @@
+# Subscription Incident Runbook
+
+This runbook covers production subscription pipeline failures for:
+
+- Stripe webhooks
+- RevenueCat webhooks/sync
+- Internal replay scheduler
+- Internal alert scheduler
+
+All commands are non-destructive unless explicitly marked.
+
+## 0) Required credentials
+
+```bash
+export BASE_URL="https://www.insiderflow.asia"
+export ADMIN_TOKEN="replace-with-admin-token"
+export INTERNAL_JOBS_SECRET="replace-with-internal-jobs-secret"
+```
+
+## 1) Health + auth sanity
+
+```bash
+curl -sS -i "$BASE_URL/api/internal/jobs/subscription-events" \
+  -H "authorization: Bearer $INTERNAL_JOBS_SECRET"
+
+curl -sS -i "$BASE_URL/api/internal/jobs/subscription-events/alerts" \
+  -H "authorization: Bearer $INTERNAL_JOBS_SECRET"
+```
+
+Expected:
+
+- `200` = endpoint reachable + auth correct
+- `401` = auth mismatch
+- `404` = wrong service URL or old deploy
+
+## 2) Inspect failed/dead-letter events
+
+```bash
+# Failed only
+curl -sS "$BASE_URL/api/admin/jobs/subscription-events?status=failed&limit=50" \
+  -H "x-admin-token: $ADMIN_TOKEN" | jq
+
+# Dead-letter only
+curl -sS "$BASE_URL/api/admin/jobs/subscription-events?status=dead_lettered&limit=50" \
+  -H "x-admin-token: $ADMIN_TOKEN" | jq
+
+# Aggregate metrics
+curl -sS "$BASE_URL/api/admin/jobs/subscription-events/metrics" \
+  -H "x-admin-token: $ADMIN_TOKEN" | jq
+
+# Ops status + alert history
+curl -sS "$BASE_URL/api/admin/jobs/subscription-events/ops-status?limit=20" \
+  -H "x-admin-token: $ADMIN_TOKEN" | jq
+```
+
+## 3) Trigger safe auto replay (failed only)
+
+```bash
+curl -sS -X POST "$BASE_URL/api/internal/jobs/subscription-events" \
+  -H "authorization: Bearer $INTERNAL_JOBS_SECRET" \
+  -H "content-type: application/json" \
+  -d '{"limit":20}'
+```
+
+Optional provider-scoped replay:
+
+```bash
+curl -sS -X POST "$BASE_URL/api/internal/jobs/subscription-events" \
+  -H "authorization: Bearer $INTERNAL_JOBS_SECRET" \
+  -H "content-type: application/json" \
+  -d '{"provider":"stripe","limit":20}'
+```
+
+## 4) Manual replay from admin API
+
+```bash
+# Manual replay (failed only by default)
+curl -sS -X POST "$BASE_URL/api/admin/jobs/subscription-events" \
+  -H "x-admin-token: $ADMIN_TOKEN" \
+  -H "content-type: application/json" \
+  -d '{"status":"failed","limit":20}'
+
+# Replay dead-lettered explicitly (manual only)
+curl -sS -X POST "$BASE_URL/api/admin/jobs/subscription-events" \
+  -H "x-admin-token: $ADMIN_TOKEN" \
+  -H "content-type: application/json" \
+  -d '{"status":"dead_lettered","limit":20}'
+```
+
+## 5) Alert pipeline validation
+
+```bash
+# Evaluate current threshold-based alerts (no test signal)
+curl -sS "$BASE_URL/api/admin/jobs/subscription-events/alerts" \
+  -H "x-admin-token: $ADMIN_TOKEN" | jq
+
+# Dispatch current threshold-based alerts
+curl -sS -X POST "$BASE_URL/api/admin/jobs/subscription-events/alerts" \
+  -H "x-admin-token: $ADMIN_TOKEN" \
+  -H "content-type: application/json" \
+  -d '{"notify":true}' | jq
+
+# Force one test alert dispatch (bypasses cooldown)
+curl -sS -X POST "$BASE_URL/api/admin/jobs/subscription-events/alerts" \
+  -H "x-admin-token: $ADMIN_TOKEN" \
+  -H "content-type: application/json" \
+  -d '{"test":true,"notify":true}' | jq
+```
+
+## 6) RevenueCat targeted sync
+
+```bash
+curl -sS -X POST "$BASE_URL/api/dev/revenuecat-sync" \
+  -H "x-admin-token: $ADMIN_TOKEN" \
+  -H "content-type: application/json" \
+  -d '{"userId":"<target-user-id>"}' | jq
+```
+
+## 7) Decision matrix
+
+- `404` on internal endpoints: wrong service URL or stale deploy.
+- `401` on internal endpoints: `INTERNAL_JOBS_SECRET` mismatch between caller and backend.
+- growing `due_now_count` + stale `latest_processed_at`: scheduler failing or replay logic blocked.
+- growing dead-letter rate: webhook/provider failures; inspect latest event errors and run targeted replay.
+
+## 8) Post-incident checklist
+
+- Confirm `Subscription Internal Jobs` workflow is green for last 3 runs.
+- Confirm metrics trend returns to baseline:
+  - `due_now_count` decreases
+  - `dead_letter_rate` stabilizes
+  - `latest_processed_at` recent
+- Confirm no auth drift:
+  - GitHub `INTERNAL_JOBS_SECRET`
+  - Render `INTERNAL_JOBS_SECRET`
+  - same exact value
 # GitHub Actions Workflow Troubleshooting
 
 ## Issue: Workflows Not Running

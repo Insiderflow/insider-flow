@@ -18,6 +18,10 @@ on:
         required: false
         default: "true"
 
+concurrency:
+  group: subscription-internal-jobs
+  cancel-in-progress: false
+
 jobs:
   auto-retry:
     runs-on: ubuntu-latest
