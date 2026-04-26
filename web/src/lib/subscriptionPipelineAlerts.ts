@@ -11,7 +11,7 @@ export type SubscriptionEventMetricsSnapshot = {
 
 export type SubscriptionPipelineAlert = {
   key: string;
-  severity: 'warning' | 'critical';
+  severity: 'info' | 'warning' | 'critical';
   metric: string;
   message: string;
   threshold: number;
@@ -86,7 +86,22 @@ export function buildSubscriptionPipelineAlerts(
   return alerts;
 }
 
-export async function dispatchSubscriptionPipelineAlerts(alerts: SubscriptionPipelineAlert[]) {
+export function buildSubscriptionPipelineTestAlert(now = new Date()): SubscriptionPipelineAlert {
+  return {
+    key: 'subscription_test_alert',
+    severity: 'info',
+    metric: 'test',
+    message: `Manual subscription pipeline test alert at ${now.toISOString()}.`,
+    threshold: 1,
+    actual: 1,
+  };
+}
+
+export async function dispatchSubscriptionPipelineAlerts(
+  alerts: SubscriptionPipelineAlert[],
+  options: { force?: boolean } = {},
+) {
+  const forceDispatch = options.force === true;
   const webhookUrl = (process.env.SUBSCRIPTION_ALERT_WEBHOOK_URL || '').trim();
   const cooldownMinutesRaw = Number(process.env.SUBSCRIPTION_ALERT_COOLDOWN_MINUTES || 30);
   const cooldownMinutes = Number.isFinite(cooldownMinutesRaw) ? cooldownMinutesRaw : 30;
@@ -108,7 +123,7 @@ export async function dispatchSubscriptionPipelineAlerts(alerts: SubscriptionPip
   for (const alert of alerts) {
     const previous = existingByKey.get(alert.key);
     const lastSentAt = previous?.last_sent_at ? new Date(previous.last_sent_at).getTime() : 0;
-    if (lastSentAt > 0 && now.getTime() - lastSentAt < cooldownMs) {
+    if (!forceDispatch && lastSentAt > 0 && now.getTime() - lastSentAt < cooldownMs) {
       skippedCooldown.push(alert.key);
       continue;
     }
