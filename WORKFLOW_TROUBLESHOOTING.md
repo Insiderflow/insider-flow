@@ -223,5 +223,33 @@ node scripts/precalculate-portfolio-data.js
 4. Look for any error messages in the Actions tab
 5. Try creating a simple test workflow to verify Actions is enabled
 
+## Local cron fix (macOS "Operation not permitted")
+
+If `openinsider_cron.log` keeps showing:
+
+- `/bin/bash: .../scripts/run_openinsider_only.sh: Operation not permitted`
+
+the issue is typically macOS privacy sandboxing for cron access to `~/Documents`, not script execute bit.
+
+### Quick checks
+
+```bash
+ls -l "/Users/kenyeung/Documents/Insider Flow/insider-flow/scripts/run_openinsider_only.sh"
+```
+
+If executable bit exists, the next fix is required.
+
+### Recommended fix
+
+Use `launchd` (or run scheduler from a non-Documents path), because cron often lacks Files & Folders permissions for Desktop/Documents.
+
+### Temporary workaround
+
+Run manually through interactive shell context:
+
+```bash
+/bin/bash "/Users/kenyeung/Documents/Insider Flow/insider-flow/scripts/run_openinsider_only.sh"
+```
+
 
 

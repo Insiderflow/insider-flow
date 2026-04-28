@@ -9,6 +9,7 @@ const projectRoot = path.resolve(__dirname, '..');
 const frontendRoot = path.resolve(projectRoot, '../../Base44UXUI/mindful-trade-signal-flow');
 const args = new Set(process.argv.slice(2));
 const dryRun = args.has('--dry-run');
+const localRelaxedEnvMode = dryRun && process.env.CI !== 'true';
 const skipHealthFlag = args.has('--skip-health') || process.env.RELEASE_CHECK_SKIP_HEALTH === '1';
 const showFixHints = args.has('--fix-hints');
 const skipPrismaFlag = args.has('--skip-prisma') || process.env.RELEASE_CHECK_SKIP_PRISMA === '1';
@@ -154,11 +155,20 @@ async function run() {
   ];
 
   section('Backend Env Checks');
+  if (localRelaxedEnvMode) {
+    console.log('INFO local dry-run mode: missing required envs are reported as WARN (CI remains strict)');
+  }
   for (const key of requiredEnv) {
     const value = getEnv(key, envSources);
     if (isPlaceholder(value)) {
-      console.log(`FAIL ${key}`);
-      failures.push(`Missing required env: ${key}`);
+      const issue = `Missing required env: ${key}`;
+      if (localRelaxedEnvMode) {
+        console.log(`WARN ${key}`);
+        warnings.push(`${issue} (local dry-run mode)`);
+      } else {
+        console.log(`FAIL ${key}`);
+        failures.push(issue);
+      }
       missingEnvKeys.push(key);
       continue;
     }
