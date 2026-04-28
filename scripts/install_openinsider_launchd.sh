@@ -2,7 +2,8 @@
 
 set -euo pipefail
 
-BASE_DIR="/Users/kenyeung/Documents/Insider Flow/insider-flow"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BASE_DIR="${BASE_DIR:-$(cd "$SCRIPT_DIR/.." && pwd)}"
 JOB_LABEL="com.insiderflow.openinsider"
 LAUNCH_AGENTS_DIR="$HOME/Library/LaunchAgents"
 PLIST_PATH="$LAUNCH_AGENTS_DIR/$JOB_LABEL.plist"

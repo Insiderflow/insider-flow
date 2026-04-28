@@ -2,7 +2,8 @@
 
 set -euo pipefail
 
-BASE_DIR="/Users/kenyeung/Documents/Insider Flow/insider-flow"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BASE_DIR="${BASE_DIR:-$(cd "$SCRIPT_DIR/.." && pwd)}"
 WEB_DIR="$BASE_DIR/web"
 LOG_DIR="$BASE_DIR/scripts/logs"
 LOG_FILE="$LOG_DIR/openinsider_cron.log"

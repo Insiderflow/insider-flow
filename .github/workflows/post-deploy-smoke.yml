@@ -1,0 +1,72 @@
+name: Post Deploy Smoke
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: post-deploy-smoke-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  production-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      BASE_URL: ${{ secrets.RELEASE_CHECK_BASE_URL }}
+      INTERNAL_JOBS_SECRET: ${{ secrets.INTERNAL_JOBS_SECRET }}
+    steps:
+      - name: Validate smoke-test env
+        run: |
+          if [ -z "$BASE_URL" ]; then
+            echo "Missing required secret: RELEASE_CHECK_BASE_URL"
+            exit 1
+          fi
+          if [ -z "$INTERNAL_JOBS_SECRET" ]; then
+            echo "Missing required secret: INTERNAL_JOBS_SECRET"
+            exit 1
+          fi
+
+      - name: Check auth endpoint reachability
+        run: |
+          status=$(curl -sS -o /tmp/auth_me.json -w "%{http_code}" "$BASE_URL/api/auth/me")
+          if [ "$status" != "200" ] && [ "$status" != "401" ]; then
+            echo "Unexpected /api/auth/me status: $status"
+            cat /tmp/auth_me.json
+            exit 1
+          fi
+          echo "PASS /api/auth/me status=$status"
+
+      - name: Check RevenueCat webhook health
+        run: |
+          response=$(curl -sS "$BASE_URL/api/revenuecat/webhook")
+          echo "$response" | grep -q '"ok":true' || {
+            echo "RevenueCat webhook health failed"
+            echo "$response"
+            exit 1
+          }
+          echo "PASS /api/revenuecat/webhook"
+
+      - name: Check internal subscription replay job health
+        run: |
+          response=$(curl -sS "$BASE_URL/api/internal/jobs/subscription-events" \
+            -H "authorization: Bearer $INTERNAL_JOBS_SECRET")
+          echo "$response" | grep -q '"ok":true' || {
+            echo "Internal replay job health failed"
+            echo "$response"
+            exit 1
+          }
+          echo "PASS /api/internal/jobs/subscription-events"
+
+      - name: Check internal subscription alerts job health
+        run: |
+          response=$(curl -sS "$BASE_URL/api/internal/jobs/subscription-events/alerts" \
+            -H "authorization: Bearer $INTERNAL_JOBS_SECRET")
+          echo "$response" | grep -q '"ok":true' || {
+            echo "Internal alerts job health failed"
+            echo "$response"
+            exit 1
+          }
+          echo "PASS /api/internal/jobs/subscription-events/alerts"
