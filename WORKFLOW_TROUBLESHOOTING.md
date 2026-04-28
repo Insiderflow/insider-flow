@@ -134,6 +134,18 @@ curl -sS -X POST "$BASE_URL/api/dev/revenuecat-sync" \
   - GitHub `INTERNAL_JOBS_SECRET`
   - Render `INTERNAL_JOBS_SECRET`
   - same exact value
+
+## 9) Branch protection (required checks)
+
+Enable branch protection on `main` so CI is truly enforced. Use the exact checks below:
+
+- `Release Gate PR / release-gate-local`
+- `Release Gate PR / frontend-release-gate`
+- `CI / web-build`
+- `CI / mindful-trade-build`
+- `CI / repo-guard`
+
+Full setup checklist is in `BRANCH_PROTECTION.md`.
 # GitHub Actions Workflow Troubleshooting
 
 ## Issue: Workflows Not Running

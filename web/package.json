@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "rm -rf .next && prisma generate && next build",
     "start": "next start",
-    "lint": "eslint",
+    "lint": "eslint src e2e",
     "prisma:generate": "prisma generate",
     "release:check": "node scripts/release-check.mjs",
     "release:check:dry": "node scripts/release-check.mjs --dry-run",
