@@ -32,7 +32,9 @@ jobs:
       github.event_name == 'pull_request' && (
       github.event.action == 'synchronize'
       || github.event.action == 'opened'
-      || github.event.action == 'reopened')
+      || github.event.action == 'reopened') &&
+      vars.NEON_PROJECT_ID != '' &&
+      secrets.NEON_API_KEY != ''
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -59,7 +61,13 @@ jobs:
 # password for your database.
 # For example, you can uncomment the lines below to run a database migration command:
       - name: Run Migrations
-        run: npm run db:migrate
+        run: |
+          if [ -f "web/package.json" ]; then
+            cd web
+            npx prisma migrate deploy
+          else
+            echo "web/package.json not found; skipping migrations"
+          fi
         env:
           # to use pooled connection
           DATABASE_URL: "${{ steps.create_neon_branch.outputs.db_url_with_pooler }}"
@@ -89,7 +97,11 @@ jobs:
   delete_neon_branch:
     name: Delete Neon Branch
     needs: setup
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    if: |
+      github.event_name == 'pull_request' &&
+      github.event.action == 'closed' &&
+      vars.NEON_PROJECT_ID != '' &&
+      secrets.NEON_API_KEY != ''
     runs-on: ubuntu-latest
     steps:
       - name: Delete Neon Branch
