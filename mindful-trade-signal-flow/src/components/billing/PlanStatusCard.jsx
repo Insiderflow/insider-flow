@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Crown, AlertTriangle, Clock, XCircle, RefreshCw, ExternalLink } from 'lucide-react';
+import { Crown, AlertTriangle, Clock, XCircle, ExternalLink } from 'lucide-react';
 
 const IS_IOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
 

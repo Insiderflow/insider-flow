@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, X, SlidersHorizontal, ChevronDown } from 'lucide-react';
+import { Search, X, SlidersHorizontal } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 
 const TX_TYPES = [

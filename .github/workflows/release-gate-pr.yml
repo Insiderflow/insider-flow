@@ -8,6 +8,18 @@ on:
 jobs:
   release-gate-local:
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: postgresql://ci:ci@localhost:5432/ci
+      SESSION_SECRET: ci-session-secret
+      NEXTAUTH_SECRET: ci-nextauth-secret
+      NEXTAUTH_URL: https://ci.insiderflow.local
+      INTERNAL_JOBS_SECRET: ci-internal-jobs-secret
+      STRIPE_SECRET_KEY: sk_test_ci_placeholder
+      STRIPE_WEBHOOK_SECRET: whsec_ci_placeholder
+      REVENUECAT_SECRET_API_KEY: rc_ci_placeholder
+      REVENUECAT_WEBHOOK_AUTH: rc_webhook_auth_ci_placeholder
+      REVENUECAT_WEBHOOK_SECRET: rc_webhook_secret_ci_placeholder
+      SUBSCRIPTION_ALERT_WEBHOOK_URL: https://example.com/ci-alert-webhook
     defaults:
       run:
         working-directory: web
@@ -54,22 +66,35 @@ jobs:
 
       - name: Validate required frontend release env vars
         run: |
-          required_vars=(
-            VITE_API_BASE_URL
+          if [ -z "$VITE_API_BASE_URL" ]; then
+            echo "Missing required frontend secret: VITE_API_BASE_URL"
+            exit 1
+          fi
+          optional_revenuecat_vars=(
             VITE_REVENUECAT_API_KEY_IOS
             VITE_REVENUECAT_API_KEY_ANDROID
             VITE_REVENUECAT_OFFERING_ID
             VITE_REVENUECAT_ENTITLEMENT_ID
           )
-          for v in "${required_vars[@]}"; do
+          missing_optional=0
+          for v in "${optional_revenuecat_vars[@]}"; do
             if [ -z "${!v}" ]; then
-              echo "Missing required frontend secret: $v"
-              exit 1
+              echo "WARN: RevenueCat secret not set yet: $v"
+              missing_optional=1
             fi
           done
+          if [ "$missing_optional" -eq 1 ]; then
+            echo "WARN: RevenueCat mobile config is incomplete. Web-only releases are still allowed."
+          fi
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Lint frontend
+        run: npm run lint
+
+      - name: Run frontend unit tests
+        run: npm run test:unit
 
       - name: Build frontend
         run: npm run build

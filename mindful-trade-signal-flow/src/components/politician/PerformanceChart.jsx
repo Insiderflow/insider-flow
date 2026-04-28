@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts';
 import { Skeleton } from '@/components/ui/skeleton';
 import { RefreshCw, AlertCircle, Clock } from 'lucide-react';
-import { format, subMonths, subYears, parseISO } from 'date-fns';
+import { format, subMonths } from 'date-fns';
 
 const RANGES = [
   { label: '1M', months: 1 },

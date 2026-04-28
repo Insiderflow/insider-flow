@@ -1,7 +1,6 @@
 import React from 'react';
 import { ChevronRight, AlertTriangle } from 'lucide-react';
 import TradeBadge from '@/components/insider/TradeBadge';
-import { format } from 'date-fns';
 
 const TYPE_CONFIG = {
   politician: {

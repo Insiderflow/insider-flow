@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { Search as SearchIcon, X, Clock, ChevronRight, TrendingUp, Landmark, ArrowUpRight } from 'lucide-react';
+import { Search as SearchIcon, X, TrendingUp, Landmark, ArrowUpRight } from 'lucide-react';
 import { getAllTradesForSearch } from '@/lib/api';
 
 const LS_KEY = 'insiderflow_recent_searches';

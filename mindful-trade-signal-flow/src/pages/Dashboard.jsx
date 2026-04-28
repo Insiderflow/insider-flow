@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/lib/AuthContext';
-import { getDashboardStats, getPoliticianTrades, getCorporateTrades, getAlerts } from '@/lib/api';
+import { getDashboardStats, getPoliticianTrades, getCorporateTrades } from '@/lib/api';
 import AppHeader from '@/components/layout/AppHeader';
 import SummaryStrip from '@/components/dashboard/SummaryStrip';
 import WatchlistActivityPanel from '@/components/dashboard/WatchlistActivityPanel';
@@ -72,7 +72,7 @@ export default function Dashboard() {
         {/* Watchlist Activity */}
         {!error && (
           <WatchlistActivityPanel
-            alerts={watchlistAlerts}
+            alerts={watchlistTrades}
             isLoading={isLoading}
           />
         )}

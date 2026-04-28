@@ -4,7 +4,7 @@ import {
 } from 'recharts';
 import { Skeleton } from '@/components/ui/skeleton';
 import { AlertCircle, RefreshCw, Info } from 'lucide-react';
-import { subMonths, subYears, format } from 'date-fns';
+import { subMonths, format } from 'date-fns';
 
 const PERIODS = [
   { label: '1M', months: 1 },

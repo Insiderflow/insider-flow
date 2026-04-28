@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trash2, X } from 'lucide-react';
+import { Trash2 } from 'lucide-react';
 
 export default function BulkActionBar({ count, total, onSelectAll, onClearAll, onDeleteSelected, isDeleting }) {
   return (
