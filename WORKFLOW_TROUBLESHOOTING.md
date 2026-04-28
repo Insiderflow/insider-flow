@@ -243,6 +243,21 @@ If executable bit exists, the next fix is required.
 
 Use `launchd` (or run scheduler from a non-Documents path), because cron often lacks Files & Folders permissions for Desktop/Documents.
 
+Install the included LaunchAgent helper:
+
+```bash
+cd "/Users/kenyeung/Documents/Insider Flow/insider-flow/scripts"
+./install_openinsider_launchd.sh
+launchctl print "gui/$(id -u)/com.insiderflow.openinsider" | head -n 30
+```
+
+To remove it later:
+
+```bash
+cd "/Users/kenyeung/Documents/Insider Flow/insider-flow/scripts"
+./uninstall_openinsider_launchd.sh
+```
+
 ### Temporary workaround
 
 Run manually through interactive shell context:
@@ -250,6 +265,20 @@ Run manually through interactive shell context:
 ```bash
 /bin/bash "/Users/kenyeung/Documents/Insider Flow/insider-flow/scripts/run_openinsider_only.sh"
 ```
+
+## Mobile CI strictness flip (next week)
+
+Frontend release-gate workflows are currently warning-only for missing RevenueCat mobile keys.
+
+When Apple/RevenueCat setup is ready, set repository variable:
+
+- `REQUIRE_REVENUECAT_SECRETS=1`
+
+in GitHub:
+
+- Settings -> Secrets and variables -> Actions -> Variables
+
+After this, missing RevenueCat frontend secrets become hard-fail in both PR and prod release-gate workflows.
 
 
 

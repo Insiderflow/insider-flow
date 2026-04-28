@@ -55,6 +55,7 @@ jobs:
       VITE_REVENUECAT_API_KEY_ANDROID: ${{ secrets.VITE_REVENUECAT_API_KEY_ANDROID }}
       VITE_REVENUECAT_OFFERING_ID: ${{ secrets.VITE_REVENUECAT_OFFERING_ID }}
       VITE_REVENUECAT_ENTITLEMENT_ID: ${{ secrets.VITE_REVENUECAT_ENTITLEMENT_ID }}
+      REQUIRE_REVENUECAT_SECRETS: ${{ vars.REQUIRE_REVENUECAT_SECRETS }}
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -72,21 +73,30 @@ jobs:
             echo "Missing required frontend secret: VITE_API_BASE_URL"
             exit 1
           fi
-          optional_revenuecat_vars=(
+          revenuecat_vars=(
             VITE_REVENUECAT_API_KEY_IOS
             VITE_REVENUECAT_API_KEY_ANDROID
             VITE_REVENUECAT_OFFERING_ID
             VITE_REVENUECAT_ENTITLEMENT_ID
           )
-          missing_optional=0
-          for v in "${optional_revenuecat_vars[@]}"; do
+          strict_mode="${REQUIRE_REVENUECAT_SECRETS:-0}"
+          missing_revenuecat=0
+          for v in "${revenuecat_vars[@]}"; do
             if [ -z "${!v}" ]; then
-              echo "WARN: RevenueCat secret not set yet: $v"
-              missing_optional=1
+              if [ "$strict_mode" = "1" ]; then
+                echo "Missing required frontend secret (strict mobile mode): $v"
+              else
+                echo "WARN: RevenueCat secret not set yet: $v"
+              fi
+              missing_revenuecat=1
             fi
           done
-          if [ "$missing_optional" -eq 1 ]; then
+          if [ "$missing_revenuecat" -eq 1 ] && [ "$strict_mode" = "1" ]; then
+            exit 1
+          fi
+          if [ "$missing_revenuecat" -eq 1 ] && [ "$strict_mode" != "1" ]; then
             echo "WARN: RevenueCat mobile config is incomplete. Web-only releases are still allowed."
+            echo "INFO: Set repo variable REQUIRE_REVENUECAT_SECRETS=1 to enforce strict mobile billing secrets."
           fi
 
       - name: Install dependencies
