@@ -1,249 +1,0 @@
-[2025-10-22 22:05:48] Starting daily OpenInsider scraper...
-[2025-10-22 22:05:48] Step 1: Running OpenInsider scraper...
-2025-10-22 22:05:57,622 - openinsider - INFO - Starting scraping process...
-Processing months:   0%|          | 0/34 [00:00<?, ?it/s]/Users/kenyeung/Documents/Insider Flow/openinsiderData/openinsider_scraper.py:135: DeprecationWarning: Call to deprecated method findAll. (Replaced by find_all) -- Deprecated since version 4.0.0.
-  rows = table.find('tbody').findAll('tr')
-/Users/kenyeung/Documents/Insider Flow/openinsiderData/openinsider_scraper.py:139: DeprecationWarning: Call to deprecated method findAll. (Replaced by find_all) -- Deprecated since version 4.0.0.
-  cols = row.findAll('td')
-Processing months:   3%|▎         | 1/34 [00:28<15:24, 28.00s/it]Processing months:   6%|▌         | 2/34 [00:37<09:16, 17.40s/it]Processing months:   9%|▉         | 3/34 [00:41<05:39, 10.94s/it]Processing months:  12%|█▏        | 4/34 [00:43<03:41,  7.39s/it]Processing months:  15%|█▍        | 5/34 [00:58<04:53, 10.11s/it]Processing months:  18%|█▊        | 6/34 [01:15<05:51, 12.55s/it]Processing months:  21%|██        | 7/34 [01:20<04:31, 10.07s/it]Processing months:  24%|██▎       | 8/34 [01:20<02:59,  6.90s/it]Processing months:  26%|██▋       | 9/34 [01:23<02:20,  5.64s/it]Processing months:  29%|██▉       | 10/34 [01:24<01:42,  4.29s/it]Processing months:  32%|███▏      | 11/34 [01:34<02:20,  6.13s/it]Processing months:  35%|███▌      | 12/34 [01:50<03:15,  8.91s/it]Processing months:  38%|███▊      | 13/34 [02:01<03:25,  9.78s/it]Processing months:  41%|████      | 14/34 [02:04<02:34,  7.72s/it]Processing months:  44%|████▍     | 15/34 [02:12<02:25,  7.68s/it]Processing months:  47%|████▋     | 16/34 [02:17<02:05,  6.96s/it]Processing months:  50%|█████     | 17/34 [02:33<02:40,  9.45s/it]Processing months:  53%|█████▎    | 18/34 [02:35<01:57,  7.33s/it]Processing months:  56%|█████▌    | 19/34 [02:41<01:43,  6.88s/it]Processing months:  59%|█████▉    | 20/34 [02:48<01:38,  7.00s/it]Processing months:  62%|██████▏   | 21/34 [02:51<01:16,  5.90s/it]Processing months:  65%|██████▍   | 22/34 [02:52<00:51,  4.29s/it]Processing months:  68%|██████▊   | 23/34 [03:01<01:04,  5.83s/it]Processing months:  71%|███████   | 24/34 [03:15<01:21,  8.16s/it]Processing months:  74%|███████▎  | 25/34 [03:31<01:34, 10.46s/it]Processing months:  76%|███████▋  | 26/34 [03:32<01:01,  7.63s/it]Processing months:  79%|███████▉  | 27/34 [03:38<00:50,  7.20s/it]Processing months:  82%|████████▏ | 28/34 [03:44<00:40,  6.71s/it]Processing months:  85%|████████▌ | 29/34 [03:49<00:31,  6.20s/it]Processing months:  88%|████████▊ | 30/34 [03:56<00:26,  6.62s/it]Processing months:  91%|█████████ | 31/34 [03:56<00:14,  4.69s/it]Processing months:  94%|█████████▍| 32/34 [03:57<00:07,  3.61s/it]Processing months:  97%|█████████▋| 33/34 [03:58<00:02,  2.80s/it]Processing months: 100%|██████████| 34/34 [03:59<00:00,  2.22s/it]Processing months: 100%|██████████| 34/34 [03:59<00:00,  7.05s/it]
-2025-10-22 22:09:57,558 - openinsider - INFO - Scraping completed. Found 30542 transactions.
-2025-10-22 22:09:57,992 - openinsider - INFO - Data saved to ../opensecret/insider_trades_2023_2025.csv
-[2025-10-22 22:05:48] OpenInsider scraper completed successfully
-[2025-10-22 22:05:48] Step 2: Importing OpenInsider data into database...
-🚀 Starting OpenInsider data import...
-📁 Source: /Users/kenyeung/Documents/Insider Flow/opensecret/insider_trades_2023_2025.csv
-Found 3734 companies, 10716 owners, 30542 transactions
-🧹 Clearing existing OpenInsider data...
-📊 Inserting companies...
-[2025-10-22 22:17:29] Starting daily OpenInsider scraper...
-[2025-10-22 22:17:29] Step 1: Running Capitol Trades scraper...
-/Users/kenyeung/Documents/Insider Flow/insider-flow/scripts/run_daily_scraper.sh: line 23: timeout: command not found
-[2025-10-22 22:17:29] Capitol Trades scraper failed or timed out
-[2025-10-22 22:17:29] Step 2: Importing Capitol Trades data...
-/Users/kenyeung/Documents/Insider Flow/insider-flow/scripts/run_daily_scraper.sh: line 39: timeout: command not found
-[2025-10-22 22:17:29] Capitol Trades data import failed or timed out
-[2025-10-22 22:17:29] Step 3: Cleaning up old files...
-[2025-10-22 22:17:29] Step 4: Getting final database statistics...
-Database stats: 34557 trades, 220 politicians, 3259 issuers
-Latest trade: 2025-10-15
-[2025-10-22 22:17:29] Daily scraper completed successfully
-[2025-10-22 22:17:48] Starting daily OpenInsider scraper...
-[2025-10-22 22:17:48] Step 1: Running Capitol Trades scraper...
-/Users/kenyeung/Documents/Insider Flow/insider-flow/scripts/run_daily_scraper.sh: line 23: timeout: command not found
-[2025-10-22 22:17:48] Capitol Trades scraper failed or timed out
-[2025-10-22 22:17:48] Step 2: Importing Capitol Trades data...
-/Users/kenyeung/Documents/Insider Flow/insider-flow/scripts/run_daily_scraper.sh: line 39: timeout: command not found
-[2025-10-22 22:17:48] Capitol Trades data import failed or timed out
-[2025-10-22 22:17:48] Step 3: Cleaning up old files...
-[2025-10-22 22:17:48] Step 4: Getting final database statistics...
-Database stats: 34557 trades, 220 politicians, 3259 issuers
-Latest trade: 2025-10-15
-[2025-10-22 22:17:48] Daily scraper completed successfully
-[2025-10-22 22:18:31] Starting daily OpenInsider scraper...
-[2025-10-22 22:18:31] Step 1: Running Capitol Trades scraper...
-🚀 Starting to scrape latest trades...
-📄 Scraping page 1...
-✅ Found 12 trades on page 1
-📄 Scraping page 2...
-✅ Found 12 trades on page 2
-📄 Scraping page 3...
-✅ Found 12 trades on page 3
-📄 Scraping page 4...
-✅ Found 12 trades on page 4
-📄 Scraping page 5...
-✅ Found 12 trades on page 5
-💾 Saved 60 trades to trades_pages_5_2025-10-22T14-18-50-548Z.json
-🎉 Successfully scraped 60 trades
-📁 File saved as: trades_pages_5_2025-10-22T14-18-50-548Z.json
-[2025-10-22 22:18:31] Capitol Trades scraper completed successfully
-[2025-10-22 22:18:31] Step 2: Importing Capitol Trades data...
-🚀 Starting import of scraped trades...
-📁 Using file: trades_scraped_2025-10-14T11-42-26-923Z.json
-📊 Found 60 trades to process
-✅ Processed: Tim Moore - buy - Coinbase Global Inc - 2025-09-10
-✅ Processed: Tim Moore - sell - Colgate-Palmolive Co - 2025-09-09
-✅ Processed: Tim Moore - buy - HYSTER YALE - 2025-09-10
-✅ Processed: Tim Moore - sell - HYSTER YALE - 2025-09-18
-✅ Processed: Tim Moore - sell - The Procter & Gamble Co - 2025-09-09
-✅ Processed: Pat Ryan - sell - ONSOLVE LLC - 2024-07-30
-✅ Processed: Gil Cisneros - buy - Ajinomoto Co Inc - 2025-09-29
-✅ Processed: Gil Cisneros - sell - Amdocs Ltd - 2025-09-21
-✅ Processed: Gil Cisneros - sell - Amdocs Ltd - 2025-09-29
-✅ Processed: Gil Cisneros - sell - Amdocs Ltd - 2025-09-30
-✅ Processed: Gil Cisneros - sell - ANAHEIM ELEMENTARY SCHOOL DISTRICT - 2025-09-29
-✅ Processed: Gil Cisneros - buy - APi Group Corp - 2025-09-11
-✅ Processed: Gil Cisneros - buy - APi Group Corp - 2025-09-29
-✅ Processed: Gil Cisneros - sell - ARIS WATER SOLUTIN IN - 2025-09-16
-✅ Processed: Gil Cisneros - sell - ARIS WATER SOLUTIN IN - 2025-09-25
-✅ Processed: Gil Cisneros - sell - BAY AREA TOLL AUTHORITY - 2025-09-29
-✅ Processed: Gil Cisneros - buy - Bloom Energy Corp - 2025-09-25
-✅ Processed: Gil Cisneros - buy - BRIDGEBIO PHARMA IN - 2025-09-21
-✅ Processed: Gil Cisneros - buy - WARRINGTON TOWNSHIP BUCKS COUNTY PENNSYLVANIA - 2025-09-25
-✅ Processed: Gil Cisneros - sell - CAJON VALLEY UNION SCHOOL DISTRICT - 2025-09-29
-✅ Processed: Gil Cisneros - sell - COUNTY OF CALAVERAS CALIFORNIA - 2025-09-29
-✅ Processed: Gil Cisneros - sell - STATE OF CALIFORNIA - 2025-09-29
-✅ Processed: Gil Cisneros - sell - Chipotle Mexican Grill Inc - 2025-09-11
-✅ Processed: Gil Cisneros - buy - Cloudflare Inc - 2025-09-11
-✅ Processed: Gil Cisneros - sell - Conagra Brands Inc - 2025-09-04
-✅ Processed: Gil Cisneros - buy - CoStar Group Inc - 2025-09-29
-✅ Processed: Gil Cisneros - buy - CoStar Group Inc - 2025-09-21
-✅ Processed: Gil Cisneros - sell - EASTERN MUNICIPAL WATER DISTRICT FINANCING AUTHORITY CALIFORNIA - 2025-09-29
-✅ Processed: Gil Cisneros - sell - Flex Ltd - 2025-09-11
-✅ Processed: Gil Cisneros - sell - Fortive Corp - 2025-09-11
-✅ Processed: Gil Cisneros - sell - Fortive Corp - 2025-09-29
-✅ Processed: Gil Cisneros - sell - Fortive Corp - 2025-09-21
-✅ Processed: Gil Cisneros - sell - GILROY UNIFIED SCHOOL DISTRICT CALIFORNIA - 2025-09-29
-✅ Processed: Gil Cisneros - sell - GoDaddy Inc - 2025-09-21
-✅ Processed: Gil Cisneros - sell - GoDaddy Inc - 2025-09-29
-✅ Processed: Gil Cisneros - buy - Halliburton Co - 2025-09-04
-✅ Processed: Gil Cisneros - sell - HEALDSBURG UNIFIED SCHOOL DISTRICT CALIFORNIA - 2025-09-29
-✅ Processed: Gil Cisneros - buy - The Home Depot Inc - 2025-09-11
-✅ Processed: Gil Cisneros - sell - INSMED IN - 2025-09-21
-✅ Processed: Gil Cisneros - sell - Kellogg Co - 2025-09-04
-✅ Processed: Gil Cisneros - sell - Kinder Morgan Inc - 2025-09-04
-✅ Processed: Gil Cisneros - sell - COUNTY OF LOS ANGELES - 2025-09-29
-✅ Processed: Gil Cisneros - sell - Marsh & McLennan Companies Inc - 2025-09-15
-✅ Processed: Gil Cisneros - buy - MITSUBISHI HEAVY INDUST LTD - 2025-09-29
-✅ Processed: Gil Cisneros - sell - Molson Coors Beverage Company - 2025-09-04
-✅ Processed: Gil Cisneros - buy - MongoDB Inc - 2025-09-11
-✅ Processed: Gil Cisneros - sell - MORENO VALLEY UNIFIED SCHOOL DISTRICT CALIFORNIA - 2025-09-28
-✅ Processed: Gil Cisneros - sell - Northrop Grumman Corp - 2025-09-04
-✅ Processed: Gil Cisneros - sell - CITY OF OAKLAND - 2025-09-29
-✅ Processed: Gil Cisneros - sell - OKTA Inc - 2025-09-11
-✅ Processed: Gil Cisneros - exchange - Pacific Premier Bancorp Inc - 2025-09-02
-✅ Processed: Gil Cisneros - buy - PTC Inc - 2025-09-29
-✅ Processed: Gil Cisneros - sell - PUENTE BASIN WATER AGENCY CALIFORNIA - 2025-09-28
-✅ Processed: Gil Cisneros - buy - Quanta Services Inc - 2025-09-11
-✅ Processed: Gil Cisneros - buy - Revvity Inc - 2025-09-11
-✅ Processed: Gil Cisneros - sell - MT SAN JACINTO COMMUNITY COLLEGE DISTRICT - 2025-09-29
-✅ Processed: Gil Cisneros - sell - COUNTY OF SANTA CLARA CALIFORNIA - 2025-09-29
-✅ Processed: Gil Cisneros - sell - SELMA UNIFIED SCHOOL DISTRICT CALIFORNIA - 2025-09-29
-✅ Processed: Gil Cisneros - buy - Southwest Airlines Co - 2025-09-04
-✅ Processed: Gil Cisneros - sell - SOUTHWESTERN COMMUNITY COLLEGE DISTRICT CALIFORNIA - 2025-09-29
-
-🎉 Import completed!
-✅ Imported: 0 new trades
-🔄 Updated: 60 existing trades
-⚠️  Skipped: 0 trades
-
-📊 Latest 5 trades in database:
-1. Marjorie Taylor Greene - buy - ISHARES BITCOIN TRUST ET - 2025-10-15
-2. Marjorie Taylor Greene - buy - Exelon Corp - 2025-10-15
-3. Marjorie Taylor Greene - buy - Amazon.com Inc - 2025-10-15
-4. Marjorie Taylor Greene - buy - Adobe Inc - 2025-10-15
-5. Marjorie Taylor Greene - buy - Novo Nordisk A/ - 2025-10-15
-[2025-10-22 22:18:31] Capitol Trades data import completed successfully
-[2025-10-22 22:18:31] Step 3: Cleaning up old files...
-[2025-10-22 22:18:31] Step 4: Getting final database statistics...
-Database stats: 34557 trades, 220 politicians, 3259 issuers
-Latest trade: 2025-10-15
-[2025-10-22 22:18:31] Daily scraper completed successfully
-👥 Inserting owners...
-[2025-10-22 22:41:24] Starting daily OpenInsider scraper...
-[2025-10-22 22:41:24] Step 1: Checking OpenInsider data...
-[2025-10-22 22:41:24] OpenInsider data missing, importing from CSV...
-🚀 Starting OpenInsider data import...
-📁 Source: /Users/kenyeung/Documents/Insider Flow/opensecret/insider_trades_2023_2025.csv
-Found 3734 companies, 10716 owners, 30542 transactions
-🧹 Clearing existing OpenInsider data...
-📊 Inserting companies...
-👥 Inserting owners...
-[2025-10-22 22:41:24] OpenInsider data import failed
-[2025-10-22 22:41:24] Step 2: Running Capitol Trades scraper...
-🚀 Starting to scrape latest trades...
-📄 Scraping page 1...
-✅ Found 12 trades on page 1
-📄 Scraping page 2...
-✅ Found 12 trades on page 2
-📄 Scraping page 3...
-✅ Found 12 trades on page 3
-📄 Scraping page 4...
-✅ Found 12 trades on page 4
-📄 Scraping page 5...
-✅ Found 12 trades on page 5
-💾 Saved 60 trades to trades_pages_5_2025-10-22T14-59-16-898Z.json
-🎉 Successfully scraped 60 trades
-📁 File saved as: trades_pages_5_2025-10-22T14-59-16-898Z.json
-[2025-10-22 22:41:24] Capitol Trades scraper completed successfully
-[2025-10-22 22:41:24] Step 3: Importing Capitol Trades data...
-🚀 Starting import of scraped trades...
-📁 Using file: trades_scraped_2025-10-14T11-42-26-923Z.json
-📊 Found 60 trades to process
-✅ Processed: Tim Moore - buy - Coinbase Global Inc - 2025-09-10
-✅ Processed: Tim Moore - sell - Colgate-Palmolive Co - 2025-09-09
-✅ Processed: Tim Moore - buy - HYSTER YALE - 2025-09-10
-✅ Processed: Tim Moore - sell - HYSTER YALE - 2025-09-18
-✅ Processed: Tim Moore - sell - The Procter & Gamble Co - 2025-09-09
-✅ Processed: Pat Ryan - sell - ONSOLVE LLC - 2024-07-30
-✅ Processed: Gil Cisneros - buy - Ajinomoto Co Inc - 2025-09-29
-✅ Processed: Gil Cisneros - sell - Amdocs Ltd - 2025-09-21
-✅ Processed: Gil Cisneros - sell - Amdocs Ltd - 2025-09-29
-✅ Processed: Gil Cisneros - sell - Amdocs Ltd - 2025-09-30
-✅ Processed: Gil Cisneros - sell - ANAHEIM ELEMENTARY SCHOOL DISTRICT - 2025-09-29
-✅ Processed: Gil Cisneros - buy - APi Group Corp - 2025-09-11
-✅ Processed: Gil Cisneros - buy - APi Group Corp - 2025-09-29
-✅ Processed: Gil Cisneros - sell - ARIS WATER SOLUTIN IN - 2025-09-16
-✅ Processed: Gil Cisneros - sell - ARIS WATER SOLUTIN IN - 2025-09-25
-✅ Processed: Gil Cisneros - sell - BAY AREA TOLL AUTHORITY - 2025-09-29
-✅ Processed: Gil Cisneros - buy - Bloom Energy Corp - 2025-09-25
-✅ Processed: Gil Cisneros - buy - BRIDGEBIO PHARMA IN - 2025-09-21
-✅ Processed: Gil Cisneros - buy - WARRINGTON TOWNSHIP BUCKS COUNTY PENNSYLVANIA - 2025-09-25
-✅ Processed: Gil Cisneros - sell - CAJON VALLEY UNION SCHOOL DISTRICT - 2025-09-29
-✅ Processed: Gil Cisneros - sell - COUNTY OF CALAVERAS CALIFORNIA - 2025-09-29
-✅ Processed: Gil Cisneros - sell - STATE OF CALIFORNIA - 2025-09-29
-✅ Processed: Gil Cisneros - sell - Chipotle Mexican Grill Inc - 2025-09-11
-✅ Processed: Gil Cisneros - buy - Cloudflare Inc - 2025-09-11
-✅ Processed: Gil Cisneros - sell - Conagra Brands Inc - 2025-09-04
-✅ Processed: Gil Cisneros - buy - CoStar Group Inc - 2025-09-29
-✅ Processed: Gil Cisneros - buy - CoStar Group Inc - 2025-09-21
-✅ Processed: Gil Cisneros - sell - EASTERN MUNICIPAL WATER DISTRICT FINANCING AUTHORITY CALIFORNIA - 2025-09-29
-✅ Processed: Gil Cisneros - sell - Flex Ltd - 2025-09-11
-✅ Processed: Gil Cisneros - sell - Fortive Corp - 2025-09-11
-✅ Processed: Gil Cisneros - sell - Fortive Corp - 2025-09-29
-✅ Processed: Gil Cisneros - sell - Fortive Corp - 2025-09-21
-✅ Processed: Gil Cisneros - sell - GILROY UNIFIED SCHOOL DISTRICT CALIFORNIA - 2025-09-29
-✅ Processed: Gil Cisneros - sell - GoDaddy Inc - 2025-09-21
-✅ Processed: Gil Cisneros - sell - GoDaddy Inc - 2025-09-29
-✅ Processed: Gil Cisneros - buy - Halliburton Co - 2025-09-04
-✅ Processed: Gil Cisneros - sell - HEALDSBURG UNIFIED SCHOOL DISTRICT CALIFORNIA - 2025-09-29
-✅ Processed: Gil Cisneros - buy - The Home Depot Inc - 2025-09-11
-✅ Processed: Gil Cisneros - sell - INSMED IN - 2025-09-21
-✅ Processed: Gil Cisneros - sell - Kellogg Co - 2025-09-04
-✅ Processed: Gil Cisneros - sell - Kinder Morgan Inc - 2025-09-04
-✅ Processed: Gil Cisneros - sell - COUNTY OF LOS ANGELES - 2025-09-29
-✅ Processed: Gil Cisneros - sell - Marsh & McLennan Companies Inc - 2025-09-15
-✅ Processed: Gil Cisneros - buy - MITSUBISHI HEAVY INDUST LTD - 2025-09-29
-✅ Processed: Gil Cisneros - sell - Molson Coors Beverage Company - 2025-09-04
-✅ Processed: Gil Cisneros - buy - MongoDB Inc - 2025-09-11
-✅ Processed: Gil Cisneros - sell - MORENO VALLEY UNIFIED SCHOOL DISTRICT CALIFORNIA - 2025-09-28
-✅ Processed: Gil Cisneros - sell - Northrop Grumman Corp - 2025-09-04
-✅ Processed: Gil Cisneros - sell - CITY OF OAKLAND - 2025-09-29
-✅ Processed: Gil Cisneros - sell - OKTA Inc - 2025-09-11
-✅ Processed: Gil Cisneros - exchange - Pacific Premier Bancorp Inc - 2025-09-02
-✅ Processed: Gil Cisneros - buy - PTC Inc - 2025-09-29
-✅ Processed: Gil Cisneros - sell - PUENTE BASIN WATER AGENCY CALIFORNIA - 2025-09-28
-✅ Processed: Gil Cisneros - buy - Quanta Services Inc - 2025-09-11
-✅ Processed: Gil Cisneros - buy - Revvity Inc - 2025-09-11
-✅ Processed: Gil Cisneros - sell - MT SAN JACINTO COMMUNITY COLLEGE DISTRICT - 2025-09-29
-✅ Processed: Gil Cisneros - sell - COUNTY OF SANTA CLARA CALIFORNIA - 2025-09-29
-✅ Processed: Gil Cisneros - sell - SELMA UNIFIED SCHOOL DISTRICT CALIFORNIA - 2025-09-29
-✅ Processed: Gil Cisneros - buy - Southwest Airlines Co - 2025-09-04
-✅ Processed: Gil Cisneros - sell - SOUTHWESTERN COMMUNITY COLLEGE DISTRICT CALIFORNIA - 2025-09-29
-
-🎉 Import completed!
-✅ Imported: 0 new trades
-🔄 Updated: 60 existing trades
-⚠️  Skipped: 0 trades
-
-📊 Latest 5 trades in database:
-1. Marjorie Taylor Greene - buy - ISHARES BITCOIN TRUST ET - 2025-10-15
-2. Marjorie Taylor Greene - buy - Exelon Corp - 2025-10-15
-3. Marjorie Taylor Greene - buy - Amazon.com Inc - 2025-10-15
-4. Marjorie Taylor Greene - buy - Adobe Inc - 2025-10-15
-5. Marjorie Taylor Greene - buy - Novo Nordisk A/ - 2025-10-15
-[2025-10-22 22:41:24] Capitol Trades data import completed successfully
-[2025-10-22 22:41:24] Step 4: Cleaning up old files...
-[2025-10-22 22:41:24] Step 5: Getting final database statistics...
-Database stats: 34797 trades, 220 politicians, 3259 issuers
-Latest trade: 2025-10-15
-[2025-10-22 22:41:24] Daily scraper completed successfully

@@ -28,6 +28,25 @@ Select these exact checks:
 - `CI / mindful-trade-build`
 - `CI / repo-guard`
 
+## Optional status checks
+
+Add when you want deploy-time verification to block merges:
+
+- `Post Deploy Smoke / production-smoke`
+
+Requires repo Actions secrets `RELEASE_CHECK_BASE_URL` and `INTERNAL_JOBS_SECRET` (same values as production checks).
+
+## Owner-only (cannot be automated here)
+
+Do these in GitHub / hosting dashboards when you have time:
+
+- Confirm Actions secrets exist: `RELEASE_CHECK_BASE_URL`, `INTERNAL_JOBS_SECRET`, plus any Vercel/GitHub integration secrets your deploy uses.
+- Open Actions tab after each push and confirm workflows are green (especially `Post Deploy Smoke` after merge to `main`).
+- Render (or host): set **Pre-deploy command** `cd web && npx prisma migrate deploy` so DB schema cannot drift from app code.
+- Merge pending bot PRs (e.g. security/CVE) after checks pass — merge button is yours.
+- Optional later: set repo variable `REQUIRE_REVENUECAT_SECRETS=1` when Apple/RevenueCat mobile secrets are all in GitHub.
+- Optional: resolve **mirror drift** (`npm run check:mirror`) — two directories intentionally diverged; only sync when you intend to overwrite `mindful-trade-signal-flow` in-repo copy.
+
 ## Optional but recommended
 
 - Restrict who can push directly to protected branches
