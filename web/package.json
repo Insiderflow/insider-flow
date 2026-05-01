@@ -14,6 +14,10 @@
     "release:check:ci": "node scripts/release-check.mjs --dry-run --skip-health --skip-prisma --skip-frontend-check",
     "release:check:prod": "node scripts/release-check.mjs",
     "release:fix-hints": "node scripts/release-check.mjs --dry-run --skip-health --fix-hints",
+    "data:freshness": "node scripts/check_data_freshness.js",
+    "audit:membership": "node scripts/membership_integrity_audit.js",
+    "committees:enrich": "node scripts/enrich_politician_committees_govtrack.js",
+    "committees:import-csv": "node scripts/import_politician_committees_csv.js",
     "test": "vitest run",
     "test:e2e": "npm run build && playwright test",
     "test:e2e:smoke": "npm run build && playwright test e2e/smoke.spec.ts"
