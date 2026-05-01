@@ -1,14 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useQueryClient } from '@tanstack/react-query';
 import { getIssuerTrades, getWatchlistItem, addToWatchlist, removeFromWatchlist } from '@/lib/api';
 import IssuerHeader from '@/components/issuer/IssuerHeader';
 import PriceChart from '@/components/issuer/PriceChart';
 import InsiderActivityList from '@/components/issuer/InsiderActivityList';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useToast } from '@/components/ui/use-toast';
+import { useTranslation } from '@/lib/useTranslation';
 import { AlertCircle } from 'lucide-react';
+import PaidOnlyGate from '@/components/billing/PaidOnlyGate';
 
 export default function IssuerProfile() {
+  const { t } = useTranslation();
+  return (
+    <PaidOnlyGate headerTitle={t('issuers')}>
+      <IssuerProfileContent />
+    </PaidOnlyGate>
+  );
+}
+
+function IssuerProfileContent() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
+  const { t, displayIssuerName, language } = useTranslation();
   const [searchParams] = useSearchParams();
   const ticker = searchParams.get('ticker');
 
@@ -48,17 +64,31 @@ export default function IssuerProfile() {
   }, [ticker]);
 
   const handleWatch = async () => {
-    if (watchLoading) return;
+    if (watchLoading || !ticker) return;
     setWatchLoading(true);
     const optimistic = !isWatched;
     setIsWatched(optimistic);
 
-    if (!optimistic && watchlistItem) {
-      await removeFromWatchlist(watchlistItem.id);
-      setWatchlistItem(null);
-    } else {
-      const created = await addToWatchlist({ type: 'ticker', identifier: ticker, label: `${ticker}${companyName ? ' — ' + companyName : ''}` });
-      setWatchlistItem(created);
+    try {
+      if (!optimistic && watchlistItem) {
+        await removeFromWatchlist(watchlistItem.id);
+        setWatchlistItem(null);
+      } else {
+        const created = await addToWatchlist({
+          type: 'ticker',
+          identifier: ticker,
+          label: `${ticker}${companyName ? ' — ' + companyName : ''}`,
+        });
+        setWatchlistItem(created);
+      }
+      queryClient.invalidateQueries({ queryKey: ['watchlist'] });
+    } catch (e) {
+      setIsWatched(!optimistic);
+      toast({
+        title: t('watchlistUpdateFailed'),
+        description: e?.message || t('pleaseTryAgain'),
+        variant: 'destructive',
+      });
     }
     setWatchLoading(false);
   };
@@ -68,8 +98,8 @@ export default function IssuerProfile() {
     return (
       <div className="min-h-screen bg-background flex flex-col items-center justify-center gap-3 px-6 text-center">
         <AlertCircle className="h-8 w-8 text-muted-foreground" />
-        <p className="text-sm font-semibold">No ticker specified</p>
-        <button onClick={() => navigate(-1)} className="text-xs text-primary font-medium">Go back</button>
+        <p className="text-sm font-semibold">{t('noTickerSpecified')}</p>
+        <button onClick={() => navigate(-1)} className="text-xs text-primary font-medium">{t('back')}</button>
       </div>
     );
   }
@@ -86,7 +116,7 @@ export default function IssuerProfile() {
         ) : (
           <IssuerHeader
             ticker={ticker}
-            companyName={companyName}
+            companyName={displayIssuerName(companyName, language, ticker)}
             sector={sector}
             country="US"
             isWatched={isWatched}
@@ -99,7 +129,7 @@ export default function IssuerProfile() {
       {/* Price chart */}
       <div className="mt-4">
         <div className="px-4 mb-2">
-          <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Price History</p>
+          <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{t('priceHistory')}</p>
         </div>
         <PriceChart
           ticker={ticker}
@@ -113,9 +143,9 @@ export default function IssuerProfile() {
       {/* Insider activity */}
       <div className="mt-2">
         <div className="px-4 mb-3 flex items-center justify-between">
-          <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Insider Activity</p>
+          <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{t('insiderActivity')}</p>
           <span className="text-[11px] text-muted-foreground">
-            {politicianTrades.length + corporateTrades.length} trades
+            {politicianTrades.length + corporateTrades.length} {t('totalTrades')}
           </span>
         </div>
         <InsiderActivityList

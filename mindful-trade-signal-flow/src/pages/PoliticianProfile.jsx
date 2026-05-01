@@ -1,15 +1,32 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useQueryClient } from '@tanstack/react-query';
 import { getPoliticianTradesByName, getWatchlistItem, addToWatchlist, removeFromWatchlist } from '@/lib/api';
 import PoliticianProfileHeader from '@/components/politician/PoliticianProfileHeader';
 import PerformanceChart from '@/components/politician/PerformanceChart';
 import TradesFeed from '@/components/politician/TradesFeed';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useToast } from '@/components/ui/use-toast';
+import { useTranslation } from '@/lib/useTranslation';
+import PaidOnlyGate from '@/components/billing/PaidOnlyGate';
 
 export default function PoliticianProfile() {
+  const { t } = useTranslation();
+  return (
+    <PaidOnlyGate headerTitle={t('politiciansSegment')}>
+      <PoliticianProfileContent />
+    </PaidOnlyGate>
+  );
+}
+
+function PoliticianProfileContent() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
   const [searchParams] = useSearchParams();
   const politicianName = searchParams.get('name');
+  const sectorParam = searchParams.get('sector');
+  const { t } = useTranslation();
 
   const [politician, setPolitician] = useState(null);
   const [trades, setTrades] = useState([]);
@@ -19,10 +36,8 @@ export default function PoliticianProfile() {
   const [watchlistItem, setWatchlistItem] = useState(null);
   const [watchLoading, setWatchLoading] = useState(false);
 
-  const cachedAt = useMemo(() => {
-    const now = new Date();
-    return `${now.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}, ${now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}`;
-  }, []);
+  const watchlistIdentifier = politician?.politician_id || '';
+  const resolvedSector = sectorParam || politician?.sector || null;
 
   const loadData = async () => {
     setIsLoading(true);
@@ -34,31 +49,58 @@ export default function PoliticianProfile() {
   };
 
   const loadWatchlist = async () => {
-    const item = await getWatchlistItem('politician', politicianName);
-    if (item) { setIsWatched(true); setWatchlistItem(item); }
+    const lookupKey = watchlistIdentifier || politicianName;
+    if (!lookupKey) return;
+    const item = await getWatchlistItem('politician', lookupKey);
+    if (item) {
+      setIsWatched(true);
+      setWatchlistItem(item);
+      return;
+    }
+    setIsWatched(false);
+    setWatchlistItem(null);
   };
 
   useEffect(() => {
     if (!politicianName) { navigate('/politicians'); return; }
     loadData();
-    loadWatchlist();
   }, [politicianName]);
 
+  useEffect(() => {
+    if (!watchlistIdentifier) return;
+    loadWatchlist();
+  }, [watchlistIdentifier]);
+
   const handleWatch = async () => {
-    if (watchLoading) return;
+    if (watchLoading || !politicianName) return;
     setWatchLoading(true);
     // Optimistic update
     const optimistic = !isWatched;
     setIsWatched(optimistic);
 
-    if (!optimistic && watchlistItem) {
-      await removeFromWatchlist(watchlistItem.id);
-      setWatchlistItem(null);
-    } else {
-      const created = await addToWatchlist({ type: 'politician', identifier: politicianName, label: politicianName });
-      setWatchlistItem(created);
+    try {
+      if (!optimistic && watchlistItem) {
+        await removeFromWatchlist(watchlistItem.id);
+      } else {
+        const created = await addToWatchlist({
+          type: 'politician',
+          identifier: watchlistIdentifier || politicianName,
+          label: politicianName,
+        });
+        setWatchlistItem(created);
+      }
+      queryClient.invalidateQueries({ queryKey: ['watchlist'] });
+    } catch (e) {
+      // Ignore optimistic drift and sync from server below.
+      toast({
+        title: 'Watchlist update failed',
+        description: e?.message || 'Please try again',
+        variant: 'destructive',
+      });
+    } finally {
+      await loadWatchlist();
+      setWatchLoading(false);
     }
-    setWatchLoading(false);
   };
 
   return (
@@ -73,6 +115,7 @@ export default function PoliticianProfile() {
         ) : (
           <PoliticianProfileHeader
             politician={politician}
+            sector={resolvedSector}
             isWatched={isWatched}
             onWatch={handleWatch}
             onBack={() => navigate(-1)}
@@ -83,22 +126,22 @@ export default function PoliticianProfile() {
       {/* Performance Chart */}
       <div className="mt-4">
         <div className="px-4 mb-2">
-          <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Performance</p>
+          <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{t('performance')}</p>
         </div>
         <PerformanceChart
           trades={trades}
+          politicianName={politicianName}
           isLoading={isLoading}
           error={chartError}
           onRetry={() => { setChartError(null); loadData(); }}
-          cachedAt={cachedAt}
         />
       </div>
 
       {/* Trades feed */}
       <div className="mt-2">
         <div className="px-4 mb-3 flex items-center justify-between">
-          <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Trades</p>
-          <span className="text-[11px] text-muted-foreground">{trades.length} total</span>
+          <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{t('trades')}</p>
+          <span className="text-[11px] text-muted-foreground">{trades.length} {t('totalTrades')}</span>
         </div>
         <TradesFeed trades={trades} isLoading={isLoading} />
       </div>
