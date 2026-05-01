@@ -3,8 +3,12 @@
 Copy these environment variables to your **Render** web service (or any host running this Next app with the same shape of secrets):
 
 ```bash
-# Database (use the connection string from Neon dashboard; do not commit the real value)
-DATABASE_URL="postgresql://USER:PASSWORD@YOUR-NEON-HOST.neon.tech/neondb?sslmode=require"
+# Database — Neon gives two URLs in the dashboard:
+# - “Transaction” / pooled (host contains `-pooler`): use for DATABASE_URL (runtime).
+# - “Direct” / session (no pooler): use for DATABASE_URL_UNPOOLED (migrations only).
+# Set DATABASE_URL_UNPOOLED to the Neon **direct** connection string, then use the migrate wrapper below on Render.
+DATABASE_URL="postgresql://USER:PASSWORD@YOUR-NEON-POOLER-HOST/neondb?sslmode=require"
+DATABASE_URL_UNPOOLED="postgresql://USER:PASSWORD@YOUR-NEON-DIRECT-HOST/neondb?sslmode=require"
 
 # Session Management
 SESSION_SECRET="your-32-character-secret-key-here"
@@ -51,6 +55,26 @@ SUBSCRIPTION_ALERT_DEAD_LETTER_RATE_CRITICAL=0.02
 SUBSCRIPTION_ALERT_OLDEST_FAILED_MINUTES_WARN=30
 SUBSCRIPTION_ALERT_STALE_PROCESSED_MINUTES_CRITICAL=120
 ```
+
+**Render “Pre-deploy command”** — do **not** run `npx prisma migrate deploy` with only the pooler URL (Prisma **P1002** advisory lock timeout).
+
+Either:
+
+```bash
+cd web && sh scripts/render-migrate-deploy.sh
+```
+
+(requires `web/scripts/render-migrate-deploy.sh` to exist in the deployed commit)
+
+Or inline (same behavior, no script file):
+
+```bash
+cd web && export DATABASE_URL="${DATABASE_URL_UNPOOLED:-$DATABASE_URL}" && npx prisma migrate deploy
+```
+
+If Render **Root Directory** is already `web`, drop the `cd web &&` prefix from whichever command you use.
+
+Runtime traffic still uses pooled `DATABASE_URL`; migrate temporarily uses `DATABASE_URL_UNPOOLED` when set.
 
 ## Important Notes
 
