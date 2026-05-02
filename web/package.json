@@ -18,6 +18,7 @@
     "audit:membership": "node scripts/membership_integrity_audit.js",
     "committees:enrich": "node scripts/enrich_politician_committees_govtrack.js",
     "committees:import-csv": "node scripts/import_politician_committees_csv.js",
+    "openinsider:import": "node scripts/openinsider_daily_import.js",
     "test": "vitest run",
     "test:e2e": "npm run build && playwright test",
     "test:e2e:smoke": "npm run build && playwright test e2e/smoke.spec.ts"

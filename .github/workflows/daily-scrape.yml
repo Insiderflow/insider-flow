@@ -52,12 +52,20 @@ jobs:
     - name: Install Playwright browsers and system dependencies
       run: |
         npx playwright install --with-deps
+
+    - name: Restore import streak state
+      uses: actions/cache/restore@v4
+      with:
+        path: web/.ci-state
+        key: daily-scrape-streak-${{ github.ref_name }}-${{ github.run_id }}
+        restore-keys: |
+          daily-scrape-streak-${{ github.ref_name }}-
     
-    - name: Run OpenInsider scraper
+    - name: Run legacy OpenInsider Python scraper (optional)
       env:
         DATABASE_URL: ${{ secrets.DATABASE_URL }}
       run: |
-        echo "📊 Running OpenInsider scraper..."
+        echo "📊 Optional legacy Python OpenInsider scraper (repo-specific)..."
         SCRAPER_PATH=""
         if [ -f "../../openinsiderData/openinsider_scraper.py" ]; then
           SCRAPER_PATH="../../openinsiderData/openinsider_scraper.py"
@@ -68,18 +76,63 @@ jobs:
         fi
 
         if [ -z "$SCRAPER_PATH" ]; then
-          echo "❌ OpenInsider scraper not found in expected locations"
+          echo "⚠️ OpenInsider scraper not found in expected locations; skipping OpenInsider step."
           echo "   Searched: ../../openinsiderData/openinsider_scraper.py, ../openinsiderData/openinsider_scraper.py, openinsiderData/openinsider_scraper.py"
-          exit 1
+          exit 0
         fi
 
         python3 "$SCRAPER_PATH"
-        
+
+    # Corporate /insider page data: Node Playwright importer runs inside daily-scrape.js after Capitol import (non-fatal if it fails).
+
     - name: Run daily scrape (Capitol Trades)
       env:
         DATABASE_URL: ${{ secrets.DATABASE_URL }}
       run: |
         node scripts/daily-scrape.js
+
+    - name: Data freshness guard
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        MAX_TRADE_STALENESS_DAYS: 14
+        MAX_PUBLISH_STALENESS_HOURS: 72
+      run: |
+        node scripts/check_data_freshness.js
+
+    - name: Zero-import streak guard
+      if: success()
+      env:
+        ZERO_IMPORT_STREAK_FAIL_AFTER: 3
+      run: |
+        node scripts/import_streak_guard.js
+
+    - name: Upload scrape artifacts
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: daily-scrape-artifacts
+        path: |
+          web/.artifacts/**
+          web/.ci-state/**
+        if-no-files-found: warn
+
+    - name: Write scrape run summary
+      if: always()
+      run: |
+        if [ ! -f ".artifacts/daily-scrape-report.json" ]; then
+          echo "## Daily Scrape Summary" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "No scrape report generated." >> "$GITHUB_STEP_SUMMARY"
+          exit 0
+        fi
+        node -e 'const fs=require("fs");const p=".artifacts/daily-scrape-report.json";const r=JSON.parse(fs.readFileSync(p,"utf8"));const lines=[];lines.push("## Daily Scrape Summary");lines.push("");lines.push(`- Status: \`${r.status}\``);lines.push(`- Source: \`${r.source||"n/a"}\``);lines.push(`- File: \`${r.selectedFile?require("path").basename(r.selectedFile):"n/a"}\``);lines.push(`- Imported Delta: \`${r.database?.importedDelta ?? "n/a"}\``);lines.push(`- Latest Trade Date: \`${r.database?.latestTradeDate ?? "n/a"}\``);if(r.validation){lines.push(`- Primary Valid Ratio: \`${(r.validation.validRatio*100).toFixed(1)}%\``);}if(r.fallbackValidation){lines.push(`- Fallback Valid Ratio: \`${(r.fallbackValidation.validRatio*100).toFixed(1)}%\``);}if(r.error){lines.push(`- Error: \`${r.error}\``);}const gp=".artifacts/import-streak-report.json";if(fs.existsSync(gp)){const g=JSON.parse(fs.readFileSync(gp,"utf8"));lines.push(`- Zero-Import Streak: \`${g.zeroImportStreak}\` (threshold \`${g.threshold}\`)`);lines.push(`- Streak Guard: \`${g.ok ? "pass" : "fail"}\``);}fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,lines.join("\n")+"\n");'
+
+    - name: Save import streak state
+      if: always()
+      uses: actions/cache/save@v4
+      with:
+        path: web/.ci-state
+        key: daily-scrape-streak-${{ github.ref_name }}-${{ github.run_id }}
         
     - name: Notify on success
       if: success()
