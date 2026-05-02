@@ -4,6 +4,7 @@ import { queryClientInstance } from '@/lib/query-client'
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
+import { LanguageProvider } from '@/lib/LanguageContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import AppLayout from '@/components/layout/AppLayout';
 import RouteGuard from '@/components/layout/RouteGuard';
@@ -16,6 +17,7 @@ import CorporateInsiders from '@/pages/CorporateInsiders';
 import Watchlist from '@/pages/Watchlist';
 import PoliticianProfile from '@/pages/PoliticianProfile';
 import IssuerProfile from '@/pages/IssuerProfile';
+import Issuers from '@/pages/Issuers';
 import OpenInsiderExplorer from '@/pages/OpenInsiderExplorer';
 import Welcome from '@/pages/Welcome';
 import ForgotPassword from '@/pages/ForgotPassword';
@@ -60,6 +62,7 @@ const AuthenticatedApp = () => {
         {/* Detail / stack routes */}
         <Route path="/politician" element={<PoliticianProfile />} />
         <Route path="/issuer" element={<IssuerProfile />} />
+        <Route path="/issuers" element={<Issuers />} />
         <Route path="/openinsider" element={<OpenInsiderExplorer />} />
         <Route path="/openinsider/company" element={<OpenInsiderExplorer />} />
         <Route path="/openinsider/owner" element={<OpenInsiderExplorer />} />
@@ -80,19 +83,21 @@ const AuthenticatedApp = () => {
 
 function App() {
   return (
-    <AuthProvider>
-      <QueryClientProvider client={queryClientInstance}>
-        <Router
-          future={{
-            v7_startTransition: true,
-            v7_relativeSplatPath: true,
-          }}
-        >
-          <AuthenticatedApp />
-        </Router>
-        <Toaster />
-      </QueryClientProvider>
-    </AuthProvider>
+    <LanguageProvider>
+      <AuthProvider>
+        <QueryClientProvider client={queryClientInstance}>
+          <Router
+            future={{
+              v7_startTransition: true,
+              v7_relativeSplatPath: true,
+            }}
+          >
+            <AuthenticatedApp />
+          </Router>
+          <Toaster />
+        </QueryClientProvider>
+      </AuthProvider>
+    </LanguageProvider>
   );
 }
 

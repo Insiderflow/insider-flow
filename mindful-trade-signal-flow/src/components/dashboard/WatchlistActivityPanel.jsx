@@ -4,17 +4,19 @@ import { formatDistanceToNow } from 'date-fns';
 import { Eye, ChevronRight, Plus, Bell } from 'lucide-react';
 import TradeCard from '@/components/insider/TradeCard';
 import SkeletonTradeCard from '@/components/insider/SkeletonTradeCard';
+import { useTranslation } from '@/lib/useTranslation';
 
 function EmptyWatchlistCard() {
+  const { t } = useTranslation();
   return (
     <div className="bg-card rounded-xl border border-dashed border-border p-6 flex flex-col items-center text-center gap-3">
       <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center">
         <Eye className="h-5 w-5 text-muted-foreground" />
       </div>
       <div>
-        <p className="text-sm font-semibold mb-1">Your watchlist is empty</p>
+        <p className="text-sm font-semibold mb-1">{t('watchlistEmptyTitle')}</p>
         <p className="text-xs text-muted-foreground">
-          Track politicians and stocks to see their latest trades here.
+          {t('watchlistEmptyDesc')}
         </p>
       </div>
       <Link
@@ -22,16 +24,17 @@ function EmptyWatchlistCard() {
         className="flex items-center gap-1.5 text-xs font-semibold text-primary"
       >
         <Plus className="h-3.5 w-3.5" />
-        Add to Watchlist
+        {t('addToWatchlist')}
       </Link>
     </div>
   );
 }
 
 function AlertActivityRow({ alert, onNavigate }) {
+  const { t } = useTranslation();
   const sub = alert.ticker
-    ? `${alert.type === 'corporate' ? 'Corporate' : 'Watchlist'} · ${alert.ticker}`
-    : (alert.type || 'alert');
+    ? `${alert.type === 'corporate' ? t('corporate') : t('watchlistWord')} · ${alert.ticker}`
+    : (alert.type || t('alert'));
   return (
     <button
       type="button"
@@ -58,6 +61,7 @@ function AlertActivityRow({ alert, onNavigate }) {
 
 export default function WatchlistActivityPanel({ trades, alerts, isLoading, type = 'politician' }) {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const alertMode = Array.isArray(alerts);
 
   const goAlert = (alert) => {
@@ -71,12 +75,12 @@ export default function WatchlistActivityPanel({ trades, alerts, isLoading, type
   return (
     <div className="px-4 space-y-3">
       <div className="flex items-center justify-between">
-        <h2 className="text-sm font-semibold">Watchlist Activity</h2>
+        <h2 className="text-sm font-semibold">{t('watchlistActivity')}</h2>
         <Link
           to="/watchlist"
           className="flex items-center gap-0.5 text-xs text-primary font-medium"
         >
-          View all <ChevronRight className="h-3.5 w-3.5" />
+          {t('viewAll')} <ChevronRight className="h-3.5 w-3.5" />
         </Link>
       </div>
 

@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 import { useToast } from '@/components/ui/use-toast';
 import AppHeader from '@/components/layout/AppHeader';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -7,13 +8,9 @@ import WatchlistCard from '@/components/watchlist/WatchlistCard';
 import WatchlistEmpty from '@/components/watchlist/WatchlistEmpty';
 import BulkActionBar from '@/components/watchlist/BulkActionBar';
 import { CheckSquare, Square } from 'lucide-react';
-
-const TABS = [
-  { key: 'politician', label: 'Politicians' },
-  { key: 'company',    label: 'Companies' },
-  { key: 'owner',      label: 'Owners' },
-  { key: 'ticker',     label: 'Stocks' },
-];
+import { useTranslation } from '@/lib/useTranslation';
+import { useAuth } from '@/lib/AuthContext';
+import SubscriberOnlyDialog from '@/components/billing/SubscriberOnlyDialog';
 
 function WatchlistSkeleton() {
   return (
@@ -33,8 +30,17 @@ function WatchlistSkeleton() {
 }
 
 export default function Watchlist() {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { user } = useAuth();
   const queryClient = useQueryClient();
   const { toast } = useToast();
+  const TABS = [
+    { key: 'politician', label: t('politiciansTab') },
+    { key: 'company', label: t('companiesTab') },
+    { key: 'owner', label: t('ownersTab') },
+    { key: 'ticker', label: t('stocksTab') },
+  ];
 
   const [activeTab, setActiveTab] = useState(0);
   const [bulkMode, setBulkMode] = useState(false);
@@ -49,6 +55,7 @@ export default function Watchlist() {
   const { data: items = [], isLoading } = useQuery({
     queryKey: ['watchlist'],
     queryFn: () => import('@/lib/api').then(m => m.getWatchlistItems()),
+    retry: 1,
   });
 
   const tabKey = TABS[activeTab].key;
@@ -66,7 +73,7 @@ export default function Watchlist() {
     },
     onError: (_err, _id, ctx) => {
       queryClient.setQueryData(['watchlist'], ctx.prev);
-      toast({ title: 'Failed to remove item', description: 'It has been restored.', variant: 'destructive' });
+      toast({ title: t('error'), description: t('watchlistEmptyDesc'), variant: 'destructive' });
     },
     onSettled: (_d, _e, id) => {
       setRemovingIds(prev => { const s = new Set(prev); s.delete(id); return s; });
@@ -76,6 +83,7 @@ export default function Watchlist() {
 
   /* ---- Bulk remove ---- */
   const [bulkDeleting, setBulkDeleting] = useState(false);
+  const isFreeUser = !user || user.membership_tier !== 'pro';
 
   const handleBulkDelete = async () => {
     if (selected.size === 0) return;
@@ -92,9 +100,9 @@ export default function Watchlist() {
 
     if (failed > 0) {
       queryClient.setQueryData(['watchlist'], prev);
-      toast({ title: `${failed} item(s) failed to remove`, description: 'Items restored. Try again.', variant: 'destructive' });
+      toast({ title: `${failed} ${t('error')}`, description: t('adjustSearchOrFilters'), variant: 'destructive' });
     } else {
-      toast({ title: `${ids.length} item(s) removed` });
+      toast({ title: `${ids.length} ${t('success')}` });
     }
 
     queryClient.invalidateQueries({ queryKey: ['watchlist'] });
@@ -114,6 +122,35 @@ export default function Watchlist() {
     setBulkMode(v => !v);
     setSelected(new Set());
   };
+
+  const handleOpenItem = (item) => {
+    if (!item) return;
+    if (item.type === 'politician') {
+      navigate(
+        `/politician?name=${encodeURIComponent(item.label)}&sector=${encodeURIComponent(item.sector || '')}`,
+      );
+      return;
+    }
+    if (item.type === 'ticker' || item.type === 'stock') {
+      const ticker = item.identifier || item.label;
+      navigate(`/issuer?ticker=${encodeURIComponent(ticker)}`);
+    }
+  };
+
+  if (isFreeUser) {
+    return (
+      <div className="min-h-screen bg-background">
+        <AppHeader title="Watchlist" />
+        <SubscriberOnlyDialog
+          open
+          onOpenChange={(v) => {
+            if (!v) navigate('/');
+          }}
+          onUpgrade={() => navigate('/paywall')}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background pb-28">
@@ -142,7 +179,7 @@ export default function Watchlist() {
       {/* Toolbar */}
       <div className="flex items-center justify-between px-4 pt-3 pb-1">
         <p className="text-xs text-muted-foreground">
-          {isLoading ? '—' : `${tabItems.length} tracked`}
+          {isLoading ? '—' : `${tabItems.length} ${t('tracked')}`}
         </p>
         {tabItems.length > 0 && (
           <button
@@ -152,8 +189,8 @@ export default function Watchlist() {
             }`}
           >
             {bulkMode
-              ? <><CheckSquare className="h-3.5 w-3.5" /> Done</>
-              : <><Square className="h-3.5 w-3.5" /> Select</>
+              ? <><CheckSquare className="h-3.5 w-3.5" /> {t('done')}</>
+              : <><Square className="h-3.5 w-3.5" /> {t('select')}</>
             }
           </button>
         )}
@@ -173,6 +210,7 @@ export default function Watchlist() {
               bulkMode={bulkMode}
               selected={selected.has(item.id)}
               onSelect={toggleSelect}
+              onOpen={handleOpenItem}
               onRemove={(item) => removeMutation.mutate(item.id)}
               removing={removingIds.has(item.id)}
             />

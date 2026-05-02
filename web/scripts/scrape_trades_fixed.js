@@ -3,6 +3,7 @@
 const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');
+const SELECTOR_VERSION = 'capitol_table_v2_tbody_td9';
 
 async function scrapeTrades() {
   const browser = await chromium.launch({ headless: true });
@@ -12,6 +13,7 @@ async function scrapeTrades() {
   
   try {
     console.log('🚀 Starting to scrape latest trades from Capitol Trades...');
+    console.log(`🧩 Selector version: ${SELECTOR_VERSION}`);
     
     // Scrape first 20 pages to get more recent trades
     for (let pageNum = 1; pageNum <= 20; pageNum++) {

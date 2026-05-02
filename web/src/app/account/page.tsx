@@ -3,6 +3,7 @@ import EmailNotificationSettings from '@/components/EmailNotificationSettings';
 import PasswordChangeForm from '@/components/PasswordChangeForm';
 import ManageSubscriptionButton from '@/components/ManageSubscriptionButton';
 import AlertsSyncPanel from '@/components/AlertsSyncPanel';
+import DataFreshnessPanel from '@/components/DataFreshnessPanel';
 import { actionStyles } from '@/components/actionStyles';
 import Link from 'next/link';
 import { panelSurfaceStyles } from '@/components/surfaceStyles';
@@ -241,6 +242,7 @@ export default async function AccountPage({
         </div>
 
         <AlertsSyncPanel />
+        <DataFreshnessPanel />
       </main>
     </div>
   );

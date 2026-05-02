@@ -9,6 +9,7 @@ import ChipFilter from '@/components/insider/ChipFilter';
 import TradeCard from '@/components/insider/TradeCard';
 import SkeletonTradeCard from '@/components/insider/SkeletonTradeCard';
 import EmptyState from '@/components/insider/EmptyState';
+import { useTranslation } from '@/lib/useTranslation';
 
 const typeOptions = [
   { value: 'Buy', label: 'Buys' },
@@ -17,6 +18,7 @@ const typeOptions = [
 
 export default function CorporateInsiders() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [search, setSearch] = useState('');
   const [showSearch, setShowSearch] = useState(false);
   const [typeFilter, setTypeFilter] = useState('all');
@@ -46,7 +48,7 @@ export default function CorporateInsiders() {
           <div className="relative animate-slide-up">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
-              placeholder="Search insider, ticker, company..."
+              placeholder={t('searchInsiderPlaceholder')}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="pl-9 pr-9 h-10 bg-card border-border/50"
@@ -62,13 +64,13 @@ export default function CorporateInsiders() {
 
         <ChipFilter options={typeOptions} value={typeFilter} onChange={setTypeFilter} allLabel="Buy & Sell" />
 
-        <p className="text-xs text-muted-foreground">{filtered.length} trades</p>
+        <p className="text-xs text-muted-foreground">{filtered.length} {t('totalTrades')}</p>
 
         <div className="space-y-3">
           {isLoading ? (
             Array(6).fill(0).map((_, i) => <SkeletonTradeCard key={i} />)
           ) : filtered.length === 0 ? (
-            <EmptyState title="No corporate trades" description="Adjust your search or filters." />
+            <EmptyState title={t('noCorporateTrades')} description={t('adjustSearchOrFilters')} />
           ) : (
             filtered.map((trade) => (
               <TradeCard

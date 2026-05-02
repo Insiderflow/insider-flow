@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { login } from '@/lib/auth';
+import { login, OAUTH_ONLY_ACCOUNT_MESSAGE } from '@/lib/auth';
 import { rateLimit, keyFromRequest } from '@/lib/rateLimit';
 
 export async function POST(req: NextRequest) {
@@ -38,6 +38,9 @@ export async function POST(req: NextRequest) {
     if (error instanceof Error) {
       if (error.message === 'Invalid credentials') {
         return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });
+      }
+      if (error.message === OAUTH_ONLY_ACCOUNT_MESSAGE) {
+        return NextResponse.json({ error: error.message }, { status: 401 });
       }
       return NextResponse.json({ error: error.message }, { status: 400 });
     }

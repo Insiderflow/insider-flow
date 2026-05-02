@@ -96,6 +96,25 @@ async function getSP500Price(date: Date): Promise<number | null> {
   return price;
 }
 
+// Get Nasdaq-100 (^NDX) price on a date
+async function getNQPrice(date: Date): Promise<number | null> {
+  const cacheKey = `NQ_${date.toISOString().split('T')[0]}`;
+  if (priceCache.has(cacheKey)) {
+    return priceCache.get(cacheKey) || null;
+  }
+
+  const timestamp = Math.floor(date.getTime() / 1000);
+  const prices = await fetchYahooFinance('^NDX', timestamp, timestamp + 86400);
+
+  let price = null;
+  if (prices && prices.length > 0) {
+    price = prices[prices.length - 1];
+  }
+
+  priceCache.set(cacheKey, price);
+  return price;
+}
+
 // Load cached portfolio data
 function loadCachedData(): Map<string, { politician_name?: string; data?: { dates: string[]; politician_returns: number[]; sp500_returns: number[] }; updated_at: string }> {
   try {
@@ -241,10 +260,30 @@ async function handleRequest(
           // Continue without trades
         }
         
+        const nqReturns: number[] = [];
+        const cachedDates = cachedData.data.dates || [];
+        let nqStartPrice: number | null = null;
+        if (cachedDates.length > 0) {
+          nqStartPrice = await getNQPrice(new Date(cachedDates[0]));
+        }
+        for (let i = 0; i < cachedDates.length; i++) {
+          if (!nqStartPrice) {
+            nqReturns.push(i > 0 ? nqReturns[i - 1] : 0);
+            continue;
+          }
+          const nqPoint = await getNQPrice(new Date(cachedDates[i]));
+          if (nqPoint) {
+            nqReturns.push(((nqPoint - nqStartPrice) / nqStartPrice) * 100);
+          } else {
+            nqReturns.push(i > 0 ? nqReturns[i - 1] : 0);
+          }
+        }
+
         return NextResponse.json({
           dates: cachedData.data.dates,
           politician_returns: cachedData.data.politician_returns,
           sp500_returns: cachedData.data.sp500_returns,
+          nq_returns: nqReturns,
           trades: formattedTrades,
           cached: true,
           cached_at: cachedData.updated_at
@@ -357,6 +396,17 @@ async function handleRequest(
     }
     
     // Process each month
+    const nqReturns: number[] = [];
+    let nqStartPrice: number | null = null;
+    try {
+      nqStartPrice = await Promise.race([
+        getNQPrice(actualStartDate),
+        new Promise<null>((resolve) => setTimeout(() => resolve(null), 5000)),
+      ]);
+    } catch {
+      nqStartPrice = null;
+    }
+
     for (let i = 0; i < dates.length; i++) {
       const monthEnd = new Date(dates[i]);
       monthEnd.setMonth(monthEnd.getMonth() + 1);
@@ -450,6 +500,27 @@ async function handleRequest(
       } else {
         sp500Returns.push(0);
       }
+
+      if (nqStartPrice) {
+        try {
+          const nqMonthEndPrice = await Promise.race([
+            getNQPrice(monthEnd),
+            new Promise<null>((resolve) => setTimeout(() => resolve(null), 3000)),
+          ]);
+          await new Promise(resolve => setTimeout(resolve, 50)); // Rate limit
+
+          if (nqMonthEndPrice) {
+            const nqReturn = ((nqMonthEndPrice - nqStartPrice) / nqStartPrice) * 100;
+            nqReturns.push(nqReturn);
+          } else {
+            nqReturns.push(i > 0 ? nqReturns[i - 1] : 0);
+          }
+        } catch {
+          nqReturns.push(i > 0 ? nqReturns[i - 1] : 0);
+        }
+      } else {
+        nqReturns.push(0);
+      }
     }
 
     // Format trades for response
@@ -468,11 +539,15 @@ async function handleRequest(
     while (sp500Returns.length < dates.length) {
       sp500Returns.push(0);
     }
+    while (nqReturns.length < dates.length) {
+      nqReturns.push(0);
+    }
 
     return NextResponse.json({
       dates,
       politician_returns: politicianReturns,
       sp500_returns: sp500Returns,
+      nq_returns: nqReturns,
       trades: formattedTrades,
       cached: false
     });

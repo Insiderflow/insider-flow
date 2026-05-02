@@ -4,12 +4,20 @@ import SettingsCard from '@/components/settings/SettingsCard';
 import PlanStatusCard from './PlanStatusCard';
 import { appClient } from '@/api/appClient';
 import { useToast } from '@/components/ui/use-toast';
+import { stripeBillingAllowed } from '@/lib/nativeRuntime';
 
 export default function BillingSection({ billingData }) {
   const { toast } = useToast();
   const [loadingPortal, setLoadingPortal] = useState(false);
 
   const openStripePortal = async () => {
+    if (!stripeBillingAllowed()) {
+      toast({
+        title: 'Manage subscription',
+        description: 'Use App Store subscription settings for plans purchased in the app.',
+      });
+      return;
+    }
     if (billingData.billingProvider !== 'stripe') return;
     setLoadingPortal(true);
     try {

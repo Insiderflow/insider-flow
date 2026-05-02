@@ -50,6 +50,18 @@ export interface LoginRequest {
   password: string;
 }
 
+export interface AppleMobileLoginRequest {
+  identityToken: string;
+}
+
+export interface GoogleMobileLoginRequest {
+  idToken: string;
+}
+
+export interface FacebookMobileLoginRequest {
+  accessToken: string;
+}
+
 export interface RegisterRequest {
   email: string;
   password: string;
@@ -89,6 +101,7 @@ export interface NotificationSettings {
 
 export interface PoliticianTrade {
   id: string;
+  politician_id?: string;
   politician_name: string;
   party: Party;
   chamber: Chamber;
@@ -217,6 +230,8 @@ export interface WatchlistItem {
   type: WatchlistItemType;
   identifier: string;
   label: string;
+  sector?: string;
+  avatar_url?: string | null;
   notes: string;
   created_date: string;
 }
@@ -322,4 +337,40 @@ export interface DashboardStats {
   buysDelta: string;
   sellsDelta: string;
   activeDelta: string;
+}
+
+// ─────────────────────────────────────────────
+// Politicians by Sector (11 GICS sectors)
+// ─────────────────────────────────────────────
+
+export type GicsSectorName =
+  | "Information Technology"
+  | "Financials"
+  | "Industrials"
+  | "Health Care"
+  | "Consumer Discretionary"
+  | "Communication Services"
+  | "Consumer Staples"
+  | "Energy"
+  | "Materials"
+  | "Real Estate"
+  | "Utilities";
+
+export type PoliticianPartyMobile = "D" | "R" | "I" | "U";
+export type PoliticianChamberMobile = "House" | "Senate" | "Unknown";
+
+export interface PoliticianBySectorStats {
+  name: string;
+  title: string;
+  party: PoliticianPartyMobile;
+  chamber: PoliticianChamberMobile;
+  state: string;
+  tradeCountInSector: number;
+  lastTradeDate: string | null; // YYYY-MM-DD
+  totalVolumeInSector: number;
+}
+
+export interface PoliticiansBySectorResponse {
+  sector: GicsSectorName;
+  politicians: PoliticianBySectorStats[];
 }

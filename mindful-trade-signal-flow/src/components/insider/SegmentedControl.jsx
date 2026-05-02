@@ -7,7 +7,7 @@ export default function SegmentedControl({ options, value, onChange }) {
         <button
           key={option.value}
           onClick={() => onChange(option.value)}
-          className={`flex-1 px-3 py-1.5 text-xs font-medium rounded-md transition-all ${
+          className={`flex-1 min-h-9 px-3 py-1.5 text-xs font-medium rounded-md transition-all ${
             value === option.value
               ? 'bg-card text-foreground shadow-sm'
               : 'text-muted-foreground hover:text-foreground'

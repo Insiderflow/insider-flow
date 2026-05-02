@@ -10,6 +10,7 @@ import PortfolioChart from '@/components/PortfolioChart';
 import { getCurrentUserWithTier, isPaid } from '@/lib/membership';
 import { badgeStyles } from '@/components/badgeStyles';
 import { navLinkButtonStyles, textLinkStyles } from '@/components/linkStyles';
+import { SECTOR_NAMES, getPoliticiansBySector, getSectorsForPolitician } from '@/lib/politiciansBySector';
 
 export const dynamic = 'force-dynamic';
 
@@ -129,12 +130,25 @@ export default async function PoliticianDetailPage({
     count: issuer._count.issuer_id
   }));
 
-  // Get sector distribution (simplified - would need sector data)
-  const sectors = { 'Other': totalTrades }; // Simplified for now
+  const resolvedSelectedSector = (() => {
+    const raw = typeof sp.sector === 'string' ? sp.sector : '';
+    return SECTOR_NAMES.find((s) => s.toLowerCase() === raw.trim().toLowerCase()) || null;
+  })();
 
-  const mostTradedSectors = Object.entries(sectors)
-    .sort(([,a], [,b]) => b - a)
-    .slice(0, 4);
+  // Default sector is the first sector this politician belongs to.
+  const politicianSectorList = await getSectorsForPolitician(politician.name);
+  const selectedSector = resolvedSelectedSector ?? politicianSectorList[0] ?? SECTOR_NAMES[0];
+  const relatedPoliticians = (await getPoliticiansBySector(selectedSector)).slice(0, 12);
+
+  // Map politician name -> id so the sector list can link to exact profiles.
+  const relatedNames = relatedPoliticians.map((p) => p.name);
+  const relatedIds = relatedNames.length
+    ? await prisma.politician.findMany({
+        where: { name: { in: relatedNames } },
+        select: { id: true, name: true },
+      })
+    : [];
+  const idByName = new Map(relatedIds.map((row) => [row.name, row.id]));
 
   // Prepare trade data for table
   const tradeRows = trades.slice(0, 50).map(trade => ({
@@ -200,7 +214,7 @@ export default async function PoliticianDetailPage({
           </div>
 
           {/* Stats Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
             <div className="bg-gray-800 border border-gray-600 rounded-lg p-4 shadow-md">
               <div className="text-2xl font-bold text-white">{totalTrades}</div>
               <div className="text-sm text-gray-400">交易次數</div>
@@ -222,6 +236,33 @@ export default async function PoliticianDetailPage({
                 }) : '無交易記錄'}
               </div>
               <div className="text-sm text-gray-400">最後交易</div>
+            </div>
+
+            {/* Sector selection */}
+            <div className="bg-gray-800 border border-gray-600 rounded-lg p-4 shadow-md">
+              <div className="text-sm text-gray-400 mb-2">產業選擇</div>
+              <form method="get" className="flex flex-col gap-2">
+                <input type="hidden" name="page" value="1" />
+                <input type="hidden" name="sort" value={sortKey} />
+                <input type="hidden" name="order" value={order} />
+                <select
+                  name="sector"
+                  defaultValue={selectedSector}
+                  className="border border-gray-600 p-2 bg-gray-900 text-white text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200 rounded"
+                >
+                  {SECTOR_NAMES.map((s) => (
+                    <option key={s} value={s}>
+                      {s}
+                    </option>
+                  ))}
+                </select>
+                <button
+                  type="submit"
+                  className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none transition-colors duration-200 text-sm"
+                >
+                  查看
+                </button>
+              </form>
             </div>
           </div>
         </div>
@@ -246,18 +287,49 @@ export default async function PoliticianDetailPage({
           </div>
         </div>
 
-        {/* Most Traded Sectors */}
+        {/* Related Politicians by selected sector */}
         <div className="mb-6">
-          <h2 className="text-xl font-semibold text-white mb-4">最常交易產業</h2>
+          <h2 className="text-xl font-semibold text-white mb-4">
+            {selectedSector} - 相關政治家
+          </h2>
           <div className="bg-gray-800 border border-gray-600 rounded-lg p-4 shadow-md">
-            <div className="space-y-2">
-              {mostTradedSectors.map(([sector, count], index) => (
-                <div key={index} className="flex justify-between items-center">
-                  <span className="text-white">{sector}</span>
-                  <span className="text-gray-400">{count}</span>
-                </div>
-              ))}
-            </div>
+            {relatedPoliticians.length ? (
+              <div className="space-y-2">
+                {relatedPoliticians.map((p) => {
+                  const tone: 'democrat' | 'republican' | 'neutral' =
+                    p.party === 'D' ? 'democrat' : p.party === 'R' ? 'republican' : 'neutral';
+                  const isCurrent = p.name === politician.name;
+                  const relatedId = idByName.get(p.name);
+                  return (
+                    <div
+                      key={`${p.name}-${p.chamber}-${p.state}`}
+                      className={`flex justify-between items-center p-2 rounded ${isCurrent ? 'bg-blue-900/40' : ''}`}
+                    >
+                      <div className="min-w-0">
+                        {relatedId ? (
+                          <Link href={`/politicians/${relatedId}`} className={textLinkStyles('muted')}>
+                            <div className="text-white font-medium truncate">{p.title}</div>
+                          </Link>
+                        ) : (
+                          <div className="text-white font-medium truncate">{p.title}</div>
+                        )}
+                        <div className="flex flex-wrap gap-2 mt-1">
+                          <span className={badgeStyles(tone, 'sm')}>{p.party}</span>
+                          <span className={badgeStyles('neutral', 'sm')}>{p.chamber}</span>
+                          <span className={badgeStyles('neutral', 'sm')}>{p.state}</span>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-white font-semibold">{p.tradeCountInSector}</div>
+                        <div className="text-gray-400 text-xs">{p.lastTradeDate ?? '—'}</div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="text-gray-400 text-sm">找不到此產業的相關政治家。</div>
+            )}
           </div>
         </div>
 

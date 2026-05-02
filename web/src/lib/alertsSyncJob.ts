@@ -3,6 +3,7 @@ import { releaseAlertsSyncLock, tryAcquireAlertsSyncLock } from '@/lib/alertsSyn
 
 type AlertsSyncJobResult = {
   syncedUsers: number;
+  seatAlignmentInserted: number;
   deletedOldReadAlerts: number;
   elapsedMs: number;
   retentionCutoff: string;
@@ -52,6 +53,7 @@ export async function runAlertsSyncJob() {
     state.lastRunAt = new Date().toISOString();
     state.lastResult = {
       syncedUsers: sync.syncedUsers,
+      seatAlignmentInserted: sync.seatAlignmentInserted ?? 0,
       deletedOldReadAlerts: prune.deletedAlerts,
       elapsedMs,
       retentionCutoff: prune.cutoff.toISOString(),

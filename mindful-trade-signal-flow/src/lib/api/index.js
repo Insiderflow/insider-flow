@@ -24,6 +24,7 @@ import {
   searchEndpoints,
   alertEndpoints,
 } from './endpoints';
+import { appClient } from '@/api/appClient';
 import {
   MOCK_POLITICIAN_TRADES,
   MOCK_CORPORATE_TRADES,
@@ -60,6 +61,20 @@ export async function getPoliticianTradesByName(name) {
   }
   const raw = await politicianEndpoints.getTradesByName(name);
   return mapPoliticianTrades(raw);
+}
+
+/**
+ * Returns politicians pre-filtered/aggregated into one of the 11 GICS sectors.
+ * Output is already in mobile-friendly shape (name/title/party/chamber/state + trade counts).
+ */
+export async function getPoliticiansBySector(sector) {
+  if (USE_MOCK) {
+    await delay();
+    // fall back to existing mock search results shape if MOCK ever enabled
+    return [];
+  }
+  const res = await politicianEndpoints.getPoliticiansBySector(sector);
+  return res?.politicians || [];
 }
 
 export async function getUniquePoliticians() {
@@ -117,6 +132,7 @@ export async function getOpenInsiderOwners({ limit = 100 } = {}) {
 function toWatchlistPayload(data) {
   const payload = { type: data.type };
   if (data.type === 'politician') payload.politicianId = data.identifier;
+  if (data.type === 'politician') payload.politicianName = data.label;
   if (data.type === 'company') payload.companyId = data.identifier;
   if (data.type === 'owner') payload.ownerId = data.identifier;
   if (data.type === 'ticker' || data.type === 'stock') payload.ticker = data.identifier;
@@ -124,42 +140,59 @@ function toWatchlistPayload(data) {
 }
 
 export async function getWatchlistItems() {
-  const [politicians, companies, owners, stocks] = await Promise.all([
-    watchlistEndpoints.getItems({ type: 'politician' }),
-    watchlistEndpoints.getItems({ type: 'company' }),
-    watchlistEndpoints.getItems({ type: 'owner' }),
-    watchlistEndpoints.getItems({ type: 'stock' }),
-  ]);
-  const flatten = [...(politicians.watchlist || []), ...(companies.watchlist || []), ...(owners.watchlist || []), ...(stocks.watchlist || [])];
-  return mapWatchlistItems(flatten);
+  try {
+    const response = await watchlistEndpoints.getItems();
+    return mapWatchlistItems(response.watchlist || []);
+  } catch {
+    const fallback = await appClient.entities.WatchlistItem.list();
+    return mapWatchlistItems(fallback || []);
+  }
 }
 
 export async function addToWatchlist(data) {
-  const raw = await watchlistEndpoints.addItem(toWatchlistPayload(data));
-  return mapWatchlistItem(raw.watchlistItem);
+  try {
+    const raw = await watchlistEndpoints.addItem(toWatchlistPayload(data));
+    return mapWatchlistItem(raw.watchlistItem);
+  } catch {
+    const created = await appClient.entities.WatchlistItem.create(toWatchlistPayload(data));
+    return mapWatchlistItem(created);
+  }
 }
 
 export async function removeFromWatchlist(id) {
-  const all = await getWatchlistItems();
-  const target = all.find((i) => i.id === id);
-  if (!target) return;
-  const params = { type: target.type };
-  if (target.type === 'politician') params.politicianId = target.identifier;
-  if (target.type === 'company') params.companyId = target.identifier;
-  if (target.type === 'owner') params.ownerId = target.identifier;
-  if (target.type === 'ticker' || target.type === 'stock') params.ticker = target.identifier;
-  return watchlistEndpoints.removeItem(params);
+  try {
+    const all = await getWatchlistItems();
+    const target = all.find((i) => i.id === id);
+    if (!target) return;
+    const params = { type: target.type };
+    if (target.type === 'politician') params.politicianId = target.identifier;
+    if (target.type === 'company') params.companyId = target.identifier;
+    if (target.type === 'owner') params.ownerId = target.identifier;
+    if (target.type === 'ticker' || target.type === 'stock') params.ticker = target.identifier;
+    return watchlistEndpoints.removeItem(params);
+  } catch {
+    return appClient.entities.WatchlistItem.delete(id);
+  }
 }
 
 export async function getWatchlistItem(type, identifier) {
-  const response = await watchlistEndpoints.getItems(
-    type === 'politician' ? { type, politicianId: identifier }
-      : type === 'company' ? { type, companyId: identifier }
-      : type === 'owner' ? { type, ownerId: identifier }
-      : { type: 'stock', ticker: identifier },
+  const normalizedType = type === 'stock' ? 'ticker' : type;
+  const idNeedle = String(identifier || '').toLowerCase();
+  const all = await getWatchlistItems();
+  const directMatch = all.find(
+    (item) =>
+      item.type === normalizedType &&
+      String(item.identifier || '').toLowerCase() === idNeedle,
   );
-  const item = response.watchlist?.[0];
-  return item ? mapWatchlistItem(item) : null;
+  if (directMatch) return directMatch;
+  if (normalizedType === 'politician') {
+    return all.find(
+      (item) =>
+        item.type === 'politician' &&
+        String(item.label || '').toLowerCase() === idNeedle,
+    ) || null;
+  }
+  return null;
 }
 
 export async function getAlerts() {

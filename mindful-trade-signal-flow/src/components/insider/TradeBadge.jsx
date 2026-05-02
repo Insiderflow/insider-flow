@@ -1,6 +1,8 @@
 import React from 'react';
+import { useTranslation } from '@/lib/useTranslation';
 
 export default function TradeBadge({ type, size = 'sm' }) {
+  const { t } = useTranslation();
   const isBuy = type === 'Buy';
   const sizeClasses = size === 'lg'
     ? 'px-3 py-1 text-xs'
@@ -14,7 +16,7 @@ export default function TradeBadge({ type, size = 'sm' }) {
           : 'bg-sell/10 text-sell'
       }`}
     >
-      {isBuy ? '↑ BUY' : '↓ SELL'}
+      {isBuy ? `↑ ${t('buy')}` : `↓ ${t('sell')}`}
     </span>
   );
 }

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Search as SearchIcon, X, TrendingUp, Landmark, ArrowUpRight } from 'lucide-react';
 import { getAllTradesForSearch } from '@/lib/api';
+import { useTranslation } from '@/lib/useTranslation';
 
 const LS_KEY = 'insiderflow_recent_searches';
 const MAX_RECENT = 6;
@@ -45,16 +46,18 @@ function ResultRow({ icon: Icon, iconBg, iconColor, title, subtitle, meta, onCli
 }
 
 function SectionHeader({ title, count }) {
+  const { t } = useTranslation();
   return (
     <div className="px-4 py-2 bg-secondary/40 border-b border-border/30 flex items-center justify-between">
       <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">{title}</p>
-      {count != null && <span className="text-[10px] text-muted-foreground">{count} results</span>}
+      {count != null && <span className="text-[10px] text-muted-foreground">{count} {t('results')}</span>}
     </div>
   );
 }
 
 export default function Search() {
   const navigate = useNavigate();
+  const { t, displaySector, displayIssuerName } = useTranslation();
   const [query, setQuery] = useState('');
   const [debouncedQuery, setDebouncedQuery] = useState('');
   const { recent, add, clear } = useRecentSearches();
@@ -147,7 +150,7 @@ export default function Search() {
           <input
             ref={inputRef}
             type="text"
-            placeholder="Search politicians, tickers, companies…"
+            placeholder={t('searchPlaceholder')}
             value={query}
             onChange={e => setQuery(e.target.value)}
             className="w-full bg-secondary rounded-xl h-11 pl-9 pr-10 text-sm outline-none placeholder:text-muted-foreground/60 border border-border/50 focus:border-primary/50 transition-colors"
@@ -180,8 +183,8 @@ export default function Search() {
             {recent.length > 0 && (
               <div className="mb-4">
                 <div className="flex items-center justify-between px-4 mb-2">
-                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Recent</p>
-                  <button onClick={clear} className="text-[11px] text-muted-foreground hover:text-foreground">Clear</button>
+                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{t('recent')}</p>
+                  <button onClick={clear} className="text-[11px] text-muted-foreground hover:text-foreground">{t('clear')}</button>
                 </div>
                 <div className="bg-card mx-4 rounded-2xl border border-border/50 overflow-hidden">
                   {recent.map(item => (
@@ -203,7 +206,7 @@ export default function Search() {
             {/* Trending tickers */}
             <div className="px-4">
               <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">
-                Trending This Week
+                {t('trendingThisWeek')}
               </p>
               <div className="flex flex-wrap gap-2">
                 {['NVDA', 'AAPL', 'TSLA', 'META', 'JPM', 'MSFT', 'AMZN', 'XOM'].map(ticker => (
@@ -226,40 +229,47 @@ export default function Search() {
             {!hasResults ? (
               <div className="flex flex-col items-center justify-center pt-20 px-6 text-center">
                 <SearchIcon className="h-8 w-8 text-muted-foreground/40 mb-3" />
-                <p className="text-sm font-semibold mb-1">No results for "{debouncedQuery}"</p>
-                <p className="text-xs text-muted-foreground">Try a politician name, ticker, or company.</p>
+                <p className="text-sm font-semibold mb-1">{t('noResultsFor')} "{debouncedQuery}"</p>
+                <p className="text-xs text-muted-foreground">{t('tryPoliticianTickerCompany')}</p>
               </div>
             ) : (
               <div className="bg-card mx-4 mt-4 rounded-2xl border border-border/50 overflow-hidden">
                 {politicianResults.length > 0 && (
                   <>
-                    <SectionHeader title="Politicians" count={politicianResults.length} />
-                    {politicianResults.slice(0, 5).map(t => (
+                    <SectionHeader title={t('politiciansTab')} count={politicianResults.length} />
+                    {politicianResults.slice(0, 5).map((trade) => {
+                      const sectorSubtitle = `${t('sector')}: ${displaySector(trade.sector) || t('unknown')}`;
+                      return (
                       <ResultRow
-                        key={t.id}
+                        key={trade.id}
                         icon={Landmark}
                         iconBg="bg-blue-500/10"
                         iconColor="text-blue-400"
-                        title={t.politician_name}
-                        subtitle={`${t.party} · ${t.chamber} · ${t.state}`}
-                        onClick={() => handleSelect('politician', t.politician_name, t.politician_name, `${t.party} · ${t.chamber} · ${t.state}`)}
+                        title={trade.politician_name}
+                        subtitle={sectorSubtitle}
+                        onClick={() =>
+                          handleSelect('politician', trade.politician_name, trade.politician_name, sectorSubtitle)
+                        }
                       />
-                    ))}
+                      );
+                    })}
                   </>
                 )}
                 {tickerResults.length > 0 && (
                   <>
-                    <SectionHeader title="Stocks & Companies" count={tickerResults.length} />
+                    <SectionHeader title={t('stocksAndCompanies')} count={tickerResults.length} />
                     {tickerResults.slice(0, 5).map(t => (
                       <ResultRow
                         key={t.ticker}
                         icon={TrendingUp}
                         iconBg="bg-primary/10"
                         iconColor="text-primary"
-                        title={t.company_name || t.ticker}
+                        title={displayIssuerName(t.company_name || t.ticker, t.ticker)}
                         subtitle={t.sector}
                         meta={t.ticker}
-                        onClick={() => handleSelect('ticker', t.ticker, t.company_name || t.ticker, t.sector)}
+                        onClick={() =>
+                          handleSelect('ticker', t.ticker, displayIssuerName(t.company_name || t.ticker, t.ticker), t.sector)
+                        }
                       />
                     ))}
                   </>

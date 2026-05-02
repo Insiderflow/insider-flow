@@ -1,5 +1,6 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import GoogleProvider from "next-auth/providers/google";
+import FacebookProvider from "next-auth/providers/facebook";
 import type { NextAuthOptions } from "next-auth";
 import type { JWT } from "next-auth/jwt";
 import { prisma } from "@/lib/prisma";
@@ -7,14 +8,25 @@ import { prisma } from "@/lib/prisma";
 type JwtWithId = JWT & { id?: string };
 type SessionUserWithId = { id?: string };
 
+const providers = [
+  GoogleProvider({
+    clientId: process.env.GOOGLE_CLIENT_ID!,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+  }),
+];
+
+if (process.env.FACEBOOK_CLIENT_ID?.trim() && process.env.FACEBOOK_CLIENT_SECRET?.trim()) {
+  providers.push(
+    FacebookProvider({
+      clientId: process.env.FACEBOOK_CLIENT_ID,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+    }),
+  );
+}
+
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
-  providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    }),
-  ],
+  providers,
   session: { strategy: "jwt" },
   debug: process.env.NEXTAUTH_DEBUG === "true",
   pages: {
@@ -22,8 +34,7 @@ export const authOptions: NextAuthOptions = {
     error: "/login?error=OAuthSignIn",
   },
   callbacks: {
-    async signIn({ account }) {
-      if (account?.provider === "google") return true;
+    async signIn() {
       return true;
     },
     async jwt({ token, user }) {
@@ -57,5 +68,3 @@ export const authOptions: NextAuthOptions = {
     : {},
   secret: process.env.NEXTAUTH_SECRET,
 };
-
-

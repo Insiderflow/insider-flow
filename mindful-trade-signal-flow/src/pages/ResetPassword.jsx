@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { authEndpoints } from '@/lib/api/endpoints';
 import { ArrowLeft, KeyRound } from 'lucide-react';
+import { useTranslation } from '@/lib/useTranslation';
 
 export default function ResetPassword() {
+  const { t } = useTranslation();
   const [searchParams] = useSearchParams();
   const token = searchParams.get('token') || '';
   const navigate = useNavigate();
@@ -18,24 +20,24 @@ export default function ResetPassword() {
     setError('');
     setMessage('');
     if (!token) {
-      setError('Missing reset token. Open the link from your email.');
+      setError(t('missingResetToken'));
       return;
     }
     if (password.length < 8) {
-      setError('Password must be at least 8 characters');
+      setError(t('passwordMin8'));
       return;
     }
     if (password !== confirm) {
-      setError('Passwords do not match');
+      setError(t('passwordsNotMatch'));
       return;
     }
     setLoading(true);
     try {
       await authEndpoints.resetPassword({ token, new_password: password });
-      setMessage('Password updated. You can sign in now.');
+      setMessage(t('passwordUpdated'));
       setTimeout(() => navigate('/welcome', { replace: true }), 1500);
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Reset failed');
+      setError(e instanceof Error ? e.message : t('resetFailed'));
     } finally {
       setLoading(false);
     }
@@ -48,22 +50,22 @@ export default function ResetPassword() {
         className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground mb-8"
       >
         <ArrowLeft className="h-3.5 w-3.5" />
-        Back to sign in
+        {t('backToSignIn')}
       </Link>
 
       <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center mb-4">
         <KeyRound className="h-4 w-4 text-primary-foreground" />
       </div>
-      <h1 className="text-xl font-bold tracking-tight mb-1">Set new password</h1>
+      <h1 className="text-xl font-bold tracking-tight mb-1">{t('setNewPassword')}</h1>
       <p className="text-sm text-muted-foreground mb-6">
-        Choose a strong password for your account.
+        {t('chooseStrongPassword')}
       </p>
 
       <input
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        placeholder="New password"
+        placeholder={t('newPassword')}
         className="w-full h-12 rounded-xl bg-secondary/40 border border-border/50 px-3 text-sm outline-none mb-3"
         autoComplete="new-password"
       />
@@ -71,7 +73,7 @@ export default function ResetPassword() {
         type="password"
         value={confirm}
         onChange={(e) => setConfirm(e.target.value)}
-        placeholder="Confirm password"
+        placeholder={t('confirmPassword')}
         className="w-full h-12 rounded-xl bg-secondary/40 border border-border/50 px-3 text-sm outline-none mb-3"
         autoComplete="new-password"
       />
@@ -84,7 +86,7 @@ export default function ResetPassword() {
         disabled={loading}
         className="w-full h-12 rounded-xl bg-primary text-primary-foreground font-semibold text-sm disabled:opacity-60"
       >
-        {loading ? 'Saving…' : 'Update password'}
+        {loading ? t('saving') : t('updatePassword')}
       </button>
     </div>
   );

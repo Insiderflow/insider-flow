@@ -136,6 +136,51 @@
 }
 
 @layer utilities {
+  /* iPhone typography scale */
+  .text-ui-title {
+    @apply text-lg font-semibold tracking-tight;
+  }
+  .text-ui-section {
+    @apply text-sm font-semibold tracking-tight;
+  }
+  .text-ui-body {
+    @apply text-sm leading-5;
+  }
+  .text-ui-meta {
+    @apply text-xs text-muted-foreground leading-5;
+  }
+  .text-ui-caption {
+    @apply text-[11px] text-muted-foreground;
+  }
+
+  /* Consistent touch targets */
+  .tap-chip {
+    @apply min-h-9 px-3 py-1.5 text-xs font-medium rounded-full border transition-colors;
+  }
+  .tap-icon {
+    @apply h-10 w-10;
+  }
+  .tap-button {
+    @apply min-h-10 px-3 py-2 rounded-xl text-xs font-semibold border transition-all active:scale-95;
+  }
+  .motion-press {
+    @apply transition-transform duration-150 ease-out active:scale-[0.98];
+  }
+  .motion-fade-in {
+    animation: ui-fade-in 240ms ease-out both;
+  }
+  .motion-slide-up {
+    animation: ui-slide-up 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .motion-elevate {
+    @apply transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-md;
+  }
+  .motion-stagger-item {
+    opacity: 0;
+    animation: ui-slide-up 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--stagger-delay, 0ms);
+  }
+
   .text-buy {
     color: hsl(var(--buy));
   }
@@ -192,5 +237,21 @@
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+}
+
+@keyframes ui-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes ui-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

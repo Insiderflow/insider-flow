@@ -4,8 +4,10 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { TrendingUp, TrendingDown } from 'lucide-react';
 import EmptyState from '@/components/insider/EmptyState';
 import { ShoppingBag } from 'lucide-react';
+import { useTranslation } from '@/lib/useTranslation';
 
 function TradeRow({ trade }) {
+  const { t, displayIssuerName } = useTranslation();
   const isBuy = trade.trade_type === 'Buy';
 
   return (
@@ -24,13 +26,13 @@ function TradeRow({ trade }) {
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 mb-0.5">
           <span className="font-mono text-sm font-bold text-primary">{trade.ticker}</span>
-          <span className="text-xs text-muted-foreground truncate">{trade.company_name}</span>
+          <span className="text-xs text-muted-foreground truncate">{displayIssuerName(trade.company_name, trade.ticker)}</span>
         </div>
         <p className="text-[11px] text-muted-foreground">
           {trade.trade_date ? format(new Date(trade.trade_date), 'MMM d, yyyy') : '—'}
           {trade.disclosure_date && (
             <span className="ml-2 opacity-60">
-              · disclosed {format(new Date(trade.disclosure_date), 'MMM d')}
+              · {t('disclosed')} {format(new Date(trade.disclosure_date), 'MMM d')}
             </span>
           )}
         </p>
@@ -39,7 +41,7 @@ function TradeRow({ trade }) {
       {/* Amount + badge */}
       <div className="text-right flex-shrink-0">
         <p className={`text-xs font-semibold ${isBuy ? 'text-buy' : 'text-sell'}`}>
-          {isBuy ? 'BUY' : 'SELL'}
+          {isBuy ? t('buy') : t('sell')}
         </p>
         <p className="text-[11px] text-muted-foreground tabular-nums">{trade.amount_range || '—'}</p>
       </div>
@@ -48,6 +50,7 @@ function TradeRow({ trade }) {
 }
 
 export default function TradesFeed({ trades, isLoading }) {
+  const { t } = useTranslation();
   if (isLoading) {
     return (
       <div className="px-4 space-y-3">
@@ -70,8 +73,8 @@ export default function TradesFeed({ trades, isLoading }) {
       <div className="px-4">
         <EmptyState
           icon={ShoppingBag}
-          title="No trades on record"
-          description="This politician has no disclosed trades yet."
+          title={t('noPoliticianTrades')}
+          description={t('adjustSearchOrFilters')}
         />
       </div>
     );

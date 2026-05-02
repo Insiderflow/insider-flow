@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "check:github": "bash ./scripts/check_local_vs_github.sh",
     "check:mirror": "bash ./scripts/check_vite_mirror_sync.sh",
     "sync:mirror": "bash ./scripts/sync_vite_mirror.sh",
     "hooks:install": "bash ./scripts/install_local_hooks.sh"

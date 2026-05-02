@@ -6,7 +6,15 @@ import { cookies } from "next/headers";
 function getAllowedOrigins(): string[] {
   const raw =
     process.env.CORS_ALLOWED_ORIGINS ||
-    "http://localhost:5173,http://localhost:4173,http://127.0.0.1:5173,https://www.insiderflow.asia";
+    [
+      "http://localhost:5173",
+      "http://localhost:4173",
+      "http://127.0.0.1:5173",
+      "https://www.insiderflow.asia",
+      // Capacitor WKWebView origins (confirm via Safari Web Inspector → Network → Request Headers → Origin)
+      "capacitor://localhost",
+      "ionic://localhost",
+    ].join(",");
   return raw
     .split(",")
     .map((s) => s.trim())

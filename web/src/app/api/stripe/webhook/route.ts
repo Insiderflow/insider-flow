@@ -6,10 +6,19 @@ import {
   markSubscriptionEventFailed,
   markSubscriptionEventProcessed,
 } from '@/lib/subscriptionEvents';
+import { enforceRouteRateLimit } from '@/lib/rateLimit';
 
 export const dynamic = 'force-dynamic';
 
 export async function POST(req: NextRequest) {
+  const rate = enforceRouteRateLimit(req, 'stripe_webhook', 120, 60_000);
+  if (!rate.ok) {
+    return NextResponse.json(
+      { error: 'Too many requests', retry_after_seconds: rate.retryAfterSeconds },
+      { status: 429 },
+    );
+  }
+
   const body = await req.text();
   const signature = req.headers.get('stripe-signature');
 

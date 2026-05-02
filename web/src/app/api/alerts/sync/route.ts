@@ -30,6 +30,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       ok: true,
       syncedUsers: lastResult?.syncedUsers ?? 0,
+      seatAlignmentInserted: lastResult?.seatAlignmentInserted ?? 0,
       deletedOldReadAlerts: lastResult?.deletedOldReadAlerts ?? 0,
       retentionCutoff: lastResult?.retentionCutoff ?? null,
       elapsedMs: lastResult?.elapsedMs ?? 0,

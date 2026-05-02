@@ -25,6 +25,7 @@ model Politician {
   party         String?
   chamber       String?
   state         String?
+  committees    String?
   created_at    DateTime        @default(now())
   Trade         Trade[]
   UserWatchlist UserWatchlist[]
@@ -102,6 +103,7 @@ enum AlertType {
   politician
   watchlist
   corporate
+  seat_alignment
 }
 
 model Alert {
@@ -202,6 +204,27 @@ model OpenInsiderTransaction {
   @@index([ownerId])
   @@index([transactionType])
   @@map("openinsider_transactions")
+}
+
+/** Quarterly-ish 13F-style holdings snapshots from Finnhub (not corporate Form 4). */
+model InstitutionalHoldingSnapshot {
+  id           String   @id
+  symbol       String
+  reportDate   DateTime @map("report_date")
+  investorCik  String?  @map("investor_cik")
+  investorName String   @map("investor_name")
+  putCall      String?  @map("put_call")
+  changeShares Decimal? @map("change_shares") @db.Decimal(30, 4)
+  sharesHeld   Decimal? @map("shares_held") @db.Decimal(30, 4)
+  valueUsd     Decimal? @map("value_usd") @db.Decimal(30, 4)
+  pctPortfolio Decimal? @map("pct_portfolio") @db.Decimal(14, 8)
+  dataSource   String   @default("finnhub") @map("data_source")
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([symbol])
+  @@index([reportDate(sort: Desc)])
+  @@map("institutional_holding_snapshots")
 }
 
 // NextAuth.js models

@@ -56,6 +56,7 @@ function toDate(v: unknown): string {
 export function mapPoliticianTrade(raw: any): PoliticianTrade {
   return {
     id:               toStr(raw.id),
+    politician_id:    toStr(raw.politician_id),
     politician_name:  toStr(raw.politician_name),
     party:            raw.party ?? 'Independent',
     chamber:          raw.chamber ?? 'House',
@@ -200,6 +201,8 @@ export function mapWatchlistItem(raw: any): WatchlistItem {
     type:         normalizedType,
     identifier:   toStr(identifier),
     label:        toStr(label),
+    sector:       toStr(raw.sector),
+    avatar_url:   raw.avatar_url ?? null,
     notes:        toStr(raw.notes),
     created_date: toDate(raw.created_date ?? raw.created_at),
   };

@@ -1,8 +1,9 @@
-import React, { useState, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts';
 import { Skeleton } from '@/components/ui/skeleton';
 import { RefreshCw, AlertCircle, Clock } from 'lucide-react';
 import { format, subMonths } from 'date-fns';
+import { politicianEndpoints } from '@/lib/api/endpoints';
 
 const RANGES = [
   { label: '1M', months: 1 },
@@ -11,26 +12,17 @@ const RANGES = [
   { label: '1Y', months: 12 },
 ];
 
-// Generate mock performance data from trades
-function buildChartData(trades, months) {
-  const now = new Date();
-  const start = subMonths(now, months);
-  const points = [];
-  let politicianCumulative = 0;
-  let sp500Cumulative = 0;
-
-  for (let i = 0; i <= months * 4; i++) {
-    const date = new Date(start.getTime() + (i / (months * 4)) * (now - start));
-    // Simulate returns: politician slightly higher variance
-    politicianCumulative += (Math.random() - 0.44) * 2.5;
-    sp500Cumulative += (Math.random() - 0.46) * 1.2;
-    points.push({
-      date: format(date, 'MMM d'),
-      politician: parseFloat(politicianCumulative.toFixed(2)),
-      sp500: parseFloat(sp500Cumulative.toFixed(2)),
-    });
-  }
-  return points;
+function mapApiToChartData(apiData) {
+  const dates = apiData?.dates || [];
+  const p = apiData?.politician_returns || [];
+  const s = apiData?.sp500_returns || [];
+  const n = apiData?.nq_returns || [];
+  return dates.map((d, i) => ({
+    date: format(new Date(d), 'MMM d'),
+    politician: Number(p[i] || 0),
+    sp500: Number(s[i] || 0),
+    nq: Number(n[i] || 0),
+  }));
 }
 
 const CustomTooltip = ({ active, payload, label }) => {
@@ -51,12 +43,39 @@ const CustomTooltip = ({ active, payload, label }) => {
   );
 };
 
-export default function PerformanceChart({ trades, isLoading, error, onRetry, cachedAt }) {
+export default function PerformanceChart({ trades, politicianName, isLoading, error, onRetry }) {
   const [activeRange, setActiveRange] = useState('3M');
   const months = RANGES.find(r => r.label === activeRange)?.months || 3;
-  const data = useMemo(() => buildChartData(trades, months), [trades, months]);
+  const [apiData, setApiData] = useState(null);
+  const [chartError, setChartError] = useState(null);
+  const [isChartLoading, setIsChartLoading] = useState(false);
 
-  if (isLoading) {
+  const resolvedPolitician = politicianName || trades?.[0]?.politician_name || null;
+
+  const loadChart = async () => {
+    if (!resolvedPolitician) return;
+    setIsChartLoading(true);
+    setChartError(null);
+    try {
+      const now = new Date();
+      const start = subMonths(now, months);
+      const startDate = start.toISOString().slice(0, 10);
+      const res = await politicianEndpoints.getPortfolioComparison(resolvedPolitician, { start_date: startDate });
+      setApiData(res || null);
+    } catch (e) {
+      setChartError(e?.message || 'Failed to load chart');
+    } finally {
+      setIsChartLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadChart();
+  }, [resolvedPolitician, months]);
+
+  const data = useMemo(() => mapApiToChartData(apiData), [apiData]);
+
+  if (isLoading || isChartLoading) {
     return (
       <div className="px-4 pb-4">
         <div className="bg-card rounded-2xl border border-border/50 p-4 space-y-3">
@@ -67,7 +86,7 @@ export default function PerformanceChart({ trades, isLoading, error, onRetry, ca
     );
   }
 
-  if (error) {
+  if (error || chartError || !data.length) {
     return (
       <div className="px-4 pb-4">
         <div className="bg-card rounded-2xl border border-border/50 p-5 flex flex-col items-center gap-3 text-center">
@@ -76,9 +95,12 @@ export default function PerformanceChart({ trades, isLoading, error, onRetry, ca
             <p className="text-sm font-semibold">Chart unavailable</p>
             <p className="text-xs text-muted-foreground mt-0.5">Analytics request timed out. Data may be stale.</p>
           </div>
-          {onRetry && (
+          {(onRetry || resolvedPolitician) && (
             <button
-              onClick={onRetry}
+              onClick={() => {
+                onRetry?.();
+                loadChart();
+              }}
               className="flex items-center gap-1.5 text-xs font-semibold text-primary hover:text-primary/80 transition-colors"
             >
               <RefreshCw className="h-3.5 w-3.5" /> Retry
@@ -95,11 +117,13 @@ export default function PerformanceChart({ trades, isLoading, error, onRetry, ca
         {/* Header row */}
         <div className="flex items-center justify-between mb-3">
           <div>
-            <p className="text-sm font-semibold">Portfolio vs S&P 500</p>
-            {cachedAt && (
+            <p className="text-sm font-semibold">Portfolio vs S&P 500 / NQ</p>
+            {apiData?.cached && apiData?.cached_at && (
               <div className="flex items-center gap-1 mt-0.5">
                 <Clock className="h-2.5 w-2.5 text-muted-foreground" />
-                <span className="text-[10px] text-muted-foreground">Cached {cachedAt}</span>
+                <span className="text-[10px] text-muted-foreground">
+                  Cached {new Date(apiData.cached_at).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
+                </span>
               </div>
             )}
           </div>
@@ -130,6 +154,10 @@ export default function PerformanceChart({ trades, isLoading, error, onRetry, ca
           <div className="flex items-center gap-1.5">
             <span className="w-3 h-0.5 rounded-full bg-muted-foreground inline-block" />
             <span className="text-[11px] text-muted-foreground">S&P 500</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <span className="w-3 h-0.5 rounded-full bg-violet-400 inline-block" />
+            <span className="text-[11px] text-muted-foreground">NQ</span>
           </div>
         </div>
 
@@ -168,6 +196,16 @@ export default function PerformanceChart({ trades, isLoading, error, onRetry, ca
               stroke="hsl(var(--muted-foreground))"
               strokeWidth={1.5}
               strokeDasharray="4 3"
+              dot={false}
+              activeDot={{ r: 3, strokeWidth: 0 }}
+            />
+            <Line
+              type="monotone"
+              dataKey="nq"
+              name="NQ"
+              stroke="#a78bfa"
+              strokeWidth={1.5}
+              strokeDasharray="2 2"
               dot={false}
               activeDot={{ r: 3, strokeWidth: 0 }}
             />

@@ -76,6 +76,7 @@ export default function Upgrade() {
       ]
     }
   ].filter(plan => plan.priceId); // Filter out plans with missing price IDs
+  const billingUnavailable = plans.length === 0;
 
   return (
     <div className="min-h-screen bg-gray-900 text-white">
@@ -91,6 +92,15 @@ export default function Upgrade() {
             <span className="zh-Hans hidden">解锁完整内幕交易数据，掌握政治人物和企业高层的股票交易动向</span>
           </p>
         </div>
+
+        {billingUnavailable && (
+          <div className="max-w-3xl mx-auto mb-8 bg-yellow-900/40 border border-yellow-600 rounded-xl p-4">
+            <p className="text-yellow-100 font-medium">
+              <span className="zh-Hant">Billing temporarily unavailable. Please try again later or contact support.</span>
+              <span className="zh-Hans hidden">Billing temporarily unavailable. Please try again later or contact support.</span>
+            </p>
+          </div>
+        )}
 
         {/* Pricing Cards */}
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">

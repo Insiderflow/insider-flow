@@ -1,4 +1,5 @@
 import bcrypt from 'bcryptjs';
+import { Prisma } from '@prisma/client';
 import { cookies } from 'next/headers';
 import { headers } from 'next/headers';
 import { prisma } from './prisma';
@@ -7,10 +8,33 @@ import crypto from 'crypto';
 import { getServerSession } from 'next-auth';
 import type { Session } from 'next-auth';
 import { authOptions } from '@/lib/nextauthOptions';
+import { verifyAppleIdentityToken } from '@/lib/appleAuth';
+import { verifyGoogleIdToken } from '@/lib/googleAuth';
+import { verifyFacebookAccessToken } from '@/lib/facebookAuth';
 
 // const SESSION_SECRET = process.env.SESSION_SECRET || 'fallback-secret-for-development';
 const SESSION_DURATION = 30 * 24 * 60 * 60 * 1000; // 30 days
 const ACCESS_TOKEN_TTL_SECONDS = 15 * 60; // 15 minutes
+
+/** Surfaced when `password_hash` is null (OAuth-only accounts). */
+export const OAUTH_ONLY_ACCOUNT_MESSAGE =
+  'Use social sign-in (Google, Apple, or Facebook)';
+
+function isPrismaUniqueViolation(error: unknown): boolean {
+  return error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002';
+}
+
+/** OAuth client IDs whose JWT `aud` we accept for Sign in with Google (Web + optional iOS/Android). */
+export function getGoogleJwtAudiences(): string[] {
+  const explicit = process.env.GOOGLE_JWT_AUDIENCES?.split(/[,;\s]+/).map((s) => s.trim()).filter(Boolean);
+  if (explicit?.length) return [...new Set(explicit)];
+  const ids = [
+    process.env.GOOGLE_CLIENT_ID?.trim(),
+    process.env.GOOGLE_IOS_CLIENT_ID?.trim(),
+    process.env.GOOGLE_ANDROID_CLIENT_ID?.trim(),
+  ].filter(Boolean) as string[];
+  return [...new Set(ids)];
+}
 
 export async function hashPassword(password: string): Promise<string> {
   return bcrypt.hash(password, 12);
@@ -154,7 +178,7 @@ export async function login(email: string, password: string) {
 
   // Check if user has a password (not OAuth user)
   if (!user.password_hash) {
-    throw new Error('請使用 Google 登入');
+    throw new Error(OAUTH_ONLY_ACCOUNT_MESSAGE);
   }
 
   const isValidPassword = await verifyPassword(password, user.password_hash);
@@ -171,6 +195,317 @@ export async function loginMobile(email: string, password: string) {
   const { user, sessionToken } = await login(email, password);
   const accessToken = createAccessToken(user.id);
   return { user, accessToken, refreshToken: sessionToken };
+}
+
+/** Native Sign in with Apple: JWT verified against Apple JWKS; links or creates `Account` + `User`. */
+export async function loginOrRegisterAppleMobile(identityToken: string) {
+  const bundleAudience = process.env.APPLE_IOS_CLIENT_ID?.trim();
+  if (!bundleAudience) {
+    throw new Error('Apple Sign-In is not configured');
+  }
+
+  const { sub, email } = await verifyAppleIdentityToken(identityToken, bundleAudience);
+
+  const appleAccountWhere = {
+    provider_providerAccountId: { provider: 'apple' as const, providerAccountId: sub },
+  };
+
+  const findUserByAppleAccount = async () => {
+    const row = await prisma.account.findUnique({
+      where: appleAccountWhere,
+      include: { user: true },
+    });
+    return row?.user ?? null;
+  };
+
+  let user = await findUserByAppleAccount();
+
+  if (!user && email) {
+    const byEmail = await prisma.user.findUnique({ where: { email } });
+    if (byEmail) {
+      try {
+        await prisma.account.create({
+          data: {
+            userId: byEmail.id,
+            type: 'oauth',
+            provider: 'apple',
+            providerAccountId: sub,
+          },
+        });
+        user = byEmail;
+      } catch (err) {
+        if (!isPrismaUniqueViolation(err)) throw err;
+        user = await findUserByAppleAccount();
+      }
+    }
+  }
+
+  if (!user) {
+    user = await createAppleUserAndAccountTransactional(sub, email);
+  }
+
+  const sessionToken = await createSession(user.id);
+  const accessToken = createAccessToken(user.id);
+  return { user, accessToken, refreshToken: sessionToken };
+}
+
+async function createAppleUserAndAccountTransactional(sub: string, email?: string) {
+  const syntheticLocalPart = sub.replace(/[^a-zA-Z0-9]/g, '').slice(0, 48) || 'user';
+  let candidate = email ?? `apple.${syntheticLocalPart}@apple.local.insiderflow`;
+
+  let suffix = 0;
+  while (await prisma.user.findUnique({ where: { email: candidate } })) {
+    suffix += 1;
+    if (suffix > 25) {
+      throw new Error('Could not allocate Apple user identity');
+    }
+    candidate = `apple.${syntheticLocalPart}.${suffix}@apple.local.insiderflow`;
+  }
+
+  try {
+    return await prisma.$transaction(async (tx) => {
+      const created = await tx.user.create({
+        data: {
+          id: crypto.randomUUID(),
+          email: candidate,
+          password_hash: null,
+          email_verified: true,
+          emailVerified: new Date(),
+          name: email ? email.split('@')[0] : null,
+          updated_at: new Date(),
+        },
+      });
+      await tx.account.create({
+        data: {
+          userId: created.id,
+          type: 'oauth',
+          provider: 'apple',
+          providerAccountId: sub,
+        },
+      });
+      return created;
+    });
+  } catch (err) {
+    if (!isPrismaUniqueViolation(err)) throw err;
+    const linked = await prisma.account.findUnique({
+      where: {
+        provider_providerAccountId: { provider: 'apple', providerAccountId: sub },
+      },
+      include: { user: true },
+    });
+    if (linked?.user) return linked.user;
+    throw new Error('Apple sign-in conflict — please try again');
+  }
+}
+
+/** Native Sign in with Google: verify ID token; link/create `Account` + `User`. */
+export async function loginOrRegisterGoogleMobile(idToken: string) {
+  const audiences = getGoogleJwtAudiences();
+  if (!audiences.length) {
+    throw new Error('Google Sign-In is not configured');
+  }
+
+  const { sub, email, emailVerified } = await verifyGoogleIdToken(idToken, audiences);
+
+  const googleAccountWhere = {
+    provider_providerAccountId: { provider: 'google' as const, providerAccountId: sub },
+  };
+
+  const findUserByGoogleAccount = async () => {
+    const row = await prisma.account.findUnique({
+      where: googleAccountWhere,
+      include: { user: true },
+    });
+    return row?.user ?? null;
+  };
+
+  let user = await findUserByGoogleAccount();
+
+  if (!user && email) {
+    const byEmail = await prisma.user.findUnique({ where: { email } });
+    if (byEmail) {
+      try {
+        await prisma.account.create({
+          data: {
+            userId: byEmail.id,
+            type: 'oauth',
+            provider: 'google',
+            providerAccountId: sub,
+          },
+        });
+        user = byEmail;
+      } catch (err) {
+        if (!isPrismaUniqueViolation(err)) throw err;
+        user = await findUserByGoogleAccount();
+      }
+    }
+  }
+
+  if (!user) {
+    user = await createGoogleUserAndAccountTransactional(sub, email, emailVerified);
+  }
+
+  const sessionToken = await createSession(user.id);
+  const accessToken = createAccessToken(user.id);
+  return { user, accessToken, refreshToken: sessionToken };
+}
+
+async function createGoogleUserAndAccountTransactional(
+  sub: string,
+  email: string | undefined,
+  googleEmailVerified: boolean,
+) {
+  const syntheticLocalPart = sub.replace(/[^a-zA-Z0-9]/g, '').slice(0, 48) || 'user';
+  let candidate =
+    email ?? `google.${syntheticLocalPart}@google.local.insiderflow`;
+
+  let suffix = 0;
+  while (await prisma.user.findUnique({ where: { email: candidate } })) {
+    suffix += 1;
+    if (suffix > 25) {
+      throw new Error('Could not allocate Google user identity');
+    }
+    candidate = `google.${syntheticLocalPart}.${suffix}@google.local.insiderflow`;
+  }
+
+  const verified = Boolean(email && googleEmailVerified);
+
+  try {
+    return await prisma.$transaction(async (tx) => {
+      const created = await tx.user.create({
+        data: {
+          id: crypto.randomUUID(),
+          email: candidate,
+          password_hash: null,
+          email_verified: verified,
+          emailVerified: verified ? new Date() : null,
+          name: email ? email.split('@')[0] : null,
+          updated_at: new Date(),
+        },
+      });
+      await tx.account.create({
+        data: {
+          userId: created.id,
+          type: 'oauth',
+          provider: 'google',
+          providerAccountId: sub,
+        },
+      });
+      return created;
+    });
+  } catch (err) {
+    if (!isPrismaUniqueViolation(err)) throw err;
+    const linked = await prisma.account.findUnique({
+      where: {
+        provider_providerAccountId: { provider: 'google', providerAccountId: sub },
+      },
+      include: { user: true },
+    });
+    if (linked?.user) return linked.user;
+    throw new Error('Google sign-in conflict — please try again');
+  }
+}
+
+/** Native Facebook Login: validate Graph token; link/create `Account` + `User`. */
+export async function loginOrRegisterFacebookMobile(accessToken: string) {
+  const { sub, email, name } = await verifyFacebookAccessToken(accessToken);
+
+  const fbAccountWhere = {
+    provider_providerAccountId: { provider: 'facebook' as const, providerAccountId: sub },
+  };
+
+  const findUserByFacebookAccount = async () => {
+    const row = await prisma.account.findUnique({
+      where: fbAccountWhere,
+      include: { user: true },
+    });
+    return row?.user ?? null;
+  };
+
+  let user = await findUserByFacebookAccount();
+
+  if (!user && email) {
+    const byEmail = await prisma.user.findUnique({ where: { email } });
+    if (byEmail) {
+      try {
+        await prisma.account.create({
+          data: {
+            userId: byEmail.id,
+            type: 'oauth',
+            provider: 'facebook',
+            providerAccountId: sub,
+          },
+        });
+        user = byEmail;
+      } catch (err) {
+        if (!isPrismaUniqueViolation(err)) throw err;
+        user = await findUserByFacebookAccount();
+      }
+    }
+  }
+
+  if (!user) {
+    user = await createFacebookUserAndAccountTransactional(sub, email, name);
+  }
+
+  const sessionToken = await createSession(user.id);
+  const accessTokenOut = createAccessToken(user.id);
+  return { user, accessToken: accessTokenOut, refreshToken: sessionToken };
+}
+
+async function createFacebookUserAndAccountTransactional(
+  sub: string,
+  email: string | undefined,
+  name: string | undefined,
+) {
+  const syntheticLocalPart = sub.replace(/[^a-zA-Z0-9]/g, '').slice(0, 48) || 'user';
+  let candidate = email ?? `fb.${syntheticLocalPart}@facebook.local.insiderflow`;
+
+  let suffix = 0;
+  while (await prisma.user.findUnique({ where: { email: candidate } })) {
+    suffix += 1;
+    if (suffix > 25) {
+      throw new Error('Could not allocate Facebook user identity');
+    }
+    candidate = `fb.${syntheticLocalPart}.${suffix}@facebook.local.insiderflow`;
+  }
+
+  const verified = Boolean(email);
+
+  try {
+    return await prisma.$transaction(async (tx) => {
+      const created = await tx.user.create({
+        data: {
+          id: crypto.randomUUID(),
+          email: candidate,
+          password_hash: null,
+          email_verified: verified,
+          emailVerified: verified ? new Date() : null,
+          name: name ?? (email ? email.split('@')[0] : null),
+          updated_at: new Date(),
+        },
+      });
+      await tx.account.create({
+        data: {
+          userId: created.id,
+          type: 'oauth',
+          provider: 'facebook',
+          providerAccountId: sub,
+        },
+      });
+      return created;
+    });
+  } catch (err) {
+    if (!isPrismaUniqueViolation(err)) throw err;
+    const linked = await prisma.account.findUnique({
+      where: {
+        provider_providerAccountId: { provider: 'facebook', providerAccountId: sub },
+      },
+      include: { user: true },
+    });
+    if (linked?.user) return linked.user;
+    throw new Error('Facebook sign-in conflict — please try again');
+  }
 }
 
 export async function refreshMobileTokens(refreshToken: string) {

@@ -18,6 +18,9 @@ import type {
   // Auth
   AuthVerifyResponse,
   LoginRequest,
+  AppleMobileLoginRequest,
+  GoogleMobileLoginRequest,
+  FacebookMobileLoginRequest,
   RegisterRequest,
   PasswordResetRequest,
   ResetPasswordRequest,
@@ -51,6 +54,9 @@ import type {
   AlertUnreadCountResponse,
   // Dashboard
   DashboardStats,
+  // Sector analytics
+  PoliticiansBySectorResponse,
+  GicsSectorName,
 } from './types';
 
 // ─────────────────────────────────────────────
@@ -77,6 +83,54 @@ export const authEndpoints = {
       return response;
     }
     return apiClient.post<{ user: UserProfile; token: string }>('/api/auth/login', payload);
+  },
+
+  loginWithApple: async (payload: AppleMobileLoginRequest) => {
+    if (!isMobileTransport()) {
+      throw new Error('Apple Sign-In is only available in the mobile app');
+    }
+    const response = await apiClient.post<{
+      user: UserProfile;
+      accessToken: string;
+      refreshToken: string;
+    }>('/api/mobile/auth/apple', payload);
+    setMobileTokens({
+      accessToken: response.accessToken,
+      refreshToken: response.refreshToken,
+    });
+    return response;
+  },
+
+  loginWithGoogle: async (payload: GoogleMobileLoginRequest) => {
+    if (!isMobileTransport()) {
+      throw new Error('Google token login is only available in mobile auth mode');
+    }
+    const response = await apiClient.post<{
+      user: UserProfile;
+      accessToken: string;
+      refreshToken: string;
+    }>('/api/mobile/auth/google', payload);
+    setMobileTokens({
+      accessToken: response.accessToken,
+      refreshToken: response.refreshToken,
+    });
+    return response;
+  },
+
+  loginWithFacebook: async (payload: FacebookMobileLoginRequest) => {
+    if (!isMobileTransport()) {
+      throw new Error('Facebook token login is only available in mobile auth mode');
+    }
+    const response = await apiClient.post<{
+      user: UserProfile;
+      accessToken: string;
+      refreshToken: string;
+    }>('/api/mobile/auth/facebook', payload);
+    setMobileTokens({
+      accessToken: response.accessToken,
+      refreshToken: response.refreshToken,
+    });
+    return response;
   },
 
   register: (payload: RegisterRequest) =>
@@ -148,6 +202,9 @@ export const politicianEndpoints = {
 
   getTradesByName: (name: string) =>
     apiClient.get<PoliticianTrade[]>('/api/politician-trades', { politician: name }),
+
+  getPoliticiansBySector: (sector: GicsSectorName) =>
+    apiClient.get<PoliticiansBySectorResponse>('/api/politicians-by-sector', { sector } as any),
 
   getPortfolioComparison: (
     politician: string,

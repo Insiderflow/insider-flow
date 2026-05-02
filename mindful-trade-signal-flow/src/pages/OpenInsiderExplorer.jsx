@@ -12,8 +12,7 @@ import OwnerRow from '@/components/openinsider/OwnerRow';
 import ExplorerSkeleton from '@/components/openinsider/ExplorerSkeleton';
 import EmptyState from '@/components/insider/EmptyState';
 import { AlertCircle, RefreshCw, Database } from 'lucide-react';
-
-const TABS = ['Transactions', 'Companies', 'Owners'];
+import { useTranslation } from '@/lib/useTranslation';
 
 const DEFAULT_FILTERS = { keyword: '', type: 'all', dateRange: 'all' };
 
@@ -42,6 +41,9 @@ function sortItems(items, sort) {
 
 export default function OpenInsiderExplorer() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  const TAB_KEYS = ['transactions', 'companies', 'owners'];
+  const TABS = [t('transactionsTab'), t('companiesTabOpenInsider'), t('ownersTabOpenInsider')];
   const [activeTab, setActiveTab] = useState(0);
   const [filters, setFilters] = useState(DEFAULT_FILTERS);
   const [sort, setSort] = useState('-transaction_date');
@@ -102,14 +104,14 @@ export default function OpenInsiderExplorer() {
       <div className="px-4 mt-8 flex flex-col items-center gap-3 text-center">
         <AlertCircle className="h-7 w-7 text-muted-foreground" />
         <div>
-          <p className="text-sm font-semibold">Failed to load data</p>
-          <p className="text-xs text-muted-foreground mt-0.5">Your filters are preserved.</p>
+          <p className="text-sm font-semibold">{t('failedLoadData')}</p>
+          <p className="text-xs text-muted-foreground mt-0.5">{t('filtersPreserved')}</p>
         </div>
         <button
           onClick={() => tabRefetch()}
           className="flex items-center gap-1.5 text-xs font-semibold text-primary hover:text-primary/80"
         >
-          <RefreshCw className="h-3.5 w-3.5" /> Retry
+          <RefreshCw className="h-3.5 w-3.5" /> {t('retry')}
         </button>
       </div>
     );
@@ -156,7 +158,7 @@ export default function OpenInsiderExplorer() {
 
         {activeTab !== 0 && (
           <div className="px-4">
-            <p className="text-xs text-muted-foreground">{tabCount} results</p>
+            <p className="text-xs text-muted-foreground">{tabCount} {t('results')}</p>
           </div>
         )}
       </div>
@@ -164,12 +166,12 @@ export default function OpenInsiderExplorer() {
       {/* Content */}
       <div className={`space-y-${density === 'compact' ? '1.5' : '2.5'} px-4`}>
         {tabIsLoading ? (
-          <ExplorerSkeleton tab={TABS[activeTab].toLowerCase()} density={density} />
+          <ExplorerSkeleton tab={TAB_KEYS[activeTab]} density={density} />
         ) : tabError ? (
           <ErrorState />
         ) : activeTab === 0 ? (
           filteredTx.length === 0 ? (
-            <EmptyState icon={Database} title="No transactions" description="Try adjusting filters or date range." />
+            <EmptyState icon={Database} title={t('noTransactions')} description={t('tryAdjustFilters')} />
           ) : (
             filteredTx.map((tx, i) => (
               <TransactionRow
@@ -183,7 +185,7 @@ export default function OpenInsiderExplorer() {
           )
         ) : activeTab === 1 ? (
           filteredCompanies.length === 0 ? (
-            <EmptyState icon={Database} title="No companies" description="Try a different search." />
+            <EmptyState icon={Database} title={t('noCompanies')} description={t('tryDifferentSearch')} />
           ) : (
             filteredCompanies.map((c, i) => (
               <CompanyRow
@@ -195,7 +197,7 @@ export default function OpenInsiderExplorer() {
           )
         ) : (
           filteredOwners.length === 0 ? (
-            <EmptyState icon={Database} title="No owners" description="Try a different search." />
+            <EmptyState icon={Database} title={t('noOwners')} description={t('tryDifferentSearch')} />
           ) : (
             filteredOwners.map((o, i) => (
               <OwnerRow

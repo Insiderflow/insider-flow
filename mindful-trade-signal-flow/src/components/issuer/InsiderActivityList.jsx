@@ -1,22 +1,26 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import { TrendingUp, TrendingDown } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import EmptyState from '@/components/insider/EmptyState';
 import { Activity } from 'lucide-react';
+import { useTranslation } from '@/lib/useTranslation';
 
 function ActivityRow({ trade, type }) {
+  const { t, displaySector } = useTranslation();
   const isBuy = trade.trade_type === 'Buy';
   const name = type === 'politician' ? trade.politician_name : trade.insider_name;
+  const sectorText = displaySector(trade.sector) || t('unknown');
   const role = type === 'politician'
-    ? `${trade.party || ''} · ${trade.chamber || ''}`
+    ? `${t('sector')}: ${sectorText}`
     : trade.title || '';
   const amount = type === 'politician'
     ? trade.amount_range
     : trade.total_value ? `$${Number(trade.total_value).toLocaleString()}` : '';
 
   return (
-    <div className="flex items-center gap-3 py-3 border-b border-border/30 last:border-0">
+    <div className="flex items-center gap-3 py-3.5 px-3 rounded-xl border border-border/40 bg-card/60">
       <div className={`w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 ${
         isBuy ? 'bg-buy/10' : 'bg-sell/10'
       }`}>
@@ -26,14 +30,26 @@ function ActivityRow({ trade, type }) {
         }
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-semibold truncate">{name}</p>
-        <p className="text-[11px] text-muted-foreground truncate">{role}</p>
+        {type === 'politician' ? (
+          <Link
+            to={`/politician?name=${encodeURIComponent(trade.politician_name || '')}&sector=${encodeURIComponent(trade.sector || '')}`}
+            className="block min-w-0"
+          >
+            <p className="text-sm font-semibold truncate text-primary hover:underline active:opacity-70">{name}</p>
+            <p className="text-[11px] text-muted-foreground truncate">{role}</p>
+          </Link>
+        ) : (
+          <>
+            <p className="text-sm font-semibold truncate">{name}</p>
+            <p className="text-[11px] text-muted-foreground truncate">{role}</p>
+          </>
+        )}
       </div>
       <div className="text-right flex-shrink-0">
         <p className={`text-xs font-semibold ${isBuy ? 'text-buy' : 'text-sell'}`}>
-          {isBuy ? 'BUY' : 'SELL'}
+          {isBuy ? t('buy') : t('sell')}
         </p>
-        {amount && <p className="text-[11px] text-muted-foreground tabular-nums">{amount}</p>}
+        {amount && <p className="text-[11px] text-muted-foreground tabular-nums font-medium">{amount}</p>}
         <p className="text-[10px] text-muted-foreground">
           {trade.trade_date ? format(new Date(trade.trade_date), 'MMM d') : ''}
         </p>
@@ -43,6 +59,7 @@ function ActivityRow({ trade, type }) {
 }
 
 export default function InsiderActivityList({ politicianTrades, corporateTrades, isLoading }) {
+  const { t } = useTranslation();
   const combined = [
     ...(politicianTrades || []).map(t => ({ ...t, _type: 'politician' })),
     ...(corporateTrades || []).map(t => ({ ...t, _type: 'corporate' })),
@@ -70,17 +87,23 @@ export default function InsiderActivityList({ politicianTrades, corporateTrades,
       <div className="px-4">
         <EmptyState
           icon={Activity}
-          title="No insider activity"
-          description="No trades on record for this issuer."
+          title={t('noInsiderActivity')}
+          description={t('noTradesForIssuer')}
         />
       </div>
     );
   }
 
   return (
-    <div className="px-4">
+    <div className="px-4 space-y-2">
       {combined.map((trade, idx) => (
-        <ActivityRow key={trade.id || idx} trade={trade} type={trade._type} />
+        <div
+          key={trade.id || idx}
+          className="motion-stagger-item"
+          style={{ '--stagger-delay': `${Math.min(idx, 9) * 35}ms` }}
+        >
+          <ActivityRow trade={trade} type={trade._type} />
+        </div>
       ))}
     </div>
   );

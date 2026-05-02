@@ -10,14 +10,23 @@ async function importScrapedTrades() {
   try {
     console.log('🚀 Starting import of scraped trades...');
     
-    // Find the most recent scraped file
-    const files = fs.readdirSync('.').filter(f => f.startsWith('trades_scraped_') && f.endsWith('.json'));
-    if (files.length === 0) {
-      console.log('❌ No scraped trade files found');
-      return;
+    const requestedFile = process.argv[2];
+    let latestFile = requestedFile || null;
+    if (!latestFile) {
+      // Find the most recent scraped file from primary or fallback scraper
+      const files = fs
+        .readdirSync('.')
+        .filter(
+          (f) =>
+            (f.startsWith('trades_scraped_') || f.startsWith('trades_pages_5_')) &&
+            f.endsWith('.json'),
+        );
+      if (files.length === 0) {
+        console.log('❌ No scraped trade files found');
+        return;
+      }
+      latestFile = files.sort().pop();
     }
-    
-    const latestFile = files.sort().pop();
     console.log(`📁 Using file: ${latestFile}`);
     
     const data = JSON.parse(fs.readFileSync(latestFile, 'utf8'));
@@ -40,15 +49,21 @@ async function importScrapedTrades() {
         await prisma.politician.upsert({
           where: { id: trade.politicianId },
           update: {
-            name: trade.politicianName || 'Unknown Politician'
+            name: trade.politicianName || 'Unknown Politician',
+            ...(trade.politicianCommittees
+              ? { committees: String(trade.politicianCommittees).slice(0, 4000) }
+              : {}),
           },
           create: {
             id: trade.politicianId,
             name: trade.politicianName || 'Unknown Politician',
             party: null,
             chamber: trade.politicianChamber || null,
-            state: null
-          }
+            state: null,
+            committees: trade.politicianCommittees
+              ? String(trade.politicianCommittees).slice(0, 4000)
+              : null,
+          },
         });
         
         // Ensure issuer exists

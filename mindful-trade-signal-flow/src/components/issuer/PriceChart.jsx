@@ -5,6 +5,7 @@ import {
 import { Skeleton } from '@/components/ui/skeleton';
 import { AlertCircle, RefreshCw, Info } from 'lucide-react';
 import { subMonths, format } from 'date-fns';
+import { useTranslation } from '@/lib/useTranslation';
 
 const PERIODS = [
   { label: '1M', months: 1 },
@@ -46,6 +47,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 export default function PriceChart({ ticker, isLoading, error, isFallback, onRetry }) {
+  const { t } = useTranslation();
   const [activePeriod, setActivePeriod] = useState('3M');
   const months = PERIODS.find(p => p.label === activePeriod)?.months || 3;
   const data = useMemo(() => generatePriceData(ticker, months), [ticker, months]);
@@ -76,15 +78,15 @@ export default function PriceChart({ ticker, isLoading, error, isFallback, onRet
         <div className="bg-card rounded-2xl border border-border/50 p-5 flex flex-col items-center gap-3 text-center">
           <AlertCircle className="h-6 w-6 text-muted-foreground" />
           <div>
-            <p className="text-sm font-semibold">Price data unavailable</p>
-            <p className="text-xs text-muted-foreground mt-0.5">Could not load price history for {ticker}.</p>
+            <p className="text-sm font-semibold">{t('priceDataUnavailable')}</p>
+            <p className="text-xs text-muted-foreground mt-0.5">{t('couldNotLoadPriceHistory')} {ticker}.</p>
           </div>
           {onRetry && (
             <button
               onClick={onRetry}
               className="flex items-center gap-1.5 text-xs font-semibold text-primary hover:text-primary/80 transition-colors"
             >
-              <RefreshCw className="h-3.5 w-3.5" /> Retry
+              <RefreshCw className="h-3.5 w-3.5" /> {t('retry')}
             </button>
           )}
         </div>
@@ -126,7 +128,7 @@ export default function PriceChart({ ticker, isLoading, error, isFallback, onRet
           <div className="flex items-center gap-1.5 mb-2 px-2 py-1.5 bg-warning/10 rounded-lg">
             <Info className="h-3.5 w-3.5 text-warning-color flex-shrink-0" />
             <p className="text-[11px] text-warning-color font-medium">
-              Showing Yahoo Finance data · Internal source unavailable
+              {t('showingYahooFallback')}
             </p>
           </div>
         )}

@@ -6,8 +6,13 @@ import {
   buildSubscriptionPipelineAlerts,
   dispatchSubscriptionPipelineAlerts,
 } from '@/lib/subscriptionPipelineAlerts';
+import { enforceRouteRateLimit } from '@/lib/rateLimit';
 
 export async function GET(request: NextRequest) {
+  const rate = enforceRouteRateLimit(request, 'admin_sub_alerts', 60, 60_000);
+  if (!rate.ok) {
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+  }
   const auth = assertAdminRequest(request);
   if (!auth.ok) {
     return NextResponse.json({ error: auth.message }, { status: 401 });
@@ -25,6 +30,10 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+  const rate = enforceRouteRateLimit(request, 'admin_sub_alerts', 60, 60_000);
+  if (!rate.ok) {
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+  }
   const auth = assertAdminRequest(request);
   if (!auth.ok) {
     return NextResponse.json({ error: auth.message }, { status: 401 });

@@ -7,12 +7,16 @@ import AppHeader from '@/components/layout/AppHeader';
 import { Skeleton } from '@/components/ui/skeleton';
 import { getAlerts, markAlertRead, markAllAlertsRead } from '@/lib/api';
 import { QUERY_KEYS } from '@/lib/api/queryKeys';
+import { useTranslation } from '@/lib/useTranslation';
+import { useAuth } from '@/lib/AuthContext';
+import SubscriberOnlyDialog from '@/components/billing/SubscriberOnlyDialog';
 
 const ALERT_ICONS = {
   notable_trade: { icon: AlertTriangle, bg: 'bg-warning/10', color: 'text-warning-color' },
   politician:    { icon: Landmark,      bg: 'bg-blue-500/10', color: 'text-blue-400'   },
   watchlist:     { icon: Bookmark,      bg: 'bg-purple-500/10', color: 'text-purple-400' },
   corporate:     { icon: TrendingUp,    bg: 'bg-primary/10',  color: 'text-primary'    },
+  seat_alignment:{ icon: AlertTriangle, bg: 'bg-amber-500/10', color: 'text-amber-400' },
 };
 
 function AlertRow({ alert, onPress }) {
@@ -75,8 +79,11 @@ function AlertsSkeleton() {
 
 export default function Alerts() {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const queryClient = useQueryClient();
+  const { t } = useTranslation();
   const [filter, setFilter] = useState('all');
+  const isFreeUser = !user || user.membership_tier !== 'pro';
 
   const { data: alerts = [], isLoading } = useQuery({
     queryKey: ['alerts'],
@@ -112,6 +119,21 @@ export default function Alerts() {
     if (alert.ticker) navigate(`/issuer?ticker=${encodeURIComponent(alert.ticker)}`);
   };
 
+  if (isFreeUser) {
+    return (
+      <div className="min-h-screen bg-background">
+        <AppHeader title="Alerts" />
+        <SubscriberOnlyDialog
+          open
+          onOpenChange={(v) => {
+            if (!v) navigate('/');
+          }}
+          onUpgrade={() => navigate('/paywall')}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background pb-28">
       <AppHeader title="Alerts" />
@@ -127,7 +149,7 @@ export default function Alerts() {
                 filter === f ? 'bg-card text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'
               }`}
             >
-              {f}{f === 'unread' && unreadCount > 0 ? ` (${unreadCount})` : ''}
+              {(f === 'all' ? t('all') : t('unread'))}{f === 'unread' && unreadCount > 0 ? ` (${unreadCount})` : ''}
             </button>
           ))}
         </div>
@@ -137,7 +159,7 @@ export default function Alerts() {
             disabled={markAllReadMutation.isPending}
             className="flex items-center gap-1.5 text-xs text-primary font-semibold disabled:opacity-60"
           >
-            <CheckCheck className="h-3.5 w-3.5" /> Mark all read
+            <CheckCheck className="h-3.5 w-3.5" /> {t('markAllRead')}
           </button>
         )}
       </div>
@@ -152,12 +174,12 @@ export default function Alerts() {
               <Bell className="h-5 w-5 text-muted-foreground" />
             </div>
             <p className="text-sm font-semibold mb-1">
-              {filter === 'unread' ? 'All caught up' : 'No alerts yet'}
+              {filter === 'unread' ? t('allCaughtUp') : t('noAlertsYet')}
             </p>
             <p className="text-xs text-muted-foreground max-w-[220px]">
               {filter === 'unread'
-                ? 'No unread alerts. Check back later.'
-                : 'Add items to your watchlist to start receiving trade alerts.'}
+                ? t('noUnreadAlerts')
+                : t('addWatchlistForAlerts')}
             </p>
           </div>
         ) : (
@@ -174,13 +196,13 @@ export default function Alerts() {
         <div className="mx-4 mt-3 rounded-xl border border-primary/20 bg-primary/5 px-4 py-3 flex items-center gap-3">
           <Bell className="h-4 w-4 text-primary flex-shrink-0" />
           <p className="text-xs text-muted-foreground flex-1">
-            Real-time push alerts available on <span className="text-primary font-semibold">Pro plan</span>.
+            {t('proPlanNudge')}
           </p>
           <button
             onClick={() => navigate('/paywall')}
             className="text-xs font-bold text-primary flex-shrink-0"
           >
-            Upgrade →
+            {t('upgrade')} →
           </button>
         </div>
       )}

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { keyFromRequest, rateLimit } from '@/lib/rateLimit';
-import { loginMobile } from '@/lib/auth';
+import { loginMobile, OAUTH_ONLY_ACCOUNT_MESSAGE } from '@/lib/auth';
 
 export async function POST(req: NextRequest) {
   try {
@@ -10,7 +10,17 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
     }
 
-    const { email, password } = await req.json();
+    let body: unknown;
+    try {
+      body = await req.json();
+    } catch {
+      return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 });
+    }
+    const email = typeof body === 'object' && body !== null && 'email' in body ? String((body as { email?: unknown }).email ?? '') : '';
+    const password =
+      typeof body === 'object' && body !== null && 'password' in body
+        ? String((body as { password?: unknown }).password ?? '')
+        : '';
     if (!email || !password) {
       return NextResponse.json({ error: 'Email and password are required' }, { status: 400 });
     }
@@ -29,6 +39,9 @@ export async function POST(req: NextRequest) {
     if (error instanceof Error) {
       if (error.message === 'Invalid credentials') {
         return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });
+      }
+      if (error.message === OAUTH_ONLY_ACCOUNT_MESSAGE) {
+        return NextResponse.json({ error: error.message }, { status: 401 });
       }
       return NextResponse.json({ error: error.message }, { status: 400 });
     }

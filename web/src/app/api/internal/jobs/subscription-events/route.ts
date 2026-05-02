@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { assertInternalJobRequest } from '@/lib/admin';
 import { replaySubscriptionEvents } from '@/lib/subscriptionEventReplay';
+import { enforceRouteRateLimit } from '@/lib/rateLimit';
 
 function parseProvider(value: unknown): 'stripe' | 'revenuecat' | undefined {
   if (value === 'stripe' || value === 'revenuecat') return value;
@@ -8,6 +9,10 @@ function parseProvider(value: unknown): 'stripe' | 'revenuecat' | undefined {
 }
 
 export async function POST(request: NextRequest) {
+  const rate = enforceRouteRateLimit(request, 'internal_sub_events', 30, 60_000);
+  if (!rate.ok) {
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+  }
   const auth = assertInternalJobRequest(request);
   if (!auth.ok) {
     return NextResponse.json({ error: auth.message }, { status: 401 });
@@ -49,6 +54,10 @@ export async function POST(request: NextRequest) {
 }
 
 export async function GET(request: NextRequest) {
+  const rate = enforceRouteRateLimit(request, 'internal_sub_events', 30, 60_000);
+  if (!rate.ok) {
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+  }
   const auth = assertInternalJobRequest(request);
   if (!auth.ok) {
     return NextResponse.json({ error: auth.message }, { status: 401 });

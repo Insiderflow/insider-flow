@@ -9,6 +9,7 @@ import {
   processRevenueCatWebhookPayload,
   verifyRevenueCatSignature,
 } from '@/lib/revenuecatWebhook';
+import { enforceRouteRateLimit } from '@/lib/rateLimit';
 
 export const dynamic = 'force-dynamic';
 
@@ -27,6 +28,14 @@ function isAuthorized(request: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
+    const rate = enforceRouteRateLimit(req, 'revenuecat_webhook', 120, 60_000);
+    if (!rate.ok) {
+      return NextResponse.json(
+        { error: 'Too many requests', retry_after_seconds: rate.retryAfterSeconds },
+        { status: 429 },
+      );
+    }
+
     if (!isAuthorized(req)) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }

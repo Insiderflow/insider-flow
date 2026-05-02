@@ -5,8 +5,13 @@ import {
   buildSubscriptionPipelineAlerts,
   dispatchSubscriptionPipelineAlerts,
 } from '@/lib/subscriptionPipelineAlerts';
+import { enforceRouteRateLimit } from '@/lib/rateLimit';
 
 export async function POST(request: NextRequest) {
+  const rate = enforceRouteRateLimit(request, 'internal_sub_alerts', 30, 60_000);
+  if (!rate.ok) {
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+  }
   const auth = assertInternalJobRequest(request);
   if (!auth.ok) {
     return NextResponse.json({ error: auth.message }, { status: 401 });
@@ -42,6 +47,10 @@ export async function POST(request: NextRequest) {
 }
 
 export async function GET(request: NextRequest) {
+  const rate = enforceRouteRateLimit(request, 'internal_sub_alerts', 30, 60_000);
+  if (!rate.ok) {
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+  }
   const auth = assertInternalJobRequest(request);
   if (!auth.ok) {
     return NextResponse.json({ error: auth.message }, { status: 401 });

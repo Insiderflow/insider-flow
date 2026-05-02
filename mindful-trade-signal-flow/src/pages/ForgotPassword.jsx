@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { authEndpoints } from '@/lib/api/endpoints';
 import { ArrowLeft, Mail } from 'lucide-react';
+import { useTranslation } from '@/lib/useTranslation';
 
 export default function ForgotPassword() {
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
@@ -13,15 +15,15 @@ export default function ForgotPassword() {
     setError('');
     setMessage('');
     if (!email.trim()) {
-      setError('Email is required');
+      setError(t('emailRequired'));
       return;
     }
     setLoading(true);
     try {
       await authEndpoints.requestPasswordReset({ email: email.trim() });
-      setMessage('If an account exists, check your email for a reset link.');
+      setMessage(t('resetLinkSent'));
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Request failed');
+      setError(e instanceof Error ? e.message : t('requestFailed'));
     } finally {
       setLoading(false);
     }
@@ -34,15 +36,15 @@ export default function ForgotPassword() {
         className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground mb-8"
       >
         <ArrowLeft className="h-3.5 w-3.5" />
-        Back to sign in
+        {t('backToSignIn')}
       </Link>
 
       <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center mb-4">
         <Mail className="h-4 w-4 text-primary-foreground" />
       </div>
-      <h1 className="text-xl font-bold tracking-tight mb-1">Forgot password</h1>
+      <h1 className="text-xl font-bold tracking-tight mb-1">{t('forgotPassword')}</h1>
       <p className="text-sm text-muted-foreground mb-6">
-        Enter your account email. We’ll send a reset link if an account exists.
+        {t('enterEmailReset')}
       </p>
 
       <input
@@ -62,7 +64,7 @@ export default function ForgotPassword() {
         disabled={loading}
         className="w-full h-12 rounded-xl bg-primary text-primary-foreground font-semibold text-sm disabled:opacity-60"
       >
-        {loading ? 'Sending…' : 'Send reset link'}
+        {loading ? t('sending') : t('sendResetLink')}
       </button>
     </div>
   );

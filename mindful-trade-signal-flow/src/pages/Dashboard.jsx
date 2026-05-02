@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuth } from '@/lib/AuthContext';
 import { getDashboardStats, getPoliticianTrades, getCorporateTrades } from '@/lib/api';
 import AppHeader from '@/components/layout/AppHeader';
@@ -8,6 +8,7 @@ import RecentActivityFeed from '@/components/dashboard/RecentActivityFeed';
 import QuickActions from '@/components/dashboard/QuickActions';
 import PaywallBanner from '@/components/dashboard/PaywallBanner';
 import ErrorRetry from '@/components/dashboard/ErrorRetry';
+import { useTranslation } from '@/lib/useTranslation';
 
 const MOCK_STATS = {
   buysToday: 47,
@@ -22,6 +23,7 @@ const LATEST_DATE = new Date().toISOString().split('T')[0];
 
 export default function Dashboard() {
   const { user } = useAuth();
+  const { t } = useTranslation();
   const [politicianTrades, setPoliticianTrades] = useState([]);
   const [corporateTrades, setCorporateTrades] = useState([]);
   const [watchlistTrades, setWatchlistTrades] = useState([]);
@@ -35,8 +37,8 @@ export default function Dashboard() {
     setError(null);
     const [dashboardStats, pTrades, cTrades] = await Promise.all([
       getDashboardStats(),
-      getPoliticianTrades({ limit: 10 }),
-      getCorporateTrades({ limit: 10 }),
+      getPoliticianTrades({ limit: 50 }),
+      getCorporateTrades({ limit: 50 }),
     ]);
     setStats(dashboardStats || MOCK_STATS);
     setPoliticianTrades(pTrades);

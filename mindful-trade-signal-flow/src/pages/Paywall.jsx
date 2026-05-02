@@ -4,8 +4,9 @@ import { useAuth } from '@/lib/AuthContext';
 import { appClient } from '@/api/appClient';
 import { useToast } from '@/components/ui/use-toast';
 import { Check, X, Zap, ArrowLeft, RotateCcw } from 'lucide-react';
+import { usesNativeStoreBilling } from '@/lib/nativeRuntime';
 
-const IS_IOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+const IS_IOS_UA = /iphone|ipad|ipod/i.test(navigator.userAgent);
 
 const FEATURES = [
   { label: 'Politician trade feed',         free: true,  paid: true },
@@ -77,7 +78,7 @@ export default function Paywall() {
   };
 
   const handleRestore = async () => {
-    if (!IS_IOS) return;
+    if (!usesNativeStoreBilling()) return;
     setRestoring(true);
     await new Promise(r => setTimeout(r, 1200));
     // Replace with: window.webkit?.messageHandlers?.storeKit?.postMessage({ action: 'restorePurchases' });
@@ -132,7 +133,7 @@ export default function Paywall() {
           ))}
         </div>
 
-        {IS_IOS && (
+        {(usesNativeStoreBilling() || IS_IOS_UA) && (
           <p className="text-[10px] text-muted-foreground text-center leading-relaxed px-4">
             Payment will be charged to your Apple ID account at confirmation of purchase. Subscription automatically renews unless auto-renew is turned off at least 24 hours before the end of the current period. Manage subscriptions in your App Store account settings.
           </p>
@@ -148,13 +149,13 @@ export default function Paywall() {
         >
           {loading ? (
             <span className="flex items-center gap-2"><span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" /> Processing…</span>
-          ) : IS_IOS ? (
+          ) : usesNativeStoreBilling() ? (
             '✦ Subscribe — $9.99/mo'
           ) : (
             '✦ Start Pro — $9.99/mo'
           )}
         </button>
-        {IS_IOS && (
+        {usesNativeStoreBilling() && (
           <button
             onClick={handleRestore}
             disabled={restoring}

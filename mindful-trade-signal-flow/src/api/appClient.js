@@ -4,6 +4,7 @@ import {
   getRefreshToken,
   isMobileTransport,
 } from '@/lib/authTransport';
+import { stripeBillingAllowed } from '@/lib/nativeRuntime';
 
 async function request(path, options = {}) {
   const headers = { 'Content-Type': 'application/json', ...(options.headers || {}) };
@@ -36,6 +37,9 @@ async function request(path, options = {}) {
 }
 
 async function invokeFunction(name, payload = {}) {
+  if ((name === 'stripeCheckout' || name === 'stripePortal') && !stripeBillingAllowed()) {
+    throw new Error('Stripe billing is disabled in native / mobile-transport builds');
+  }
   if (name === 'stripeCheckout') {
     return request('/api/stripe/checkout', {
       method: 'POST',

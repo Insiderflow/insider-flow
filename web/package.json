@@ -19,6 +19,9 @@
     "committees:enrich": "node scripts/enrich_politician_committees_govtrack.js",
     "committees:import-csv": "node scripts/import_politician_committees_csv.js",
     "openinsider:import": "node scripts/openinsider_daily_import.js",
+    "openinsider:backfill": "node scripts/openinsider_backfill_import.js",
+    "finnhub:csv-study": "node scripts/finnhub_csv_study.js",
+    "finnhub:import-range": "node scripts/finnhub_range_import.js",
     "test": "vitest run",
     "test:e2e": "npm run build && playwright test",
     "test:e2e:smoke": "npm run build && playwright test e2e/smoke.spec.ts"
@@ -33,6 +36,7 @@
     "buffer": "^6.0.3",
     "chart.js": "^4.5.0",
     "csv-parser": "^3.2.0",
+    "jose": "^6.2.3",
     "next": "15.5.3",
     "next-auth": "^4.24.7",
     "node-fetch": "^3.3.2",
