@@ -8,7 +8,8 @@ import { prisma } from "@/lib/prisma";
 type JwtWithId = JWT & { id?: string };
 type SessionUserWithId = { id?: string };
 
-const providers = [
+/** Mixed OAuth providers — widen type so Facebook + Google both satisfy NextAuth's provider union. */
+const providers: NextAuthOptions["providers"] = [
   GoogleProvider({
     clientId: process.env.GOOGLE_CLIENT_ID!,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
