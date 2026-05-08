@@ -10,7 +10,58 @@ import { statSurfaceStyles } from '@/components/surfaceStyles';
 import { pageTitleStyles } from '@/components/typographyStyles';
 export const dynamic = 'force-dynamic';
 
-type Row = { id: string; name: string; ticker: string | null; trades: number; politicians: number; volume: number };
+type Row = {
+  id: string;
+  name: string;
+  ticker: string | null;
+  trades: number;
+  politicians: number;
+  volume: number;
+  price: number | null;
+  change30dPct: number | null;
+  trend: 'up' | 'down' | 'flat' | 'na';
+};
+
+async function fetchTickerSnapshot(ticker: string): Promise<{ price: number | null; change30dPct: number | null; trend: Row['trend'] }> {
+  const cleanTicker = ticker.trim().toUpperCase();
+  if (!cleanTicker || cleanTicker === 'N/A') {
+    return { price: null, change30dPct: null, trend: 'na' };
+  }
+
+  try {
+    const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(cleanTicker)}?range=1mo&interval=1d`;
+    const response = await fetch(url, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0',
+      },
+      next: { revalidate: 900 },
+    });
+    if (!response.ok) {
+      return { price: null, change30dPct: null, trend: 'na' };
+    }
+
+    const data = await response.json();
+    const result = data?.chart?.result?.[0];
+    const closes: unknown[] = result?.indicators?.quote?.[0]?.close ?? [];
+    const validCloses = closes
+      .map((v) => (typeof v === 'number' ? v : Number(v)))
+      .filter((v) => Number.isFinite(v));
+
+    const latestClose = validCloses.length > 0 ? validCloses[validCloses.length - 1] : null;
+    const firstClose = validCloses.length > 0 ? validCloses[0] : null;
+    const price = typeof latestClose === 'number' && Number.isFinite(latestClose) ? latestClose : null;
+
+    if (price === null || firstClose === null || firstClose === 0) {
+      return { price, change30dPct: null, trend: price === null ? 'na' : 'flat' };
+    }
+
+    const change30dPct = ((price - firstClose) / firstClose) * 100;
+    const trend: Row['trend'] = change30dPct > 0 ? 'up' : change30dPct < 0 ? 'down' : 'flat';
+    return { price, change30dPct, trend };
+  } catch {
+    return { price: null, change30dPct: null, trend: 'na' };
+  }
+}
 
 export default async function IssuersPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   const me = await getCurrentUserWithTier();
@@ -18,7 +69,7 @@ export default async function IssuersPage({ searchParams }: { searchParams: Prom
     redirect('/upgrade?reason=paid_required');
   }
   const sp = await searchParams;
-  const allowedSort = new Set(['name', 'trades', 'politicians', 'volume']);
+  const allowedSort = new Set(['name', 'trades', 'politicians', 'volume', 'price', 'change30dPct']);
   const sortKeyRaw = typeof sp.sort === 'string' ? sp.sort : 'trades';
   const sortKey = allowedSort.has(sortKeyRaw) ? sortKeyRaw : 'trades';
   const order = (typeof sp.order === 'string' && sp.order.toLowerCase() === 'asc') ? 'asc' : 'desc';
@@ -55,11 +106,29 @@ export default async function IssuersPage({ searchParams }: { searchParams: Prom
       ticker: issuer.ticker || 'N/A',
       trades: trades.length,
       politicians,
-      volume
+      volume,
+      price: null,
+      change30dPct: null,
+      trend: 'na',
     };
   });
 
   // Sort the results (for computed columns)
+  const tickerSnapshots = await Promise.all(
+    rows.map(async (row) => {
+      const snapshot = await fetchTickerSnapshot(row.ticker || '');
+      return [row.ticker || '', snapshot] as const;
+    })
+  );
+  const tickerSnapshotMap = new Map(tickerSnapshots);
+
+  rows.forEach((row) => {
+    const snapshot = tickerSnapshotMap.get(row.ticker || '');
+    row.price = snapshot?.price ?? null;
+    row.change30dPct = snapshot?.change30dPct ?? null;
+    row.trend = snapshot?.trend ?? 'na';
+  });
+
   rows.sort((a, b) => {
     const aVal = a[sortKey as keyof Row];
     const bVal = b[sortKey as keyof Row];
@@ -149,6 +218,8 @@ export default async function IssuersPage({ searchParams }: { searchParams: Prom
               <option value="trades">交易次數</option>
               <option value="politicians">政治家</option>
               <option value="volume">交易金額</option>
+              <option value="price">價格</option>
+              <option value="change30dPct">30天變化</option>
               <option value="name">名稱</option>
             </select>
           </label>
@@ -181,6 +252,9 @@ export default async function IssuersPage({ searchParams }: { searchParams: Prom
               trades: r.trades,
               politicians: r.politicians,
               volume: new Intl.NumberFormat('en-US').format(Math.round(r.volume)),
+              price: r.price,
+              change30dPct: r.change30dPct,
+              trend: r.trend,
             }))}
           />
         )}

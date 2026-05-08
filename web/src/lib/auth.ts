@@ -73,16 +73,18 @@ export async function getSessionUser(incomingRequest?: Request) {
     }
   }
 
+  // Prefer NextAuth session identity when present (web app default auth path).
+  // This avoids stale legacy `session` cookies overriding the active signed-in user.
+  const nextAuthSession = (await getServerSession(authOptions)) as Session | null;
+  if (nextAuthSession?.user?.email) {
+    const user = await prisma.user.findUnique({ where: { email: nextAuthSession.user.email } });
+    if (user) return user;
+  }
+
   const cookieStore = await cookies();
   const sessionToken = cookieStore.get('session')?.value;
 
   if (!sessionToken) {
-    // Fallback to NextAuth session (App Router usage)
-    const session = (await getServerSession(authOptions)) as Session | null;
-    if (session && session.user && session.user.email) {
-      const user = await prisma.user.findUnique({ where: { email: session.user.email } });
-      return user;
-    }
     return null;
   }
 

@@ -13,6 +13,9 @@ interface Issuer {
   trades: number;
   politicians: number;
   volume: string;
+  price: number | null;
+  change30dPct: number | null;
+  trend: 'up' | 'down' | 'flat' | 'na';
 }
 
 interface SortableIssuersTableProps {
@@ -66,8 +69,42 @@ export default function SortableIssuersTable({ issuers }: SortableIssuersTablePr
       )
     },
     { key: 'ticker', label: '代碼', sortable: false, priority: 'high' as const },
-    { key: 'trades', label: '交易次數', sortable: true, priority: 'medium' as const },
+    { key: 'trades', label: '交易次數', sortable: true, priority: 'high' as const },
     { key: 'politicians', label: '政治家', sortable: true, priority: 'medium' as const },
+    {
+      key: 'price',
+      label: '價格',
+      sortable: true,
+      priority: 'high' as const,
+      render: (value: unknown) => {
+        if (typeof value !== 'number' || !Number.isFinite(value)) return 'N/A';
+        return `$${value.toFixed(2)}`;
+      },
+    },
+    {
+      key: 'change30dPct',
+      label: '30天變化',
+      sortable: true,
+      priority: 'high' as const,
+      render: (value: unknown) => {
+        if (typeof value !== 'number' || !Number.isFinite(value)) return 'N/A';
+        const color = value > 0 ? 'text-green-400' : value < 0 ? 'text-red-400' : 'text-gray-300';
+        const sign = value > 0 ? '+' : '';
+        return <span className={color}>{`${sign}${value.toFixed(2)}%`}</span>;
+      },
+    },
+    {
+      key: 'trend',
+      label: '走勢',
+      sortable: false,
+      priority: 'medium' as const,
+      render: (value: unknown) => {
+        if (value === 'up') return <span className="text-green-400">▲ Up</span>;
+        if (value === 'down') return <span className="text-red-400">▼ Down</span>;
+        if (value === 'flat') return <span className="text-gray-300">■ Flat</span>;
+        return 'N/A';
+      },
+    },
     { key: 'volume', label: '交易金額', sortable: true, priority: 'low' as const },
   ];
 
@@ -79,7 +116,13 @@ export default function SortableIssuersTable({ issuers }: SortableIssuersTablePr
       sortKey={sortKey}
       sortOrder={sortOrder}
       mobileCardTitle={(row) => row.name}
-      mobileCardSubtitle={(row) => `${row.ticker ? `$${row.ticker}` : '無代碼'} • ${row.trades} 筆交易`}
+      mobileCardSubtitle={(row) => {
+        const priceText = typeof row.price === 'number' ? `$${row.price.toFixed(2)}` : 'N/A';
+        const changeText = typeof row.change30dPct === 'number'
+          ? `${row.change30dPct > 0 ? '+' : ''}${row.change30dPct.toFixed(2)}%`
+          : 'N/A';
+        return `${row.ticker ? `$${row.ticker}` : '無代碼'} • ${priceText} • 30D ${changeText}`;
+      }}
     />
   );
 }
