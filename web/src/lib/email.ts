@@ -2,8 +2,8 @@ import fetch from 'node-fetch';
 import { getPublicAppUrlOrDefault } from '@/lib/publicAppUrl';
 import crypto from 'crypto';
 
-const GRIDSEND_API_KEY = process.env.GRIDSEND_API_KEY;
-const EMAIL_FROM = process.env.EMAIL_FROM;
+const GRIDSEND_API_KEY = process.env.GRIDSEND_API_KEY || process.env.SENDGRID_API_KEY;
+const EMAIL_FROM = process.env.EMAIL_FROM || process.env.SENDGRID_FROM_EMAIL;
 const DISABLE_EMAIL = process.env.DISABLE_EMAIL === 'true';
 
 type EmailResponse = { ok: true } | Record<string, unknown>;
