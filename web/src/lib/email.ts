@@ -2,9 +2,12 @@ import fetch from 'node-fetch';
 import { getPublicAppUrlOrDefault } from '@/lib/publicAppUrl';
 import crypto from 'crypto';
 
-const GRIDSEND_API_KEY = process.env.GRIDSEND_API_KEY || process.env.SENDGRID_API_KEY;
+const RAW_GRIDSEND_API_KEY = process.env.GRIDSEND_API_KEY;
+const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
+const EMAIL_API_KEY = RAW_GRIDSEND_API_KEY || SENDGRID_API_KEY;
 const EMAIL_FROM = process.env.EMAIL_FROM || process.env.SENDGRID_FROM_EMAIL;
 const DISABLE_EMAIL = process.env.DISABLE_EMAIL === 'true';
+const GRIDSEND_API_BASE_URL = process.env.GRIDSEND_API_BASE_URL || 'https://api.gridsend.com';
 
 type EmailResponse = { ok: true } | Record<string, unknown>;
 
@@ -21,7 +24,7 @@ export async function sendEmail(to: string, subject: string, html: string): Prom
     return { ok: true, skipped: true, reason: 'development' };
   }
 
-  if (!GRIDSEND_API_KEY) {
+  if (!EMAIL_API_KEY) {
     console.error('[email error] GRIDSEND_API_KEY is missing', { to, subject });
     throw new Error('GRIDSEND_API_KEY is not configured');
   }
@@ -33,18 +36,35 @@ export async function sendEmail(to: string, subject: string, html: string): Prom
 
   try {
     console.log('[email sending]', { to, subject, from: EMAIL_FROM });
-    const response = await fetch('https://api.gridsend.com/v1/send', {
+    const shouldUseSendGridApi =
+      Boolean(SENDGRID_API_KEY) ||
+      EMAIL_API_KEY.startsWith('SG.');
+
+    const endpoint = shouldUseSendGridApi
+      ? 'https://api.sendgrid.com/v3/mail/send'
+      : `${GRIDSEND_API_BASE_URL.replace(/\/+$/, '')}/v1/send`;
+
+    const payload = shouldUseSendGridApi
+      ? {
+          personalizations: [{ to: [{ email: to }] }],
+          from: { email: EMAIL_FROM },
+          subject,
+          content: [{ type: 'text/html', value: html }],
+        }
+      : {
+          from: EMAIL_FROM,
+          to,
+          subject,
+          html,
+        };
+
+    const response = await fetch(endpoint, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${GRIDSEND_API_KEY}`,
+        Authorization: `Bearer ${EMAIL_API_KEY}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        from: EMAIL_FROM,
-        to,
-        subject,
-        html,
-      }),
+      body: JSON.stringify(payload),
     });
 
     if (!response.ok) {
@@ -59,7 +79,17 @@ export async function sendEmail(to: string, subject: string, html: string): Prom
       throw new Error(`Failed to send email: ${response.status} ${response.statusText} - ${errorText}`);
     }
 
-    const json = (await response.json()) as Record<string, unknown>;
+    const responseText = await response.text();
+    let json: Record<string, unknown>;
+    if (!responseText) {
+      json = { ok: true };
+    } else {
+      try {
+        json = JSON.parse(responseText) as Record<string, unknown>;
+      } catch {
+        json = { ok: true, raw: responseText };
+      }
+    }
     console.log('[email sent]', { to, subject, response: json });
     return json;
   } catch (error) {
