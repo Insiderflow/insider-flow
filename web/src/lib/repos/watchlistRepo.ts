@@ -1,3 +1,5 @@
+import { Prisma } from '@prisma/client';
+
 import { prisma } from '@/lib/prisma';
 
 export async function isPoliticianWatchedByUser(userId: string, politicianId: string) {
@@ -43,7 +45,7 @@ export async function getWatchlistUsersByPolitician(politicianId: string) {
       email_verified: true,
       UserWatchlist: { some: { watchlist_type: 'politician', politician_id: politicianId } },
       OR: [
-        { notification_settings: null },
+        { notification_settings: { equals: Prisma.JsonNull } },
         { notification_settings: { path: ['watchlistUpdates'], equals: true } },
       ],
     },
