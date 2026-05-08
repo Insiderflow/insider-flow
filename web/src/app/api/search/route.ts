@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { sectorToZh } from '@/lib/sectorI18n';
 
 export async function GET(request: NextRequest) {
   try {
@@ -68,7 +69,7 @@ export async function GET(request: NextRequest) {
         id: issuer.id,
         type: 'issuer',
         title: issuer.name,
-        subtitle: `${issuer.ticker ? `$${issuer.ticker}` : '無代碼'} • ${issuer.sector || '未知行業'} • ${issuer._count.Trade} 筆交易`,
+        subtitle: `${issuer.ticker ? `$${issuer.ticker}` : '無代碼'} • ${sectorToZh(issuer.sector) || '未知行業'} • ${issuer._count.Trade} 筆交易`,
         url: `/issuers/${issuer.id}`
       });
     });

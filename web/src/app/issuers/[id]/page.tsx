@@ -1,14 +1,14 @@
 import Link from 'next/link';
-import { prisma } from '@/lib/prisma';
 import { notFound, redirect } from 'next/navigation';
-import LoadingWrapper from '@/components/LoadingWrapper';
-import LoadingSpinner from '@/components/LoadingSpinner';
-import IssuerTradesTable from '@/components/IssuerTradesTable';
-import IssuerTimelineChart from '@/components/IssuerTimelineChart';
-import PoliticianTradeCandlestickChart from '@/components/PoliticianTradeCandlestickChart';
 import { getCurrentUserWithTier, isPaid } from '@/lib/membership';
 import { badgeStyles } from '@/components/badgeStyles';
 import { navLinkButtonStyles } from '@/components/linkStyles';
+import { pageTitleStyles } from '@/components/typographyStyles';
+import { statSurfaceStyles } from '@/components/surfaceStyles';
+import { getIssuerDetailData } from '@/lib/repos/issuersRepo';
+import PoliticianProfileImage from '@/components/PoliticianProfileImage';
+import IssuerMarketTrendChart from '@/components/IssuerMarketTrendChart';
+import { sectorToZh } from '@/lib/sectorI18n';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,322 +18,96 @@ interface IssuerDetailPageProps {
 
 export default async function IssuerDetailPage({ 
   params, 
-  searchParams 
-}: IssuerDetailPageProps & { 
-  searchParams: Promise<Record<string, string | string[] | undefined>> 
-}) {
+}: IssuerDetailPageProps) {
   const { id } = await params;
-  const sp = await searchParams;
   const me = await getCurrentUserWithTier();
   if (!isPaid(me)) {
     redirect('/upgrade?reason=paid_required');
   }
-  
-  // Pagination and sorting parameters
-  const pageSize = 20;
-  const page = Math.max(1, Number(typeof sp.page === 'string' ? sp.page : 1) || 1);
-  const allowedSort = new Set(['traded_at', 'published_at', 'price', 'size_max']);
-  const order = (typeof sp.order === 'string' && sp.order.toLowerCase() === 'asc') ? 'asc' : 'desc';
-  const sortKeyRaw = typeof sp.sort === 'string' ? sp.sort : 'traded_at';
-  const sortKey = allowedSort.has(sortKeyRaw) ? sortKeyRaw : 'traded_at';
-  
-  const orderBy: Record<string, 'asc' | 'desc'> = {};
-  orderBy[sortKey] = order;
-  
-  // Get issuer with paginated trades
-  const issuer = await prisma.issuer.findUnique({
-    where: { id },
-    include: {
-      Trade: {
-        include: {
-          Politician: true
-        },
-        orderBy: [orderBy],
-        skip: (page - 1) * pageSize,
-        take: pageSize
-      }
-    }
-  });
-
-  if (!issuer) {
-    notFound();
-  }
-
-  const trades = issuer.Trade; // Current page trades
-
-  // Get total count for pagination
-  const totalTrades = await prisma.trade.count({
-    where: { issuer_id: id }
-  });
-
-  // Calculate stats from all trades (not just current page)
-  // Use paginated trades as fallback if database query fails
-  const allTrades: typeof trades = await prisma.trade.findMany({
-    where: { issuer_id: id },
-    include: { Politician: true },
-  }).catch((error) => {
-    console.error('Error fetching all trades for issuer:', error);
-    // Fallback to current paginated trades if full query fails
-    return trades;
-  });
-  const politicians = new Set(allTrades.map(t => t.Politician.id)).size;
-  const volume = allTrades.reduce((sum, trade) => {
-    const avgSize = trade.size_min && trade.size_max ? 
-      (Number(trade.size_min) + Number(trade.size_max)) / 2 : 0;
-    return sum + avgSize;
-  }, 0);
-
-  const lastTraded = allTrades.length > 0 ? 
-    new Date(Math.max(...allTrades.map(t => new Date(t.traded_at).getTime()))) : 
-    null;
-
-  // Get party breakdown from all trades
-  const partyBreakdown = allTrades.reduce((acc, trade) => {
-    const party = trade.Politician.party || 'Other';
-    if (!acc[party]) {
-      acc[party] = { trades: 0, buy: 0, sell: 0 };
-    }
-    acc[party].trades++;
-    if (trade.type === 'buy') {
-      acc[party].buy++;
-    } else if (trade.type === 'sell') {
-      acc[party].sell++;
-    }
-    return acc;
-  }, {} as Record<string, { trades: number; buy: number; sell: number }>);
-
-  // Prepare trade data for table
-  const tradeRows = trades.slice(0, 50).map(trade => ({
-    politician: trade.Politician.name,
-    politicianId: trade.Politician.id,
-    party: trade.Politician.party || 'Unknown',
-    published: trade.published_at ? new Date(trade.published_at).toLocaleDateString('en-US', {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric'
-    }) : '',
-    traded: new Date(trade.traded_at).toLocaleDateString('en-US', {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric'
-    }),
-    type: trade.type,
-    size: trade.size_min && trade.size_max ? 
-      `${trade.size_min}K–${trade.size_max}K` : 
-      'N/A',
-    detailUrl: `/trades/${trade.id}`
-  }));
+  const detail = await getIssuerDetailData(id);
+  if (!detail) notFound();
+  const { issuer, stats, recentTrades, chartPoints } = detail;
 
   return (
     <div className="min-h-screen bg-gray-900">
       <main className="p-4">
-        {/* Header Section */}
         <div className="mb-6">
-          <div className="flex flex-col md:flex-row gap-4 items-start md:items-center mb-4">
-            {/* Issuer Info */}
-            <div className="flex-1">
-              <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">
-                {issuer.name}
-              </h1>
-              {issuer.ticker && (
-                <div className="text-lg text-gray-300 mb-2">
-                  {issuer.ticker}
+          <h1 className={pageTitleStyles()}>
+            <span className="zh-Hant">發行商</span>
+            <span className="zh-Hans hidden">发行商</span>
+          </h1>
+        </div>
+
+        <section className="rounded-xl border border-gray-700 bg-gray-800 p-5 mb-6">
+          <div className="flex flex-col gap-2">
+            <h2 className="text-2xl font-bold text-white">{issuer.name}</h2>
+            <div className="text-gray-300">{issuer.ticker || 'N/A'}</div>
+            <div className="flex flex-wrap gap-2">
+              {issuer.sector && <span className={badgeStyles('info')}>{sectorToZh(issuer.sector) || issuer.sector}</span>}
+              {issuer.country && <span className={badgeStyles('neutral')}>{issuer.country}</span>}
+            </div>
+          </div>
+        </section>
+
+        <section className="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
+          <div className={statSurfaceStyles()}>
+            <div className="text-xs text-white/70">交易次數</div>
+            <div className="text-xl text-white font-semibold">{stats.trades.toLocaleString('en-US')}</div>
+          </div>
+          <div className={statSurfaceStyles()}>
+            <div className="text-xs text-white/70">交易議員</div>
+            <div className="text-xl text-white font-semibold">{stats.politicians.toLocaleString('en-US')}</div>
+          </div>
+          <div className={statSurfaceStyles()}>
+            <div className="text-xs text-white/70">交易總額</div>
+            <div className="text-xl text-white font-semibold">${Math.round(stats.totalVolume).toLocaleString('en-US')}</div>
+          </div>
+          <div className={statSurfaceStyles()}>
+            <div className="text-xs text-white/70">最大交易</div>
+            <div className="text-xl text-white font-semibold">${Math.round(stats.maxTrade).toLocaleString('en-US')}</div>
+          </div>
+          <div className={statSurfaceStyles()}>
+            <div className="text-xs text-white/70">最後交易</div>
+            <div className="text-xl text-white font-semibold">{stats.lastTraded ? stats.lastTraded.toLocaleDateString('zh-TW') : '-'}</div>
+          </div>
+        </section>
+
+        <section className="mb-6">
+          <IssuerMarketTrendChart issuerName={issuer.name} points={chartPoints} />
+        </section>
+
+        <section className="rounded-xl border border-gray-700 bg-gray-800 p-5 mb-6">
+          <h3 className="text-xl font-semibold text-white mb-4">最近交易</h3>
+          {recentTrades.length === 0 ? (
+            <div className="text-gray-400">目前沒有最近交易資料。</div>
+          ) : (
+            <div className="space-y-3">
+              {recentTrades.map((trade) => (
+                <div key={trade.id} className="rounded-lg border border-gray-700 bg-gray-900 p-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-full overflow-hidden bg-gray-700 shrink-0">
+                        <PoliticianProfileImage politicianId={trade.politician.id} politicianName={trade.politician.name} />
+                      </div>
+                      <Link href={`/politicians/${trade.politician.id}`} className="text-blue-300 hover:text-blue-200">
+                        {trade.politician.name}
+                      </Link>
+                    </div>
+                    <span className={badgeStyles(trade.type.toUpperCase() === 'BUY' ? 'success' : 'danger', 'xs')}>
+                      {trade.type}
+                    </span>
+                  </div>
+                  <div className="mt-2 text-sm text-gray-300 flex flex-wrap gap-4">
+                    <span>交易日：{trade.tradedAt.toLocaleDateString('zh-TW')}</span>
+                    <span>金額：{trade.sizeMin && trade.sizeMax ? `$${Math.round(trade.sizeMin).toLocaleString('en-US')} - $${Math.round(trade.sizeMax).toLocaleString('en-US')}` : '-'}</span>
+                    <span>價格：{trade.price !== null ? `$${trade.price.toFixed(2)}` : '-'}</span>
+                  </div>
                 </div>
-              )}
-              <div className="flex flex-wrap gap-2 mb-3">
-                {issuer.sector && (
-                  <span className={badgeStyles('info')}>
-                    {issuer.sector}
-                  </span>
-                )}
-                {issuer.country && (
-                  <span className={badgeStyles('neutral')}>
-                    {issuer.country}
-                  </span>
-                )}
-              </div>
+              ))}
             </div>
-          </div>
+          )}
+        </section>
 
-          {/* Stats Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-            <div className="bg-gray-800 border border-gray-600 rounded-lg p-4 shadow-md">
-              <div className="text-2xl font-bold text-white">{allTrades.length}</div>
-              <div className="text-sm text-gray-400">交易次數</div>
-            </div>
-            <div className="bg-gray-800 border border-gray-600 rounded-lg p-4 shadow-md">
-              <div className="text-2xl font-bold text-white">{politicians}</div>
-              <div className="text-sm text-gray-400">政治家</div>
-            </div>
-            <div className="bg-gray-800 border border-gray-600 rounded-lg p-4 shadow-md">
-              <div className="text-2xl font-bold text-white">${(volume / 1000000).toFixed(1)}M</div>
-              <div className="text-sm text-gray-400">交易金額</div>
-            </div>
-            <div className="bg-gray-800 border border-gray-600 rounded-lg p-4 shadow-md">
-              <div className="text-2xl font-bold text-white">
-                {lastTraded ? lastTraded.toLocaleDateString('zh-TW', {
-                  month: 'short',
-                  day: 'numeric',
-                  year: 'numeric'
-                }) : '無交易記錄'}
-              </div>
-              <div className="text-sm text-gray-400">最後交易</div>
-            </div>
-          </div>
-        </div>
-
-        {/* Timeline Chart */}
-        <div className="mb-6">
-          <IssuerTimelineChart 
-            trades={allTrades?.map(trade => ({
-              id: trade.id,
-              traded_at: trade.traded_at.toISOString(),
-              type: trade.type as 'buy' | 'sell' | 'exchange',
-              politician: {
-                id: trade.Politician.id,
-                name: trade.Politician.name,
-                party: trade.Politician.party,
-                chamber: trade.Politician.chamber
-              },
-              size_min: trade.size_min ? Number(trade.size_min) : undefined,
-              size_max: trade.size_max ? Number(trade.size_max) : undefined,
-              price: trade.price ? Number(trade.price) : undefined
-            })) || []}
-            issuerName={issuer.name}
-          />
-        </div>
-
-        {/* Candlestick Chart with Politician Trade Markers - LOCAL TESTING ONLY */}
-        {issuer.ticker && (allTrades && allTrades.length > 0) && (
-          <div className="mb-6">
-            <PoliticianTradeCandlestickChart
-              ticker={issuer.ticker}
-              trades={allTrades.map(trade => ({
-                id: trade.id,
-                traded_at: trade.traded_at.toISOString(),
-                type: trade.type as 'buy' | 'sell' | 'exchange',
-                politician: {
-                  id: trade.Politician.id,
-                  name: trade.Politician.name,
-                  party: trade.Politician.party,
-                  chamber: trade.Politician.chamber
-                },
-                size_min: trade.size_min ? Number(trade.size_min) : undefined,
-                size_max: trade.size_max ? Number(trade.size_max) : undefined,
-                price: trade.price ? Number(trade.price) : undefined,
-                published_at: trade.published_at?.toISOString() || null
-              }))}
-              issuerName={issuer.name}
-            />
-          </div>
-        )}
-
-        {/* Party Breakdown */}
-        <div className="mb-6">
-          <h2 className="text-xl font-semibold text-white mb-4">按黨派交易</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {Object.entries(partyBreakdown).map(([party, data]) => (
-              <div key={party} className="bg-gray-800 border border-gray-600 rounded-lg p-4 shadow-md">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-white font-medium">{party}</span>
-                  <span className="text-gray-400">{data.trades} 筆交易</span>
-                </div>
-                <div className="flex gap-4 text-sm">
-                  <span className="text-green-400">買入: {data.buy}</span>
-                  <span className="text-red-400">賣出: {data.sell}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Recent Trades Table */}
-        <div className="mb-6">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold text-white">最近交易</h2>
-            <span className="text-sm text-gray-400">
-              顯示 {trades.length} / {totalTrades} 筆交易
-            </span>
-          </div>
-          
-          {/* Pagination and Sorting Controls */}
-          <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
-            <div className="text-sm text-gray-300">
-              第 {page} 頁，共 {Math.ceil(totalTrades / pageSize)} 頁
-            </div>
-            <div className="flex items-center gap-4">
-              <form method="get" className="flex items-center gap-2">
-                <input type="hidden" name="page" value="1" />
-                <label className="text-sm text-gray-400">排序:</label>
-                <select 
-                  name="sort" 
-                  defaultValue={sortKey}
-                  className="border border-gray-600 p-1 bg-gray-800 text-white text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200"
-                >
-                  <option value="traded_at">交易日期</option>
-                  <option value="published_at">發布日期</option>
-                  <option value="price">價格</option>
-                  <option value="size_max">金額</option>
-                </select>
-                <select 
-                  name="order" 
-                  defaultValue={order}
-                  className="border border-gray-600 p-1 bg-gray-800 text-white text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200"
-                >
-                  <option value="desc">新到舊</option>
-                  <option value="asc">舊到新</option>
-                </select>
-                <button 
-                  type="submit"
-                  className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none transition-colors duration-200 text-sm"
-                >
-                  套用
-                </button>
-              </form>
-            </div>
-          </div>
-          
-          {/* Pagination Controls */}
-          <div className="flex justify-center items-center gap-2 mb-4">
-            {page > 1 && (
-              <a 
-                href={`/issuers/${id}?${new URLSearchParams({ 
-                  page: String(page - 1),
-                  sort: sortKey,
-                  order: order
-                }).toString()}`}
-                className="px-3 py-1 bg-gray-700 text-white rounded hover:bg-gray-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none transition-colors duration-200"
-              >
-                上一頁
-              </a>
-            )}
-            <span className="px-3 py-1 bg-gray-600 text-white rounded">
-              {page} / {Math.ceil(totalTrades / pageSize)}
-            </span>
-            {page < Math.ceil(totalTrades / pageSize) && (
-              <a 
-                href={`/issuers/${id}?${new URLSearchParams({ 
-                  page: String(page + 1),
-                  sort: sortKey,
-                  order: order
-                }).toString()}`}
-                className="px-3 py-1 bg-gray-700 text-white rounded hover:bg-gray-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none transition-colors duration-200"
-              >
-                下一頁
-              </a>
-            )}
-          </div>
-          
-          <LoadingWrapper fallback={
-            <div className="border border-gray-600 bg-gray-800 rounded shadow-md flex justify-center items-center min-h-[400px]">
-              <LoadingSpinner size="lg" />
-            </div>
-          }>
-            <IssuerTradesTable data={tradeRows} />
-          </LoadingWrapper>
-        </div>
-
-        {/* Back Button */}
         <div className="mt-6">
           <Link 
             href="/issuers" 

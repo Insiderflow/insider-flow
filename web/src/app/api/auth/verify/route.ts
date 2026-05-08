@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyEmail } from '@/lib/auth';
+import { getPublicAppUrlOrDefault } from '@/lib/publicAppUrl';
 
 export async function GET(req: NextRequest) {
   try {
@@ -13,12 +14,12 @@ export async function GET(req: NextRequest) {
     await verifyEmail(token);
 
     // Redirect to verification success page
-    const baseUrl = process.env.NEXTAUTH_URL || 'https://insiderflow.asia';
+    const baseUrl = getPublicAppUrlOrDefault();
     return NextResponse.redirect(new URL('/verification-success', baseUrl));
 
   } catch {
     // Redirect to verification error page
-    const baseUrl = process.env.NEXTAUTH_URL || 'https://insiderflow.asia';
+    const baseUrl = getPublicAppUrlOrDefault();
     return NextResponse.redirect(new URL('/verification-error', baseUrl));
   }
 }

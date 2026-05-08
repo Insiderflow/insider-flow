@@ -21,7 +21,7 @@ describe('stripeWebhook helpers', () => {
   });
 
   it('extracts subscription id from string invoice field', () => {
-    const invoice = { subscription: 'sub_abc' } as Stripe.Invoice;
+    const invoice = { subscription: 'sub_abc' } as unknown as Stripe.Invoice;
     expect(getInvoiceSubscriptionId(invoice)).toBe('sub_abc');
   });
 

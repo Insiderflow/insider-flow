@@ -6,7 +6,8 @@ import { spawnSync } from 'node:child_process';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const projectRoot = path.resolve(__dirname, '..');
-const frontendRoot = path.resolve(projectRoot, '../../Base44UXUI/mindful-trade-signal-flow');
+/** Canonical Vite SPA (same monorepo as `web/`). */
+const frontendRoot = path.resolve(projectRoot, '../mindful-trade-signal-flow');
 const args = new Set(process.argv.slice(2));
 const dryRun = args.has('--dry-run');
 const localRelaxedEnvMode = dryRun && process.env.CI !== 'true';
@@ -14,6 +15,10 @@ const skipHealthFlag = args.has('--skip-health') || process.env.RELEASE_CHECK_SK
 const showFixHints = args.has('--fix-hints');
 const skipPrismaFlag = args.has('--skip-prisma') || process.env.RELEASE_CHECK_SKIP_PRISMA === '1';
 const skipFrontendCheckFlag = args.has('--skip-frontend-check') || process.env.RELEASE_CHECK_SKIP_FRONTEND === '1';
+const skipRevenuecatFlag =
+  args.has('--skip-revenuecat') ||
+  process.env.RELEASE_CHECK_SKIP_REVENUECAT === '1' ||
+  process.env.RELEASE_CHECK_SKIP_REVENUECAT === 'true';
 
 function parseEnvFile(filePath) {
   if (!fs.existsSync(filePath)) return {};
@@ -124,7 +129,7 @@ function printFixHints({
   }
 
   console.log('\nExtended hints for mobile envs:');
-  console.log('- Run: cd ../../Base44UXUI/mindful-trade-signal-flow && npm run release:check -- --fix-hints');
+  console.log('- Run: cd ../mindful-trade-signal-flow && npm run release:check -- --fix-hints');
 }
 
 async function run() {
@@ -138,7 +143,7 @@ async function run() {
   let prismaFailed = false;
   let healthFailed = false;
 
-  const requiredEnv = [
+  const requiredEnvCore = [
     'DATABASE_URL',
     'SESSION_SECRET',
     'NEXTAUTH_SECRET',
@@ -146,15 +151,26 @@ async function run() {
     'INTERNAL_JOBS_SECRET',
     'STRIPE_SECRET_KEY',
     'STRIPE_WEBHOOK_SECRET',
+  ];
+  const requiredEnvRevenuecat = [
     'REVENUECAT_SECRET_API_KEY',
     'REVENUECAT_WEBHOOK_AUTH',
     'REVENUECAT_WEBHOOK_SECRET',
   ];
+  const requiredEnv = skipRevenuecatFlag
+    ? [...requiredEnvCore]
+    : [...requiredEnvCore, ...requiredEnvRevenuecat];
   const recommendedEnv = [
     'SUBSCRIPTION_ALERT_WEBHOOK_URL',
   ];
 
   section('Backend Env Checks');
+  if (skipRevenuecatFlag) {
+    console.log(
+      'INFO RevenueCat backend env checks skipped (RELEASE_CHECK_SKIP_REVENUECAT=1 or --skip-revenuecat)',
+    );
+    warnings.push('RevenueCat env checks skipped — unset when backend webhook secrets are configured');
+  }
   if (localRelaxedEnvMode) {
     console.log('INFO local dry-run mode: missing required envs are reported as WARN (CI remains strict)');
   }
@@ -221,13 +237,18 @@ async function run() {
       console.log(`INFO using RELEASE_CHECK_BASE_URL=${baseUrl}`);
     }
 
-    const rcHealth = await checkHealth(`${baseUrl}/api/revenuecat/webhook`);
-    if (!rcHealth.ok || rcHealth.body?.ok !== true) {
-      healthFailed = true;
-      failures.push(`RevenueCat webhook health failed (status ${rcHealth.status})`);
-      console.log(`FAIL revenuecat webhook health status=${rcHealth.status}`);
+    if (skipRevenuecatFlag) {
+      console.log('SKIP revenuecat webhook health (RELEASE_CHECK_SKIP_REVENUECAT=1 or --skip-revenuecat)');
+      warnings.push('RevenueCat webhook health skipped — re-enable after production RevenueCat secrets exist');
     } else {
-      console.log('PASS revenuecat webhook health');
+      const rcHealth = await checkHealth(`${baseUrl}/api/revenuecat/webhook`);
+      if (!rcHealth.ok || rcHealth.body?.ok !== true) {
+        healthFailed = true;
+        failures.push(`RevenueCat webhook health failed (status ${rcHealth.status})`);
+        console.log(`FAIL revenuecat webhook health status=${rcHealth.status}`);
+      } else {
+        console.log('PASS revenuecat webhook health');
+      }
     }
 
     const internalSecret = getEnv('INTERNAL_JOBS_SECRET', envSources);

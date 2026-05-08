@@ -1,167 +1,45 @@
- 
-
 import Link from 'next/link';
-import { prisma } from '@/lib/prisma';
-import LoadingWrapper from '@/components/LoadingWrapper';
 import HomePoliticianImage from '@/components/HomePoliticianImage';
-import { StatsCardSkeleton } from '@/components/SkeletonLoader';
 import LastUpdated, { DataFreshnessIndicator } from '@/components/LastUpdated';
-import PoliticianCard from '@/components/PoliticianCard';
 import { actionStyles } from '@/components/actionStyles';
 import { badgeStyles } from '@/components/badgeStyles';
 import { textLinkStyles } from '@/components/linkStyles';
-import { panelSurfaceStyles, statSurfaceStyles } from '@/components/surfaceStyles';
+import { panelSurfaceStyles } from '@/components/surfaceStyles';
 import { bodySubtextStyles, mutedLabelStyles, sectionTitleStyles } from '@/components/typographyStyles';
+import { getHomePageStats } from '@/lib/repos/homeRepo';
+import { getPoliticiansPageData } from '@/lib/repos/politiciansRepo';
+import { getLatestTradesPublic } from '@/lib/repos/tradesRepo';
+import StatCard from '@/components/StatCard';
 export const dynamic = 'force-dynamic';
 
 export default async function Home({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   const sp = await searchParams;
   const verified = sp.verified === 'true';
   const verificationError = sp.verification;
-  // Latest trades: pull from past 7 days (by published_at), then randomize with diverse politicians
-  const now = new Date();
-  const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-  
-  // First try to get trades from last 7 days
-  let recentTradesPool = await prisma.trade.findMany({
-    where: {
-      published_at: {
-        gte: sevenDaysAgo,
-        lte: now
-      },
-    },
-    orderBy: { published_at: 'desc' },
-    take: 200, // Increased pool size
-    include: { Politician: true, Issuer: true },
-  });
-
-  // If we don't have enough trades from last 7 days, expand to last 30 days
-  if (recentTradesPool.length < 20) {
-    const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
-    recentTradesPool = await prisma.trade.findMany({
-      where: {
-        published_at: {
-          gte: thirtyDaysAgo,
-          lte: now
-        },
-      },
-      orderBy: { published_at: 'desc' },
-      take: 200,
-      include: { Politician: true, Issuer: true },
-    });
-  }
-
-  // Shuffle helper
-  function shuffleArray<T>(arr: T[]): T[] {
-    const a = arr.slice();
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-  }
-
-  // Prefer diversity: pick at most one trade per politician, randomized
-  const byPolitician = new Map<string, typeof recentTradesPool[number]>();
-  for (const t of recentTradesPool) {
-    if (!byPolitician.has(t.politician_id)) {
-      byPolitician.set(t.politician_id, t);
-    }
-  }
-  const diversified = shuffleArray(Array.from(byPolitician.values())).slice(0, 5);
-  
-  // Fallback: if less than 5 unique politicians, fill from pool randomly
-  let latestTrades = diversified.length < 5
-    ? [...diversified, ...shuffleArray(recentTradesPool.filter(t => !byPolitician.has(t.politician_id))).slice(0, 5 - diversified.length)]
-    : diversified;
-
-  // Final fallback: if we still don't have 5 trades, get any recent trades
-  if (latestTrades.length < 5) {
-    const fallbackTrades = await prisma.trade.findMany({
-      where: {
-        published_at: { not: null }
-      },
-      orderBy: { published_at: 'desc' },
-      take: 10,
-      include: { Politician: true, Issuer: true },
-    });
-    
-    const fallbackShuffled = shuffleArray(fallbackTrades);
-    latestTrades = [...latestTrades, ...fallbackShuffled.slice(0, 5 - latestTrades.length)];
-  }
-
-  // Top 5 most active politicians (by trade count) with latest trade date
-  const topPoliticiansGrouped = await prisma.trade.groupBy({
-    by: ['politician_id'],
-    _count: { politician_id: true },
-    _max: { traded_at: true },
-    orderBy: { _count: { politician_id: 'desc' } },
-    take: 5
-  });
-
-  const topPoliticianIds = topPoliticiansGrouped.map(g => g.politician_id);
-  const topPoliticians = await prisma.politician.findMany({ where: { id: { in: topPoliticianIds } } });
-  const polById = new Map(topPoliticians.map(p => [p.id, p] as const));
-  // Calculate detailed stats for each politician
-  const featuredListWithStats = await Promise.all(
-    topPoliticiansGrouped.map(async (g) => {
-      const politician = polById.get(g.politician_id);
-      if (!politician) return null;
-
-      // Get issuer count and total volume for this politician
-      const [issuerStats, volumeStats] = await Promise.all([
-        prisma.trade.groupBy({
-          by: ['issuer_id'],
-          where: { politician_id: g.politician_id },
-          _count: { issuer_id: true }
-        }),
-        prisma.trade.aggregate({
-          where: { politician_id: g.politician_id },
-          _sum: { size_max: true }
-        })
-      ]);
-
-      return {
-        politician,
-        stats: {
-          tradeCount: g._count.politician_id,
-          latestTradeDate: g._max.traded_at,
-          issuerCount: issuerStats.length,
-          totalVolume: Number(volumeStats._sum.size_max || 0)
-        }
-      };
-    })
-  );
-
-  const featuredList = featuredListWithStats.filter(item => item !== null) as { politician: typeof topPoliticians[number]; stats: { tradeCount: number; latestTradeDate: Date | null; issuerCount: number; totalVolume: number } }[];
-  const [tradeCount, polCount, issuerCount, lastTradeDate] = await Promise.all([
-    prisma.trade.count(),
-    prisma.politician.count(),
-    prisma.issuer.count(),
-    prisma.trade.findFirst({
-      orderBy: { created_at: 'desc' },
-      select: { created_at: true }
-    }).then(result => result?.created_at || new Date())
+  const [stats, latestTrades, topPoliticiansResult] = await Promise.all([
+    getHomePageStats(),
+    getLatestTradesPublic(10),
+    getPoliticiansPageData({ page: 1, pageSize: 6, sortBy: 'trades', order: 'desc' }),
   ]);
+  const lastTradeDate = stats.lastTradeDate;
 
-  // Note: per-card stats for politicians are provided by featuredList above
   return (
     <div className="min-h-screen bg-gray-900">
-      <main className="space-y-10">
+      <main className="p-4 space-y-8">
       {/* hero */}
-      <section className="rounded-xl overflow-hidden hero-gradient">
-        <div className="px-8 py-16 text-center">
+      <section className="rounded-xl overflow-hidden hero-gradient border border-gray-700">
+        <div className="px-5 sm:px-8 py-14 sm:py-20 text-center">
           <h1 className="text-4xl md:text-5xl font-extrabold mb-4 text-white">
-            <span className="zh-Hant">CEO 內線交易追蹤</span>
-            <span className="zh-Hans hidden">CEO 内线交易追踪</span>
+            <span className="zh-Hant">內幕流 內幕交易即時追蹤</span>
+            <span className="zh-Hans hidden">内幕流 内幕交易即时追踪</span>
           </h1>
-          <p className="text-white/90 mb-6">
-            <span className="zh-Hant">最新企業買賣 即時知道　$10/月 快人一步</span>
-            <span className="zh-Hans hidden">最新企业买卖 即时知道　$10/月 快人一步</span>
+          <p className="text-white/90 mb-8 text-lg">
+            <span className="zh-Hant">追蹤國會議員最新交易、發行商動向與市場熱點。</span>
+            <span className="zh-Hans hidden">追踪国会议员最新交易、发行商动向与市场热点。</span>
           </p>
-          <Link href="/upgrade?reason=paid_required" className={actionStyles('secondary')} aria-label="Upgrade">
-            <span className="zh-Hant">立即升級 →</span>
-            <span className="zh-Hans hidden">立即升级 →</span>
+          <Link href="/register" className={actionStyles('secondary')} aria-label="Register watchlist">
+            <span className="zh-Hant">立即註冊 Watchlist</span>
+            <span className="zh-Hans hidden">立即注册 Watchlist</span>
           </Link>
         </div>
       </section>
@@ -220,38 +98,14 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
           </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <LoadingWrapper fallback={<StatsCardSkeleton />}>
-          <div className={statSurfaceStyles()}>
-            <div className="text-xs sm:text-sm text-white">
-              <span className="zh-Hant">總交易</span>
-              <span className="zh-Hans hidden">总交易</span>
-            </div>
-            <div className="text-lg sm:text-2xl font-semibold text-white">{tradeCount}</div>
-          </div>
-        </LoadingWrapper>
-        <LoadingWrapper fallback={<StatsCardSkeleton />}>
-          <div className={statSurfaceStyles()}>
-            <div className="text-xs sm:text-sm text-white">
-              <span className="zh-Hant">政治家</span>
-              <span className="zh-Hans hidden">政治家</span>
-            </div>
-            <div className="text-lg sm:text-2xl font-semibold text-white">{polCount}</div>
-          </div>
-        </LoadingWrapper>
-        <LoadingWrapper fallback={<StatsCardSkeleton />}>
-          <div className={statSurfaceStyles()}>
-            <div className="text-xs sm:text-sm text-white">
-              <span className="zh-Hant">發行商</span>
-              <span className="zh-Hans hidden">发行商</span>
-            </div>
-            <div className="text-lg sm:text-2xl font-semibold text-white">{issuerCount}</div>
-          </div>
-        </LoadingWrapper>
+          <StatCard label={<><span className="zh-Hant">總交易</span><span className="zh-Hans hidden">总交易</span></>} value={stats.tradeCount.toLocaleString('en-US')} />
+          <StatCard label={<><span className="zh-Hant">政治家</span><span className="zh-Hans hidden">政治家</span></>} value={stats.politicianCount.toLocaleString('en-US')} />
+          <StatCard label={<><span className="zh-Hant">發行商</span><span className="zh-Hans hidden">发行商</span></>} value={stats.issuerCount.toLocaleString('en-US')} />
         </div>
       </section>
-      {/* Latest Trades and Popular Politicians Cards */}
+      {/* Latest Trades and Most Traded Politicians */}
       <section className="space-y-8">
-        {/* Latest Trades (5 cards) */}
+        {/* Latest Trades */}
         <div className={`${panelSurfaceStyles()} rounded-xl shadow-md`}>
           <div className="flex items-center justify-between mb-6">
             <div>
@@ -260,7 +114,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
                 <span className="zh-Hans hidden">🔥 最新交易</span>
               </h2>
               <p className={`text-sm ${mutedLabelStyles()}`}>
-                <span className="zh-Hant">國會議員最新股票交易動態</span>
+                <span className="zh-Hant">公開前 10 筆最新交易</span>
                 <span className="zh-Hans hidden">国会议员最新股票交易动态</span>
               </p>
             </div>
@@ -275,13 +129,13 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex flex-col">
                     <span className={`text-sm ${bodySubtextStyles()}`}>
-                      <span className="zh-Hant">交易日期: {new Date(t.traded_at).toLocaleDateString('zh-TW')}</span>
-                      <span className="zh-Hans hidden">交易日期: {new Date(t.traded_at).toLocaleDateString('zh-CN')}</span>
+                      <span className="zh-Hant">交易日期: {new Date(t.tradedAt).toLocaleDateString('zh-TW')}</span>
+                      <span className="zh-Hans hidden">交易日期: {new Date(t.tradedAt).toLocaleDateString('zh-CN')}</span>
                     </span>
-                    {t.published_at && (
+                    {t.publishedAt && (
                       <span className={`text-xs ${mutedLabelStyles()}`}>
-                        <span className="zh-Hant">發布日期: {new Date(t.published_at).toLocaleDateString('zh-TW')}</span>
-                        <span className="zh-Hans hidden">发布日期: {new Date(t.published_at).toLocaleDateString('zh-CN')}</span>
+                        <span className="zh-Hant">發布日期: {new Date(t.publishedAt).toLocaleDateString('zh-TW')}</span>
+                        <span className="zh-Hans hidden">发布日期: {new Date(t.publishedAt).toLocaleDateString('zh-CN')}</span>
                       </span>
                     )}
                   </div>
@@ -299,11 +153,11 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
                 
                 <div className="flex items-center space-x-3 mb-3">
                   <div className="relative w-12 h-12 rounded-full overflow-hidden">
-                    <HomePoliticianImage politicianId={t.Politician.id} politicianName={t.Politician.name} />
+                    <HomePoliticianImage politicianId={t.politician.id} politicianName={t.politician.name} />
                   </div>
                   <div className="flex-1">
-                    <Link href={`/politicians/${t.Politician.id}`} className="text-white font-semibold hover:text-blue-300 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none rounded">{t.Politician.name}</Link>
-                    <div className={`text-xs ${bodySubtextStyles()}`}>{t.Politician.party} • {t.Politician.state}</div>
+                    <Link href={`/politicians/${t.politician.id}`} className="text-white font-semibold hover:text-blue-300 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none rounded">{t.politician.name}</Link>
+                    <div className={`text-xs ${bodySubtextStyles()}`}>{t.politician.party} • {t.politician.state}</div>
                   </div>
                 </div>
 
@@ -313,28 +167,28 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
                       <span className="zh-Hant">發行商</span>
                       <span className="zh-Hans hidden">发行商</span>
                     </span>
-                    <Link href={`/issuers/${t.Issuer.id}`} className={`${textLinkStyles()} text-sm`}>{t.Issuer.name}</Link>
+                    <Link href={`/issuers/${t.issuer.id}`} className={`${textLinkStyles()} text-sm`}>{t.issuer.name}</Link>
                   </div>
                   
-                  {t.size_min && t.size_max && (
+                  {t.sizeMin && t.sizeMax && (
                     <div className="flex items-center justify-between">
                       <span className={`text-xs ${mutedLabelStyles()}`}>
                         <span className="zh-Hant">交易規模</span>
                         <span className="zh-Hans hidden">交易规模</span>
                       </span>
                       <span className="text-sm text-white">
-                        ${Number(t.size_min).toLocaleString()} - ${Number(t.size_max).toLocaleString()}
+                        ${Number(t.sizeMin).toLocaleString()} - ${Number(t.sizeMax).toLocaleString()}
                       </span>
                     </div>
                   )}
                   
-                  {t.price && (
+                  {t.price !== null && (
                     <div className="flex items-center justify-between">
                       <span className={`text-xs ${mutedLabelStyles()}`}>
                         <span className="zh-Hant">價格</span>
                         <span className="zh-Hans hidden">价格</span>
                       </span>
-                      <span className="text-sm text-white">${Number(t.price).toFixed(2)}</span>
+                      <span className="text-sm text-white">${t.price.toFixed(2)}</span>
                     </div>
                   )}
                 </div>
@@ -343,12 +197,12 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
           </div>
         </div>
 
-        {/* Top Politicians (5 cards) */}
+        {/* Most Traded Politicians */}
         <div className={`${panelSurfaceStyles()} rounded-xl shadow-md`}>
           <div className="flex items-center justify-between mb-4">
             <h2 className={sectionTitleStyles()}>
-              <span className="zh-Hant">熱門議員</span>
-              <span className="zh-Hans hidden">热门议员</span>
+              <span className="zh-Hant">最常交易議員</span>
+              <span className="zh-Hans hidden">最常交易议员</span>
             </h2>
             <Link href="/politicians" className={`${textLinkStyles('muted')} text-sm`}>
               <span className="zh-Hant">查看所有</span>
@@ -356,22 +210,25 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {featuredList.map(({ politician, stats }) => (
-              <PoliticianCard
-                key={politician.id}
-                politician={{
-                  id: politician.id,
-                  name: politician.name,
-                  party: politician.party,
-                  chamber: politician.chamber,
-                  trades: stats.tradeCount,
-                  issuers: stats.issuerCount,
-                  volume: stats.totalVolume,
-                  lastTraded: stats.latestTradeDate
-                }}
-                showWatchlistButton={false}
-                initialInWatchlist={false}
-              />
+            {topPoliticiansResult.rows.map((row) => (
+              <div key={row.id} className="bg-gray-700 rounded-lg p-4">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-12 h-12 rounded-full overflow-hidden">
+                    <HomePoliticianImage politicianId={row.id} politicianName={row.name} />
+                  </div>
+                  <div className="min-w-0">
+                    <Link href={`/politicians/${row.id}`} className="text-white font-semibold hover:text-blue-300 truncate block">
+                      {row.name}
+                    </Link>
+                    <p className={`text-xs ${mutedLabelStyles()}`}>{row.party || 'Unknown'} · {row.chamber || 'N/A'}</p>
+                  </div>
+                </div>
+                <div className="space-y-1 text-sm">
+                  <div className="flex justify-between"><span className="text-gray-400">交易次數</span><span className="text-white">{row.trades}</span></div>
+                  <div className="flex justify-between"><span className="text-gray-400">發行商數</span><span className="text-white">{row.issuers}</span></div>
+                  <div className="flex justify-between"><span className="text-gray-400">總金額</span><span className="text-white">${Math.round(row.totalVolume).toLocaleString('en-US')}</span></div>
+                </div>
+              </div>
             ))}
           </div>
         </div>

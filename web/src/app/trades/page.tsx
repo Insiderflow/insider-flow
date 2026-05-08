@@ -1,18 +1,16 @@
 import Link from 'next/link';
-import { prisma } from '@/lib/prisma';
-import ClearFiltersButton from '@/components/ClearFiltersButton';
-import AutocompleteInput from '@/components/AutocompleteInput';
-import SortableTradesTable from '@/components/SortableTradesTable';
 import LastUpdated, { DataFreshnessIndicator } from '@/components/LastUpdated';
 import { getCurrentUserWithTier, isPaid } from '@/lib/membership';
 import { redirect } from 'next/navigation';
 import StateNotice from '@/components/StateNotice';
 import { actionStyles } from '@/components/actionStyles';
 import { fieldControlStyles, fieldLabelStyles } from '@/components/formStyles';
-import { statSurfaceStyles } from '@/components/surfaceStyles';
 import { bodySubtextStyles, pageTitleStyles } from '@/components/typographyStyles';
-import { badgeStyles } from '@/components/badgeStyles';
 import { textLinkStyles } from '@/components/linkStyles';
+import { getTradesPageData, type TradeSortKey, type SortOrder } from '@/lib/repos/tradesRepo';
+import StatCard from '@/components/StatCard';
+import FilterBar from '@/components/FilterBar';
+import PaginationBar from '@/components/PaginationBar';
 
 export const dynamic = 'force-dynamic';
 
@@ -22,76 +20,29 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
     redirect('/upgrade?reason=paid_required');
   }
   const sp = await searchParams;
-  const pageSize = 50;
+  const pageSize = 30;
   const page = Math.max(1, Number(typeof sp.page === 'string' ? sp.page : 1) || 1);
-  const allowedSort = new Set(['traded_at', 'published_at', 'price', 'size_max']);
-  const order = (typeof sp.order === 'string' && sp.order.toLowerCase() === 'asc') ? 'asc' : 'desc';
+  const allowedSort = new Set<TradeSortKey>(['traded_at', 'published_at', 'price', 'size_max']);
+  const order: SortOrder = (typeof sp.order === 'string' && sp.order.toLowerCase() === 'asc') ? 'asc' : 'desc';
   const sortKeyRaw = typeof sp.sort === 'string' ? sp.sort : 'traded_at';
-  const sortKey = allowedSort.has(sortKeyRaw) ? sortKeyRaw : 'traded_at';
+  const sortKey: TradeSortKey = allowedSort.has(sortKeyRaw as TradeSortKey) ? (sortKeyRaw as TradeSortKey) : 'traded_at';
   const qPolitician = typeof sp.qp === 'string' ? sp.qp : '';
   const qIssuer = typeof sp.qi === 'string' ? sp.qi : '';
   const typeFilter = typeof sp.type === 'string' ? sp.type : '';
-  const ownerFilter = typeof sp.owner === 'string' ? sp.owner : '';
-  const size_min = typeof sp.smin === 'string' && sp.smin !== '' ? Number(sp.smin) : undefined;
-  const size_max = typeof sp.smax === 'string' && sp.smax !== '' ? Number(sp.smax) : undefined;
-  const priceMin = typeof sp.pmin === 'string' && sp.pmin !== '' ? Number(sp.pmin) : undefined;
-  const priceMax = typeof sp.pmax === 'string' && sp.pmax !== '' ? Number(sp.pmax) : undefined;
+  const tradedFrom = typeof sp.from === 'string' ? sp.from : '';
+  const tradedTo = typeof sp.to === 'string' ? sp.to : '';
 
-  const orderBy: Record<string, 'asc' | 'desc'> = {};
-  orderBy[sortKey] = order;
-
-  type TradeWhere = {
-    Politician?: { is: { name: { contains: string; mode: 'insensitive' } } };
-    Issuer?: { is: { name: { contains: string; mode: 'insensitive' } } };
-    type?: string;
-    owner?: string;
-    AND?: Array<Record<string, unknown>>;
-  };
-  const where: TradeWhere = {};
-  if (qPolitician) where.Politician = { is: { name: { contains: qPolitician, mode: 'insensitive' } } };
-  if (qIssuer) where.Issuer = { is: { name: { contains: qIssuer, mode: 'insensitive' } } };
-  if (typeFilter === 'buy' || typeFilter === 'sell') where.type = typeFilter.toUpperCase();
-  if (ownerFilter) where.owner = ownerFilter;
-  if (size_min != null || size_max != null) {
-    // inclusive bounds on size range using size_max/size_min
-    where.AND = where.AND || [];
-    if (size_min != null) where.AND.push({ size_max: { gte: size_min } });
-    if (size_max != null) where.AND.push({ size_min: { lte: size_max } });
-  }
-  if (priceMin != null || priceMax != null) {
-    where.AND = where.AND || [];
-    if (priceMin != null) where.AND.push({ price: { gte: priceMin } });
-    if (priceMax != null) where.AND.push({ price: { lte: priceMax } });
-  }
-  
-  // When sorting by published_at, exclude trades with null published dates
-  if (sortKey === 'published_at') {
-    where.AND = where.AND || [];
-    where.AND.push({ published_at: { not: null } });
-  }
-
-  // Fetch page of trades
-  const trades = await prisma.trade.findMany({
-    where,
-    orderBy,
-    take: pageSize,
-    skip: (page - 1) * pageSize,
-    include: { Politician: true, Issuer: true },
+  const { rows: trades, total: totalCount, stats, lastTradeDate } = await getTradesPageData({
+    page,
+    pageSize,
+    sortBy: sortKey,
+    order,
+    politician: qPolitician,
+    issuer: qIssuer,
+    type: typeFilter,
+    tradedFrom: tradedFrom || undefined,
+    tradedTo: tradedTo || undefined,
   });
-
-  // Global aggregates for the current filter set
-  const [totalCount, distinctPoliticians, distinctIssuers, lastTradeDate] = await Promise.all([
-    prisma.trade.count({ where }),
-    prisma.trade.groupBy({ by: ['politician_id'], where }),
-    prisma.trade.groupBy({ by: ['issuer_id'], where }),
-    prisma.trade.findFirst({
-      orderBy: { traded_at: 'desc' },
-      select: { traded_at: true }
-    }).then(result => result?.traded_at || new Date())
-  ]);
-  const tradeCount = totalCount;
-  const polCount = distinctPoliticians.length;
-  const issuerCount = distinctIssuers.length;
 
   const hasPrev = page > 1;
   const totalPages = Math.max(1, Math.ceil(totalCount / pageSize));
@@ -106,8 +57,8 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
       <main className="p-4">
         <div className="flex justify-between items-center mb-2">
           <h1 className={pageTitleStyles()}>
-            <span className="zh-Hant">股票交易</span>
-            <span className="zh-Hans hidden">股票交易</span>
+            <span className="zh-Hant">最新交易</span>
+            <span className="zh-Hans hidden">最新交易</span>
           </h1>
           <div className="flex items-center gap-2">
             <DataFreshnessIndicator timestamp={lastTradeDate} />
@@ -115,65 +66,45 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
           </div>
         </div>
         <p className={`${bodySubtextStyles()} mb-4 text-sm sm:text-base`}>
-          <span className="zh-Hant">追蹤國會股票交易動態</span>
+          <span className="zh-Hant">追蹤議員與發行商的最新交易動態</span>
           <span className="zh-Hans hidden">追踪国会股票交易动态</span>
         </p>
         <section className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
-          <div className={statSurfaceStyles()}>
-            <div className="text-xs text-white">
-              <span className="zh-Hant">總交易</span>
-              <span className="zh-Hans hidden">总交易</span>
-            </div>
-            <div className="text-lg sm:text-xl font-semibold text-white">{tradeCount}</div>
-          </div>
-          <div className={statSurfaceStyles()}>
-            <div className="text-xs text-white">
-              <span className="zh-Hant">政治家</span>
-              <span className="zh-Hans hidden">政治家</span>
-            </div>
-            <div className="text-lg sm:text-xl font-semibold text-white">{polCount}</div>
-          </div>
-          <div className={statSurfaceStyles()}>
-            <div className="text-xs text-white">
-              <span className="zh-Hant">發行商</span>
-              <span className="zh-Hans hidden">发行商</span>
-            </div>
-            <div className="text-lg sm:text-xl font-semibold text-white">{issuerCount}</div>
-          </div>
+          <StatCard label={<><span className="zh-Hant">總交易</span><span className="zh-Hans hidden">总交易</span></>} value={stats.tradeCount.toLocaleString('en-US')} />
+          <StatCard label={<><span className="zh-Hant">政治家</span><span className="zh-Hans hidden">政治家</span></>} value={stats.politicianCount.toLocaleString('en-US')} />
+          <StatCard label={<><span className="zh-Hant">發行商</span><span className="zh-Hans hidden">发行商</span></>} value={stats.issuerCount.toLocaleString('en-US')} />
         </section>
-        <div className="flex items-center justify-between mb-3">
-          <div className="text-xs text-gray-300">
-            <span className="zh-Hant">第 {page} 頁</span>
-            <span className="zh-Hans hidden">第 {page} 页</span>
-          </div>
-          <div className="space-x-2">
-            <a href={prevHref} aria-disabled={!hasPrev} className={`${actionStyles('secondary')} ${!hasPrev ? 'bg-gray-700 text-gray-400 border-gray-600 cursor-not-allowed hover:bg-gray-700 hover:text-gray-400' : ''}`} aria-label="Previous page">
-              <span className="zh-Hant">上一頁</span>
-              <span className="zh-Hans hidden">上一页</span>
-            </a>
-            <a href={nextHref} aria-disabled={!hasNext} className={`${actionStyles('secondary')} ${!hasNext ? 'bg-gray-700 text-gray-400 border-gray-600 cursor-not-allowed hover:bg-gray-700 hover:text-gray-400' : ''}`} aria-label="Next page">
-              <span className="zh-Hant">下一頁</span>
-              <span className="zh-Hans hidden">下一页</span>
-            </a>
-          </div>
-        </div>
-        <div className="mb-2">
-          <ClearFiltersButton formId="trades-filters" />
-        </div>
-        <form id="trades-filters" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-3" method="get">
+        <PaginationBar page={page} totalPages={totalPages} prevHref={prevHref} nextHref={nextHref} className="mb-3" />
+        <FilterBar id="trades-filters" className="mb-4">
           <label className={fieldLabelStyles()}>
             <span className="w-full sm:w-28 text-gray-400">
               <span className="zh-Hant">按政治家</span>
               <span className="zh-Hans hidden">按政治家</span>
             </span>
-            <AutocompleteInput name="qp" initialValue={qPolitician} placeholder="Name" searchPath="/api/suggest/politicians" ariaLabel="Politician name filter" />
+            <input name="qp" defaultValue={qPolitician} placeholder="輸入政治家姓名" className={fieldControlStyles()} />
           </label>
           <label className={fieldLabelStyles()}>
             <span className="w-full sm:w-24 text-gray-400">
               <span className="zh-Hant">按發行商</span>
               <span className="zh-Hans hidden">按发行商</span>
             </span>
-            <AutocompleteInput name="qi" initialValue={qIssuer} placeholder="公司/代碼" searchPath="/api/suggest/issuers" ariaLabel="Issuer name filter" />
+            <input name="qi" defaultValue={qIssuer} placeholder="輸入發行商名稱" className={fieldControlStyles()} />
+          </label>
+          <label className={fieldLabelStyles()}>
+            <span className="w-full sm:w-auto text-gray-400">交易類型</span>
+            <select name="type" defaultValue={typeFilter} className={fieldControlStyles()}>
+              <option value="">全部</option>
+              <option value="BUY">買入</option>
+              <option value="SELL">賣出</option>
+              <option value="EXCHANGE">交換</option>
+            </select>
+          </label>
+          <label className={fieldLabelStyles()}>
+            <span className="w-full sm:w-auto text-gray-400">交易日期</span>
+            <div className="flex gap-2">
+              <input type="date" name="from" defaultValue={tradedFrom} className={fieldControlStyles()} />
+              <input type="date" name="to" defaultValue={tradedTo} className={fieldControlStyles()} />
+            </div>
           </label>
           <label className={fieldLabelStyles()}>
             <span className="w-full sm:w-auto text-gray-400">
@@ -184,7 +115,7 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
               <option value="traded_at">交易日期</option>
               <option value="published_at">發布日期</option>
               <option value="price">價格</option>
-              <option value="size_max">金額(上限)</option>
+              <option value="size_max">交易金額</option>
             </select>
           </label>
           <label className={fieldLabelStyles()}>
@@ -197,97 +128,55 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
               <option value="asc">舊到新</option>
             </select>
           </label>
-          <label className={fieldLabelStyles()}>
-            <span className="w-full sm:w-20 text-gray-400">
-              <span className="zh-Hant">類型</span>
-              <span className="zh-Hans hidden">类型</span>
-            </span>
-            <select name="type" defaultValue={typeFilter} className={fieldControlStyles()} aria-label="Trade type filter">
-              <option value="">全部</option>
-            <option value="buy">
-              <span className="zh-Hant">買入</span>
-              <span className="zh-Hans hidden">买入</span>
-            </option>
-            <option value="sell">
-              <span className="zh-Hant">賣出</span>
-              <span className="zh-Hans hidden">卖出</span>
-            </option>
-          </select>
-        </label>
-          <label className={fieldLabelStyles()}>
-            <span className="w-full sm:w-20 text-gray-400">
-              <span className="zh-Hant">持有人</span>
-              <span className="zh-Hans hidden">持有人</span>
-            </span>
-            <select name="owner" defaultValue={ownerFilter} className={fieldControlStyles()} aria-label="Owner filter">
-              <option value="">
-                <span className="zh-Hant">全部</span>
-                <span className="zh-Hans hidden">全部</span>
-              </option>
-              <option value="Self">
-                <span className="zh-Hant">本人</span>
-                <span className="zh-Hans hidden">本人</span>
-              </option>
-              <option value="Spouse">
-                <span className="zh-Hant">配偶</span>
-                <span className="zh-Hans hidden">配偶</span>
-              </option>
-              <option value="Joint">
-                <span className="zh-Hant">共同</span>
-                <span className="zh-Hans hidden">共同</span>
-              </option>
-              <option value="Undisclosed">
-                <span className="zh-Hant">未披露</span>
-                <span className="zh-Hans hidden">未披露</span>
-              </option>
-            </select>
-          </label>
-          <label className={fieldLabelStyles()}>
-            <span className="w-full sm:w-28 text-gray-400">
-              <span className="zh-Hant">金額範圍</span>
-              <span className="zh-Hans hidden">金额范围</span>
-            </span>
-            <div className="flex gap-1">
-              <input name="smin" type="number" inputMode="numeric" placeholder="最低" defaultValue={size_min ?? ''} className={`${fieldControlStyles()} w-20 sm:w-24`} aria-label="Minimum size" />
-              <input name="smax" type="number" inputMode="numeric" placeholder="最高" defaultValue={size_max ?? ''} className={`${fieldControlStyles()} w-20 sm:w-24`} aria-label="Maximum size" />
-            </div>
-          </label>
-          <label className={fieldLabelStyles()}>
-            <span className="w-full sm:w-24 text-gray-400">
-              <span className="zh-Hant">價格</span>
-              <span className="zh-Hans hidden">价格</span>
-            </span>
-            <div className="flex gap-1">
-              <input name="pmin" type="number" step="0.01" placeholder="最低" defaultValue={priceMin ?? ''} className={`${fieldControlStyles()} w-20 sm:w-24`} aria-label="Minimum price" />
-              <input name="pmax" type="number" step="0.01" placeholder="最高" defaultValue={priceMax ?? ''} className={`${fieldControlStyles()} w-20 sm:w-24`} aria-label="Maximum price" />
-            </div>
-          </label>
-          <button className={`${actionStyles('secondary')} col-span-1 sm:col-span-2 lg:col-span-1`} type="submit" aria-label="Apply filters">
+          <button className={`${actionStyles('secondary')} col-span-1`} type="submit" aria-label="Apply filters">
             <span className="zh-Hant">套用</span>
             <span className="zh-Hans hidden">应用</span>
           </button>
-        </form>
+          <Link href="/trades" className={`${actionStyles('ghost')} col-span-1`}>
+            清除
+          </Link>
+        </FilterBar>
         {trades.length === 0 ? (
           <StateNotice
             title="查無符合條件的交易"
             description="請調整篩選條件，或清除目前篩選重新查看所有交易。"
-            actions={<ClearFiltersButton formId="trades-filters" />}
+            actions={<Link href="/trades" className={actionStyles('primary')}>清除篩選</Link>}
           />
         ) : (
-          <SortableTradesTable
-            trades={trades.map((t) => ({
-              id: t.id,
-              politician: <Link className={textLinkStyles()} href={`/politicians/${t.politician_id}`}>{t.Politician.name}</Link>,
-              issuer: <Link className={textLinkStyles()} href={`/issuers/${t.issuer_id}`}>{t.Issuer.name}</Link>,
-              publishedAt: t.published_at ? new Date(t.published_at).toISOString().slice(0, 10) : '',
-              tradedAt: new Date(t.traded_at).toISOString().slice(0, 10),
-              filedAfterDays: t.filed_after_days ?? '',
-              owner: t.owner ?? '',
-              type: <span className={badgeStyles(t.type?.toUpperCase() === 'BUY' ? 'success' : 'danger', 'xs')}>{t.type}</span>,
-              size: t.size_min && t.size_max ? `${t.size_min.toString()}–${t.size_max.toString()}` : t.size_min ? t.size_min.toString() : '',
-              price: t.price ? new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 }).format(Number(t.price)) : '',
-            }))}
-          />
+          <div className="overflow-x-auto rounded-xl border border-gray-700">
+            <table className="min-w-full text-sm">
+              <thead className="bg-gray-800 text-gray-300">
+                <tr>
+                  <th className="px-3 py-2 text-left">政治家</th>
+                  <th className="px-3 py-2 text-left">發行商</th>
+                  <th className="px-3 py-2 text-left">交易日</th>
+                  <th className="px-3 py-2 text-left">申報日</th>
+                  <th className="px-3 py-2 text-left">類型</th>
+                  <th className="px-3 py-2 text-left">交易金額</th>
+                  <th className="px-3 py-2 text-left">價格</th>
+                </tr>
+              </thead>
+              <tbody className="bg-gray-900">
+                {trades.map((t) => (
+                  <tr key={t.id} className="border-t border-gray-800">
+                    <td className="px-3 py-2">
+                      <Link className={textLinkStyles()} href={`/politicians/${t.politician.id}`}>{t.politician.name}</Link>
+                    </td>
+                    <td className="px-3 py-2">
+                      <Link className={textLinkStyles()} href={`/issuers/${t.issuer.id}`}>{t.issuer.name}</Link>
+                    </td>
+                    <td className="px-3 py-2 text-gray-300">{new Date(t.tradedAt).toLocaleDateString('zh-TW')}</td>
+                    <td className="px-3 py-2 text-gray-300">{t.publishedAt ? new Date(t.publishedAt).toLocaleDateString('zh-TW') : '-'}</td>
+                    <td className="px-3 py-2 text-gray-300">{t.type}</td>
+                    <td className="px-3 py-2 text-gray-300">
+                      {t.sizeMin && t.sizeMax ? `$${Math.round(t.sizeMin).toLocaleString('en-US')} - $${Math.round(t.sizeMax).toLocaleString('en-US')}` : '-'}
+                    </td>
+                    <td className="px-3 py-2 text-gray-300">{t.price !== null ? `$${t.price.toFixed(2)}` : '-'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </main>
     </div>

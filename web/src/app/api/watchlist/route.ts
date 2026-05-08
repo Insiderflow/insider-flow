@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { getSessionUser } from '@/lib/auth';
 import { getPoliticianImageSrc } from '@/lib/politicianImageMapping';
+import { sectorToZh } from '@/lib/sectorI18n';
 
 function normalizeWatchlistType(type: string | null) {
   if (!type) return type;
@@ -68,7 +69,7 @@ export async function GET(request: NextRequest) {
     for (const trade of latestTrades) {
       if (!trade.politician_id) continue;
       if (sectorByPoliticianId.has(trade.politician_id)) continue;
-      sectorByPoliticianId.set(trade.politician_id, trade.Issuer?.sector || null);
+      sectorByPoliticianId.set(trade.politician_id, sectorToZh(trade.Issuer?.sector) || null);
     }
 
     const watchlist = rows.map((item) => {

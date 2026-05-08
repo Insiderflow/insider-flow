@@ -1,30 +1,33 @@
 "use client";
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { actionStyles } from '@/components/actionStyles';
-import { fieldControlStyles } from '@/components/formStyles';
+import { fieldControlStyles, fieldLabelStyles } from '@/components/formStyles';
+import Link from 'next/link';
+import { textLinkStyles } from '@/components/linkStyles';
 
 export default function RegistrationForm() {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setSuccessMessage('');
     setIsLoading(true);
 
     if (password.length < 8) {
-      setError('Password must be at least 8 characters');
+      setError('密碼至少需 8 個字元');
       setIsLoading(false);
       return;
     }
     if (password !== confirm) {
-      setError('Passwords do not match');
+      setError('兩次密碼輸入不一致');
       setIsLoading(false);
       return;
     }
@@ -33,20 +36,17 @@ export default function RegistrationForm() {
       const response = await fetch('/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ name, email, password }),
       });
 
       if (response.ok) {
-        // Go to success page with instruction to login
-        router.push('/register-success');
+        setSuccessMessage('驗證信已寄出，請去信箱點擊驗證連結後再登入。若沒收到，請檢查垃圾郵件。');
       } else {
-        // Handle error response
         const data = await response.json();
-        setError(data.error || 'Registration failed');
+        setError(data.error || '註冊失敗，請稍後再試');
       }
-    } catch (error) {
-      console.error('Registration error:', error);
-      setError('Network error. Please try again.');
+    } catch {
+      setError('網路錯誤，請稍後再試');
     } finally {
       setIsLoading(false);
     }
@@ -54,15 +54,33 @@ export default function RegistrationForm() {
 
   return (
     <div className="space-y-4">
+      {successMessage && (
+        <div className="rounded-lg border border-green-500/50 bg-green-900/30 p-3 text-sm text-green-200">
+          <p className="font-medium mb-1">GridSend 驗證信已發送</p>
+          <p>{successMessage}</p>
+        </div>
+      )}
       {error && (
-        <div className="bg-white text-red-600 p-2.5 rounded border border-red-200 text-sm">
+        <div className="rounded-lg border border-red-500/50 bg-red-900/30 p-3 text-sm text-red-200">
           {error}
         </div>
       )}
       
       <form onSubmit={handleSubmit} className="space-y-3">
-        <label className="block">
-          <span className="text-sm text-gray-400">電郵</span>
+        <label className={fieldLabelStyles()}>
+          <span className="w-full sm:w-24 text-gray-400">名稱</span>
+          <input
+            name="name"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className={fieldControlStyles('md')}
+            placeholder="例如：Ken"
+            disabled={isLoading}
+          />
+        </label>
+        <label className={fieldLabelStyles()}>
+          <span className="w-full sm:w-24 text-gray-400">電郵</span>
           <input
             name="email"
             type="email"
@@ -74,8 +92,8 @@ export default function RegistrationForm() {
             disabled={isLoading}
           />
         </label>
-        <label className="block">
-          <span className="text-sm text-gray-400">密碼</span>
+        <label className={fieldLabelStyles()}>
+          <span className="w-full sm:w-24 text-gray-400">密碼</span>
           <input
             name="password"
             type="password"
@@ -87,8 +105,8 @@ export default function RegistrationForm() {
             disabled={isLoading}
           />
         </label>
-        <label className="block">
-          <span className="text-sm text-gray-400">確認密碼</span>
+        <label className={fieldLabelStyles()}>
+          <span className="w-full sm:w-24 text-gray-400">確認密碼</span>
           <input
             name="confirm"
             type="password"
@@ -100,13 +118,18 @@ export default function RegistrationForm() {
             disabled={isLoading}
           />
         </label>
-        <button
-          type="submit"
-          disabled={isLoading}
-          className={actionStyles('secondary')}
-        >
-          {isLoading ? '註冊中…' : '繼續'}
-        </button>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pt-1">
+          <button
+            type="submit"
+            disabled={isLoading}
+            className={actionStyles('secondary')}
+          >
+            {isLoading ? '註冊中…' : '建立帳號'}
+          </button>
+          <p className="text-sm text-gray-400">
+            已有帳號？ <Link href="/login" className={textLinkStyles()}>立即登入</Link>
+          </p>
+        </div>
       </form>
     </div>
   );

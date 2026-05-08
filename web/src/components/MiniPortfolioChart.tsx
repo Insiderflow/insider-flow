@@ -222,8 +222,6 @@ export default function MiniPortfolioChart({ politician, className = "" }: MiniP
   };
   
   const latestPoliticianReturn = getLastValidReturn(recentData.politician_returns, data.politician_returns);
-  const latestSp500Return = recentData.sp500_returns[recentData.sp500_returns.length - 1] || 0;
-  const outperformance = latestPoliticianReturn - latestSp500Return;
 
   return (
     <div className={`${className}`}>
@@ -234,7 +232,7 @@ export default function MiniPortfolioChart({ politician, className = "" }: MiniP
       
       {/* Performance Summary */}
       <div className="text-center">
-        <div className="flex justify-between items-center text-xs">
+        <div className="flex justify-start items-center text-xs">
           <div className="flex items-center gap-1">
             <div className="w-2 h-2 rounded-full bg-blue-500"></div>
             <span className="text-gray-300">
@@ -242,27 +240,9 @@ export default function MiniPortfolioChart({ politician, className = "" }: MiniP
               <span className="zh-Hans hidden">投资组合</span>
             </span>
           </div>
-          <div className="flex items-center gap-1">
-            <div className="w-2 h-2 rounded-full bg-green-500"></div>
-            <span className="text-gray-300">S&P 500</span>
-          </div>
         </div>
-        
-        {/* Performance indicator */}
-        <div className="mt-1">
-          {outperformance > 0 ? (
-            <span className="text-green-400 text-xs font-medium">
-              +{outperformance.toFixed(1)}%
-              <span className="zh-Hant"> 超越大盤</span>
-              <span className="zh-Hans hidden"> 超越大盘</span>
-            </span>
-          ) : (
-            <span className="text-red-400 text-xs font-medium">
-              {outperformance.toFixed(1)}%
-              <span className="zh-Hant"> 落後大盤</span>
-              <span className="zh-Hans hidden"> 落后大盘</span>
-            </span>
-          )}
+        <div className="mt-1 text-xs text-gray-400">
+          {latestPoliticianReturn.toFixed(1)}%
         </div>
       </div>
     </div>

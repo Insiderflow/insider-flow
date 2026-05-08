@@ -13,6 +13,7 @@
     "release:check:local": "node scripts/release-check.mjs --dry-run --skip-health",
     "release:check:ci": "node scripts/release-check.mjs --dry-run --skip-health --skip-prisma --skip-frontend-check",
     "release:check:prod": "node scripts/release-check.mjs",
+    "release:check:no-rc": "node scripts/release-check.mjs --skip-revenuecat",
     "release:fix-hints": "node scripts/release-check.mjs --dry-run --skip-health --fix-hints",
     "data:freshness": "node scripts/check_data_freshness.js",
     "audit:membership": "node scripts/membership_integrity_audit.js",
@@ -29,7 +30,6 @@
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.7",
     "@prisma/client": "^6.16.2",
-    "@sendgrid/mail": "^8.1.6",
     "@types/node-fetch": "^2.6.13",
     "axios": "^1.12.2",
     "bcryptjs": "^3.0.2",

@@ -160,6 +160,52 @@ export default async function WatchlistPage() {
             />
           )}
 
+          {/* Politicians */}
+          {groupedWatchlist.politicians.length > 0 && (
+            <div className={panelSurfaceStyles()}>
+              <h2 className={`${sectionTitleStyles()} mb-4`}>
+                <span className="zh-Hant">關注的政治人物</span>
+                <span className="zh-Hans hidden">关注的政治人物</span>
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {groupedWatchlist.politicians.map((item) => (
+                  <div key={item.id} className="bg-gray-700 rounded-lg p-4">
+                    <div className="flex justify-between items-start gap-3">
+                      <div className="min-w-0">
+                        <h3 className="font-semibold text-lg truncate">
+                          {item.Politician?.name || '未揭露'}
+                        </h3>
+                        <p className={`${bodySubtextStyles()} text-sm truncate`}>
+                          {(item.Politician?.party || '未揭露')}
+                          {item.Politician?.state ? ` • ${item.Politician.state}` : ''}
+                        </p>
+                        <p className={`${bodySubtextStyles()} text-sm truncate`}>
+                          產業：{(item as unknown as { sector?: string | null }).sector || '未揭露'}
+                        </p>
+                      </div>
+                      <WatchlistButton
+                        userId={userId}
+                        type="politician"
+                        politicianId={item.politician_id || undefined}
+                        className="text-xs shrink-0"
+                        initialWatching={true}
+                      />
+                    </div>
+                    <div className="mt-2">
+                      <Link
+                        href={`/politicians/${item.politician_id}`}
+                        className={`${textLinkStyles('muted')} text-sm`}
+                      >
+                        <span className="zh-Hant">查看詳情</span>
+                        <span className="zh-Hans hidden">查看详情</span>
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Companies */}
           {groupedWatchlist.companies.length > 0 && (
             <div className={panelSurfaceStyles()}>

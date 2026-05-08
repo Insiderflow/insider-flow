@@ -17,6 +17,9 @@ model Issuer {
   Trade      Trade[]
 
   @@index([ticker])
+  @@index([name])
+  @@index([sector])
+  @@map("Issuer")
 }
 
 model Politician {
@@ -29,6 +32,11 @@ model Politician {
   created_at    DateTime        @default(now())
   Trade         Trade[]
   UserWatchlist UserWatchlist[]
+
+  @@index([name])
+  @@index([party])
+  @@index([chamber])
+  @@map("Politician")
 }
 
 model LegacySession {
@@ -61,6 +69,15 @@ model Trade {
   created_at       DateTime   @default(now())
   Issuer           Issuer     @relation(fields: [issuer_id], references: [id])
   Politician       Politician @relation(fields: [politician_id], references: [id])
+
+  @@index([politician_id])
+  @@index([issuer_id])
+  @@index([traded_at(sort: Desc)])
+  @@index([published_at(sort: Desc)])
+  @@index([type, traded_at(sort: Desc)])
+  @@index([issuer_id, traded_at(sort: Desc)])
+  @@index([politician_id, traded_at(sort: Desc)])
+  @@map("Trade")
 }
 
 model User {

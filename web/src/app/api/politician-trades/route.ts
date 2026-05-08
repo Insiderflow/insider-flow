@@ -3,6 +3,7 @@ import { prisma } from '@/lib/prisma';
 import { getPoliticianImageSrc } from '@/lib/politicianImageMapping';
 import fs from 'fs/promises';
 import path from 'path';
+import { sectorToZh } from '@/lib/sectorI18n';
 
 const DASHBOARD_TTL_MS = 30_000;
 const DASHBOARD_DISK_TTL_MS = 5 * 60_000;
@@ -100,7 +101,7 @@ export async function GET(req: NextRequest) {
             : 'Unknown',
       trade_date: row.traded_at.toISOString().slice(0, 10),
       disclosure_date: row.published_at?.toISOString().slice(0, 10) || row.traded_at.toISOString().slice(0, 10),
-      sector: row.Issuer?.sector || '',
+      sector: sectorToZh(row.Issuer?.sector) || '',
       committees: row.Politician?.committees || '',
       notable: Number(row.size_max || 0) >= 1000000,
       avatar_url:

@@ -8,7 +8,6 @@ import { translateTxnType } from '@/lib/transactionTypeI18n';
 import FilterCategories from './FilterCategories';
 import { getCurrentUserWithTier, isPaid } from '@/lib/membership';
 import { redirect } from 'next/navigation';
-import ExportButton from '@/components/ExportButton';
 import TableRowSkeleton from '@/components/TableRowSkeleton';
 import { actionStyles } from '@/components/actionStyles';
 import { badgeStyles } from '@/components/badgeStyles';
@@ -332,32 +331,6 @@ export default async function InsiderPage({ searchParams }: { searchParams: Prom
               <ClearFiltersButton formId="insider-filters" />
             </div>
           </form>
-        </div>
-
-        {/* Export and Table Controls */}
-        <div className={`${panelSurfaceStyles('sm')} mb-4 flex justify-between items-center`}>
-          <div className="flex items-center space-x-4">
-            <ExportButton 
-              data={transactions.map(t => ({
-                transactionDate: t.transactionDate,
-                ticker: t.company.ticker,
-                companyName: t.company.name,
-                ownerName: t.owner.name,
-                title: t.owner.title,
-                transactionType: t.transactionType,
-                lastPrice: t.lastPrice ? Number(t.lastPrice) : 0,
-                quantity: t.quantity,
-                sharesHeld: t.sharesHeld,
-                owned: t.owned,
-                value: t.value
-              }))}
-              filename="insider-trades"
-            />
-            <span className="text-sm text-gray-400">
-              <span className="zh-Hant">顯示 {transactions.length} 筆交易</span>
-              <span className="zh-Hans hidden">显示 {transactions.length} 笔交易</span>
-            </span>
-          </div>
         </div>
 
         {/* Table */}

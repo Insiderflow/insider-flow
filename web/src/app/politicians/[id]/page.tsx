@@ -1,16 +1,15 @@
 import Link from 'next/link';
-import { prisma } from '@/lib/prisma';
 import { notFound, redirect } from 'next/navigation';
-import LoadingWrapper from '@/components/LoadingWrapper';
-import LoadingSpinner from '@/components/LoadingSpinner';
 import PoliticianProfileImage from '@/components/PoliticianProfileImage';
-import PoliticianTradesTable from '@/components/PoliticianTradesTable';
 import WatchlistButton from '@/components/WatchlistButton';
-import PortfolioChart from '@/components/PortfolioChart';
+import PoliticianTopIssuersPieChart from '@/components/PoliticianTopIssuersPieChart';
 import { getCurrentUserWithTier, isPaid } from '@/lib/membership';
 import { badgeStyles } from '@/components/badgeStyles';
 import { navLinkButtonStyles, textLinkStyles } from '@/components/linkStyles';
-import { SECTOR_NAMES, getPoliticiansBySector, getSectorsForPolitician } from '@/lib/politiciansBySector';
+import { getPoliticianDetailData, type SortOrder } from '@/lib/repos/politiciansRepo';
+import { isPoliticianWatchedByUser } from '@/lib/repos/watchlistRepo';
+import IssuerMarketTrendChart from '@/components/IssuerMarketTrendChart';
+import { sectorToZh } from '@/lib/sectorI18n';
 
 export const dynamic = 'force-dynamic';
 
@@ -31,146 +30,26 @@ export default async function PoliticianDetailPage({
   }
   const sp = await searchParams;
   
-  // Pagination and sorting parameters
   const pageSize = 20;
   const page = Math.max(1, Number(typeof sp.page === 'string' ? sp.page : 1) || 1);
   const allowedSort = new Set(['traded_at', 'published_at', 'price', 'size_max']);
-  const order = (typeof sp.order === 'string' && sp.order.toLowerCase() === 'asc') ? 'asc' : 'desc';
+  const order: SortOrder = (typeof sp.order === 'string' && sp.order.toLowerCase() === 'asc') ? 'asc' : 'desc';
   const sortKeyRaw = typeof sp.sort === 'string' ? sp.sort : 'traded_at';
-  const sortKey = allowedSort.has(sortKeyRaw) ? sortKeyRaw : 'traded_at';
-  
-  const orderBy: Record<string, 'asc' | 'desc'> = {};
-  orderBy[sortKey] = order;
-  
-  // Build where clause for trades
-  const tradeWhere: Record<string, unknown> = { politician_id: id };
-  
-  // When sorting by published_at, exclude trades with null published dates
-  if (sortKey === 'published_at') {
-    tradeWhere.published_at = { not: null };
-  }
-  
-  // Get politician with paginated trades
-  const politician = await prisma.politician.findUnique({
-    where: { id },
-    include: {
-      Trade: {
-        where: tradeWhere,
-        include: {
-          Issuer: true
-        },
-        orderBy: [orderBy],
-        skip: (page - 1) * pageSize,
-        take: pageSize
-      }
-    }
+  const sortKey = (allowedSort.has(sortKeyRaw) ? sortKeyRaw : 'traded_at') as 'traded_at' | 'published_at' | 'price' | 'size_max';
+
+  const detail = await getPoliticianDetailData({
+    id,
+    page,
+    pageSize,
+    sortBy: sortKey,
+    order,
   });
 
-  if (!politician) {
+  if (!detail) {
     notFound();
   }
-
-  // Get total count for pagination
-  const totalTrades = await prisma.trade.count({
-    where: tradeWhere
-  });
-
-  // Calculate stats efficiently with aggregation queries
-  const [tradeStats, issuerStats, lastTradeDate] = await Promise.all([
-    // Get trade count and volume stats
-    prisma.trade.aggregate({
-      where: { politician_id: id },
-      _count: { id: true },
-      _sum: { 
-        size_min: true,
-        size_max: true 
-      }
-    }),
-    // Get unique issuer count
-    prisma.trade.groupBy({
-      by: ['issuer_id'],
-      where: { politician_id: id },
-      _count: { issuer_id: true }
-    }),
-    // Get last trade date
-    prisma.trade.findFirst({
-      where: { politician_id: id },
-      orderBy: { traded_at: 'desc' },
-      select: { traded_at: true }
-    })
-  ]);
-
-  const trades = politician.Trade; // Current page trades
-  const issuers = issuerStats.length;
-  const volume = tradeStats._sum.size_min && tradeStats._sum.size_max ? 
-    (Number(tradeStats._sum.size_min) + Number(tradeStats._sum.size_max)) / 2 : 0;
-  const lastTraded = lastTradeDate?.traded_at || null;
-
-  // Get most traded issuers efficiently
-  const mostTradedIssuers = await prisma.trade.groupBy({
-    by: ['issuer_id'],
-    where: { politician_id: id },
-    _count: { issuer_id: true },
-    orderBy: { _count: { issuer_id: 'desc' } },
-    take: 5
-  });
-
-  // Get issuer names for the most traded issuers
-  const issuerIds = mostTradedIssuers.map(issuer => issuer.issuer_id);
-  const issuerNames = await prisma.issuer.findMany({
-    where: { id: { in: issuerIds } },
-    select: { id: true, name: true }
-  });
-  const issuerNameMap = new Map(issuerNames.map(issuer => [issuer.id, issuer.name]));
-
-  // Combine the data
-  const mostTradedIssuersWithNames = mostTradedIssuers.map(issuer => ({
-    issuer_id: issuer.issuer_id,
-    name: issuerNameMap.get(issuer.issuer_id) || 'Unknown',
-    count: issuer._count.issuer_id
-  }));
-
-  const resolvedSelectedSector = (() => {
-    const raw = typeof sp.sector === 'string' ? sp.sector : '';
-    return SECTOR_NAMES.find((s) => s.toLowerCase() === raw.trim().toLowerCase()) || null;
-  })();
-
-  // Default sector is the first sector this politician belongs to.
-  const politicianSectorList = await getSectorsForPolitician(politician.name);
-  const selectedSector = resolvedSelectedSector ?? politicianSectorList[0] ?? SECTOR_NAMES[0];
-  const relatedPoliticians = (await getPoliticiansBySector(selectedSector)).slice(0, 12);
-
-  // Map politician name -> id so the sector list can link to exact profiles.
-  const relatedNames = relatedPoliticians.map((p) => p.name);
-  const relatedIds = relatedNames.length
-    ? await prisma.politician.findMany({
-        where: { name: { in: relatedNames } },
-        select: { id: true, name: true },
-      })
-    : [];
-  const idByName = new Map(relatedIds.map((row) => [row.name, row.id]));
-
-  // Prepare trade data for table
-  const tradeRows = trades.slice(0, 50).map(trade => ({
-    issuer: trade.Issuer.name,
-    issuer_id: trade.Issuer.id,
-    ticker: trade.Issuer.ticker || 'N/A',
-    published: trade.published_at ? new Date(trade.published_at).toLocaleDateString('en-US', {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric'
-    }) : '',
-    traded: new Date(trade.traded_at).toLocaleDateString('en-US', {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric'
-    }),
-    type: trade.type,
-    size: trade.size_min && trade.size_max ? 
-      `${trade.size_min}K–${trade.size_max}K` : 
-      'N/A',
-    detailUrl: `/trades/${trade.id}`
-  }));
+  const { politician, trades, topIssuers, totalTrades, totalVolume, maxTrade, lastTraded, chartPoints } = detail;
+  const initialWatching = me ? await isPoliticianWatchedByUser(me.id, politician.id) : false;
 
   return (
     <div className="min-h-screen bg-gray-900">
@@ -209,23 +88,33 @@ export default async function PoliticianDetailPage({
                 </span>
               </div>
             {/* Watchlist button */}
-            <WatchlistButton type="politician" politicianId={politician.id} />
+            <div className="mt-2">
+              <p className="text-xs text-gray-400 mb-2">
+                <span className="zh-Hant">Email 追蹤此議員</span>
+                <span className="zh-Hans hidden">Email 追踪此议员</span>
+              </p>
+              <WatchlistButton userId={me?.id} type="politician" politicianId={politician.id} initialWatching={initialWatching} />
+            </div>
             </div>
           </div>
 
           {/* Stats Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
             <div className="bg-gray-800 border border-gray-600 rounded-lg p-4 shadow-md">
               <div className="text-2xl font-bold text-white">{totalTrades}</div>
               <div className="text-sm text-gray-400">交易次數</div>
             </div>
             <div className="bg-gray-800 border border-gray-600 rounded-lg p-4 shadow-md">
-              <div className="text-2xl font-bold text-white">{issuers}</div>
+              <div className="text-2xl font-bold text-white">{topIssuers.length}</div>
               <div className="text-sm text-gray-400">發行商</div>
             </div>
             <div className="bg-gray-800 border border-gray-600 rounded-lg p-4 shadow-md">
-              <div className="text-2xl font-bold text-white">${(volume / 1000000).toFixed(1)}M</div>
+              <div className="text-2xl font-bold text-white">${(totalVolume / 1000000).toFixed(1)}M</div>
               <div className="text-sm text-gray-400">交易金額</div>
+            </div>
+            <div className="bg-gray-800 border border-gray-600 rounded-lg p-4 shadow-md">
+              <div className="text-2xl font-bold text-white">${Math.round(maxTrade).toLocaleString('en-US')}</div>
+              <div className="text-sm text-gray-400">最大交易</div>
             </div>
             <div className="bg-gray-800 border border-gray-600 rounded-lg p-4 shadow-md">
               <div className="text-2xl font-bold text-white">
@@ -237,33 +126,6 @@ export default async function PoliticianDetailPage({
               </div>
               <div className="text-sm text-gray-400">最後交易</div>
             </div>
-
-            {/* Sector selection */}
-            <div className="bg-gray-800 border border-gray-600 rounded-lg p-4 shadow-md">
-              <div className="text-sm text-gray-400 mb-2">產業選擇</div>
-              <form method="get" className="flex flex-col gap-2">
-                <input type="hidden" name="page" value="1" />
-                <input type="hidden" name="sort" value={sortKey} />
-                <input type="hidden" name="order" value={order} />
-                <select
-                  name="sector"
-                  defaultValue={selectedSector}
-                  className="border border-gray-600 p-2 bg-gray-900 text-white text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200 rounded"
-                >
-                  {SECTOR_NAMES.map((s) => (
-                    <option key={s} value={s}>
-                      {s}
-                    </option>
-                  ))}
-                </select>
-                <button
-                  type="submit"
-                  className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none transition-colors duration-200 text-sm"
-                >
-                  查看
-                </button>
-              </form>
-            </div>
           </div>
         </div>
 
@@ -271,80 +133,19 @@ export default async function PoliticianDetailPage({
         <div className="mb-6">
           <h2 className="text-xl font-semibold text-white mb-4">最常交易發行商</h2>
           <div className="bg-gray-800 border border-gray-600 rounded-lg p-4 shadow-md">
-            <div className="space-y-2">
-              {mostTradedIssuersWithNames.map((issuer, index) => (
-                <div key={index} className="flex justify-between items-center">
-                  <Link 
-                    href={`/issuers/${issuer.issuer_id}`}
-                    className={textLinkStyles('muted')}
-                  >
-                    {issuer.name}
-                  </Link>
-                  <span className="text-gray-400">{issuer.count}</span>
-                </div>
-              ))}
-            </div>
+            <PoliticianTopIssuersPieChart items={topIssuers} />
           </div>
         </div>
 
-        {/* Related Politicians by selected sector */}
         <div className="mb-6">
-          <h2 className="text-xl font-semibold text-white mb-4">
-            {selectedSector} - 相關政治家
-          </h2>
-          <div className="bg-gray-800 border border-gray-600 rounded-lg p-4 shadow-md">
-            {relatedPoliticians.length ? (
-              <div className="space-y-2">
-                {relatedPoliticians.map((p) => {
-                  const tone: 'democrat' | 'republican' | 'neutral' =
-                    p.party === 'D' ? 'democrat' : p.party === 'R' ? 'republican' : 'neutral';
-                  const isCurrent = p.name === politician.name;
-                  const relatedId = idByName.get(p.name);
-                  return (
-                    <div
-                      key={`${p.name}-${p.chamber}-${p.state}`}
-                      className={`flex justify-between items-center p-2 rounded ${isCurrent ? 'bg-blue-900/40' : ''}`}
-                    >
-                      <div className="min-w-0">
-                        {relatedId ? (
-                          <Link href={`/politicians/${relatedId}`} className={textLinkStyles('muted')}>
-                            <div className="text-white font-medium truncate">{p.title}</div>
-                          </Link>
-                        ) : (
-                          <div className="text-white font-medium truncate">{p.title}</div>
-                        )}
-                        <div className="flex flex-wrap gap-2 mt-1">
-                          <span className={badgeStyles(tone, 'sm')}>{p.party}</span>
-                          <span className={badgeStyles('neutral', 'sm')}>{p.chamber}</span>
-                          <span className={badgeStyles('neutral', 'sm')}>{p.state}</span>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <div className="text-white font-semibold">{p.tradeCountInSector}</div>
-                        <div className="text-gray-400 text-xs">{p.lastTradeDate ?? '—'}</div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            ) : (
-              <div className="text-gray-400 text-sm">找不到此產業的相關政治家。</div>
-            )}
-          </div>
+          <IssuerMarketTrendChart issuerName={politician.name} points={chartPoints} />
         </div>
 
-        {/* Portfolio Comparison Chart */}
-        <div className="mb-6">
-          <PortfolioChart politician={politician.name} />
-        </div>
-
-        {/* Recent Trades Table */}
+        {/* Recent Trades */}
         <div className="mb-6">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-semibold text-white">最近交易</h2>
-            <span className="text-sm text-gray-400">
-              顯示 {trades.length} / {totalTrades} 筆交易
-            </span>
+            <span className="text-sm text-gray-400">顯示 {trades.length} / {totalTrades} 筆交易</span>
           </div>
           
           {/* Pagination and Sorting Controls */}
@@ -361,10 +162,10 @@ export default async function PoliticianDetailPage({
                   defaultValue={sortKey}
                   className="border border-gray-600 p-1 bg-gray-800 text-white text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200"
                 >
-                  <option value="tradedAt">交易日期</option>
-                  <option value="publishedAt">發布日期</option>
+                  <option value="traded_at">交易日期</option>
+                  <option value="published_at">發布日期</option>
                   <option value="price">價格</option>
-                  <option value="sizeMax">金額</option>
+                  <option value="size_max">金額</option>
                 </select>
                 <select 
                   name="order" 
@@ -415,18 +216,30 @@ export default async function PoliticianDetailPage({
             )}
           </div>
           
-          <LoadingWrapper fallback={
-            <div className="border border-gray-600 bg-gray-800 rounded shadow-md flex justify-center items-center min-h-[400px]">
-              <LoadingSpinner size="lg" />
-            </div>
-          }>
-            <PoliticianTradesTable 
-              data={tradeRows} 
-              politician_id={id}
-              currentSort={sortKey}
-              currentOrder={order}
-            />
-          </LoadingWrapper>
+          <div className="space-y-3">
+            {trades.map((trade) => (
+              <div key={trade.id} className="rounded-lg border border-gray-700 bg-gray-900 p-3">
+                <div className="flex items-center justify-between">
+                  <Link href={`/issuers/${trade.Issuer.id}`} className={textLinkStyles('muted')}>
+                    {trade.Issuer.name} {trade.Issuer.ticker ? `(${trade.Issuer.ticker})` : ''}
+                  </Link>
+                  <span className={badgeStyles(trade.type.toUpperCase() === 'BUY' ? 'success' : 'danger', 'xs')}>
+                    {trade.type}
+                  </span>
+                </div>
+                <div className="mt-2 text-sm text-gray-300 flex flex-wrap gap-4">
+                  <span>交易日：{new Date(trade.traded_at).toLocaleDateString('zh-TW')}</span>
+                  <span>申報日：{trade.published_at ? new Date(trade.published_at).toLocaleDateString('zh-TW') : '-'}</span>
+                  <span>產業：{sectorToZh(trade.Issuer.sector) || '未揭露'}</span>
+                  <span>
+                    金額：{trade.size_min && trade.size_max
+                      ? `$${Math.round(Number(trade.size_min)).toLocaleString('en-US')} - $${Math.round(Number(trade.size_max)).toLocaleString('en-US')}`
+                      : '未揭露'}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Back Button */}

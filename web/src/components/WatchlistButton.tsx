@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useTransition } from 'react';
+import { toggleWatchlistAction } from '@/actions/watchlist';
 
 interface WatchlistButtonProps {
   userId?: string;
@@ -10,6 +11,7 @@ interface WatchlistButtonProps {
   ownerId?: string;
   ticker?: string;
   className?: string;
+  initialWatching?: boolean;
 }
 
 export default function WatchlistButton({ 
@@ -19,10 +21,12 @@ export default function WatchlistButton({
   companyId, 
   ownerId, 
   ticker,
-  className = '' 
+  className = '',
+  initialWatching = false,
 }: WatchlistButtonProps) {
-  const [isWatching, setIsWatching] = useState(false);
+  const [isWatching, setIsWatching] = useState(initialWatching);
   const [isLoading, setIsLoading] = useState(false);
+  const [isPending, startTransition] = useTransition();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -35,6 +39,10 @@ export default function WatchlistButton({
         if (ownerId) params.set('ownerId', ownerId);
         if (ticker) params.set('ticker', ticker);
 
+        if (type === 'politician' && politicianId) {
+          setIsLoggedIn(Boolean(userId));
+          return;
+        }
         const res = await fetch(`/api/watchlist?${params.toString()}`);
         if (res.status === 200) {
           setIsLoggedIn(true);
@@ -52,11 +60,23 @@ export default function WatchlistButton({
     };
     
     checkAuth();
-  }, [userId, companyId, ownerId, politicianId, ticker, type]);
+  }, [userId, companyId, ownerId, politicianId, ticker, type, initialWatching]);
 
   const handleToggleWatchlist = async () => {
     if (!isLoggedIn) {
       alert('Please log in to add items to your watchlist');
+      return;
+    }
+
+    if (type === 'politician' && politicianId) {
+      startTransition(async () => {
+        const result = await toggleWatchlistAction({ politicianId });
+        if (!result.ok) {
+          alert(result.error || '操作失敗');
+          return;
+        }
+        setIsWatching(result.watching);
+      });
       return;
     }
 
@@ -121,14 +141,14 @@ export default function WatchlistButton({
   return (
     <button
       onClick={handleToggleWatchlist}
-      disabled={isLoading}
+      disabled={isLoading || isPending}
       className={`inline-flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors duration-200 ${
         isWatching
           ? 'bg-red-600 hover:bg-red-700 text-white'
           : 'bg-blue-600 hover:bg-blue-700 text-white'
       } disabled:opacity-50 disabled:cursor-not-allowed ${className}`}
     >
-      {isLoading ? (
+      {isLoading || isPending ? (
         <>
           <svg className="animate-spin -ml-1 mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>

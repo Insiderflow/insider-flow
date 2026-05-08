@@ -122,6 +122,19 @@ export default async function RootLayout({
         <div className="max-w-6xl mx-auto px-4 py-6">
           {children}
         </div>
+        <footer className="border-t border-gray-700 bg-gray-900/70">
+          <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 text-xs text-gray-300">
+            <span>© {new Date().getFullYear()} Insider Flow</span>
+            <div className="space-x-4">
+              <Link className="hover:text-blue-300" href="/privacy">
+                Privacy
+              </Link>
+              <Link className="hover:text-blue-300" href="/terms">
+                Terms
+              </Link>
+            </div>
+          </div>
+        </footer>
       </body>
     </html>
   );

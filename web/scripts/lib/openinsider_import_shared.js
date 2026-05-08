@@ -104,9 +104,16 @@ async function extractRowsFromPage(page) {
 
       const parseDate = (dateStr) => {
         if (!dateStr) return null;
-        const parts = dateStr.split('/');
+        const trimmed = String(dateStr).trim();
+        const parsed = new Date(trimmed);
+        if (!Number.isNaN(parsed.getTime())) return parsed;
+        const parts = trimmed.split('/');
         if (parts.length === 3) {
-          return new Date(parseInt(parts[2], 10), parseInt(parts[0], 10) - 1, parseInt(parts[1], 10));
+          const mm = parseInt(parts[0], 10);
+          const dd = parseInt(parts[1], 10);
+          const yyyy = parseInt(parts[2], 10);
+          const fallback = new Date(yyyy, mm - 1, dd);
+          if (!Number.isNaN(fallback.getTime())) return fallback;
         }
         return null;
       };
@@ -187,23 +194,46 @@ async function persistOpenInsiderRow(prisma, t, summary) {
   const { created } = await upsertTransaction(prisma, payload);
   if (created) summary.imported += 1;
   else summary.skippedDup += 1;
+  return created;
 }
 
-async function persistOpenInsiderRows(prisma, rows, summary) {
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function persistOpenInsiderRows(prisma, rows, summary, options = {}) {
+  const perRowDelayMs = Math.max(0, Number(options.perRowDelayMs || 0));
+  const perRowJitterMs = Math.max(0, Number(options.perRowJitterMs || 0));
+  const stopAfterDuplicateStreak = Math.max(0, Number(options.stopAfterDuplicateStreak || 0));
+  let duplicateStreak = 0;
+
   for (const t of rows) {
     try {
-      await persistOpenInsiderRow(prisma, t, summary);
+      const created = await persistOpenInsiderRow(prisma, t, summary);
+      duplicateStreak = created ? 0 : duplicateStreak + 1;
+      if (stopAfterDuplicateStreak > 0 && duplicateStreak >= stopAfterDuplicateStreak) {
+        if (summary && Array.isArray(summary.errorMessages)) {
+          summary.errorMessages.push(
+            `early-stop: duplicate streak reached ${duplicateStreak} (threshold=${stopAfterDuplicateStreak})`,
+          );
+        }
+        break;
+      }
     } catch (e) {
       summary.errors += 1;
       summary.errorMessages.push(`${t.ticker}: ${e instanceof Error ? e.message : String(e)}`);
+    }
+    if (perRowDelayMs > 0 || perRowJitterMs > 0) {
+      const jitter = perRowJitterMs > 0 ? Math.floor(Math.random() * (perRowJitterMs + 1)) : 0;
+      await sleep(perRowDelayMs + jitter);
     }
   }
 }
 
 function formatOpenInsiderDate(d) {
-  const mm = String(d.getMonth() + 1).padStart(2, '0');
-  const dd = String(d.getDate()).padStart(2, '0');
-  const yyyy = d.getFullYear();
+  const mm = String(d.getUTCMonth() + 1).padStart(2, '0');
+  const dd = String(d.getUTCDate()).padStart(2, '0');
+  const yyyy = d.getUTCFullYear();
   return `${mm}/${dd}/${yyyy}`;
 }
 

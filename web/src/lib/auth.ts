@@ -121,7 +121,7 @@ export async function logout() {
   }
 }
 
-export async function createUser(email: string, password: string) {
+export async function createUser(email: string, password: string, name?: string) {
   const existingUser = await prisma.user.findUnique({
     where: { email },
   });
@@ -137,6 +137,7 @@ export async function createUser(email: string, password: string) {
     data: {
       id: crypto.randomUUID(),
       email,
+      name: name?.trim() || null,
       password_hash: passwordHash,
       email_verification_token: verificationToken,
       email_verified: false, // Require email verification
@@ -186,6 +187,9 @@ export async function login(email: string, password: string) {
   const isValidPassword = await verifyPassword(password, user.password_hash);
   if (!isValidPassword) {
     throw new Error('Invalid credentials');
+  }
+  if (!user.email_verified) {
+    throw new Error('Please verify your email before logging in');
   }
 
   const sessionToken = await createSession(user.id);

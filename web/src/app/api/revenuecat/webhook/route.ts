@@ -45,7 +45,14 @@ export async function POST(req: NextRequest) {
     if (signatureCheck.enabled && !signatureCheck.valid) {
       return NextResponse.json({ error: 'Invalid RevenueCat signature' }, { status: 401 });
     }
-    const payload = rawBody ? JSON.parse(rawBody) : {};
+    let payload: unknown = {};
+    if (rawBody) {
+      try {
+        payload = JSON.parse(rawBody) as unknown;
+      } catch {
+        return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 });
+      }
+    }
     const { appUserId, eventKey, eventType } = extractRevenueCatEvent(payload);
     if (!appUserId) {
       return NextResponse.json({ error: 'Missing app_user_id' }, { status: 400 });

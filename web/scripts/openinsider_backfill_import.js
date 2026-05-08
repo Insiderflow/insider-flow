@@ -15,6 +15,7 @@
 
 const { chromium } = require('playwright');
 const { PrismaClient } = require('@prisma/client');
+const { execSync } = require('child_process');
 const {
   extractRowsFromPage,
   persistOpenInsiderRows,
@@ -23,16 +24,18 @@ const {
 } = require('./lib/openinsider_import_shared');
 
 const prisma = new PrismaClient();
+const OPENINSIDER_BASES = ['https://openinsider.com', 'http://openinsider.com'];
 
 function parseArgs() {
   const argv = process.argv.slice(2);
   const dryRun = argv.includes('--dry-run');
+  const monthByMonth = argv.includes('--month-by-month');
   let days = 62;
   let maxPages = 120;
   let sleepMs = 900;
 
   const di = argv.indexOf('--days');
-  if (di >= 0 && argv[di + 1]) days = Math.min(365, Math.max(1, parseInt(argv[di + 1], 10) || 62));
+  if (di >= 0 && argv[di + 1]) days = Math.min(3650, Math.max(1, parseInt(argv[di + 1], 10) || 62));
 
   const mpi = argv.indexOf('--max-pages');
   if (mpi >= 0 && argv[mpi + 1]) maxPages = Math.min(300, Math.max(1, parseInt(argv[mpi + 1], 10) || 120));
@@ -40,7 +43,7 @@ function parseArgs() {
   const si = argv.indexOf('--sleep-ms');
   if (si >= 0 && argv[si + 1]) sleepMs = Math.min(5000, Math.max(200, parseInt(argv[si + 1], 10) || 900));
 
-  return { dryRun, days, maxPages, sleepMs };
+  return { dryRun, monthByMonth, days, maxPages, sleepMs };
 }
 
 function sleep(ms) {
@@ -57,16 +60,86 @@ function latestInsiderPageUrl(pageNum) {
   return `https://openinsider.com/latest-insider-trading?page=${pageNum}`;
 }
 
+function toUrlVariants(url) {
+  const raw = String(url).trim();
+  if (/^https?:\/\//i.test(raw)) {
+    const noProto = raw.replace(/^https?:\/\//i, '');
+    return [`https://${noProto}`, `http://${noProto}`];
+  }
+  const noLeading = raw.replace(/^\/+/, '');
+  return OPENINSIDER_BASES.map((base) => `${base}/${noLeading}`);
+}
+
+async function loadOpenInsiderPage(page, url, label) {
+  const variants = toUrlVariants(url);
+  let lastErr = null;
+
+  for (const variant of variants) {
+    try {
+      await page.goto(variant, { waitUntil: 'domcontentloaded', timeout: 120000 });
+      return { url: variant, transport: 'playwright-goto' };
+    } catch (err) {
+      lastErr = err;
+      const msg = err instanceof Error ? err.message : String(err);
+      const isNetworkRefusal =
+        /ERR_CONNECTION_REFUSED|ERR_CONNECTION_RESET|ERR_CONNECTION_TIMED_OUT|ERR_NAME_NOT_RESOLVED|chrome-error:\/\/chromewebdata|interrupted by another navigation/i.test(
+          msg,
+        );
+      console.warn(`[${label}] goto failed for ${variant}: ${msg}`);
+      if (!isNetworkRefusal) throw err;
+    }
+  }
+
+  for (const variant of variants) {
+    try {
+      const res = await fetch(variant, {
+        headers: {
+          'User-Agent':
+            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+          Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        },
+        signal: AbortSignal.timeout(120000),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const html = await res.text();
+      await page.setContent(html, { waitUntil: 'domcontentloaded', timeout: 120000 });
+      return { url: variant, transport: 'fetch+setContent' };
+    } catch (err) {
+      lastErr = err;
+      console.warn(`[${label}] fetch failed for ${variant}: ${err instanceof Error ? err.message : String(err)}`);
+    }
+  }
+
+  for (const variant of variants) {
+    try {
+      const html = execSync(`curl -L --max-time 120 -sS "${variant}"`, {
+        cwd: process.cwd(),
+        stdio: ['ignore', 'pipe', 'pipe'],
+      }).toString();
+      if (!html || !/<html/i.test(html)) throw new Error('curl returned empty/non-html payload');
+      await page.setContent(html, { waitUntil: 'domcontentloaded', timeout: 120000 });
+      return { url: variant, transport: 'curl+setContent' };
+    } catch (err) {
+      lastErr = err;
+      console.warn(`[${label}] curl failed for ${variant}: ${err instanceof Error ? err.message : String(err)}`);
+    }
+  }
+
+  throw lastErr || new Error(`[${label}] all transports failed for ${url}`);
+}
+
 async function scrapePagedList(browser, label, urlFn, cutoffMs, globalDedupe, maxPages, sleepMs, collected) {
   const context = browser.contexts()[0];
   const page = await context.newPage();
   let staleStreak = 0;
+  let zeroNewStreak = 0;
 
   try {
     for (let p = 1; p <= maxPages; p++) {
       const url = urlFn(p);
       console.log(`[${label}] page ${p}: ${url}`);
-      await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 120000 }).catch(() => {});
+      const loaded = await loadOpenInsiderPage(page, url, `${label}:p${p}`);
+      console.log(`[${label}] loaded via ${loaded.transport} (${loaded.url})`);
       await sleep(sleepMs);
       const html = await page.content().catch(() => '');
       if (/captcha|blocked|challenge|Cloudflare/i.test(html)) {
@@ -101,6 +174,15 @@ async function scrapePagedList(browser, label, urlFn, cutoffMs, globalDedupe, ma
       console.log(
         `[${label}] rows=${rows.length} keptInWindow=${kept} oldestFiling=${Number.isFinite(oldestTs) ? new Date(oldestTs).toISOString().slice(0, 10) : 'n/a'}`,
       );
+      if (kept === 0) {
+        zeroNewStreak += 1;
+        if (zeroNewStreak >= 3) {
+          console.log(`[${label}] stopping after ${zeroNewStreak} pages with no new deduped rows`);
+          break;
+        }
+      } else {
+        zeroNewStreak = 0;
+      }
 
       const allOlderThanCutoff = rows.every((r) => new Date(r.transactionDate).getTime() < cutoffMs);
       if (allOlderThanCutoff) {
@@ -125,11 +207,13 @@ async function scrapePagedList(browser, label, urlFn, cutoffMs, globalDedupe, ma
 async function scrapeScreenerWindow(browser, startDate, endDate, cutoffMs, globalDedupe, maxPages, sleepMs, collected) {
   const context = browser.contexts()[0];
   const page = await context.newPage();
+  let zeroNewStreak = 0;
   try {
     for (let p = 1; p <= maxPages; p++) {
       const url = screenerUrl(p, startDate, endDate);
       console.log(`[screener] page ${p}: ${url}`);
-      await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 120000 }).catch(() => {});
+      const loaded = await loadOpenInsiderPage(page, url, `screener:p${p}`);
+      console.log(`[screener] loaded via ${loaded.transport} (${loaded.url})`);
       await sleep(sleepMs);
 
       const rows = await extractRowsFromPage(page);
@@ -149,6 +233,15 @@ async function scrapeScreenerWindow(browser, startDate, endDate, cutoffMs, globa
         added++;
       }
       console.log(`[screener] rows=${rows.length} newDeduped=${added}`);
+      if (added === 0) {
+        zeroNewStreak += 1;
+        if (zeroNewStreak >= 6) {
+          console.log(`[screener] stopping after ${zeroNewStreak} pages with no new deduped rows`);
+          break;
+        }
+      } else {
+        zeroNewStreak = 0;
+      }
       await sleep(sleepMs);
     }
   } finally {
@@ -156,8 +249,36 @@ async function scrapeScreenerWindow(browser, startDate, endDate, cutoffMs, globa
   }
 }
 
+function startOfMonthUtc(d) {
+  return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), 1, 0, 0, 0, 0));
+}
+
+function endOfMonthUtc(d) {
+  return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 0, 23, 59, 59, 999));
+}
+
+function addMonthsUtc(d, delta) {
+  return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + delta, 1, 0, 0, 0, 0));
+}
+
+function monthWindowsUtc(startInclusive, endInclusive) {
+  const windows = [];
+  let cursor = startOfMonthUtc(startInclusive);
+  const endMonthStart = startOfMonthUtc(endInclusive);
+  while (cursor.getTime() <= endMonthStart.getTime()) {
+    const monthStart = cursor;
+    const monthEnd = endOfMonthUtc(cursor);
+    windows.push({
+      start: new Date(Math.max(monthStart.getTime(), startInclusive.getTime())),
+      end: new Date(Math.min(monthEnd.getTime(), endInclusive.getTime())),
+    });
+    cursor = addMonthsUtc(cursor, 1);
+  }
+  return windows;
+}
+
 async function main() {
-  const { dryRun, days, maxPages, sleepMs } = parseArgs();
+  const { dryRun, monthByMonth, days, maxPages, sleepMs } = parseArgs();
 
   if (process.env.OPENINSIDER_IMPORT_DISABLED === '1') {
     console.log(JSON.stringify({ skipped: true, reason: 'OPENINSIDER_IMPORT_DISABLED=1' }));
@@ -217,16 +338,38 @@ async function main() {
       sleepMs,
       collected,
     );
-    await scrapeScreenerWindow(
-      browser,
-      windowStart,
-      windowEnd,
-      cutoffMs,
-      globalDedupe,
-      maxPages,
-      sleepMs,
-      collected,
-    );
+    if (monthByMonth) {
+      const windows = monthWindowsUtc(windowStart, windowEnd);
+      console.log(`[screener] month-by-month mode (${windows.length} windows)`);
+      for (const [idx, w] of windows.entries()) {
+        console.log(
+          `[screener] window ${idx + 1}/${windows.length}: ${w.start.toISOString().slice(0, 10)} -> ${w.end
+            .toISOString()
+            .slice(0, 10)}`,
+        );
+        await scrapeScreenerWindow(
+          browser,
+          w.start,
+          w.end,
+          cutoffMs,
+          globalDedupe,
+          maxPages,
+          sleepMs,
+          collected,
+        );
+      }
+    } else {
+      await scrapeScreenerWindow(
+        browser,
+        windowStart,
+        windowEnd,
+        cutoffMs,
+        globalDedupe,
+        maxPages,
+        sleepMs,
+        collected,
+      );
+    }
 
     summary.collectedUnique = collected.length;
 

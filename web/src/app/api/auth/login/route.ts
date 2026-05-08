@@ -16,7 +16,6 @@ export async function POST(req: NextRequest) {
     }
 
     const { user, sessionToken } = await login(email, password);
-    // Email verification check disabled for development
     const res = NextResponse.json({ 
       message: 'Login successful',
       user: {

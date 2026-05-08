@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { actionStyles } from '@/components/actionStyles';
-import { fieldControlStyles } from '@/components/formStyles';
+import { fieldControlStyles, fieldLabelStyles } from '@/components/formStyles';
 import { textLinkStyles } from '@/components/linkStyles';
 
 interface LoginFormProps {
@@ -37,7 +37,7 @@ export default function LoginForm({ next }: LoginFormProps) {
         }, 100);
       } else {
         const data = await res.json();
-        if (res.status === 403 && (data.error || '').toLowerCase().includes('not verified')) {
+        if ((data.error || '').toLowerCase().includes('verify')) {
           setUnverified(true);
           setError('');
         } else {
@@ -77,27 +77,28 @@ export default function LoginForm({ next }: LoginFormProps) {
   return (
     <div className="space-y-4">
       {unverified && (
-        <div className="bg-yellow-100 text-yellow-800 border border-yellow-300 p-3 rounded text-sm flex items-center justify-between">
-          <span>您的電郵尚未驗證。請點擊下方按鈕重新發送驗證電郵。</span>
-          <button onClick={resendVerification} disabled={resending || !email}
-            className={`ml-3 ${actionStyles('ghost')}`}>
-            {resending ? 'Sending…' : 'Resend' }
-          </button>
+        <div className="rounded-lg border border-yellow-500/50 bg-yellow-900/30 p-3 text-sm text-yellow-200">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            <span>請先驗證信箱，再登入帳號。</span>
+            <button onClick={resendVerification} disabled={resending || !email} className={actionStyles('ghost')}>
+              {resending ? '寄送中…' : '重寄驗證信'}
+            </button>
+          </div>
         </div>
       )}
       {resendMsg && (
-        <div className="bg-white text-gray-800 p-2.5 rounded border border-gray-200 text-sm">
+        <div className="rounded-lg border border-green-500/50 bg-green-900/30 p-3 text-sm text-green-200">
           {resendMsg}
         </div>
       )}
       {error && (
-        <div className="bg-white text-red-600 p-2.5 rounded border border-red-200 text-sm">
+        <div className="rounded-lg border border-red-500/50 bg-red-900/30 p-3 text-sm text-red-200">
           {error}
         </div>
       )}
       <form onSubmit={handleSubmit} className="space-y-3">
-        <label className="block">
-          <span className="text-sm text-gray-400">電郵</span>
+        <label className={fieldLabelStyles()}>
+          <span className="w-full sm:w-24 text-gray-400">電郵</span>
           <input
             type="email"
             value={email}
@@ -108,8 +109,8 @@ export default function LoginForm({ next }: LoginFormProps) {
             disabled={isLoading}
           />
         </label>
-        <label className="block">
-          <span className="text-sm text-gray-400">密碼</span>
+        <label className={fieldLabelStyles()}>
+          <span className="w-full sm:w-24 text-gray-400">密碼</span>
           <input
             type="password"
             value={password}
@@ -120,7 +121,7 @@ export default function LoginForm({ next }: LoginFormProps) {
             disabled={isLoading}
           />
         </label>
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
           <button
             type="submit"
             disabled={isLoading}
@@ -131,6 +132,17 @@ export default function LoginForm({ next }: LoginFormProps) {
           <Link href="/forgot-password" className={`${textLinkStyles()} text-sm`}>忘記密碼？</Link>
         </div>
       </form>
+      <p className="text-xs text-gray-400">
+        By continuing, you agree to our{" "}
+        <Link href="/terms" className={textLinkStyles()}>
+          Terms
+        </Link>{" "}
+        and{" "}
+        <Link href="/privacy" className={textLinkStyles()}>
+          Privacy Policy
+        </Link>
+        .
+      </p>
     </div>
   );
 }

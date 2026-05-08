@@ -49,7 +49,6 @@ export default function PortfolioChart({ politician }: PortfolioChartProps) {
   const [data, setData] = useState<PortfolioData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [chinaFilter, setChinaFilter] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,13 +56,8 @@ export default function PortfolioChart({ politician }: PortfolioChartProps) {
         setLoading(true);
         setError(null);
         
-        const params = new URLSearchParams();
-        if (chinaFilter) {
-          params.set('china_filter', 'true');
-        }
-        
         const response = await axios.get(
-          `/api/portfolio_comparison/${encodeURIComponent(politician)}?${params.toString()}`
+          `/api/portfolio_comparison/${encodeURIComponent(politician)}`
         );
         
         // Check if response has error
@@ -93,7 +87,7 @@ export default function PortfolioChart({ politician }: PortfolioChartProps) {
     };
 
     fetchData();
-  }, [politician, chinaFilter]);
+  }, [politician]);
 
   if (loading) {
     return (
@@ -204,7 +198,7 @@ export default function PortfolioChart({ politician }: PortfolioChartProps) {
       },
       title: {
         display: true,
-        text: chinaFilter ? '中國股票投資組合比較' : '投資組合表現比較',
+        text: '投資組合表現比較',
         color: 'white',
         font: {
           size: 18,
@@ -321,9 +315,9 @@ export default function PortfolioChart({ politician }: PortfolioChartProps) {
 
   return (
     <div className="bg-gray-800 rounded-lg p-6 shadow-lg">
-      {/* Header with China Filter */}
+      {/* Header */}
       <div className="mb-6">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
+        <div className="mb-4">
           <div>
             <h3 className="text-xl font-bold text-white mb-2">
               <span className="zh-Hant">投資組合表現分析</span>
@@ -333,25 +327,6 @@ export default function PortfolioChart({ politician }: PortfolioChartProps) {
               <span className="zh-Hant">比較政治家的投資組合回報率與 S&P 500 指數表現</span>
               <span className="zh-Hans hidden">比较政治家的投资组合回报率与 S&P 500 指数表现</span>
             </p>
-          </div>
-          
-          <div className="flex items-center gap-3">
-            <label className="flex items-center gap-2 text-sm text-gray-300 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={chinaFilter}
-                onChange={(e) => setChinaFilter(e.target.checked)}
-                className="w-4 h-4 rounded border-gray-600 bg-gray-700 text-blue-600 focus:ring-blue-500 focus:ring-2"
-              />
-              <span className="zh-Hant">中國股票篩選</span>
-              <span className="zh-Hans hidden">中国股票筛选</span>
-            </label>
-            {chinaFilter && (
-              <span className="text-xs text-yellow-400 bg-yellow-900/20 px-2 py-1 rounded">
-                <span className="zh-Hant">已啟用</span>
-                <span className="zh-Hans hidden">已启用</span>
-              </span>
-            )}
           </div>
         </div>
       </div>
