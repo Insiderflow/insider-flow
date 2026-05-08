@@ -9,11 +9,14 @@ import { bodySubtextStyles, mutedLabelStyles, sectionTitleStyles } from '@/compo
 import { getHomePageStats } from '@/lib/repos/homeRepo';
 import { getPoliticiansPageData } from '@/lib/repos/politiciansRepo';
 import { getLatestTradesPublic } from '@/lib/repos/tradesRepo';
+import { getCurrentUserWithTier, isPaid } from '@/lib/membership';
 import StatCard from '@/components/StatCard';
 export const dynamic = 'force-dynamic';
 
 export default async function Home({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   const sp = await searchParams;
+  const me = await getCurrentUserWithTier();
+  const canAccessDetails = isPaid(me);
   const verified = sp.verified === 'true';
   const verificationError = sp.verification;
   const [stats, latestTrades, topPoliticiansResult] = await Promise.all([
@@ -210,14 +213,16 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {topPoliticiansResult.rows.map((row) => (
+            {topPoliticiansResult.rows.map((row) => {
+              const detailHref = canAccessDetails ? `/politicians/${row.id}` : '/upgrade?reason=paid_required';
+              return (
               <div key={row.id} className="bg-gray-700 rounded-lg p-4">
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-12 h-12 rounded-full overflow-hidden">
                     <HomePoliticianImage politicianId={row.id} politicianName={row.name} />
                   </div>
                   <div className="min-w-0">
-                    <Link href={`/politicians/${row.id}`} className="text-white font-semibold hover:text-blue-300 truncate block">
+                    <Link href={detailHref} className="text-white font-semibold hover:text-blue-300 truncate block">
                       {row.name}
                     </Link>
                     <p className={`text-xs ${mutedLabelStyles()}`}>{row.party || 'Unknown'} · {row.chamber || 'N/A'}</p>
@@ -229,7 +234,8 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
                   <div className="flex justify-between"><span className="text-gray-400">總金額</span><span className="text-white">${Math.round(row.totalVolume).toLocaleString('en-US')}</span></div>
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

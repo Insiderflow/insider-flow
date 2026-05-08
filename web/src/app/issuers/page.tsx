@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { getCurrentUserWithTier, isPaid } from '@/lib/membership';
-import { redirect } from 'next/navigation';
 import StateNotice from '@/components/StateNotice';
 import { actionStyles } from '@/components/actionStyles';
 import { fieldControlStyles, fieldLabelStyles } from '@/components/formStyles';
@@ -14,9 +13,7 @@ export const dynamic = 'force-dynamic';
 
 export default async function IssuersPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   const me = await getCurrentUserWithTier();
-  if (!isPaid(me)) {
-    redirect('/upgrade?reason=paid_required');
-  }
+  const canAccessDetails = isPaid(me);
   const sp = await searchParams;
   const allowedSort = new Set(['name', 'trades', 'politicians', 'volume', 'lastTraded', 'price', 'change30dPct']);
   const sortKeyRaw = typeof sp.sort === 'string' ? sp.sort : 'trades';
@@ -106,10 +103,12 @@ export default async function IssuersPage({ searchParams }: { searchParams: Prom
                 </tr>
               </thead>
               <tbody className="bg-gray-900">
-                {rows.map((issuer) => (
+                {rows.map((issuer) => {
+                  const detailHref = canAccessDetails ? `/issuers/${issuer.id}` : '/upgrade?reason=paid_required';
+                  return (
                   <tr key={issuer.id} className="border-t border-gray-800">
                     <td className="px-3 py-2">
-                      <Link href={`/issuers/${issuer.id}`} className={textLinkStyles()}>
+                      <Link href={detailHref} className={textLinkStyles()}>
                         {issuer.name}
                       </Link>
                     </td>
@@ -130,7 +129,8 @@ export default async function IssuersPage({ searchParams }: { searchParams: Prom
                       {issuer.trend === 'up' ? '上升' : issuer.trend === 'down' ? '下跌' : issuer.trend === 'flat' ? '持平' : '未揭露'}
                     </td>
                   </tr>
-                ))}
+                  );
+                })}
               </tbody>
             </table>
           </div>

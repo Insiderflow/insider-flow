@@ -1,6 +1,5 @@
 import LastUpdated, { DataFreshnessIndicator } from '@/components/LastUpdated';
 import { getCurrentUserWithTier, isPaid } from '@/lib/membership';
-import { redirect } from 'next/navigation';
 import StateNotice from '@/components/StateNotice';
 import Link from 'next/link';
 import PoliticianProfileImage from '@/components/PoliticianProfileImage';
@@ -16,9 +15,7 @@ export const dynamic = 'force-dynamic';
 export default async function PoliticiansPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   const sp = await searchParams;
   const me = await getCurrentUserWithTier();
-  if (!isPaid(me)) {
-    redirect('/upgrade?reason=paid_required');
-  }
+  const canAccessDetails = isPaid(me);
   const chamber = typeof sp.chamber === 'string' ? sp.chamber : '';
   const searchName = typeof sp.name === 'string' ? sp.name : '';
   const allowedSort = new Set<PoliticianSortKey>(['name', 'trades', 'volume', 'lastTraded']);
@@ -71,10 +68,12 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
           <h2 className="text-xl font-semibold text-white mb-4">最活躍政治家</h2>
           <div className="bg-gray-800 border border-gray-600 rounded-lg p-4 shadow-md">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3">
-              {topByVolumePoliticians.map((politician) => (
+              {topByVolumePoliticians.map((politician) => {
+                const detailHref = canAccessDetails ? `/politicians/${politician.id}` : '/upgrade?reason=paid_required';
+                return (
                 <Link
                   key={politician.id}
-                  href={`/politicians/${politician.id}`}
+                  href={detailHref}
                   className="bg-gray-900 border border-gray-700 rounded-md p-3 hover:border-gray-500 transition-colors flex items-center gap-3"
                 >
                   <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-700 flex-shrink-0">
@@ -94,7 +93,8 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
                     </div>
                   </div>
                 </Link>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
@@ -186,14 +186,16 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
           />
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {rows.map((politician) => (
+            {rows.map((politician) => {
+              const detailHref = canAccessDetails ? `/politicians/${politician.id}` : '/upgrade?reason=paid_required';
+              return (
               <div key={politician.id} className="bg-gray-800 border border-gray-600 rounded-xl p-4 space-y-3">
                 <div className="flex items-center gap-3">
-                  <Link href={`/politicians/${politician.id}`} className="w-14 h-14 rounded-full overflow-hidden bg-gray-700 shrink-0">
+                  <Link href={detailHref} className="w-14 h-14 rounded-full overflow-hidden bg-gray-700 shrink-0">
                     <PoliticianProfileImage politicianId={politician.id} politicianName={politician.name} />
                   </Link>
                   <div className="min-w-0">
-                    <Link href={`/politicians/${politician.id}`} className="text-white font-semibold hover:text-blue-300 truncate block">
+                    <Link href={detailHref} className="text-white font-semibold hover:text-blue-300 truncate block">
                       {politician.name}
                     </Link>
                     <p className="text-xs text-gray-400 truncate">
@@ -215,7 +217,8 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
                   最後交易日期：{politician.lastTraded ? politician.lastTraded.toLocaleDateString('zh-TW') : '無資料'}
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </main>

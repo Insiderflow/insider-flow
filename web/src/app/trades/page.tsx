@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import LastUpdated, { DataFreshnessIndicator } from '@/components/LastUpdated';
 import { getCurrentUserWithTier, isPaid } from '@/lib/membership';
-import { redirect } from 'next/navigation';
 import StateNotice from '@/components/StateNotice';
 import { actionStyles } from '@/components/actionStyles';
 import { fieldControlStyles, fieldLabelStyles } from '@/components/formStyles';
@@ -16,9 +15,7 @@ export const dynamic = 'force-dynamic';
 
 export default async function TradesPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   const me = await getCurrentUserWithTier();
-  if (!isPaid(me)) {
-    redirect('/upgrade?reason=paid_required');
-  }
+  const canAccessDetails = isPaid(me);
   const sp = await searchParams;
   const pageSize = 30;
   const page = Math.max(1, Number(typeof sp.page === 'string' ? sp.page : 1) || 1);
@@ -157,13 +154,16 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
                 </tr>
               </thead>
               <tbody className="bg-gray-900">
-                {trades.map((t) => (
+                {trades.map((t) => {
+                  const politicianHref = canAccessDetails ? `/politicians/${t.politician.id}` : '/upgrade?reason=paid_required';
+                  const issuerHref = canAccessDetails ? `/issuers/${t.issuer.id}` : '/upgrade?reason=paid_required';
+                  return (
                   <tr key={t.id} className="border-t border-gray-800">
                     <td className="px-3 py-2">
-                      <Link className={textLinkStyles()} href={`/politicians/${t.politician.id}`}>{t.politician.name}</Link>
+                      <Link className={textLinkStyles()} href={politicianHref}>{t.politician.name}</Link>
                     </td>
                     <td className="px-3 py-2">
-                      <Link className={textLinkStyles()} href={`/issuers/${t.issuer.id}`}>{t.issuer.name}</Link>
+                      <Link className={textLinkStyles()} href={issuerHref}>{t.issuer.name}</Link>
                     </td>
                     <td className="px-3 py-2 text-gray-300">{new Date(t.tradedAt).toLocaleDateString('zh-TW')}</td>
                     <td className="px-3 py-2 text-gray-300">{t.publishedAt ? new Date(t.publishedAt).toLocaleDateString('zh-TW') : '-'}</td>
@@ -173,7 +173,8 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
                     </td>
                     <td className="px-3 py-2 text-gray-300">{t.price !== null ? `$${t.price.toFixed(2)}` : '-'}</td>
                   </tr>
-                ))}
+                  );
+                })}
               </tbody>
             </table>
           </div>
