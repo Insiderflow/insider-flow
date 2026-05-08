@@ -46,8 +46,10 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
   const hasNext = page < totalPages;
 
   const baseQS = new URLSearchParams(Object.entries(sp as Record<string,string|undefined>).filter(([k,v]) => k !== 'page' && typeof v === 'string') as [string,string][]);
-  const prevHref = hasPrev ? `/trades?${new URLSearchParams({ ...Object.fromEntries(baseQS), page: String(page - 1) }).toString()}` : '#';
-  const nextHref = hasNext ? `/trades?${new URLSearchParams({ ...Object.fromEntries(baseQS), page: String(page + 1) }).toString()}` : '#';
+  const tradesQs = (p: number) =>
+    `/trades?${new URLSearchParams({ ...Object.fromEntries(baseQS), page: String(p) }).toString()}`;
+  const prevHref = hasPrev ? tradesQs(page - 1) : '#';
+  const nextHref = hasNext ? tradesQs(page + 1) : '#';
 
   return (
     <div className="min-h-screen bg-gray-900">
@@ -71,7 +73,14 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
           <StatCard label={<><span className="zh-Hant">政治家</span><span className="zh-Hans hidden">政治家</span></>} value={stats.politicianCount.toLocaleString('en-US')} />
           <StatCard label={<><span className="zh-Hant">發行商</span><span className="zh-Hans hidden">发行商</span></>} value={stats.issuerCount.toLocaleString('en-US')} />
         </section>
-        <PaginationBar page={page} totalPages={totalPages} prevHref={prevHref} nextHref={nextHref} className="mb-3" />
+        <PaginationBar
+          page={page}
+          totalPages={totalPages}
+          prevHref={prevHref}
+          nextHref={nextHref}
+          getPageHref={tradesQs}
+          className="mb-3"
+        />
         <FilterBar id="trades-filters" className="mb-4">
           <label className={fieldLabelStyles()}>
             <span className="w-full sm:w-28 text-gray-400">

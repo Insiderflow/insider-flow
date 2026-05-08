@@ -33,8 +33,10 @@ export default async function IssuersPage({ searchParams }: { searchParams: Prom
 
   const totalPages = Math.max(1, Math.ceil(total / pageSize));
   const baseQS = new URLSearchParams(Object.entries(sp as Record<string,string|undefined>).filter(([k,v]) => k !== 'page' && typeof v === 'string') as [string,string][]);
-  const prevHref = `/issuers?${new URLSearchParams({ ...Object.fromEntries(baseQS), page: String(Math.max(1, page - 1)) }).toString()}`;
-  const nextHref = `/issuers?${new URLSearchParams({ ...Object.fromEntries(baseQS), page: String(Math.min(totalPages, page + 1)) }).toString()}`;
+  const issuersQs = (p: number) =>
+    `/issuers?${new URLSearchParams({ ...Object.fromEntries(baseQS), page: String(p) }).toString()}`;
+  const prevHref = issuersQs(Math.max(1, page - 1));
+  const nextHref = issuersQs(Math.min(totalPages, page + 1));
   return (
     <div className="min-h-screen bg-gray-900">
       <main className="p-4">
@@ -45,7 +47,14 @@ export default async function IssuersPage({ searchParams }: { searchParams: Prom
           </h1>
           <div className="text-sm text-gray-300">共 {total.toLocaleString('en-US')} 家</div>
         </div>
-        <PaginationBar page={page} totalPages={totalPages} prevHref={prevHref} nextHref={nextHref} className="mb-3" />
+        <PaginationBar
+          page={page}
+          totalPages={totalPages}
+          prevHref={prevHref}
+          nextHref={nextHref}
+          getPageHref={issuersQs}
+          className="mb-3"
+        />
         <FilterBar className="mb-3">
           <label className={fieldLabelStyles()}>
             <span className="w-full sm:w-auto text-gray-400">搜尋</span>

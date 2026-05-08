@@ -40,6 +40,16 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
   const polCount = total;
   const issuerCount = rows.reduce((sum, r) => sum + r.issuers, 0);
   const lastTradeDate = rows.find((r) => r.lastTraded)?.lastTraded || new Date();
+
+  const politiciansQs = (p: number) =>
+    `/politicians?${new URLSearchParams({
+      page: String(p),
+      ...(chamber ? { chamber } : {}),
+      ...(searchName ? { name: searchName } : {}),
+      sort: sortKey,
+      order,
+    }).toString()}`;
+
   return (
     <div className="min-h-screen bg-gray-900">
       <main className="p-4">
@@ -154,20 +164,9 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
         <PaginationBar
           page={page}
           totalPages={totalPages}
-          prevHref={`/politicians?${new URLSearchParams({
-            page: String(Math.max(1, page - 1)),
-            ...(chamber ? { chamber } : {}),
-            ...(searchName ? { name: searchName } : {}),
-            sort: sortKey,
-            order,
-          }).toString()}`}
-          nextHref={`/politicians?${new URLSearchParams({
-            page: String(Math.min(totalPages, page + 1)),
-            ...(chamber ? { chamber } : {}),
-            ...(searchName ? { name: searchName } : {}),
-            sort: sortKey,
-            order,
-          }).toString()}`}
+          prevHref={politiciansQs(Math.max(1, page - 1))}
+          nextHref={politiciansQs(Math.min(totalPages, page + 1))}
+          getPageHref={politiciansQs}
           className="mb-4"
         />
         
