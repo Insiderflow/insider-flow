@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { getPoliticianImageSrc } from '@/lib/politicianImageMapping';
 import WatchlistButton from './WatchlistButton';
-import MiniPortfolioChart from './MiniPortfolioChart';
 
 interface PoliticianCardProps {
   politician: {
@@ -108,18 +107,6 @@ export default function PoliticianCard({ politician, showWatchlistButton = true 
             </div>
           </div>
         </div>
-        
-        {/* Mini Portfolio Chart */}
-        <div className="mt-3 pt-3 border-t border-gray-600">
-          <div className="mb-2">
-            <div className="text-center text-gray-400 text-xs mb-2">
-              <span className="zh-Hant">投資組合表現</span>
-              <span className="zh-Hans hidden">投资组合表现</span>
-            </div>
-            <MiniPortfolioChart politician={politician.name} />
-          </div>
-        </div>
-        
         {/* Last trade date */}
         <div className="mt-3 pt-3 border-t border-gray-600">
           <div className="text-center">

@@ -3,15 +3,12 @@ import { prisma } from '@/lib/prisma';
 import { notFound, redirect } from 'next/navigation';
 import LoadingWrapper from '@/components/LoadingWrapper';
 import LoadingSpinner from '@/components/LoadingSpinner';
-import PoliticianProfileImage from '@/components/PoliticianProfileImage';
 import IssuerTradesTable from '@/components/IssuerTradesTable';
 import IssuerTimelineChart from '@/components/IssuerTimelineChart';
 import PoliticianTradeCandlestickChart from '@/components/PoliticianTradeCandlestickChart';
-import WatchlistButton from '@/components/WatchlistButton';
-import { getSessionUser } from '@/lib/auth';
 import { getCurrentUserWithTier, isPaid } from '@/lib/membership';
 import { badgeStyles } from '@/components/badgeStyles';
-import { navLinkButtonStyles, textLinkStyles } from '@/components/linkStyles';
+import { navLinkButtonStyles } from '@/components/linkStyles';
 
 export const dynamic = 'force-dynamic';
 
@@ -31,7 +28,6 @@ export default async function IssuerDetailPage({
   if (!isPaid(me)) {
     redirect('/upgrade?reason=paid_required');
   }
-  const user = await getSessionUser();
   
   // Pagination and sorting parameters
   const pageSize = 20;
@@ -90,27 +86,6 @@ export default async function IssuerDetailPage({
   const lastTraded = allTrades.length > 0 ? 
     new Date(Math.max(...allTrades.map(t => new Date(t.traded_at).getTime()))) : 
     null;
-
-  // Get most active politicians from all trades
-  const politicianCounts = allTrades.reduce((acc, trade) => {
-    const politician_id = trade.Politician.id;
-    const politicianName = trade.Politician.name;
-    const politicianParty = trade.Politician.party;
-    const politicianChamber = trade.Politician.chamber;
-    acc[politician_id] = acc[politician_id] || { 
-      id: politician_id,
-      name: politicianName, 
-      party: politicianParty,
-      chamber: politicianChamber,
-      count: 0 
-    };
-    acc[politician_id].count++;
-    return acc;
-  }, {} as Record<string, { id: string; name: string; party: string | null; chamber: string | null; count: number }>);
-
-  const mostActivePoliticians = Object.values(politicianCounts)
-    .sort((a, b) => b.count - a.count)
-    .slice(0, 5);
 
   // Get party breakdown from all trades
   const partyBreakdown = allTrades.reduce((acc, trade) => {
@@ -269,45 +244,6 @@ export default async function IssuerDetailPage({
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-
-        {/* Most Active Politicians */}
-        <div className="mb-6">
-          <h2 className="text-xl font-semibold text-white mb-4">最活躍政治家</h2>
-          <div className="bg-gray-800 border border-gray-600 rounded-lg p-4 shadow-md">
-            <div className="space-y-2">
-              {mostActivePoliticians.map((politician, index) => (
-                <div key={index} className="flex justify-between items-center">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-gray-700 rounded-full overflow-hidden flex-shrink-0">
-                      <PoliticianProfileImage 
-                        politicianId={politician.id}
-                        politicianName={politician.name}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div>
-                      <a 
-                        href={`/politicians/${politician.id}`}
-                        className={textLinkStyles('muted')}
-                      >
-                        {politician.name}
-                      </a>
-                      <div className="text-xs text-gray-400">
-                        {politician.party} {politician.chamber}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    {user && (
-                      <WatchlistButton type="politician" politicianId={politician.id} />
-                    )}
-                    <span className="text-gray-400">{politician.count}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
 

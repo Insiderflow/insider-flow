@@ -7,6 +7,7 @@ import fs from 'fs';
 import path from 'path';
 import StateNotice from '@/components/StateNotice';
 import Link from 'next/link';
+import PoliticianProfileImage from '@/components/PoliticianProfileImage';
 import { actionStyles } from '@/components/actionStyles';
 import { fieldControlStyles, fieldLabelStyles } from '@/components/formStyles';
 import { statSurfaceStyles } from '@/components/surfaceStyles';
@@ -334,6 +335,9 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
       performance
     };
   });
+  const topByVolumePoliticians = [...rows]
+    .sort((a, b) => b.volume - a.volume)
+    .slice(0, 5);
   const [tradeCount, polCount, issuerCount, lastTradeDate] = await Promise.all([
     prisma.trade.count(),
     prisma.politician.count(),
@@ -385,6 +389,37 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
             <div className="text-lg sm:text-xl font-semibold text-white">{issuerCount}</div>
           </div>
         </section>
+        <section className="mb-6">
+          <h2 className="text-xl font-semibold text-white mb-4">最活躍政治家</h2>
+          <div className="bg-gray-800 border border-gray-600 rounded-lg p-4 shadow-md">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3">
+              {topByVolumePoliticians.map((politician) => (
+                <Link
+                  key={politician.id}
+                  href={`/politicians/${politician.id}`}
+                  className="bg-gray-900 border border-gray-700 rounded-md p-3 hover:border-gray-500 transition-colors flex items-center gap-3"
+                >
+                  <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-700 flex-shrink-0">
+                    <PoliticianProfileImage
+                      politicianId={politician.id}
+                      politicianName={politician.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="text-white font-medium truncate">{politician.name}</div>
+                    <div className="text-xs text-gray-400 mt-1 truncate">
+                      {(politician.party || 'Unknown')} {politician.chamber || ''}
+                    </div>
+                    <div className="text-sm text-blue-300 mt-2">
+                      交易金額：${new Intl.NumberFormat('en-US').format(Math.round(politician.volume))}
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
         <form className="flex flex-col sm:flex-row gap-3 mb-3" method="get">
           <label className={fieldLabelStyles()}>
             <span className="w-full sm:w-auto text-gray-400">
@@ -416,30 +451,12 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
               <span className="zh-Hans hidden">排序</span>
             </span>
             <select name="sort" defaultValue={sortKey} className={fieldControlStyles()} aria-label="Sort by">
-              <option value="trades">
-                <span className="zh-Hant">交易</span>
-                <span className="zh-Hans hidden">交易</span>
-              </option>
-              <option value="issuers">
-                <span className="zh-Hant">發行商</span>
-                <span className="zh-Hans hidden">发行商</span>
-              </option>
-              <option value="volume">
-                <span className="zh-Hant">交易金額</span>
-                <span className="zh-Hans hidden">交易金额</span>
-              </option>
-              <option value="portfolio">
-                <span className="zh-Hant">投資組合表現</span>
-                <span className="zh-Hans hidden">投资组合表现</span>
-              </option>
-              <option value="performance">
-                <span className="zh-Hant">表現 vs S&P 500</span>
-                <span className="zh-Hans hidden">表现 vs S&P 500</span>
-              </option>
-              <option value="name">
-                <span className="zh-Hant">姓名</span>
-                <span className="zh-Hans hidden">姓名</span>
-              </option>
+              <option value="trades">交易</option>
+              <option value="issuers">發行商</option>
+              <option value="volume">交易金額</option>
+              <option value="portfolio">投資組合表現</option>
+              <option value="performance">表現 vs S&P 500</option>
+              <option value="name">姓名</option>
             </select>
           </label>
           <label className={fieldLabelStyles()}>
@@ -448,14 +465,8 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
               <span className="zh-Hans hidden">方向</span>
             </span>
             <select name="order" defaultValue={order} className={fieldControlStyles()} aria-label="Sort order">
-              <option value="asc">
-                <span className="zh-Hant">升序</span>
-                <span className="zh-Hans hidden">升序</span>
-              </option>
-              <option value="desc">
-                <span className="zh-Hant">降序</span>
-                <span className="zh-Hans hidden">降序</span>
-              </option>
+              <option value="asc">升序</option>
+              <option value="desc">降序</option>
             </select>
           </label>
           <button className={actionStyles('ghost')} type="submit" aria-label="Apply filters">
