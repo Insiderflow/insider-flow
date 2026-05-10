@@ -99,6 +99,13 @@ jobs:
       run: |
         node scripts/check_data_freshness.js
 
+    - name: OpenInsider (企業交易) freshness guard
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        MAX_OPENINSIDER_STALENESS_DAYS: 21
+      run: |
+        node scripts/check_openinsider_freshness.js
+
     - name: Zero-import streak guard
       if: success()
       env:

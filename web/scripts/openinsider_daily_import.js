@@ -2,11 +2,18 @@
 /**
  * Headless OpenInsider scrape → Prisma OpenInsider* tables (powers /insider web page).
  * See scripts/lib/openinsider_import_shared.js for parsing/upsert logic.
+ *
+ * Load order (handles networks where outbound HTTPS :443 is blocked/refused but HTTP :80 works):
+ *   1) curl per URL (HTTP first)
+ *   2) fetch()
+ *   3) Playwright goto
+ *
+ * OPENINSIDER_CURL_IPV4=1 — append curl --ipv4 (helps when IPv6 has no route).
  */
 
 const { chromium } = require('playwright');
 const { PrismaClient } = require('@prisma/client');
-const { execSync } = require('child_process');
+const { execFileSync } = require('child_process');
 const {
   extractRowsFromPage,
   persistOpenInsiderRows,
@@ -14,13 +21,92 @@ const {
 
 const prisma = new PrismaClient();
 
+/** HTTP first: avoids Playwright noise when only port 80 works. */
 const OPENINSIDER_URLS = [
-  'https://openinsider.com/latest-cluster-insider-trades',
   'http://openinsider.com/latest-cluster-insider-trades',
+  'https://openinsider.com/latest-cluster-insider-trades',
 ];
+
+function curlFetchHtml(url) {
+  const args = ['-L', '--max-time', '120', '-sS', url];
+  if (process.env.OPENINSIDER_CURL_IPV4 === '1') {
+    args.splice(1, 0, '--ipv4');
+  }
+  return execFileSync('curl', args, {
+    encoding: 'utf8',
+    maxBuffer: 50 * 1024 * 1024,
+  });
+}
 
 function parseArgs() {
   return { dryRun: process.argv.includes('--dry-run') };
+}
+
+/**
+ * @param {import('playwright').Page} page
+ * @param {{ url: string | null; transport: string | null }} summary
+ */
+async function loadOpenInsiderDom(page, summary) {
+  let lastErr = null;
+
+  for (const url of OPENINSIDER_URLS) {
+    try {
+      const html = curlFetchHtml(url);
+      if (!html || !/<html/i.test(html)) throw new Error('curl returned empty/non-html payload');
+      await page.setContent(html, { waitUntil: 'domcontentloaded', timeout: 120000 });
+      summary.url = url;
+      summary.transport = 'curl+setContent';
+      console.log(`OpenInsider loaded via curl → setContent (${url})`);
+      return;
+    } catch (err) {
+      lastErr = err;
+      console.warn(`OpenInsider curl failed for ${url}: ${err instanceof Error ? err.message : String(err)}`);
+    }
+  }
+
+  for (const url of OPENINSIDER_URLS) {
+    try {
+      const res = await fetch(url, {
+        headers: {
+          'User-Agent':
+            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+          Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        },
+        signal: AbortSignal.timeout(120000),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const html = await res.text();
+      await page.setContent(html, { waitUntil: 'domcontentloaded', timeout: 120000 });
+      summary.url = url;
+      summary.transport = 'node-fetch+setContent';
+      console.log(`OpenInsider loaded via fetch → setContent (${url})`);
+      return;
+    } catch (err) {
+      lastErr = err;
+      console.warn(`OpenInsider fetch failed for ${url}: ${err instanceof Error ? err.message : String(err)}`);
+    }
+  }
+
+  for (const url of OPENINSIDER_URLS) {
+    try {
+      await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 120000 });
+      summary.url = url;
+      summary.transport = 'playwright-goto';
+      console.log(`OpenInsider loaded via Playwright (${url})`);
+      return;
+    } catch (err) {
+      lastErr = err;
+      const message = err instanceof Error ? err.message : String(err);
+      const isNetworkRefusal =
+        /ERR_CONNECTION_REFUSED|ERR_CONNECTION_RESET|ERR_CONNECTION_TIMED_OUT|ERR_NAME_NOT_RESOLVED|chrome-error:\/\/chromewebdata|interrupted by another navigation/i.test(
+          message,
+        );
+      console.warn(`OpenInsider goto failed for ${url}: ${message}`);
+      if (!isNetworkRefusal) throw err;
+    }
+  }
+
+  throw lastErr || new Error('OpenInsider navigation+fetch failed for all URL variants');
 }
 
 async function main() {
@@ -84,73 +170,16 @@ async function main() {
       });
 
       const page = await context.newPage();
-      let lastGotoError = null;
-      for (const url of OPENINSIDER_URLS) {
-        try {
-          await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 120000 });
-          summary.url = url;
-          summary.transport = 'playwright-goto';
-          break;
-        } catch (err) {
-          lastGotoError = err;
-          const message = err instanceof Error ? err.message : String(err);
-          const isNetworkRefusal =
-            /ERR_CONNECTION_REFUSED|ERR_CONNECTION_RESET|ERR_CONNECTION_TIMED_OUT|ERR_NAME_NOT_RESOLVED|chrome-error:\/\/chromewebdata|interrupted by another navigation/i.test(
-              message,
-            );
-          console.warn(`OpenInsider goto failed for ${url}: ${message}`);
-          if (!isNetworkRefusal) throw err;
-        }
-      }
-      if (!summary.url) {
-        for (const url of OPENINSIDER_URLS) {
-          try {
-            const res = await fetch(url, {
-              headers: {
-                'User-Agent':
-                  'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-                Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-              },
-              signal: AbortSignal.timeout(120000),
-            });
-            if (!res.ok) throw new Error(`HTTP ${res.status}`);
-            const html = await res.text();
-            await page.setContent(html, { waitUntil: 'domcontentloaded', timeout: 120000 });
-            summary.url = url;
-            summary.transport = 'node-fetch+setContent';
-            console.log(`OpenInsider fallback content load succeeded via ${url}`);
-            break;
-          } catch (err) {
-            lastGotoError = err;
-            console.warn(`OpenInsider direct fetch failed for ${url}: ${err instanceof Error ? err.message : String(err)}`);
-          }
-        }
-      }
-      if (!summary.url) {
-        for (const url of OPENINSIDER_URLS) {
-          try {
-            const html = execSync(`curl -L --max-time 120 -sS "${url}"`, {
-              cwd: process.cwd(),
-              stdio: ['ignore', 'pipe', 'pipe'],
-            }).toString();
-            if (!html || !/<html/i.test(html)) throw new Error('curl returned empty/non-html payload');
-            await page.setContent(html, { waitUntil: 'domcontentloaded', timeout: 120000 });
-            summary.url = url;
-            summary.transport = 'curl+setContent';
-            console.log(`OpenInsider curl fallback content load succeeded via ${url}`);
-            break;
-          } catch (err) {
-            lastGotoError = err;
-            console.warn(`OpenInsider curl fetch failed for ${url}: ${err instanceof Error ? err.message : String(err)}`);
-          }
-        }
-      }
-      if (!summary.url) throw lastGotoError || new Error('OpenInsider navigation+fetch failed for all URL variants');
+      await loadOpenInsiderDom(page, summary);
       await page.waitForTimeout(2500);
 
       const html = await page.content();
-      if (/captcha|blocked|challenge|Cloudflare/i.test(html)) {
-        console.warn('OpenInsider page may be blocked; continuing with whatever table exists.');
+      // Avoid broad matches like "blocked" / "challenge" (common in normal HTML); target bot walls only.
+      const looksLikeBotWall =
+        /(?:__cf_bm|cf-ray|cdn-cgi\/challenge|Checking your browser before accessing|Just a moment)/i.test(html) ||
+        /g-recaptcha|hcaptcha|data-sitekey/i.test(html);
+      if (looksLikeBotWall) {
+        console.warn('OpenInsider response looks like a bot-check page; continuing if a table is present.');
       }
 
       let trades = await extractRowsFromPage(page);
