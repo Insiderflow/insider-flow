@@ -77,8 +77,13 @@ export async function getTradesPageData(query: TradesQuery) {
     prisma.trade.findFirst({
       where,
       orderBy: { traded_at: 'desc' },
-      select: { traded_at: true },
-    }).then((r) => r?.traded_at || new Date()),
+      select: { traded_at: true, published_at: true },
+    }).then((r) => {
+      if (!r) return new Date();
+      const t = r.traded_at?.getTime() ?? 0;
+      const p = r.published_at?.getTime() ?? 0;
+      return new Date(Math.max(t, p || 0));
+    }),
   ]);
 
   const mappedRows: TradeListItem[] = rows.map((row) => ({

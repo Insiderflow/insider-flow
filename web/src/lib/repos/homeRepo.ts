@@ -22,15 +22,19 @@ export type HomeLatestTrade = {
 };
 
 export async function getHomePageStats() {
-  const [tradeCount, politicianCount, issuerCount, lastTradeDate] = await Promise.all([
+  const [tradeCount, politicianCount, issuerCount, latestRow] = await Promise.all([
     prisma.trade.count(),
     prisma.politician.count(),
     prisma.issuer.count(),
     prisma.trade.findFirst({
       orderBy: { traded_at: 'desc' },
-      select: { traded_at: true },
-    }).then((r) => r?.traded_at || new Date()),
+      select: { traded_at: true, published_at: true },
+    }),
   ]);
+
+  const t = latestRow?.traded_at?.getTime() ?? 0;
+  const p = latestRow?.published_at?.getTime() ?? 0;
+  const lastTradeDate = new Date(Math.max(t, p || 0));
 
   return { tradeCount, politicianCount, issuerCount, lastTradeDate };
 }

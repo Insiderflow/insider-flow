@@ -80,7 +80,7 @@ export async function getPoliticiansPageData(params: {
         by: ['politician_id'],
         where: { politician_id: { in: ids } },
         _sum: { size_min: true, size_max: true },
-        _max: { size_max: true, traded_at: true },
+        _max: { size_max: true, traded_at: true, published_at: true },
       }),
       prisma.trade.groupBy({
         by: ['politician_id', 'issuer_id'],
@@ -118,7 +118,14 @@ export async function getPoliticiansPageData(params: {
       statsById.set(row.politician_id, {
         totalVolume: (min + max) / 2,
         maxTrade: row._max.size_max ? Number(row._max.size_max) : 0,
-        lastTraded: row._max.traded_at || null,
+        lastTraded: (() => {
+          const ta = row._max.traded_at;
+          const pa = row._max.published_at;
+          const t = ta?.getTime() ?? 0;
+          const p = pa?.getTime() ?? 0;
+          if (!t && !p) return null;
+          return new Date(Math.max(t, p || 0));
+        })(),
         issuers: issuerCountMap.get(row.politician_id) || 0,
         recentTradeLabel: recentMap.get(row.politician_id) || '無近期交易',
         recentSector: sectorMap.get(row.politician_id) || null,
@@ -184,7 +191,7 @@ export async function getPoliticianDetailData(params: {
     prisma.trade.aggregate({
       where: { politician_id: params.id },
       _sum: { size_min: true, size_max: true },
-      _max: { size_max: true, traded_at: true },
+      _max: { size_max: true, traded_at: true, published_at: true },
     }),
     prisma.trade.groupBy({
       by: ['issuer_id'],
@@ -240,7 +247,14 @@ export async function getPoliticianDetailData(params: {
     totalTrades,
     totalVolume: volume / 2,
     maxTrade: stats._max.size_max ? Number(stats._max.size_max) : 0,
-    lastTraded: stats._max.traded_at || null,
+    lastTraded: (() => {
+      const ta = stats._max.traded_at;
+      const pa = stats._max.published_at;
+      const t = ta?.getTime() ?? 0;
+      const p = pa?.getTime() ?? 0;
+      if (!t && !p) return null;
+      return new Date(Math.max(t, p || 0));
+    })(),
     trades,
     chartPoints,
     topIssuers: topIssuers.map((i) => ({

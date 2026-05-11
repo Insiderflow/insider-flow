@@ -88,6 +88,8 @@ jobs:
     - name: Run daily scrape (Capitol Trades)
       env:
         DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        # Keep CI fast and memory-safe: corporate OpenInsider is optional; Capitol must not depend on it.
+        OPENINSIDER_IMPORT_DISABLED: '1'
       run: |
         node scripts/daily-scrape.js
 

@@ -23,6 +23,7 @@
     "openinsider:backfill": "node scripts/openinsider_backfill_import.js",
     "openinsider:screener-months": "node scripts/openinsider_screener_month_import.js",
     "openinsider:convert-sd3v-csv": "node scripts/convert_sd3v_openinsider_csv.js",
+    "capitol:sync": "node scripts/capitol_only_daily.js",
     "finnhub:csv-study": "node scripts/finnhub_csv_study.js",
     "finnhub:import-range": "node scripts/finnhub_range_import.js",
     "test": "vitest run",

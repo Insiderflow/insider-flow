@@ -94,9 +94,44 @@ async function importScrapedTrades() {
         });
         
         if (existingTrade) {
-          // Skip duplicate trade
-          console.log(`⚠️  Skipping duplicate trade: ${trade.politicianName} - ${trade.type} - ${trade.issuerName} - ${new Date(trade.tradedAt).toISOString().split('T')[0]}`);
-          skipped++;
+          const incomingPub = trade.publishedAt ? new Date(trade.publishedAt) : null;
+          const existingPub = existingTrade.published_at;
+          const incomingPubOk = incomingPub && !Number.isNaN(incomingPub.getTime());
+          const shouldUpdatePub =
+            incomingPubOk && (!existingPub || incomingPub.getTime() > existingPub.getTime());
+          if (shouldUpdatePub) {
+            const prevRaw =
+              existingTrade.raw && typeof existingTrade.raw === 'object' && !Array.isArray(existingTrade.raw)
+                ? existingTrade.raw
+                : {};
+            await prisma.trade.update({
+              where: { id: existingTrade.id },
+              data: {
+                published_at: incomingPub,
+                filed_after_days:
+                  trade.filedAfterDays != null
+                    ? parseInt(String(trade.filedAfterDays), 10)
+                    : existingTrade.filed_after_days,
+                owner: trade.owner || existingTrade.owner,
+                raw: {
+                  ...prevRaw,
+                  politicianName: trade.politicianName,
+                  issuerName: trade.issuerName,
+                  sizeText: trade.sizeText,
+                  ticker: trade.ticker,
+                },
+              },
+            });
+            updated++;
+            console.log(
+              `🔄 Updated disclosure on existing trade: ${trade.politicianName} - ${trade.type} - ${new Date(trade.tradedAt).toISOString().split('T')[0]}`,
+            );
+          } else {
+            console.log(
+              `⚠️  Skipping duplicate trade: ${trade.politicianName} - ${trade.type} - ${trade.issuerName} - ${new Date(trade.tradedAt).toISOString().split('T')[0]}`,
+            );
+            skipped++;
+          }
           continue;
         }
         

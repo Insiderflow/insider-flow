@@ -16,7 +16,7 @@ async function scrapeTrades() {
     console.log(`🧩 Selector version: ${SELECTOR_VERSION}`);
     
     // Scrape first 20 pages to get more recent trades
-    for (let pageNum = 1; pageNum <= 20; pageNum++) {
+    for (let pageNum = 1; pageNum <= 35; pageNum++) {
       console.log(`📄 Scraping page ${pageNum}...`);
       
       const url = `https://www.capitoltrades.com/trades?page=${pageNum}`;
