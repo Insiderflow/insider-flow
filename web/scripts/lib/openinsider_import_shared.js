@@ -247,6 +247,16 @@ function screenerUrl(pageNum, startDate, endDate) {
   return u;
 }
 
+/**
+ * Calendar-month filing screener over HTTP (for networks blocking HTTPS :443).
+ * Uses the same query shape as {@link screenerUrl} (server returns full tinytable).
+ */
+function screenerUrlMonthHttp(year, month, pageNum = 1) {
+  const startDate = new Date(Date.UTC(year, month - 1, 1));
+  const endDate = new Date(Date.UTC(year, month, 0));
+  return screenerUrl(pageNum, startDate, endDate).replace(/^https:\/\//i, 'http://');
+}
+
 module.exports = {
   extractRowsFromPage,
   persistOpenInsiderRow,
@@ -257,4 +267,5 @@ module.exports = {
   rowDedupeKey,
   formatOpenInsiderDate,
   screenerUrl,
+  screenerUrlMonthHttp,
 };

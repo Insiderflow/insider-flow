@@ -13,11 +13,11 @@
 
 const { chromium } = require('playwright');
 const { PrismaClient } = require('@prisma/client');
-const { execFileSync } = require('child_process');
 const {
   extractRowsFromPage,
   persistOpenInsiderRows,
 } = require('./lib/openinsider_import_shared');
+const { curlFetchHtml } = require('./lib/openinsider_http_fetch');
 
 const prisma = new PrismaClient();
 
@@ -26,17 +26,6 @@ const OPENINSIDER_URLS = [
   'http://openinsider.com/latest-cluster-insider-trades',
   'https://openinsider.com/latest-cluster-insider-trades',
 ];
-
-function curlFetchHtml(url) {
-  const args = ['-L', '--max-time', '120', '-sS', url];
-  if (process.env.OPENINSIDER_CURL_IPV4 === '1') {
-    args.splice(1, 0, '--ipv4');
-  }
-  return execFileSync('curl', args, {
-    encoding: 'utf8',
-    maxBuffer: 50 * 1024 * 1024,
-  });
-}
 
 function parseArgs() {
   return { dryRun: process.argv.includes('--dry-run') };
