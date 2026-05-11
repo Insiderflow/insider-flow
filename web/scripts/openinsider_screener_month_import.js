@@ -1,7 +1,12 @@
 #!/usr/bin/env node
 /**
- * Bulk OpenInsider import via monthly filing-date screener (scripts/lib/openinsider_import_shared screenerUrl),
- * fetched over http:// + curl + Playwright setContent — avoids broken outbound HTTPS :443.
+ * Bulk OpenInsider import: HTTP curl + Playwright setContent + shared table extract.
+ *
+ * IMPORTANT: OpenInsider's screener HTML (curl/static) often IGNORES fdr/fdlt and returns the
+ * same global "latest" filings for every month URL. This script therefore FILTERS each row by
+ * filing date (transactionDate) UTC — only rows whose filing month matches the requested month
+ * are persisted. If you see rowsRaw >> rowsAccepted, the server ignored the URL window; use
+ * openinsider_backfill_import.js, openinsider_daily_import.js, or an external CSV pipeline instead.
  *
  * Usage (from web/):
  *   node scripts/openinsider_screener_month_import.js --from 2025-1 --to 2026-5
@@ -25,6 +30,15 @@ function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));
 }
 
+/** Keep rows whose filing date (transactionDate) falls in this calendar month (UTC). */
+function filterByFilingMonthUtc(rows, year, month) {
+  return rows.filter((row) => {
+    const d = new Date(row.transactionDate);
+    if (Number.isNaN(d.getTime())) return false;
+    return d.getUTCFullYear() === year && d.getUTCMonth() + 1 === month;
+  });
+}
+
 function parseArgs() {
   const argv = process.argv.slice(2);
   const dryRun = argv.includes('--dry-run');
@@ -32,7 +46,7 @@ function parseArgs() {
   let fromMonth = null;
   let toYear = null;
   let toMonth = null;
-  let maxPagesPerMonth = 8;
+  let maxPagesPerMonth = 20;
   let sleepMs = Number(process.env.OPENINSIDER_SCREENER_SLEEP_MS || '2500') || 2500;
 
   const fi = argv.indexOf('--from');
@@ -49,7 +63,7 @@ function parseArgs() {
   }
   const mpi = argv.indexOf('--max-pages');
   if (mpi >= 0 && argv[mpi + 1]) {
-    maxPagesPerMonth = Math.min(30, Math.max(1, parseInt(argv[mpi + 1], 10) || 8));
+    maxPagesPerMonth = Math.min(50, Math.max(1, parseInt(argv[mpi + 1], 10) || 20));
   }
   const si = argv.indexOf('--sleep-ms');
   if (si >= 0 && argv[si + 1]) {
@@ -58,7 +72,7 @@ function parseArgs() {
 
   if (!fromYear || !fromMonth || !toYear || !toMonth) {
     console.error(
-      'Usage: node scripts/openinsider_screener_month_import.js --from YYYY-M --to YYYY-M [--max-pages 8] [--sleep-ms 2500] [--dry-run]',
+      'Usage: node scripts/openinsider_screener_month_import.js --from YYYY-M --to YYYY-M [--max-pages 20] [--sleep-ms 2500] [--dry-run]',
     );
     process.exit(1);
   }
@@ -99,11 +113,13 @@ async function main() {
     dryRun: opts.dryRun,
     monthsProcessed: 0,
     pagesFetched: 0,
-    rowsScraped: 0,
+    rowsScrapedRaw: 0,
+    rowsAcceptedFilingMonth: 0,
     imported: 0,
     skippedDup: 0,
     errors: 0,
     errorMessages: [],
+    screenerIgnoredUrlMonthHint: false,
   };
 
   const persistDelayMs = Math.min(
@@ -140,7 +156,9 @@ async function main() {
     )) {
       console.log(JSON.stringify({ phase: 'month', year, month }));
       summary.monthsProcessed += 1;
-      let monthRows = 0;
+      let monthRaw = 0;
+      let monthAccepted = 0;
+      let warnedThisMonth = false;
 
       for (let pageNum = 1; pageNum <= opts.maxPagesPerMonth; pageNum += 1) {
         const url = screenerUrlMonthHttp(year, month, pageNum);
@@ -163,8 +181,33 @@ async function main() {
         if (!trades.length) {
           break;
         }
-        monthRows += trades.length;
-        summary.rowsScraped += trades.length;
+        monthRaw += trades.length;
+        summary.rowsScrapedRaw += trades.length;
+
+        const accepted = filterByFilingMonthUtc(trades, year, month);
+        monthAccepted += accepted.length;
+        summary.rowsAcceptedFilingMonth += accepted.length;
+
+        if (
+          !warnedThisMonth &&
+          trades.length >= 40 &&
+          accepted.length / trades.length < 0.05
+        ) {
+          warnedThisMonth = true;
+          summary.screenerIgnoredUrlMonthHint = true;
+          console.warn(
+            JSON.stringify({
+              warn: 'openinsider_screener_month_import',
+              message:
+                'Almost no rows match requested filing month — OpenInsider likely ignored fdr/fdlt in this response. Use openinsider_backfill_import.js, daily cluster import, or sd3v CSV + convert_sd3v_openinsider_csv.js for that period.',
+              year,
+              month,
+              pageNum,
+              rawRows: trades.length,
+              acceptedRows: accepted.length,
+            }),
+          );
+        }
 
         const batchSummary = {
           imported: 0,
@@ -172,8 +215,8 @@ async function main() {
           errors: 0,
           errorMessages: [],
         };
-        if (!opts.dryRun) {
-          await persistOpenInsiderRows(prisma, trades, batchSummary, {
+        if (!opts.dryRun && accepted.length) {
+          await persistOpenInsiderRows(prisma, accepted, batchSummary, {
             perRowDelayMs: persistDelayMs,
             perRowJitterMs: persistJitterMs,
             stopAfterDuplicateStreak: 0,
@@ -184,13 +227,18 @@ async function main() {
         summary.errors += batchSummary.errors;
         summary.errorMessages.push(...batchSummary.errorMessages);
 
-        if (trades.length < 4000) {
-          break;
-        }
         await sleep(opts.sleepMs);
       }
 
-      console.log(JSON.stringify({ phase: 'month_done', year, month, rows: monthRows }));
+      console.log(
+        JSON.stringify({
+          phase: 'month_done',
+          year,
+          month,
+          rowsRaw: monthRaw,
+          rowsAcceptedFilingMonth: monthAccepted,
+        }),
+      );
       await sleep(opts.sleepMs);
     }
 
