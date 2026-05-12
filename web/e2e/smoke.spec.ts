@@ -6,7 +6,7 @@ test('auth pages render and navigate', async ({ page }) => {
   await expect(page.getByLabel('電郵')).toBeVisible();
   await expect(page.getByLabel('密碼')).toBeVisible();
 
-  await page.getByRole('link', { name: '建立帳戶' }).click();
+  await page.getByRole('link', { name: '立即註冊' }).click();
   await expect(page).toHaveURL(/\/register/);
   await expect(page.getByRole('heading', { name: '歡迎加入' })).toBeVisible();
 
