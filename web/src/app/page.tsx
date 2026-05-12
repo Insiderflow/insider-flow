@@ -3,6 +3,7 @@ import HomePoliticianImage from '@/components/HomePoliticianImage';
 import LastUpdated, { DataFreshnessIndicator } from '@/components/LastUpdated';
 import CatalogFreshnessTrustNote from '@/components/marketing/CatalogFreshnessTrustNote';
 import SubstackPromoBand from '@/components/marketing/SubstackPromoBand';
+import TestimonialsSection from '@/components/marketing/TestimonialsSection';
 import { actionStyles } from '@/components/actionStyles';
 import { badgeStyles } from '@/components/badgeStyles';
 import { textLinkStyles } from '@/components/linkStyles';
@@ -233,6 +234,12 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
                     </div>
                   )}
                 </div>
+                {!canAccessDetails ? (
+                  <p className="mt-3 pt-2 border-t border-gray-600/80 text-[11px] text-amber-400/95 leading-snug text-center">
+                    <span className="zh-Hant">點名稱解鎖深度頁</span>
+                    <span className="zh-Hans hidden">点击名称解锁深度页</span>
+                  </p>
+                ) : null}
               </div>
               );
             })}
@@ -240,6 +247,8 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
         </div>
 
         <SubstackPromoBand />
+
+        <TestimonialsSection />
 
         {/* Most Traded Politicians */}
         <div className={`${panelSurfaceStyles()} rounded-xl shadow-md`}>
