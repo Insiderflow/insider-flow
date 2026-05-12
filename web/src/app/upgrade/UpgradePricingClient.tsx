@@ -168,8 +168,10 @@ export default function UpgradePricingClient() {
                 </div>
               )}
               {plan.popular && (
-                <p className="text-green-400 text-sm font-medium zh-Hant">相較月付每年省約 US$ 20</p>
-                <p className="text-green-400 text-sm font-medium zh-Hans hidden">相较月付每年省约 US$ 20</p>
+                <p className="text-green-400 text-sm font-medium">
+                  <span className="zh-Hant">相較月付每年省約 US$ 20</span>
+                  <span className="zh-Hans hidden">相较月付每年省约 US$ 20</span>
+                </p>
               )}
             </div>
 
