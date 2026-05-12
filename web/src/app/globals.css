@@ -47,12 +47,24 @@ h1, h2, h3 {
 /* Orange accent utility */
 .accent-orange { color: var(--accent-orange); }
 
-/* Purple gradient header */
+/* Hero: deep indigo + soft violet glow (readable, less “neon banner”) */
 .hero-gradient {
-  background: linear-gradient(180deg, #4B0082 0%, #8A2BE2 100%);
-  color: #FFFFFF;
+  position: relative;
+  background:
+    radial-gradient(ellipse 100% 70% at 50% -30%, rgba(167, 139, 250, 0.22), transparent 55%),
+    linear-gradient(168deg, #080510 0%, #120a22 38%, #1a0f32 72%, #0f081c 100%);
+  color: #ffffff;
   min-height: 200px;
   transition: background 300ms ease;
+}
+
+.hero-gradient::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.45) 0%, transparent 42%);
+  pointer-events: none;
+  border-radius: inherit;
 }
 
 /* Language toggle styles */

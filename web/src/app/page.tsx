@@ -35,47 +35,71 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
     <div className="min-h-screen bg-gray-900">
       <main className="p-4 space-y-8">
       {/* hero */}
-      <section className="rounded-xl overflow-hidden hero-gradient border border-gray-700">
-        <div className="px-5 sm:px-8 py-12 sm:py-16 text-center max-w-4xl mx-auto">
-          <p className="text-orange-300/95 text-xs sm:text-sm font-semibold tracking-wide uppercase mb-3 zh-Hant">
-            美國國會 STOCK 披露 · 華語介面
-          </p>
-          <p className="text-orange-300/95 text-xs sm:text-sm font-semibold tracking-wide uppercase mb-3 zh-Hans hidden">
-            美国国会 STOCK 披露 · 华语界面
-          </p>
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-3 text-white leading-tight zh-Hant">
-            內幕流 — 把國會資金流變成你的選股雷達
-          </h1>
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-3 text-white leading-tight zh-Hans hidden">
-            内幕流 — 把国会资金流变成你的选股雷达
-          </h1>
-          <p className="text-white/90 mb-2 text-base sm:text-lg leading-relaxed zh-Hant">
-            官方披露為據：議員買賣、發行商、產業熱點一站追蹤。<strong className="text-white">免費</strong>可看完整交易表；<strong className="text-white">付費</strong>解鎖深度頁與圖表。
-          </p>
-          <p className="text-white/90 mb-2 text-base sm:text-lg leading-relaxed zh-Hans hidden">
-            官方披露为据：议员买卖、发行商、产业热点一站追踪。<strong className="text-white">免费</strong>可看完整交易表；<strong className="text-white">付费</strong>解锁深度页与图表。
-          </p>
-          <p lang="en" className="text-white/60 text-xs sm:text-sm mb-8 max-w-2xl mx-auto">
-            Capitol STOCK disclosures in Chinese-first UI. Free includes the full /trades directory; paid unlocks analytics & charts.
-          </p>
-          <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3">
-            <Link href="/upgrade" className={`${actionStyles('primary')} min-w-[200px] px-6 py-3 text-base font-bold shadow-lg shadow-blue-900/30`}>
-              <span className="zh-Hant">解鎖付費深度</span>
-              <span className="zh-Hans hidden">解锁付费深度</span>
-            </Link>
-            <Link
-              href={substackUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex min-w-[200px] items-center justify-center rounded px-6 py-3 text-base font-bold bg-orange-500 text-gray-900 border border-orange-400 hover:bg-orange-400 transition-colors focus:ring-2 focus:ring-orange-300 focus:ring-offset-2 focus:ring-offset-purple-900 focus:outline-none"
+      <section className="rounded-2xl overflow-hidden hero-gradient border border-white/10 shadow-xl shadow-black/40">
+        <div className="relative z-10 px-5 sm:px-10 py-14 sm:py-20 text-center">
+          <div className="max-w-2xl lg:max-w-3xl mx-auto flex flex-col items-center">
+            <p className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[11px] sm:text-xs font-medium tracking-[0.12em] text-white/85 uppercase mb-6 backdrop-blur-sm">
+              <span className="zh-Hant">美國國會 STOCK 披露 · 華語介面</span>
+              <span className="zh-Hans hidden">美国国会 STOCK 披露 · 华语界面</span>
+            </p>
+
+            <h1 className="text-balance text-3xl sm:text-4xl md:text-[2.65rem] font-extrabold text-white leading-[1.15] tracking-tight mb-5 drop-shadow-sm zh-Hant">
+              內幕流 — 把國會資金流變成你的選股雷達
+            </h1>
+            <h1 className="text-balance text-3xl sm:text-4xl md:text-[2.65rem] font-extrabold text-white leading-[1.15] tracking-tight mb-5 drop-shadow-sm zh-Hans hidden">
+              内幕流 — 把国会资金流变成你的选股雷达
+            </h1>
+
+            <p className="text-white/82 text-[15px] sm:text-base leading-relaxed max-w-xl mb-1 zh-Hant">
+              官方披露為據，一站追蹤議員買賣、發行商與產業熱點。
+              <span className="text-white/95"> 免費</span>
+              可瀏覽完整交易表；
+              <span className="text-white/95"> 付費</span>
+              解鎖深度頁與圖表。
+            </p>
+            <p className="text-white/82 text-[15px] sm:text-base leading-relaxed max-w-xl mb-1 zh-Hans hidden">
+              官方披露为据，一站追踪议员买卖、发行商与产业热点。
+              <span className="text-white/95"> 免费</span>
+              可浏览完整交易表；
+              <span className="text-white/95"> 付费</span>
+              解锁深度页与图表。
+            </p>
+
+            <p
+              lang="en"
+              className="text-white/50 text-[13px] sm:text-sm leading-relaxed max-w-lg mt-5 pt-5 border-t border-white/10 w-full"
             >
-              <span className="zh-Hant">免費訂閱 Substack 週報</span>
-              <span className="zh-Hans hidden">免费订阅 Substack 周报</span>
-            </Link>
-            <Link href="/register" className={`${actionStyles('secondary')} min-w-[180px] px-5 py-3 text-sm font-semibold`}>
-              <span className="zh-Hant">免費註冊 Watchlist</span>
-              <span className="zh-Hans hidden">免费注册 Watchlist</span>
-            </Link>
+              Capitol STOCK disclosures in a Chinese-first UI. Free: full <code className="text-white/65 text-[12px]">/trades</code> directory.
+              Paid: analytics and charts.
+            </p>
+
+            <div className="mt-10 w-full flex flex-col items-stretch sm:items-center gap-4">
+              <Link
+                href="/upgrade"
+                className="inline-flex w-full sm:w-auto sm:min-w-[280px] justify-center rounded-xl bg-blue-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-blue-950/50 ring-1 ring-white/10 transition hover:bg-blue-500 hover:shadow-blue-900/40 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-[#0f081c]"
+              >
+                <span className="zh-Hant">解鎖付費深度</span>
+                <span className="zh-Hans hidden">解锁付费深度</span>
+              </Link>
+              <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-5 text-sm">
+                <Link
+                  href={substackUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center rounded-lg border border-white/20 bg-white/5 px-5 py-2.5 font-medium text-white/90 backdrop-blur-sm transition hover:border-white/35 hover:bg-white/10 hover:text-white"
+                >
+                  <span className="zh-Hant">免費訂閱 Substack 週報</span>
+                  <span className="zh-Hans hidden">免费订阅 Substack 周报</span>
+                </Link>
+                <Link
+                  href="/register"
+                  className="inline-flex items-center justify-center rounded-lg border border-transparent px-5 py-2.5 font-medium text-white/75 underline decoration-white/25 underline-offset-4 transition hover:text-white hover:decoration-white/50"
+                >
+                  <span className="zh-Hant">免費註冊 Watchlist</span>
+                  <span className="zh-Hans hidden">免费注册 Watchlist</span>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
