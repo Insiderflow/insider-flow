@@ -16,6 +16,9 @@ The daily newsletter automatically sends new trades to all active paid members e
 
 **Usage:**
 ```bash
+# From machine: use repo-relative path (not Documents/Insider Flow/web)
+cd insider-flow/web
+
 # Test mode (send to single email)
 node scripts/send-daily-newsletter.js your-email@example.com
 

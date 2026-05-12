@@ -24,6 +24,24 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v5
+
+    - name: Assert newsletter secrets (DATABASE_URL + SENDGRID_API_KEY)
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+      run: |
+        set -euo pipefail
+        ok=1
+        if [ -z "${DATABASE_URL:-}" ]; then
+          echo "::error::Repository secret DATABASE_URL is missing. Settings → Secrets and variables → Actions → DATABASE_URL (Neon pooler URL)."
+          ok=0
+        fi
+        if [ -z "${SENDGRID_API_KEY:-}" ]; then
+          echo "::error::Repository secret SENDGRID_API_KEY is missing. SendGrid → API Keys → Mail Send → add secret here. Without it the newsletter job cannot send (and will fail by design)."
+          ok=0
+        fi
+        if [ "$ok" != "1" ]; then exit 1; fi
+        echo "Newsletter required secrets are set."
       
     - name: Setup Node.js
       uses: actions/setup-node@v5

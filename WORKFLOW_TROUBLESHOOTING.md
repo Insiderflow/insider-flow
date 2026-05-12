@@ -189,9 +189,11 @@ Ensure these secrets are set in repository settings:
 - `NEWSLETTER_CTA_URL` (optional)
 
 ### 7. Test Workflows Locally
-You can test the scripts locally:
+You can test the scripts locally (repo root is `insider-flow`; app lives in `web`):
+
 ```bash
-cd web
+cd insider-flow/web
+node scripts/check-newsletter-status.js
 node scripts/send-daily-newsletter.js your-email@example.com
 node scripts/precalculate-portfolio-data.js
 ```
@@ -200,6 +202,23 @@ node scripts/precalculate-portfolio-data.js
 - Go to Actions tab to see all workflow runs
 - Click on a run to see detailed logs
 - Check for errors in the logs
+
+## Daily Newsletter — all runs red
+
+1. Open the failed run → **Assert newsletter secrets** or **Send Daily Newsletter**.
+2. Usual cause: **`SENDGRID_API_KEY` missing** in GitHub **Settings → Secrets and variables → Actions**. The job is designed to **fail** in CI when the key is absent (no silent “green” with zero sends).
+3. Also required: **`DATABASE_URL`** (for Prisma + paid recipient query).
+4. SendGrid **sender** (`team@insiderflow.asia` or your override) must be **verified** in SendGrid.
+5. Recipients are **active PAID** users only — free Gmail signups do not get this digest.
+
+## Daily Data Scrape — all runs red
+
+Separate from newsletter: scrapes Capitol → DB. If this fails, fewer new `Trade.created_at` rows for the digest window.
+
+1. Find the **first failed step** (often **Assert DATABASE_URL**, **Install Playwright**, or **Run daily scrape**).
+2. **`DATABASE_URL`** must exist in Actions secrets.
+3. **Playwright / Capitol:** timeouts or **validation failed** usually mean site or JSON shape drift — read logs around `scrape_trades_fixed.js` / `import_scraped_trades.js`.
+4. Download workflow artifact **`daily-scrape-artifacts`** and open `daily-scrape-report.json`.
 
 ## Current Workflows
 
@@ -279,6 +298,28 @@ in GitHub:
 - Settings -> Secrets and variables -> Actions -> Variables
 
 After this, missing RevenueCat frontend secrets become hard-fail in both PR and prod release-gate workflows.
+
+## Release Gate without RevenueCat (backend not wired yet)
+
+`web/scripts/release-check.mjs` normally **requires** `REVENUECAT_SECRET_API_KEY`, `REVENUECAT_WEBHOOK_AUTH`, and `REVENUECAT_WEBHOOK_SECRET`, and probes **`GET /api/revenuecat/webhook`** on the production base URL.
+
+Until RevenueCat exists:
+
+1. GitHub → **Settings → Secrets and variables → Actions → Variables**
+2. Add **`RELEASE_CHECK_SKIP_REVENUECAT`** = **`1`**
+
+The **Release Gate Prod** workflow passes this into `npm run release:check:prod`, which skips RevenueCat env validation and the webhook health probe (with a WARN in logs).
+
+Locally:
+
+```bash
+cd web && npm run release:check:no-rc
+# or: RELEASE_CHECK_SKIP_REVENUECAT=1 npm run release:check:prod
+```
+
+Remove the variable (or set to `0`) when backend RevenueCat secrets are configured in GitHub + Render.
+
+**Note:** **Post Deploy Smoke** only checks that `GET /api/revenuecat/webhook` returns `"ok":true` (it always does). It does **not** require RevenueCat secrets. Failures there are usually **wrong `RELEASE_CHECK_BASE_URL`** or network.
 
 
 
