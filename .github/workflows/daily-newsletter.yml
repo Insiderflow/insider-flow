@@ -1,3 +1,5 @@
+# Re-run failed jobs reuses the OLD commit (no new checkout of main). If a run failed before
+# a dependency fix landed, use "Run workflow" on main instead of Re-run, or push a no-op commit.
 name: Daily Newsletter
 
 on:
@@ -11,6 +13,8 @@ on:
     paths:
       - '.github/workflows/daily-newsletter.yml'
       - 'web/scripts/send-daily-newsletter.js'
+      - 'web/package.json'
+      - 'web/package-lock.json'
 
 jobs:
   send-newsletter:
@@ -52,6 +56,9 @@ jobs:
         
     - name: Install dependencies
       run: npm ci
+
+    - name: Verify SendGrid dependency (clear signal if Re-run used an old commit)
+      run: node -e "require('@sendgrid/mail'); console.log('@sendgrid/mail ok')"
       
     - name: Generate Prisma Client
       run: npx prisma generate
