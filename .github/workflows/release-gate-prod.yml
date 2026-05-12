@@ -27,6 +27,8 @@ jobs:
       REVENUECAT_WEBHOOK_SECRET: ${{ secrets.REVENUECAT_WEBHOOK_SECRET }}
       RELEASE_CHECK_BASE_URL: ${{ secrets.RELEASE_CHECK_BASE_URL }}
       RELEASE_CHECK_SKIP_FRONTEND: "1"
+      # Set repo variable RELEASE_CHECK_SKIP_REVENUECAT=1 until RevenueCat backend secrets + webhooks exist.
+      RELEASE_CHECK_SKIP_REVENUECAT: ${{ vars.RELEASE_CHECK_SKIP_REVENUECAT }}
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -50,7 +52,7 @@ jobs:
       run:
         working-directory: mindful-trade-signal-flow
     env:
-      VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
+      _SECRET_VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
       VITE_REVENUECAT_API_KEY_IOS: ${{ secrets.VITE_REVENUECAT_API_KEY_IOS }}
       VITE_REVENUECAT_API_KEY_ANDROID: ${{ secrets.VITE_REVENUECAT_API_KEY_ANDROID }}
       VITE_REVENUECAT_OFFERING_ID: ${{ secrets.VITE_REVENUECAT_OFFERING_ID }}
@@ -67,12 +69,18 @@ jobs:
           cache: npm
           cache-dependency-path: mindful-trade-signal-flow/package-lock.json
 
-      - name: Validate required frontend release env vars
+      - name: Resolve VITE_API_BASE_URL (secret or prod default)
         run: |
-          if [ -z "$VITE_API_BASE_URL" ]; then
-            echo "Missing required frontend secret: VITE_API_BASE_URL"
-            exit 1
+          set -euo pipefail
+          if [ -n "${_SECRET_VITE_API_BASE_URL:-}" ]; then
+            echo "VITE_API_BASE_URL=${_SECRET_VITE_API_BASE_URL}" >> "$GITHUB_ENV"
+          else
+            echo "VITE_API_BASE_URL=https://www.insiderflow.asia" >> "$GITHUB_ENV"
+            echo "::notice::VITE_API_BASE_URL secret unset — using https://www.insiderflow.asia for CI. Add repo secret VITE_API_BASE_URL if the Vite app must target another host."
           fi
+
+      - name: Validate RevenueCat secrets (optional strict)
+        run: |
           revenuecat_vars=(
             VITE_REVENUECAT_API_KEY_IOS
             VITE_REVENUECAT_API_KEY_ANDROID
