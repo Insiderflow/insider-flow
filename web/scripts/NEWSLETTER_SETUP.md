@@ -93,6 +93,13 @@ Edit `BATCH_SIZE` and `BATCH_DELAY_MS` constants in the script
 
 ## Troubleshooting
 
+### I use Gmail but never get the daily digest
+1. **Paid only:** This workflow emails **active PAID** users (`membership_tier = PAID`, expiry in future or null). **Free / registered-only accounts are not on the list.** For free research use [Substack](https://insiderflow.substack.com/).
+2. **GitHub secret:** Repo → **Settings → Secrets and variables → Actions** → ensure **`SENDGRID_API_KEY`** is set. If it is missing, the script **dry-runs** (no send); in CI it now **fails the job** so you see red in Actions.
+3. **Sender verification:** In SendGrid, **`NEWSLETTER_FROM_EMAIL` / `SENDGRID_FROM_EMAIL`** (e.g. `team@insiderflow.asia`) must be a **verified sender** or Single Sender.
+4. **Gmail folder:** Check **Promotions** / **Spam** for subject `【每日內幕交易】`.
+5. **Run locally:** `cd web && node scripts/check-newsletter-status.js` then `node scripts/send-daily-newsletter.js your@gmail.com` (sends one test to you if `SENDGRID_API_KEY` is in `.env.local`).
+
 ### No emails sent
 - Check GitHub Actions logs
 - Verify SendGrid API key is correct

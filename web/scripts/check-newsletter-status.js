@@ -83,12 +83,18 @@ async function checkNewsletterStatus() {
       return { startUtc, endUtc };
     })();
 
-    const todayTrades = await prisma.trade.count({
+    const todayTradesByTradedAt = await prisma.trade.count({
       where: {
         traded_at: { gte: startUtc, lt: endUtc }
       }
     });
-    console.log(`   Today's trades (HKT): ${todayTrades}`);
+    const todayTradesByCreatedAt = await prisma.trade.count({
+      where: {
+        created_at: { gte: startUtc, lt: endUtc }
+      }
+    });
+    console.log(`   Today's trades by traded_at (HKT window): ${todayTradesByTradedAt}`);
+    console.log(`   Today's trades by created_at (matches newsletter digest): ${todayTradesByCreatedAt}`);
     console.log(`   Date range: ${startUtc.toISOString()} to ${endUtc.toISOString()}`);
   } catch (e) {
     console.error('❌ Error checking trades:', e.message);

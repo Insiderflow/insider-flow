@@ -1,8 +1,8 @@
 /*
  Daily newsletter sender for paid members (Chinese).
- - Selects new trades in the Hong Kong day window (HKT) based on traded_at
+ - Selects trades newly imported today (HKT calendar day) using Trade.created_at in UTC window
  - Renders concise HTML digest in Chinese
- - Sends to all active paid members via SendGrid
+ - Sends to all active paid members via SendGrid (FREE accounts never receive this job)
  - Usage: node scripts/send-daily-newsletter.js [testEmail] (optional test mode)
 */
 
@@ -283,6 +283,12 @@ async function main() {
     }
     console.log('HTML preview (first 1000 chars):');
     console.log(html.slice(0, 1000));
+    if (process.env.GITHUB_ACTIONS === 'true' || process.env.CI === 'true') {
+      console.error(
+        '\n❌ CI detected: set repository secret SENDGRID_API_KEY or the job will never send mail (dry run only).'
+      );
+      process.exitCode = 1;
+    }
     return;
   }
 
@@ -309,12 +315,17 @@ async function main() {
     return;
   }
 
-  // Production mode: send to all paid members
+  // Production mode: send to all paid members only (not free / not unverified)
+  console.log(
+    '\n📣 Newsletter audience: active PAID members only (membership_tier=PAID, subscription not expired). FREE accounts are excluded.\n'
+  );
   const members = await getActivePaidMembers();
   console.log(`👥 Found ${members.length} active paid members`);
 
   if (members.length === 0) {
-    console.log('⚠️  No paid members to send to');
+    console.log(
+      '⚠️  No paid members to send to — if you expected mail at your Gmail, confirm your user row is PAID and membership_expires_at is null or future.'
+    );
     return;
   }
 
