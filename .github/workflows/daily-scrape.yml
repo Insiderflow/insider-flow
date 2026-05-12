@@ -9,6 +9,8 @@ on:
     - cron: '0 17 * * *'  # 1am HKT
   workflow_dispatch: # Allow manual trigger
 
+# If another Daily Data Scrape starts while this run is still going (manual + cron, or double Run),
+# cancel-in-progress aborts the older run — logs end with "Error: The operation was canceled".
 concurrency:
   group: daily-scrape
   cancel-in-progress: true
@@ -61,10 +63,11 @@ jobs:
           exit 1
         fi
 
-    # Scrape scripts only use Chromium; installing all browsers wastes ~3–6 min per cold runner.
-    - name: Install Playwright (Chromium only) and system dependencies
-      run: |
-        npx playwright install --with-deps chromium
+    # Chromium only. Skip --with-deps: ubuntu-latest already has enough libs for headless Capitol
+    # scrapes; --with-deps pulls 100+ apt packages as root and is slow / easy to confuse with hangs.
+    # If a run fails with a missing .so, restore: npx playwright install --with-deps chromium
+    - name: Install Playwright (Chromium browser only)
+      run: npx playwright install chromium
 
     - name: Restore import streak state
       uses: actions/cache/restore@v4
