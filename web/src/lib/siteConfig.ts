@@ -7,3 +7,6 @@ export function getSubstackPublishUrl(): string {
   if (fromEnv) return fromEnv;
   return 'https://insiderflow.substack.com';
 }
+
+/** Homepage “latest trades” card grid count (free preview). */
+export const HOME_LATEST_TRADES_PREVIEW = 20;

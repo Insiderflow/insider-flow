@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import HomePoliticianImage from '@/components/HomePoliticianImage';
-import LastUpdated, { DataFreshnessIndicator } from '@/components/LastUpdated';
+import LastUpdated from '@/components/LastUpdated';
 import CatalogFreshnessTrustNote from '@/components/marketing/CatalogFreshnessTrustNote';
 import SubstackPromoBand from '@/components/marketing/SubstackPromoBand';
 import TestimonialsSection from '@/components/marketing/TestimonialsSection';
@@ -14,7 +14,7 @@ import { getPoliticiansPageData } from '@/lib/repos/politiciansRepo';
 import { getLatestTradesPublic } from '@/lib/repos/tradesRepo';
 import { getCurrentUserWithTier, isPaid } from '@/lib/membership';
 import StatCard from '@/components/StatCard';
-import { getSubstackPublishUrl } from '@/lib/siteConfig';
+import { getSubstackPublishUrl, HOME_LATEST_TRADES_PREVIEW } from '@/lib/siteConfig';
 export const dynamic = 'force-dynamic';
 
 export default async function Home({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
@@ -25,7 +25,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
   const verificationError = sp.verification;
   const [stats, latestTrades, topPoliticiansResult] = await Promise.all([
     getHomePageStats(),
-    getLatestTradesPublic(20),
+    getLatestTradesPublic(HOME_LATEST_TRADES_PREVIEW),
     getPoliticiansPageData({ page: 1, pageSize: 6, sortBy: 'trades', order: 'desc' }),
   ]);
   const lastTradeDate = stats.lastTradeDate;
@@ -50,27 +50,34 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
               内幕流 — 把国会资金流变成你的选股雷达
             </h1>
 
-            <p className="text-white/82 text-[15px] sm:text-base leading-relaxed max-w-xl mb-1 zh-Hant">
-              官方披露為據，一站追蹤議員買賣、發行商與產業熱點。
-              <span className="text-white/95"> 免費</span>
-              可瀏覽完整交易表；
-              <span className="text-white/95"> 付費</span>
-              解鎖深度頁與圖表。
-            </p>
-            <p className="text-white/82 text-[15px] sm:text-base leading-relaxed max-w-xl mb-1 zh-Hans hidden">
-              官方披露为据，一站追踪议员买卖、发行商与产业热点。
-              <span className="text-white/95"> 免费</span>
-              可浏览完整交易表；
-              <span className="text-white/95"> 付费</span>
-              解锁深度页与图表。
-            </p>
+            <div className="text-white/85 text-[15px] sm:text-base leading-relaxed max-w-xl mb-2 space-y-3 text-left w-full">
+              <p className="zh-Hant">
+                <span className="text-emerald-300/95 font-semibold">免費：</span>
+                首頁預覽最新交易、無限瀏覽 <Link href="/trades" className="text-white underline decoration-white/30 underline-offset-2 hover:decoration-white">完整 /trades 表</Link>
+                ；訂閱 <strong className="text-white">Substack 週報</strong> 拿長文觀點。
+              </p>
+              <p className="zh-Hans hidden">
+                <span className="text-emerald-300/95 font-semibold">免费：</span>
+                首页预览最新交易、无限浏览 <Link href="/trades" className="text-white underline decoration-white/30 underline-offset-2 hover:decoration-white">完整 /trades 表</Link>
+                ；订阅 <strong className="text-white">Substack 周报</strong> 拿长文观点。
+              </p>
+              <p className="zh-Hant">
+                <span className="text-blue-300/95 font-semibold">付費 Insider+：</span>
+                議員／發行商<strong className="text-white">深度頁</strong>、圖表、企業內部人專區與 Watchlist 進階能力。
+              </p>
+              <p className="zh-Hans hidden">
+                <span className="text-blue-300/95 font-semibold">付费 Insider+：</span>
+                议员／发行商<strong className="text-white">深度页</strong>、图表、企业内部人专区与 Watchlist 进阶能力。
+              </p>
+            </div>
 
             <p
               lang="en"
-              className="text-white/50 text-[13px] sm:text-sm leading-relaxed max-w-lg mt-5 pt-5 border-t border-white/10 w-full"
+              className="text-white/50 text-[13px] sm:text-sm leading-relaxed max-w-lg mt-4 pt-4 border-t border-white/10 w-full text-left"
             >
-              Capitol STOCK disclosures in a Chinese-first UI. Free: full <code className="text-white/65 text-[12px]">/trades</code> directory.
-              Paid: analytics and charts.
+              <strong className="text-white/70">Free:</strong> live preview + full disclosure table + Substack weekly research.
+              {' '}
+              <strong className="text-white/70">Paid:</strong> politician & issuer analytics, charts, alerts where enabled.
             </p>
 
             <div className="mt-10 w-full flex flex-col items-stretch sm:items-center gap-4">
@@ -78,25 +85,25 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
                 href="/upgrade"
                 className="inline-flex w-full sm:w-auto sm:min-w-[280px] justify-center rounded-xl bg-blue-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-blue-950/50 ring-1 ring-white/10 transition hover:bg-blue-500 hover:shadow-blue-900/40 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-[#0f081c]"
               >
-                <span className="zh-Hant">解鎖付費深度</span>
-                <span className="zh-Hans hidden">解锁付费深度</span>
+                <span className="zh-Hant">立即升級 Insider+</span>
+                <span className="zh-Hans hidden">立即升级 Insider+</span>
               </Link>
-              <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-5 text-sm">
+              <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-center gap-3 sm:gap-4 text-sm w-full sm:w-auto">
                 <Link
                   href={substackUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center rounded-lg border border-white/20 bg-white/5 px-5 py-2.5 font-medium text-white/90 backdrop-blur-sm transition hover:border-white/35 hover:bg-white/10 hover:text-white"
+                  className="inline-flex items-center justify-center rounded-xl border-2 border-orange-400/80 bg-orange-500 px-6 py-3 font-bold text-gray-900 shadow-md shadow-orange-950/40 transition hover:bg-orange-400 hover:border-orange-300"
                 >
                   <span className="zh-Hant">免費訂閱 Substack 週報</span>
                   <span className="zh-Hans hidden">免费订阅 Substack 周报</span>
                 </Link>
                 <Link
                   href="/register"
-                  className="inline-flex items-center justify-center rounded-lg border border-transparent px-5 py-2.5 font-medium text-white/75 underline decoration-white/25 underline-offset-4 transition hover:text-white hover:decoration-white/50"
+                  className="inline-flex items-center justify-center rounded-xl border border-white/25 bg-white/10 px-6 py-3 font-semibold text-white backdrop-blur-sm transition hover:bg-white/15 hover:border-white/40"
                 >
-                  <span className="zh-Hant">免費註冊 Watchlist</span>
-                  <span className="zh-Hans hidden">免费注册 Watchlist</span>
+                  <span className="zh-Hant">建立 Watchlist（免費）</span>
+                  <span className="zh-Hans hidden">建立 Watchlist（免费）</span>
                 </Link>
               </div>
             </div>
@@ -152,9 +159,8 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
             <span className="zh-Hant">數據概覽</span>
             <span className="zh-Hans hidden">数据概览</span>
           </h2>
-          <div className="flex flex-col items-end gap-2 shrink-0">
-            <div className="flex items-center gap-3">
-              <DataFreshnessIndicator timestamp={lastTradeDate} />
+          <div className="flex flex-col items-stretch sm:items-end gap-3 shrink-0 w-full sm:w-auto">
+            <div className="flex flex-wrap items-center justify-end gap-2 text-xs text-gray-400">
               <LastUpdated timestamp={lastTradeDate} />
             </div>
             <CatalogFreshnessTrustNote asOf={lastTradeDate} />
@@ -177,8 +183,12 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
                 <span className="zh-Hans hidden">🔥 最新交易</span>
               </h2>
               <p className={`text-sm ${mutedLabelStyles()}`}>
-                <span className="zh-Hant">公開預覽：最新 20 筆（完整表免費見「交易」）</span>
-                <span className="zh-Hans hidden">公开预览：最新 20 笔（完整表免费见「交易」）</span>
+                <span className="zh-Hant">
+                  公開預覽：最新 {HOME_LATEST_TRADES_PREVIEW} 筆卡片（完整表免費見「交易」）
+                </span>
+                <span className="zh-Hans hidden">
+                  公开预览：最新 {HOME_LATEST_TRADES_PREVIEW} 笔卡片（完整表免费见「交易」）
+                </span>
               </p>
             </div>
             <Link href="/trades" className={actionStyles('ghost')}>
