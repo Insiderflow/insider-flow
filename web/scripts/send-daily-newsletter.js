@@ -18,6 +18,12 @@ const prisma = new PrismaClient();
 const BATCH_SIZE = 50;
 const BATCH_DELAY_MS = 1000; // 1 second between batches
 
+/** GitHub Actions secrets often include a trailing newline; SendGrid then returns "invalid grant". */
+function normalizeSendGridApiKey(raw) {
+  if (raw == null) return '';
+  return String(raw).trim().replace(/^\uFEFF/, '');
+}
+
 function getHktWindowUtc(now = new Date()) {
   // Compute today's start/end in HKT and convert to UTC for DB filter
   // HKT is UTC+8
@@ -224,7 +230,7 @@ async function sendEmailBatch(emails, subject, html, fromEmail, fromName) {
 
 async function main() {
   const testEmail = process.argv[2] || process.env.TEST_NEWSLETTER_EMAIL;
-  const sendgridKey = process.env.SENDGRID_API_KEY;
+  const sendgridKey = normalizeSendGridApiKey(process.env.SENDGRID_API_KEY);
 
   // For testing: use a specific date with actual trades
   const useTestDate = process.argv[3] === '--test-date' || process.env.USE_TEST_DATE === 'true';
@@ -294,8 +300,12 @@ async function main() {
 
   sgMail.setApiKey(sendgridKey);
 
-  const fromEmail = process.env.NEWSLETTER_FROM_EMAIL || 'team@insiderflow.asia';
-  const fromName = process.env.NEWSLETTER_FROM_NAME || 'Insider Flow';
+  const fromEmail = String(
+    process.env.NEWSLETTER_FROM_EMAIL ||
+      process.env.SENDGRID_FROM_EMAIL ||
+      'team@insiderflow.asia'
+  ).trim();
+  const fromName = String(process.env.NEWSLETTER_FROM_NAME || 'Insider Flow').trim();
 
   // Test mode: send to single email
   if (testEmail) {
