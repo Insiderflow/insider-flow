@@ -82,11 +82,13 @@ export function DataFreshnessIndicator({ timestamp, className = "" }: { timestam
     const updateFreshness = () => {
       const date = new Date(timestamp);
       const now = new Date();
-      const diffInHours = (now.getTime() - date.getTime()) / (1000 * 60 * 60);
-      
-      if (diffInHours < 24) {
+      // Timestamp is latest *Capitol trade or disclosure calendar date* in DB, not “last cron run”.
+      // STOCK/Ticker disclosures are often multi-day behind wall clock; <24h would almost always read “stale”.
+      const diffInDays = (now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24);
+
+      if (diffInDays < 7) {
         setFreshness('fresh');
-      } else if (diffInHours < 168) { // 1 week
+      } else if (diffInDays < 21) {
         setFreshness('stale');
       } else {
         setFreshness('old');
