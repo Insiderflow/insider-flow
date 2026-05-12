@@ -5,6 +5,31 @@ const fs = require('fs');
 const path = require('path');
 
 const prisma = new PrismaClient();
+const ARTIFACTS_DIR = path.join(__dirname, '..', '.artifacts');
+
+function writeImportArtifact(latestFile, imported, updated, skipped, totalRows) {
+  try {
+    fs.mkdirSync(ARTIFACTS_DIR, { recursive: true });
+    fs.writeFileSync(
+      path.join(ARTIFACTS_DIR, 'last-capital-import.json'),
+      JSON.stringify(
+        {
+          finishedAt: new Date().toISOString(),
+          file: latestFile,
+          imported,
+          updated,
+          skipped,
+          totalRows,
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+  } catch (e) {
+    console.warn('⚠️  Could not write last-capital-import.json:', e instanceof Error ? e.message : String(e));
+  }
+}
 
 async function importScrapedTrades() {
   try {
@@ -23,7 +48,7 @@ async function importScrapedTrades() {
         );
       if (files.length === 0) {
         console.log('❌ No scraped trade files found');
-        return;
+        process.exit(1);
       }
       latestFile = files.sort().pop();
     }
@@ -172,7 +197,9 @@ async function importScrapedTrades() {
     console.log(`✅ Imported: ${imported} new trades`);
     console.log(`🔄 Updated: ${updated} existing trades`);
     console.log(`⚠️  Skipped: ${skipped} trades`);
-    
+
+    writeImportArtifact(latestFile, imported, updated, skipped, data.length);
+
     // Show latest trades in database
     const latestTrades = await prisma.trade.findMany({
       where: {
@@ -196,10 +223,14 @@ async function importScrapedTrades() {
     
   } catch (error) {
     console.error('❌ Import failed:', error);
+    process.exitCode = 1;
   } finally {
     await prisma.$disconnect();
   }
 }
 
-importScrapedTrades();
+importScrapedTrades().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});
 

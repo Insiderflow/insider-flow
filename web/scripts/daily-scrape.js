@@ -75,6 +75,11 @@ async function dailyScrape() {
     console.log('🚀 Starting daily scrape...');
     console.log(`📅 Date: ${new Date().toISOString()}`);
     fs.mkdirSync(ARTIFACTS_DIR, { recursive: true });
+    try {
+      fs.unlinkSync(path.join(ARTIFACTS_DIR, 'last-capital-import.json'));
+    } catch {
+      /* no stale import stats from a previous partial run */
+    }
     report.database.beforeTradeCount = await prisma.trade.count();
     
     // Step 1: Run primary scraper + validation gate
