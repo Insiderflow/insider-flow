@@ -6,23 +6,32 @@ on:
     branches: [main]
   workflow_dispatch:
 
+# Docker pull of ghcr.io/gitleaks/gitleaks:latest + full clone was hanging runners for 10+ minutes.
 jobs:
   gitleaks:
     runs-on: ubuntu-latest
+    timeout-minutes: 8
     permissions:
       contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v5
         with:
-          fetch-depth: 0
+          # Enough history for PRs; avoids fetch-depth:0 clone cost on every push
+          fetch-depth: 50
 
-      - name: Run gitleaks (report-only for now)
+      - name: Install gitleaks (no Docker)
         run: |
-          docker run --rm \
-            -v "${PWD}:/repo" \
-            ghcr.io/gitleaks/gitleaks:latest \
-            detect --source /repo --redact --report-format sarif --report-path /repo/gitleaks.sarif --exit-code 0
+          set -euo pipefail
+          VER="8.18.4"
+          curl -sSfL "https://github.com/gitleaks/gitleaks/releases/download/v${VER}/gitleaks_${VER}_linux_x64.tar.gz" | tar -xz
+          sudo mv gitleaks /usr/local/bin/gitleaks
+          gitleaks version
+
+      - name: Run gitleaks (report-only)
+        run: |
+          set -euo pipefail
+          gitleaks detect --source . --redact --report-format sarif --report-path gitleaks.sarif --exit-code 0
 
       - name: Upload gitleaks report
         uses: actions/upload-artifact@v4

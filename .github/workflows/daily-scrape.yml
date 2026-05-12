@@ -49,6 +49,18 @@ jobs:
       run: |
         npm ci
 
+    - name: Prisma generate
+      run: npx prisma generate
+
+    - name: Assert DATABASE_URL (Capitol import)
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      run: |
+        if [ -z "$DATABASE_URL" ]; then
+          echo "::error::Repository secret DATABASE_URL is empty or missing. Settings → Secrets and variables → Actions → DATABASE_URL (same Neon URL as Render)."
+          exit 1
+        fi
+
     - name: Install Playwright browsers and system dependencies
       run: |
         npx playwright install --with-deps
