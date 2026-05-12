@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import HomePoliticianImage from '@/components/HomePoliticianImage';
 import LastUpdated, { DataFreshnessIndicator } from '@/components/LastUpdated';
+import CatalogFreshnessTrustNote from '@/components/marketing/CatalogFreshnessTrustNote';
+import SubstackPromoBand from '@/components/marketing/SubstackPromoBand';
 import { actionStyles } from '@/components/actionStyles';
 import { badgeStyles } from '@/components/badgeStyles';
 import { textLinkStyles } from '@/components/linkStyles';
@@ -11,6 +13,7 @@ import { getPoliticiansPageData } from '@/lib/repos/politiciansRepo';
 import { getLatestTradesPublic } from '@/lib/repos/tradesRepo';
 import { getCurrentUserWithTier, isPaid } from '@/lib/membership';
 import StatCard from '@/components/StatCard';
+import { getSubstackPublishUrl } from '@/lib/siteConfig';
 export const dynamic = 'force-dynamic';
 
 export default async function Home({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
@@ -21,29 +24,58 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
   const verificationError = sp.verification;
   const [stats, latestTrades, topPoliticiansResult] = await Promise.all([
     getHomePageStats(),
-    getLatestTradesPublic(10),
+    getLatestTradesPublic(20),
     getPoliticiansPageData({ page: 1, pageSize: 6, sortBy: 'trades', order: 'desc' }),
   ]);
   const lastTradeDate = stats.lastTradeDate;
+  const substackUrl = getSubstackPublishUrl();
 
   return (
     <div className="min-h-screen bg-gray-900">
       <main className="p-4 space-y-8">
       {/* hero */}
       <section className="rounded-xl overflow-hidden hero-gradient border border-gray-700">
-        <div className="px-5 sm:px-8 py-14 sm:py-20 text-center">
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-4 text-white">
-            <span className="zh-Hant">內幕流 內幕交易即時追蹤</span>
-            <span className="zh-Hans hidden">内幕流 内幕交易即时追踪</span>
-          </h1>
-          <p className="text-white/90 mb-8 text-lg">
-            <span className="zh-Hant">追蹤國會議員最新交易、發行商動向與市場熱點。</span>
-            <span className="zh-Hans hidden">追踪国会议员最新交易、发行商动向与市场热点。</span>
+        <div className="px-5 sm:px-8 py-12 sm:py-16 text-center max-w-4xl mx-auto">
+          <p className="text-orange-300/95 text-xs sm:text-sm font-semibold tracking-wide uppercase mb-3 zh-Hant">
+            美國國會 STOCK 披露 · 華語介面
           </p>
-          <Link href="/register" className={actionStyles('secondary')} aria-label="Register watchlist">
-            <span className="zh-Hant">立即註冊 Watchlist</span>
-            <span className="zh-Hans hidden">立即注册 Watchlist</span>
-          </Link>
+          <p className="text-orange-300/95 text-xs sm:text-sm font-semibold tracking-wide uppercase mb-3 zh-Hans hidden">
+            美国国会 STOCK 披露 · 华语界面
+          </p>
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-3 text-white leading-tight zh-Hant">
+            內幕流 — 把國會資金流變成你的選股雷達
+          </h1>
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-3 text-white leading-tight zh-Hans hidden">
+            内幕流 — 把国会资金流变成你的选股雷达
+          </h1>
+          <p className="text-white/90 mb-2 text-base sm:text-lg leading-relaxed zh-Hant">
+            官方披露為據：議員買賣、發行商、產業熱點一站追蹤。<strong className="text-white">免費</strong>可看完整交易表；<strong className="text-white">付費</strong>解鎖深度頁與圖表。
+          </p>
+          <p className="text-white/90 mb-2 text-base sm:text-lg leading-relaxed zh-Hans hidden">
+            官方披露为据：议员买卖、发行商、产业热点一站追踪。<strong className="text-white">免费</strong>可看完整交易表；<strong className="text-white">付费</strong>解锁深度页与图表。
+          </p>
+          <p lang="en" className="text-white/60 text-xs sm:text-sm mb-8 max-w-2xl mx-auto">
+            Capitol STOCK disclosures in Chinese-first UI. Free includes the full /trades directory; paid unlocks analytics & charts.
+          </p>
+          <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3">
+            <Link href="/upgrade" className={`${actionStyles('primary')} min-w-[200px] px-6 py-3 text-base font-bold shadow-lg shadow-blue-900/30`}>
+              <span className="zh-Hant">解鎖付費深度</span>
+              <span className="zh-Hans hidden">解锁付费深度</span>
+            </Link>
+            <Link
+              href={substackUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-w-[200px] items-center justify-center rounded px-6 py-3 text-base font-bold bg-orange-500 text-gray-900 border border-orange-400 hover:bg-orange-400 transition-colors focus:ring-2 focus:ring-orange-300 focus:ring-offset-2 focus:ring-offset-purple-900 focus:outline-none"
+            >
+              <span className="zh-Hant">免費訂閱 Substack 週報</span>
+              <span className="zh-Hans hidden">免费订阅 Substack 周报</span>
+            </Link>
+            <Link href="/register" className={`${actionStyles('secondary')} min-w-[180px] px-5 py-3 text-sm font-semibold`}>
+              <span className="zh-Hant">免費註冊 Watchlist</span>
+              <span className="zh-Hans hidden">免费注册 Watchlist</span>
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -90,14 +122,17 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
 
       {/* stats */}
       <section className="space-y-4">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
           <h2 className={sectionTitleStyles()}>
             <span className="zh-Hant">數據概覽</span>
             <span className="zh-Hans hidden">数据概览</span>
           </h2>
-          <div className="flex items-center gap-3">
-            <DataFreshnessIndicator timestamp={lastTradeDate} />
-            <LastUpdated timestamp={lastTradeDate} />
+          <div className="flex flex-col items-end gap-2 shrink-0">
+            <div className="flex items-center gap-3">
+              <DataFreshnessIndicator timestamp={lastTradeDate} />
+              <LastUpdated timestamp={lastTradeDate} />
+            </div>
+            <CatalogFreshnessTrustNote asOf={lastTradeDate} />
           </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -117,17 +152,20 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
                 <span className="zh-Hans hidden">🔥 最新交易</span>
               </h2>
               <p className={`text-sm ${mutedLabelStyles()}`}>
-                <span className="zh-Hant">公開前 10 筆最新交易</span>
-                <span className="zh-Hans hidden">国会议员最新股票交易动态</span>
+                <span className="zh-Hant">公開預覽：最新 20 筆（完整表免費見「交易」）</span>
+                <span className="zh-Hans hidden">公开预览：最新 20 笔（完整表免费见「交易」）</span>
               </p>
             </div>
             <Link href="/trades" className={actionStyles('ghost')}>
-              <span className="zh-Hant">查看所有 →</span>
-              <span className="zh-Hans hidden">查看所有 →</span>
+              <span className="zh-Hant">免費看完整表 →</span>
+              <span className="zh-Hans hidden">免费看完整表 →</span>
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {latestTrades.map(t => (
+            {latestTrades.map((t) => {
+              const polHref = canAccessDetails ? `/politicians/${t.politician.id}` : '/upgrade?reason=paid_required';
+              const issuerHref = canAccessDetails ? `/issuers/${t.issuer.id}` : '/upgrade?reason=paid_required';
+              return (
               <div key={t.id} className="bg-gray-700 rounded-lg p-4 hover:shadow-lg transition-all duration-300 hover:bg-gray-600">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex flex-col">
@@ -159,7 +197,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
                     <HomePoliticianImage politicianId={t.politician.id} politicianName={t.politician.name} />
                   </div>
                   <div className="flex-1">
-                    <Link href={`/politicians/${t.politician.id}`} className="text-white font-semibold hover:text-blue-300 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none rounded">{t.politician.name}</Link>
+                    <Link href={polHref} className="text-white font-semibold hover:text-blue-300 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none rounded">{t.politician.name}</Link>
                     <div className={`text-xs ${bodySubtextStyles()}`}>{t.politician.party} • {t.politician.state}</div>
                   </div>
                 </div>
@@ -170,7 +208,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
                       <span className="zh-Hant">發行商</span>
                       <span className="zh-Hans hidden">发行商</span>
                     </span>
-                    <Link href={`/issuers/${t.issuer.id}`} className={`${textLinkStyles()} text-sm`}>{t.issuer.name}</Link>
+                    <Link href={issuerHref} className={`${textLinkStyles()} text-sm`}>{t.issuer.name}</Link>
                   </div>
                   
                   {t.sizeMin && t.sizeMax && (
@@ -196,9 +234,12 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
                   )}
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
         </div>
+
+        <SubstackPromoBand />
 
         {/* Most Traded Politicians */}
         <div className={`${panelSurfaceStyles()} rounded-xl shadow-md`}>

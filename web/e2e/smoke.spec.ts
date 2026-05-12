@@ -19,7 +19,7 @@ test('auth pages render and navigate', async ({ page }) => {
 
 test('public product pages render', async ({ page }) => {
   await page.goto('/upgrade');
-  await expect(page.getByRole('heading', { name: '升級為付費會員' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /升級 Insider\+/ })).toBeVisible();
 
   await page.goto('/institutional');
   await expect(page.getByRole('heading', { name: '機構投資者', exact: true })).toBeVisible();

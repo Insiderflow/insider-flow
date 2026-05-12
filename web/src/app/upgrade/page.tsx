@@ -1,245 +1,49 @@
-'use client';
-
-import { useState } from 'react';
-import { badgeStyles } from '@/components/badgeStyles';
+import FreeVsPaidComparison from './FreeVsPaidComparison';
+import UpgradePricingClient from './UpgradePricingClient';
+import { bodySubtextStyles, pageTitleStyles } from '@/components/typographyStyles';
 import { panelSurfaceStyles } from '@/components/surfaceStyles';
-import { bodySubtextStyles, pageTitleStyles, sectionTitleStyles } from '@/components/typographyStyles';
 
-export default function Upgrade() {
-  const [loading, setLoading] = useState<string | null>(null);
-
-  const startCheckout = async (priceId: string, planName: string) => {
-    if (!priceId) {
-      alert('Price ID is missing. Please contact support.');
-      return;
-    }
-    
-    setLoading(planName);
-    try {
-      const res = await fetch('/api/stripe/checkout', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ priceId }),
-      });
-      const data = await res.json();
-      
-      if (!res.ok) {
-        console.error('Checkout error:', data);
-        alert(data.details || data.error || 'Checkout failed');
-        return;
-      }
-      
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        alert(data.error || 'Checkout failed');
-      }
-    } catch (err) {
-      console.error('Checkout request failed:', err);
-      alert('Checkout failed. Please try again.');
-    } finally {
-      setLoading(null);
-    }
-  };
-
-  const plans = [
-    {
-      name: '月方案',
-      nameEn: 'Monthly',
-      price: 'US$ 10',
-      period: '/月',
-      priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_MONTHLY || '',
-      popular: false,
-      features: [
-        '完整內幕交易數據',
-        '即時交易通知',
-        '政治人物追蹤',
-        '公司股票監控',
-        '郵件通知服務'
-      ]
-    },
-    {
-      name: '年方案',
-      nameEn: 'Yearly',
-      price: 'US$ 100',
-      period: '/年',
-      priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_YEARLY || '',
-      popular: true,
-      features: [
-        '完整內幕交易數據',
-        '即時交易通知',
-        '政治人物追蹤',
-        '公司股票監控',
-        '郵件通知服務',
-        '節省 17% 年費',
-        '優先客戶支援'
-      ]
-    }
-  ].filter(plan => plan.priceId); // Filter out plans with missing price IDs
-  const billingUnavailable = plans.length === 0;
-
+export default function UpgradePage() {
   return (
     <div className="min-h-screen bg-gray-900 text-white">
       <div className="max-w-6xl mx-auto px-4 py-12">
-        {/* Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-10">
           <h1 className={`${pageTitleStyles()} mb-4`}>
-            <span className="zh-Hant">升級為付費會員</span>
-            <span className="zh-Hans hidden">升级为付费会员</span>
+            <span className="zh-Hant">升級 Insider+ · 把國會倉位變成你的研究護城河</span>
+            <span className="zh-Hans hidden">升级 Insider+ · 把国会仓位变成你的研究护城河</span>
           </h1>
-          <p className={`${bodySubtextStyles()} text-xl max-w-2xl mx-auto`}>
-            <span className="zh-Hant">解鎖完整內幕交易數據，掌握政治人物和企業高層的股票交易動向</span>
-            <span className="zh-Hans hidden">解锁完整内幕交易数据，掌握政治人物和企业高层的股票交易动向</span>
+          <p className={`${bodySubtextStyles()} text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed`}>
+            <span className="zh-Hant">
+              免費版已能瀏覽<strong className="text-white">完整交易表</strong>與名單；付費解鎖
+              <strong className="text-white">議員／發行商深度頁、圖表與企業內部人專區</strong>
+              ——適合認真跟美股的華語投資人。
+            </span>
+            <span className="zh-Hans hidden">
+              免费版已能浏览<strong className="text-white">完整交易表</strong>与名单；付费解锁
+              <strong className="text-white">议员／发行商深度页、图表与企业内部人专区</strong>
+              ——适合认真跟美股的华语投资人。
+            </span>
+          </p>
+          <p lang="en" className="mt-4 text-sm text-gray-500 max-w-2xl mx-auto">
+            Free tier already includes the full /trades table. Paid unlocks politician & issuer analytics, charts, and the corporate insider hub—built for serious US-equity research.
           </p>
         </div>
 
-        {billingUnavailable && (
-          <div className="max-w-3xl mx-auto mb-8 bg-yellow-900/40 border border-yellow-600 rounded-xl p-4">
-            <p className="text-yellow-100 font-medium">
-              <span className="zh-Hant">Billing temporarily unavailable. Please try again later or contact support.</span>
-              <span className="zh-Hans hidden">Billing temporarily unavailable. Please try again later or contact support.</span>
-            </p>
-          </div>
-        )}
+        <section className={`${panelSurfaceStyles()} max-w-3xl mx-auto mb-10 rounded-xl border border-gray-700 p-6 text-center`}>
+          <p className="text-gray-400 text-sm zh-Hant">
+            我們正在收集可公開展示的用戶回饋。若願意分享使用心得，歡迎在 Substack 回信或寫信至客服信箱——優質心得有機會登上此區並獲得額外會員天數（由團隊審核）。
+          </p>
+          <p className="text-gray-400 text-sm zh-Hans hidden">
+            我们正在收集可公开展示的用户反馈。若愿意分享使用心得，欢迎在 Substack 回信或写信至客服信箱——优质心得有机会登上此区并获得额外会员天数（由团队审核）。
+          </p>
+          <p lang="en" className="text-xs text-gray-600 mt-3">
+            Social proof wall: invite only — reply on Substack or email support with a short story; selected quotes may appear here with your permission.
+          </p>
+        </section>
 
-        {/* Pricing Cards */}
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {plans.map((plan) => (
-            <div
-              key={plan.name}
-              className={`relative ${panelSurfaceStyles('lg')} border-2 rounded-xl ${
-                plan.popular 
-                  ? 'border-blue-500 shadow-2xl shadow-blue-500/20' 
-                  : 'border-gray-600'
-              }`}
-            >
-              {plan.popular && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <span className={badgeStyles('info')}>
-                    <span className="zh-Hant">最受歡迎</span>
-                    <span className="zh-Hans hidden">最受欢迎</span>
-                  </span>
-                </div>
-              )}
-              
-              <div className="text-center mb-8">
-                <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
-                <div className="flex items-baseline justify-center mb-4">
-                  <span className="text-5xl font-bold">{plan.price}</span>
-                  <span className="text-gray-400 ml-2">{plan.period}</span>
-                </div>
-                {plan.name === '月方案' && (
-                  <div className="mb-3">
-                    <p className="text-yellow-400 text-sm font-bold mb-1">
-                      <span className="zh-Hant">限時優惠</span>
-                      <span className="zh-Hans hidden">限时优惠</span>
-                    </p>
-                    <p className="text-yellow-300 text-base font-semibold">
-                      <span className="zh-Hant">一個月試用優惠碼</span>
-                      <span className="zh-Hans hidden">一个月试用优惠码</span>
-                      <span className="bg-yellow-400 text-gray-900 px-2 py-1 rounded font-bold ml-2">1month</span>
-                    </p>
-                  </div>
-                )}
-                {plan.popular && (
-                  <p className="text-green-400 text-sm font-medium">
-                    <span className="zh-Hant">相比月方案節省 17% (US$ 20)</span>
-                    <span className="zh-Hans hidden">相比月方案节省 17% (US$ 20)</span>
-                  </p>
-                )}
-              </div>
-
-              {/* Features */}
-              <div className="mb-8">
-                <h4 className="text-lg font-semibold mb-4">
-                  <span className="zh-Hant">包含功能</span>
-                  <span className="zh-Hans hidden">包含功能</span>
-                </h4>
-                <ul className="space-y-3">
-                  {plan.features.map((feature, index) => (
-                    <li key={index} className="flex items-center">
-                      <svg className="w-5 h-5 text-green-400 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                      <span className="text-gray-300">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* CTA Button */}
-              <button
-                onClick={() => startCheckout(plan.priceId, plan.nameEn)}
-                disabled={loading === plan.nameEn}
-                className={`w-full py-4 px-6 rounded-lg font-semibold text-lg transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed ${
-                  plan.popular
-                    ? 'bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl'
-                    : 'bg-gray-700 hover:bg-gray-600 text-white'
-                }`}
-              >
-                {loading === plan.nameEn ? (
-                  <span className="flex items-center justify-center">
-                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    <span className="zh-Hant">處理中...</span>
-                    <span className="zh-Hans hidden">处理中...</span>
-                  </span>
-                ) : (
-                  <>
-                    <span className="zh-Hant">立即訂閱 {plan.name}</span>
-                    <span className="zh-Hans hidden">立即订阅 {plan.name}</span>
-                  </>
-                )}
-              </button>
-            </div>
-          ))}
-        </div>
-
-        {/* FAQ Section */}
-        <div className="mt-16 max-w-3xl mx-auto">
-          <h2 className={`${sectionTitleStyles()} text-center mb-8`}>
-            <span className="zh-Hant">常見問題</span>
-            <span className="zh-Hans hidden">常见问题</span>
-          </h2>
-          <div className="space-y-6">
-            <div className={panelSurfaceStyles()}>
-              <h3 className="text-lg font-semibold mb-2">
-                <span className="zh-Hant">如何取消訂閱？</span>
-                <span className="zh-Hans hidden">如何取消订阅？</span>
-              </h3>
-              <p className={bodySubtextStyles()}>
-                <span className="zh-Hant">您可以在帳戶設定中管理您的訂閱，隨時取消或修改。</span>
-                <span className="zh-Hans hidden">您可以在账户设置中管理您的订阅，随时取消或修改。</span>
-              </p>
-            </div>
-            <div className={panelSurfaceStyles()}>
-              <h3 className="text-lg font-semibold mb-2">
-                <span className="zh-Hant">付款安全嗎？</span>
-                <span className="zh-Hans hidden">付款安全吗？</span>
-              </h3>
-              <p className={bodySubtextStyles()}>
-                <span className="zh-Hant">我們使用 Stripe 處理付款，符合最高安全標準。</span>
-                <span className="zh-Hans hidden">我们使用 Stripe 处理付款，符合最高安全标准。</span>
-              </p>
-            </div>
-            <div className={panelSurfaceStyles()}>
-              <h3 className="text-lg font-semibold mb-2">
-                <span className="zh-Hant">可以退款嗎？</span>
-                <span className="zh-Hans hidden">可以退款吗？</span>
-              </h3>
-              <p className={bodySubtextStyles()}>
-                <span className="zh-Hant">我們提供 7 天退款保證，如有任何問題請聯繫客服。</span>
-                <span className="zh-Hans hidden">我们提供 7 天退款保证，如有任何问题请联系客服。</span>
-              </p>
-            </div>
-          </div>
-        </div>
+        <FreeVsPaidComparison />
+        <UpgradePricingClient />
       </div>
     </div>
   );
 }
-
-
-// Force deployment Fri Oct 10 22:18:17 HKT 2025

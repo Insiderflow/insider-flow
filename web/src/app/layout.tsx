@@ -5,6 +5,8 @@ import { getSessionUser } from '@/lib/auth';
 import LanguageToggle from '@/components/LanguageToggle';
 import LanguageInitializer from '@/components/LanguageInitializer';
 import GlobalSearch from '@/components/GlobalSearch';
+import SiteFooter from '@/components/marketing/SiteFooter';
+import { getSubstackPublishUrl } from '@/lib/siteConfig';
 
 export const dynamic = 'force-dynamic';
 import { Geist, Geist_Mono } from "next/font/google";
@@ -21,8 +23,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "內幕流 - Insider Flow",
-  description: "Political insider trading tracker with portfolio analysis and real-time data",
+  title: "內幕流 Insider Flow — 美國國會股票披露（繁中）",
+  description:
+    "華語介面追蹤美國國會議員 STOCK 交易與披露。免費完整交易表、Substack 週報；付費解鎖深度頁與圖表。",
 };
 
 export default async function RootLayout({
@@ -31,6 +34,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const user = await getSessionUser();
+  const substackUrl = getSubstackPublishUrl();
   return (
     <html lang="zh-Hant" suppressHydrationWarning>
       <head>
@@ -75,6 +79,19 @@ export default async function RootLayout({
                 <Link className="text-white hover:text-blue-300 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none rounded transition-colors duration-200" href="/insider" aria-label="Insider page">
                   <span className="zh-Hant">企業交易</span>
                   <span className="zh-Hans hidden">企业交易</span>
+                </Link>
+                <Link className="text-amber-400 hover:text-amber-300 font-semibold focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:outline-none rounded transition-colors duration-200" href="/upgrade" aria-label="Upgrade">
+                  <span className="zh-Hant">升級</span>
+                  <span className="zh-Hans hidden">升级</span>
+                </Link>
+                <Link
+                  className="text-orange-400 hover:text-orange-300 focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:outline-none rounded transition-colors duration-200"
+                  href={substackUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Substack weekly"
+                >
+                  Substack
                 </Link>
               </nav>
               
@@ -122,18 +139,8 @@ export default async function RootLayout({
         <div className="max-w-6xl mx-auto px-4 py-6">
           {children}
         </div>
-        <footer className="border-t border-gray-700 bg-gray-900/70">
-          <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 text-xs text-gray-300">
-            <span>© {new Date().getFullYear()} Insider Flow</span>
-            <div className="space-x-4">
-              <Link className="hover:text-blue-300" href="/privacy">
-                Privacy
-              </Link>
-              <Link className="hover:text-blue-300" href="/terms">
-                Terms
-              </Link>
-            </div>
-          </div>
+        <footer className="border-t border-gray-800 bg-gray-950 mt-auto">
+          <SiteFooter />
         </footer>
       </body>
     </html>
