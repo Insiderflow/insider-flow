@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CONTACT_EMAIL } from "@/lib/siteConfig";
 
 export const metadata = {
   title: "Privacy Policy | Insider Flow",
@@ -55,8 +56,8 @@ export default function PrivacyPage() {
         <h2 className="text-xl font-medium text-white">Your controls</h2>
         <p>
           You can request account deletion and data export by emailing{" "}
-          <a className="text-blue-300 hover:text-blue-200" href="mailto:support@insiderflow.asia">
-            support@insiderflow.asia
+          <a className="text-blue-300 hover:text-blue-200" href={`mailto:${CONTACT_EMAIL}`}>
+            {CONTACT_EMAIL}
           </a>
           . We may verify account ownership before processing requests.
         </p>
@@ -66,8 +67,8 @@ export default function PrivacyPage() {
         <h2 className="text-xl font-medium text-white">Contact</h2>
         <p>
           Privacy questions:{" "}
-          <a className="text-blue-300 hover:text-blue-200" href="mailto:support@insiderflow.asia">
-            support@insiderflow.asia
+          <a className="text-blue-300 hover:text-blue-200" href={`mailto:${CONTACT_EMAIL}`}>
+            {CONTACT_EMAIL}
           </a>
         </p>
       </section>

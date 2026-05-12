@@ -16,3 +16,6 @@ export function getSubstackPublishUrl(): string {
 
 /** Homepage “latest trades” card grid count (free preview). */
 export const HOME_LATEST_TRADES_PREVIEW = 20;
+
+/** Public contact / support (Terms, Privacy, mailto links). */
+export const CONTACT_EMAIL = 'team@insiderflow.asia';

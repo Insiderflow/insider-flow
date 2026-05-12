@@ -24,7 +24,7 @@ const prisma = new PrismaClient();
 
 // SEC user agent requirement (SEC requires this in headers)
 const SEC_HEADERS = {
-  'User-Agent': 'Insider Flow insiderflow.asia contact@insiderflow.asia',
+  'User-Agent': 'Insider Flow insiderflow.asia team@insiderflow.asia',
   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
   'Accept-Language': 'en-US,en;q=0.5',
   'Accept-Encoding': 'gzip, deflate, br',

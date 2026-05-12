@@ -16,7 +16,7 @@ INTERNAL_JOBS_SECRET="your_internal_jobs_secret_here"
 
 # Email Service
 GRIDSEND_API_KEY="gs_your_api_key_here"
-EMAIL_FROM="no-reply@insiderflow.asia"
+EMAIL_FROM="team@insiderflow.asia"
 
 # Application URLs — keep NEXT_PUBLIC_BASE_URL and NEXTAUTH_URL on the same host users open (e.g. www).
 NEXT_PUBLIC_BASE_URL="https://www.insiderflow.asia"

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CONTACT_EMAIL } from "@/lib/siteConfig";
 
 export const metadata = {
   title: "Terms of Service | Insider Flow",
@@ -64,8 +65,8 @@ export default function TermsPage() {
         <h2 className="text-xl font-medium text-white">Contact</h2>
         <p>
           Questions about these terms:{" "}
-          <a className="text-blue-300 hover:text-blue-200" href="mailto:support@insiderflow.asia">
-            support@insiderflow.asia
+          <a className="text-blue-300 hover:text-blue-200" href={`mailto:${CONTACT_EMAIL}`}>
+            {CONTACT_EMAIL}
           </a>
         </p>
       </section>

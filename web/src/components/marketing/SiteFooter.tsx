@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { getSubstackPublishUrl } from '@/lib/siteConfig';
+import { CONTACT_EMAIL, getSubstackPublishUrl } from '@/lib/siteConfig';
 
 export default function SiteFooter() {
   const substack = getSubstackPublishUrl();
@@ -67,6 +67,12 @@ export default function SiteFooter() {
                   <span className="zh-Hans hidden">服务条款</span>
                 </Link>
                 <span className="block text-[10px] text-gray-600 mt-0.5">Terms of Service</span>
+              </li>
+              <li>
+                <a href={`mailto:${CONTACT_EMAIL}`} className="hover:text-blue-300 transition-colors">
+                  {CONTACT_EMAIL}
+                </a>
+                <span className="block text-[10px] text-gray-600 mt-0.5">Contact</span>
               </li>
             </ul>
           </div>
