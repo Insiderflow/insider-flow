@@ -56,6 +56,7 @@ export async function POST(req: NextRequest) {
           quantity: 1,
         },
       ],
+      allow_promotion_codes: true,
       success_url: `${req.nextUrl.origin}/account?success=true`,
       cancel_url: `${req.nextUrl.origin}/upgrade?canceled=true`,
       metadata: {
