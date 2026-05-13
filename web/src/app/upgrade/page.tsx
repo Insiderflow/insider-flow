@@ -1,7 +1,7 @@
 import FreeVsPaidComparison from './FreeVsPaidComparison';
 import UpgradePricingClient from './UpgradePricingClient';
+import UpgradeTestimonials from './UpgradeTestimonials';
 import { bodySubtextStyles, pageTitleStyles } from '@/components/typographyStyles';
-import { panelSurfaceStyles } from '@/components/surfaceStyles';
 
 export default function UpgradePage() {
   return (
@@ -29,17 +29,7 @@ export default function UpgradePage() {
           </p>
         </div>
 
-        <section className={`${panelSurfaceStyles()} max-w-3xl mx-auto mb-10 rounded-xl border border-gray-700 p-6 text-center`}>
-          <p className="text-gray-400 text-sm zh-Hant">
-            我們正在收集可公開展示的用戶回饋。若願意分享使用心得，歡迎在 Substack 回信或寫信至客服信箱——優質心得有機會登上此區並獲得額外會員天數（由團隊審核）。
-          </p>
-          <p className="text-gray-400 text-sm zh-Hans hidden">
-            我们正在收集可公开展示的用户反馈。若愿意分享使用心得，欢迎在 Substack 回信或写信至客服信箱——优质心得有机会登上此区并获得额外会员天数（由团队审核）。
-          </p>
-          <p lang="en" className="text-xs text-gray-600 mt-3">
-            Social proof wall: invite only — reply on Substack or email support with a short story; selected quotes may appear here with your permission.
-          </p>
-        </section>
+        <UpgradeTestimonials />
 
         <FreeVsPaidComparison />
         <UpgradePricingClient />
