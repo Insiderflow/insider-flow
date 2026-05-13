@@ -1,4 +1,3 @@
-import LastUpdated, { DataFreshnessIndicator } from '@/components/LastUpdated';
 import { getCurrentUserWithTier, isPaid } from '@/lib/membership';
 import StateNotice from '@/components/StateNotice';
 import Link from 'next/link';
@@ -58,8 +57,6 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
   const tradeCount = rows.reduce((sum, r) => sum + r.trades, 0);
   const polCount = total;
   const issuerCount = rows.reduce((sum, r) => sum + r.issuers, 0);
-  const lastTradeDate = rows.find((r) => r.lastTraded)?.lastTraded || new Date();
-
   const politiciansQs = (p: number) =>
     `/politicians?${new URLSearchParams({
       page: String(p),
@@ -72,24 +69,18 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
   return (
     <div className="min-h-screen bg-gray-900">
       <main className="p-4">
-        <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <h1 className={pageTitleStyles()}>
             <span className="zh-Hant">國會議員</span>
             <span className="zh-Hans hidden">国会议员</span>
           </h1>
-          <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-4">
-            <div className={`text-sm ${mutedLabelStyles()}`}>
-              <span className="zh-Hant">
-                共 {total.toLocaleString('zh-TW')} 位 · 第 {page} / {totalPages} 頁
-              </span>
-              <span className="zh-Hans hidden">
-                共 {total.toLocaleString('zh-CN')} 位 · 第 {page} / {totalPages} 页
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <DataFreshnessIndicator timestamp={lastTradeDate} />
-              <LastUpdated timestamp={lastTradeDate} className="text-xs text-gray-400" />
-            </div>
+          <div className={`text-sm ${mutedLabelStyles()}`}>
+            <span className="zh-Hant">
+              共 {total.toLocaleString('zh-TW')} 位 · 第 {page} / {totalPages} 頁
+            </span>
+            <span className="zh-Hans hidden">
+              共 {total.toLocaleString('zh-CN')} 位 · 第 {page} / {totalPages} 页
+            </span>
           </div>
         </div>
 
