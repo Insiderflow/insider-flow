@@ -43,6 +43,7 @@ export type PoliticianListItem = {
   name: string;
   party: string | null;
   chamber: string | null;
+  state: string | null;
   trades: number;
   issuers: number;
   totalVolume: number;
@@ -68,7 +69,7 @@ export async function getPoliticiansPageData(params: {
 
   const allPoliticians = await prisma.politician.findMany({
     where,
-    select: { id: true, name: true, party: true, chamber: true, _count: { select: { Trade: true } } },
+    select: { id: true, name: true, party: true, chamber: true, state: true, _count: { select: { Trade: true } } },
   });
 
   const ids = allPoliticians.map((p) => p.id);
@@ -140,6 +141,7 @@ export async function getPoliticiansPageData(params: {
       name: p.name,
       party: p.party,
       chamber: p.chamber,
+      state: p.state,
       trades: p._count.Trade,
       issuers: stat?.issuers || 0,
       totalVolume: stat?.totalVolume || 0,
