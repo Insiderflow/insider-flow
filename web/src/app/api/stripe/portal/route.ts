@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
   try {
     const sessionUser = await getSessionUser();
     if (!sessionUser) {
-      return NextResponse.json({ error: 'login required' }, { status: 401 });
+      return NextResponse.json({ error: '請先登入' }, { status: 401 });
     }
 
     // Get full user data from database including stripe_customer_id

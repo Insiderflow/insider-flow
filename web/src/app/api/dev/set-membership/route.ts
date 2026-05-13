@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   }
   const user = await getSessionUser();
-  if (!user) return NextResponse.json({ error: 'login required' }, { status: 401 });
+  if (!user) return NextResponse.json({ error: '請先登入' }, { status: 401 });
   const { tier, days } = await req.json();
   if (tier !== 'PAID' && tier !== 'FREE') {
     return NextResponse.json({ error: 'invalid tier' }, { status: 400 });

@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
 
   const caller = await getSessionUser(req);
   if (!caller) {
-    return NextResponse.json({ error: 'login required' }, { status: 401 });
+    return NextResponse.json({ error: '請先登入' }, { status: 401 });
   }
 
   let body: SyncBody = {};

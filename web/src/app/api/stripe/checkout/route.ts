@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
     const user = await getSessionUser();
     if (!user) {
       console.error('No user found');
-      return NextResponse.json({ error: 'login required' }, { status: 401 });
+      return NextResponse.json({ error: '請先登入' }, { status: 401 });
     }
 
 
