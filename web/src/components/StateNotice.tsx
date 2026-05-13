@@ -14,8 +14,8 @@ export default function StateNotice({
   tone = 'info',
   actions,
 }: {
-  title: string;
-  description: string;
+  title: ReactNode;
+  description: ReactNode;
   tone?: StateNoticeTone;
   actions?: ReactNode;
 }) {

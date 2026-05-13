@@ -25,7 +25,10 @@ export default function LanguageToggle() {
 
   return (
     <div className="flex items-center gap-2">
-      <span className="text-sm text-gray-300">語言:</span>
+      <span className="text-sm text-gray-300 shrink-0">
+        <span className="zh-Hant">介面語言</span>
+        <span className="zh-Hans hidden">界面语言</span>
+      </span>
       <div className="flex bg-gray-700 rounded-lg p-1">
         <button
           onClick={() => handleLanguageChange('zh-Hant')}

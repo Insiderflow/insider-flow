@@ -23,8 +23,8 @@ export default function SiteFooter() {
               </li>
               <li>
                 <Link href="/politicians" className="hover:text-orange-300 transition-colors">
-                  <span className="zh-Hant">政治家</span>
-                  <span className="zh-Hans hidden">政治家</span>
+                  <span className="zh-Hant">議員</span>
+                  <span className="zh-Hans hidden">议员</span>
                 </Link>
               </li>
               <li>

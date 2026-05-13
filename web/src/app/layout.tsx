@@ -49,7 +49,7 @@ export default async function RootLayout({
           `}
         </Script>
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased language-zh-Hant`}>
         <LanguageInitializer />
         <header className="border-b border-gray-600 bg-gray-900/90 backdrop-blur sticky top-0 z-10">
           <div className="max-w-6xl mx-auto px-4 py-3">
@@ -69,8 +69,8 @@ export default async function RootLayout({
                   <span className="zh-Hans hidden">交易</span>
                 </Link>
                 <Link className="text-white hover:text-blue-300 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none rounded transition-colors duration-200" href="/politicians" aria-label="Politicians page">
-                  <span className="zh-Hant">政治家</span>
-                  <span className="zh-Hans hidden">政治家</span>
+                  <span className="zh-Hant">議員</span>
+                  <span className="zh-Hans hidden">议员</span>
                 </Link>
                 <Link className="text-white hover:text-blue-300 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none rounded transition-colors duration-200" href="/issuers" aria-label="Issuers page">
                   <span className="zh-Hant">發行商</span>
