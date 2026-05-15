@@ -1,16 +1,18 @@
 /*
  Daily newsletter sender for paid members (Chinese).
- - Selects trades newly imported today (HKT calendar day) using Trade.created_at in UTC window
- - Renders concise HTML digest in Chinese
- - Sends to all active paid members via SendGrid (FREE accounts never receive this job)
+ - Selects trades for the Hong Kong calendar day containing the run time:
+   rows where created_at OR updated_at falls in [00:00, 24:00) HKT (UTC bounds from Intl).
+ - updated_at catches re-imports / disclosure fixes on existing rows (created_at stays old).
  - Usage: node scripts/send-daily-newsletter.js [testEmail] (optional test mode)
 */
 
 // Load environment variables from .env.local
 require('dotenv').config({ path: '.env.local' });
 
+const path = require('path');
 const { PrismaClient } = require('@prisma/client');
 const sgMail = require('@sendgrid/mail');
+const { getHktDayBoundsUtc } = require(path.join(__dirname, 'lib', 'hkt-day-window.js'));
 
 const prisma = new PrismaClient();
 
@@ -22,21 +24,6 @@ const BATCH_DELAY_MS = 1000; // 1 second between batches
 function normalizeSendGridApiKey(raw) {
   if (raw == null) return '';
   return String(raw).trim().replace(/^\uFEFF/, '');
-}
-
-function getHktWindowUtc(now = new Date()) {
-  // Compute today's start/end in HKT and convert to UTC for DB filter
-  // HKT is UTC+8
-  const utcMs = now.getTime();
-  const hktOffsetMs = 8 * 60 * 60 * 1000;
-  const hktNow = new Date(utcMs + hktOffsetMs);
-  const startHkt = new Date(hktNow);
-  startHkt.setHours(0, 0, 0, 0);
-  const endHkt = new Date(startHkt.getTime() + 24 * 60 * 60 * 1000);
-  // convert back to UTC by subtracting offset
-  const startUtc = new Date(startHkt.getTime() - hktOffsetMs);
-  const endUtc = new Date(endHkt.getTime() - hktOffsetMs);
-  return { startUtc, endUtc, startHkt, endHkt };
 }
 
 function formatDate(d) {
@@ -240,14 +227,11 @@ async function main() {
     targetDate = new Date('2024-11-14T12:00:00Z');
   }
 
-  const { startUtc, endUtc, startHkt } = getHktWindowUtc(targetDate);
-  const dateLabel = formatDate(startHkt);
+  const { startUtc, endUtc, dateLabel } = getHktDayBoundsUtc(targetDate);
 
   console.log(`📅 HKT window (UTC): ${startUtc.toISOString()} ~ ${endUtc.toISOString()}`);
 
-  // Fetch new trades created today (HKT window) with issuer/politician via SQL join
-  // Use created_at to show trades that were added to the database today
-  // This catches newly scraped/imported trades regardless of their original published_at date
+  // New inserts: created_at in window. Re-import / disclosure refresh: created_at old, updated_at in window.
   const trades = await prisma.$queryRaw`
     SELECT 
       t.id,
@@ -263,21 +247,25 @@ async function main() {
       t.source_url,
       t.raw,
       t.created_at,
+      t.updated_at,
       i.ticker AS issuer_ticker,
       i.name   AS issuer_name,
       p.name   AS politician_name
     FROM "Trade" t
     LEFT JOIN "Issuer" i ON i.id = t.issuer_id
     LEFT JOIN "Politician" p ON p.id = t.politician_id
-    WHERE t.created_at >= ${startUtc} AND t.created_at < ${endUtc}
-    ORDER BY t.created_at DESC NULLS LAST
+    WHERE (
+      (t.created_at >= ${startUtc} AND t.created_at < ${endUtc})
+      OR (t.updated_at >= ${startUtc} AND t.updated_at < ${endUtc})
+    )
+    ORDER BY GREATEST(t.created_at, t.updated_at) DESC NULLS LAST
     LIMIT 200
   `;
 
-  console.log(`📊 Found ${trades.length} new trades added on ${dateLabel}`);
+  console.log(`📊 Found ${trades.length} trades (new or updated) for ${dateLabel} HKT`);
 
   const html = renderHtml(trades, dateLabel);
-  const subject = `【每日內幕交易】${dateLabel} 新增 ${trades.length} 筆`;
+  const subject = `【每日內幕交易】${dateLabel} 共 ${trades.length} 筆`;
 
   if (!sendgridKey) {
     console.log('⚠️  SENDGRID_API_KEY not set. Dry run preview below:');

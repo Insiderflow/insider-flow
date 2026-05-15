@@ -4,7 +4,9 @@
  */
 
 require('dotenv').config({ path: '.env.local' });
+const path = require('path');
 const { PrismaClient } = require('@prisma/client');
+const { getHktDayBoundsUtc } = require(path.join(__dirname, 'lib', 'hkt-day-window.js'));
 const prisma = new PrismaClient();
 
 async function checkNewsletterStatus() {
@@ -69,19 +71,7 @@ async function checkNewsletterStatus() {
     });
     console.log(`\n📊 Recent Trades (last 7 days): ${recentTrades}`);
 
-    // Check today's trades (HKT)
-    const { startUtc, endUtc } = (() => {
-      const now = new Date();
-      const utcMs = now.getTime();
-      const hktOffsetMs = 8 * 60 * 60 * 1000;
-      const hktNow = new Date(utcMs + hktOffsetMs);
-      const startHkt = new Date(hktNow);
-      startHkt.setHours(0, 0, 0, 0);
-      const endHkt = new Date(startHkt.getTime() + 24 * 60 * 60 * 1000);
-      const startUtc = new Date(startHkt.getTime() - hktOffsetMs);
-      const endUtc = new Date(endHkt.getTime() - hktOffsetMs);
-      return { startUtc, endUtc };
-    })();
+    const { startUtc, endUtc } = getHktDayBoundsUtc();
 
     const todayTradesByTradedAt = await prisma.trade.count({
       where: {
@@ -93,8 +83,23 @@ async function checkNewsletterStatus() {
         created_at: { gte: startUtc, lt: endUtc }
       }
     });
+    const todayTradesByUpdatedAt = await prisma.trade.count({
+      where: {
+        updated_at: { gte: startUtc, lt: endUtc }
+      }
+    });
+    const digestCount = await prisma.trade.count({
+      where: {
+        OR: [
+          { created_at: { gte: startUtc, lt: endUtc } },
+          { updated_at: { gte: startUtc, lt: endUtc } }
+        ]
+      }
+    });
     console.log(`   Today's trades by traded_at (HKT window): ${todayTradesByTradedAt}`);
-    console.log(`   Today's trades by created_at (matches newsletter digest): ${todayTradesByCreatedAt}`);
+    console.log(`   Today's trades by created_at only: ${todayTradesByCreatedAt}`);
+    console.log(`   Today's trades by updated_at only: ${todayTradesByUpdatedAt}`);
+    console.log(`   Newsletter digest (created OR updated in HKT day): ${digestCount}`);
     console.log(`   Date range: ${startUtc.toISOString()} to ${endUtc.toISOString()}`);
   } catch (e) {
     console.error('❌ Error checking trades:', e.message);

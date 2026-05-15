@@ -13,6 +13,10 @@ on:
     paths:
       - '.github/workflows/daily-newsletter.yml'
       - 'web/scripts/send-daily-newsletter.js'
+      - 'web/scripts/lib/hkt-day-window.js'
+      - 'web/scripts/check-newsletter-status.js'
+      - 'web/prisma/schema.prisma'
+      - 'web/prisma/migrations/**'
       - 'web/package.json'
       - 'web/package-lock.json'
 
@@ -62,6 +66,11 @@ jobs:
       
     - name: Generate Prisma Client
       run: npx prisma generate
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+    - name: Apply database migrations
+      run: npx prisma migrate deploy
       env:
         DATABASE_URL: ${{ secrets.DATABASE_URL }}
         
