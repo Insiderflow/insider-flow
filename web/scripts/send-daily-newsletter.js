@@ -1,16 +1,18 @@
 /*
  Daily newsletter sender for paid members (Chinese).
- - Selects trades newly imported today (HKT calendar day) using Trade.created_at in UTC window
- - Renders concise HTML digest in Chinese
- - Sends to all active paid members via SendGrid (FREE accounts never receive this job)
+ - HKT calendar day via Intl (Asia/Hong_Kong), not host TZ.
+ - Rows included if created_at OR published_at falls in that UTC window (new inserts + same-day disclosures).
+ - Re-imports that only bump published_at to a past date still need Trade.updated_at (future schema) — see OR below.
  - Usage: node scripts/send-daily-newsletter.js [testEmail] (optional test mode)
 */
 
 // Load environment variables from .env.local
 require('dotenv').config({ path: '.env.local' });
 
+const path = require('path');
 const { PrismaClient } = require('@prisma/client');
 const sgMail = require('@sendgrid/mail');
+const { getHktDayBoundsUtc } = require(path.join(__dirname, 'lib', 'hkt-day-window.js'));
 
 const prisma = new PrismaClient();
 
@@ -22,21 +24,6 @@ const BATCH_DELAY_MS = 1000; // 1 second between batches
 function normalizeSendGridApiKey(raw) {
   if (raw == null) return '';
   return String(raw).trim().replace(/^\uFEFF/, '');
-}
-
-function getHktWindowUtc(now = new Date()) {
-  // Compute today's start/end in HKT and convert to UTC for DB filter
-  // HKT is UTC+8
-  const utcMs = now.getTime();
-  const hktOffsetMs = 8 * 60 * 60 * 1000;
-  const hktNow = new Date(utcMs + hktOffsetMs);
-  const startHkt = new Date(hktNow);
-  startHkt.setHours(0, 0, 0, 0);
-  const endHkt = new Date(startHkt.getTime() + 24 * 60 * 60 * 1000);
-  // convert back to UTC by subtracting offset
-  const startUtc = new Date(startHkt.getTime() - hktOffsetMs);
-  const endUtc = new Date(endHkt.getTime() - hktOffsetMs);
-  return { startUtc, endUtc, startHkt, endHkt };
 }
 
 function formatDate(d) {
@@ -144,7 +131,7 @@ function renderHtml(trades, dateLabel) {
 
   return `
 <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, 'Noto Sans', 'PingFang SC', 'Microsoft YaHei', sans-serif; line-height:1.6; color:#111;">
-  <h2 style="margin:0 0 12px;">【每日內幕交易】${escapeHtml(dateLabel)} 新增 ${trades.length} 筆</h2>
+  <h2 style="margin:0 0 12px;">【每日內幕交易】${escapeHtml(dateLabel)} 共 ${trades.length} 筆</h2>
   <table style="border-collapse:collapse; width:100%; max-width:900px;">
     <thead>
       <tr style="background:#fafafa;">
@@ -240,14 +227,12 @@ async function main() {
     targetDate = new Date('2024-11-14T12:00:00Z');
   }
 
-  const { startUtc, endUtc, startHkt } = getHktWindowUtc(targetDate);
-  const dateLabel = formatDate(startHkt);
+  const { startUtc, endUtc, dateLabel } = getHktDayBoundsUtc(targetDate);
 
   console.log(`📅 HKT window (UTC): ${startUtc.toISOString()} ~ ${endUtc.toISOString()}`);
 
-  // Fetch new trades created today (HKT window) with issuer/politician via SQL join
-  // Use created_at to show trades that were added to the database today
-  // This catches newly scraped/imported trades regardless of their original published_at date
+  // created_at: brand-new rows. published_at: disclosure calendar lands on this HKT day (row may be old).
+  // Still misses "only raw/issuer touched" updates without updated_at — add Trade.updated_at if needed.
   const trades = await prisma.$queryRaw`
     SELECT 
       t.id,
@@ -269,15 +254,18 @@ async function main() {
     FROM "Trade" t
     LEFT JOIN "Issuer" i ON i.id = t.issuer_id
     LEFT JOIN "Politician" p ON p.id = t.politician_id
-    WHERE t.created_at >= ${startUtc} AND t.created_at < ${endUtc}
-    ORDER BY t.created_at DESC NULLS LAST
+    WHERE (
+      (t.created_at >= ${startUtc} AND t.created_at < ${endUtc})
+      OR (t.published_at IS NOT NULL AND t.published_at >= ${startUtc} AND t.published_at < ${endUtc})
+    )
+    ORDER BY GREATEST(t.created_at, COALESCE(t.published_at, t.created_at)) DESC NULLS LAST
     LIMIT 200
   `;
 
-  console.log(`📊 Found ${trades.length} new trades added on ${dateLabel}`);
+  console.log(`📊 Found ${trades.length} trades for digest (${dateLabel} HKT)`);
 
   const html = renderHtml(trades, dateLabel);
-  const subject = `【每日內幕交易】${dateLabel} 新增 ${trades.length} 筆`;
+  const subject = `【每日內幕交易】${dateLabel} 共 ${trades.length} 筆`;
 
   if (!sendgridKey) {
     console.log('⚠️  SENDGRID_API_KEY not set. Dry run preview below:');

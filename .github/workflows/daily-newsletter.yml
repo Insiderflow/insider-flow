@@ -13,6 +13,8 @@ on:
     paths:
       - '.github/workflows/daily-newsletter.yml'
       - 'web/scripts/send-daily-newsletter.js'
+      - 'web/scripts/check-newsletter-status.js'
+      - 'web/scripts/lib/hkt-day-window.js'
       - 'web/package.json'
       - 'web/package-lock.json'
 

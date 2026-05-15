@@ -69,7 +69,7 @@ node scripts/send-daily-newsletter.js your-email@example.com
 
 ## How It Works
 
-1. **Trade Selection:** Queries trades where `traded_at` falls within today's HKT window (00:00-23:59 HKT)
+1. **Trade Selection:** Uses **`Asia/Hong_Kong`** calendar day (via `Intl`, not host `TZ`). Includes a row if **`created_at` OR `published_at`** falls in that `[00:00, 24:00) HKT` UTC window (new inserts plus same-day disclosures on older rows). Re-imports that only touch other fields without moving `published_at` into “today” may still be omitted until we add `Trade.updated_at` again.
 2. **Member Filtering:** Finds all users with:
    - `membership_tier = 'PAID'`
    - `membership_expires_at` is null OR in the future
@@ -115,9 +115,9 @@ Edit `BATCH_SIZE` and `BATCH_DELAY_MS` constants in the script
 - Check SendGrid account status
 
 ### Wrong trades included
-- Verify timezone calculation in `getHktWindowUtc()`
-- Check `traded_at` field in database
-- Review the SQL query in `main()` function
+- Confirm `scripts/lib/hkt-day-window.js` bounds in logs vs expected HKT date.
+- Compare `check-newsletter-status.js` lines: `created only` vs `published only` vs **digest (OR)**.
+- Review the raw SQL `WHERE` in `send-daily-newsletter.js` `main()`.
 
 
 
