@@ -32,11 +32,11 @@ function StarRow() {
   );
 }
 
-export default function TestimonialsSection() {
+export default function UpgradeTestimonials() {
   return (
     <section
-      className="rounded-2xl border border-blue-900/60 bg-gradient-to-b from-slate-950 via-gray-900 to-gray-900/95 px-4 py-10 sm:px-8 shadow-xl shadow-blue-950/40"
-      aria-labelledby="testimonials-heading"
+      className="mb-10 rounded-2xl border border-blue-900/60 bg-gradient-to-b from-slate-950 via-gray-900 to-gray-900/95 px-4 py-10 sm:px-8 shadow-xl shadow-blue-950/40"
+      aria-labelledby="upgrade-testimonials-heading"
     >
       <div className="mx-auto max-w-5xl">
         <div className="mb-8 text-center">
@@ -47,7 +47,7 @@ export default function TestimonialsSection() {
               <span className="zh-Hans hidden">真实付费用户</span>
             </span>
           </div>
-          <h2 id="testimonials-heading" className={`${sectionTitleStyles()} text-2xl sm:text-3xl`}>
+          <h2 id="upgrade-testimonials-heading" className={`${sectionTitleStyles()} text-2xl sm:text-3xl`}>
             <span className="zh-Hant">真實用戶怎麼說</span>
             <span className="zh-Hans hidden">真实用户怎么说</span>
           </h2>

@@ -1,6 +1,6 @@
 import FreeVsPaidComparison from './FreeVsPaidComparison';
 import UpgradePricingClient from './UpgradePricingClient';
-import TestimonialsSection from '@/components/marketing/TestimonialsSection';
+import UpgradeTestimonials from './UpgradeTestimonials';
 import { bodySubtextStyles, pageTitleStyles } from '@/components/typographyStyles';
 
 export default function UpgradePage() {
@@ -29,9 +29,7 @@ export default function UpgradePage() {
           </p>
         </div>
 
-        <div className="mb-10">
-          <TestimonialsSection />
-        </div>
+        <UpgradeTestimonials />
 
         <FreeVsPaidComparison />
         <UpgradePricingClient />
