@@ -67,7 +67,6 @@ model Trade {
   source_url       String?
   raw              Json?
   created_at       DateTime   @default(now())
-  updated_at       DateTime   @updatedAt
   Issuer           Issuer     @relation(fields: [issuer_id], references: [id])
   Politician       Politician @relation(fields: [politician_id], references: [id])
 

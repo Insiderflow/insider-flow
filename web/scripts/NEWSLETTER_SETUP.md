@@ -69,7 +69,7 @@ node scripts/send-daily-newsletter.js your-email@example.com
 
 ## How It Works
 
-1. **Trade Selection:** Uses the **Hong Kong calendar day** containing job run time (via `Intl`, not the host OS timezone). Includes a row if **`created_at` OR `updated_at`** falls in that `[00:00, 24:00) HKT` window. `updated_at` covers re-imports and disclosure fixes where `created_at` stays old (new inserts still match on `created_at`).
+1. **Trade Selection:** Queries trades where `traded_at` falls within today's HKT window (00:00-23:59 HKT)
 2. **Member Filtering:** Finds all users with:
    - `membership_tier = 'PAID'`
    - `membership_expires_at` is null OR in the future
@@ -114,14 +114,10 @@ Edit `BATCH_SIZE` and `BATCH_DELAY_MS` constants in the script
 - Verify email addresses are valid
 - Check SendGrid account status
 
-### Digest shows zero trades but the site has new activity
-- The digest uses the **Hong Kong calendar day** of the job run and includes rows where **`created_at` OR `updated_at`** falls in that window. Re-imported rows that only **update** an existing trade (same `id` / duplicate key path) used to keep a **stale `created_at`**, so they were invisible to the old query; **`updated_at`** fixes that after migrations are applied.
-- **Run** `node scripts/check-newsletter-status.js` and compare `created_at only` vs `Newsletter digest (created OR updated)` counts.
-- **Wrong day:** If the runner’s clock or your mental model uses another zone, confirm the logged `Date range` in Actions matches the HKT day you expect (`Intl` + `Asia/Hong_Kong`, independent of host `TZ`).
-
 ### Wrong trades included
-- Confirm the SQL `WHERE` in `send-daily-newsletter.js` matches your product definition (created vs updated vs disclosure dates).
-- Review sample rows’ `created_at`, `updated_at`, and `published_at` in SQL for a specific `id`.
+- Verify timezone calculation in `getHktWindowUtc()`
+- Check `traded_at` field in database
+- Review the SQL query in `main()` function
 
 
 
