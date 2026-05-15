@@ -122,9 +122,10 @@ export async function getTradesPageData(query: TradesQuery) {
 
 export async function getLatestTradesPublic(limit = 10) {
   const rows = await prisma.trade.findMany({
-    where: { published_at: { not: null } },
     include: { Politician: true, Issuer: true },
-    orderBy: [{ published_at: 'desc' }, { traded_at: 'desc' }],
+    // Do not require published_at: many ingested rows have traded_at but disclosure is null/late;
+    // this filter made the home "最新交易" block look frozen while scraper + DB were updating.
+    orderBy: [{ traded_at: 'desc' }, { published_at: 'desc' }],
     take: limit,
   });
 
