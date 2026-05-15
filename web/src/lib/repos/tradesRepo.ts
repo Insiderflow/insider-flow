@@ -122,10 +122,9 @@ export async function getTradesPageData(query: TradesQuery) {
 
 export async function getLatestTradesPublic(limit = 10) {
   const rows = await prisma.trade.findMany({
+    where: { published_at: { not: null } },
     include: { Politician: true, Issuer: true },
-    // Do not require published_at: ingested rows often have traded_at before disclosure is set;
-    // excluding null hid new trades on the home preview while DB totals still grew.
-    orderBy: [{ traded_at: 'desc' }, { published_at: 'desc' }],
+    orderBy: [{ published_at: 'desc' }, { traded_at: 'desc' }],
     take: limit,
   });
 

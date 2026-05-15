@@ -35,7 +35,8 @@ export async function getHomePageStats() {
 
 export async function getLatestTradesForHome(limit = 10): Promise<HomeLatestTrade[]> {
   const rows = await prisma.trade.findMany({
-    orderBy: [{ traded_at: 'desc' }, { published_at: 'desc' }],
+    where: { published_at: { not: null } },
+    orderBy: [{ published_at: 'desc' }, { traded_at: 'desc' }],
     take: limit,
     include: { Politician: true, Issuer: true },
   });
