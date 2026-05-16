@@ -1,0 +1,70 @@
+# Corporate OpenInsider → Prisma (openInsider_* tables). Capitol / politician scrape stays in daily-scrape.yml.
+name: OpenInsider daily import
+
+on:
+  schedule:
+    # Stagger after Daily Data Scrape HKT slots (9pm / 10pm / 1am HKT → 13 / 14 / 17 UTC) by 20m.
+    - cron: '20 13 * * *'
+    - cron: '20 14 * * *'
+    - cron: '20 17 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/openinsider-daily-import.yml'
+      - 'web/scripts/openinsider_daily_import.js'
+      - 'web/scripts/lib/openinsider_import_shared.js'
+      - 'web/scripts/lib/openinsider_http_fetch.js'
+      - 'web/scripts/lib/openinsider_screener_scrape.js'
+      - 'web/scripts/import_openinsider_filing_csv.js'
+      - 'web/scripts/openinsider_filing_day_csv.js'
+      - 'web/package.json'
+      - 'web/package-lock.json'
+
+concurrency:
+  group: openinsider-daily-import
+  cancel-in-progress: true
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: web
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Prisma generate
+        run: npx prisma generate
+
+      - name: Assert DATABASE_URL
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          if [ -z "$DATABASE_URL" ]; then
+            echo "::error::DATABASE_URL Actions secret is missing (same Neon URL as Render)."
+            exit 1
+          fi
+
+      - name: Install Playwright Chromium
+        run: npx playwright install chromium
+
+      - name: Run OpenInsider daily import
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          OPENINSIDER_CURL_IPV4: '1'
+          OPENINSIDER_MAX_ROWS: '300'
+          OPENINSIDER_SCREENER_DAYS: '7'
+          OPENINSIDER_SCREENER_MAX_PAGES: '12'
+        run: node scripts/openinsider_daily_import.js

@@ -86,8 +86,10 @@ export default async function InsiderPage({ searchParams }: { searchParams: Prom
   const isInstitutionFilter = typeof sp.institution === 'string' ? sp.institution : '';
   const filterCategory = typeof sp.filter === 'string' ? sp.filter : '';
 
-  const orderBy: Record<string, 'asc' | 'desc'> = {};
-  orderBy[sortKey] = order;
+  const orderBy: Array<Record<string, 'asc' | 'desc'>> =
+    sortKey === 'transactionDate'
+      ? [{ transactionDate: order }, { tradeDate: order }]
+      : [{ [sortKey]: order }];
 
   type TransactionWhere = {
     company?: { is: { name: { contains: string; mode: 'insensitive' } } };

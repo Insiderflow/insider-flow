@@ -18,6 +18,7 @@ const {
   persistOpenInsiderRows,
 } = require('./lib/openinsider_import_shared');
 const { curlFetchHtml } = require('./lib/openinsider_http_fetch');
+const { scrapeRecentFilingDays } = require('./lib/openinsider_screener_scrape');
 
 const prisma = new PrismaClient();
 
@@ -109,7 +110,11 @@ async function main() {
 
     const maxRows = Math.min(
       500,
-      Math.max(1, Number(process.env.OPENINSIDER_MAX_ROWS || '150') || 150),
+      Math.max(1, Number(process.env.OPENINSIDER_MAX_ROWS || '300') || 300),
+    );
+    const screenerDays = Math.min(
+      14,
+      Math.max(0, Number(process.env.OPENINSIDER_SCREENER_DAYS || '7') || 7),
     );
     const persistDelayMs = Math.min(
       5000,
@@ -133,6 +138,9 @@ async function main() {
       skippedDup: 0,
       errors: 0,
       errorMessages: [],
+      screenerDays,
+      screenerByDay: {},
+      screenerScraped: 0,
       rateLimit: {
         persistDelayMs,
         persistJitterMs,
@@ -140,7 +148,9 @@ async function main() {
       },
     };
 
-    console.log(`OpenInsider import starting (maxRows=${maxRows}, dryRun=${dryRun})`);
+    console.log(
+      `OpenInsider import starting (maxRows=${maxRows}, screenerDays=${screenerDays}, dryRun=${dryRun})`,
+    );
 
     let browser;
     try {
@@ -193,6 +203,35 @@ async function main() {
         perRowJitterMs: persistJitterMs,
         stopAfterDuplicateStreak: duplicateStreakStop,
       });
+
+      if (screenerDays > 0) {
+        console.log(`OpenInsider screener pass: last ${screenerDays} UTC filing days`);
+        const screener = await scrapeRecentFilingDays(browser, {
+          days: screenerDays,
+          maxPagesPerDay: Math.min(
+            30,
+            Math.max(1, Number(process.env.OPENINSIDER_SCREENER_MAX_PAGES || '12') || 12),
+          ),
+          sleepMs: Math.min(
+            3000,
+            Math.max(200, Number(process.env.OPENINSIDER_SCREENER_SLEEP_MS || '500') || 500),
+          ),
+        });
+        summary.screenerByDay = screener.byDay;
+        summary.screenerScraped = screener.rows.length;
+        if (!dryRun && screener.rows.length > 0) {
+          await persistOpenInsiderRows(prisma, screener.rows, summary, {
+            perRowDelayMs: persistDelayMs,
+            perRowJitterMs: persistJitterMs,
+            stopAfterDuplicateStreak: 0,
+          });
+        }
+      }
+
+      const latest = await prisma.openInsiderTransaction.aggregate({
+        _max: { transactionDate: true },
+      });
+      summary.dbLatestFiling = latest._max.transactionDate?.toISOString() || null;
       console.log(JSON.stringify(summary));
     } catch (e) {
       summary.errors += 1;
