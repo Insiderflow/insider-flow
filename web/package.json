@@ -22,6 +22,8 @@
     "openinsider:import": "node scripts/openinsider_daily_import.js",
     "openinsider:import-csv": "node scripts/import_openinsider_filing_csv.js",
     "openinsider:filing-day-csv": "node scripts/openinsider_filing_day_csv.js",
+    "openinsider:backfill-week": "node scripts/openinsider_backfill_filing_days.js --days 7",
+    "openinsider:backfill-days": "node scripts/openinsider_backfill_filing_days.js",
     "openinsider:backfill": "node scripts/openinsider_backfill_import.js",
     "openinsider:screener-months": "node scripts/openinsider_screener_month_import.js",
     "openinsider:convert-sd3v-csv": "node scripts/convert_sd3v_openinsider_csv.js",

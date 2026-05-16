@@ -28,7 +28,7 @@ concurrency:
 jobs:
   import:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 45
     defaults:
       run:
         working-directory: web
@@ -66,5 +66,11 @@ jobs:
           OPENINSIDER_CURL_IPV4: '1'
           OPENINSIDER_MAX_ROWS: '300'
           OPENINSIDER_SCREENER_DAYS: '7'
-          OPENINSIDER_SCREENER_MAX_PAGES: '12'
+          OPENINSIDER_SCREENER_MAX_PAGES: '15'
         run: node scripts/openinsider_daily_import.js
+
+      - name: Backfill this week's filing days (UTC)
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          OPENINSIDER_CURL_IPV4: '1'
+        run: node scripts/openinsider_backfill_filing_days.js --days 7 --max-pages 15 --sleep-ms 400
