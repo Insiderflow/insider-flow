@@ -202,17 +202,17 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
               return (
               <div key={t.id} className="bg-gray-700 rounded-lg p-4 hover:shadow-lg transition-all duration-300 hover:bg-gray-600">
                 <div className="flex items-center justify-between mb-3">
-                  <div className="flex flex-col">
-                    <span className={`text-sm ${bodySubtextStyles()}`}>
-                      <span className="zh-Hant">交易日期: {new Date(t.tradedAt).toLocaleDateString('zh-TW')}</span>
-                      <span className="zh-Hans hidden">交易日期: {new Date(t.tradedAt).toLocaleDateString('zh-CN')}</span>
-                    </span>
-                    {t.publishedAt && (
-                      <span className={`text-xs ${mutedLabelStyles()}`}>
+                  <div className="flex flex-col gap-0.5">
+                    {t.publishedAt ? (
+                      <span className="text-sm font-semibold text-emerald-200/95">
                         <span className="zh-Hant">發布日期: {new Date(t.publishedAt).toLocaleDateString('zh-TW')}</span>
                         <span className="zh-Hans hidden">发布日期: {new Date(t.publishedAt).toLocaleDateString('zh-CN')}</span>
                       </span>
-                    )}
+                    ) : null}
+                    <span className={`text-xs ${mutedLabelStyles()}`}>
+                      <span className="zh-Hant">交易日期: {new Date(t.tradedAt).toLocaleDateString('zh-TW')}</span>
+                      <span className="zh-Hans hidden">交易日期: {new Date(t.tradedAt).toLocaleDateString('zh-CN')}</span>
+                    </span>
                   </div>
                   <span className={badgeStyles(
                     t.type.toLowerCase() === 'buy'

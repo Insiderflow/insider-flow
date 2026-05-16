@@ -27,10 +27,10 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
   const sp = await searchParams;
   const pageSize = 30;
   const page = Math.max(1, Number(typeof sp.page === 'string' ? sp.page : 1) || 1);
-  const allowedSort = new Set<TradeSortKey>(['traded_at', 'published_at', 'price', 'size_max']);
+  const allowedSort = new Set<TradeSortKey>(['activity', 'traded_at', 'published_at', 'price', 'size_max']);
   const order: SortOrder = (typeof sp.order === 'string' && sp.order.toLowerCase() === 'asc') ? 'asc' : 'desc';
-  const sortKeyRaw = typeof sp.sort === 'string' ? sp.sort : 'traded_at';
-  const sortKey: TradeSortKey = allowedSort.has(sortKeyRaw as TradeSortKey) ? (sortKeyRaw as TradeSortKey) : 'traded_at';
+  const sortKeyRaw = typeof sp.sort === 'string' ? sp.sort : 'activity';
+  const sortKey: TradeSortKey = allowedSort.has(sortKeyRaw as TradeSortKey) ? (sortKeyRaw as TradeSortKey) : 'activity';
   const qPolitician = typeof sp.qp === 'string' ? sp.qp : '';
   const qIssuer = typeof sp.qi === 'string' ? sp.qi : '';
   const typeFilter = typeof sp.type === 'string' ? sp.type : '';
@@ -168,6 +168,7 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
               <span className="zh-Hans hidden">排序栏位</span>
             </span>
             <select name="sort" defaultValue={sortKey} className={fieldControlStyles()} aria-label="排序欄位">
+              <option value="activity">最新動態（申報／成交）</option>
               <option value="traded_at">交易日</option>
               <option value="published_at">申報日</option>
               <option value="price">成交價</option>

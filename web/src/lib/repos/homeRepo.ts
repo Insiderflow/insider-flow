@@ -1,4 +1,4 @@
-import { getGlobalLatestTradeActivity } from '@/lib/tradeActivity';
+import { findTradeIdsByActivityOrder, getGlobalLatestTradeActivity } from '@/lib/tradeActivity';
 import { prisma } from '@/lib/prisma';
 
 export type HomeLatestTrade = {
@@ -34,13 +34,17 @@ export async function getHomePageStats() {
 }
 
 export async function getLatestTradesForHome(limit = 10): Promise<HomeLatestTrade[]> {
+  const ids = await findTradeIdsByActivityOrder({ limit });
+  if (ids.length === 0) return [];
+
   const rows = await prisma.trade.findMany({
-    orderBy: [{ traded_at: 'desc' }, { published_at: 'desc' }],
-    take: limit,
+    where: { id: { in: ids } },
     include: { Politician: true, Issuer: true },
   });
+  const byId = new Map(rows.map((r) => [r.id, r]));
+  const ordered = ids.map((id) => byId.get(id)).filter((r): r is NonNullable<typeof r> => Boolean(r));
 
-  return rows.map((row) => ({
+  return ordered.map((row) => ({
     id: row.id,
     type: row.type,
     tradedAt: row.traded_at,

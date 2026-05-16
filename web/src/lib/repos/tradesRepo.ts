@@ -1,6 +1,12 @@
 import { prisma } from '@/lib/prisma';
+import {
+  countTradesForActivityFilters,
+  findTradeIdsByActivityOrder,
+  getMaxTradeActivityForFilters,
+  type ActivityTradeFilters,
+} from '@/lib/tradeActivity';
 
-export type TradeSortKey = 'traded_at' | 'published_at' | 'size_max' | 'price';
+export type TradeSortKey = 'traded_at' | 'published_at' | 'activity' | 'size_max' | 'price';
 export type SortOrder = 'asc' | 'desc';
 
 export type TradesQuery = {
@@ -44,8 +50,171 @@ function normalizeType(input?: string) {
   return undefined;
 }
 
+function activityFiltersFromQuery(query: TradesQuery): ActivityTradeFilters {
+  const normalizedType = normalizeType(query.type);
+  return {
+    politician: query.politician,
+    issuer: query.issuer,
+    type: normalizedType,
+    tradedFrom: query.tradedFrom,
+    tradedTo: query.tradedTo,
+  };
+}
+
+function mapTradeRows(
+  rows: Array<{
+    id: string;
+    type: string;
+    traded_at: Date;
+    published_at: Date | null;
+    size_min: unknown;
+    size_max: unknown;
+    price: unknown;
+    owner: string | null;
+    Politician: { id: string; name: string; party: string | null; chamber: string | null };
+    Issuer: { id: string; name: string; ticker: string | null };
+  }>,
+): TradeListItem[] {
+  return rows.map((row) => ({
+    id: row.id,
+    type: row.type,
+    tradedAt: row.traded_at,
+    publishedAt: row.published_at,
+    sizeMin: row.size_min ? Number(row.size_min) : null,
+    sizeMax: row.size_max ? Number(row.size_max) : null,
+    price: row.price ? Number(row.price) : null,
+    owner: row.owner || null,
+    politician: {
+      id: row.Politician.id,
+      name: row.Politician.name,
+      party: row.Politician.party,
+      chamber: row.Politician.chamber,
+    },
+    issuer: {
+      id: row.Issuer.id,
+      name: row.Issuer.name,
+      ticker: row.Issuer.ticker,
+    },
+  }));
+}
+
+async function hydrateTradesByIds(ids: string[]): Promise<TradeListItem[]> {
+  if (ids.length === 0) return [];
+  const rows = await prisma.trade.findMany({
+    where: { id: { in: ids } },
+    include: { Politician: true, Issuer: true },
+  });
+  const byId = new Map(rows.map((r) => [r.id, r]));
+  const ordered = ids.map((id) => byId.get(id)).filter((r): r is NonNullable<typeof r> => Boolean(r));
+  return mapTradeRows(ordered);
+}
+
 export async function getTradesPageData(query: TradesQuery) {
   const normalizedType = normalizeType(query.type);
+  const activityFilters = activityFiltersFromQuery(query);
+
+  if (query.sortBy === 'activity') {
+    if (query.order === 'asc') {
+      // Rare; fall back to disclosure-first ascending via published_at then traded_at.
+      const where = {
+        ...(query.politician
+          ? { Politician: { is: { name: { contains: query.politician, mode: 'insensitive' as const } } } }
+          : {}),
+        ...(query.issuer ? { Issuer: { is: { name: { contains: query.issuer, mode: 'insensitive' as const } } } } : {}),
+        ...(normalizedType ? { type: normalizedType } : {}),
+        ...(query.tradedFrom || query.tradedTo
+          ? {
+              traded_at: {
+                ...(query.tradedFrom ? { gte: new Date(query.tradedFrom) } : {}),
+                ...(query.tradedTo ? { lte: new Date(`${query.tradedTo}T23:59:59.999Z`) } : {}),
+              },
+            }
+          : {}),
+      };
+
+      const [rows, total, distinctPoliticians, distinctIssuers, lastTradeDate] = await Promise.all([
+        prisma.trade.findMany({
+          where,
+          include: { Politician: true, Issuer: true },
+          orderBy: [{ published_at: 'asc' }, { traded_at: 'asc' }],
+          skip: (query.page - 1) * query.pageSize,
+          take: query.pageSize,
+        }),
+        prisma.trade.count({ where }),
+        prisma.trade.groupBy({ by: ['politician_id'], where }),
+        prisma.trade.groupBy({ by: ['issuer_id'], where }),
+        getMaxTradeActivityForFilters(activityFilters),
+      ]);
+
+      return {
+        rows: mapTradeRows(rows),
+        total,
+        stats: {
+          tradeCount: total,
+          politicianCount: distinctPoliticians.length,
+          issuerCount: distinctIssuers.length,
+        },
+        lastTradeDate,
+      };
+    }
+
+    const skip = (query.page - 1) * query.pageSize;
+    const [ids, total, distinctPoliticians, distinctIssuers, lastTradeDate] = await Promise.all([
+      findTradeIdsByActivityOrder({ limit: query.pageSize, skip, filters: activityFilters }),
+      countTradesForActivityFilters(activityFilters),
+      prisma.trade.groupBy({
+        by: ['politician_id'],
+        where: {
+          ...(query.politician
+            ? { Politician: { is: { name: { contains: query.politician, mode: 'insensitive' as const } } } }
+            : {}),
+          ...(query.issuer ? { Issuer: { is: { name: { contains: query.issuer, mode: 'insensitive' as const } } } } : {}),
+          ...(normalizedType ? { type: normalizedType } : {}),
+          ...(query.tradedFrom || query.tradedTo
+            ? {
+                traded_at: {
+                  ...(query.tradedFrom ? { gte: new Date(query.tradedFrom) } : {}),
+                  ...(query.tradedTo ? { lte: new Date(`${query.tradedTo}T23:59:59.999Z`) } : {}),
+                },
+              }
+            : {}),
+        },
+      }),
+      prisma.trade.groupBy({
+        by: ['issuer_id'],
+        where: {
+          ...(query.politician
+            ? { Politician: { is: { name: { contains: query.politician, mode: 'insensitive' as const } } } }
+            : {}),
+          ...(query.issuer ? { Issuer: { is: { name: { contains: query.issuer, mode: 'insensitive' as const } } } } : {}),
+          ...(normalizedType ? { type: normalizedType } : {}),
+          ...(query.tradedFrom || query.tradedTo
+            ? {
+                traded_at: {
+                  ...(query.tradedFrom ? { gte: new Date(query.tradedFrom) } : {}),
+                  ...(query.tradedTo ? { lte: new Date(`${query.tradedTo}T23:59:59.999Z`) } : {}),
+                },
+              }
+            : {}),
+        },
+      }),
+      getMaxTradeActivityForFilters(activityFilters),
+    ]);
+
+    const mappedRows = await hydrateTradesByIds(ids);
+
+    return {
+      rows: mappedRows,
+      total,
+      stats: {
+        tradeCount: total,
+        politicianCount: distinctPoliticians.length,
+        issuerCount: distinctIssuers.length,
+      },
+      lastTradeDate,
+    };
+  }
+
   const where = {
     ...(query.politician
       ? { Politician: { is: { name: { contains: query.politician, mode: 'insensitive' as const } } } }
@@ -74,42 +243,11 @@ export async function getTradesPageData(query: TradesQuery) {
     prisma.trade.count({ where }),
     prisma.trade.groupBy({ by: ['politician_id'], where }),
     prisma.trade.groupBy({ by: ['issuer_id'], where }),
-    prisma.trade.findFirst({
-      where,
-      orderBy: { traded_at: 'desc' },
-      select: { traded_at: true, published_at: true },
-    }).then((r) => {
-      if (!r) return new Date();
-      const t = r.traded_at?.getTime() ?? 0;
-      const p = r.published_at?.getTime() ?? 0;
-      return new Date(Math.max(t, p || 0));
-    }),
+    getMaxTradeActivityForFilters(activityFilters),
   ]);
 
-  const mappedRows: TradeListItem[] = rows.map((row) => ({
-    id: row.id,
-    type: row.type,
-    tradedAt: row.traded_at,
-    publishedAt: row.published_at,
-    sizeMin: row.size_min ? Number(row.size_min) : null,
-    sizeMax: row.size_max ? Number(row.size_max) : null,
-    price: row.price ? Number(row.price) : null,
-    owner: row.owner || null,
-    politician: {
-      id: row.Politician.id,
-      name: row.Politician.name,
-      party: row.Politician.party,
-      chamber: row.Politician.chamber,
-    },
-    issuer: {
-      id: row.Issuer.id,
-      name: row.Issuer.name,
-      ticker: row.Issuer.ticker,
-    },
-  }));
-
   return {
-    rows: mappedRows,
+    rows: mapTradeRows(rows),
     total,
     stats: {
       tradeCount: total,
@@ -121,32 +259,36 @@ export async function getTradesPageData(query: TradesQuery) {
 }
 
 export async function getLatestTradesPublic(limit = 10) {
-  const rows = await prisma.trade.findMany({
-    include: { Politician: true, Issuer: true },
-    // Do not require published_at: many ingested rows have traded_at but disclosure is null/late;
-    // this filter made the home "最新交易" block look frozen while scraper + DB were updating.
-    orderBy: [{ traded_at: 'desc' }, { published_at: 'desc' }],
-    take: limit,
-  });
+  const ids = await findTradeIdsByActivityOrder({ limit });
+  if (ids.length === 0) return [];
 
-  return rows.map((row) => ({
-    id: row.id,
-    type: row.type,
-    tradedAt: row.traded_at,
-    publishedAt: row.published_at,
-    sizeMin: row.size_min ? Number(row.size_min) : null,
-    sizeMax: row.size_max ? Number(row.size_max) : null,
-    price: row.price ? Number(row.price) : null,
-    politician: {
-      id: row.Politician.id,
-      name: row.Politician.name,
-      party: row.Politician.party,
-      state: row.Politician.state,
-    },
-    issuer: {
-      id: row.Issuer.id,
-      name: row.Issuer.name,
-      ticker: row.Issuer.ticker,
-    },
-  }));
+  const rows = await prisma.trade.findMany({
+    where: { id: { in: ids } },
+    include: { Politician: true, Issuer: true },
+  });
+  const byId = new Map(rows.map((r) => [r.id, r]));
+
+  return ids
+    .map((id) => byId.get(id))
+    .filter((r): r is NonNullable<typeof r> => Boolean(r))
+    .map((row) => ({
+      id: row.id,
+      type: row.type,
+      tradedAt: row.traded_at,
+      publishedAt: row.published_at,
+      sizeMin: row.size_min ? Number(row.size_min) : null,
+      sizeMax: row.size_max ? Number(row.size_max) : null,
+      price: row.price ? Number(row.price) : null,
+      politician: {
+        id: row.Politician.id,
+        name: row.Politician.name,
+        party: row.Politician.party,
+        state: row.Politician.state,
+      },
+      issuer: {
+        id: row.Issuer.id,
+        name: row.Issuer.name,
+        ticker: row.Issuer.ticker,
+      },
+    }));
 }
