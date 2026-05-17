@@ -6,6 +6,7 @@ import LanguageToggle from '@/components/LanguageToggle';
 import LanguageInitializer from '@/components/LanguageInitializer';
 import GlobalSearch from '@/components/GlobalSearch';
 import SiteFooter from '@/components/marketing/SiteFooter';
+import MobileHandoffScript from '@/components/MobileHandoffScript';
 import { getSubstackPublishUrl } from '@/lib/siteConfig';
 
 export const dynamic = 'force-dynamic';
@@ -38,6 +39,7 @@ export default async function RootLayout({
   return (
     <html lang="zh-Hant" suppressHydrationWarning>
       <head>
+        <MobileHandoffScript />
         {/* Google tag (gtag.js) */}
         <Script async src="https://www.googletagmanager.com/gtag/js?id=G-XNQRFHM8EV" />
         <Script id="google-analytics">

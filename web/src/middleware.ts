@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { cookies } from "next/headers";
-import { isMobileUserAgent } from "@/lib/mobileUserAgent";
+import { isMobileRequest } from "@/lib/mobileRequest";
 
 const DESKTOP_COOKIE = "if_desktop";
 const MOBILE_APP_PREFIX = "/app";
@@ -64,6 +64,13 @@ function mobileAppRedirect(req: NextRequest): NextResponse | null {
   const { pathname, search } = req.nextUrl;
   if (!shouldServeMobileApp(pathname)) return null;
 
+  if (req.nextUrl.searchParams.get("mobile") === "1") {
+    const dest = new URL(`/app/${search}`, req.url);
+    const res = NextResponse.redirect(dest);
+    res.cookies.set(DESKTOP_COOKIE, "", { path: "/", maxAge: 0, sameSite: "lax" });
+    return res;
+  }
+
   if (req.nextUrl.searchParams.get("desktop") === "1") {
     const res = NextResponse.next();
     res.cookies.set(DESKTOP_COOKIE, "1", {
@@ -76,7 +83,7 @@ function mobileAppRedirect(req: NextRequest): NextResponse | null {
 
   if (req.cookies.get(DESKTOP_COOKIE)?.value === "1") return null;
 
-  if (!isMobileUserAgent(req.headers.get("user-agent"))) return null;
+  if (!isMobileRequest(req)) return null;
 
   const dest = new URL(`${MOBILE_APP_PREFIX}/${search}`, req.url);
   return NextResponse.redirect(dest);
