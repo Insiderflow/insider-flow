@@ -7,18 +7,33 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model IndustrySubsector {
+  slug          String   @id
+  parent_sector String
+  name_en       String
+  sort_order    Int      @default(0)
+  created_at    DateTime @default(now())
+  Issuer        Issuer[]
+
+  @@index([parent_sector])
+  @@map("IndustrySubsector")
+}
+
 model Issuer {
-  id         String   @id
-  ticker     String?
-  name       String
-  sector     String?
-  country    String?
-  created_at DateTime @default(now())
-  Trade      Trade[]
+  id              String             @id
+  ticker          String?
+  name            String
+  sector          String?
+  sub_sector_slug String?
+  country         String?
+  created_at      DateTime           @default(now())
+  Trade           Trade[]
+  IndustrySubsector IndustrySubsector? @relation(fields: [sub_sector_slug], references: [slug], onDelete: SetNull)
 
   @@index([ticker])
   @@index([name])
   @@index([sector])
+  @@index([sub_sector_slug])
   @@map("Issuer")
 }
 
