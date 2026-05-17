@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "rm -rf .next && prisma generate && next build",
-    "build:mobile-app": "cd ../IphoneAppUI && npm run build:embed",
-    "build:all": "npm run build:mobile-app && npm run build",
+    "build:mobile-app": "cd ../IphoneAppUI && npm ci && npm run build:embed",
+    "build": "npm run build:mobile-app && rm -rf .next && prisma generate && next build",
+    "build:all": "npm run build",
     "start": "next start",
     "lint": "eslint src e2e",
     "prisma:generate": "prisma generate",

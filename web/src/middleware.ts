@@ -78,7 +78,7 @@ function mobileAppRedirect(req: NextRequest): NextResponse | null {
 
   if (!isMobileUserAgent(req.headers.get("user-agent"))) return null;
 
-  const dest = new URL(`${MOBILE_APP_PREFIX}${search}`, req.url);
+  const dest = new URL(`${MOBILE_APP_PREFIX}/${search}`, req.url);
   return NextResponse.redirect(dest);
 }
 
