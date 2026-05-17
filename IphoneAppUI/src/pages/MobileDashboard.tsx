@@ -14,6 +14,7 @@ import InsiderDashboard from "@/components/insider/InsiderDashboard";
 import MobileHeader from "@/components/layout/MobileHeader";
 import PullToRefresh from "@/components/layout/PullToRefresh";
 import { fetchDashboard, type Period } from "@/data/mockData";
+import { visibleDashboardKpis } from "@/lib/dashboardKpis";
 import { useDataMode } from "@/context/DataModeContext";
 import { useLanguage } from "@/i18n/LanguageContext";
 
@@ -86,7 +87,7 @@ export default function MobileDashboard() {
         <div className="shimmer-loading mx-4 mt-6 h-8 w-40 rounded-lg" />
         <div className="mx-4 mt-4 h-32 rounded-card shimmer-loading" />
         <div className="mx-4 mt-4 grid grid-cols-2 gap-2">
-          {[0, 1, 2, 3].map((i) => (
+          {[0, 1].map((i) => (
             <div key={i} className="h-24 rounded-card shimmer-loading" />
           ))}
         </div>
@@ -129,7 +130,7 @@ export default function MobileDashboard() {
             <section>
               <h2 className="section-title mb-3 px-1">{t.sections.overview}</h2>
               <div className="flex flex-wrap gap-2">
-                {data.kpis.map((kpi, i) => (
+                {visibleDashboardKpis(data.kpis).map((kpi, i) => (
                   <KpiCard key={kpi.id} item={kpi} index={i} />
                 ))}
               </div>

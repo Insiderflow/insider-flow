@@ -5,6 +5,7 @@ import InsiderHighlightCard from "./InsiderHighlightCard";
 import IndustryChainPreviewCard from "@/components/dashboard/IndustryChainPreviewCard";
 import InsiderIndustrySection from "./InsiderIndustrySection";
 import type { DashboardPayload, Period } from "@/data/mockData";
+import { visibleDashboardKpis } from "@/lib/dashboardKpis";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 interface InsiderDashboardProps {
@@ -24,7 +25,7 @@ export default function InsiderDashboard({ data, period }: InsiderDashboardProps
       <section>
         <h2 className="section-title mb-3 px-1">{t.sections.overview}</h2>
         <div className="flex flex-wrap gap-2">
-          {data.kpis.map((kpi, i) => (
+          {visibleDashboardKpis(data.kpis).map((kpi, i) => (
             <KpiCard key={kpi.id} item={kpi} index={i} />
           ))}
         </div>

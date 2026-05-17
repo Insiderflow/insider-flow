@@ -22,6 +22,7 @@ import IndustryComparePage from "@/pages/IndustryComparePage";
 import WatchlistPage from "@/pages/settings/WatchlistPage";
 import NotificationSettingsPage from "@/pages/settings/NotificationSettingsPage";
 import LegalDocumentPage from "@/pages/LegalDocumentPage";
+import AnalyticsPageView from "@/components/analytics/AnalyticsPageView";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -36,6 +37,7 @@ export default function App() {
         <AuthProvider>
           <QueryClientProvider client={queryClient}>
             <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, "") || undefined}>
+              <AnalyticsPageView />
               <Routes>
                 <Route path="/login" element={<MobileLogin />} />
                 <Route element={<AppShell />}>
