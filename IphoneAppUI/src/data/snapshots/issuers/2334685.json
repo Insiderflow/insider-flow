@@ -1,0 +1,92 @@
+{
+  "id": "2334685",
+  "name": "ATLAS ENERGY SOLUTIONS IN",
+  "ticker": "CAESI",
+  "sector": "Energy",
+  "sectorKey": "Energy",
+  "country": null,
+  "stats": {
+    "trades": 4,
+    "politicians": 1,
+    "totalVolume": 15725000,
+    "maxTrade": 25000000,
+    "lastTraded": "2026-04-30"
+  },
+  "chartPoints": [
+    {
+      "period": "2024-Q1",
+      "buyVolume": 0,
+      "sellVolume": 375000,
+      "sp500Close": 5254.35009765625
+    },
+    {
+      "period": "2024-Q2",
+      "buyVolume": 0,
+      "sellVolume": 175000,
+      "sp500Close": 5460.47998046875
+    },
+    {
+      "period": "2026-Q1",
+      "buyVolume": 175000,
+      "sellVolume": 0,
+      "sp500Close": 6528.52001953125
+    },
+    {
+      "period": "2026-Q2",
+      "buyVolume": 15000000,
+      "sellVolume": 0,
+      "sp500Close": 7408.5
+    }
+  ],
+  "topPoliticians": [
+    {
+      "id": "R000614",
+      "name": "Chip Roy",
+      "party": "R",
+      "trades": 4,
+      "totalVolume": 15725000
+    }
+  ],
+  "recentTrades": [
+    {
+      "id": "trade_R000614_2334685_1778600583579_mkvjdp",
+      "politicianId": "R000614",
+      "politicianName": "Chip Roy",
+      "party": "R",
+      "side": "buy",
+      "amount": 25000000,
+      "tradeDate": "2026-04-30",
+      "filedAt": "2026-05-11"
+    },
+    {
+      "id": "trade_R000614_2334685_1778600579662_tnp650",
+      "politicianId": "R000614",
+      "politicianName": "Chip Roy",
+      "party": "R",
+      "side": "buy",
+      "amount": 250000,
+      "tradeDate": "2026-03-30",
+      "filedAt": "2026-05-12"
+    },
+    {
+      "id": "20003774081",
+      "politicianId": "R000614",
+      "politicianName": "Chip Roy",
+      "party": "R",
+      "side": "sell",
+      "amount": 250000,
+      "tradeDate": "2024-05-19",
+      "filedAt": "2024-06-10"
+    },
+    {
+      "id": "20003771810",
+      "politicianId": "R000614",
+      "politicianName": "Chip Roy",
+      "party": "R",
+      "side": "sell",
+      "amount": 500000,
+      "tradeDate": "2024-03-11",
+      "filedAt": "2024-04-11"
+    }
+  ]
+}

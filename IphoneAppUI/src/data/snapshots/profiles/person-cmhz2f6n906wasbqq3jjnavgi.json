@@ -1,0 +1,64 @@
+{
+  "id": "person-cmhz2f6n906wasbqq3jjnavgi",
+  "entityType": "person",
+  "name": "Bulgarino Nicole E",
+  "ticker": "HDSN",
+  "companyName": "Hudson Technologies Inc /Ny",
+  "roles": [
+    "Dir"
+  ],
+  "logoLabel": "BU",
+  "logoColor": "#6366F1",
+  "allTradesCount": 4,
+  "activity": {
+    "totalBuys": 343995,
+    "buyTxCount": 4,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmp82nhhg00ni4ey49qh0ph3t",
+      "ticker": "HDSN",
+      "side": "buy",
+      "amount": 2665,
+      "shares": 550,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82cze1008osbqxy16s3ts1",
+      "ticker": "HDSN",
+      "side": "buy",
+      "amount": 2665,
+      "shares": 550,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp831doi015esbtz741rttu2",
+      "ticker": "HDSN",
+      "side": "buy",
+      "amount": 2665,
+      "shares": 550,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmhz2fny30jyfsbqqwbqf9ny4",
+      "ticker": "AMRC",
+      "side": "buy",
+      "amount": 336000,
+      "shares": 15000,
+      "filedAt": "2023-11-13",
+      "tradeDate": "2023-11-10"
+    }
+  ]
+}

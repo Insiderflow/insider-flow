@@ -1,0 +1,300 @@
+{
+  "id": "company-txo",
+  "entityType": "company",
+  "name": "Txo Partners, L.P.",
+  "ticker": "TXO",
+  "companyName": "Txo Partners, L.P.",
+  "roles": [
+    "Issuer"
+  ],
+  "logoLabel": "TX",
+  "logoColor": "#166534",
+  "displayName": "TXO PARTNERS, L.P. / US",
+  "exchange": "NYSE",
+  "industry": "—",
+  "description": "Txo Partners, L.P.",
+  "dataAsOf": "2026-05-15",
+  "allTradesCount": 19,
+  "activity": {
+    "totalBuys": 94092120,
+    "buyTxCount": 19,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 16.18947368421053,
+    "avgSell": 0,
+    "plan10b5Pct": 0,
+    "ppSalePct": 0,
+    "buyRangeMin": 12.97,
+    "buyRangeMax": 20,
+    "sellRangeMin": null,
+    "sellRangeMax": null
+  },
+  "companyTrades": [
+    {
+      "id": "cmp82mhd900ec4ey4kn3j4cpy",
+      "ticker": "TXO",
+      "insiderName": "Simpson Bob R",
+      "personId": "person-cmhz2f6n706t3sbqqyircw3y6",
+      "side": "buy",
+      "amount": 3911980,
+      "shares": 301597,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82hf6o00odsbqxg9yx2ki8",
+      "ticker": "TXO",
+      "insiderName": "Simpson Bob R",
+      "personId": "person-cmhz2f6n706t3sbqqyircw3y6",
+      "side": "buy",
+      "amount": 3911980,
+      "shares": 301597,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82y65b00w8sbtzzlacnc4j",
+      "ticker": "TXO",
+      "insiderName": "Simpson Bob R",
+      "personId": "person-cmhz2f6n706t3sbqqyircw3y6",
+      "side": "buy",
+      "amount": 3911980,
+      "shares": 301597,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmhz2g1p30x4ssbqq2q4b34wl",
+      "ticker": "TXO",
+      "insiderName": "Adams William H III",
+      "personId": "person-cmhz2f6n906wxsbqq3ya2lbd8",
+      "side": "buy",
+      "amount": 152600,
+      "shares": 10000,
+      "filedAt": "2025-05-20",
+      "tradeDate": "2025-05-19"
+    },
+    {
+      "id": "cmhz2g0wd0wn5sbqqx9yhb9ad",
+      "ticker": "TXO",
+      "insiderName": "King Luther Jr",
+      "personId": "person-cmhz2fbi10akbsbqq7dt5dd8k",
+      "side": "buy",
+      "amount": 7500000,
+      "shares": 500000,
+      "filedAt": "2025-05-19",
+      "tradeDate": "2025-05-15"
+    },
+    {
+      "id": "cmhz2g1p40x69sbqqcs912t0h",
+      "ticker": "TXO",
+      "insiderName": "Simpson Bob R",
+      "personId": "person-cmhz2f6n706t3sbqqyircw3y6",
+      "side": "buy",
+      "amount": 33750000,
+      "shares": 2250000,
+      "filedAt": "2025-05-15",
+      "tradeDate": "2025-05-15"
+    },
+    {
+      "id": "cmhz2g1p50x6ksbqql1k0kk3o",
+      "ticker": "TXO",
+      "insiderName": "Massaro Lawrence S",
+      "personId": "person-cmhz2fc2y0aposbqqhbarp0e9",
+      "side": "buy",
+      "amount": 300000,
+      "shares": 20000,
+      "filedAt": "2025-05-15",
+      "tradeDate": "2025-05-15"
+    },
+    {
+      "id": "cmhz2g1p10x3ssbqqjd9mut1n",
+      "ticker": "TXO",
+      "insiderName": "Hutton Keith A",
+      "personId": "person-cmhz2f76n0752sbqqbz71sw2f",
+      "side": "buy",
+      "amount": 10500000,
+      "shares": 700000,
+      "filedAt": "2025-05-15",
+      "tradeDate": "2025-05-15"
+    },
+    {
+      "id": "cmhz2g1os0wvpsbqq2ouf4mwp",
+      "ticker": "TXO",
+      "insiderName": "Kevil Phillip R",
+      "personId": "person-cmhz2f6n806tysbqqwc94p5on",
+      "side": "buy",
+      "amount": 45540,
+      "shares": 3000,
+      "filedAt": "2025-05-15",
+      "tradeDate": "2025-05-14"
+    },
+    {
+      "id": "cmhz2fw950rensbqq1303ob79",
+      "ticker": "TXO",
+      "insiderName": "Adams William H III",
+      "personId": "person-cmhz2f6n906wxsbqq3ya2lbd8",
+      "side": "buy",
+      "amount": 236998,
+      "shares": 14000,
+      "filedAt": "2025-01-02",
+      "tradeDate": "2024-12-30"
+    },
+    {
+      "id": "cmhz2fxnt0tgssbqqme8plqsx",
+      "ticker": "TXO",
+      "insiderName": "Hutton Keith A",
+      "personId": "person-cmhz2f76n0752sbqqbz71sw2f",
+      "side": "buy",
+      "amount": 1905020,
+      "shares": 120000,
+      "filedAt": "2024-12-19",
+      "tradeDate": "2024-12-17"
+    },
+    {
+      "id": "cmhz2fxnq0tdysbqqdtifhkhg",
+      "ticker": "TXO",
+      "insiderName": "Kevil Phillip R",
+      "personId": "person-cmhz2f6n806tysbqqwc94p5on",
+      "side": "buy",
+      "amount": 32150,
+      "shares": 2000,
+      "filedAt": "2024-12-18",
+      "tradeDate": "2024-12-16"
+    },
+    {
+      "id": "cmhz2frzw0o6ksbqq5c87ezkl",
+      "ticker": "TXO",
+      "insiderName": "Hutton Keith A",
+      "personId": "person-cmhz2f76n0752sbqqbz71sw2f",
+      "side": "buy",
+      "amount": 17560000,
+      "shares": 878000,
+      "filedAt": "2024-06-28",
+      "tradeDate": "2024-06-28"
+    },
+    {
+      "id": "cmhz2frzr0o1msbqqdfkx766v",
+      "ticker": "TXO",
+      "insiderName": "Simpson Bob R",
+      "personId": "person-cmhz2f6n706t3sbqqyircw3y6",
+      "side": "buy",
+      "amount": 2000000,
+      "shares": 100000,
+      "filedAt": "2024-06-28",
+      "tradeDate": "2024-06-28"
+    },
+    {
+      "id": "cmhz2fnxv0jrwsbqqx81or1ay",
+      "ticker": "TXO",
+      "insiderName": "Kevil Phillip R",
+      "personId": "person-cmhz2f6n806tysbqqwc94p5on",
+      "side": "buy",
+      "amount": 25024,
+      "shares": 1360,
+      "filedAt": "2023-11-22",
+      "tradeDate": "2023-11-21"
+    },
+    {
+      "id": "cmhz2for50kmmsbqq4anrh0p0",
+      "ticker": "TXO",
+      "insiderName": "Hutton Keith A",
+      "personId": "person-cmhz2f76n0752sbqqbz71sw2f",
+      "side": "buy",
+      "amount": 3168000,
+      "shares": 180000,
+      "filedAt": "2023-11-14",
+      "tradeDate": "2023-11-10"
+    },
+    {
+      "id": "cmhz2fny50k0bsbqqluqrzi09",
+      "ticker": "TXO",
+      "insiderName": "Adams William H III",
+      "personId": "person-cmhz2f6n906wxsbqq3ya2lbd8",
+      "side": "buy",
+      "amount": 264000,
+      "shares": 15000,
+      "filedAt": "2023-11-14",
+      "tradeDate": "2023-11-10"
+    },
+    {
+      "id": "cmhz2fnye0k8csbqqr6gswcy0",
+      "ticker": "TXO",
+      "insiderName": "Kevil Phillip R",
+      "personId": "person-cmhz2f6n806tysbqqwc94p5on",
+      "side": "buy",
+      "amount": 43584,
+      "shares": 2400,
+      "filedAt": "2023-11-14",
+      "tradeDate": "2023-11-10"
+    },
+    {
+      "id": "cmhz2fnxs0jpesbqqnha1eo80",
+      "ticker": "TXO",
+      "insiderName": "Simpson Bob R",
+      "personId": "person-cmhz2f6n706t3sbqqyircw3y6",
+      "side": "buy",
+      "amount": 4873264,
+      "shares": 276890,
+      "filedAt": "2023-11-14",
+      "tradeDate": "2023-11-10"
+    }
+  ],
+  "insiders": [
+    {
+      "id": "person-cmhz2f6n706t3sbqqyircw3y6",
+      "name": "Simpson Bob R",
+      "role": "Dir, 10%",
+      "tradesCount": 6
+    },
+    {
+      "id": "person-cmhz2f6n906wxsbqq3ya2lbd8",
+      "name": "Adams William H III",
+      "role": "See Remarks",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmhz2fbi10akbsbqq7dt5dd8k",
+      "name": "King Luther Jr",
+      "role": "See below",
+      "tradesCount": 1
+    },
+    {
+      "id": "person-cmhz2fc2y0aposbqqhbarp0e9",
+      "name": "Massaro Lawrence S",
+      "role": "Dir",
+      "tradesCount": 1
+    },
+    {
+      "id": "person-cmhz2f76n0752sbqqbz71sw2f",
+      "name": "Hutton Keith A",
+      "role": "See Remarks",
+      "tradesCount": 4
+    },
+    {
+      "id": "person-cmhz2f6n806tysbqqwc94p5on",
+      "name": "Kevil Phillip R",
+      "role": "See Remarks",
+      "tradesCount": 4
+    }
+  ],
+  "tradeTypes": {
+    "buy": 100,
+    "sell": 0,
+    "option": 0,
+    "proposed": 0
+  },
+  "aiSummary": {
+    "headline": "19 buys and 0 sells for TXO.",
+    "bullets": [
+      "19 Form 4 filings on record."
+    ],
+    "sentiment": "bullish"
+  },
+  "eventStudies": [],
+  "recentTrades": []
+}

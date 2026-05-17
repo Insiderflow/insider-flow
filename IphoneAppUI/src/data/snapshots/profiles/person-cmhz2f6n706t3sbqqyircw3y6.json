@@ -1,0 +1,82 @@
+{
+  "id": "person-cmhz2f6n706t3sbqqyircw3y6",
+  "entityType": "person",
+  "name": "Simpson Bob R",
+  "ticker": "TXO",
+  "companyName": "Txo Partners, L.P.",
+  "roles": [
+    "Dir, 10%"
+  ],
+  "logoLabel": "SI",
+  "logoColor": "#6366F1",
+  "allTradesCount": 6,
+  "activity": {
+    "totalBuys": 52359204,
+    "buyTxCount": 6,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmp82mhd900ec4ey4kn3j4cpy",
+      "ticker": "TXO",
+      "side": "buy",
+      "amount": 3911980,
+      "shares": 301597,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82hf6o00odsbqxg9yx2ki8",
+      "ticker": "TXO",
+      "side": "buy",
+      "amount": 3911980,
+      "shares": 301597,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82y65b00w8sbtzzlacnc4j",
+      "ticker": "TXO",
+      "side": "buy",
+      "amount": 3911980,
+      "shares": 301597,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmhz2g1p40x69sbqqcs912t0h",
+      "ticker": "TXO",
+      "side": "buy",
+      "amount": 33750000,
+      "shares": 2250000,
+      "filedAt": "2025-05-15",
+      "tradeDate": "2025-05-15"
+    },
+    {
+      "id": "cmhz2frzr0o1msbqqdfkx766v",
+      "ticker": "TXO",
+      "side": "buy",
+      "amount": 2000000,
+      "shares": 100000,
+      "filedAt": "2024-06-28",
+      "tradeDate": "2024-06-28"
+    },
+    {
+      "id": "cmhz2fnxs0jpesbqqnha1eo80",
+      "ticker": "TXO",
+      "side": "buy",
+      "amount": 4873264,
+      "shares": 276890,
+      "filedAt": "2023-11-14",
+      "tradeDate": "2023-11-10"
+    }
+  ]
+}

@@ -1,0 +1,306 @@
+{
+  "id": "H001082",
+  "entityType": "person",
+  "name": "Kevin Hern",
+  "ticker": "GS",
+  "companyName": "The Goldman Sachs Group Inc",
+  "roles": [
+    "Financials"
+  ],
+  "seatSector": "Financials",
+  "imageUrl": "/images/politicians/H001082_Kevin_Hern.jpg",
+  "logoLabel": "KE",
+  "logoColor": "#EF4444",
+  "allTradesCount": 332,
+  "activity": {
+    "totalBuys": 1515000,
+    "buyTxCount": 3,
+    "totalSells": 47,
+    "sellTxCount": 47,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "trade_H001082_432035_1778081391051_rui36c",
+      "ticker": "GS",
+      "side": "sell",
+      "amount": 500000,
+      "shares": 0,
+      "filedAt": "2026-05-06",
+      "tradeDate": "2026-04-29"
+    },
+    {
+      "id": "trade_H001082_431593_1775484770510_p1bhg5",
+      "ticker": "EXAS",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-04-06",
+      "tradeDate": "2026-03-24"
+    },
+    {
+      "id": "trade_H001082_433309_1775484770510_82wi2b",
+      "ticker": "LCMDT",
+      "side": "sell",
+      "amount": 50000,
+      "shares": 0,
+      "filedAt": "2026-04-06",
+      "tradeDate": "2026-03-20"
+    },
+    {
+      "id": "trade_H001082_434171_1775484773388_qpnkqw",
+      "ticker": "TROW",
+      "side": "sell",
+      "amount": 50000,
+      "shares": 0,
+      "filedAt": "2026-04-06",
+      "tradeDate": "2026-03-20"
+    },
+    {
+      "id": "trade_H001082_434201_1775484773388_ww3a1z",
+      "ticker": "PLD",
+      "side": "sell",
+      "amount": 100000,
+      "shares": 0,
+      "filedAt": "2026-04-06",
+      "tradeDate": "2026-03-20"
+    },
+    {
+      "id": "trade_H001082_435219_1775484773388_bbxj6d",
+      "ticker": "TXN",
+      "side": "sell",
+      "amount": 1000000,
+      "shares": 0,
+      "filedAt": "2026-04-06",
+      "tradeDate": "2026-03-18"
+    },
+    {
+      "id": "trade_H001082_2335373_1775484773388_zxhsn0",
+      "ticker": "",
+      "side": "sell",
+      "amount": 1000000,
+      "shares": 0,
+      "filedAt": "2026-04-06",
+      "tradeDate": "2026-03-18"
+    },
+    {
+      "id": "trade_H001082_430041_1775484770510_cfirh9",
+      "ticker": "BDX",
+      "side": "sell",
+      "amount": 50000,
+      "shares": 0,
+      "filedAt": "2026-04-06",
+      "tradeDate": "2026-03-17"
+    },
+    {
+      "id": "trade_H001082_430911_1775484770510_cpx1v0",
+      "ticker": "CMCSA",
+      "side": "sell",
+      "amount": 50000,
+      "shares": 0,
+      "filedAt": "2026-04-06",
+      "tradeDate": "2026-03-17"
+    },
+    {
+      "id": "trade_H001082_432508_1775484770510_iiqjp6",
+      "ticker": "IVZ",
+      "side": "sell",
+      "amount": 50000,
+      "shares": 0,
+      "filedAt": "2026-04-06",
+      "tradeDate": "2026-03-17"
+    },
+    {
+      "id": "trade_H001082_430865_1775484770510_h30g0h",
+      "ticker": "CTSH",
+      "side": "sell",
+      "amount": 50000,
+      "shares": 0,
+      "filedAt": "2026-04-06",
+      "tradeDate": "2026-03-17"
+    },
+    {
+      "id": "trade_H001082_2332760_1775484770510_o676s0",
+      "ticker": "MUA",
+      "side": "sell",
+      "amount": 100000,
+      "shares": 0,
+      "filedAt": "2026-04-06",
+      "tradeDate": "2026-03-17"
+    }
+  ],
+  "party": "R",
+  "state": "Oklahoma",
+  "chamber": "",
+  "politicianCharts": {
+    "stats": {
+      "totalTrades": 332,
+      "issuerCount": 8,
+      "totalVolume": 40440500,
+      "maxTrade": 5000000,
+      "lastTraded": "2026-05-06"
+    },
+    "topIssuers": [
+      {
+        "issuerId": "432293",
+        "count": 22,
+        "name": "The Home Depot Inc",
+        "ticker": "HD",
+        "sector": "非必需消費"
+      },
+      {
+        "issuerId": "429469",
+        "count": 22,
+        "name": "Accenture P",
+        "ticker": "LCACN",
+        "sector": "資訊科技"
+      },
+      {
+        "issuerId": "433382",
+        "count": 16,
+        "name": "Microsoft Corp",
+        "ticker": "MSFT",
+        "sector": "資訊科技"
+      },
+      {
+        "issuerId": "433243",
+        "count": 13,
+        "name": "Masimo Corp",
+        "ticker": "MASI",
+        "sector": "醫療保健"
+      },
+      {
+        "issuerId": "435544",
+        "count": 12,
+        "name": "US TREASURY BILLS",
+        "ticker": null,
+        "sector": "N/A"
+      },
+      {
+        "issuerId": "432782",
+        "count": 9,
+        "name": "Johnson & Johnson",
+        "ticker": "JNJ",
+        "sector": "醫療保健"
+      },
+      {
+        "issuerId": "435219",
+        "count": 9,
+        "name": "Texas Instruments Inc",
+        "ticker": "TXN",
+        "sector": "資訊科技"
+      },
+      {
+        "issuerId": "431260",
+        "count": 9,
+        "name": "Devon Energy Corp",
+        "ticker": "DVN",
+        "sector": "能源"
+      }
+    ],
+    "chartPoints": [
+      {
+        "period": "2022-Q3",
+        "buyVolume": 24000,
+        "sellVolume": 0,
+        "sp500Close": 3585.6201171875
+      },
+      {
+        "period": "2022-Q4",
+        "buyVolume": 225000,
+        "sellVolume": 863000,
+        "sp500Close": 3839.5
+      },
+      {
+        "period": "2023-Q1",
+        "buyVolume": 3960000,
+        "sellVolume": 9352500,
+        "sp500Close": 4109.31005859375
+      },
+      {
+        "period": "2023-Q2",
+        "buyVolume": 950500,
+        "sellVolume": 758000,
+        "sp500Close": 4450.3798828125
+      },
+      {
+        "period": "2023-Q3",
+        "buyVolume": 942500,
+        "sellVolume": 1300000,
+        "sp500Close": 4288.0498046875
+      },
+      {
+        "period": "2023-Q4",
+        "buyVolume": 926500,
+        "sellVolume": 949000,
+        "sp500Close": 4769.830078125
+      },
+      {
+        "period": "2024-Q1",
+        "buyVolume": 184500,
+        "sellVolume": 391000,
+        "sp500Close": 5254.35009765625
+      },
+      {
+        "period": "2024-Q2",
+        "buyVolume": 527000,
+        "sellVolume": 750000,
+        "sp500Close": 5460.47998046875
+      },
+      {
+        "period": "2024-Q3",
+        "buyVolume": 16000,
+        "sellVolume": 1125000,
+        "sp500Close": 5762.47998046875
+      },
+      {
+        "period": "2024-Q4",
+        "buyVolume": 191000,
+        "sellVolume": 4732500,
+        "sp500Close": 5881.6298828125
+      },
+      {
+        "period": "2025-Q1",
+        "buyVolume": 175000,
+        "sellVolume": 750000,
+        "sp500Close": 5611.85009765625
+      },
+      {
+        "period": "2025-Q2",
+        "buyVolume": 3375000,
+        "sellVolume": 0,
+        "sp500Close": 6204.9501953125
+      },
+      {
+        "period": "2025-Q3",
+        "buyVolume": 0,
+        "sellVolume": 1560000,
+        "sp500Close": 6688.4599609375
+      },
+      {
+        "period": "2025-Q4",
+        "buyVolume": 750000,
+        "sellVolume": 1144000,
+        "sp500Close": 6845.5
+      },
+      {
+        "period": "2026-Q1",
+        "buyVolume": 375000,
+        "sellVolume": 2585500,
+        "sp500Close": 6528.52001953125
+      },
+      {
+        "period": "2026-Q2",
+        "buyVolume": 0,
+        "sellVolume": 375000,
+        "sp500Close": 7408.5
+      }
+    ]
+  }
+}

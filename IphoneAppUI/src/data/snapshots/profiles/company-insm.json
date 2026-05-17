@@ -1,0 +1,284 @@
+{
+  "id": "company-insm",
+  "entityType": "company",
+  "name": "Insmed Inc",
+  "ticker": "INSM",
+  "companyName": "Insmed Inc",
+  "roles": [
+    "Issuer"
+  ],
+  "logoLabel": "IN",
+  "logoColor": "#166534",
+  "displayName": "INSMED INC / US",
+  "exchange": "NYSE",
+  "industry": "—",
+  "description": "Insmed Inc",
+  "dataAsOf": "2026-05-15",
+  "allTradesCount": 17,
+  "activity": {
+    "totalBuys": 587494,
+    "buyTxCount": 2,
+    "totalSells": -17366037,
+    "sellTxCount": 15,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 42.985,
+    "avgSell": 0,
+    "plan10b5Pct": 0,
+    "ppSalePct": 0,
+    "buyRangeMin": 19.29,
+    "buyRangeMax": 66.68,
+    "sellRangeMin": null,
+    "sellRangeMax": null
+  },
+  "companyTrades": [
+    {
+      "id": "cmp82n1pt00jf4ey4xybpgwtf",
+      "ticker": "INSM",
+      "insiderName": "Bonstein Sara",
+      "personId": "person-cmp82decs00a9sbqxp85zynko",
+      "side": "sell",
+      "amount": -961041,
+      "shares": -8272,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82n28c00jl4ey4s0wyijh7",
+      "ticker": "INSM",
+      "insiderName": "Adsett Roger",
+      "personId": "person-cmp82ddbb00a5sbqxfo9q6w22",
+      "side": "sell",
+      "amount": -678143,
+      "shares": -5837,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82n2vq00jr4ey4qyrtatru",
+      "ticker": "INSM",
+      "insiderName": "Flammer Martina M.D.",
+      "personId": "person-cmp82dfe500adsbqx19y6h1pi",
+      "side": "sell",
+      "amount": -2128892,
+      "shares": -18333,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82n3e900jx4ey4l426ip8e",
+      "ticker": "INSM",
+      "insiderName": "Smith Michael Alexander",
+      "personId": "person-cmp82dhlb00alsbqxuhi1rv2y",
+      "side": "sell",
+      "amount": -477384,
+      "shares": -4109,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82n44k00k34ey4d5ddhceg",
+      "ticker": "INSM",
+      "insiderName": "Lewis William",
+      "personId": "person-cmp82dgjx00ahsbqxj6fev9kd",
+      "side": "sell",
+      "amount": -1543219,
+      "shares": -13283,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82dhzv00ansbqxdl35e9sa",
+      "ticker": "INSM",
+      "insiderName": "Smith Michael Alexander",
+      "personId": "person-cmp82dhlb00alsbqxuhi1rv2y",
+      "side": "sell",
+      "amount": -477384,
+      "shares": -4109,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82ddq100a7sbqx5q5aa0ce",
+      "ticker": "INSM",
+      "insiderName": "Adsett Roger",
+      "personId": "person-cmp82ddbb00a5sbqxfo9q6w22",
+      "side": "sell",
+      "amount": -678143,
+      "shares": -5837,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82derf00absbqx0m3uym5f",
+      "ticker": "INSM",
+      "insiderName": "Bonstein Sara",
+      "personId": "person-cmp82decs00a9sbqxp85zynko",
+      "side": "sell",
+      "amount": -961041,
+      "shares": -8272,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82dfqp00afsbqx34g6n0l6",
+      "ticker": "INSM",
+      "insiderName": "Flammer Martina M.D.",
+      "personId": "person-cmp82dfe500adsbqx19y6h1pi",
+      "side": "sell",
+      "amount": -2128892,
+      "shares": -18333,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82dgyd00ajsbqx9b3dxpih",
+      "ticker": "INSM",
+      "insiderName": "Lewis William",
+      "personId": "person-cmp82dgjx00ahsbqxj6fev9kd",
+      "side": "sell",
+      "amount": -1543219,
+      "shares": -13283,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82zz38011bsbtzz7xw2x25",
+      "ticker": "INSM",
+      "insiderName": "Bonstein Sara",
+      "personId": "person-cmp82decs00a9sbqxp85zynko",
+      "side": "sell",
+      "amount": -961041,
+      "shares": -8272,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp83014q011hsbtzexnw9bl7",
+      "ticker": "INSM",
+      "insiderName": "Adsett Roger",
+      "personId": "person-cmp82ddbb00a5sbqxfo9q6w22",
+      "side": "sell",
+      "amount": -678143,
+      "shares": -5837,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp83034s011nsbtzm6xkh2ca",
+      "ticker": "INSM",
+      "insiderName": "Flammer Martina M.D.",
+      "personId": "person-cmp82dfe500adsbqx19y6h1pi",
+      "side": "sell",
+      "amount": -2128892,
+      "shares": -18333,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp8305cn011tsbtzxgozt6cl",
+      "ticker": "INSM",
+      "insiderName": "Smith Michael Alexander",
+      "personId": "person-cmp82dhlb00alsbqxuhi1rv2y",
+      "side": "sell",
+      "amount": -477384,
+      "shares": -4109,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp8307l0011zsbtzg1xkl6rz",
+      "ticker": "INSM",
+      "insiderName": "Lewis William",
+      "personId": "person-cmp82dgjx00ahsbqxj6fev9kd",
+      "side": "sell",
+      "amount": -1543219,
+      "shares": -13283,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmhz2g0wf0woisbqqvjys2scb",
+      "ticker": "INSM",
+      "insiderName": "Desjardins Clarissa",
+      "personId": "person-cmhz2fbi20akksbqqbok8sgdk",
+      "side": "buy",
+      "amount": 201694,
+      "shares": 3025,
+      "filedAt": "2025-05-22",
+      "tradeDate": "2025-05-20"
+    },
+    {
+      "id": "cmhz2flj90hoxsbqqxiiav5tt",
+      "ticker": "INSM",
+      "insiderName": "Sharoky Melvin Md",
+      "personId": "person-cmhz2f5dw060nsbqq5pl99vsa",
+      "side": "buy",
+      "amount": 385800,
+      "shares": 20000,
+      "filedAt": "2023-05-17",
+      "tradeDate": "2023-05-15"
+    }
+  ],
+  "insiders": [
+    {
+      "id": "person-cmp82decs00a9sbqxp85zynko",
+      "name": "Bonstein Sara",
+      "role": "CFO",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmp82ddbb00a5sbqxfo9q6w22",
+      "name": "Adsett Roger",
+      "role": "COO",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmp82dfe500adsbqx19y6h1pi",
+      "name": "Flammer Martina M.D.",
+      "role": "Chief Medical Officer",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmp82dhlb00alsbqxuhi1rv2y",
+      "name": "Smith Michael Alexander",
+      "role": "GC",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmp82dgjx00ahsbqxj6fev9kd",
+      "name": "Lewis William",
+      "role": "Chair, CEO",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmhz2fbi20akksbqqbok8sgdk",
+      "name": "Desjardins Clarissa",
+      "role": "Dir",
+      "tradesCount": 1
+    },
+    {
+      "id": "person-cmhz2f5dw060nsbqq5pl99vsa",
+      "name": "Sharoky Melvin Md",
+      "role": "Dir",
+      "tradesCount": 1
+    }
+  ],
+  "tradeTypes": {
+    "buy": 12,
+    "sell": 88,
+    "option": 0,
+    "proposed": 0
+  },
+  "aiSummary": {
+    "headline": "2 buys and 15 sells for INSM.",
+    "bullets": [
+      "17 Form 4 filings on record."
+    ],
+    "sentiment": "bearish"
+  },
+  "eventStudies": [],
+  "recentTrades": []
+}

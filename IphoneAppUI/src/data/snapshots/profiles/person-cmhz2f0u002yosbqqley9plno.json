@@ -1,0 +1,73 @@
+{
+  "id": "person-cmhz2f0u002yosbqqley9plno",
+  "entityType": "person",
+  "name": "Slayen Howard T",
+  "ticker": "AEHR",
+  "companyName": "Aehr Test Systems",
+  "roles": [
+    "Dir"
+  ],
+  "logoLabel": "SL",
+  "logoColor": "#6366F1",
+  "allTradesCount": 5,
+  "activity": {
+    "totalBuys": 338140,
+    "buyTxCount": 2,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmp82jvps001e4ey43s4lclve",
+      "ticker": "AEHR",
+      "side": "sell",
+      "amount": -714154,
+      "shares": -6819,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82uobm00m2sbtzgj80z8cj",
+      "ticker": "AEHR",
+      "side": "sell",
+      "amount": -714154,
+      "shares": -6819,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82ap97000qsbqxgci26nts",
+      "ticker": "AEHR",
+      "side": "sell",
+      "amount": -714154,
+      "shares": -6819,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmhz2fvj00qwssbqq8p6h5ps1",
+      "ticker": "AEHR",
+      "side": "buy",
+      "amount": 310000,
+      "shares": 20000,
+      "filedAt": "2024-08-02",
+      "tradeDate": "2024-08-02"
+    },
+    {
+      "id": "cmhz2ff7w0b9hsbqqnyjrlcpi",
+      "ticker": "AEHR",
+      "side": "buy",
+      "amount": 28140,
+      "shares": 700,
+      "filedAt": "2023-10-11",
+      "tradeDate": "2023-10-11"
+    }
+  ]
+}

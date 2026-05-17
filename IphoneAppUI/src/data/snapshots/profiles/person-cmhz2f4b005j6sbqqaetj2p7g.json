@@ -1,0 +1,37 @@
+{
+  "id": "person-cmhz2f4b005j6sbqqaetj2p7g",
+  "entityType": "person",
+  "name": "Abbatecola Vincent P",
+  "ticker": "HDSN",
+  "companyName": "Hudson Technologies Inc /Ny",
+  "roles": [
+    "Dir"
+  ],
+  "logoLabel": "AB",
+  "logoColor": "#6366F1",
+  "allTradesCount": 1,
+  "activity": {
+    "totalBuys": 8270,
+    "buyTxCount": 1,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2fkuh0gm0sbqqb7m7yqgw",
+      "ticker": "HDSN",
+      "side": "buy",
+      "amount": 8270,
+      "shares": 1000,
+      "filedAt": "2023-03-15",
+      "tradeDate": "2023-03-14"
+    }
+  ]
+}

@@ -1,0 +1,211 @@
+{
+  "id": "company-crwd",
+  "entityType": "company",
+  "name": "Crowdstrike Holdings, Inc.",
+  "ticker": "CRWD",
+  "companyName": "Crowdstrike Holdings, Inc.",
+  "roles": [
+    "Issuer"
+  ],
+  "logoLabel": "CR",
+  "logoColor": "#166534",
+  "displayName": "CROWDSTRIKE HOLDINGS, INC. / US",
+  "exchange": "NYSE",
+  "industry": "—",
+  "description": "Crowdstrike Holdings, Inc.",
+  "dataAsOf": "2026-05-15",
+  "allTradesCount": 12,
+  "activity": {
+    "totalBuys": 4901658,
+    "buyTxCount": 3,
+    "totalSells": -26521559,
+    "sellTxCount": 9,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 141.43333333333334,
+    "avgSell": 0,
+    "plan10b5Pct": 0,
+    "ppSalePct": 0,
+    "buyRangeMin": 96.19,
+    "buyRangeMax": 229.11,
+    "sellRangeMin": null,
+    "sellRangeMax": null
+  },
+  "companyTrades": [
+    {
+      "id": "cmp82jvc6001b4ey4kq05syil",
+      "ticker": "CRWD",
+      "insiderName": "Kurtz George",
+      "personId": "person-cmox888z6004g3ff02jefeor2",
+      "side": "sell",
+      "amount": -1115594,
+      "shares": -1928,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82jw4q001h4ey4vwcu3ow7",
+      "ticker": "CRWD",
+      "insiderName": "Gandhi Sameer K",
+      "personId": "person-cmp82blsq003vsbqxj45aczhn",
+      "side": "sell",
+      "amount": -5800313,
+      "shares": -10000,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82jwdu001k4ey40t3jx6b9",
+      "ticker": "CRWD",
+      "insiderName": "Kurtz George",
+      "personId": "person-cmox888z6004g3ff02jefeor2",
+      "side": "sell",
+      "amount": -1708607,
+      "shares": -3072,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82unc000lzsbtzd2bfvvas",
+      "ticker": "CRWD",
+      "insiderName": "Kurtz George",
+      "personId": "person-cmox888z6004g3ff02jefeor2",
+      "side": "sell",
+      "amount": -1115594,
+      "shares": -1928,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82upd800m5sbtzlf3tn1px",
+      "ticker": "CRWD",
+      "insiderName": "Gandhi Sameer K",
+      "personId": "person-cmp82blsq003vsbqxj45aczhn",
+      "side": "sell",
+      "amount": -5800313,
+      "shares": -10000,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82uqkl00m8sbtzer9vv1ac",
+      "ticker": "CRWD",
+      "insiderName": "Kurtz George",
+      "personId": "person-cmox888z6004g3ff02jefeor2",
+      "side": "sell",
+      "amount": -1708607,
+      "shares": -3072,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82bn8k0040sbqxv4emff4p",
+      "ticker": "CRWD",
+      "insiderName": "Kurtz George",
+      "personId": "person-cmox888z6004g3ff02jefeor2",
+      "side": "sell",
+      "amount": -1115594,
+      "shares": -1928,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82bm71003xsbqx9b0hu8ez",
+      "ticker": "CRWD",
+      "insiderName": "Gandhi Sameer K",
+      "personId": "person-cmp82blsq003vsbqxj45aczhn",
+      "side": "sell",
+      "amount": -5800313,
+      "shares": -10000,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmox888zf004i3ff01qyj66ax",
+      "ticker": "CRWD",
+      "insiderName": "Kurtz George",
+      "personId": "person-cmox888z6004g3ff02jefeor2",
+      "side": "sell",
+      "amount": -2356624,
+      "shares": -5000,
+      "filedAt": "2026-05-07",
+      "tradeDate": "2026-05-05"
+    },
+    {
+      "id": "cmhz2fiqv0erxsbqqudkwkgdl",
+      "ticker": "CRWD",
+      "insiderName": "Austin Roxanne S",
+      "personId": "person-cmhz2f25203sbsbqqx7uhuhv6",
+      "side": "buy",
+      "amount": 1534500,
+      "shares": 15500,
+      "filedAt": "2023-02-14",
+      "tradeDate": "2023-01-05"
+    },
+    {
+      "id": "cmhz2fir20f08sbqq59vvsvj9",
+      "ticker": "CRWD",
+      "insiderName": "Henry Shawn",
+      "personId": "person-cmhz2f3re04tdsbqq8munxleu",
+      "side": "buy",
+      "amount": 458,
+      "shares": 2,
+      "filedAt": "2023-02-10",
+      "tradeDate": "2022-04-18"
+    },
+    {
+      "id": "cmhz2fh9j0cslsbqq4ss9bh4r",
+      "ticker": "CRWD",
+      "insiderName": "Austin Roxanne S",
+      "personId": "person-cmhz2f25203sbsbqqx7uhuhv6",
+      "side": "buy",
+      "amount": 3366700,
+      "shares": 35000,
+      "filedAt": "2023-01-06",
+      "tradeDate": "2023-01-05"
+    }
+  ],
+  "insiders": [
+    {
+      "id": "person-cmox888z6004g3ff02jefeor2",
+      "name": "Kurtz George",
+      "role": "Pres, CEO",
+      "tradesCount": 6
+    },
+    {
+      "id": "person-cmp82blsq003vsbqxj45aczhn",
+      "name": "Gandhi Sameer K",
+      "role": "Dir",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmhz2f25203sbsbqqx7uhuhv6",
+      "name": "Austin Roxanne S",
+      "role": "Dir",
+      "tradesCount": 2
+    },
+    {
+      "id": "person-cmhz2f3re04tdsbqq8munxleu",
+      "name": "Henry Shawn",
+      "role": "CHIEF SECURITY OFFICER",
+      "tradesCount": 1
+    }
+  ],
+  "tradeTypes": {
+    "buy": 25,
+    "sell": 75,
+    "option": 0,
+    "proposed": 0
+  },
+  "aiSummary": {
+    "headline": "3 buys and 9 sells for CRWD.",
+    "bullets": [
+      "12 Form 4 filings on record."
+    ],
+    "sentiment": "bearish"
+  },
+  "eventStudies": [],
+  "recentTrades": []
+}

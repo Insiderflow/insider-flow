@@ -1,0 +1,55 @@
+{
+  "id": "person-cmp82d108008usbqxyeemjv7g",
+  "entityType": "person",
+  "name": "Gaglione Kenneth",
+  "ticker": "HDSN",
+  "companyName": "Hudson Technologies Inc /Ny",
+  "roles": [
+    "Pres, CEO"
+  ],
+  "logoLabel": "GA",
+  "logoColor": "#6366F1",
+  "allTradesCount": 3,
+  "activity": {
+    "totalBuys": 73425,
+    "buyTxCount": 3,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmp82nixi00nu4ey44nosw93f",
+      "ticker": "HDSN",
+      "side": "buy",
+      "amount": 24475,
+      "shares": 5000,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82d1eu008wsbqxe5ys70hl",
+      "ticker": "HDSN",
+      "side": "buy",
+      "amount": 24475,
+      "shares": 5000,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp831i3t015qsbtzzvuq03er",
+      "ticker": "HDSN",
+      "side": "buy",
+      "amount": 24475,
+      "shares": 5000,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    }
+  ]
+}

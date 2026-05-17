@@ -1,0 +1,73 @@
+{
+  "id": "person-cmhz2f3rg04xssbqqyp5lyxjl",
+  "entityType": "person",
+  "name": "Apeiron Investment Group Ltd.",
+  "ticker": "ATAI",
+  "companyName": "Atai Life Sciences N.V.",
+  "roles": [
+    "10%"
+  ],
+  "logoLabel": "AP",
+  "logoColor": "#6366F1",
+  "allTradesCount": 5,
+  "activity": {
+    "totalBuys": 45878990,
+    "buyTxCount": 5,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2g3b00yr6sbqqm9xv65ww",
+      "ticker": "ATAI",
+      "side": "buy",
+      "amount": 19000000,
+      "shares": 8675799,
+      "filedAt": "2025-08-18",
+      "tradeDate": "2025-08-14"
+    },
+    {
+      "id": "cmhz2g0320vdisbqq0bhd1bzl",
+      "ticker": "ATAI",
+      "side": "buy",
+      "amount": 2520000,
+      "shares": 1800000,
+      "filedAt": "2025-03-24",
+      "tradeDate": "2025-03-24"
+    },
+    {
+      "id": "cmhz2fygt0tyrsbqqpvuc0o1l",
+      "ticker": "ATAI",
+      "side": "buy",
+      "amount": 22755008,
+      "shares": 10835718,
+      "filedAt": "2025-02-19",
+      "tradeDate": "2025-02-14"
+    },
+    {
+      "id": "cmhz2fkuj0go8sbqqx583jklr",
+      "ticker": "ATAI",
+      "side": "buy",
+      "amount": 1600443,
+      "shares": 1214297,
+      "filedAt": "2023-03-29",
+      "tradeDate": "2023-03-29"
+    },
+    {
+      "id": "cmhz2fje10fahsbqqztanbhnj",
+      "ticker": "SNSE",
+      "side": "buy",
+      "amount": 3539,
+      "shares": 2200,
+      "filedAt": "2023-02-27",
+      "tradeDate": "2023-02-23"
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "id": "company-bac",
+  "entityType": "company",
+  "name": "Bank of America Corp /De/",
+  "ticker": "BAC",
+  "companyName": "Bank of America Corp /De/",
+  "roles": [
+    "Issuer"
+  ],
+  "logoLabel": "BA",
+  "logoColor": "#166534",
+  "displayName": "BANK OF AMERICA CORP /DE/ / US",
+  "exchange": "NYSE",
+  "industry": "—",
+  "description": "Bank of America Corp /De/",
+  "dataAsOf": "2026-05-07",
+  "allTradesCount": 2,
+  "activity": {
+    "totalBuys": 656250,
+    "buyTxCount": 1,
+    "totalSells": -6718702,
+    "sellTxCount": 1,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 26.25,
+    "avgSell": 0,
+    "plan10b5Pct": 0,
+    "ppSalePct": 0,
+    "buyRangeMin": 26.25,
+    "buyRangeMax": 26.25,
+    "sellRangeMin": null,
+    "sellRangeMax": null
+  },
+  "companyTrades": [
+    {
+      "id": "cmox88pu4009m3ff057qljq9f",
+      "ticker": "BAC",
+      "insiderName": "Greener Geoffrey S",
+      "personId": "person-cmox88ptv009k3ff0e4vgic65",
+      "side": "sell",
+      "amount": -6718702,
+      "shares": -126756,
+      "filedAt": "2026-05-07",
+      "tradeDate": "2026-05-05"
+    },
+    {
+      "id": "cmhz2for10kj9sbqqncl8fov3",
+      "ticker": "BAC",
+      "insiderName": "Woods Thomas D",
+      "personId": "person-cmhz2f6nd073ssbqqcnhxmh2b",
+      "side": "buy",
+      "amount": 656250,
+      "shares": 25000,
+      "filedAt": "2023-11-03",
+      "tradeDate": "2023-11-01"
+    }
+  ],
+  "insiders": [
+    {
+      "id": "person-cmox88ptv009k3ff0e4vgic65",
+      "name": "Greener Geoffrey S",
+      "role": "Chief Risk Officer",
+      "tradesCount": 1
+    },
+    {
+      "id": "person-cmhz2f6nd073ssbqqcnhxmh2b",
+      "name": "Woods Thomas D",
+      "role": "Dir",
+      "tradesCount": 1
+    }
+  ],
+  "tradeTypes": {
+    "buy": 50,
+    "sell": 50,
+    "option": 0,
+    "proposed": 0
+  },
+  "aiSummary": {
+    "headline": "1 buys and 1 sells for BAC.",
+    "bullets": [
+      "2 Form 4 filings on record."
+    ],
+    "sentiment": "mixed"
+  },
+  "eventStudies": [],
+  "recentTrades": []
+}

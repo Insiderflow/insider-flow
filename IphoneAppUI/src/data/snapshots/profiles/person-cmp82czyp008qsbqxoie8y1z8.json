@@ -1,0 +1,82 @@
+{
+  "id": "person-cmp82czyp008qsbqxoie8y1z8",
+  "entityType": "person",
+  "name": "Feeler Jeffrey R",
+  "ticker": "TTEK",
+  "companyName": "Tetra Tech Inc",
+  "roles": [
+    "Dir"
+  ],
+  "logoLabel": "FE",
+  "logoColor": "#6366F1",
+  "allTradesCount": 6,
+  "activity": {
+    "totalBuys": 225813,
+    "buyTxCount": 6,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmp82kklc00784ey4rnpc1k66",
+      "ticker": "TTEK",
+      "side": "buy",
+      "amount": 50179,
+      "shares": 1900,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-15"
+    },
+    {
+      "id": "cmp82nijq00nr4ey41o9sgw7y",
+      "ticker": "HDSN",
+      "side": "buy",
+      "amount": 25092,
+      "shares": 5100,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82d0dd008ssbqxr5spnayg",
+      "ticker": "HDSN",
+      "side": "buy",
+      "amount": 25092,
+      "shares": 5100,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82ha3f00nvsbqxv7mri68f",
+      "ticker": "TTEK",
+      "side": "buy",
+      "amount": 50179,
+      "shares": 1900,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-15"
+    },
+    {
+      "id": "cmp82wokk00rwsbtzv3xqq9qq",
+      "ticker": "TTEK",
+      "side": "buy",
+      "amount": 50179,
+      "shares": 1900,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-15"
+    },
+    {
+      "id": "cmp831gye015nsbtzg149qxv5",
+      "ticker": "HDSN",
+      "side": "buy",
+      "amount": 25092,
+      "shares": 5100,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    }
+  ]
+}

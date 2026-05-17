@@ -1,0 +1,288 @@
+{
+  "id": "D000032",
+  "entityType": "person",
+  "name": "Byron Donalds",
+  "ticker": "LLY",
+  "companyName": "Eli Lilly and Co",
+  "roles": [
+    "Health Care"
+  ],
+  "seatSector": "Health Care",
+  "imageUrl": "/images/politicians/D000032_Byron_Donalds.jpg",
+  "logoLabel": "BY",
+  "logoColor": "#EF4444",
+  "allTradesCount": 139,
+  "activity": {
+    "totalBuys": 490000,
+    "buyTxCount": 27,
+    "totalSells": 23,
+    "sellTxCount": 23,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "trade_D000032_433036_1778858389133_tjmhbn",
+      "ticker": "LLY",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-14",
+      "tradeDate": "2026-04-02"
+    },
+    {
+      "id": "trade_D000032_432490_1778858389133_fig540",
+      "ticker": "INTU",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-14",
+      "tradeDate": "2026-04-02"
+    },
+    {
+      "id": "trade_D000032_430534_1778858389133_fwz8jd",
+      "ticker": "CMG",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-14",
+      "tradeDate": "2026-04-02"
+    },
+    {
+      "id": "trade_D000032_433236_1778858389133_dp9kr1",
+      "ticker": "MRVL",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-14",
+      "tradeDate": "2026-04-02"
+    },
+    {
+      "id": "trade_D000032_433589_1775747888301_w90m66",
+      "ticker": "NFLX",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-04-09",
+      "tradeDate": "2026-03-20"
+    },
+    {
+      "id": "trade_D000032_435339_1775747892103_2sst53",
+      "ticker": "TTD",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-04-09",
+      "tradeDate": "2026-03-20"
+    },
+    {
+      "id": "trade_D000032_433981_1775747892103_6t9gk6",
+      "ticker": "PYPL",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-04-09",
+      "tradeDate": "2026-03-13"
+    },
+    {
+      "id": "trade_D000032_434658_1773078109664_rux4nx",
+      "ticker": "NOW",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-03-09",
+      "tradeDate": "2026-02-10"
+    },
+    {
+      "id": "trade_D000032_430264_1773078109664_a5fop2",
+      "ticker": "BRO",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-03-09",
+      "tradeDate": "2026-02-10"
+    },
+    {
+      "id": "trade_D000032_435339_1773078109664_s14fl2",
+      "ticker": "TTD",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-03-09",
+      "tradeDate": "2026-02-10"
+    },
+    {
+      "id": "trade_D000032_433981_1773078109664_awdx3v",
+      "ticker": "PYPL",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-03-09",
+      "tradeDate": "2026-02-10"
+    },
+    {
+      "id": "trade_D000032_433952_1771004074169_umso9m",
+      "ticker": "PH",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-02-13",
+      "tradeDate": "2026-01-08"
+    }
+  ],
+  "party": "R",
+  "state": "Florida",
+  "chamber": "",
+  "politicianCharts": {
+    "stats": {
+      "totalTrades": 139,
+      "issuerCount": 8,
+      "totalVolume": 1179000,
+      "maxTrade": 100000,
+      "lastTraded": "2026-05-14"
+    },
+    "topIssuers": [
+      {
+        "issuerId": "435339",
+        "count": 6,
+        "name": "The Trade Desk Inc",
+        "ticker": "TTD",
+        "sector": "通訊服務"
+      },
+      {
+        "issuerId": "430264",
+        "count": 5,
+        "name": "Brown & Brown Inc",
+        "ticker": "BRO",
+        "sector": "金融"
+      },
+      {
+        "issuerId": "431833",
+        "count": 4,
+        "name": "Fortinet Inc",
+        "ticker": "FTNT",
+        "sector": "資訊科技"
+      },
+      {
+        "issuerId": "430534",
+        "count": 4,
+        "name": "Chipotle Mexican Grill Inc",
+        "ticker": "CMG",
+        "sector": "非必需消費"
+      },
+      {
+        "issuerId": "434194",
+        "count": 4,
+        "name": "The Progressive Corp",
+        "ticker": "PGR",
+        "sector": "金融"
+      },
+      {
+        "issuerId": "2334966",
+        "count": 3,
+        "name": "TRADEWEB MARKETS",
+        "ticker": "INCTW",
+        "sector": "金融"
+      },
+      {
+        "issuerId": "431700",
+        "count": 3,
+        "name": "First Citizens BancShares Inc",
+        "ticker": "FCNCA",
+        "sector": "金融"
+      },
+      {
+        "issuerId": "2332051",
+        "count": 3,
+        "name": "Arch Coal Inc",
+        "ticker": "ARCH",
+        "sector": "原材料"
+      }
+    ],
+    "chartPoints": [
+      {
+        "period": "2022-Q4",
+        "buyVolume": 48000,
+        "sellVolume": 48000,
+        "sp500Close": 3839.5
+      },
+      {
+        "period": "2023-Q1",
+        "buyVolume": 32000,
+        "sellVolume": 32000,
+        "sp500Close": 4109.31005859375
+      },
+      {
+        "period": "2023-Q3",
+        "buyVolume": 40000,
+        "sellVolume": 32000,
+        "sp500Close": 4288.0498046875
+      },
+      {
+        "period": "2023-Q4",
+        "buyVolume": 48000,
+        "sellVolume": 48000,
+        "sp500Close": 4769.830078125
+      },
+      {
+        "period": "2024-Q1",
+        "buyVolume": 40000,
+        "sellVolume": 48000,
+        "sp500Close": 5254.35009765625
+      },
+      {
+        "period": "2024-Q2",
+        "buyVolume": 8000,
+        "sellVolume": 8000,
+        "sp500Close": 5460.47998046875
+      },
+      {
+        "period": "2024-Q3",
+        "buyVolume": 16000,
+        "sellVolume": 16000,
+        "sp500Close": 5762.47998046875
+      },
+      {
+        "period": "2025-Q1",
+        "buyVolume": 152000,
+        "sellVolume": 136000,
+        "sp500Close": 5611.85009765625
+      },
+      {
+        "period": "2025-Q2",
+        "buyVolume": 16000,
+        "sellVolume": 16000,
+        "sp500Close": 6204.9501953125
+      },
+      {
+        "period": "2025-Q3",
+        "buyVolume": 16000,
+        "sellVolume": 80000,
+        "sp500Close": 6688.4599609375
+      },
+      {
+        "period": "2025-Q4",
+        "buyVolume": 163000,
+        "sellVolume": 16000,
+        "sp500Close": 6845.5
+      },
+      {
+        "period": "2026-Q1",
+        "buyVolume": 40000,
+        "sellVolume": 48000,
+        "sp500Close": 6528.52001953125
+      },
+      {
+        "period": "2026-Q2",
+        "buyVolume": 16000,
+        "sellVolume": 16000,
+        "sp500Close": 7408.5
+      }
+    ]
+  }
+}

@@ -1,0 +1,299 @@
+{
+  "id": "company-plse",
+  "entityType": "company",
+  "name": "Pulse Biosciences, Inc.",
+  "ticker": "PLSE",
+  "companyName": "Pulse Biosciences, Inc.",
+  "roles": [
+    "Issuer"
+  ],
+  "logoLabel": "PL",
+  "logoColor": "#166534",
+  "displayName": "PULSE BIOSCIENCES, INC. / US",
+  "exchange": "NYSE",
+  "industry": "—",
+  "description": "Pulse Biosciences, Inc.",
+  "dataAsOf": "2026-05-15",
+  "allTradesCount": 22,
+  "activity": {
+    "totalBuys": 118731165,
+    "buyTxCount": 22,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 11.09909090909091,
+    "avgSell": 0,
+    "plan10b5Pct": 0,
+    "ppSalePct": 0,
+    "buyRangeMin": 5.9,
+    "buyRangeMax": 19.69,
+    "sellRangeMin": null,
+    "sellRangeMax": null
+  },
+  "companyTrades": [
+    {
+      "id": "cmp82k239002z4ey4st24c68h",
+      "ticker": "PLSE",
+      "insiderName": "Duggan Robert W",
+      "personId": "person-cmhz2f4ug05nzsbqq0xo1dq83",
+      "side": "buy",
+      "amount": 12999988,
+      "shares": 660233,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-11"
+    },
+    {
+      "id": "cmp82fi0900hysbqx99hc2opx",
+      "ticker": "PLSE",
+      "insiderName": "Duggan Robert W",
+      "personId": "person-cmhz2f4ug05nzsbqq0xo1dq83",
+      "side": "buy",
+      "amount": 12999988,
+      "shares": 660233,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-11"
+    },
+    {
+      "id": "cmp82v85800nnsbtzzbg4kyq4",
+      "ticker": "PLSE",
+      "insiderName": "Duggan Robert W",
+      "personId": "person-cmhz2f4ug05nzsbqq0xo1dq83",
+      "side": "buy",
+      "amount": 12999988,
+      "shares": 660233,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-11"
+    },
+    {
+      "id": "cmhz2g2ia0xuhsbqqucwgtm8d",
+      "ticker": "PLSE",
+      "insiderName": "Duggan Robert W",
+      "personId": "person-cmhz2f4ug05nzsbqq0xo1dq83",
+      "side": "buy",
+      "amount": 2788624,
+      "shares": 192599,
+      "filedAt": "2025-09-12",
+      "tradeDate": "2025-09-10"
+    },
+    {
+      "id": "cmhz2fxns0tg5sbqq9zjo69w4",
+      "ticker": "PLSE",
+      "insiderName": "Duggan Robert W",
+      "personId": "person-cmhz2f4ug05nzsbqq0xo1dq83",
+      "side": "buy",
+      "amount": 949298,
+      "shares": 55256,
+      "filedAt": "2024-12-17",
+      "tradeDate": "2024-12-13"
+    },
+    {
+      "id": "cmhz2fxn70syesbqq2lpb1v0s",
+      "ticker": "PLSE",
+      "insiderName": "Duggan Robert W",
+      "personId": "person-cmhz2f4ug05nzsbqq0xo1dq83",
+      "side": "buy",
+      "amount": 972344,
+      "shares": 56054,
+      "filedAt": "2024-12-13",
+      "tradeDate": "2024-12-11"
+    },
+    {
+      "id": "cmhz2ftlx0pgvsbqqfhn4k8bx",
+      "ticker": "PLSE",
+      "insiderName": "Barrett Burke Thomas",
+      "personId": "person-cmhz2f8sy08kwsbqqw8po5owb",
+      "side": "buy",
+      "amount": 85600,
+      "shares": 10000,
+      "filedAt": "2024-05-22",
+      "tradeDate": "2024-05-20"
+    },
+    {
+      "id": "cmhz2fpki0ld7sbqq8712tpsr",
+      "ticker": "PLSE",
+      "insiderName": "Duggan Robert W",
+      "personId": "person-cmhz2f4ug05nzsbqq0xo1dq83",
+      "side": "buy",
+      "amount": 164691,
+      "shares": 17999,
+      "filedAt": "2023-12-14",
+      "tradeDate": "2023-12-12"
+    },
+    {
+      "id": "cmhz2forg0kw2sbqqeo8m43l4",
+      "ticker": "PLSE",
+      "insiderName": "Duggan Robert W",
+      "personId": "person-cmhz2f4ug05nzsbqq0xo1dq83",
+      "side": "buy",
+      "amount": 843504,
+      "shares": 90118,
+      "filedAt": "2023-12-13",
+      "tradeDate": "2023-12-11"
+    },
+    {
+      "id": "cmhz2fpkg0lc4sbqqdq0j9042",
+      "ticker": "PLSE",
+      "insiderName": "Duggan Robert W",
+      "personId": "person-cmhz2f4ug05nzsbqq0xo1dq83",
+      "side": "buy",
+      "amount": 1112898,
+      "shares": 116656,
+      "filedAt": "2023-12-12",
+      "tradeDate": "2023-12-08"
+    },
+    {
+      "id": "cmhz2forj0kycsbqqalk1q6j3",
+      "ticker": "PLSE",
+      "insiderName": "Duggan Robert W",
+      "personId": "person-cmhz2f4ug05nzsbqq0xo1dq83",
+      "side": "buy",
+      "amount": 687890,
+      "shares": 74852,
+      "filedAt": "2023-12-11",
+      "tradeDate": "2023-12-07"
+    },
+    {
+      "id": "cmhz2forl0l00sbqq4o465cpx",
+      "ticker": "PLSE",
+      "insiderName": "Duggan Robert W",
+      "personId": "person-cmhz2f4ug05nzsbqq0xo1dq83",
+      "side": "buy",
+      "amount": 750286,
+      "shares": 82813,
+      "filedAt": "2023-12-08",
+      "tradeDate": "2023-12-06"
+    },
+    {
+      "id": "cmhz2fpkb0l8jsbqqglbrg88v",
+      "ticker": "PLSE",
+      "insiderName": "Duggan Robert W",
+      "personId": "person-cmhz2f4ug05nzsbqq0xo1dq83",
+      "side": "buy",
+      "amount": 616636,
+      "shares": 66021,
+      "filedAt": "2023-12-07",
+      "tradeDate": "2023-12-05"
+    },
+    {
+      "id": "cmhz2forn0l1usbqqos6sklev",
+      "ticker": "PLSE",
+      "insiderName": "Duggan Robert W",
+      "personId": "person-cmhz2f4ug05nzsbqq0xo1dq83",
+      "side": "buy",
+      "amount": 280260,
+      "shares": 27000,
+      "filedAt": "2023-12-06",
+      "tradeDate": "2023-12-04"
+    },
+    {
+      "id": "cmhz2fpkh0lcpsbqqwq5vlaz8",
+      "ticker": "PLSE",
+      "insiderName": "Duggan Robert W",
+      "personId": "person-cmhz2f4ug05nzsbqq0xo1dq83",
+      "side": "buy",
+      "amount": 413592,
+      "shares": 45600,
+      "filedAt": "2023-12-05",
+      "tradeDate": "2023-12-01"
+    },
+    {
+      "id": "cmhz2fora0kqjsbqqe4zuyfz9",
+      "ticker": "PLSE",
+      "insiderName": "Duggan Robert W",
+      "personId": "person-cmhz2f4ug05nzsbqq0xo1dq83",
+      "side": "buy",
+      "amount": 1385673,
+      "shares": 152944,
+      "filedAt": "2023-12-04",
+      "tradeDate": "2023-11-30"
+    },
+    {
+      "id": "cmhz2fpkj0ldssbqqlnxkinpz",
+      "ticker": "PLSE",
+      "insiderName": "Duggan Robert W",
+      "personId": "person-cmhz2f4ug05nzsbqq0xo1dq83",
+      "side": "buy",
+      "amount": 2049784,
+      "shares": 218600,
+      "filedAt": "2023-12-01",
+      "tradeDate": "2023-11-29"
+    },
+    {
+      "id": "cmhz2fnxr0jo0sbqqf7mndovx",
+      "ticker": "PLSE",
+      "insiderName": "Duggan Robert W",
+      "personId": "person-cmhz2f4ug05nzsbqq0xo1dq83",
+      "side": "buy",
+      "amount": 1117085,
+      "shares": 124397,
+      "filedAt": "2023-11-30",
+      "tradeDate": "2023-11-28"
+    },
+    {
+      "id": "cmhz2fnyb0k4vsbqqpmthju4w",
+      "ticker": "PLSE",
+      "insiderName": "Duggan Robert W",
+      "personId": "person-cmhz2f4ug05nzsbqq0xo1dq83",
+      "side": "buy",
+      "amount": 123470,
+      "shares": 20241,
+      "filedAt": "2023-11-20",
+      "tradeDate": "2023-11-17"
+    },
+    {
+      "id": "cmhz2fnye0k83sbqqwi7o5w9e",
+      "ticker": "PLSE",
+      "insiderName": "Danahy Kevin Patrick",
+      "personId": "person-cmhz2f6nb06zwsbqq1ukh0x2t",
+      "side": "buy",
+      "amount": 35156,
+      "shares": 5393,
+      "filedAt": "2023-11-17",
+      "tradeDate": "2023-11-16"
+    }
+  ],
+  "insiders": [
+    {
+      "id": "person-cmhz2f4ug05nzsbqq0xo1dq83",
+      "name": "Duggan Robert W",
+      "role": "Dir, 10%",
+      "tradesCount": 19
+    },
+    {
+      "id": "person-cmhz2f8sy08kwsbqqw8po5owb",
+      "name": "Barrett Burke Thomas",
+      "role": "Pres, CEO",
+      "tradesCount": 1
+    },
+    {
+      "id": "person-cmhz2f6nb06zwsbqq1ukh0x2t",
+      "name": "Danahy Kevin Patrick",
+      "role": "CEO",
+      "tradesCount": 1
+    },
+    {
+      "id": "person-cmhz2f6n606rusbqqd7yetmj6",
+      "name": "Levinson Mitchell E.",
+      "role": "Chief Strategy Officer",
+      "tradesCount": 1
+    }
+  ],
+  "tradeTypes": {
+    "buy": 100,
+    "sell": 0,
+    "option": 0,
+    "proposed": 0
+  },
+  "aiSummary": {
+    "headline": "22 buys and 0 sells for PLSE.",
+    "bullets": [
+      "22 Form 4 filings on record."
+    ],
+    "sentiment": "bullish"
+  },
+  "eventStudies": [],
+  "recentTrades": []
+}

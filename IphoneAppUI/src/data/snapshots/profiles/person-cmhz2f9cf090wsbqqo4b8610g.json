@@ -1,0 +1,37 @@
+{
+  "id": "person-cmhz2f9cf090wsbqqo4b8610g",
+  "entityType": "person",
+  "name": "Johnson Kevin R",
+  "ticker": "GS",
+  "companyName": "Goldman Sachs Group Inc",
+  "roles": [
+    "Dir"
+  ],
+  "logoLabel": "JO",
+  "logoColor": "#6366F1",
+  "allTradesCount": 1,
+  "activity": {
+    "totalBuys": 1485648,
+    "buyTxCount": 1,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2fvjd0r87sbqq8ix5hcnb",
+      "ticker": "GS",
+      "side": "buy",
+      "amount": 1485648,
+      "shares": 2400,
+      "filedAt": "2025-01-21",
+      "tradeDate": "2025-01-17"
+    }
+  ]
+}

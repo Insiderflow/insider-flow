@@ -1,0 +1,73 @@
+{
+  "id": "person-cmp82h2f900n8sbqx7byeosrl",
+  "entityType": "person",
+  "name": "Sohn Evan",
+  "ticker": "TONX",
+  "companyName": "Ton Strategy Co",
+  "roles": [
+    "Dir"
+  ],
+  "logoLabel": "SO",
+  "logoColor": "#6366F1",
+  "allTradesCount": 5,
+  "activity": {
+    "totalBuys": 49650,
+    "buyTxCount": 5,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmp82ncm500mc4ey49zt82syb",
+      "ticker": "TONX",
+      "side": "buy",
+      "amount": 9930,
+      "shares": 2770,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82h2tb00nasbqxx73ot0nn",
+      "ticker": "TONX",
+      "side": "buy",
+      "amount": 9930,
+      "shares": 2770,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82nocl00p94ey46zqmawyv",
+      "ticker": "TONX",
+      "side": "buy",
+      "amount": 9930,
+      "shares": 2770,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp830zag0148sbtzmzg4y5ew",
+      "ticker": "TONX",
+      "side": "buy",
+      "amount": 9930,
+      "shares": 2770,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp831zj30175sbtzm8xugq07",
+      "ticker": "TONX",
+      "side": "buy",
+      "amount": 9930,
+      "shares": 2770,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    }
+  ]
+}

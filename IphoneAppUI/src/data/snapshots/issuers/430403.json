@@ -1,0 +1,455 @@
+{
+  "id": "430403",
+  "name": "Carrier Global Corp",
+  "ticker": "CARR",
+  "sector": "Industrials",
+  "sectorKey": "Industrials",
+  "country": null,
+  "stats": {
+    "trades": 53,
+    "politicians": 8,
+    "totalVolume": 497500,
+    "maxTrade": 50000,
+    "lastTraded": "2026-05-01"
+  },
+  "chartPoints": [
+    {
+      "period": "2022-Q4",
+      "buyVolume": 0,
+      "sellVolume": 8000,
+      "sp500Close": 3839.5
+    },
+    {
+      "period": "2023-Q2",
+      "buyVolume": 0,
+      "sellVolume": 32500,
+      "sp500Close": 4450.3798828125
+    },
+    {
+      "period": "2023-Q3",
+      "buyVolume": 16000,
+      "sellVolume": 24000,
+      "sp500Close": 4288.0498046875
+    },
+    {
+      "period": "2023-Q4",
+      "buyVolume": 40500,
+      "sellVolume": 32000,
+      "sp500Close": 4769.830078125
+    },
+    {
+      "period": "2024-Q1",
+      "buyVolume": 8000,
+      "sellVolume": 8000,
+      "sp500Close": 5254.35009765625
+    },
+    {
+      "period": "2024-Q2",
+      "buyVolume": 16000,
+      "sellVolume": 32500,
+      "sp500Close": 5460.47998046875
+    },
+    {
+      "period": "2024-Q3",
+      "buyVolume": 8000,
+      "sellVolume": 8000,
+      "sp500Close": 5762.47998046875
+    },
+    {
+      "period": "2025-Q1",
+      "buyVolume": 16000,
+      "sellVolume": 16000,
+      "sp500Close": 5611.85009765625
+    },
+    {
+      "period": "2025-Q2",
+      "buyVolume": 16000,
+      "sellVolume": 8000,
+      "sp500Close": 6204.9501953125
+    },
+    {
+      "period": "2025-Q3",
+      "buyVolume": 8000,
+      "sellVolume": 112000,
+      "sp500Close": 6688.4599609375
+    },
+    {
+      "period": "2025-Q4",
+      "buyVolume": 8000,
+      "sellVolume": 32000,
+      "sp500Close": 6845.5
+    },
+    {
+      "period": "2026-Q1",
+      "buyVolume": 0,
+      "sellVolume": 8000,
+      "sp500Close": 6528.52001953125
+    },
+    {
+      "period": "2026-Q2",
+      "buyVolume": 40000,
+      "sellVolume": 0,
+      "sp500Close": 7408.5
+    }
+  ],
+  "topPoliticians": [
+    {
+      "id": "K000389",
+      "name": "Ro Khanna",
+      "party": "D",
+      "trades": 29,
+      "totalVolume": 305500
+    },
+    {
+      "id": "M001136",
+      "name": "Lisa McClain",
+      "party": "R",
+      "trades": 13,
+      "totalVolume": 104000
+    },
+    {
+      "id": "J000310",
+      "name": "Julie Johnson",
+      "party": "D",
+      "trades": 4,
+      "totalVolume": 32000
+    },
+    {
+      "id": "M001217",
+      "name": "Jared Moskowitz",
+      "party": "D",
+      "trades": 2,
+      "totalVolume": 16000
+    },
+    {
+      "id": "L000560",
+      "name": "Rick Larsen",
+      "party": "D",
+      "trades": 2,
+      "totalVolume": 16000
+    },
+    {
+      "id": "P000595",
+      "name": "Gary Peters",
+      "party": "D",
+      "trades": 1,
+      "totalVolume": 8000
+    },
+    {
+      "id": "S000168",
+      "name": "Maria Elvira Salazar",
+      "party": "R",
+      "trades": 1,
+      "totalVolume": 8000
+    },
+    {
+      "id": "T000278",
+      "name": "Tommy Tuberville",
+      "party": "R",
+      "trades": 1,
+      "totalVolume": 8000
+    }
+  ],
+  "recentTrades": [
+    {
+      "id": "trade_S000168_430403_1778600583579_0p7ahr",
+      "politicianId": "S000168",
+      "politicianName": "Maria Elvira Salazar",
+      "party": "R",
+      "side": "buy",
+      "amount": 15000,
+      "tradeDate": "2026-05-01",
+      "filedAt": "2026-05-11"
+    },
+    {
+      "id": "trade_K000389_430403_1778772216235_zt73z8",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "buy",
+      "amount": 15000,
+      "tradeDate": "2026-04-24",
+      "filedAt": "2026-05-13"
+    },
+    {
+      "id": "trade_K000389_430403_1778772173429_wkom3y",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "buy",
+      "amount": 15000,
+      "tradeDate": "2026-04-13",
+      "filedAt": "2026-05-13"
+    },
+    {
+      "id": "trade_L000560_430403_1776351575420_2by612",
+      "politicianId": "L000560",
+      "politicianName": "Rick Larsen",
+      "party": "D",
+      "side": "buy",
+      "amount": 15000,
+      "tradeDate": "2026-04-07",
+      "filedAt": "2026-04-16"
+    },
+    {
+      "id": "trade_L000560_430403_1777533546016_ra15mj",
+      "politicianId": "L000560",
+      "politicianName": "Rick Larsen",
+      "party": "D",
+      "side": "buy",
+      "amount": 15000,
+      "tradeDate": "2026-04-06",
+      "filedAt": "2026-04-15"
+    },
+    {
+      "id": "trade_K000389_430403_1775830796285_hmk7mb",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2026-03-30",
+      "filedAt": "2026-04-09"
+    },
+    {
+      "id": "trade_J000310_430403_1768656767671_76gwxq",
+      "politicianId": "J000310",
+      "politicianName": "Julie Johnson",
+      "party": "D",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2025-12-18",
+      "filedAt": "2026-01-16"
+    },
+    {
+      "id": "trade_J000310_430403_1765632661003_9gbppt",
+      "politicianId": "J000310",
+      "politicianName": "Julie Johnson",
+      "party": "D",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2025-11-13",
+      "filedAt": "2025-12-12"
+    },
+    {
+      "id": "trade_M001217_430403_1764004329974_medmqx",
+      "politicianId": "M001217",
+      "politicianName": "Jared Moskowitz",
+      "party": "D",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2025-10-10",
+      "filedAt": "2025-11-24"
+    },
+    {
+      "id": "trade_J000310_430403_1763399533928_1lx1co",
+      "politicianId": "J000310",
+      "politicianName": "Julie Johnson",
+      "party": "D",
+      "side": "buy",
+      "amount": 15000,
+      "tradeDate": "2025-10-07",
+      "filedAt": "2025-11-17"
+    },
+    {
+      "id": "trade_J000310_430403_1763399533928_v6025k",
+      "politicianId": "J000310",
+      "politicianName": "Julie Johnson",
+      "party": "D",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2025-10-06",
+      "filedAt": "2025-11-17"
+    },
+    {
+      "id": "trade_M001136_430403_1761401714825_j1m3v2",
+      "politicianId": "M001136",
+      "politicianName": "Lisa McClain",
+      "party": "R",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2025-09-11",
+      "filedAt": "2025-10-23"
+    },
+    {
+      "id": "trade_M001136_430403_1761412321792_111tcb",
+      "politicianId": "M001136",
+      "politicianName": "Lisa McClain",
+      "party": "R",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2025-09-11",
+      "filedAt": "2025-10-23"
+    },
+    {
+      "id": "trade_M001136_430403_1761239566198_8lcdgt",
+      "politicianId": "M001136",
+      "politicianName": "Lisa McClain",
+      "party": "R",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2025-09-11",
+      "filedAt": "2025-10-23"
+    },
+    {
+      "id": "trade_M001136_430403_1761671612265_aacxf0",
+      "politicianId": "M001136",
+      "politicianName": "Lisa McClain",
+      "party": "R",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2025-09-11",
+      "filedAt": "2025-10-23"
+    },
+    {
+      "id": "trade_M001136_430403_1761485241349_bf7b56",
+      "politicianId": "M001136",
+      "politicianName": "Lisa McClain",
+      "party": "R",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2025-09-11",
+      "filedAt": "2025-10-23"
+    },
+    {
+      "id": "trade_M001136_430403_1761661246943_yhos02",
+      "politicianId": "M001136",
+      "politicianName": "Lisa McClain",
+      "party": "R",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2025-09-11",
+      "filedAt": "2025-10-23"
+    },
+    {
+      "id": "trade_M001136_430403_1761658460721_a4wvfc",
+      "politicianId": "M001136",
+      "politicianName": "Lisa McClain",
+      "party": "R",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2025-09-11",
+      "filedAt": "2025-10-23"
+    },
+    {
+      "id": "trade_M001136_430403_1761585218794_27lavw",
+      "politicianId": "M001136",
+      "politicianName": "Lisa McClain",
+      "party": "R",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2025-09-11",
+      "filedAt": "2025-10-23"
+    },
+    {
+      "id": "trade_M001136_430403_1761574769235_fuq4hk",
+      "politicianId": "M001136",
+      "politicianName": "Lisa McClain",
+      "party": "R",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2025-09-11",
+      "filedAt": "2025-10-23"
+    },
+    {
+      "id": "trade_M001136_430403_1761572235624_sw5dbn",
+      "politicianId": "M001136",
+      "politicianName": "Lisa McClain",
+      "party": "R",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2025-09-11",
+      "filedAt": "2025-10-23"
+    },
+    {
+      "id": "trade_M001136_430403_1761498727694_2iy6mq",
+      "politicianId": "M001136",
+      "politicianName": "Lisa McClain",
+      "party": "R",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2025-09-11",
+      "filedAt": "2025-10-23"
+    },
+    {
+      "id": "trade_M001136_430403_1761488234196_6dk4kq",
+      "politicianId": "M001136",
+      "politicianName": "Lisa McClain",
+      "party": "R",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2025-09-11",
+      "filedAt": "2025-10-23"
+    },
+    {
+      "id": "20003790466",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2025-08-25",
+      "filedAt": "2025-09-11"
+    },
+    {
+      "id": "20003791012",
+      "politicianId": "M001136",
+      "politicianName": "Lisa McClain",
+      "party": "R",
+      "side": "buy",
+      "amount": 15000,
+      "tradeDate": "2025-08-03",
+      "filedAt": "2025-09-14"
+    },
+    {
+      "id": "20003790626",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2025-08-03",
+      "filedAt": "2025-09-11"
+    },
+    {
+      "id": "20003787025",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "buy",
+      "amount": 15000,
+      "tradeDate": "2025-05-27",
+      "filedAt": "2025-06-11"
+    },
+    {
+      "id": "20003786128",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2025-04-22",
+      "filedAt": "2025-05-14"
+    },
+    {
+      "id": "20003785017",
+      "politicianId": "M001217",
+      "politicianName": "Jared Moskowitz",
+      "party": "D",
+      "side": "buy",
+      "amount": 15000,
+      "tradeDate": "2025-04-06",
+      "filedAt": "2025-05-11"
+    },
+    {
+      "id": "20003782678",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "buy",
+      "amount": 15000,
+      "tradeDate": "2025-02-24",
+      "filedAt": "2025-03-09"
+    }
+  ]
+}

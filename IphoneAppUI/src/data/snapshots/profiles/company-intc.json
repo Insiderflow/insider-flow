@@ -1,0 +1,194 @@
+{
+  "id": "company-intc",
+  "entityType": "company",
+  "name": "Intel Corp",
+  "ticker": "INTC",
+  "companyName": "Intel Corp",
+  "roles": [
+    "Issuer"
+  ],
+  "logoLabel": "IN",
+  "logoColor": "#166534",
+  "displayName": "INTEL CORP / US",
+  "exchange": "NYSE",
+  "industry": "—",
+  "description": "Intel Corp",
+  "dataAsOf": "2024-11-06",
+  "allTradesCount": 11,
+  "activity": {
+    "totalBuys": 2005491,
+    "buyTxCount": 11,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 31.402727272727272,
+    "avgSell": 0,
+    "plan10b5Pct": 0,
+    "ppSalePct": 0,
+    "buyRangeMin": 20.16,
+    "buyRangeMax": 43.36,
+    "sellRangeMin": null,
+    "sellRangeMax": null
+  },
+  "companyTrades": [
+    {
+      "id": "cmhz2fwz00scosbqqb97ph39v",
+      "ticker": "INTC",
+      "insiderName": "Gelsinger Patrick P",
+      "personId": "person-cmhz2f0u40362sbqqyxrzhgow",
+      "side": "buy",
+      "amount": 251198,
+      "shares": 11150,
+      "filedAt": "2024-11-06",
+      "tradeDate": "2024-11-04"
+    },
+    {
+      "id": "cmhz2fvis0qpzsbqqoof6qw3y",
+      "ticker": "INTC",
+      "insiderName": "Gelsinger Patrick P",
+      "personId": "person-cmhz2f0u40362sbqqyxrzhgow",
+      "side": "buy",
+      "amount": 251946,
+      "shares": 12500,
+      "filedAt": "2024-08-07",
+      "tradeDate": "2024-08-05"
+    },
+    {
+      "id": "cmhz2fqic0m9qsbqqd1df44e1",
+      "ticker": "INTC",
+      "insiderName": "Gelsinger Patrick P",
+      "personId": "person-cmhz2f0u40362sbqqyxrzhgow",
+      "side": "buy",
+      "amount": 119671,
+      "shares": 2800,
+      "filedAt": "2024-02-02",
+      "tradeDate": "2024-02-01"
+    },
+    {
+      "id": "cmhz2fn5g0jkzsbqqakgriikp",
+      "ticker": "INTC",
+      "insiderName": "Gelsinger Patrick P",
+      "personId": "person-cmhz2f0u40362sbqqyxrzhgow",
+      "side": "buy",
+      "amount": 130083,
+      "shares": 3000,
+      "filedAt": "2024-01-30",
+      "tradeDate": "2024-01-29"
+    },
+    {
+      "id": "cmhz2for00kicsbqq551owgq0",
+      "ticker": "INTC",
+      "insiderName": "Gelsinger Patrick P",
+      "personId": "person-cmhz2f0u40362sbqqyxrzhgow",
+      "side": "buy",
+      "amount": 249333,
+      "shares": 6775,
+      "filedAt": "2023-11-02",
+      "tradeDate": "2023-11-01"
+    },
+    {
+      "id": "cmhz2fjej0fpwsbqq9e8mnlva",
+      "ticker": "INTC",
+      "insiderName": "Ishrak Omar",
+      "personId": "person-cmhz2f3rk054zsbqqdo4hhpco",
+      "side": "buy",
+      "amount": 2412,
+      "shares": 86,
+      "filedAt": "2023-08-10",
+      "tradeDate": "2023-01-30"
+    },
+    {
+      "id": "cmhz2fk4v0gc6sbqq0o8q9mol",
+      "ticker": "INTC",
+      "insiderName": "Gelsinger Patrick P",
+      "personId": "person-cmhz2f0u40362sbqqyxrzhgow",
+      "side": "buy",
+      "amount": 133343,
+      "shares": 3850,
+      "filedAt": "2023-08-04",
+      "tradeDate": "2023-08-02"
+    },
+    {
+      "id": "cmhz2fk4f0fyisbqq08i1r13x",
+      "ticker": "INTC",
+      "insiderName": "Gelsinger Patrick P",
+      "personId": "person-cmhz2f0u40362sbqqyxrzhgow",
+      "side": "buy",
+      "amount": 116586,
+      "shares": 3250,
+      "filedAt": "2023-08-02",
+      "tradeDate": "2023-07-31"
+    },
+    {
+      "id": "cmhz2fje00f9usbqqfuxado2z",
+      "ticker": "INTC",
+      "insiderName": "Gelsinger Patrick P",
+      "personId": "person-cmhz2f0u40362sbqqyxrzhgow",
+      "side": "buy",
+      "amount": 249081,
+      "shares": 9700,
+      "filedAt": "2023-02-24",
+      "tradeDate": "2023-02-23"
+    },
+    {
+      "id": "cmhz2fiqw0escsbqqsje3gxuk",
+      "ticker": "INTC",
+      "insiderName": "Zinsner David",
+      "personId": "person-cmhz2f38304p3sbqq7j3d17pm",
+      "side": "buy",
+      "amount": 251389,
+      "shares": 9050,
+      "filedAt": "2023-02-02",
+      "tradeDate": "2023-01-30"
+    },
+    {
+      "id": "cmhz2fjdt0f4asbqqxis1ywyz",
+      "ticker": "INTC",
+      "insiderName": "Gelsinger Patrick P",
+      "personId": "person-cmhz2f0u40362sbqqyxrzhgow",
+      "side": "buy",
+      "amount": 250449,
+      "shares": 9000,
+      "filedAt": "2023-02-02",
+      "tradeDate": "2023-01-31"
+    }
+  ],
+  "insiders": [
+    {
+      "id": "person-cmhz2f0u40362sbqqyxrzhgow",
+      "name": "Gelsinger Patrick P",
+      "role": "Dir",
+      "tradesCount": 9
+    },
+    {
+      "id": "person-cmhz2f3rk054zsbqqdo4hhpco",
+      "name": "Ishrak Omar",
+      "role": "Dir",
+      "tradesCount": 1
+    },
+    {
+      "id": "person-cmhz2f38304p3sbqq7j3d17pm",
+      "name": "Zinsner David",
+      "role": "EVP, CFO",
+      "tradesCount": 1
+    }
+  ],
+  "tradeTypes": {
+    "buy": 100,
+    "sell": 0,
+    "option": 0,
+    "proposed": 0
+  },
+  "aiSummary": {
+    "headline": "11 buys and 0 sells for INTC.",
+    "bullets": [
+      "11 Form 4 filings on record."
+    ],
+    "sentiment": "bullish"
+  },
+  "eventStudies": [],
+  "recentTrades": []
+}

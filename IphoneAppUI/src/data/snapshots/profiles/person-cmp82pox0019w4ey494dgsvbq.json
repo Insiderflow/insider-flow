@@ -1,0 +1,46 @@
+{
+  "id": "person-cmp82pox0019w4ey494dgsvbq",
+  "entityType": "person",
+  "name": "Olsen Sarah Josephine",
+  "ticker": "TONX",
+  "companyName": "Ton Strategy Co",
+  "roles": [
+    "CFO, COO"
+  ],
+  "logoLabel": "OL",
+  "logoColor": "#6366F1",
+  "allTradesCount": 2,
+  "activity": {
+    "totalBuys": 53866,
+    "buyTxCount": 2,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmp82pox7019y4ey4m1sr25na",
+      "ticker": "TONX",
+      "side": "buy",
+      "amount": 26933,
+      "shares": 7440,
+      "filedAt": "2026-05-14",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82summ00hzsbtzso0sayxk",
+      "ticker": "TONX",
+      "side": "buy",
+      "amount": 26933,
+      "shares": 7440,
+      "filedAt": "2026-05-14",
+      "tradeDate": "2026-05-14"
+    }
+  ]
+}

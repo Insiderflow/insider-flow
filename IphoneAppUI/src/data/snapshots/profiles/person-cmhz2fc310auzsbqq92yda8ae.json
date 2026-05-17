@@ -1,0 +1,37 @@
+{
+  "id": "person-cmhz2fc310auzsbqq92yda8ae",
+  "entityType": "person",
+  "name": "Stotz Manuel",
+  "ticker": "TONX",
+  "companyName": "Ton Strategy Co",
+  "roles": [
+    "Dir, 10%"
+  ],
+  "logoLabel": "ST",
+  "logoColor": "#6366F1",
+  "allTradesCount": 1,
+  "activity": {
+    "totalBuys": 497602,
+    "buyTxCount": 1,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2g2i50xqlsbqq6hw3z45d",
+      "ticker": "TONX",
+      "side": "buy",
+      "amount": 497602,
+      "shares": 70000,
+      "filedAt": "2025-09-29",
+      "tradeDate": "2025-09-29"
+    }
+  ]
+}

@@ -2,21 +2,33 @@ import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { getSessionUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
+import { resolveCheckoutPriceId, type BillingPlan } from '@/lib/stripePrices';
 
 export async function POST(req: NextRequest) {
   try {
     console.log('Checkout request received');
-    const user = await getSessionUser();
+    const user = await getSessionUser(req);
     if (!user) {
       console.error('No user found');
       return NextResponse.json({ error: '請先登入' }, { status: 401 });
     }
 
 
-    const { priceId } = await req.json();
+    const body = await req.json();
+    const requestedPlan =
+      body?.plan === 'yearly' || body?.plan === 'monthly' ? (body.plan as BillingPlan) : undefined;
+    const plan: BillingPlan | undefined = requestedPlan;
+    const priceId = resolveCheckoutPriceId({
+      plan,
+      priceId: typeof body?.priceId === 'string' ? body.priceId : undefined,
+    });
+    const returnUrl =
+      typeof body?.return_url === 'string' && body.return_url.startsWith('http')
+        ? body.return_url
+        : null;
 
     if (!priceId) {
-      return NextResponse.json({ error: 'priceId is required' }, { status: 400 });
+      return NextResponse.json({ error: 'payment_config' }, { status: 500 });
     }
 
     if (!process.env.STRIPE_SECRET_KEY) {
@@ -57,8 +69,12 @@ export async function POST(req: NextRequest) {
         },
       ],
       allow_promotion_codes: true,
-      success_url: `${req.nextUrl.origin}/account?success=true`,
-      cancel_url: `${req.nextUrl.origin}/upgrade?canceled=true`,
+      success_url: returnUrl
+        ? `${returnUrl}${returnUrl.includes('?') ? '&' : '?'}success=true`
+        : `${req.nextUrl.origin}/account?success=true`,
+      cancel_url: returnUrl
+        ? `${returnUrl}${returnUrl.includes('?') ? '&' : '?'}canceled=true`
+        : `${req.nextUrl.origin}/upgrade?canceled=true`,
       metadata: {
         user_id: user.id,
       },

@@ -1,0 +1,136 @@
+{
+  "id": "person-cmp82gge900lesbqxrtmvn60j",
+  "entityType": "person",
+  "name": "Millennium Management LLC",
+  "ticker": "SNSE",
+  "companyName": "Sensei Biotherapeutics, Inc.",
+  "roles": [
+    "10%"
+  ],
+  "logoLabel": "MI",
+  "logoColor": "#6366F1",
+  "allTradesCount": 14,
+  "activity": {
+    "totalBuys": 2824806,
+    "buyTxCount": 7,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmp82mqei00gl4ey4z7d3uvgr",
+      "ticker": "SNSE",
+      "side": "buy",
+      "amount": 141364,
+      "shares": 4215,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-04-02"
+    },
+    {
+      "id": "cmp82mqub00go4ey4gaf2hr73",
+      "ticker": "SNSE",
+      "side": "sell",
+      "amount": -538114,
+      "shares": -17076,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-04-02"
+    },
+    {
+      "id": "cmp82mrqo00h04ey4otjq5co4",
+      "ticker": "SNSE",
+      "side": "buy",
+      "amount": 382100,
+      "shares": 12180,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-03-31"
+    },
+    {
+      "id": "cmp82ms5h00h34ey4q200yy4c",
+      "ticker": "SNSE",
+      "side": "sell",
+      "amount": -76949,
+      "shares": -2741,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-03-31"
+    },
+    {
+      "id": "cmp82msta00h94ey40121q1fs",
+      "ticker": "SNSE",
+      "side": "buy",
+      "amount": 818257,
+      "shares": 30585,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-03-26"
+    },
+    {
+      "id": "cmp82mt4a00hc4ey46mqtpasa",
+      "ticker": "SNSE",
+      "side": "sell",
+      "amount": -89390,
+      "shares": -3250,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-03-26"
+    },
+    {
+      "id": "cmp82ggsq00lgsbqxug32t0u7",
+      "ticker": "SNSE",
+      "side": "buy",
+      "amount": 141364,
+      "shares": 4215,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-04-02"
+    },
+    {
+      "id": "cmp82ghs400ljsbqxqlczlu9j",
+      "ticker": "SNSE",
+      "side": "sell",
+      "amount": -538114,
+      "shares": -17076,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-04-02"
+    },
+    {
+      "id": "cmp82yxvb00yhsbtzyss1ysxz",
+      "ticker": "SNSE",
+      "side": "buy",
+      "amount": 141364,
+      "shares": 4215,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-04-02"
+    },
+    {
+      "id": "cmp82yyuw00yksbtzngo33pvx",
+      "ticker": "SNSE",
+      "side": "sell",
+      "amount": -538114,
+      "shares": -17076,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-04-02"
+    },
+    {
+      "id": "cmp82z2wg00ywsbtz57tqjwis",
+      "ticker": "SNSE",
+      "side": "buy",
+      "amount": 382100,
+      "shares": 12180,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-03-31"
+    },
+    {
+      "id": "cmp82z3yi00yzsbtzne4ub7b5",
+      "ticker": "SNSE",
+      "side": "sell",
+      "amount": -76949,
+      "shares": -2741,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-03-31"
+    }
+  ]
+}

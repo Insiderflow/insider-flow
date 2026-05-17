@@ -1,0 +1,228 @@
+{
+  "id": "company-jpm",
+  "entityType": "company",
+  "name": "Jpmorgan Chase & Co",
+  "ticker": "JPM",
+  "companyName": "Jpmorgan Chase & Co",
+  "roles": [
+    "Issuer"
+  ],
+  "logoLabel": "JP",
+  "logoColor": "#166534",
+  "displayName": "JPMORGAN CHASE & CO / US",
+  "exchange": "NYSE",
+  "industry": "—",
+  "description": "Jpmorgan Chase & Co",
+  "dataAsOf": "2026-05-15",
+  "allTradesCount": 13,
+  "activity": {
+    "totalBuys": 50448,
+    "buyTxCount": 1,
+    "totalSells": -19646097,
+    "sellTxCount": 12,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 134.53,
+    "avgSell": 0,
+    "plan10b5Pct": 0,
+    "ppSalePct": 0,
+    "buyRangeMin": 134.53,
+    "buyRangeMax": 134.53,
+    "sellRangeMin": null,
+    "sellRangeMax": null
+  },
+  "companyTrades": [
+    {
+      "id": "cmp82k8fc004k4ey4z7jcpqd5",
+      "ticker": "JPM",
+      "insiderName": "Erdoes Mary E.",
+      "personId": "person-cmp82dqnv00bjsbqxmg20qdps",
+      "side": "sell",
+      "amount": -1983527,
+      "shares": -6648,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-15"
+    },
+    {
+      "id": "cmp82k8so004n4ey4qs5pagbz",
+      "ticker": "JPM",
+      "insiderName": "Lake Marianne",
+      "personId": "person-cmp82drpe00bnsbqxylslay9a",
+      "side": "sell",
+      "amount": -1917531,
+      "shares": -6427,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-15"
+    },
+    {
+      "id": "cmp82k921004q4ey4xlcffe9q",
+      "ticker": "JPM",
+      "insiderName": "Petno Douglas B",
+      "personId": "person-cmp82dsx400brsbqxjts4qgr3",
+      "side": "sell",
+      "amount": -1697983,
+      "shares": -5659,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-15"
+    },
+    {
+      "id": "cmp82k9df004t4ey4a8bp5xku",
+      "ticker": "JPM",
+      "insiderName": "Beer Lori A",
+      "personId": "person-cmp82dpon00bfsbqxskyqzgha",
+      "side": "sell",
+      "amount": -949658,
+      "shares": -3165,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-15"
+    },
+    {
+      "id": "cmp82dq3800bhsbqxlmbadliq",
+      "ticker": "JPM",
+      "insiderName": "Beer Lori A",
+      "personId": "person-cmp82dpon00bfsbqxskyqzgha",
+      "side": "sell",
+      "amount": -949658,
+      "shares": -3165,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-15"
+    },
+    {
+      "id": "cmp82dr2k00blsbqxegu2wrrm",
+      "ticker": "JPM",
+      "insiderName": "Erdoes Mary E.",
+      "personId": "person-cmp82dqnv00bjsbqxmg20qdps",
+      "side": "sell",
+      "amount": -1983527,
+      "shares": -6648,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-15"
+    },
+    {
+      "id": "cmp82dsa800bpsbqxzcd1d5fy",
+      "ticker": "JPM",
+      "insiderName": "Lake Marianne",
+      "personId": "person-cmp82drpe00bnsbqxylslay9a",
+      "side": "sell",
+      "amount": -1917531,
+      "shares": -6427,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-15"
+    },
+    {
+      "id": "cmp82dtbq00btsbqx20nb5g94",
+      "ticker": "JPM",
+      "insiderName": "Petno Douglas B",
+      "personId": "person-cmp82dsx400brsbqxjts4qgr3",
+      "side": "sell",
+      "amount": -1697983,
+      "shares": -5659,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-15"
+    },
+    {
+      "id": "cmp82vrkk00p8sbtzg74d68u2",
+      "ticker": "JPM",
+      "insiderName": "Erdoes Mary E.",
+      "personId": "person-cmp82dqnv00bjsbqxmg20qdps",
+      "side": "sell",
+      "amount": -1983527,
+      "shares": -6648,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-15"
+    },
+    {
+      "id": "cmp82vsll00pbsbtz95pn9sb3",
+      "ticker": "JPM",
+      "insiderName": "Lake Marianne",
+      "personId": "person-cmp82drpe00bnsbqxylslay9a",
+      "side": "sell",
+      "amount": -1917531,
+      "shares": -6427,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-15"
+    },
+    {
+      "id": "cmp82vtkv00pesbtz2dfsontg",
+      "ticker": "JPM",
+      "insiderName": "Petno Douglas B",
+      "personId": "person-cmp82dsx400brsbqxjts4qgr3",
+      "side": "sell",
+      "amount": -1697983,
+      "shares": -5659,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-15"
+    },
+    {
+      "id": "cmp82vusv00phsbtz0o9bt19o",
+      "ticker": "JPM",
+      "insiderName": "Beer Lori A",
+      "personId": "person-cmp82dpon00bfsbqxskyqzgha",
+      "side": "sell",
+      "amount": -949658,
+      "shares": -3165,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-15"
+    },
+    {
+      "id": "cmhz2fgmc0cnusbqqdj2mnrm5",
+      "ticker": "JPM",
+      "insiderName": "Hobson Mellody L",
+      "personId": "person-cmhz2f25103qbsbqqkkbaooir",
+      "side": "buy",
+      "amount": 50448,
+      "shares": 375,
+      "filedAt": "2023-01-20",
+      "tradeDate": "2023-01-19"
+    }
+  ],
+  "insiders": [
+    {
+      "id": "person-cmp82dqnv00bjsbqxmg20qdps",
+      "name": "Erdoes Mary E.",
+      "role": "CEO Asset, Wealth Management",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmp82drpe00bnsbqxylslay9a",
+      "name": "Lake Marianne",
+      "role": "CEO CCB",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmp82dsx400brsbqxjts4qgr3",
+      "name": "Petno Douglas B",
+      "role": "Co-CEO CIB",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmp82dpon00bfsbqxskyqzgha",
+      "name": "Beer Lori A",
+      "role": "CIO",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmhz2f25103qbsbqqkkbaooir",
+      "name": "Hobson Mellody L",
+      "role": "Dir",
+      "tradesCount": 1
+    }
+  ],
+  "tradeTypes": {
+    "buy": 8,
+    "sell": 92,
+    "option": 0,
+    "proposed": 0
+  },
+  "aiSummary": {
+    "headline": "1 buys and 12 sells for JPM.",
+    "bullets": [
+      "13 Form 4 filings on record."
+    ],
+    "sentiment": "bearish"
+  },
+  "eventStudies": [],
+  "recentTrades": []
+}

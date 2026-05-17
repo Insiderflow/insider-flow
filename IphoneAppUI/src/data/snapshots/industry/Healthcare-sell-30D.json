@@ -1,0 +1,164 @@
+{
+  "sector": "Healthcare",
+  "side": "sell",
+  "sectors": [
+    {
+      "nameKey": "RealEstate",
+      "name": "RealEstate",
+      "buyAmount": 7254050,
+      "sellAmount": -311745
+    },
+    {
+      "nameKey": "Utilities",
+      "name": "Utilities",
+      "buyAmount": 0,
+      "sellAmount": -1438173
+    },
+    {
+      "nameKey": "Materials",
+      "name": "Materials",
+      "buyAmount": 508866,
+      "sellAmount": -6932323
+    },
+    {
+      "nameKey": "Energy",
+      "name": "Energy",
+      "buyAmount": 66480,
+      "sellAmount": -8951519
+    },
+    {
+      "nameKey": "ConsumerDiscretionary",
+      "name": "ConsumerDiscretionary",
+      "buyAmount": 3816962,
+      "sellAmount": -21772105
+    },
+    {
+      "nameKey": "Financials",
+      "name": "Financials",
+      "buyAmount": 634270,
+      "sellAmount": -39521296
+    },
+    {
+      "nameKey": "ConsumerStaples",
+      "name": "ConsumerStaples",
+      "buyAmount": 0,
+      "sellAmount": -42714926
+    },
+    {
+      "nameKey": "CommunicationServices",
+      "name": "CommunicationServices",
+      "buyAmount": 0,
+      "sellAmount": -66498248
+    },
+    {
+      "nameKey": "Industrials",
+      "name": "Industrials",
+      "buyAmount": 1238471,
+      "sellAmount": -71659784
+    },
+    {
+      "nameKey": "Healthcare",
+      "name": "Healthcare",
+      "buyAmount": 0,
+      "sellAmount": -270588321
+    },
+    {
+      "nameKey": "InformationTechnology",
+      "name": "InformationTechnology",
+      "buyAmount": 0,
+      "sellAmount": -604435814
+    },
+    {
+      "nameKey": "Other",
+      "name": "Other",
+      "buyAmount": 330184823,
+      "sellAmount": -5554718548
+    }
+  ],
+  "companies": [
+    {
+      "ticker": "DXCM",
+      "companyName": "Dexcom Inc",
+      "amount": -121460,
+      "tradeCount": 2,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "MOH",
+      "companyName": "Molina Healthcare, Inc.",
+      "amount": -344790,
+      "tradeCount": 3,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "ARWR",
+      "companyName": "Arrowhead Pharmaceuticals, Inc.",
+      "amount": -456668,
+      "tradeCount": 2,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "ICUI",
+      "companyName": "Icu Medical Inc/De",
+      "amount": -910872,
+      "tradeCount": 3,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "IONS",
+      "companyName": "Ionis Pharmaceuticals Inc",
+      "amount": -1068036,
+      "tradeCount": 3,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "NBIX",
+      "companyName": "Neurocrine Biosciences Inc",
+      "amount": -1181202,
+      "tradeCount": 2,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "BCRX",
+      "companyName": "Biocryst Pharmaceuticals Inc",
+      "amount": -1788750,
+      "tradeCount": 3,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "NTRA",
+      "companyName": "Natera, Inc.",
+      "amount": -2878353,
+      "tradeCount": 3,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "VRTX",
+      "companyName": "Vertex Pharmaceuticals Inc / Ma",
+      "amount": -3144600,
+      "tradeCount": 1,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "UTHR",
+      "companyName": "United Therapeutics Corp",
+      "amount": -44601268,
+      "tradeCount": 8,
+      "insiderCount": 2
+    },
+    {
+      "ticker": "ILMN",
+      "companyName": "Illumina, Inc.",
+      "amount": -95863950,
+      "tradeCount": 2,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "CI",
+      "companyName": "Cigna Group",
+      "amount": -118228372,
+      "tradeCount": 2,
+      "insiderCount": 1
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "id": "person-cmhz2faf809mjsbqqtrn36sop",
+  "entityType": "person",
+  "name": "Searle Bradley",
+  "ticker": "PSQH",
+  "companyName": "Psq Holdings, Inc.",
+  "roles": [
+    "CFO"
+  ],
+  "logoLabel": "SE",
+  "logoColor": "#6366F1",
+  "allTradesCount": 2,
+  "activity": {
+    "totalBuys": 25470,
+    "buyTxCount": 2,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2g0w90wj4sbqqny2zzwq5",
+      "ticker": "PSQH",
+      "side": "buy",
+      "amount": 12018,
+      "shares": 6000,
+      "filedAt": "2025-05-16",
+      "tradeDate": "2025-05-14"
+    },
+    {
+      "id": "cmhz2fxnt0tgesbqqlotrxn2p",
+      "ticker": "PSQH",
+      "side": "buy",
+      "amount": 13452,
+      "shares": 3281,
+      "filedAt": "2024-12-12",
+      "tradeDate": "2024-12-11"
+    }
+  ]
+}

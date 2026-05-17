@@ -1,0 +1,37 @@
+{
+  "id": "person-cmhz2fbi10akbsbqq7dt5dd8k",
+  "entityType": "person",
+  "name": "King Luther Jr",
+  "ticker": "TXO",
+  "companyName": "Txo Partners, L.P.",
+  "roles": [
+    "See below"
+  ],
+  "logoLabel": "KI",
+  "logoColor": "#6366F1",
+  "allTradesCount": 1,
+  "activity": {
+    "totalBuys": 7500000,
+    "buyTxCount": 1,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2g0wd0wn5sbqqx9yhb9ad",
+      "ticker": "TXO",
+      "side": "buy",
+      "amount": 7500000,
+      "shares": 500000,
+      "filedAt": "2025-05-19",
+      "tradeDate": "2025-05-15"
+    }
+  ]
+}

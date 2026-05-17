@@ -1,0 +1,183 @@
+{
+  "id": "company-aehr",
+  "entityType": "company",
+  "name": "Aehr Test Systems",
+  "ticker": "AEHR",
+  "companyName": "Aehr Test Systems",
+  "roles": [
+    "Issuer"
+  ],
+  "logoLabel": "AE",
+  "logoColor": "#166534",
+  "displayName": "AEHR TEST SYSTEMS / US",
+  "exchange": "NYSE",
+  "industry": "—",
+  "description": "Aehr Test Systems",
+  "dataAsOf": "2026-05-15",
+  "allTradesCount": 10,
+  "activity": {
+    "totalBuys": 489587,
+    "buyTxCount": 4,
+    "totalSells": -2807286,
+    "sellTxCount": 6,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 23.245,
+    "avgSell": 0,
+    "plan10b5Pct": 0,
+    "ppSalePct": 0,
+    "buyRangeMin": 15.5,
+    "buyRangeMax": 40.2,
+    "sellRangeMin": null,
+    "sellRangeMax": null
+  },
+  "companyTrades": [
+    {
+      "id": "cmp82jvps001e4ey43s4lclve",
+      "ticker": "AEHR",
+      "insiderName": "Slayen Howard T",
+      "personId": "person-cmhz2f0u002yosbqqley9plno",
+      "side": "sell",
+      "amount": -714154,
+      "shares": -6819,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82k0h2002k4ey4fgu1c5qo",
+      "ticker": "AEHR",
+      "insiderName": "Siu Chris",
+      "personId": "person-cmp82ann1000lsbqx7pupo4ys",
+      "side": "sell",
+      "amount": -221608,
+      "shares": -2070,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82uobm00m2sbtzgj80z8cj",
+      "ticker": "AEHR",
+      "insiderName": "Slayen Howard T",
+      "personId": "person-cmhz2f0u002yosbqqley9plno",
+      "side": "sell",
+      "amount": -714154,
+      "shares": -6819,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82v2vo00n8sbtz7dhunhlk",
+      "ticker": "AEHR",
+      "insiderName": "Siu Chris",
+      "personId": "person-cmp82ann1000lsbqx7pupo4ys",
+      "side": "sell",
+      "amount": -221608,
+      "shares": -2070,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82ao1i000nsbqxb1irwwin",
+      "ticker": "AEHR",
+      "insiderName": "Siu Chris",
+      "personId": "person-cmp82ann1000lsbqx7pupo4ys",
+      "side": "sell",
+      "amount": -221608,
+      "shares": -2070,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82ap97000qsbqxgci26nts",
+      "ticker": "AEHR",
+      "insiderName": "Slayen Howard T",
+      "personId": "person-cmhz2f0u002yosbqqley9plno",
+      "side": "sell",
+      "amount": -714154,
+      "shares": -6819,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmhz2fvj00qwssbqq8p6h5ps1",
+      "ticker": "AEHR",
+      "insiderName": "Slayen Howard T",
+      "personId": "person-cmhz2f0u002yosbqqley9plno",
+      "side": "buy",
+      "amount": 310000,
+      "shares": 20000,
+      "filedAt": "2024-08-02",
+      "tradeDate": "2024-08-02"
+    },
+    {
+      "id": "cmhz2fr6o0mxgsbqqyujhdr58",
+      "ticker": "AEHR",
+      "insiderName": "Ray-Chaudhuri Avijit K.",
+      "personId": "person-cmhz2f63x06nrsbqq4pvqyqc2",
+      "side": "buy",
+      "amount": 97847,
+      "shares": 5041,
+      "filedAt": "2024-07-29",
+      "tradeDate": "2024-07-18"
+    },
+    {
+      "id": "cmhz2fn4z0j8ssbqq0xxpvlio",
+      "ticker": "AEHR",
+      "insiderName": "Ray-Chaudhuri Avijit K.",
+      "personId": "person-cmhz2f63x06nrsbqq4pvqyqc2",
+      "side": "buy",
+      "amount": 53600,
+      "shares": 3000,
+      "filedAt": "2024-01-12",
+      "tradeDate": "2024-01-12"
+    },
+    {
+      "id": "cmhz2ff7w0b9hsbqqnyjrlcpi",
+      "ticker": "AEHR",
+      "insiderName": "Slayen Howard T",
+      "personId": "person-cmhz2f0u002yosbqqley9plno",
+      "side": "buy",
+      "amount": 28140,
+      "shares": 700,
+      "filedAt": "2023-10-11",
+      "tradeDate": "2023-10-11"
+    }
+  ],
+  "insiders": [
+    {
+      "id": "person-cmhz2f0u002yosbqqley9plno",
+      "name": "Slayen Howard T",
+      "role": "Dir",
+      "tradesCount": 5
+    },
+    {
+      "id": "person-cmp82ann1000lsbqx7pupo4ys",
+      "name": "Siu Chris",
+      "role": "CFO",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmhz2f63x06nrsbqq4pvqyqc2",
+      "name": "Ray-Chaudhuri Avijit K.",
+      "role": "EVP of R, D",
+      "tradesCount": 2
+    }
+  ],
+  "tradeTypes": {
+    "buy": 40,
+    "sell": 60,
+    "option": 0,
+    "proposed": 0
+  },
+  "aiSummary": {
+    "headline": "4 buys and 6 sells for AEHR.",
+    "bullets": [
+      "10 Form 4 filings on record."
+    ],
+    "sentiment": "bearish"
+  },
+  "eventStudies": [],
+  "recentTrades": []
+}

@@ -1,0 +1,284 @@
+{
+  "id": "company-wgs",
+  "entityType": "company",
+  "name": "Genedx Holdings Corp.",
+  "ticker": "WGS",
+  "companyName": "Genedx Holdings Corp.",
+  "roles": [
+    "Issuer"
+  ],
+  "logoLabel": "WG",
+  "logoColor": "#166534",
+  "displayName": "GENEDX HOLDINGS CORP. / US",
+  "exchange": "NYSE",
+  "industry": "—",
+  "description": "Genedx Holdings Corp.",
+  "dataAsOf": "2026-05-15",
+  "allTradesCount": 17,
+  "activity": {
+    "totalBuys": 103683963,
+    "buyTxCount": 17,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 20.1864705882353,
+    "avgSell": 0,
+    "plan10b5Pct": 0,
+    "ppSalePct": 0,
+    "buyRangeMin": 0.35,
+    "buyRangeMax": 60.16,
+    "sellRangeMin": null,
+    "sellRangeMax": null
+  },
+  "companyTrades": [
+    {
+      "id": "cmp82k39000384ey4bmi5fv6g",
+      "ticker": "WGS",
+      "insiderName": "Meister Keith A.",
+      "personId": "person-cmhz2fc2x0ao3sbqqp1ac0uxv",
+      "side": "buy",
+      "amount": 13765345,
+      "shares": 351273,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82i5vw00qysbqx2jvwcjpr",
+      "ticker": "WGS",
+      "insiderName": "Meister Keith A.",
+      "personId": "person-cmhz2fc2x0ao3sbqqp1ac0uxv",
+      "side": "buy",
+      "amount": 13765345,
+      "shares": 351273,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82vb7q00nwsbtz8ebb3up8",
+      "ticker": "WGS",
+      "insiderName": "Meister Keith A.",
+      "personId": "person-cmhz2fc2x0ao3sbqqp1ac0uxv",
+      "side": "buy",
+      "amount": 13765345,
+      "shares": 351273,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmhz2g1p60x78sbqqr0o04o7z",
+      "ticker": "WGS",
+      "insiderName": "Meister Keith A.",
+      "personId": "person-cmhz2fc2x0ao3sbqqp1ac0uxv",
+      "side": "buy",
+      "amount": 3007997,
+      "shares": 50000,
+      "filedAt": "2025-05-16",
+      "tradeDate": "2025-05-14"
+    },
+    {
+      "id": "cmhz2g1p90x9psbqqoilpigrt",
+      "ticker": "WGS",
+      "insiderName": "Meister Keith A.",
+      "personId": "person-cmhz2fc2x0ao3sbqqp1ac0uxv",
+      "side": "buy",
+      "amount": 5600994,
+      "shares": 100000,
+      "filedAt": "2025-05-12",
+      "tradeDate": "2025-05-08"
+    },
+    {
+      "id": "cmhz2fs000oa3sbqq02flx99x",
+      "ticker": "WGS",
+      "insiderName": "Casdin Capital, LLC",
+      "personId": "person-cmhz2f7q307ussbqqm30gee5t",
+      "side": "buy",
+      "amount": 2757117,
+      "shares": 130000,
+      "filedAt": "2024-06-05",
+      "tradeDate": "2024-06-03"
+    },
+    {
+      "id": "cmhz2ftm40pn3sbqqy4gjadkh",
+      "ticker": "WGS",
+      "insiderName": "Casdin Capital, LLC",
+      "personId": "person-cmhz2f7q307ussbqqm30gee5t",
+      "side": "buy",
+      "amount": 842604,
+      "shares": 40000,
+      "filedAt": "2024-05-31",
+      "tradeDate": "2024-05-29"
+    },
+    {
+      "id": "cmhz2ftlx0ph7sbqqxdso56he",
+      "ticker": "WGS",
+      "insiderName": "Casdin Capital, LLC",
+      "personId": "person-cmhz2f7q307ussbqqm30gee5t",
+      "side": "buy",
+      "amount": 3424989,
+      "shares": 170000,
+      "filedAt": "2024-05-28",
+      "tradeDate": "2024-05-23"
+    },
+    {
+      "id": "cmhz2furs0q9usbqqe61kpydq",
+      "ticker": "WGS",
+      "insiderName": "Casdin Capital, LLC",
+      "personId": "person-cmhz2f7q307ussbqqm30gee5t",
+      "side": "buy",
+      "amount": 1165295,
+      "shares": 50000,
+      "filedAt": "2024-05-15",
+      "tradeDate": "2024-05-13"
+    },
+    {
+      "id": "cmhz2fr6t0n0isbqq2vcyimvp",
+      "ticker": "WGS",
+      "insiderName": "Casdin Capital, LLC",
+      "personId": "person-cmhz2f7q307ussbqqm30gee5t",
+      "side": "buy",
+      "amount": 357652,
+      "shares": 40900,
+      "filedAt": "2024-03-06",
+      "tradeDate": "2024-03-04"
+    },
+    {
+      "id": "cmhz2fnxt0jq4sbqqmfo4ic5h",
+      "ticker": "WGS",
+      "insiderName": "Ryan Jason",
+      "personId": "person-cmhz2f6n706tdsbqqcinwrg12",
+      "side": "buy",
+      "amount": 161368,
+      "shares": 114742,
+      "filedAt": "2023-11-20",
+      "tradeDate": "2023-11-16"
+    },
+    {
+      "id": "cmhz2for90kpysbqqdo20gb49",
+      "ticker": "WGS",
+      "insiderName": "Pfenniger Richard C Jr",
+      "personId": "person-cmhz2f4au058ssbqqo9q8zi4r",
+      "side": "buy",
+      "amount": 14889,
+      "shares": 10000,
+      "filedAt": "2023-11-08",
+      "tradeDate": "2023-11-08"
+    },
+    {
+      "id": "cmhz2fk4f0fyhsbqq8qd3ryic",
+      "ticker": "WGS",
+      "insiderName": "Pfenniger Richard C Jr",
+      "personId": "person-cmhz2f4au058ssbqqo9q8zi4r",
+      "side": "buy",
+      "amount": 25523,
+      "shares": 5000,
+      "filedAt": "2023-08-18",
+      "tradeDate": "2023-08-17"
+    },
+    {
+      "id": "cmhz2fmc60ijnsbqqckg2u8df",
+      "ticker": "WGS",
+      "insiderName": "Pfenniger Richard C Jr",
+      "personId": "person-cmhz2f4au058ssbqqo9q8zi4r",
+      "side": "buy",
+      "amount": 29500,
+      "shares": 5000,
+      "filedAt": "2023-05-22",
+      "tradeDate": "2023-05-18"
+    },
+    {
+      "id": "cmhz2fjds0f3nsbqquxvvvlpr",
+      "ticker": "WGS",
+      "insiderName": "Icahn School of Medicine At Mount Sinai",
+      "personId": "person-cmhz2f3rf04v8sbqqb6at22iv",
+      "side": "buy",
+      "amount": 10000000,
+      "shares": 28571428,
+      "filedAt": "2023-02-02",
+      "tradeDate": "2023-01-31"
+    },
+    {
+      "id": "cmhz2fiqx0etnsbqq56xvacpp",
+      "ticker": "WGS",
+      "insiderName": "Casdin Eli",
+      "personId": "person-cmhz2f38304pssbqq2foc27mr",
+      "side": "buy",
+      "amount": 30000000,
+      "shares": 85714285,
+      "filedAt": "2023-02-02",
+      "tradeDate": "2023-01-31"
+    },
+    {
+      "id": "cmhz2fh9i0crgsbqq5cq7sogu",
+      "ticker": "WGS",
+      "insiderName": "Opko Health, Inc.",
+      "personId": "person-cmhz2f25203rqsbqqihuugt1a",
+      "side": "buy",
+      "amount": 5000000,
+      "shares": 14285714,
+      "filedAt": "2023-01-31",
+      "tradeDate": "2023-01-26"
+    }
+  ],
+  "insiders": [
+    {
+      "id": "person-cmhz2fc2x0ao3sbqqp1ac0uxv",
+      "name": "Meister Keith A.",
+      "role": "Dir, 10%",
+      "tradesCount": 5
+    },
+    {
+      "id": "person-cmhz2f7q307ussbqqm30gee5t",
+      "name": "Casdin Capital, LLC",
+      "role": "Dir, 10%",
+      "tradesCount": 5
+    },
+    {
+      "id": "person-cmhz2f6n706tdsbqqcinwrg12",
+      "name": "Ryan Jason",
+      "role": "Exec COB",
+      "tradesCount": 1
+    },
+    {
+      "id": "person-cmhz2f4au058ssbqqo9q8zi4r",
+      "name": "Pfenniger Richard C Jr",
+      "role": "Dir",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmhz2f3rf04v8sbqqb6at22iv",
+      "name": "Icahn School of Medicine At Mount Sinai",
+      "role": "10%",
+      "tradesCount": 1
+    },
+    {
+      "id": "person-cmhz2f38304pssbqq2foc27mr",
+      "name": "Casdin Eli",
+      "role": "Dir, 10%",
+      "tradesCount": 1
+    },
+    {
+      "id": "person-cmhz2f25203rqsbqqihuugt1a",
+      "name": "Opko Health, Inc.",
+      "role": "10%",
+      "tradesCount": 1
+    }
+  ],
+  "tradeTypes": {
+    "buy": 100,
+    "sell": 0,
+    "option": 0,
+    "proposed": 0
+  },
+  "aiSummary": {
+    "headline": "17 buys and 0 sells for WGS.",
+    "bullets": [
+      "17 Form 4 filings on record."
+    ],
+    "sentiment": "bullish"
+  },
+  "eventStudies": [],
+  "recentTrades": []
+}

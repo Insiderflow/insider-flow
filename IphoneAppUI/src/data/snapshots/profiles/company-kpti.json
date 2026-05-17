@@ -1,0 +1,306 @@
+{
+  "id": "company-kpti",
+  "entityType": "company",
+  "name": "Karyopharm Therapeutics Inc.",
+  "ticker": "KPTI",
+  "companyName": "Karyopharm Therapeutics Inc.",
+  "roles": [
+    "Issuer"
+  ],
+  "logoLabel": "KP",
+  "logoColor": "#166534",
+  "displayName": "KARYOPHARM THERAPEUTICS INC. / US",
+  "exchange": "NYSE",
+  "industry": "—",
+  "description": "Karyopharm Therapeutics Inc.",
+  "dataAsOf": "2026-05-15",
+  "allTradesCount": 19,
+  "activity": {
+    "totalBuys": 49985,
+    "buyTxCount": 1,
+    "totalSells": -104229,
+    "sellTxCount": 18,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 1.22,
+    "avgSell": 0,
+    "plan10b5Pct": 0,
+    "ppSalePct": 0,
+    "buyRangeMin": 1.22,
+    "buyRangeMax": 1.22,
+    "sellRangeMin": null,
+    "sellRangeMax": null
+  },
+  "companyTrades": [
+    {
+      "id": "cmp82n04x00j34ey4bxl8jpgf",
+      "ticker": "KPTI",
+      "insiderName": "Poulton Stuart",
+      "personId": "person-cmp82e1zu00crsbqx02glh3wa",
+      "side": "sell",
+      "amount": -3829,
+      "shares": -403,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82n33n00ju4ey4zt2onpfw",
+      "ticker": "KPTI",
+      "insiderName": "Rangwala Reshma",
+      "personId": "person-cmp82e31a00cvsbqxh3wjwptk",
+      "side": "sell",
+      "amount": -3876,
+      "shares": -408,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82n56x00kc4ey43atxveti",
+      "ticker": "KPTI",
+      "insiderName": "Cheng Sohanya Roshan",
+      "personId": "person-cmp82dyzk00cfsbqxf903q7vz",
+      "side": "sell",
+      "amount": -3078,
+      "shares": -324,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82n7lu00l04ey45fos760t",
+      "ticker": "KPTI",
+      "insiderName": "Abate Kristin",
+      "personId": "person-cmp82dxy400cbsbqxdpxnduy9",
+      "side": "sell",
+      "amount": -504,
+      "shares": -53,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82n8ho00l94ey4h840ja3o",
+      "ticker": "KPTI",
+      "insiderName": "Paulson Richard A.",
+      "personId": "person-cmp82e10f00cnsbqxzlq8er69",
+      "side": "sell",
+      "amount": -20929,
+      "shares": -2203,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82n8tr00lc4ey4u8v8202i",
+      "ticker": "KPTI",
+      "insiderName": "Mano Michael",
+      "personId": "person-cmp82dzz300cjsbqx8ay4cwx2",
+      "side": "sell",
+      "amount": -2527,
+      "shares": -266,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82dycq00cdsbqxfy4sbr1p",
+      "ticker": "KPTI",
+      "insiderName": "Abate Kristin",
+      "personId": "person-cmp82dxy400cbsbqxdpxnduy9",
+      "side": "sell",
+      "amount": -504,
+      "shares": -53,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82dze600chsbqxqv71rmqo",
+      "ticker": "KPTI",
+      "insiderName": "Cheng Sohanya Roshan",
+      "personId": "person-cmp82dyzk00cfsbqxf903q7vz",
+      "side": "sell",
+      "amount": -3078,
+      "shares": -324,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82e0di00clsbqx7g7h7plj",
+      "ticker": "KPTI",
+      "insiderName": "Mano Michael",
+      "personId": "person-cmp82dzz300cjsbqx8ay4cwx2",
+      "side": "sell",
+      "amount": -2527,
+      "shares": -266,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82e1ex00cpsbqxoy50tq53",
+      "ticker": "KPTI",
+      "insiderName": "Paulson Richard A.",
+      "personId": "person-cmp82e10f00cnsbqxzlq8er69",
+      "side": "sell",
+      "amount": -20929,
+      "shares": -2203,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82e2ep00ctsbqxecy49039",
+      "ticker": "KPTI",
+      "insiderName": "Poulton Stuart",
+      "personId": "person-cmp82e1zu00crsbqx02glh3wa",
+      "side": "sell",
+      "amount": -3829,
+      "shares": -403,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82e3fx00cxsbqx8wd3ay3h",
+      "ticker": "KPTI",
+      "insiderName": "Rangwala Reshma",
+      "personId": "person-cmp82e31a00cvsbqxh3wjwptk",
+      "side": "sell",
+      "amount": -3876,
+      "shares": -408,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82zv1l010zsbtzzl6txute",
+      "ticker": "KPTI",
+      "insiderName": "Poulton Stuart",
+      "personId": "person-cmp82e1zu00crsbqx02glh3wa",
+      "side": "sell",
+      "amount": -3829,
+      "shares": -403,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp8304ci011qsbtzhkj2nf7g",
+      "ticker": "KPTI",
+      "insiderName": "Rangwala Reshma",
+      "personId": "person-cmp82e31a00cvsbqxh3wjwptk",
+      "side": "sell",
+      "amount": -3876,
+      "shares": -408,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp830ala0128sbtz3inb7frq",
+      "ticker": "KPTI",
+      "insiderName": "Cheng Sohanya Roshan",
+      "personId": "person-cmp82dyzk00cfsbqxf903q7vz",
+      "side": "sell",
+      "amount": -3078,
+      "shares": -324,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp830ixs012wsbtzxnpibc3v",
+      "ticker": "KPTI",
+      "insiderName": "Abate Kristin",
+      "personId": "person-cmp82dxy400cbsbqxdpxnduy9",
+      "side": "sell",
+      "amount": -504,
+      "shares": -53,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp830lx30135sbtzm6y6o8jo",
+      "ticker": "KPTI",
+      "insiderName": "Paulson Richard A.",
+      "personId": "person-cmp82e10f00cnsbqxzlq8er69",
+      "side": "sell",
+      "amount": -20929,
+      "shares": -2203,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp830mz50138sbtz3bpa3ev2",
+      "ticker": "KPTI",
+      "insiderName": "Mano Michael",
+      "personId": "person-cmp82dzz300cjsbqx8ay4cwx2",
+      "side": "sell",
+      "amount": -2527,
+      "shares": -266,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmhz2fhab0dglsbqqhfwjfydy",
+      "ticker": "KPTI",
+      "insiderName": "Bohlin Garen G",
+      "personId": "person-cmhz2f2og043wsbqqhfbmx9v2",
+      "side": "buy",
+      "amount": 49985,
+      "shares": 41140,
+      "filedAt": "2023-09-12",
+      "tradeDate": "2023-09-12"
+    }
+  ],
+  "insiders": [
+    {
+      "id": "person-cmp82e1zu00crsbqx02glh3wa",
+      "name": "Poulton Stuart",
+      "role": "EVP, Chief Development Officer",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmp82e31a00cvsbqxh3wjwptk",
+      "name": "Rangwala Reshma",
+      "role": "EVP, Chief Medical Officer",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmp82dyzk00cfsbqxf903q7vz",
+      "name": "Cheng Sohanya Roshan",
+      "role": "EVP, Chief Commercial Officer",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmp82dxy400cbsbqxdpxnduy9",
+      "name": "Abate Kristin",
+      "role": "Chief Accounting Officer",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmp82e10f00cnsbqxzlq8er69",
+      "name": "Paulson Richard A.",
+      "role": "Pres, CEO",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmp82dzz300cjsbqx8ay4cwx2",
+      "name": "Mano Michael",
+      "role": "EVP, CLO, Secretary",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmhz2f2og043wsbqqhfbmx9v2",
+      "name": "Bohlin Garen G",
+      "role": "Dir",
+      "tradesCount": 1
+    }
+  ],
+  "tradeTypes": {
+    "buy": 5,
+    "sell": 95,
+    "option": 0,
+    "proposed": 0
+  },
+  "aiSummary": {
+    "headline": "1 buys and 18 sells for KPTI.",
+    "bullets": [
+      "19 Form 4 filings on record."
+    ],
+    "sentiment": "bearish"
+  },
+  "eventStudies": [],
+  "recentTrades": []
+}

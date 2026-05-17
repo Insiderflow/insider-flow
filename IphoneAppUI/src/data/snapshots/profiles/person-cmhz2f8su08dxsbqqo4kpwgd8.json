@@ -1,0 +1,37 @@
+{
+  "id": "person-cmhz2f8su08dxsbqqo4kpwgd8",
+  "entityType": "person",
+  "name": "Flaherty Mark A.",
+  "ticker": "GS",
+  "companyName": "Goldman Sachs Group Inc",
+  "roles": [
+    "Dir"
+  ],
+  "logoLabel": "FL",
+  "logoColor": "#6366F1",
+  "allTradesCount": 1,
+  "activity": {
+    "totalBuys": 29545,
+    "buyTxCount": 1,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2fst00oqtsbqqn6k6nsq3",
+      "ticker": "GS",
+      "side": "buy",
+      "amount": 29545,
+      "shares": 82,
+      "filedAt": "2024-10-09",
+      "tradeDate": "2022-03-30"
+    }
+  ]
+}

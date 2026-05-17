@@ -1,0 +1,133 @@
+{
+  "id": "company-rhld",
+  "entityType": "company",
+  "name": "Resolute Holdings Management, Inc.",
+  "ticker": "RHLD",
+  "companyName": "Resolute Holdings Management, Inc.",
+  "roles": [
+    "Issuer"
+  ],
+  "logoLabel": "RH",
+  "logoColor": "#166534",
+  "displayName": "RESOLUTE HOLDINGS MANAGEMENT, INC. / US",
+  "exchange": "NYSE",
+  "industry": "—",
+  "description": "Resolute Holdings Management, Inc.",
+  "dataAsOf": "2026-05-15",
+  "allTradesCount": 6,
+  "activity": {
+    "totalBuys": 446229,
+    "buyTxCount": 6,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 108.43,
+    "avgSell": 0,
+    "plan10b5Pct": 0,
+    "ppSalePct": 0,
+    "buyRangeMin": 108.34,
+    "buyRangeMax": 108.52,
+    "sellRangeMin": null,
+    "sellRangeMax": null
+  },
+  "companyTrades": [
+    {
+      "id": "cmp82jxng001w4ey4ffutxzqk",
+      "ticker": "RHLD",
+      "insiderName": "Mikkilineni Krishna",
+      "personId": "person-cmp82ct0r0081sbqx6qj26wd2",
+      "side": "buy",
+      "amount": 99990,
+      "shares": 921,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82k1g7002t4ey4m5xo9wat",
+      "ticker": "RHLD",
+      "insiderName": "Schoen Kurt",
+      "personId": "person-cmp82ctyu0085sbqxyyf3gy9d",
+      "side": "buy",
+      "amount": 48753,
+      "shares": 450,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82uum900mksbtzy4foe4t9",
+      "ticker": "RHLD",
+      "insiderName": "Mikkilineni Krishna",
+      "personId": "person-cmp82ct0r0081sbqx6qj26wd2",
+      "side": "buy",
+      "amount": 99990,
+      "shares": 921,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82fxdl00jjsbqxm7kottvx",
+      "ticker": "RHLD",
+      "insiderName": "Mikkilineni Krishna",
+      "personId": "person-cmp82ct0r0081sbqx6qj26wd2",
+      "side": "buy",
+      "amount": 99990,
+      "shares": 921,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82fyd400jmsbqxp3zlbvyz",
+      "ticker": "RHLD",
+      "insiderName": "Schoen Kurt",
+      "personId": "person-cmp82ctyu0085sbqxyyf3gy9d",
+      "side": "buy",
+      "amount": 48753,
+      "shares": 450,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82v5xx00nhsbtz7kwxpu3r",
+      "ticker": "RHLD",
+      "insiderName": "Schoen Kurt",
+      "personId": "person-cmp82ctyu0085sbqxyyf3gy9d",
+      "side": "buy",
+      "amount": 48753,
+      "shares": 450,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    }
+  ],
+  "insiders": [
+    {
+      "id": "person-cmp82ct0r0081sbqx6qj26wd2",
+      "name": "Mikkilineni Krishna",
+      "role": "Dir",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmp82ctyu0085sbqxyyf3gy9d",
+      "name": "Schoen Kurt",
+      "role": "See remarks",
+      "tradesCount": 3
+    }
+  ],
+  "tradeTypes": {
+    "buy": 100,
+    "sell": 0,
+    "option": 0,
+    "proposed": 0
+  },
+  "aiSummary": {
+    "headline": "6 buys and 0 sells for RHLD.",
+    "bullets": [
+      "6 Form 4 filings on record."
+    ],
+    "sentiment": "bullish"
+  },
+  "eventStudies": [],
+  "recentTrades": []
+}

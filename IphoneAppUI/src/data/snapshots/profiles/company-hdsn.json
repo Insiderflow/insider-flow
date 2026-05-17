@@ -1,0 +1,323 @@
+{
+  "id": "company-hdsn",
+  "entityType": "company",
+  "name": "Hudson Technologies Inc /Ny",
+  "ticker": "HDSN",
+  "companyName": "Hudson Technologies Inc /Ny",
+  "roles": [
+    "Issuer"
+  ],
+  "logoLabel": "HD",
+  "logoColor": "#166534",
+  "displayName": "HUDSON TECHNOLOGIES INC /NY / US",
+  "exchange": "NYSE",
+  "industry": "—",
+  "description": "Hudson Technologies Inc /Ny",
+  "dataAsOf": "2026-05-15",
+  "allTradesCount": 22,
+  "activity": {
+    "totalBuys": 462500,
+    "buyTxCount": 22,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 5.054545454545454,
+    "avgSell": 0,
+    "plan10b5Pct": 0,
+    "ppSalePct": 0,
+    "buyRangeMin": 4.84,
+    "buyRangeMax": 8.27,
+    "sellRangeMin": null,
+    "sellRangeMax": null
+  },
+  "companyTrades": [
+    {
+      "id": "cmp82nfvi00n64ey4zbp7359o",
+      "ticker": "HDSN",
+      "insiderName": "Mansy Loan Nguyen",
+      "personId": "person-cmp82d1zn008ysbqxmntc3h08",
+      "side": "buy",
+      "amount": 24814,
+      "shares": 5000,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82ngny00nc4ey4z5desr24",
+      "ticker": "HDSN",
+      "insiderName": "Parrillo Richard",
+      "personId": "person-cmp82d3160092sbqxxz8sf6x6",
+      "side": "buy",
+      "amount": 24814,
+      "shares": 5000,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82nhhg00ni4ey49qh0ph3t",
+      "ticker": "HDSN",
+      "insiderName": "Bulgarino Nicole E",
+      "personId": "person-cmhz2f6n906wasbqq3jjnavgi",
+      "side": "buy",
+      "amount": 2665,
+      "shares": 550,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82nhx900nl4ey46u3k6s55",
+      "ticker": "HDSN",
+      "insiderName": "Prouty Eric A",
+      "personId": "person-cmp82d40f0096sbqxtj6vns83",
+      "side": "buy",
+      "amount": 24200,
+      "shares": 5000,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82ni8z00no4ey4am2i9h5s",
+      "ticker": "HDSN",
+      "insiderName": "Sheriff Alan",
+      "personId": "person-cmp82d585009asbqxsuqucq2z",
+      "side": "buy",
+      "amount": 25350,
+      "shares": 5200,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82nijq00nr4ey41o9sgw7y",
+      "ticker": "HDSN",
+      "insiderName": "Feeler Jeffrey R",
+      "personId": "person-cmp82czyp008qsbqxoie8y1z8",
+      "side": "buy",
+      "amount": 25092,
+      "shares": 5100,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82nixi00nu4ey44nosw93f",
+      "ticker": "HDSN",
+      "insiderName": "Gaglione Kenneth",
+      "personId": "person-cmp82d108008usbqxyeemjv7g",
+      "side": "buy",
+      "amount": 24475,
+      "shares": 5000,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82cze1008osbqxy16s3ts1",
+      "ticker": "HDSN",
+      "insiderName": "Bulgarino Nicole E",
+      "personId": "person-cmhz2f6n906wasbqq3jjnavgi",
+      "side": "buy",
+      "amount": 2665,
+      "shares": 550,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82d0dd008ssbqxr5spnayg",
+      "ticker": "HDSN",
+      "insiderName": "Feeler Jeffrey R",
+      "personId": "person-cmp82czyp008qsbqxoie8y1z8",
+      "side": "buy",
+      "amount": 25092,
+      "shares": 5100,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82d1eu008wsbqxe5ys70hl",
+      "ticker": "HDSN",
+      "insiderName": "Gaglione Kenneth",
+      "personId": "person-cmp82d108008usbqxyeemjv7g",
+      "side": "buy",
+      "amount": 24475,
+      "shares": 5000,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82d2e50090sbqxq7pfrehx",
+      "ticker": "HDSN",
+      "insiderName": "Mansy Loan Nguyen",
+      "personId": "person-cmp82d1zn008ysbqxmntc3h08",
+      "side": "buy",
+      "amount": 24814,
+      "shares": 5000,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82d3fl0094sbqxune1o88d",
+      "ticker": "HDSN",
+      "insiderName": "Parrillo Richard",
+      "personId": "person-cmp82d3160092sbqxxz8sf6x6",
+      "side": "buy",
+      "amount": 24814,
+      "shares": 5000,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82d4na0098sbqxwubygofe",
+      "ticker": "HDSN",
+      "insiderName": "Prouty Eric A",
+      "personId": "person-cmp82d40f0096sbqxtj6vns83",
+      "side": "buy",
+      "amount": 24200,
+      "shares": 5000,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82d5mo009csbqxlxcspbsi",
+      "ticker": "HDSN",
+      "insiderName": "Sheriff Alan",
+      "personId": "person-cmp82d585009asbqxsuqucq2z",
+      "side": "buy",
+      "amount": 25350,
+      "shares": 5200,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp8319n40152sbtzm82nsxmx",
+      "ticker": "HDSN",
+      "insiderName": "Mansy Loan Nguyen",
+      "personId": "person-cmp82d1zn008ysbqxmntc3h08",
+      "side": "buy",
+      "amount": 24814,
+      "shares": 5000,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp831bmv0158sbtztpz49upc",
+      "ticker": "HDSN",
+      "insiderName": "Parrillo Richard",
+      "personId": "person-cmp82d3160092sbqxxz8sf6x6",
+      "side": "buy",
+      "amount": 24814,
+      "shares": 5000,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp831doi015esbtz741rttu2",
+      "ticker": "HDSN",
+      "insiderName": "Bulgarino Nicole E",
+      "personId": "person-cmhz2f6n906wasbqq3jjnavgi",
+      "side": "buy",
+      "amount": 2665,
+      "shares": 550,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp831evf015hsbtz9bapk2tz",
+      "ticker": "HDSN",
+      "insiderName": "Prouty Eric A",
+      "personId": "person-cmp82d40f0096sbqxtj6vns83",
+      "side": "buy",
+      "amount": 24200,
+      "shares": 5000,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp831fus015ksbtzzl2rnaic",
+      "ticker": "HDSN",
+      "insiderName": "Sheriff Alan",
+      "personId": "person-cmp82d585009asbqxsuqucq2z",
+      "side": "buy",
+      "amount": 25350,
+      "shares": 5200,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp831gye015nsbtzg149qxv5",
+      "ticker": "HDSN",
+      "insiderName": "Feeler Jeffrey R",
+      "personId": "person-cmp82czyp008qsbqxoie8y1z8",
+      "side": "buy",
+      "amount": 25092,
+      "shares": 5100,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    }
+  ],
+  "insiders": [
+    {
+      "id": "person-cmp82d1zn008ysbqxmntc3h08",
+      "name": "Mansy Loan Nguyen",
+      "role": "Dir",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmp82d3160092sbqxxz8sf6x6",
+      "name": "Parrillo Richard",
+      "role": "Dir",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmhz2f6n906wasbqq3jjnavgi",
+      "name": "Bulgarino Nicole E",
+      "role": "Dir",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmp82d40f0096sbqxtj6vns83",
+      "name": "Prouty Eric A",
+      "role": "Dir",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmp82d585009asbqxsuqucq2z",
+      "name": "Sheriff Alan",
+      "role": "Dir",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmp82czyp008qsbqxoie8y1z8",
+      "name": "Feeler Jeffrey R",
+      "role": "Dir",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmp82d108008usbqxyeemjv7g",
+      "name": "Gaglione Kenneth",
+      "role": "Pres, CEO",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmhz2f4b005j6sbqqaetj2p7g",
+      "name": "Abbatecola Vincent P",
+      "role": "Dir",
+      "tradesCount": 1
+    }
+  ],
+  "tradeTypes": {
+    "buy": 100,
+    "sell": 0,
+    "option": 0,
+    "proposed": 0
+  },
+  "aiSummary": {
+    "headline": "22 buys and 0 sells for HDSN.",
+    "bullets": [
+      "22 Form 4 filings on record."
+    ],
+    "sentiment": "bullish"
+  },
+  "eventStudies": [],
+  "recentTrades": []
+}

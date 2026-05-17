@@ -1,0 +1,261 @@
+{
+  "id": "company-tonx",
+  "entityType": "company",
+  "name": "Ton Strategy Co",
+  "ticker": "TONX",
+  "companyName": "Ton Strategy Co",
+  "roles": [
+    "Issuer"
+  ],
+  "logoLabel": "TO",
+  "logoColor": "#166534",
+  "displayName": "TON STRATEGY CO / US",
+  "exchange": "NYSE",
+  "industry": "—",
+  "description": "Ton Strategy Co",
+  "dataAsOf": "2026-05-15",
+  "allTradesCount": 16,
+  "activity": {
+    "totalBuys": 764779,
+    "buyTxCount": 16,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 3.8225000000000002,
+    "avgSell": 0,
+    "plan10b5Pct": 0,
+    "ppSalePct": 0,
+    "buyRangeMin": 3.52,
+    "buyRangeMax": 7.11,
+    "sellRangeMin": null,
+    "sellRangeMax": null
+  },
+  "companyTrades": [
+    {
+      "id": "cmp82na8a00lr4ey4x00j9n85",
+      "ticker": "TONX",
+      "insiderName": "Marbach Mary",
+      "personId": "person-cmp82h1ff00n4sbqx4f1cqs1o",
+      "side": "buy",
+      "amount": 5632,
+      "shares": 1600,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-15"
+    },
+    {
+      "id": "cmp82nc0200m64ey4omd6734f",
+      "ticker": "TONX",
+      "insiderName": "Wilson Kevin Mark",
+      "personId": "person-cmp82h4fl00ndsbqxl24pvx05",
+      "side": "buy",
+      "amount": 29353,
+      "shares": 8020,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82ncm500mc4ey49zt82syb",
+      "ticker": "TONX",
+      "insiderName": "Sohn Evan",
+      "personId": "person-cmp82h2f900n8sbqx7byeosrl",
+      "side": "buy",
+      "amount": 9930,
+      "shares": 2770,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82h4u700nfsbqx32qec9fq",
+      "ticker": "TONX",
+      "insiderName": "Wilson Kevin Mark",
+      "personId": "person-cmp82h4fl00ndsbqxl24pvx05",
+      "side": "buy",
+      "amount": 29353,
+      "shares": 8020,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82h1u400n6sbqx9lsu5h3u",
+      "ticker": "TONX",
+      "insiderName": "Marbach Mary",
+      "personId": "person-cmp82h1ff00n4sbqx4f1cqs1o",
+      "side": "buy",
+      "amount": 5632,
+      "shares": 1600,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-15"
+    },
+    {
+      "id": "cmp82h2tb00nasbqxx73ot0nn",
+      "ticker": "TONX",
+      "insiderName": "Sohn Evan",
+      "personId": "person-cmp82h2f900n8sbqx7byeosrl",
+      "side": "buy",
+      "amount": 9930,
+      "shares": 2770,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82nocl00p94ey46zqmawyv",
+      "ticker": "TONX",
+      "insiderName": "Sohn Evan",
+      "personId": "person-cmp82h2f900n8sbqx7byeosrl",
+      "side": "buy",
+      "amount": 9930,
+      "shares": 2770,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp830s7q013nsbtz6p4rhh4q",
+      "ticker": "TONX",
+      "insiderName": "Marbach Mary",
+      "personId": "person-cmp82h1ff00n4sbqx4f1cqs1o",
+      "side": "buy",
+      "amount": 5632,
+      "shares": 1600,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-15"
+    },
+    {
+      "id": "cmp830x8t0142sbtzsgohspmk",
+      "ticker": "TONX",
+      "insiderName": "Wilson Kevin Mark",
+      "personId": "person-cmp82h4fl00ndsbqxl24pvx05",
+      "side": "buy",
+      "amount": 29353,
+      "shares": 8020,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp830zag0148sbtzmzg4y5ew",
+      "ticker": "TONX",
+      "insiderName": "Sohn Evan",
+      "personId": "person-cmp82h2f900n8sbqx7byeosrl",
+      "side": "buy",
+      "amount": 9930,
+      "shares": 2770,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp831zj30175sbtzm8xugq07",
+      "ticker": "TONX",
+      "insiderName": "Sohn Evan",
+      "personId": "person-cmp82h2f900n8sbqx7byeosrl",
+      "side": "buy",
+      "amount": 9930,
+      "shares": 2770,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82p28h013a4ey4ect9zxbn",
+      "ticker": "TONX",
+      "insiderName": "Wilson Kevin Mark",
+      "personId": "person-cmp82h4fl00ndsbqxl24pvx05",
+      "side": "buy",
+      "amount": 29353,
+      "shares": 8020,
+      "filedAt": "2026-05-14",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82pox7019y4ey4m1sr25na",
+      "ticker": "TONX",
+      "insiderName": "Olsen Sarah Josephine",
+      "personId": "person-cmp82pox0019w4ey494dgsvbq",
+      "side": "buy",
+      "amount": 26933,
+      "shares": 7440,
+      "filedAt": "2026-05-14",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82qtzd00cnsbtz6j2loddc",
+      "ticker": "TONX",
+      "insiderName": "Wilson Kevin Mark",
+      "personId": "person-cmp82h4fl00ndsbqxl24pvx05",
+      "side": "buy",
+      "amount": 29353,
+      "shares": 8020,
+      "filedAt": "2026-05-14",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82summ00hzsbtzso0sayxk",
+      "ticker": "TONX",
+      "insiderName": "Olsen Sarah Josephine",
+      "personId": "person-cmp82pox0019w4ey494dgsvbq",
+      "side": "buy",
+      "amount": 26933,
+      "shares": 7440,
+      "filedAt": "2026-05-14",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmhz2g2i50xqlsbqq6hw3z45d",
+      "ticker": "TONX",
+      "insiderName": "Stotz Manuel",
+      "personId": "person-cmhz2fc310auzsbqq92yda8ae",
+      "side": "buy",
+      "amount": 497602,
+      "shares": 70000,
+      "filedAt": "2025-09-29",
+      "tradeDate": "2025-09-29"
+    }
+  ],
+  "insiders": [
+    {
+      "id": "person-cmp82h1ff00n4sbqx4f1cqs1o",
+      "name": "Marbach Mary",
+      "role": "GC, Corp Secretary",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmp82h4fl00ndsbqxl24pvx05",
+      "name": "Wilson Kevin Mark",
+      "role": "CEO",
+      "tradesCount": 5
+    },
+    {
+      "id": "person-cmp82h2f900n8sbqx7byeosrl",
+      "name": "Sohn Evan",
+      "role": "Dir",
+      "tradesCount": 5
+    },
+    {
+      "id": "person-cmp82pox0019w4ey494dgsvbq",
+      "name": "Olsen Sarah Josephine",
+      "role": "CFO, COO",
+      "tradesCount": 2
+    },
+    {
+      "id": "person-cmhz2fc310auzsbqq92yda8ae",
+      "name": "Stotz Manuel",
+      "role": "Dir, 10%",
+      "tradesCount": 1
+    }
+  ],
+  "tradeTypes": {
+    "buy": 100,
+    "sell": 0,
+    "option": 0,
+    "proposed": 0
+  },
+  "aiSummary": {
+    "headline": "16 buys and 0 sells for TONX.",
+    "bullets": [
+      "16 Form 4 filings on record."
+    ],
+    "sentiment": "bullish"
+  },
+  "eventStudies": [],
+  "recentTrades": []
+}

@@ -1,0 +1,37 @@
+{
+  "id": "person-cmhz2f6n706tdsbqqcinwrg12",
+  "entityType": "person",
+  "name": "Ryan Jason",
+  "ticker": "WGS",
+  "companyName": "Genedx Holdings Corp.",
+  "roles": [
+    "Exec COB"
+  ],
+  "logoLabel": "RY",
+  "logoColor": "#6366F1",
+  "allTradesCount": 1,
+  "activity": {
+    "totalBuys": 161368,
+    "buyTxCount": 1,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2fnxt0jq4sbqqmfo4ic5h",
+      "ticker": "WGS",
+      "side": "buy",
+      "amount": 161368,
+      "shares": 114742,
+      "filedAt": "2023-11-20",
+      "tradeDate": "2023-11-16"
+    }
+  ]
+}

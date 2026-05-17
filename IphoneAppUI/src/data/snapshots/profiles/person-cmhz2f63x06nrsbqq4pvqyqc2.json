@@ -1,0 +1,46 @@
+{
+  "id": "person-cmhz2f63x06nrsbqq4pvqyqc2",
+  "entityType": "person",
+  "name": "Ray-Chaudhuri Avijit K.",
+  "ticker": "AEHR",
+  "companyName": "Aehr Test Systems",
+  "roles": [
+    "EVP of R, D"
+  ],
+  "logoLabel": "RA",
+  "logoColor": "#6366F1",
+  "allTradesCount": 2,
+  "activity": {
+    "totalBuys": 151447,
+    "buyTxCount": 2,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2fr6o0mxgsbqqyujhdr58",
+      "ticker": "AEHR",
+      "side": "buy",
+      "amount": 97847,
+      "shares": 5041,
+      "filedAt": "2024-07-29",
+      "tradeDate": "2024-07-18"
+    },
+    {
+      "id": "cmhz2fn4z0j8ssbqq0xxpvlio",
+      "ticker": "AEHR",
+      "side": "buy",
+      "amount": 53600,
+      "shares": 3000,
+      "filedAt": "2024-01-12",
+      "tradeDate": "2024-01-12"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "id": "person-cmhz2f3re04tdsbqq8munxleu",
+  "entityType": "person",
+  "name": "Henry Shawn",
+  "ticker": "CRWD",
+  "companyName": "Crowdstrike Holdings, Inc.",
+  "roles": [
+    "CHIEF SECURITY OFFICER"
+  ],
+  "logoLabel": "HE",
+  "logoColor": "#6366F1",
+  "allTradesCount": 1,
+  "activity": {
+    "totalBuys": 458,
+    "buyTxCount": 1,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2fir20f08sbqq59vvsvj9",
+      "ticker": "CRWD",
+      "side": "buy",
+      "amount": 458,
+      "shares": 2,
+      "filedAt": "2023-02-10",
+      "tradeDate": "2022-04-18"
+    }
+  ]
+}

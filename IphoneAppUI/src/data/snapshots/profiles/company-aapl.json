@@ -1,0 +1,72 @@
+{
+  "id": "company-aapl",
+  "entityType": "company",
+  "name": "Apple Inc.",
+  "ticker": "AAPL",
+  "companyName": "Apple Inc.",
+  "roles": [
+    "Issuer"
+  ],
+  "logoLabel": "AA",
+  "logoColor": "#166534",
+  "displayName": "APPLE INC. / US",
+  "exchange": "NYSE",
+  "industry": "—",
+  "description": "Apple Inc.",
+  "dataAsOf": "2026-05-08",
+  "allTradesCount": 1,
+  "activity": {
+    "totalBuys": 0,
+    "buyTxCount": 0,
+    "totalSells": -71189722,
+    "sellTxCount": 1,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0,
+    "plan10b5Pct": 0,
+    "ppSalePct": 0,
+    "buyRangeMin": null,
+    "buyRangeMax": null,
+    "sellRangeMin": null,
+    "sellRangeMax": null
+  },
+  "companyTrades": [
+    {
+      "id": "cmoyfltfs004f3ffvs45rgjvt",
+      "ticker": "AAPL",
+      "insiderName": "Levinson Arthur D",
+      "personId": "person-cmoyfltep004d3ffvoia6f2do",
+      "side": "sell",
+      "amount": -71189722,
+      "shares": -250000,
+      "filedAt": "2026-05-08",
+      "tradeDate": "2026-05-06"
+    }
+  ],
+  "insiders": [
+    {
+      "id": "person-cmoyfltep004d3ffvoia6f2do",
+      "name": "Levinson Arthur D",
+      "role": "Dir",
+      "tradesCount": 1
+    }
+  ],
+  "tradeTypes": {
+    "buy": 0,
+    "sell": 100,
+    "option": 0,
+    "proposed": 0
+  },
+  "aiSummary": {
+    "headline": "0 buys and 1 sells for AAPL.",
+    "bullets": [
+      "1 Form 4 filings on record."
+    ],
+    "sentiment": "bearish"
+  },
+  "eventStudies": [],
+  "recentTrades": []
+}

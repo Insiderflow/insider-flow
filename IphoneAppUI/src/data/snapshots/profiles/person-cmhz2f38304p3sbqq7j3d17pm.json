@@ -1,0 +1,37 @@
+{
+  "id": "person-cmhz2f38304p3sbqq7j3d17pm",
+  "entityType": "person",
+  "name": "Zinsner David",
+  "ticker": "INTC",
+  "companyName": "Intel Corp",
+  "roles": [
+    "EVP, CFO"
+  ],
+  "logoLabel": "ZI",
+  "logoColor": "#6366F1",
+  "allTradesCount": 1,
+  "activity": {
+    "totalBuys": 251389,
+    "buyTxCount": 1,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2fiqw0escsbqqsje3gxuk",
+      "ticker": "INTC",
+      "side": "buy",
+      "amount": 251389,
+      "shares": 9050,
+      "filedAt": "2023-02-02",
+      "tradeDate": "2023-01-30"
+    }
+  ]
+}

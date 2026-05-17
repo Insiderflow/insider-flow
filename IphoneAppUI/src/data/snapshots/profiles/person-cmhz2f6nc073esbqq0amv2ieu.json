@@ -1,0 +1,64 @@
+{
+  "id": "person-cmhz2f6nc073esbqq0amv2ieu",
+  "entityType": "person",
+  "name": "Davis Richard K",
+  "ticker": "DOW",
+  "companyName": "Dow Inc.",
+  "roles": [
+    "Dir"
+  ],
+  "logoLabel": "DA",
+  "logoColor": "#6366F1",
+  "allTradesCount": 4,
+  "activity": {
+    "totalBuys": 1040397,
+    "buyTxCount": 4,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2fxn70sxpsbqq9jnu8uno",
+      "ticker": "DOW",
+      "side": "buy",
+      "amount": 249730,
+      "shares": 6025,
+      "filedAt": "2024-12-16",
+      "tradeDate": "2024-12-12"
+    },
+    {
+      "id": "cmhz2for50km9sbqqpxbd7s9s",
+      "ticker": "DOW",
+      "side": "buy",
+      "amount": 255437,
+      "shares": 5000,
+      "filedAt": "2023-11-20",
+      "tradeDate": "2023-11-16"
+    },
+    {
+      "id": "cmhz2for00kifsbqqpq818lkv",
+      "ticker": "MA",
+      "side": "buy",
+      "amount": 390960,
+      "shares": 1000,
+      "filedAt": "2023-11-09",
+      "tradeDate": "2023-11-09"
+    },
+    {
+      "id": "cmhz2for80kp4sbqqxguhw87g",
+      "ticker": "WFC",
+      "side": "buy",
+      "amount": 144270,
+      "shares": 3500,
+      "filedAt": "2023-11-09",
+      "tradeDate": "2023-11-09"
+    }
+  ]
+}

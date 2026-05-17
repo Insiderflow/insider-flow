@@ -1,0 +1,113 @@
+{
+  "meta": {
+    "dataAsOf": "2026-05-17",
+    "nextUpdateEt": "22:15",
+    "generatedAt": "2026-05-17T06:02:31.827Z",
+    "latestDisclosureAt": "2026-05-15T18:15:00.000Z"
+  },
+  "aiSummary": {
+    "headline": "2026/05/17 國會披露",
+    "narrative": "截至美東時間，2026/05/17 尚無新的 STOCK 申報入庫。通常會在披露日後幾小時至數天內陸續出現，請稍後再查看。",
+    "bullets": [],
+    "sentiment": "mixed"
+  },
+  "kpis": [
+    {
+      "id": "buys",
+      "label": "Buys",
+      "value": 0,
+      "changePct": 0,
+      "spike": [
+        0.378,
+        0.396,
+        0.412,
+        0.442,
+        0.447,
+        0.485,
+        0.485,
+        0.525,
+        0.527,
+        0.562,
+        0.572,
+        0.596,
+        0.618,
+        0.63
+      ]
+    },
+    {
+      "id": "sells",
+      "label": "Sells",
+      "value": 0,
+      "changePct": 0,
+      "spike": [
+        0.365,
+        0.355,
+        0.331,
+        0.309,
+        0.297,
+        0.264,
+        0.261,
+        0.221,
+        0.221,
+        0.183,
+        0.179,
+        0.147,
+        0.133,
+        0.113
+      ]
+    },
+    {
+      "id": "options",
+      "label": "Options",
+      "value": 0,
+      "changePct": 0,
+      "spike": [
+        0.479,
+        0.477,
+        0.501,
+        0.491,
+        0.507,
+        0.488,
+        0.495,
+        0.468,
+        0.469,
+        0.439,
+        0.44,
+        0.412,
+        0.417,
+        0.396
+      ]
+    },
+    {
+      "id": "pp_sale",
+      "label": "PP Sale",
+      "value": 0,
+      "changePct": 0,
+      "spike": [
+        0.54,
+        0.54,
+        0.578,
+        0.584,
+        0.613,
+        0.63,
+        0.647,
+        0.676,
+        0.682,
+        0.719,
+        0.72,
+        0.76,
+        0.761,
+        0.796
+      ]
+    }
+  ],
+  "clusterBuys": [],
+  "clusterSells": [],
+  "topPoliticianBuys": [],
+  "topPoliticianSells": [],
+  "todaysTrades": [],
+  "primeBrokers": [],
+  "industryChain": [],
+  "topIndustries": [],
+  "recentTrades": []
+}

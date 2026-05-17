@@ -1,0 +1,82 @@
+{
+  "id": "person-cmp82ctyu0085sbqxyyf3gy9d",
+  "entityType": "person",
+  "name": "Schoen Kurt",
+  "ticker": "RHLD",
+  "companyName": "Resolute Holdings Management, Inc.",
+  "roles": [
+    "See remarks"
+  ],
+  "logoLabel": "SC",
+  "logoColor": "#6366F1",
+  "allTradesCount": 6,
+  "activity": {
+    "totalBuys": 297219,
+    "buyTxCount": 6,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmp82k1g7002t4ey4m5xo9wat",
+      "ticker": "RHLD",
+      "side": "buy",
+      "amount": 48753,
+      "shares": 450,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82k1vk002w4ey4b24jqzer",
+      "ticker": "GPGI",
+      "side": "buy",
+      "amount": 50320,
+      "shares": 4000,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82cub80087sbqxz55u924x",
+      "ticker": "GPGI",
+      "side": "buy",
+      "amount": 50320,
+      "shares": 4000,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82fyd400jmsbqxp3zlbvyz",
+      "ticker": "RHLD",
+      "side": "buy",
+      "amount": 48753,
+      "shares": 450,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82v5xx00nhsbtz7kwxpu3r",
+      "ticker": "RHLD",
+      "side": "buy",
+      "amount": 48753,
+      "shares": 450,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82v75l00nksbtzbbqptio8",
+      "ticker": "GPGI",
+      "side": "buy",
+      "amount": 50320,
+      "shares": 4000,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    }
+  ]
+}

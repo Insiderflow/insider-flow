@@ -1,0 +1,246 @@
+{
+  "id": "M001234",
+  "entityType": "person",
+  "name": "Kelly Morrison",
+  "ticker": "",
+  "companyName": "STAR CATCHER INDUSTRIES INC",
+  "roles": [
+    "Other"
+  ],
+  "seatSector": "Other",
+  "imageUrl": "/images/politicians/M001234_Kelly_Morrison.jpg",
+  "logoLabel": "KE",
+  "logoColor": "#3B82F6",
+  "allTradesCount": 72,
+  "activity": {
+    "totalBuys": 1510000,
+    "buyTxCount": 29,
+    "totalSells": 21,
+    "sellTxCount": 21,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "trade_M001234_2335404_1778081391051_g26ogn",
+      "ticker": "",
+      "side": "sell",
+      "amount": 50000,
+      "shares": 0,
+      "filedAt": "2026-05-06",
+      "tradeDate": "2026-05-04"
+    },
+    {
+      "id": "trade_M001234_2335350_1778081391051_1wsqyt",
+      "ticker": "",
+      "side": "sell",
+      "amount": 50000,
+      "shares": 0,
+      "filedAt": "2026-05-06",
+      "tradeDate": "2026-05-04"
+    },
+    {
+      "id": "trade_M001234_2335353_1778081391051_rwn8t1",
+      "ticker": "",
+      "side": "sell",
+      "amount": 50000,
+      "shares": 0,
+      "filedAt": "2026-05-06",
+      "tradeDate": "2026-05-04"
+    },
+    {
+      "id": "trade_M001234_2335403_1778081391051_rkdhwb",
+      "ticker": "",
+      "side": "buy",
+      "amount": 50000,
+      "shares": 0,
+      "filedAt": "2026-05-06",
+      "tradeDate": "2026-04-17"
+    },
+    {
+      "id": "trade_M001234_2335402_1778081391051_tkml1m",
+      "ticker": "",
+      "side": "buy",
+      "amount": 100000,
+      "shares": 0,
+      "filedAt": "2026-05-06",
+      "tradeDate": "2026-04-15"
+    },
+    {
+      "id": "trade_M001234_2335370_1778081391051_v25fdr",
+      "ticker": "",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-06",
+      "tradeDate": "2026-04-14"
+    },
+    {
+      "id": "trade_M001234_2335404_1778081391051_dyiju1",
+      "ticker": "",
+      "side": "buy",
+      "amount": 50000,
+      "shares": 0,
+      "filedAt": "2026-05-06",
+      "tradeDate": "2026-04-06"
+    },
+    {
+      "id": "trade_M001234_2334891_1775225058346_94ihyo",
+      "ticker": "",
+      "side": "sell",
+      "amount": 250000,
+      "shares": 0,
+      "filedAt": "2026-04-03",
+      "tradeDate": "2026-03-15"
+    },
+    {
+      "id": "trade_M001234_2335372_1775225058346_mdaq6u",
+      "ticker": "",
+      "side": "buy",
+      "amount": 50000,
+      "shares": 0,
+      "filedAt": "2026-04-03",
+      "tradeDate": "2026-03-15"
+    },
+    {
+      "id": "trade_M001234_2335353_1773250953266_mqv0nq",
+      "ticker": "",
+      "side": "buy",
+      "amount": 50000,
+      "shares": 0,
+      "filedAt": "2026-03-11",
+      "tradeDate": "2026-03-09"
+    },
+    {
+      "id": "trade_M001234_2335354_1773250953266_7trjrs",
+      "ticker": "",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-03-11",
+      "tradeDate": "2026-03-08"
+    },
+    {
+      "id": "trade_M001234_429848_1773250953266_2a3i0h",
+      "ticker": "AJG",
+      "side": "sell",
+      "amount": 50000,
+      "shares": 0,
+      "filedAt": "2026-03-11",
+      "tradeDate": "2026-03-08"
+    }
+  ],
+  "party": "D",
+  "state": "Minnesota",
+  "chamber": "",
+  "politicianCharts": {
+    "stats": {
+      "totalTrades": 72,
+      "issuerCount": 8,
+      "totalVolume": 5064000,
+      "maxTrade": 1000000,
+      "lastTraded": "2026-05-06"
+    },
+    "topIssuers": [
+      {
+        "issuerId": "2334891",
+        "count": 8,
+        "name": "ANDERSEN CORP",
+        "ticker": null,
+        "sector": "N/A"
+      },
+      {
+        "issuerId": "429866",
+        "count": 2,
+        "name": "Ashtead Group PLC",
+        "ticker": "ASHGY",
+        "sector": "工業"
+      },
+      {
+        "issuerId": "2335350",
+        "count": 2,
+        "name": "HERMEUS CORP",
+        "ticker": null,
+        "sector": null
+      },
+      {
+        "issuerId": "2335353",
+        "count": 2,
+        "name": "SARONIC TECHNOLOGIES INC",
+        "ticker": null,
+        "sector": null
+      },
+      {
+        "issuerId": "2334890",
+        "count": 2,
+        "name": "AERO ENGINEERING HOLDINGS LLC",
+        "ticker": "None",
+        "sector": "N/A"
+      },
+      {
+        "issuerId": "2335404",
+        "count": 2,
+        "name": "STAR CATCHER INDUSTRIES INC",
+        "ticker": null,
+        "sector": null
+      },
+      {
+        "issuerId": "2335370",
+        "count": 2,
+        "name": "CAVALL LLP",
+        "ticker": null,
+        "sector": null
+      },
+      {
+        "issuerId": "430239",
+        "count": 2,
+        "name": "Broadcom Inc",
+        "ticker": "AVGO",
+        "sector": "資訊科技"
+      }
+    ],
+    "chartPoints": [
+      {
+        "period": "2025-Q1",
+        "buyVolume": 436500,
+        "sellVolume": 2122500,
+        "sp500Close": 5611.85009765625
+      },
+      {
+        "period": "2025-Q2",
+        "buyVolume": 123500,
+        "sellVolume": 463500,
+        "sp500Close": 6204.9501953125
+      },
+      {
+        "period": "2025-Q3",
+        "buyVolume": 182500,
+        "sellVolume": 256000,
+        "sp500Close": 6688.4599609375
+      },
+      {
+        "period": "2025-Q4",
+        "buyVolume": 105500,
+        "sellVolume": 75000,
+        "sp500Close": 6845.5
+      },
+      {
+        "period": "2026-Q1",
+        "buyVolume": 430500,
+        "sellVolume": 590500,
+        "sp500Close": 6528.52001953125
+      },
+      {
+        "period": "2026-Q2",
+        "buyVolume": 148000,
+        "sellVolume": 97500,
+        "sp500Close": 7408.5
+      }
+    ]
+  }
+}

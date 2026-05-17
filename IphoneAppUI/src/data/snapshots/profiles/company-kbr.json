@@ -1,0 +1,150 @@
+{
+  "id": "company-kbr",
+  "entityType": "company",
+  "name": "Kbr, Inc.",
+  "ticker": "KBR",
+  "companyName": "Kbr, Inc.",
+  "roles": [
+    "Issuer"
+  ],
+  "logoLabel": "KB",
+  "logoColor": "#166534",
+  "displayName": "KBR, INC. / US",
+  "exchange": "NYSE",
+  "industry": "—",
+  "description": "Kbr, Inc.",
+  "dataAsOf": "2026-05-15",
+  "allTradesCount": 7,
+  "activity": {
+    "totalBuys": 1303430,
+    "buyTxCount": 7,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 33.66285714285714,
+    "avgSell": 0,
+    "plan10b5Pct": 0,
+    "ppSalePct": 0,
+    "buyRangeMin": 30.6,
+    "buyRangeMax": 51.53,
+    "sellRangeMin": null,
+    "sellRangeMax": null
+  },
+  "companyTrades": [
+    {
+      "id": "cmp82jxdf001t4ey4gf34p0za",
+      "ticker": "KBR",
+      "insiderName": "Von Thaer Lewis",
+      "personId": "person-cmp82dvxa00c3sbqxv5fd23vt",
+      "side": "buy",
+      "amount": 92310,
+      "shares": 3000,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82jy3r001z4ey4ct9yylep",
+      "ticker": "KBR",
+      "insiderName": "Evans Shad E.",
+      "personId": "person-cmp82duy000bzsbqxec540og4",
+      "side": "buy",
+      "amount": 256275,
+      "shares": 8375,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82utl200mhsbtzyidtmktu",
+      "ticker": "KBR",
+      "insiderName": "Von Thaer Lewis",
+      "personId": "person-cmp82dvxa00c3sbqxv5fd23vt",
+      "side": "buy",
+      "amount": 92310,
+      "shares": 3000,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82uvtx00mnsbtz7r9dy6us",
+      "ticker": "KBR",
+      "insiderName": "Evans Shad E.",
+      "personId": "person-cmp82duy000bzsbqxec540og4",
+      "side": "buy",
+      "amount": 256275,
+      "shares": 8375,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82dwby00c5sbqx7tzpkizr",
+      "ticker": "KBR",
+      "insiderName": "Von Thaer Lewis",
+      "personId": "person-cmp82dvxa00c3sbqxv5fd23vt",
+      "side": "buy",
+      "amount": 92310,
+      "shares": 3000,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82dvcj00c1sbqxcgkw9cog",
+      "ticker": "KBR",
+      "insiderName": "Evans Shad E.",
+      "personId": "person-cmp82duy000bzsbqxec540og4",
+      "side": "buy",
+      "amount": 256275,
+      "shares": 8375,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmhz2foqz0khmsbqqlclkxdgr",
+      "ticker": "KBR",
+      "insiderName": "Sopp Mark W",
+      "personId": "person-cmhz2f6nc0734sbqqcpn7v1oh",
+      "side": "buy",
+      "amount": 257675,
+      "shares": 5000,
+      "filedAt": "2023-11-08",
+      "tradeDate": "2023-11-08"
+    }
+  ],
+  "insiders": [
+    {
+      "id": "person-cmp82dvxa00c3sbqxv5fd23vt",
+      "name": "Von Thaer Lewis",
+      "role": "Dir",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmp82duy000bzsbqxec540og4",
+      "name": "Evans Shad E.",
+      "role": "EVP, CFO",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmhz2f6nc0734sbqqcpn7v1oh",
+      "name": "Sopp Mark W",
+      "role": "EVP, CFO",
+      "tradesCount": 1
+    }
+  ],
+  "tradeTypes": {
+    "buy": 100,
+    "sell": 0,
+    "option": 0,
+    "proposed": 0
+  },
+  "aiSummary": {
+    "headline": "7 buys and 0 sells for KBR.",
+    "bullets": [
+      "7 Form 4 filings on record."
+    ],
+    "sentiment": "bullish"
+  },
+  "eventStudies": [],
+  "recentTrades": []
+}

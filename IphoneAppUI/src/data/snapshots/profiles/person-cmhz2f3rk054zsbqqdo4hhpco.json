@@ -1,0 +1,37 @@
+{
+  "id": "person-cmhz2f3rk054zsbqqdo4hhpco",
+  "entityType": "person",
+  "name": "Ishrak Omar",
+  "ticker": "INTC",
+  "companyName": "Intel Corp",
+  "roles": [
+    "Dir"
+  ],
+  "logoLabel": "IS",
+  "logoColor": "#6366F1",
+  "allTradesCount": 1,
+  "activity": {
+    "totalBuys": 2412,
+    "buyTxCount": 1,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2fjej0fpwsbqq9e8mnlva",
+      "ticker": "INTC",
+      "side": "buy",
+      "amount": 2412,
+      "shares": 86,
+      "filedAt": "2023-08-10",
+      "tradeDate": "2023-01-30"
+    }
+  ]
+}

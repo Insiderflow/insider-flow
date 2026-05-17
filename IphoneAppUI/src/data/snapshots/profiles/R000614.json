@@ -1,0 +1,209 @@
+{
+  "id": "R000614",
+  "entityType": "person",
+  "name": "Chip Roy",
+  "ticker": "CAESI",
+  "companyName": "ATLAS ENERGY SOLUTIONS IN",
+  "roles": [
+    "Energy"
+  ],
+  "seatSector": "Energy",
+  "imageUrl": "/images/politicians/R000614_Chip_Roy.jpg",
+  "logoLabel": "CH",
+  "logoColor": "#EF4444",
+  "allTradesCount": 10,
+  "activity": {
+    "totalBuys": 25250000,
+    "buyTxCount": 2,
+    "totalSells": 8,
+    "sellTxCount": 8,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "trade_R000614_2334685_1778600583579_mkvjdp",
+      "ticker": "CAESI",
+      "side": "buy",
+      "amount": 25000000,
+      "shares": 0,
+      "filedAt": "2026-05-11",
+      "tradeDate": "2026-04-30"
+    },
+    {
+      "id": "trade_R000614_2334685_1778600579662_tnp650",
+      "ticker": "CAESI",
+      "side": "buy",
+      "amount": 250000,
+      "shares": 0,
+      "filedAt": "2026-05-12",
+      "tradeDate": "2026-03-30"
+    },
+    {
+      "id": "20003774081",
+      "ticker": "CAESI",
+      "side": "sell",
+      "amount": 250000,
+      "shares": 0,
+      "filedAt": "2024-06-10",
+      "tradeDate": "2024-05-19"
+    },
+    {
+      "id": "20003771812",
+      "ticker": "XLE",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2024-04-11",
+      "tradeDate": "2024-04-09"
+    },
+    {
+      "id": "20003771813",
+      "ticker": "XOM",
+      "side": "sell",
+      "amount": 50000,
+      "shares": 0,
+      "filedAt": "2024-04-11",
+      "tradeDate": "2024-04-09"
+    },
+    {
+      "id": "20003771814",
+      "ticker": "KMI",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2024-04-11",
+      "tradeDate": "2024-04-09"
+    },
+    {
+      "id": "20003771815",
+      "ticker": "XLE",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2024-04-11",
+      "tradeDate": "2024-04-09"
+    },
+    {
+      "id": "20003771809",
+      "ticker": "T",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2024-04-11",
+      "tradeDate": "2024-04-09"
+    },
+    {
+      "id": "20003771811",
+      "ticker": "CVX",
+      "side": "sell",
+      "amount": 50000,
+      "shares": 0,
+      "filedAt": "2024-04-11",
+      "tradeDate": "2024-04-09"
+    },
+    {
+      "id": "20003771810",
+      "ticker": "CAESI",
+      "side": "sell",
+      "amount": 500000,
+      "shares": 0,
+      "filedAt": "2024-04-11",
+      "tradeDate": "2024-03-11"
+    }
+  ],
+  "party": "R",
+  "state": "Texas",
+  "chamber": "",
+  "politicianCharts": {
+    "stats": {
+      "totalTrades": 10,
+      "issuerCount": 7,
+      "totalVolume": 15822000,
+      "maxTrade": 25000000,
+      "lastTraded": "2026-05-12"
+    },
+    "topIssuers": [
+      {
+        "issuerId": "2334685",
+        "count": 4,
+        "name": "ATLAS ENERGY SOLUTIONS IN",
+        "ticker": "CAESI",
+        "sector": "能源"
+      },
+      {
+        "issuerId": "429914",
+        "count": 1,
+        "name": "AT&T Inc",
+        "ticker": "T",
+        "sector": "通訊服務"
+      },
+      {
+        "issuerId": "430515",
+        "count": 1,
+        "name": "Chevron Corp",
+        "ticker": "CVX",
+        "sector": "能源"
+      },
+      {
+        "issuerId": "431493",
+        "count": 1,
+        "name": "Energy Transfer LP",
+        "ticker": "XLE",
+        "sector": "能源"
+      },
+      {
+        "issuerId": "431608",
+        "count": 1,
+        "name": "Exxon Mobil Corp",
+        "ticker": "XOM",
+        "sector": "能源"
+      },
+      {
+        "issuerId": "432879",
+        "count": 1,
+        "name": "Kinder Morgan Inc",
+        "ticker": "KMI",
+        "sector": "能源"
+      },
+      {
+        "issuerId": "433747",
+        "count": 1,
+        "name": "NuStar Energy LP",
+        "ticker": "XLE",
+        "sector": "能源"
+      }
+    ],
+    "chartPoints": [
+      {
+        "period": "2024-Q1",
+        "buyVolume": 0,
+        "sellVolume": 375000,
+        "sp500Close": 5254.35009765625
+      },
+      {
+        "period": "2024-Q2",
+        "buyVolume": 0,
+        "sellVolume": 272000,
+        "sp500Close": 5460.47998046875
+      },
+      {
+        "period": "2026-Q1",
+        "buyVolume": 175000,
+        "sellVolume": 0,
+        "sp500Close": 6528.52001953125
+      },
+      {
+        "period": "2026-Q2",
+        "buyVolume": 15000000,
+        "sellVolume": 0,
+        "sp500Close": 7408.5
+      }
+    ]
+  }
+}

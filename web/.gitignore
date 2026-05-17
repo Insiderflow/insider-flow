@@ -26,6 +26,10 @@
 # production
 /build
 
+# Embedded IphoneAppUI build (npm run build:mobile-app)
+/public/app/*
+!/public/app/.gitkeep
+
 # misc
 .DS_Store
 *.pem

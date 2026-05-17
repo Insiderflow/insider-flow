@@ -91,3 +91,20 @@ export function resolveIssuerTradeSector(ticker: string | null | undefined, issu
   if (!sym) return null;
   return TICKER_TO_SECTOR[sym] ?? null;
 }
+
+/** Committee seat sector first; else GICS sector of the trade's issuer/ticker. */
+export function resolvePoliticianSeatSector(
+  politicianId: string,
+  dbCommittees: string | null | undefined,
+  tradeTicker?: string | null,
+  issuerSector?: string | null,
+): SectorName | null {
+  const committees = resolvePoliticianCommittees(politicianId, dbCommittees);
+  const fromSeat = inferSeatSectorFromCommittees(committees);
+  if (fromSeat) return fromSeat;
+  return resolveIssuerTradeSector(tradeTicker, issuerSector);
+}
+
+export function politicianSeatDisplayTitle(sector: SectorName | null): string {
+  return sector ?? 'Other';
+}

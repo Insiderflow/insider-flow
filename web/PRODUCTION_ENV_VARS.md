@@ -30,11 +30,15 @@ GOOGLE_CLIENT_SECRET=your_google_client_secret_here
 NEXTAUTH_SECRET=your_nextauth_secret_here
 NEXTAUTH_URL=https://www.insiderflow.asia
 
-# Stripe Configuration
-STRIPE_SECRET_KEY=your_stripe_secret_key_here
-STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret_here
-NEXT_PUBLIC_STRIPE_PRICE_MONTHLY=your_monthly_price_id_here
-NEXT_PUBLIC_STRIPE_PRICE_YEARLY=your_yearly_price_id_here
+# Stripe Configuration (LIVE mode — must match www.insiderflow.asia upgrade page)
+STRIPE_SECRET_KEY=sk_live_...   # Dashboard → Developers → API keys → Secret key
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_live_...
+STRIPE_PRICE_MONTHLY=price_1SFZAlFFlTVpQdN1jE1BnHiN
+STRIPE_PRICE_YEARLY=price_1SFZC2FFlTVpQdN1oK6WIuRs
+NEXT_PUBLIC_STRIPE_PRICE_MONTHLY=price_1SFZAlFFlTVpQdN1jE1BnHiN
+NEXT_PUBLIC_STRIPE_PRICE_YEARLY=price_1SFZC2FFlTVpQdN1oK6WIuRs
+# Webhook signing secret for endpoint https://www.insiderflow.asia/api/stripe/webhook (LIVE mode endpoint, not test)
+STRIPE_WEBHOOK_SECRET=whsec_...
 
 # RevenueCat (native App Store / Play subscriptions)
 REVENUECAT_SECRET_API_KEY=your_revenuecat_secret_api_key_here
@@ -61,6 +65,9 @@ SUBSCRIPTION_ALERT_STALE_PROCESSED_MINUTES_CRITICAL=120
 Either:
 
 ```bash
+cd web && npm run build:mobile-app && npm run build
+# Or on Render build command: `npm run build:all` (embeds IphoneAppUI at /app then Next build)
+
 cd web && sh scripts/render-migrate-deploy.sh
 ```
 

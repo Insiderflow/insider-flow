@@ -1,0 +1,646 @@
+{
+  "meta": {
+    "dataAsOf": "2026-05-15",
+    "nextUpdateEt": "22:15",
+    "generatedAt": "2026-05-17T06:02:47.558Z",
+    "latestFilingAt": "2026-05-15T21:44:31.000Z"
+  },
+  "aiSummary": {
+    "headline": "2026/05/17 Form 4",
+    "narrative": "截至美東時間，2026/05/17 尚無新的 Form 4 內部人申報入庫。申報通常在交易後 2 個工作日內陸續出現，請稍後再查看。",
+    "bullets": [],
+    "sentiment": "mixed"
+  },
+  "kpis": [
+    {
+      "id": "buys",
+      "label": "Buys",
+      "value": 403,
+      "changePct": 100,
+      "spike": [
+        0.5,
+        0.539,
+        0.543,
+        0.574,
+        0.589,
+        0.608,
+        0.635,
+        0.643,
+        0.679,
+        0.68,
+        0.72,
+        0.721,
+        0.757,
+        0.765
+      ]
+    },
+    {
+      "id": "sells",
+      "label": "Sells",
+      "value": 1114,
+      "changePct": 100,
+      "spike": [
+        0.549,
+        0.509,
+        0.508,
+        0.471,
+        0.464,
+        0.436,
+        0.418,
+        0.402,
+        0.372,
+        0.367,
+        0.329,
+        0.329,
+        0.289,
+        0.287
+      ]
+    },
+    {
+      "id": "options",
+      "label": "Options",
+      "value": 0,
+      "changePct": 0,
+      "spike": [
+        0.604,
+        0.576,
+        0.576,
+        0.547,
+        0.548,
+        0.522,
+        0.529,
+        0.511,
+        0.528,
+        0.518,
+        0.543,
+        0.541,
+        0.57,
+        0.57
+      ]
+    },
+    {
+      "id": "pp_sale",
+      "label": "PP Sale",
+      "value": 0,
+      "changePct": 0,
+      "spike": [
+        0.313,
+        0.345,
+        0.349,
+        0.388,
+        0.388,
+        0.427,
+        0.431,
+        0.463,
+        0.476,
+        0.497,
+        0.522,
+        0.531,
+        0.567,
+        0.568
+      ]
+    }
+  ],
+  "clusterBuys": [],
+  "clusterSells": [],
+  "topPoliticianBuys": [],
+  "topPoliticianSells": [],
+  "primeBrokers": [],
+  "industryChain": [
+    {
+      "nameKey": "RealEstate",
+      "name": "RealEstate",
+      "buyPct": 0,
+      "sellPct": 100,
+      "netAmount": 103915,
+      "buyAmount": 0,
+      "sellAmount": -103915,
+      "segments": [
+        {
+          "nameKey": "re-reits",
+          "name": "REITs",
+          "tone": "neutral",
+          "buyPct": 50
+        },
+        {
+          "nameKey": "re-real-estate-services",
+          "name": "Real Estate Services",
+          "tone": "sell",
+          "buyPct": 12
+        },
+        {
+          "nameKey": "re-development",
+          "name": "Development",
+          "tone": "sell",
+          "buyPct": 12
+        }
+      ]
+    },
+    {
+      "nameKey": "Energy",
+      "name": "Energy",
+      "buyPct": -2,
+      "sellPct": 102,
+      "netAmount": 1421346,
+      "buyAmount": 22160,
+      "sellAmount": -1399186,
+      "segments": [
+        {
+          "nameKey": "energy-oil-and-gas",
+          "name": "Oil & Gas",
+          "tone": "sell",
+          "buyPct": 12
+        },
+        {
+          "nameKey": "energy-renewables",
+          "name": "Renewables",
+          "tone": "sell",
+          "buyPct": 12
+        },
+        {
+          "nameKey": "energy-coal",
+          "name": "Coal",
+          "tone": "sell",
+          "buyPct": 12
+        }
+      ]
+    },
+    {
+      "nameKey": "Materials",
+      "name": "Materials",
+      "buyPct": 0,
+      "sellPct": 100,
+      "netAmount": 2133812,
+      "buyAmount": 2522,
+      "sellAmount": -2131290,
+      "segments": [
+        {
+          "nameKey": "mat-chemicals",
+          "name": "Chemicals",
+          "tone": "sell",
+          "buyPct": 12
+        },
+        {
+          "nameKey": "mat-metals-and-mining",
+          "name": "Metals & Mining",
+          "tone": "sell",
+          "buyPct": 12
+        },
+        {
+          "nameKey": "mat-paper-and-packaging",
+          "name": "Paper & Packaging",
+          "tone": "sell",
+          "buyPct": 12
+        }
+      ]
+    },
+    {
+      "nameKey": "ConsumerDiscretionary",
+      "name": "ConsumerDiscretionary",
+      "buyPct": -8,
+      "sellPct": 108,
+      "netAmount": 2961629,
+      "buyAmount": 204700,
+      "sellAmount": -2756929,
+      "segments": [
+        {
+          "nameKey": "cd-retail",
+          "name": "Retail",
+          "tone": "neutral",
+          "buyPct": 50
+        },
+        {
+          "nameKey": "cd-automotive",
+          "name": "Automotive",
+          "tone": "sell",
+          "buyPct": 12
+        },
+        {
+          "nameKey": "cd-leisure",
+          "name": "Leisure",
+          "tone": "sell",
+          "buyPct": 12
+        },
+        {
+          "nameKey": "cd-e-commerce",
+          "name": "E-Commerce",
+          "tone": "sell",
+          "buyPct": 12
+        }
+      ]
+    },
+    {
+      "nameKey": "ConsumerStaples",
+      "name": "ConsumerStaples",
+      "buyPct": 0,
+      "sellPct": 100,
+      "netAmount": 13730462,
+      "buyAmount": 0,
+      "sellAmount": -13730462,
+      "segments": [
+        {
+          "nameKey": "cs-food-and-beverage",
+          "name": "Food & Beverage",
+          "tone": "sell",
+          "buyPct": 12
+        },
+        {
+          "nameKey": "cs-household-products",
+          "name": "Household Products",
+          "tone": "sell",
+          "buyPct": 12
+        },
+        {
+          "nameKey": "cs-tobacco",
+          "name": "Tobacco",
+          "tone": "neutral",
+          "buyPct": 50
+        }
+      ]
+    },
+    {
+      "nameKey": "Healthcare",
+      "name": "Healthcare",
+      "buyPct": 0,
+      "sellPct": 100,
+      "netAmount": 14492030,
+      "buyAmount": 0,
+      "sellAmount": -14492030,
+      "segments": [
+        {
+          "nameKey": "hc-pharma",
+          "name": "Pharma",
+          "tone": "sell",
+          "buyPct": 12
+        },
+        {
+          "nameKey": "hc-hospitals",
+          "name": "Hospitals",
+          "tone": "neutral",
+          "buyPct": 50
+        },
+        {
+          "nameKey": "hc-devices",
+          "name": "Devices",
+          "tone": "sell",
+          "buyPct": 12
+        },
+        {
+          "nameKey": "hc-biotech",
+          "name": "Biotech",
+          "tone": "neutral",
+          "buyPct": 50
+        },
+        {
+          "nameKey": "hc-diagnostics",
+          "name": "Diagnostics",
+          "tone": "sell",
+          "buyPct": 12
+        }
+      ]
+    }
+  ],
+  "topIndustries": [
+    {
+      "nameKey": "RealEstate",
+      "name": "RealEstate",
+      "buyAmount": 0,
+      "sellAmount": -103915
+    },
+    {
+      "nameKey": "Energy",
+      "name": "Energy",
+      "buyAmount": 22160,
+      "sellAmount": -1399186
+    },
+    {
+      "nameKey": "Materials",
+      "name": "Materials",
+      "buyAmount": 2522,
+      "sellAmount": -2131290
+    },
+    {
+      "nameKey": "ConsumerDiscretionary",
+      "name": "ConsumerDiscretionary",
+      "buyAmount": 204700,
+      "sellAmount": -2756929
+    },
+    {
+      "nameKey": "ConsumerStaples",
+      "name": "ConsumerStaples",
+      "buyAmount": 0,
+      "sellAmount": -13730462
+    },
+    {
+      "nameKey": "Healthcare",
+      "name": "Healthcare",
+      "buyAmount": 0,
+      "sellAmount": -14492030
+    }
+  ],
+  "recentTrades": [],
+  "insiderExtras": {
+    "companyClustersBuy": [
+      {
+        "id": "cc-HDSN",
+        "ticker": "HDSN",
+        "companyName": "HUDSON TECHNOLOGIE",
+        "logoColor": "#166534",
+        "insiders": 7,
+        "trades": 7,
+        "side": "buy",
+        "spike": [
+          0.352,
+          0.386,
+          0.397,
+          0.421,
+          0.443,
+          0.455,
+          0.488,
+          0.491,
+          0.531,
+          0.531,
+          0.569,
+          0.574,
+          0.604,
+          0.62
+        ]
+      },
+      {
+        "id": "cc-KBR",
+        "ticker": "KBR",
+        "companyName": "KBR, INC.",
+        "logoColor": "#166534",
+        "insiders": 2,
+        "trades": 4,
+        "side": "buy",
+        "spike": [
+          0.4,
+          0.439,
+          0.443,
+          0.474,
+          0.489,
+          0.508,
+          0.535,
+          0.543,
+          0.579,
+          0.58,
+          0.62,
+          0.621,
+          0.657,
+          0.665
+        ]
+      },
+      {
+        "id": "cc-RHLD",
+        "ticker": "RHLD",
+        "companyName": "RESOLUTE HOLDINGS ",
+        "logoColor": "#166534",
+        "insiders": 2,
+        "trades": 3,
+        "side": "buy",
+        "spike": [
+          0.451,
+          0.491,
+          0.492,
+          0.529,
+          0.536,
+          0.564,
+          0.582,
+          0.597,
+          0.628,
+          0.633,
+          0.671,
+          0.671,
+          0.711,
+          0.713
+        ]
+      }
+    ],
+    "companyClustersSell": [
+      {
+        "id": "cc-PSQH",
+        "ticker": "PSQH",
+        "companyName": "PSQ HOLDINGS, INC.",
+        "logoColor": "#166534",
+        "insiders": 3,
+        "trades": 6,
+        "side": "sell",
+        "spike": [
+          0.348,
+          0.314,
+          0.303,
+          0.279,
+          0.257,
+          0.245,
+          0.212,
+          0.209,
+          0.169,
+          0.169,
+          0.131,
+          0.126,
+          0.096,
+          0.08
+        ]
+      },
+      {
+        "id": "cc-CRWD",
+        "ticker": "CRWD",
+        "companyName": "CROWDSTRIKE HOLDIN",
+        "logoColor": "#166534",
+        "insiders": 2,
+        "trades": 6,
+        "side": "sell",
+        "spike": [
+          0.4,
+          0.361,
+          0.357,
+          0.326,
+          0.311,
+          0.292,
+          0.265,
+          0.257,
+          0.221,
+          0.22,
+          0.18,
+          0.179,
+          0.143,
+          0.135
+        ]
+      },
+      {
+        "id": "cc-AEHR",
+        "ticker": "AEHR",
+        "companyName": "AEHR TEST SYSTEMS",
+        "logoColor": "#166534",
+        "insiders": 2,
+        "trades": 6,
+        "side": "sell",
+        "spike": [
+          0.449,
+          0.409,
+          0.408,
+          0.371,
+          0.364,
+          0.336,
+          0.318,
+          0.303,
+          0.272,
+          0.267,
+          0.229,
+          0.229,
+          0.189,
+          0.187
+        ]
+      }
+    ],
+    "highlightsBuy": [
+      {
+        "id": "person-cmhz2fc2x0ao3sbqqp1ac0uxv",
+        "entityType": "company",
+        "name": "Meister Keith A.",
+        "subtitle": "Dir, 10% • WGS",
+        "ticker": "WGS",
+        "amount": 13765345,
+        "shares": 351273,
+        "side": "buy",
+        "spike": [
+          0.4,
+          0.439,
+          0.443,
+          0.474,
+          0.489,
+          0.508,
+          0.535,
+          0.543,
+          0.579,
+          0.58,
+          0.62,
+          0.621
+        ]
+      },
+      {
+        "id": "person-cmhz2f4ug05nzsbqq0xo1dq83",
+        "entityType": "company",
+        "name": "Duggan Robert W",
+        "subtitle": "Dir, 10% • PLSE",
+        "ticker": "PLSE",
+        "amount": 12999988,
+        "shares": 660233,
+        "side": "buy",
+        "spike": [
+          0.451,
+          0.491,
+          0.492,
+          0.529,
+          0.536,
+          0.564,
+          0.582,
+          0.597,
+          0.628,
+          0.633,
+          0.671,
+          0.671
+        ]
+      },
+      {
+        "id": "person-cmhz2f6n706t3sbqqyircw3y6",
+        "entityType": "company",
+        "name": "Simpson Bob R",
+        "subtitle": "Dir, 10% • TXO",
+        "ticker": "TXO",
+        "amount": 3911980,
+        "shares": 301597,
+        "side": "buy",
+        "spike": [
+          0.506,
+          0.544,
+          0.544,
+          0.584,
+          0.586,
+          0.62,
+          0.63,
+          0.654,
+          0.677,
+          0.689,
+          0.722,
+          0.725
+        ]
+      }
+    ],
+    "highlightsSell": [
+      {
+        "id": "person-cmp82dxy400cbsbqxdpxnduy9",
+        "entityType": "person",
+        "name": "Abate Kristin",
+        "subtitle": "Chief Accounting Officer • KPTI",
+        "ticker": "KPTI",
+        "amount": -504,
+        "shares": -53,
+        "side": "sell",
+        "spike": [
+          0.4,
+          0.361,
+          0.357,
+          0.326,
+          0.311,
+          0.292,
+          0.265,
+          0.257,
+          0.221,
+          0.22,
+          0.18,
+          0.179
+        ]
+      },
+      {
+        "id": "person-cmp82dzz300cjsbqx8ay4cwx2",
+        "entityType": "person",
+        "name": "Mano Michael",
+        "subtitle": "EVP, CLO, Secretary • KPTI",
+        "ticker": "KPTI",
+        "amount": -2527,
+        "shares": -266,
+        "side": "sell",
+        "spike": [
+          0.449,
+          0.409,
+          0.408,
+          0.371,
+          0.364,
+          0.336,
+          0.318,
+          0.303,
+          0.272,
+          0.267,
+          0.229,
+          0.229
+        ]
+      },
+      {
+        "id": "person-cmp82cikn0072sbqxzfi0wjxa",
+        "entityType": "person",
+        "name": "Gryzlov Yury",
+        "subtitle": "COO • GDYN",
+        "ticker": "GDYN",
+        "amount": -3012,
+        "shares": -467,
+        "side": "sell",
+        "spike": [
+          0.494,
+          0.456,
+          0.456,
+          0.416,
+          0.414,
+          0.38,
+          0.37,
+          0.346,
+          0.323,
+          0.311,
+          0.278,
+          0.275
+        ]
+      }
+    ]
+  }
+}

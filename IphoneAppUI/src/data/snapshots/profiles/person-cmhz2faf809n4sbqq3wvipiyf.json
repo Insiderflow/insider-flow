@@ -1,0 +1,37 @@
+{
+  "id": "person-cmhz2faf809n4sbqq3wvipiyf",
+  "entityType": "person",
+  "name": "Farr David N",
+  "ticker": "IBM",
+  "companyName": "International Business Machines Corp",
+  "roles": [
+    "Dir"
+  ],
+  "logoLabel": "FA",
+  "logoColor": "#6366F1",
+  "allTradesCount": 1,
+  "activity": {
+    "totalBuys": 298800,
+    "buyTxCount": 1,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2fxnv0timsbqqfvxdy2nr",
+      "ticker": "IBM",
+      "side": "buy",
+      "amount": 298800,
+      "shares": 1200,
+      "filedAt": "2025-02-28",
+      "tradeDate": "2025-02-28"
+    }
+  ]
+}

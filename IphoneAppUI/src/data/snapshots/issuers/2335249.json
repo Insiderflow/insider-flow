@@ -1,0 +1,226 @@
+{
+  "id": "2335249",
+  "name": "NORTHERN TRUST INTERMEDI ET",
+  "ticker": "FTAXI",
+  "sector": null,
+  "sectorKey": "Other",
+  "country": null,
+  "stats": {
+    "trades": 18,
+    "politicians": 1,
+    "totalVolume": 11015000,
+    "maxTrade": 1000000,
+    "lastTraded": "2026-04-23"
+  },
+  "chartPoints": [
+    {
+      "period": "2025-Q3",
+      "buyVolume": 9750000,
+      "sellVolume": 0,
+      "sp500Close": 6688.4599609375
+    },
+    {
+      "period": "2026-Q1",
+      "buyVolume": 815000,
+      "sellVolume": 375000,
+      "sp500Close": 6528.52001953125
+    },
+    {
+      "period": "2026-Q2",
+      "buyVolume": 75000,
+      "sellVolume": 0,
+      "sp500Close": 7408.5
+    }
+  ],
+  "topPoliticians": [
+    {
+      "id": "M001157",
+      "name": "Michael McCaul",
+      "party": "R",
+      "trades": 18,
+      "totalVolume": 11015000
+    }
+  ],
+  "recentTrades": [
+    {
+      "id": "trade_M001157_2335249_1778600613007_d76pyz",
+      "politicianId": "M001157",
+      "politicianName": "Michael McCaul",
+      "party": "R",
+      "side": "buy",
+      "amount": 100000,
+      "tradeDate": "2026-04-23",
+      "filedAt": "2026-05-11"
+    },
+    {
+      "id": "trade_M001157_2335249_1776092069895_e0f04l",
+      "politicianId": "M001157",
+      "politicianName": "Michael McCaul",
+      "party": "R",
+      "side": "buy",
+      "amount": 50000,
+      "tradeDate": "2026-03-24",
+      "filedAt": "2026-04-10"
+    },
+    {
+      "id": "trade_M001157_2335249_1777533589552_mtqe0u",
+      "politicianId": "M001157",
+      "politicianName": "Michael McCaul",
+      "party": "R",
+      "side": "buy",
+      "amount": 50000,
+      "tradeDate": "2026-03-23",
+      "filedAt": "2026-04-09"
+    },
+    {
+      "id": "trade_M001157_2335249_1773757283579_1tufvd",
+      "politicianId": "M001157",
+      "politicianName": "Michael McCaul",
+      "party": "R",
+      "side": "buy",
+      "amount": 1000000,
+      "tradeDate": "2026-02-11",
+      "filedAt": "2026-03-12"
+    },
+    {
+      "id": "trade_M001157_2335249_1770918712486_c1x9xe",
+      "politicianId": "M001157",
+      "politicianName": "Michael McCaul",
+      "party": "R",
+      "side": "sell",
+      "amount": 500000,
+      "tradeDate": "2026-01-20",
+      "filedAt": "2026-02-12"
+    },
+    {
+      "id": "trade_M001157_2335249_1761401769094_h62kzr",
+      "politicianId": "M001157",
+      "politicianName": "Michael McCaul",
+      "party": "R",
+      "side": "buy",
+      "amount": 1000000,
+      "tradeDate": "2025-09-30",
+      "filedAt": "2025-10-13"
+    },
+    {
+      "id": "trade_M001157_2335249_1761488287225_ho4jtw",
+      "politicianId": "M001157",
+      "politicianName": "Michael McCaul",
+      "party": "R",
+      "side": "buy",
+      "amount": 1000000,
+      "tradeDate": "2025-09-30",
+      "filedAt": "2025-10-13"
+    },
+    {
+      "id": "trade_M001157_2335249_1761498780414_6g6gpt",
+      "politicianId": "M001157",
+      "politicianName": "Michael McCaul",
+      "party": "R",
+      "side": "buy",
+      "amount": 1000000,
+      "tradeDate": "2025-09-30",
+      "filedAt": "2025-10-13"
+    },
+    {
+      "id": "trade_M001157_2335249_1761572289021_ge474x",
+      "politicianId": "M001157",
+      "politicianName": "Michael McCaul",
+      "party": "R",
+      "side": "buy",
+      "amount": 1000000,
+      "tradeDate": "2025-09-30",
+      "filedAt": "2025-10-13"
+    },
+    {
+      "id": "trade_M001157_2335249_1761574824720_10a4vh",
+      "politicianId": "M001157",
+      "politicianName": "Michael McCaul",
+      "party": "R",
+      "side": "buy",
+      "amount": 1000000,
+      "tradeDate": "2025-09-30",
+      "filedAt": "2025-10-13"
+    },
+    {
+      "id": "trade_M001157_2335249_1760624338199_dcxxbq",
+      "politicianId": "M001157",
+      "politicianName": "Michael McCaul",
+      "party": "R",
+      "side": "buy",
+      "amount": 1000000,
+      "tradeDate": "2025-09-30",
+      "filedAt": "2025-10-13"
+    },
+    {
+      "id": "trade_M001157_2335249_1761585272917_tap986",
+      "politicianId": "M001157",
+      "politicianName": "Michael McCaul",
+      "party": "R",
+      "side": "buy",
+      "amount": 1000000,
+      "tradeDate": "2025-09-30",
+      "filedAt": "2025-10-13"
+    },
+    {
+      "id": "trade_M001157_2335249_1761658514629_zi6kio",
+      "politicianId": "M001157",
+      "politicianName": "Michael McCaul",
+      "party": "R",
+      "side": "buy",
+      "amount": 1000000,
+      "tradeDate": "2025-09-30",
+      "filedAt": "2025-10-13"
+    },
+    {
+      "id": "trade_M001157_2335249_1761661303314_f4h7pz",
+      "politicianId": "M001157",
+      "politicianName": "Michael McCaul",
+      "party": "R",
+      "side": "buy",
+      "amount": 1000000,
+      "tradeDate": "2025-09-30",
+      "filedAt": "2025-10-13"
+    },
+    {
+      "id": "trade_M001157_2335249_1761671668685_zkpzx7",
+      "politicianId": "M001157",
+      "politicianName": "Michael McCaul",
+      "party": "R",
+      "side": "buy",
+      "amount": 1000000,
+      "tradeDate": "2025-09-30",
+      "filedAt": "2025-10-13"
+    },
+    {
+      "id": "trade_M001157_2335249_1761412374881_e0tcvx",
+      "politicianId": "M001157",
+      "politicianName": "Michael McCaul",
+      "party": "R",
+      "side": "buy",
+      "amount": 1000000,
+      "tradeDate": "2025-09-30",
+      "filedAt": "2025-10-13"
+    },
+    {
+      "id": "trade_M001157_2335249_1761485296913_zbxg38",
+      "politicianId": "M001157",
+      "politicianName": "Michael McCaul",
+      "party": "R",
+      "side": "buy",
+      "amount": 1000000,
+      "tradeDate": "2025-09-30",
+      "filedAt": "2025-10-13"
+    },
+    {
+      "id": "trade_M001157_2335249_1760977812013_1ddmr5",
+      "politicianId": "M001157",
+      "politicianName": "Michael McCaul",
+      "party": "R",
+      "side": "buy",
+      "amount": 1000000,
+      "tradeDate": "2025-09-29",
+      "filedAt": "2025-10-12"
+    }
+  ]
+}

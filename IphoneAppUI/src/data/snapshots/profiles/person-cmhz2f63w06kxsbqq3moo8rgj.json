@@ -1,0 +1,73 @@
+{
+  "id": "person-cmhz2f63w06kxsbqq3moo8rgj",
+  "entityType": "person",
+  "name": "Madaus Martin D",
+  "ticker": "RGEN",
+  "companyName": "Repligen Corp",
+  "roles": [
+    "Dir"
+  ],
+  "logoLabel": "MA",
+  "logoColor": "#6366F1",
+  "allTradesCount": 5,
+  "activity": {
+    "totalBuys": 1144030,
+    "buyTxCount": 5,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2g3av0ymzsbqqgv85ekqm",
+      "ticker": "RGEN",
+      "side": "buy",
+      "amount": 201830,
+      "shares": 1800,
+      "filedAt": "2025-08-12",
+      "tradeDate": "2025-08-08"
+    },
+    {
+      "id": "cmhz2g1p40x63sbqqxifa6e0k",
+      "ticker": "HOLX",
+      "side": "buy",
+      "amount": 300760,
+      "shares": 5445,
+      "filedAt": "2025-05-09",
+      "tradeDate": "2025-05-07"
+    },
+    {
+      "id": "cmhz2fwyu0s7psbqqew4rrvyh",
+      "ticker": "AZTA",
+      "side": "buy",
+      "amount": 201404,
+      "shares": 4940,
+      "filedAt": "2024-11-19",
+      "tradeDate": "2024-11-19"
+    },
+    {
+      "id": "cmhz2frzu0o4hsbqq9zrl9a6a",
+      "ticker": "RGEN",
+      "side": "buy",
+      "amount": 201776,
+      "shares": 1615,
+      "filedAt": "2024-06-14",
+      "tradeDate": "2024-06-14"
+    },
+    {
+      "id": "cmhz2fn4o0izosbqqjwq5qsls",
+      "ticker": "RGEN",
+      "side": "buy",
+      "amount": 238260,
+      "shares": 1500,
+      "filedAt": "2023-05-08",
+      "tradeDate": "2023-05-04"
+    }
+  ]
+}

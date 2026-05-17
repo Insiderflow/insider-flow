@@ -1,0 +1,64 @@
+{
+  "id": "person-cmhz2f8ss08aysbqqxbfhv7ho",
+  "entityType": "person",
+  "name": "Murphy Matthew J",
+  "ticker": "MRVL",
+  "companyName": "Marvell Technology, Inc.",
+  "roles": [
+    "COB, CEO"
+  ],
+  "logoLabel": "MU",
+  "logoColor": "#6366F1",
+  "allTradesCount": 4,
+  "activity": {
+    "totalBuys": 2057614,
+    "buyTxCount": 2,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmp82pkln018o4ey44yhzh01f",
+      "ticker": "MRVL",
+      "side": "sell",
+      "amount": -1329450,
+      "shares": -7500,
+      "filedAt": "2026-05-14",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82sgxy00gzsbtzfb3tvt1t",
+      "ticker": "MRVL",
+      "side": "sell",
+      "amount": -1329450,
+      "shares": -7500,
+      "filedAt": "2026-05-14",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmhz2g1pj0xhwsbqql6uyxcg3",
+      "ticker": "MRVL",
+      "side": "buy",
+      "amount": 1048424,
+      "shares": 13600,
+      "filedAt": "2025-09-25",
+      "tradeDate": "2025-09-25"
+    },
+    {
+      "id": "cmhz2fssp0ohnsbqqq7okgx0c",
+      "ticker": "MRVL",
+      "side": "buy",
+      "amount": 1009190,
+      "shares": 13000,
+      "filedAt": "2024-10-14",
+      "tradeDate": "2024-10-14"
+    }
+  ]
+}

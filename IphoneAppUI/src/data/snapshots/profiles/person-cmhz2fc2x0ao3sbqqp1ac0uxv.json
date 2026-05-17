@@ -1,0 +1,109 @@
+{
+  "id": "person-cmhz2fc2x0ao3sbqqp1ac0uxv",
+  "entityType": "person",
+  "name": "Meister Keith A.",
+  "ticker": "WGS",
+  "companyName": "Genedx Holdings Corp.",
+  "roles": [
+    "Dir, 10%"
+  ],
+  "logoLabel": "ME",
+  "logoColor": "#6366F1",
+  "allTradesCount": 9,
+  "activity": {
+    "totalBuys": 60793018,
+    "buyTxCount": 7,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmp82k39000384ey4bmi5fv6g",
+      "ticker": "WGS",
+      "side": "buy",
+      "amount": 13765345,
+      "shares": 351273,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82i5vw00qysbqx2jvwcjpr",
+      "ticker": "WGS",
+      "side": "buy",
+      "amount": 13765345,
+      "shares": 351273,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82vb7q00nwsbtz8ebb3up8",
+      "ticker": "WGS",
+      "side": "buy",
+      "amount": 13765345,
+      "shares": 351273,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82o6db00to4ey4u7rm9esv",
+      "ticker": "ILMN",
+      "side": "sell",
+      "amount": -47931975,
+      "shares": -329460,
+      "filedAt": "2026-05-14",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82ntdb004asbtzph1gmy20",
+      "ticker": "ILMN",
+      "side": "sell",
+      "amount": -47931975,
+      "shares": -329460,
+      "filedAt": "2026-05-14",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmhz2g1ox0x02sbqqnqhqyqsw",
+      "ticker": "VSTS",
+      "side": "buy",
+      "amount": 4777432,
+      "shares": 800675,
+      "filedAt": "2025-05-28",
+      "tradeDate": "2025-05-23"
+    },
+    {
+      "id": "cmhz2g1p60x78sbqqr0o04o7z",
+      "ticker": "WGS",
+      "side": "buy",
+      "amount": 3007997,
+      "shares": 50000,
+      "filedAt": "2025-05-16",
+      "tradeDate": "2025-05-14"
+    },
+    {
+      "id": "cmhz2g1p20x44sbqqszch2l1b",
+      "ticker": "VSTS",
+      "side": "buy",
+      "amount": 6110560,
+      "shares": 995347,
+      "filedAt": "2025-05-12",
+      "tradeDate": "2025-05-08"
+    },
+    {
+      "id": "cmhz2g1p90x9psbqqoilpigrt",
+      "ticker": "WGS",
+      "side": "buy",
+      "amount": 5600994,
+      "shares": 100000,
+      "filedAt": "2025-05-12",
+      "tradeDate": "2025-05-08"
+    }
+  ]
+}

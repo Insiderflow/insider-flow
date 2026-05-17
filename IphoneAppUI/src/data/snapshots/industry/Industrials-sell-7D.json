@@ -1,0 +1,164 @@
+{
+  "sector": "Industrials",
+  "side": "sell",
+  "sectors": [
+    {
+      "nameKey": "RealEstate",
+      "name": "RealEstate",
+      "buyAmount": 7254050,
+      "sellAmount": -311745
+    },
+    {
+      "nameKey": "Utilities",
+      "name": "Utilities",
+      "buyAmount": 0,
+      "sellAmount": -1438173
+    },
+    {
+      "nameKey": "Materials",
+      "name": "Materials",
+      "buyAmount": 508866,
+      "sellAmount": -6932323
+    },
+    {
+      "nameKey": "Energy",
+      "name": "Energy",
+      "buyAmount": 66480,
+      "sellAmount": -8951519
+    },
+    {
+      "nameKey": "ConsumerDiscretionary",
+      "name": "ConsumerDiscretionary",
+      "buyAmount": 3816962,
+      "sellAmount": -21772105
+    },
+    {
+      "nameKey": "Financials",
+      "name": "Financials",
+      "buyAmount": 634270,
+      "sellAmount": -39521296
+    },
+    {
+      "nameKey": "ConsumerStaples",
+      "name": "ConsumerStaples",
+      "buyAmount": 0,
+      "sellAmount": -42714926
+    },
+    {
+      "nameKey": "CommunicationServices",
+      "name": "CommunicationServices",
+      "buyAmount": 0,
+      "sellAmount": -66498248
+    },
+    {
+      "nameKey": "Industrials",
+      "name": "Industrials",
+      "buyAmount": 1238471,
+      "sellAmount": -71659784
+    },
+    {
+      "nameKey": "Healthcare",
+      "name": "Healthcare",
+      "buyAmount": 0,
+      "sellAmount": -270588321
+    },
+    {
+      "nameKey": "InformationTechnology",
+      "name": "InformationTechnology",
+      "buyAmount": 0,
+      "sellAmount": -604435814
+    },
+    {
+      "nameKey": "Other",
+      "name": "Other",
+      "buyAmount": 330184823,
+      "sellAmount": -5554718548
+    }
+  ],
+  "companies": [
+    {
+      "ticker": "GWW",
+      "companyName": "W.W. Grainger, Inc.",
+      "amount": -18487,
+      "tradeCount": 3,
+      "insiderCount": 3
+    },
+    {
+      "ticker": "WCN",
+      "companyName": "Waste Connections, Inc.",
+      "amount": -95351,
+      "tradeCount": 1,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "PAYX",
+      "companyName": "Paychex Inc",
+      "amount": -123930,
+      "tradeCount": 3,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "VRSK",
+      "companyName": "Verisk Analytics, Inc.",
+      "amount": -191064,
+      "tradeCount": 3,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "CMI",
+      "companyName": "Cummins Inc",
+      "amount": -518975,
+      "tradeCount": 1,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "EXPO",
+      "companyName": "Exponent Inc",
+      "amount": -680178,
+      "tradeCount": 3,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "JBHT",
+      "companyName": "Hunt J B Transport Services Inc",
+      "amount": -3053820,
+      "tradeCount": 3,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "BE",
+      "companyName": "Bloom Energy Corp",
+      "amount": -3654678,
+      "tradeCount": 2,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "RRX",
+      "companyName": "Regal Rexnord Corp",
+      "amount": -5891193,
+      "tradeCount": 3,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "WSC",
+      "companyName": "Willscot Holdings Corp",
+      "amount": -8411132,
+      "tradeCount": 2,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "AAON",
+      "companyName": "Aaon, Inc.",
+      "amount": -8725225,
+      "tradeCount": 7,
+      "insiderCount": 3
+    },
+    {
+      "ticker": "CAT",
+      "companyName": "Caterpillar Inc",
+      "amount": -40295751,
+      "tradeCount": 5,
+      "insiderCount": 2
+    }
+  ]
+}

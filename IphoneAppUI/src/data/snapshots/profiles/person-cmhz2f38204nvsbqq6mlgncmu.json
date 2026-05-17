@@ -1,0 +1,46 @@
+{
+  "id": "person-cmhz2f38204nvsbqq6mlgncmu",
+  "entityType": "person",
+  "name": "Chadwick Ana Maria",
+  "ticker": "PODD",
+  "companyName": "Insulet Corp",
+  "roles": [
+    "Dir"
+  ],
+  "logoLabel": "CH",
+  "logoColor": "#6366F1",
+  "allTradesCount": 2,
+  "activity": {
+    "totalBuys": 39711,
+    "buyTxCount": 2,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2fvj60r21sbqqcmf8qg99",
+      "ticker": "PODD",
+      "side": "buy",
+      "amount": 20600,
+      "shares": 100,
+      "filedAt": "2024-08-29",
+      "tradeDate": "2024-08-29"
+    },
+    {
+      "id": "cmhz2fiqt0eposbqqgvi2ky5r",
+      "ticker": "DG",
+      "side": "buy",
+      "amount": 19111,
+      "shares": 120,
+      "filedAt": "2023-06-07",
+      "tradeDate": "2023-06-05"
+    }
+  ]
+}

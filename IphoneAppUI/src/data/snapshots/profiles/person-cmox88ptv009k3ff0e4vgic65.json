@@ -1,0 +1,37 @@
+{
+  "id": "person-cmox88ptv009k3ff0e4vgic65",
+  "entityType": "person",
+  "name": "Greener Geoffrey S",
+  "ticker": "BAC",
+  "companyName": "Bank of America Corp /De/",
+  "roles": [
+    "Chief Risk Officer"
+  ],
+  "logoLabel": "GR",
+  "logoColor": "#6366F1",
+  "allTradesCount": 1,
+  "activity": {
+    "totalBuys": 0,
+    "buyTxCount": 0,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmox88pu4009m3ff057qljq9f",
+      "ticker": "BAC",
+      "side": "sell",
+      "amount": -6718702,
+      "shares": -126756,
+      "filedAt": "2026-05-07",
+      "tradeDate": "2026-05-05"
+    }
+  ]
+}

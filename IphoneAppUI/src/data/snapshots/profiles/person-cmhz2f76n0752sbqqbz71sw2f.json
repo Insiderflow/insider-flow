@@ -1,0 +1,64 @@
+{
+  "id": "person-cmhz2f76n0752sbqqbz71sw2f",
+  "entityType": "person",
+  "name": "Hutton Keith A",
+  "ticker": "TXO",
+  "companyName": "Txo Partners, L.P.",
+  "roles": [
+    "See Remarks"
+  ],
+  "logoLabel": "HU",
+  "logoColor": "#6366F1",
+  "allTradesCount": 4,
+  "activity": {
+    "totalBuys": 33133020,
+    "buyTxCount": 4,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2g1p10x3ssbqqjd9mut1n",
+      "ticker": "TXO",
+      "side": "buy",
+      "amount": 10500000,
+      "shares": 700000,
+      "filedAt": "2025-05-15",
+      "tradeDate": "2025-05-15"
+    },
+    {
+      "id": "cmhz2fxnt0tgssbqqme8plqsx",
+      "ticker": "TXO",
+      "side": "buy",
+      "amount": 1905020,
+      "shares": 120000,
+      "filedAt": "2024-12-19",
+      "tradeDate": "2024-12-17"
+    },
+    {
+      "id": "cmhz2frzw0o6ksbqq5c87ezkl",
+      "ticker": "TXO",
+      "side": "buy",
+      "amount": 17560000,
+      "shares": 878000,
+      "filedAt": "2024-06-28",
+      "tradeDate": "2024-06-28"
+    },
+    {
+      "id": "cmhz2for50kmmsbqq4anrh0p0",
+      "ticker": "TXO",
+      "side": "buy",
+      "amount": 3168000,
+      "shares": 180000,
+      "filedAt": "2023-11-14",
+      "tradeDate": "2023-11-10"
+    }
+  ]
+}

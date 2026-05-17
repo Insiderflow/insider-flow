@@ -1,0 +1,37 @@
+{
+  "id": "person-cmhz2f6n606rusbqqd7yetmj6",
+  "entityType": "person",
+  "name": "Levinson Mitchell E.",
+  "ticker": "PLSE",
+  "companyName": "Pulse Biosciences, Inc.",
+  "roles": [
+    "Chief Strategy Officer"
+  ],
+  "logoLabel": "LE",
+  "logoColor": "#6366F1",
+  "allTradesCount": 1,
+  "activity": {
+    "totalBuys": 105090,
+    "buyTxCount": 1,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2fn5i0jmqsbqqnvk8edtl",
+      "ticker": "PLSE",
+      "side": "buy",
+      "amount": 105090,
+      "shares": 17800,
+      "filedAt": "2023-11-17",
+      "tradeDate": "2023-11-15"
+    }
+  ]
+}

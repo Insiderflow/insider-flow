@@ -1,0 +1,64 @@
+{
+  "id": "person-cmhz2f4au058ssbqqo9q8zi4r",
+  "entityType": "person",
+  "name": "Pfenniger Richard C Jr",
+  "ticker": "OPK",
+  "companyName": "Opko Health, Inc.",
+  "roles": [
+    "Dir"
+  ],
+  "logoLabel": "PF",
+  "logoColor": "#6366F1",
+  "allTradesCount": 4,
+  "activity": {
+    "totalBuys": 93341,
+    "buyTxCount": 4,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2fn510jamsbqq2o1356wr",
+      "ticker": "OPK",
+      "side": "buy",
+      "amount": 23429,
+      "shares": 25000,
+      "filedAt": "2024-01-05",
+      "tradeDate": "2024-01-05"
+    },
+    {
+      "id": "cmhz2for90kpysbqqdo20gb49",
+      "ticker": "WGS",
+      "side": "buy",
+      "amount": 14889,
+      "shares": 10000,
+      "filedAt": "2023-11-08",
+      "tradeDate": "2023-11-08"
+    },
+    {
+      "id": "cmhz2fk4f0fyhsbqq8qd3ryic",
+      "ticker": "WGS",
+      "side": "buy",
+      "amount": 25523,
+      "shares": 5000,
+      "filedAt": "2023-08-18",
+      "tradeDate": "2023-08-17"
+    },
+    {
+      "id": "cmhz2fmc60ijnsbqqckg2u8df",
+      "ticker": "WGS",
+      "side": "buy",
+      "amount": 29500,
+      "shares": 5000,
+      "filedAt": "2023-05-22",
+      "tradeDate": "2023-05-18"
+    }
+  ]
+}

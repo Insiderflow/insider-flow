@@ -1,0 +1,55 @@
+{
+  "id": "person-cmp82e1zu00crsbqx02glh3wa",
+  "entityType": "person",
+  "name": "Poulton Stuart",
+  "ticker": "KPTI",
+  "companyName": "Karyopharm Therapeutics Inc.",
+  "roles": [
+    "EVP, Chief Development Officer"
+  ],
+  "logoLabel": "PO",
+  "logoColor": "#6366F1",
+  "allTradesCount": 3,
+  "activity": {
+    "totalBuys": 0,
+    "buyTxCount": 0,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmp82n04x00j34ey4bxl8jpgf",
+      "ticker": "KPTI",
+      "side": "sell",
+      "amount": -3829,
+      "shares": -403,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82e2ep00ctsbqxecy49039",
+      "ticker": "KPTI",
+      "side": "sell",
+      "amount": -3829,
+      "shares": -403,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82zv1l010zsbtzzl6txute",
+      "ticker": "KPTI",
+      "side": "sell",
+      "amount": -3829,
+      "shares": -403,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    }
+  ]
+}

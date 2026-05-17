@@ -1,0 +1,37 @@
+{
+  "id": "person-cmhz2f25203rqsbqqihuugt1a",
+  "entityType": "person",
+  "name": "Opko Health, Inc.",
+  "ticker": "WGS",
+  "companyName": "Genedx Holdings Corp.",
+  "roles": [
+    "10%"
+  ],
+  "logoLabel": "OP",
+  "logoColor": "#6366F1",
+  "allTradesCount": 1,
+  "activity": {
+    "totalBuys": 5000000,
+    "buyTxCount": 1,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2fh9i0crgsbqq5cq7sogu",
+      "ticker": "WGS",
+      "side": "buy",
+      "amount": 5000000,
+      "shares": 14285714,
+      "filedAt": "2023-01-31",
+      "tradeDate": "2023-01-26"
+    }
+  ]
+}

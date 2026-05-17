@@ -1,0 +1,44 @@
+{
+  "id": "2335407",
+  "name": "TRULIEVE CANNABIS CORP",
+  "ticker": "TCNNF",
+  "sector": null,
+  "sectorKey": "Other",
+  "country": null,
+  "stats": {
+    "trades": 1,
+    "politicians": 1,
+    "totalVolume": 32500,
+    "maxTrade": 50000,
+    "lastTraded": "2026-05-06"
+  },
+  "chartPoints": [
+    {
+      "period": "2026-Q2",
+      "buyVolume": 0,
+      "sellVolume": 32500,
+      "sp500Close": 7408.5
+    }
+  ],
+  "topPoliticians": [
+    {
+      "id": "S001211",
+      "name": "Greg Stanton",
+      "party": "D",
+      "trades": 1,
+      "totalVolume": 32500
+    }
+  ],
+  "recentTrades": [
+    {
+      "id": "trade_S001211_2335407_1778252068013_vh2zkn",
+      "politicianId": "S001211",
+      "politicianName": "Greg Stanton",
+      "party": "D",
+      "side": "sell",
+      "amount": 50000,
+      "tradeDate": "2026-05-06",
+      "filedAt": "2026-05-08"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "id": "person-cmhz2f38304pssbqq2foc27mr",
+  "entityType": "person",
+  "name": "Casdin Eli",
+  "ticker": "LAB",
+  "companyName": "Standard Biotools Inc.",
+  "roles": [
+    "Dir, 10%"
+  ],
+  "logoLabel": "CA",
+  "logoColor": "#6366F1",
+  "allTradesCount": 2,
+  "activity": {
+    "totalBuys": 32631335,
+    "buyTxCount": 2,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2fn4y0j7jsbqqk1e4zas2",
+      "ticker": "LAB",
+      "side": "buy",
+      "amount": 2631335,
+      "shares": 1200000,
+      "filedAt": "2023-05-19",
+      "tradeDate": "2023-05-17"
+    },
+    {
+      "id": "cmhz2fiqx0etnsbqq56xvacpp",
+      "ticker": "WGS",
+      "side": "buy",
+      "amount": 30000000,
+      "shares": 85714285,
+      "filedAt": "2023-02-02",
+      "tradeDate": "2023-01-31"
+    }
+  ]
+}

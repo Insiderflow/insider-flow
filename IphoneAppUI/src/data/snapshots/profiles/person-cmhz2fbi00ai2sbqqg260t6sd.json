@@ -1,0 +1,46 @@
+{
+  "id": "person-cmhz2fbi00ai2sbqqg260t6sd",
+  "entityType": "person",
+  "name": "Langston Willie",
+  "ticker": "PSQH",
+  "companyName": "Psq Holdings, Inc.",
+  "roles": [
+    "Dir"
+  ],
+  "logoLabel": "LA",
+  "logoColor": "#6366F1",
+  "allTradesCount": 2,
+  "activity": {
+    "totalBuys": 103904,
+    "buyTxCount": 2,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2g1oy0x17sbqqwv8tgcrb",
+      "ticker": "PSQH",
+      "side": "buy",
+      "amount": 52704,
+      "shares": 27000,
+      "filedAt": "2025-05-20",
+      "tradeDate": "2025-05-20"
+    },
+    {
+      "id": "cmhz2g0w60wgesbqqsopb8324",
+      "ticker": "PSQH",
+      "side": "buy",
+      "amount": 51200,
+      "shares": 25000,
+      "filedAt": "2025-05-14",
+      "tradeDate": "2025-05-13"
+    }
+  ]
+}

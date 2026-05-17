@@ -1,0 +1,72 @@
+{
+  "id": "company-v",
+  "entityType": "company",
+  "name": "Visa Inc.",
+  "ticker": "V",
+  "companyName": "Visa Inc.",
+  "roles": [
+    "Issuer"
+  ],
+  "logoLabel": "V",
+  "logoColor": "#166534",
+  "displayName": "VISA INC. / US",
+  "exchange": "NYSE",
+  "industry": "—",
+  "description": "Visa Inc.",
+  "dataAsOf": "2023-02-17",
+  "allTradesCount": 1,
+  "activity": {
+    "totalBuys": 84096,
+    "buyTxCount": 1,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 184.83,
+    "avgSell": 0,
+    "plan10b5Pct": 0,
+    "ppSalePct": 0,
+    "buyRangeMin": 184.83,
+    "buyRangeMax": 184.83,
+    "sellRangeMin": null,
+    "sellRangeMax": null
+  },
+  "companyTrades": [
+    {
+      "id": "cmhz2fiqw0et1sbqqnhxjmt2m",
+      "ticker": "V",
+      "insiderName": "Morrison Denise M",
+      "personId": "person-cmhz2f38304pesbqqq78nrj5v",
+      "side": "buy",
+      "amount": 84096,
+      "shares": 455,
+      "filedAt": "2023-02-17",
+      "tradeDate": "2018-11-16"
+    }
+  ],
+  "insiders": [
+    {
+      "id": "person-cmhz2f38304pesbqqq78nrj5v",
+      "name": "Morrison Denise M",
+      "role": "Dir",
+      "tradesCount": 1
+    }
+  ],
+  "tradeTypes": {
+    "buy": 100,
+    "sell": 0,
+    "option": 0,
+    "proposed": 0
+  },
+  "aiSummary": {
+    "headline": "1 buys and 0 sells for V.",
+    "bullets": [
+      "1 Form 4 filings on record."
+    ],
+    "sentiment": "bullish"
+  },
+  "eventStudies": [],
+  "recentTrades": []
+}

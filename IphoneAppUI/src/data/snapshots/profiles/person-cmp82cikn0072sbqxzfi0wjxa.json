@@ -1,0 +1,55 @@
+{
+  "id": "person-cmp82cikn0072sbqxzfi0wjxa",
+  "entityType": "person",
+  "name": "Gryzlov Yury",
+  "ticker": "GDYN",
+  "companyName": "Grid Dynamics Holdings, Inc.",
+  "roles": [
+    "COO"
+  ],
+  "logoLabel": "GR",
+  "logoColor": "#6366F1",
+  "allTradesCount": 3,
+  "activity": {
+    "totalBuys": 0,
+    "buyTxCount": 0,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmp82mh5o00e94ey4sz7bgpit",
+      "ticker": "GDYN",
+      "side": "sell",
+      "amount": -3012,
+      "shares": -467,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-15"
+    },
+    {
+      "id": "cmp82ciz00074sbqxcm48lib0",
+      "ticker": "GDYN",
+      "side": "sell",
+      "amount": -3012,
+      "shares": -467,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-15"
+    },
+    {
+      "id": "cmp82y4x200w5sbtzwvoiwexi",
+      "ticker": "GDYN",
+      "side": "sell",
+      "amount": -3012,
+      "shares": -467,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-15"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "id": "person-cmhz2fc2y0aposbqqhbarp0e9",
+  "entityType": "person",
+  "name": "Massaro Lawrence S",
+  "ticker": "TXO",
+  "companyName": "Txo Partners, L.P.",
+  "roles": [
+    "Dir"
+  ],
+  "logoLabel": "MA",
+  "logoColor": "#6366F1",
+  "allTradesCount": 1,
+  "activity": {
+    "totalBuys": 300000,
+    "buyTxCount": 1,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2g1p50x6ksbqql1k0kk3o",
+      "ticker": "TXO",
+      "side": "buy",
+      "amount": 300000,
+      "shares": 20000,
+      "filedAt": "2025-05-15",
+      "tradeDate": "2025-05-15"
+    }
+  ]
+}

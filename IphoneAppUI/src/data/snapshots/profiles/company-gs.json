@@ -1,0 +1,106 @@
+{
+  "id": "company-gs",
+  "entityType": "company",
+  "name": "Goldman Sachs Group Inc",
+  "ticker": "GS",
+  "companyName": "Goldman Sachs Group Inc",
+  "roles": [
+    "Issuer"
+  ],
+  "logoLabel": "GS",
+  "logoColor": "#166534",
+  "displayName": "GOLDMAN SACHS GROUP INC / US",
+  "exchange": "NYSE",
+  "industry": "—",
+  "description": "Goldman Sachs Group Inc",
+  "dataAsOf": "2025-04-17",
+  "allTradesCount": 3,
+  "activity": {
+    "totalBuys": 3512777,
+    "buyTxCount": 3,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 496.48333333333335,
+    "avgSell": 0,
+    "plan10b5Pct": 0,
+    "ppSalePct": 0,
+    "buyRangeMin": 358.75,
+    "buyRangeMax": 619.02,
+    "sellRangeMin": null,
+    "sellRangeMax": null
+  },
+  "companyTrades": [
+    {
+      "id": "cmhz2fw9v0s0bsbqq2rve4vou",
+      "ticker": "GS",
+      "insiderName": "Hess John B",
+      "personId": "person-cmhz2f9vs099bsbqqysi4nw5i",
+      "side": "buy",
+      "amount": 1997584,
+      "shares": 3904,
+      "filedAt": "2025-04-17",
+      "tradeDate": "2025-04-15"
+    },
+    {
+      "id": "cmhz2fvjd0r87sbqq8ix5hcnb",
+      "ticker": "GS",
+      "insiderName": "Johnson Kevin R",
+      "personId": "person-cmhz2f9cf090wsbqqo4b8610g",
+      "side": "buy",
+      "amount": 1485648,
+      "shares": 2400,
+      "filedAt": "2025-01-21",
+      "tradeDate": "2025-01-17"
+    },
+    {
+      "id": "cmhz2fst00oqtsbqqn6k6nsq3",
+      "ticker": "GS",
+      "insiderName": "Flaherty Mark A.",
+      "personId": "person-cmhz2f8su08dxsbqqo4kpwgd8",
+      "side": "buy",
+      "amount": 29545,
+      "shares": 82,
+      "filedAt": "2024-10-09",
+      "tradeDate": "2022-03-30"
+    }
+  ],
+  "insiders": [
+    {
+      "id": "person-cmhz2f9vs099bsbqqysi4nw5i",
+      "name": "Hess John B",
+      "role": "Dir",
+      "tradesCount": 1
+    },
+    {
+      "id": "person-cmhz2f9cf090wsbqqo4b8610g",
+      "name": "Johnson Kevin R",
+      "role": "Dir",
+      "tradesCount": 1
+    },
+    {
+      "id": "person-cmhz2f8su08dxsbqqo4kpwgd8",
+      "name": "Flaherty Mark A.",
+      "role": "Dir",
+      "tradesCount": 1
+    }
+  ],
+  "tradeTypes": {
+    "buy": 100,
+    "sell": 0,
+    "option": 0,
+    "proposed": 0
+  },
+  "aiSummary": {
+    "headline": "3 buys and 0 sells for GS.",
+    "bullets": [
+      "3 Form 4 filings on record."
+    ],
+    "sentiment": "bullish"
+  },
+  "eventStudies": [],
+  "recentTrades": []
+}

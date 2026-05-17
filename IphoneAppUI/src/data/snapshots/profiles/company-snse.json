@@ -1,0 +1,249 @@
+{
+  "id": "company-snse",
+  "entityType": "company",
+  "name": "Sensei Biotherapeutics, Inc.",
+  "ticker": "SNSE",
+  "companyName": "Sensei Biotherapeutics, Inc.",
+  "roles": [
+    "Issuer"
+  ],
+  "logoLabel": "SN",
+  "logoColor": "#166534",
+  "displayName": "SENSEI BIOTHERAPEUTICS, INC. / US",
+  "exchange": "NYSE",
+  "industry": "—",
+  "description": "Sensei Biotherapeutics, Inc.",
+  "dataAsOf": "2026-05-15",
+  "allTradesCount": 16,
+  "activity": {
+    "totalBuys": 2828770,
+    "buyTxCount": 9,
+    "totalSells": -1947020,
+    "sellTxCount": 7,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 24.36888888888889,
+    "avgSell": 0,
+    "plan10b5Pct": 0,
+    "ppSalePct": 0,
+    "buyRangeMin": 0.85,
+    "buyRangeMax": 33.54,
+    "sellRangeMin": null,
+    "sellRangeMax": null
+  },
+  "companyTrades": [
+    {
+      "id": "cmp82mqei00gl4ey4z7d3uvgr",
+      "ticker": "SNSE",
+      "insiderName": "Millennium Management LLC",
+      "personId": "person-cmp82gge900lesbqxrtmvn60j",
+      "side": "buy",
+      "amount": 141364,
+      "shares": 4215,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-04-02"
+    },
+    {
+      "id": "cmp82mqub00go4ey4gaf2hr73",
+      "ticker": "SNSE",
+      "insiderName": "Millennium Management LLC",
+      "personId": "person-cmp82gge900lesbqxrtmvn60j",
+      "side": "sell",
+      "amount": -538114,
+      "shares": -17076,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-04-02"
+    },
+    {
+      "id": "cmp82mrqo00h04ey4otjq5co4",
+      "ticker": "SNSE",
+      "insiderName": "Millennium Management LLC",
+      "personId": "person-cmp82gge900lesbqxrtmvn60j",
+      "side": "buy",
+      "amount": 382100,
+      "shares": 12180,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-03-31"
+    },
+    {
+      "id": "cmp82ms5h00h34ey4q200yy4c",
+      "ticker": "SNSE",
+      "insiderName": "Millennium Management LLC",
+      "personId": "person-cmp82gge900lesbqxrtmvn60j",
+      "side": "sell",
+      "amount": -76949,
+      "shares": -2741,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-03-31"
+    },
+    {
+      "id": "cmp82mt4a00hc4ey46mqtpasa",
+      "ticker": "SNSE",
+      "insiderName": "Millennium Management LLC",
+      "personId": "person-cmp82gge900lesbqxrtmvn60j",
+      "side": "sell",
+      "amount": -89390,
+      "shares": -3250,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-03-26"
+    },
+    {
+      "id": "cmp82msta00h94ey40121q1fs",
+      "ticker": "SNSE",
+      "insiderName": "Millennium Management LLC",
+      "personId": "person-cmp82gge900lesbqxrtmvn60j",
+      "side": "buy",
+      "amount": 818257,
+      "shares": 30585,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-03-26"
+    },
+    {
+      "id": "cmp82ggsq00lgsbqxug32t0u7",
+      "ticker": "SNSE",
+      "insiderName": "Millennium Management LLC",
+      "personId": "person-cmp82gge900lesbqxrtmvn60j",
+      "side": "buy",
+      "amount": 141364,
+      "shares": 4215,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-04-02"
+    },
+    {
+      "id": "cmp82ghs400ljsbqxqlczlu9j",
+      "ticker": "SNSE",
+      "insiderName": "Millennium Management LLC",
+      "personId": "person-cmp82gge900lesbqxrtmvn60j",
+      "side": "sell",
+      "amount": -538114,
+      "shares": -17076,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-04-02"
+    },
+    {
+      "id": "cmp82yyuw00yksbtzngo33pvx",
+      "ticker": "SNSE",
+      "insiderName": "Millennium Management LLC",
+      "personId": "person-cmp82gge900lesbqxrtmvn60j",
+      "side": "sell",
+      "amount": -538114,
+      "shares": -17076,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-04-02"
+    },
+    {
+      "id": "cmp82yxvb00yhsbtzyss1ysxz",
+      "ticker": "SNSE",
+      "insiderName": "Millennium Management LLC",
+      "personId": "person-cmp82gge900lesbqxrtmvn60j",
+      "side": "buy",
+      "amount": 141364,
+      "shares": 4215,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-04-02"
+    },
+    {
+      "id": "cmp82z2wg00ywsbtz57tqjwis",
+      "ticker": "SNSE",
+      "insiderName": "Millennium Management LLC",
+      "personId": "person-cmp82gge900lesbqxrtmvn60j",
+      "side": "buy",
+      "amount": 382100,
+      "shares": 12180,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-03-31"
+    },
+    {
+      "id": "cmp82z3yi00yzsbtzne4ub7b5",
+      "ticker": "SNSE",
+      "insiderName": "Millennium Management LLC",
+      "personId": "person-cmp82gge900lesbqxrtmvn60j",
+      "side": "sell",
+      "amount": -76949,
+      "shares": -2741,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-03-31"
+    },
+    {
+      "id": "cmp82z76o00z8sbtzmz6yq9lb",
+      "ticker": "SNSE",
+      "insiderName": "Millennium Management LLC",
+      "personId": "person-cmp82gge900lesbqxrtmvn60j",
+      "side": "sell",
+      "amount": -89390,
+      "shares": -3250,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-03-26"
+    },
+    {
+      "id": "cmp82z64w00z5sbtzs6uebadn",
+      "ticker": "SNSE",
+      "insiderName": "Millennium Management LLC",
+      "personId": "person-cmp82gge900lesbqxrtmvn60j",
+      "side": "buy",
+      "amount": 818257,
+      "shares": 30585,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-03-26"
+    },
+    {
+      "id": "cmhz2fi360dhhsbqqs3hucfzs",
+      "ticker": "SNSE",
+      "insiderName": "Celebi John",
+      "personId": "person-cmhz2f2og044csbqqvgl7ypz8",
+      "side": "buy",
+      "amount": 425,
+      "shares": 500,
+      "filedAt": "2023-09-13",
+      "tradeDate": "2023-09-11"
+    },
+    {
+      "id": "cmhz2fje10fahsbqqztanbhnj",
+      "ticker": "SNSE",
+      "insiderName": "Apeiron Investment Group Ltd.",
+      "personId": "person-cmhz2f3rg04xssbqqyp5lyxjl",
+      "side": "buy",
+      "amount": 3539,
+      "shares": 2200,
+      "filedAt": "2023-02-27",
+      "tradeDate": "2023-02-23"
+    }
+  ],
+  "insiders": [
+    {
+      "id": "person-cmp82gge900lesbqxrtmvn60j",
+      "name": "Millennium Management LLC",
+      "role": "10%",
+      "tradesCount": 14
+    },
+    {
+      "id": "person-cmhz2f2og044csbqqvgl7ypz8",
+      "name": "Celebi John",
+      "role": "Pres, CEO",
+      "tradesCount": 1
+    },
+    {
+      "id": "person-cmhz2f3rg04xssbqqyp5lyxjl",
+      "name": "Apeiron Investment Group Ltd.",
+      "role": "10%",
+      "tradesCount": 1
+    }
+  ],
+  "tradeTypes": {
+    "buy": 56,
+    "sell": 44,
+    "option": 0,
+    "proposed": 0
+  },
+  "aiSummary": {
+    "headline": "9 buys and 7 sells for SNSE.",
+    "bullets": [
+      "16 Form 4 filings on record."
+    ],
+    "sentiment": "bullish"
+  },
+  "eventStudies": [],
+  "recentTrades": []
+}

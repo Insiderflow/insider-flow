@@ -1,0 +1,306 @@
+{
+  "id": "M001157",
+  "entityType": "person",
+  "name": "Michael McCaul",
+  "ticker": "NVAER",
+  "companyName": "AerCap Holdings",
+  "roles": [
+    "Industrials"
+  ],
+  "seatSector": "Industrials",
+  "imageUrl": "/images/politicians/M001157_Michael_McCaul.jpg",
+  "logoLabel": "MI",
+  "logoColor": "#EF4444",
+  "allTradesCount": 4178,
+  "activity": {
+    "totalBuys": 1550000,
+    "buyTxCount": 31,
+    "totalSells": 19,
+    "sellTxCount": 19,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "trade_M001157_429517_1778600605466_ziqvpw",
+      "ticker": "NVAER",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-11",
+      "tradeDate": "2026-04-30"
+    },
+    {
+      "id": "trade_M001157_2335313_1778600613007_8qyowd",
+      "ticker": "",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-11",
+      "tradeDate": "2026-04-30"
+    },
+    {
+      "id": "trade_M001157_429720_1778600613007_f43cec",
+      "ticker": "COR",
+      "side": "sell",
+      "amount": 250000,
+      "shares": 0,
+      "filedAt": "2026-05-11",
+      "tradeDate": "2026-04-30"
+    },
+    {
+      "id": "trade_M001157_2334500_1778600601679_ibwjse",
+      "ticker": "",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-11",
+      "tradeDate": "2026-04-29"
+    },
+    {
+      "id": "trade_M001157_434954_1778600590246_sevwaw",
+      "ticker": "",
+      "side": "buy",
+      "amount": 250000,
+      "shares": 0,
+      "filedAt": "2026-05-11",
+      "tradeDate": "2026-04-29"
+    },
+    {
+      "id": "trade_M001157_435205_1778600594020_hqbw58",
+      "ticker": "TER",
+      "side": "buy",
+      "amount": 50000,
+      "shares": 0,
+      "filedAt": "2026-05-11",
+      "tradeDate": "2026-04-29"
+    },
+    {
+      "id": "trade_M001157_2334695_1778600609239_xjnk9u",
+      "ticker": "NCGEV",
+      "side": "sell",
+      "amount": 50000,
+      "shares": 0,
+      "filedAt": "2026-05-11",
+      "tradeDate": "2026-04-29"
+    },
+    {
+      "id": "trade_M001157_432490_1778600601678_761gtl",
+      "ticker": "INTU",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-11",
+      "tradeDate": "2026-04-29"
+    },
+    {
+      "id": "trade_M001157_435761_1778600605466_4uj68j",
+      "ticker": "VMC",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-11",
+      "tradeDate": "2026-04-29"
+    },
+    {
+      "id": "trade_M001157_435639_1778600613007_ay68nk",
+      "ticker": "TFVTI",
+      "side": "sell",
+      "amount": 100000,
+      "shares": 0,
+      "filedAt": "2026-05-11",
+      "tradeDate": "2026-04-28"
+    },
+    {
+      "id": "trade_M001157_434883_1778600597907_ddwh7b",
+      "ticker": "SPGI",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-11",
+      "tradeDate": "2026-04-28"
+    },
+    {
+      "id": "trade_M001157_431181_1778600594020_iyi2lq",
+      "ticker": "DHR",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-11",
+      "tradeDate": "2026-04-28"
+    }
+  ],
+  "party": "R",
+  "state": "Texas",
+  "chamber": "",
+  "politicianCharts": {
+    "stats": {
+      "totalTrades": 4178,
+      "issuerCount": 8,
+      "totalVolume": 372980000,
+      "maxTrade": 25000000,
+      "lastTraded": "2026-05-11"
+    },
+    "topIssuers": [
+      {
+        "issuerId": "2334500",
+        "count": 167,
+        "name": "MAYS ALLOCATE LP",
+        "ticker": null,
+        "sector": "N/A"
+      },
+      {
+        "issuerId": "2334591",
+        "count": 85,
+        "name": "JPMORGAN 100% US TREASURY SECURITIES MONEY MARKET FUND",
+        "ticker": "JPM",
+        "sector": "N/A"
+      },
+      {
+        "issuerId": "435544",
+        "count": 78,
+        "name": "US TREASURY BILLS",
+        "ticker": null,
+        "sector": "N/A"
+      },
+      {
+        "issuerId": "429622",
+        "count": 65,
+        "name": "Alphabet Inc",
+        "ticker": "GOOGL",
+        "sector": "通訊服務"
+      },
+      {
+        "issuerId": "435958",
+        "count": 63,
+        "name": "Workday Inc",
+        "ticker": "WDAY",
+        "sector": "資訊科技"
+      },
+      {
+        "issuerId": "431610",
+        "count": 61,
+        "name": "Meta Platforms Inc",
+        "ticker": "META",
+        "sector": "通訊服務"
+      },
+      {
+        "issuerId": "433089",
+        "count": 48,
+        "name": "London Stock Exchange Group PLC",
+        "ticker": "LDNXF",
+        "sector": "金融"
+      },
+      {
+        "issuerId": "433589",
+        "count": 44,
+        "name": "Netflix Inc",
+        "ticker": "NFLX",
+        "sector": "通訊服務"
+      }
+    ],
+    "chartPoints": [
+      {
+        "period": "2022-Q3",
+        "buyVolume": 457500,
+        "sellVolume": 0,
+        "sp500Close": 3585.6201171875
+      },
+      {
+        "period": "2022-Q4",
+        "buyVolume": 8816000,
+        "sellVolume": 7249500,
+        "sp500Close": 3839.5
+      },
+      {
+        "period": "2023-Q1",
+        "buyVolume": 9978500,
+        "sellVolume": 6269500,
+        "sp500Close": 4109.31005859375
+      },
+      {
+        "period": "2023-Q2",
+        "buyVolume": 8982500,
+        "sellVolume": 12883500,
+        "sp500Close": 4450.3798828125
+      },
+      {
+        "period": "2023-Q3",
+        "buyVolume": 13005500,
+        "sellVolume": 24824000,
+        "sp500Close": 4288.0498046875
+      },
+      {
+        "period": "2023-Q4",
+        "buyVolume": 13698500,
+        "sellVolume": 11577500,
+        "sp500Close": 4769.830078125
+      },
+      {
+        "period": "2024-Q1",
+        "buyVolume": 13823500,
+        "sellVolume": 16861500,
+        "sp500Close": 5254.35009765625
+      },
+      {
+        "period": "2024-Q2",
+        "buyVolume": 9532000,
+        "sellVolume": 6647500,
+        "sp500Close": 5460.47998046875
+      },
+      {
+        "period": "2024-Q3",
+        "buyVolume": 8918000,
+        "sellVolume": 17565000,
+        "sp500Close": 5762.47998046875
+      },
+      {
+        "period": "2024-Q4",
+        "buyVolume": 9308000,
+        "sellVolume": 8447500,
+        "sp500Close": 5881.6298828125
+      },
+      {
+        "period": "2025-Q1",
+        "buyVolume": 7462000,
+        "sellVolume": 5077000,
+        "sp500Close": 5611.85009765625
+      },
+      {
+        "period": "2025-Q2",
+        "buyVolume": 10244500,
+        "sellVolume": 14500000,
+        "sp500Close": 6204.9501953125
+      },
+      {
+        "period": "2025-Q3",
+        "buyVolume": 81121000,
+        "sellVolume": 11746500,
+        "sp500Close": 6688.4599609375
+      },
+      {
+        "period": "2025-Q4",
+        "buyVolume": 5402500,
+        "sellVolume": 7432000,
+        "sp500Close": 6845.5
+      },
+      {
+        "period": "2026-Q1",
+        "buyVolume": 10151500,
+        "sellVolume": 6664000,
+        "sp500Close": 6528.52001953125
+      },
+      {
+        "period": "2026-Q2",
+        "buyVolume": 2763000,
+        "sellVolume": 1562500,
+        "sp500Close": 7408.5
+      }
+    ]
+  }
+}

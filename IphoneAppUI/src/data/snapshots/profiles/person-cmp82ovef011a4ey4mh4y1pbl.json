@@ -1,0 +1,46 @@
+{
+  "id": "person-cmp82ovef011a4ey4mh4y1pbl",
+  "entityType": "person",
+  "name": "Heller Bridgette P",
+  "ticker": "DXCM",
+  "companyName": "Dexcom Inc",
+  "roles": [
+    "Dir"
+  ],
+  "logoLabel": "HE",
+  "logoColor": "#6366F1",
+  "allTradesCount": 2,
+  "activity": {
+    "totalBuys": 0,
+    "buyTxCount": 0,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmp82ovel011c4ey4f481red3",
+      "ticker": "DXCM",
+      "side": "sell",
+      "amount": -60730,
+      "shares": -1012,
+      "filedAt": "2026-05-14",
+      "tradeDate": "2026-05-12"
+    },
+    {
+      "id": "cmp82q8jr00b2sbtzux7w53ql",
+      "ticker": "DXCM",
+      "side": "sell",
+      "amount": -60730,
+      "shares": -1012,
+      "filedAt": "2026-05-14",
+      "tradeDate": "2026-05-12"
+    }
+  ]
+}

@@ -1,0 +1,319 @@
+{
+  "id": "432457",
+  "name": "Insulet Corp",
+  "ticker": "PODD",
+  "sector": "Healthcare",
+  "sectorKey": "Healthcare",
+  "country": null,
+  "stats": {
+    "trades": 21,
+    "politicians": 4,
+    "totalVolume": 569000,
+    "maxTrade": 250000,
+    "lastTraded": "2026-05-07"
+  },
+  "chartPoints": [
+    {
+      "period": "2023-Q1",
+      "buyVolume": 8000,
+      "sellVolume": 0,
+      "sp500Close": 4109.31005859375
+    },
+    {
+      "period": "2023-Q2",
+      "buyVolume": 16000,
+      "sellVolume": 8000,
+      "sp500Close": 4450.3798828125
+    },
+    {
+      "period": "2023-Q3",
+      "buyVolume": 8000,
+      "sellVolume": 16000,
+      "sp500Close": 4288.0498046875
+    },
+    {
+      "period": "2023-Q4",
+      "buyVolume": 16000,
+      "sellVolume": 16000,
+      "sp500Close": 4769.830078125
+    },
+    {
+      "period": "2024-Q1",
+      "buyVolume": 0,
+      "sellVolume": 8000,
+      "sp500Close": 5254.35009765625
+    },
+    {
+      "period": "2024-Q2",
+      "buyVolume": 0,
+      "sellVolume": 75000,
+      "sp500Close": 5460.47998046875
+    },
+    {
+      "period": "2024-Q4",
+      "buyVolume": 0,
+      "sellVolume": 16000,
+      "sp500Close": 5881.6298828125
+    },
+    {
+      "period": "2025-Q2",
+      "buyVolume": 0,
+      "sellVolume": 8000,
+      "sp500Close": 6204.9501953125
+    },
+    {
+      "period": "2025-Q3",
+      "buyVolume": 8000,
+      "sellVolume": 0,
+      "sp500Close": 6688.4599609375
+    },
+    {
+      "period": "2026-Q2",
+      "buyVolume": 16000,
+      "sellVolume": 350000,
+      "sp500Close": 7408.5
+    }
+  ],
+  "topPoliticians": [
+    {
+      "id": "K000389",
+      "name": "Ro Khanna",
+      "party": "D",
+      "trades": 13,
+      "totalVolume": 104000
+    },
+    {
+      "id": "M001190",
+      "name": "Markwayne Mullin",
+      "party": "R",
+      "trades": 3,
+      "totalVolume": 24000
+    },
+    {
+      "id": "S001203",
+      "name": "Tina Smith",
+      "party": "D",
+      "trades": 3,
+      "totalVolume": 425000
+    },
+    {
+      "id": "G000599",
+      "name": "Daniel S. Goldman DemocratNew York Trades1,307 Issuers761 Volume59.79M Last Traded2025-02-11",
+      "party": "D",
+      "trades": 2,
+      "totalVolume": 16000
+    }
+  ],
+  "recentTrades": [
+    {
+      "id": "trade_S001203_432457_1778600658669_0es3od",
+      "politicianId": "S001203",
+      "politicianName": "Tina Smith",
+      "party": "D",
+      "side": "sell",
+      "amount": 250000,
+      "tradeDate": "2026-05-07",
+      "filedAt": "2026-05-10"
+    },
+    {
+      "id": "trade_S001203_432457_1778600658669_eckn2h",
+      "politicianId": "S001203",
+      "politicianName": "Tina Smith",
+      "party": "D",
+      "side": "sell",
+      "amount": 250000,
+      "tradeDate": "2026-04-29",
+      "filedAt": "2026-05-10"
+    },
+    {
+      "id": "trade_K000389_432457_1778772227791_tj5pq9",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "buy",
+      "amount": 15000,
+      "tradeDate": "2026-04-24",
+      "filedAt": "2026-05-13"
+    },
+    {
+      "id": "trade_K000389_432457_1778772170207_h8jsr0",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "buy",
+      "amount": 15000,
+      "tradeDate": "2026-04-13",
+      "filedAt": "2026-05-13"
+    },
+    {
+      "id": "20003790525",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "buy",
+      "amount": 15000,
+      "tradeDate": "2025-08-03",
+      "filedAt": "2025-09-11"
+    },
+    {
+      "id": "20003786162",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2025-04-22",
+      "filedAt": "2025-05-14"
+    },
+    {
+      "id": "20003779744",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2024-11-14",
+      "filedAt": "2024-12-05"
+    },
+    {
+      "id": "20003779968",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2024-11-11",
+      "filedAt": "2024-12-05"
+    },
+    {
+      "id": "10000062275",
+      "politicianId": "S001203",
+      "politicianName": "Tina Smith",
+      "party": "D",
+      "side": "sell",
+      "amount": 100000,
+      "tradeDate": "2024-04-03",
+      "filedAt": "2024-04-19"
+    },
+    {
+      "id": "10000063688",
+      "politicianId": "M001190",
+      "politicianName": "Markwayne Mullin",
+      "party": "R",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2024-01-03",
+      "filedAt": "2025-08-12"
+    },
+    {
+      "id": "10000063727",
+      "politicianId": "M001190",
+      "politicianName": "Markwayne Mullin",
+      "party": "R",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2023-12-21",
+      "filedAt": "2025-08-12"
+    },
+    {
+      "id": "20003769646",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "buy",
+      "amount": 15000,
+      "tradeDate": "2023-11-02",
+      "filedAt": "2023-12-07"
+    },
+    {
+      "id": "20003768897",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "buy",
+      "amount": 15000,
+      "tradeDate": "2023-10-30",
+      "filedAt": "2023-11-09"
+    },
+    {
+      "id": "20003768747",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2023-10-01",
+      "filedAt": "2023-11-09"
+    },
+    {
+      "id": "20003766979",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "buy",
+      "amount": 15000,
+      "tradeDate": "2023-08-28",
+      "filedAt": "2023-09-06"
+    },
+    {
+      "id": "20003765798",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2023-07-27",
+      "filedAt": "2023-08-08"
+    },
+    {
+      "id": "20003766280",
+      "politicianId": "G000599",
+      "politicianName": "Daniel S. Goldman DemocratNew York Trades1,307 Issuers761 Volume59.79M Last Traded2025-02-11",
+      "party": "D",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2023-07-11",
+      "filedAt": "2023-08-13"
+    },
+    {
+      "id": "20003765049",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "buy",
+      "amount": 15000,
+      "tradeDate": "2023-06-25",
+      "filedAt": "2023-07-11"
+    },
+    {
+      "id": "20003764112",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2023-05-22",
+      "filedAt": "2023-06-13"
+    },
+    {
+      "id": "20003763271",
+      "politicianId": "G000599",
+      "politicianName": "Daniel S. Goldman DemocratNew York Trades1,307 Issuers761 Volume59.79M Last Traded2025-02-11",
+      "party": "D",
+      "side": "buy",
+      "amount": 15000,
+      "tradeDate": "2023-04-09",
+      "filedAt": "2023-05-21"
+    },
+    {
+      "id": "10000063633",
+      "politicianId": "M001190",
+      "politicianName": "Markwayne Mullin",
+      "party": "R",
+      "side": "buy",
+      "amount": 15000,
+      "tradeDate": "2023-01-02",
+      "filedAt": "2025-07-30"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "id": "person-cmhz2f2of042msbqqm35d1rk8",
+  "entityType": "person",
+  "name": "Singh Prem",
+  "ticker": "PODD",
+  "companyName": "Insulet Corp",
+  "roles": [
+    "SVP, Global Operations"
+  ],
+  "logoLabel": "SI",
+  "logoColor": "#6366F1",
+  "allTradesCount": 1,
+  "activity": {
+    "totalBuys": 169,
+    "buyTxCount": 1,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2fha80ddrsbqqmic9pvyn",
+      "ticker": "PODD",
+      "side": "buy",
+      "amount": 169,
+      "shares": 1,
+      "filedAt": "2023-09-21",
+      "tradeDate": "2023-09-19"
+    }
+  ]
+}

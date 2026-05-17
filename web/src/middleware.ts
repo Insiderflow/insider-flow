@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { cookies } from "next/headers";
+import { isMobileUserAgent } from "@/lib/mobileUserAgent";
+
+const DESKTOP_COOKIE = "if_desktop";
+const MOBILE_APP_PREFIX = "/app";
 
 /** Comma-separated list. Cross-origin Vite / static apps must be listed when using credentials. */
 function getAllowedOrigins(): string[] {
@@ -8,10 +12,12 @@ function getAllowedOrigins(): string[] {
     process.env.CORS_ALLOWED_ORIGINS ||
     [
       "http://localhost:5173",
+      "http://localhost:5174",
       "http://localhost:4173",
       "http://127.0.0.1:5173",
+      "http://127.0.0.1:5174",
       "https://www.insiderflow.asia",
-      // Capacitor WKWebView origins (confirm via Safari Web Inspector → Network → Request Headers → Origin)
+      "https://insiderflow.asia",
       "capacitor://localhost",
       "ionic://localhost",
     ].join(",");
@@ -40,6 +46,42 @@ function applyCors(req: NextRequest, res: NextResponse) {
   return res;
 }
 
+function hasFileExtension(pathname: string): boolean {
+  const last = pathname.split("/").pop() ?? "";
+  return last.includes(".") && !last.endsWith(".");
+}
+
+function shouldServeMobileApp(pathname: string): boolean {
+  if (pathname.startsWith("/api")) return false;
+  if (pathname.startsWith(MOBILE_APP_PREFIX)) return false;
+  if (pathname.startsWith("/_next")) return false;
+  if (pathname === "/favicon.ico" || pathname === "/robots.txt") return false;
+  if (hasFileExtension(pathname)) return false;
+  return true;
+}
+
+function mobileAppRedirect(req: NextRequest): NextResponse | null {
+  const { pathname, search } = req.nextUrl;
+  if (!shouldServeMobileApp(pathname)) return null;
+
+  if (req.nextUrl.searchParams.get("desktop") === "1") {
+    const res = NextResponse.next();
+    res.cookies.set(DESKTOP_COOKIE, "1", {
+      path: "/",
+      maxAge: 60 * 60 * 24 * 30,
+      sameSite: "lax",
+    });
+    return res;
+  }
+
+  if (req.cookies.get(DESKTOP_COOKIE)?.value === "1") return null;
+
+  if (!isMobileUserAgent(req.headers.get("user-agent"))) return null;
+
+  const dest = new URL(`${MOBILE_APP_PREFIX}${search}`, req.url);
+  return NextResponse.redirect(dest);
+}
+
 export async function middleware(req: NextRequest) {
   const url = req.nextUrl.pathname;
 
@@ -51,6 +93,9 @@ export async function middleware(req: NextRequest) {
     const res = NextResponse.next();
     return applyCors(req, res);
   }
+
+  const mobileRedirect = mobileAppRedirect(req);
+  if (mobileRedirect) return mobileRedirect;
 
   const requiresAuth = ["/trades", "/politicians", "/issuers"].some((p) =>
     url.startsWith(p),
@@ -79,9 +124,6 @@ export async function middleware(req: NextRequest) {
 export const config = {
   matcher: [
     "/api/:path*",
-    "/trades/:path*",
-    "/politicians/:path*",
-    "/issuers/:path*",
-    "/insider/:path*",
+    "/((?!_next/static|_next/image).*)",
   ],
 };

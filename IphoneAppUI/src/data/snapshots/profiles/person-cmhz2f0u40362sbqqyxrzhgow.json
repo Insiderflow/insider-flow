@@ -1,0 +1,136 @@
+{
+  "id": "person-cmhz2f0u40362sbqqyxrzhgow",
+  "entityType": "person",
+  "name": "Gelsinger Patrick P",
+  "ticker": "MBLY",
+  "companyName": "Mobileye Global Inc.",
+  "roles": [
+    "Dir"
+  ],
+  "logoLabel": "GE",
+  "logoColor": "#6366F1",
+  "allTradesCount": 13,
+  "activity": {
+    "totalBuys": 2151581,
+    "buyTxCount": 13,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2fwyz0sc9sbqqhpj4geci",
+      "ticker": "MBLY",
+      "side": "buy",
+      "amount": 100848,
+      "shares": 6750,
+      "filedAt": "2024-11-06",
+      "tradeDate": "2024-11-04"
+    },
+    {
+      "id": "cmhz2fwz00scosbqqb97ph39v",
+      "ticker": "INTC",
+      "side": "buy",
+      "amount": 251198,
+      "shares": 11150,
+      "filedAt": "2024-11-06",
+      "tradeDate": "2024-11-04"
+    },
+    {
+      "id": "cmhz2fvis0qpzsbqqoof6qw3y",
+      "ticker": "INTC",
+      "side": "buy",
+      "amount": 251946,
+      "shares": 12500,
+      "filedAt": "2024-08-07",
+      "tradeDate": "2024-08-05"
+    },
+    {
+      "id": "cmhz2fvj70r2ysbqq434kfcj7",
+      "ticker": "MBLY",
+      "side": "buy",
+      "amount": 99045,
+      "shares": 6400,
+      "filedAt": "2024-08-06",
+      "tradeDate": "2024-08-05"
+    },
+    {
+      "id": "cmhz2fqic0m9qsbqqd1df44e1",
+      "ticker": "INTC",
+      "side": "buy",
+      "amount": 119671,
+      "shares": 2800,
+      "filedAt": "2024-02-02",
+      "tradeDate": "2024-02-01"
+    },
+    {
+      "id": "cmhz2fn500ja0sbqqluv6dvzd",
+      "ticker": "MBLY",
+      "side": "buy",
+      "amount": 99915,
+      "shares": 3600,
+      "filedAt": "2024-01-31",
+      "tradeDate": "2024-01-29"
+    },
+    {
+      "id": "cmhz2fn5g0jkzsbqqakgriikp",
+      "ticker": "INTC",
+      "side": "buy",
+      "amount": 130083,
+      "shares": 3000,
+      "filedAt": "2024-01-30",
+      "tradeDate": "2024-01-29"
+    },
+    {
+      "id": "cmhz2for00kicsbqq551owgq0",
+      "ticker": "INTC",
+      "side": "buy",
+      "amount": 249333,
+      "shares": 6775,
+      "filedAt": "2023-11-02",
+      "tradeDate": "2023-11-01"
+    },
+    {
+      "id": "cmhz2ff8a0bkgsbqq87nzfalq",
+      "ticker": "MBLY",
+      "side": "buy",
+      "amount": 100083,
+      "shares": 2845,
+      "filedAt": "2023-10-30",
+      "tradeDate": "2023-10-27"
+    },
+    {
+      "id": "cmhz2fk4v0gc6sbqq0o8q9mol",
+      "ticker": "INTC",
+      "side": "buy",
+      "amount": 133343,
+      "shares": 3850,
+      "filedAt": "2023-08-04",
+      "tradeDate": "2023-08-02"
+    },
+    {
+      "id": "cmhz2fk4f0fyisbqq08i1r13x",
+      "ticker": "INTC",
+      "side": "buy",
+      "amount": 116586,
+      "shares": 3250,
+      "filedAt": "2023-08-02",
+      "tradeDate": "2023-07-31"
+    },
+    {
+      "id": "cmhz2fje00f9usbqqfuxado2z",
+      "ticker": "INTC",
+      "side": "buy",
+      "amount": 249081,
+      "shares": 9700,
+      "filedAt": "2023-02-24",
+      "tradeDate": "2023-02-23"
+    }
+  ]
+}

@@ -1,0 +1,228 @@
+{
+  "id": "M001239",
+  "entityType": "person",
+  "name": "John McGuire",
+  "ticker": "MSFT",
+  "companyName": "Microsoft Corp",
+  "roles": [
+    "Information Technology"
+  ],
+  "seatSector": "Information Technology",
+  "imageUrl": "/images/politicians/M001239_John_McGuire.jpg",
+  "logoLabel": "JO",
+  "logoColor": "#EF4444",
+  "allTradesCount": 12,
+  "activity": {
+    "totalBuys": 135000,
+    "buyTxCount": 9,
+    "totalSells": 3,
+    "sellTxCount": 3,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "trade_M001239_433382_1778858389133_oboonf",
+      "ticker": "MSFT",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-14",
+      "tradeDate": "2026-04-15"
+    },
+    {
+      "id": "trade_M001239_433770_1778858389133_2s6moh",
+      "ticker": "NVDA",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-14",
+      "tradeDate": "2026-04-15"
+    },
+    {
+      "id": "trade_M001239_429789_1778858389132_nruhj8",
+      "ticker": "AAPL",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-14",
+      "tradeDate": "2026-04-15"
+    },
+    {
+      "id": "trade_M001239_433770_1770832306993_9nltfe",
+      "ticker": "NVDA",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-02-11",
+      "tradeDate": "2026-01-30"
+    },
+    {
+      "id": "trade_M001239_433382_1770832306993_mr8env",
+      "ticker": "MSFT",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-02-11",
+      "tradeDate": "2026-01-30"
+    },
+    {
+      "id": "trade_M001239_433382_1770832306993_i4x38x",
+      "ticker": "MSFT",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-02-11",
+      "tradeDate": "2026-01-21"
+    },
+    {
+      "id": "trade_M001239_435777_1770832306993_nm9j26",
+      "ticker": "WMT",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-02-11",
+      "tradeDate": "2026-01-20"
+    },
+    {
+      "id": "20003788265",
+      "ticker": "META",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2025-07-10",
+      "tradeDate": "2025-06-29"
+    },
+    {
+      "id": "20003788267",
+      "ticker": "NOW",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2025-07-10",
+      "tradeDate": "2025-06-26"
+    },
+    {
+      "id": "20003788266",
+      "ticker": "NFLX",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2025-07-10",
+      "tradeDate": "2025-06-15"
+    },
+    {
+      "id": "20003787184",
+      "ticker": "NOW",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2025-06-12",
+      "tradeDate": "2025-05-15"
+    },
+    {
+      "id": "20003786456",
+      "ticker": "UNH",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2025-05-18",
+      "tradeDate": "2025-04-09"
+    }
+  ],
+  "party": "R",
+  "state": "Virginia",
+  "chamber": "",
+  "politicianCharts": {
+    "stats": {
+      "totalTrades": 12,
+      "issuerCount": 8,
+      "totalVolume": 96000,
+      "maxTrade": 15000,
+      "lastTraded": "2026-05-14"
+    },
+    "topIssuers": [
+      {
+        "issuerId": "433382",
+        "count": 3,
+        "name": "Microsoft Corp",
+        "ticker": "MSFT",
+        "sector": "資訊科技"
+      },
+      {
+        "issuerId": "434658",
+        "count": 2,
+        "name": "ServiceNow Inc",
+        "ticker": "NOW",
+        "sector": "資訊科技"
+      },
+      {
+        "issuerId": "433770",
+        "count": 2,
+        "name": "NVIDIA Corporation",
+        "ticker": "NVDA",
+        "sector": "資訊科技"
+      },
+      {
+        "issuerId": "435467",
+        "count": 1,
+        "name": "Unitedhealth Group Inc",
+        "ticker": "UNH",
+        "sector": "醫療保健"
+      },
+      {
+        "issuerId": "429789",
+        "count": 1,
+        "name": "Apple Inc",
+        "ticker": "AAPL",
+        "sector": "資訊科技"
+      },
+      {
+        "issuerId": "435777",
+        "count": 1,
+        "name": "Walmart Inc",
+        "ticker": "WMT",
+        "sector": "必需消費"
+      },
+      {
+        "issuerId": "431610",
+        "count": 1,
+        "name": "Meta Platforms Inc",
+        "ticker": "META",
+        "sector": "通訊服務"
+      },
+      {
+        "issuerId": "433589",
+        "count": 1,
+        "name": "Netflix Inc",
+        "ticker": "NFLX",
+        "sector": "通訊服務"
+      }
+    ],
+    "chartPoints": [
+      {
+        "period": "2025-Q2",
+        "buyVolume": 32000,
+        "sellVolume": 8000,
+        "sp500Close": 6204.9501953125
+      },
+      {
+        "period": "2026-Q1",
+        "buyVolume": 16000,
+        "sellVolume": 16000,
+        "sp500Close": 6528.52001953125
+      },
+      {
+        "period": "2026-Q2",
+        "buyVolume": 24000,
+        "sellVolume": 0,
+        "sp500Close": 7408.5
+      }
+    ]
+  }
+}

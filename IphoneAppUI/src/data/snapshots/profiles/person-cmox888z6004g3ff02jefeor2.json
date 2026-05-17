@@ -1,0 +1,82 @@
+{
+  "id": "person-cmox888z6004g3ff02jefeor2",
+  "entityType": "person",
+  "name": "Kurtz George",
+  "ticker": "CRWD",
+  "companyName": "Crowdstrike Holdings, Inc.",
+  "roles": [
+    "Pres, CEO"
+  ],
+  "logoLabel": "KU",
+  "logoColor": "#6366F1",
+  "allTradesCount": 6,
+  "activity": {
+    "totalBuys": 0,
+    "buyTxCount": 0,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmp82jvc6001b4ey4kq05syil",
+      "ticker": "CRWD",
+      "side": "sell",
+      "amount": -1115594,
+      "shares": -1928,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82jwdu001k4ey40t3jx6b9",
+      "ticker": "CRWD",
+      "side": "sell",
+      "amount": -1708607,
+      "shares": -3072,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82unc000lzsbtzd2bfvvas",
+      "ticker": "CRWD",
+      "side": "sell",
+      "amount": -1115594,
+      "shares": -1928,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82uqkl00m8sbtzer9vv1ac",
+      "ticker": "CRWD",
+      "side": "sell",
+      "amount": -1708607,
+      "shares": -3072,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82bn8k0040sbqxv4emff4p",
+      "ticker": "CRWD",
+      "side": "sell",
+      "amount": -1115594,
+      "shares": -1928,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmox888zf004i3ff01qyj66ax",
+      "ticker": "CRWD",
+      "side": "sell",
+      "amount": -2356624,
+      "shares": -5000,
+      "filedAt": "2026-05-07",
+      "tradeDate": "2026-05-05"
+    }
+  ]
+}

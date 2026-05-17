@@ -1,0 +1,37 @@
+{
+  "id": "person-cmhz2fc320aw1sbqqu3poubog",
+  "entityType": "person",
+  "name": "Koopmans Chris",
+  "ticker": "MRVL",
+  "companyName": "Marvell Technology, Inc.",
+  "roles": [
+    "Pres, COO"
+  ],
+  "logoLabel": "KO",
+  "logoColor": "#6366F1",
+  "allTradesCount": 1,
+  "activity": {
+    "totalBuys": 530604,
+    "buyTxCount": 1,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2g2ia0xudsbqqsu7a1au5",
+      "ticker": "MRVL",
+      "side": "buy",
+      "amount": 530604,
+      "shares": 6800,
+      "filedAt": "2025-09-25",
+      "tradeDate": "2025-09-25"
+    }
+  ]
+}

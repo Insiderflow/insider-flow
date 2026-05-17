@@ -1,0 +1,55 @@
+{
+  "id": "person-cmp82dpon00bfsbqxskyqzgha",
+  "entityType": "person",
+  "name": "Beer Lori A",
+  "ticker": "JPM",
+  "companyName": "Jpmorgan Chase & Co",
+  "roles": [
+    "CIO"
+  ],
+  "logoLabel": "BE",
+  "logoColor": "#6366F1",
+  "allTradesCount": 3,
+  "activity": {
+    "totalBuys": 0,
+    "buyTxCount": 0,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmp82k9df004t4ey4a8bp5xku",
+      "ticker": "JPM",
+      "side": "sell",
+      "amount": -949658,
+      "shares": -3165,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-15"
+    },
+    {
+      "id": "cmp82dq3800bhsbqxlmbadliq",
+      "ticker": "JPM",
+      "side": "sell",
+      "amount": -949658,
+      "shares": -3165,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-15"
+    },
+    {
+      "id": "cmp82vusv00phsbtz0o9bt19o",
+      "ticker": "JPM",
+      "side": "sell",
+      "amount": -949658,
+      "shares": -3165,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-15"
+    }
+  ]
+}

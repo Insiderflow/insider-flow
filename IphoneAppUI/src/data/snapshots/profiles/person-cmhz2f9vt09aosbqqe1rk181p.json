@@ -1,0 +1,46 @@
+{
+  "id": "person-cmhz2f9vt09aosbqqe1rk181p",
+  "entityType": "person",
+  "name": "Zollar Alfred W",
+  "ticker": "NDAQ",
+  "companyName": "Nasdaq, Inc.",
+  "roles": [
+    "Dir"
+  ],
+  "logoLabel": "ZO",
+  "logoColor": "#6366F1",
+  "allTradesCount": 2,
+  "activity": {
+    "totalBuys": 401109,
+    "buyTxCount": 2,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2fwz40sfqsbqq9f5y88sk",
+      "ticker": "NDAQ",
+      "side": "buy",
+      "amount": 203970,
+      "shares": 2542,
+      "filedAt": "2024-11-14",
+      "tradeDate": "2024-11-13"
+    },
+    {
+      "id": "cmhz2fwa00s4ysbqq1vpjx2pe",
+      "ticker": "IBM",
+      "side": "buy",
+      "amount": 197139,
+      "shares": 936,
+      "filedAt": "2024-11-13",
+      "tradeDate": "2024-11-13"
+    }
+  ]
+}

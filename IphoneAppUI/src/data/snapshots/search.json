@@ -1,0 +1,154 @@
+{
+  "NVDA": {
+    "results": [
+      {
+        "id": "433770",
+        "type": "issuer",
+        "title": "NVIDIA Corporation",
+        "subtitle": "$NVDA • 資訊科技 • 285 筆交易",
+        "url": "/issuers/433770"
+      },
+      {
+        "id": "trade_M001239_433770_1778858389133_2s6moh",
+        "type": "trade",
+        "title": "John McGuire → NVIDIA Corporation",
+        "subtitle": "buy • 2026/4/15 • $NVDA",
+        "url": "/trades?qp=John%20McGuire&qi=NVIDIA%20Corporation"
+      },
+      {
+        "id": "trade_C001123_433770_1778600647162_uiym31",
+        "type": "trade",
+        "title": "Gil Cisneros → NVIDIA Corporation",
+        "subtitle": "sell • 2026/4/14 • $NVDA",
+        "url": "/trades?qp=Gil%20Cisneros&qi=NVIDIA%20Corporation"
+      },
+      {
+        "id": "trade_K000389_433770_1778772173429_94ogtf",
+        "type": "trade",
+        "title": "Ro Khanna → NVIDIA Corporation",
+        "subtitle": "buy • 2026/4/13 • $NVDA",
+        "url": "/trades?qp=Ro%20Khanna&qi=NVIDIA%20Corporation"
+      },
+      {
+        "id": "trade_F000468_433770_1777743512072_1dfte2",
+        "type": "trade",
+        "title": "Lizzie Fletcher → NVIDIA Corporation",
+        "subtitle": "sell • 2026/4/8 • $NVDA",
+        "url": "/trades?qp=Lizzie%20Fletcher&qi=NVIDIA%20Corporation"
+      },
+      {
+        "id": "trade_M001204_433770_1776782966000_ls2nek",
+        "type": "trade",
+        "title": "Dan Meuser → NVIDIA Corporation",
+        "subtitle": "sell • 2026/3/25 • $NVDA",
+        "url": "/trades?qp=Dan%20Meuser&qi=NVIDIA%20Corporation"
+      }
+    ]
+  },
+  "Pelosi": {
+    "results": [
+      {
+        "id": "P000197",
+        "type": "politician",
+        "title": "Nancy Pelosi",
+        "subtitle": "Democrat • California • 72 筆交易",
+        "url": "/politicians/P000197"
+      },
+      {
+        "id": "trade_P000197_435739_1769437659337_svs1z4",
+        "type": "trade",
+        "title": "Nancy Pelosi → Vistra Corp",
+        "subtitle": "buy • 2026/1/16 • $VST",
+        "url": "/trades?qp=Nancy%20Pelosi&qi=Vistra%20Corp"
+      },
+      {
+        "id": "trade_P000197_429603_1769448205334_2tqhiu",
+        "type": "trade",
+        "title": "Nancy Pelosi → AllianceBernstein Holding",
+        "subtitle": "buy • 2026/1/16 • $LPAB",
+        "url": "/trades?qp=Nancy%20Pelosi&qi=AllianceBernstein%20Holding"
+      },
+      {
+        "id": "trade_P000197_433770_1769437659337_klbozx",
+        "type": "trade",
+        "title": "Nancy Pelosi → NVIDIA Corporation",
+        "subtitle": "buy • 2026/1/16 • $NVDA",
+        "url": "/trades?qp=Nancy%20Pelosi&qi=NVIDIA%20Corporation"
+      },
+      {
+        "id": "trade_P000197_2334870_1769437659337_1mf0u6",
+        "type": "trade",
+        "title": "Nancy Pelosi → TEMPUS AI I",
+        "subtitle": "buy • 2026/1/16 • $NCTEM",
+        "url": "/trades?qp=Nancy%20Pelosi&qi=TEMPUS%20AI%20I"
+      },
+      {
+        "id": "trade_P000197_429622_1769448205334_xl9e5e",
+        "type": "trade",
+        "title": "Nancy Pelosi → Alphabet Inc",
+        "subtitle": "buy • 2026/1/16 • $GOOGL",
+        "url": "/trades?qp=Nancy%20Pelosi&qi=Alphabet%20Inc"
+      }
+    ]
+  },
+  "AAPL": {
+    "results": [
+      {
+        "id": "429789",
+        "type": "issuer",
+        "title": "Apple Inc",
+        "subtitle": "$AAPL • 資訊科技 • 305 筆交易",
+        "url": "/issuers/429789"
+      },
+      {
+        "id": "433085",
+        "type": "issuer",
+        "title": "Logitech International SA, Apples",
+        "subtitle": "$AAPL • 資訊科技 • 2 筆交易",
+        "url": "/issuers/433085"
+      },
+      {
+        "id": "cmoyfltdl004c3ffv8v4kauvq",
+        "type": "company",
+        "title": "Apple Inc.",
+        "subtitle": "$AAPL • Form 4 • 1 筆交易",
+        "url": "/insider/company/company-aapl"
+      },
+      {
+        "id": "trade_C001047_429789_1778170914255_da3aks",
+        "type": "trade",
+        "title": "Shelley Moore Capito → Apple Inc",
+        "subtitle": "sell • 2026/4/17 • $AAPL",
+        "url": "/trades?qp=Shelley%20Moore%20Capito&qi=Apple%20Inc"
+      },
+      {
+        "id": "trade_M001239_429789_1778858389132_nruhj8",
+        "type": "trade",
+        "title": "John McGuire → Apple Inc",
+        "subtitle": "buy • 2026/4/15 • $AAPL",
+        "url": "/trades?qp=John%20McGuire&qi=Apple%20Inc"
+      },
+      {
+        "id": "trade_K000389_429789_1778772192943_brm4xb",
+        "type": "trade",
+        "title": "Ro Khanna → Apple Inc",
+        "subtitle": "sell • 2026/4/13 • $AAPL",
+        "url": "/trades?qp=Ro%20Khanna&qi=Apple%20Inc"
+      },
+      {
+        "id": "trade_F000468_429789_1777743508176_gcj20h",
+        "type": "trade",
+        "title": "Lizzie Fletcher → Apple Inc",
+        "subtitle": "sell • 2026/4/8 • $AAPL",
+        "url": "/trades?qp=Lizzie%20Fletcher&qi=Apple%20Inc"
+      },
+      {
+        "id": "trade_W000805_429789_1777743468404_ox6nfz",
+        "type": "trade",
+        "title": "Mark Warner → Apple Inc",
+        "subtitle": "buy • 2026/3/20 • $AAPL",
+        "url": "/trades?qp=Mark%20Warner&qi=Apple%20Inc"
+      }
+    ]
+  }
+}

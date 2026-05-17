@@ -1,0 +1,306 @@
+{
+  "id": "K000389",
+  "entityType": "person",
+  "name": "Ro Khanna",
+  "ticker": "",
+  "companyName": "US TREASURY BILLS",
+  "roles": [
+    "Other"
+  ],
+  "seatSector": "Other",
+  "imageUrl": "/images/politicians/K000389_Ro_Khanna.jpg",
+  "logoLabel": "RO",
+  "logoColor": "#3B82F6",
+  "allTradesCount": 12357,
+  "activity": {
+    "totalBuys": 950000,
+    "buyTxCount": 47,
+    "totalSells": 3,
+    "sellTxCount": 3,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "trade_K000389_435544_1778772259196_y7j8s1",
+      "ticker": "",
+      "side": "buy",
+      "amount": 50000,
+      "shares": 0,
+      "filedAt": "2026-05-13",
+      "tradeDate": "2026-04-29"
+    },
+    {
+      "id": "trade_K000389_429570_1778772185108_tw1wgp",
+      "ticker": "ACI",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-13",
+      "tradeDate": "2026-04-28"
+    },
+    {
+      "id": "trade_K000389_429570_1778772167272_t94of0",
+      "ticker": "ACI",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-13",
+      "tradeDate": "2026-04-27"
+    },
+    {
+      "id": "trade_K000389_433381_1778772138297_bxnc9j",
+      "ticker": "MU",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-13",
+      "tradeDate": "2026-04-27"
+    },
+    {
+      "id": "trade_K000389_430431_1778772239504_sofczw",
+      "ticker": "EXXSP",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-13",
+      "tradeDate": "2026-04-27"
+    },
+    {
+      "id": "trade_K000389_430534_1778772223957_9esidf",
+      "ticker": "CMG",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-13",
+      "tradeDate": "2026-04-24"
+    },
+    {
+      "id": "trade_K000389_431181_1778772220130_vewh24",
+      "ticker": "DHR",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-13",
+      "tradeDate": "2026-04-24"
+    },
+    {
+      "id": "trade_K000389_435994_1778772239504_y3vesx",
+      "ticker": "XYL",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-13",
+      "tradeDate": "2026-04-24"
+    },
+    {
+      "id": "trade_K000389_433121_1778772220130_pgr24e",
+      "ticker": "LOW",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-13",
+      "tradeDate": "2026-04-24"
+    },
+    {
+      "id": "trade_K000389_430491_1778772227791_b5kdzy",
+      "ticker": "CHTR",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-13",
+      "tradeDate": "2026-04-24"
+    },
+    {
+      "id": "trade_K000389_430279_1778772223957_csmvnt",
+      "ticker": "BLDR",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-13",
+      "tradeDate": "2026-04-24"
+    },
+    {
+      "id": "trade_K000389_432994_1778772220130_c33az3",
+      "ticker": "LII",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-13",
+      "tradeDate": "2026-04-24"
+    }
+  ],
+  "party": "D",
+  "state": "California",
+  "chamber": "",
+  "politicianCharts": {
+    "stats": {
+      "totalTrades": 12357,
+      "issuerCount": 8,
+      "totalVolume": 192845500,
+      "maxTrade": 5000000,
+      "lastTraded": "2026-05-13"
+    },
+    "topIssuers": [
+      {
+        "issuerId": "430431",
+        "count": 149,
+        "name": "CBOE MINI SPX IND",
+        "ticker": "EXXSP",
+        "sector": "N/A"
+      },
+      {
+        "issuerId": "429622",
+        "count": 89,
+        "name": "Alphabet Inc",
+        "ticker": "GOOGL",
+        "sector": "通訊服務"
+      },
+      {
+        "issuerId": "429988",
+        "count": 87,
+        "name": "Bank of America Corp",
+        "ticker": "BAC",
+        "sector": "金融"
+      },
+      {
+        "issuerId": "431303",
+        "count": 73,
+        "name": "The Walt Disney Co",
+        "ticker": "DIS",
+        "sector": "通訊服務"
+      },
+      {
+        "issuerId": "433382",
+        "count": 68,
+        "name": "Microsoft Corp",
+        "ticker": "MSFT",
+        "sector": "資訊科技"
+      },
+      {
+        "issuerId": "433381",
+        "count": 67,
+        "name": "Micron Technology Inc",
+        "ticker": "MU",
+        "sector": "資訊科技"
+      },
+      {
+        "issuerId": "430016",
+        "count": 65,
+        "name": "Baxter International Inc",
+        "ticker": "BAX",
+        "sector": "醫療保健"
+      },
+      {
+        "issuerId": "435403",
+        "count": 63,
+        "name": "Truist Financial Corp",
+        "ticker": "TFC",
+        "sector": "金融"
+      }
+    ],
+    "chartPoints": [
+      {
+        "period": "2022-Q3",
+        "buyVolume": 2176000,
+        "sellVolume": 749000,
+        "sp500Close": 3585.6201171875
+      },
+      {
+        "period": "2022-Q4",
+        "buyVolume": 10277500,
+        "sellVolume": 8311000,
+        "sp500Close": 3839.5
+      },
+      {
+        "period": "2023-Q1",
+        "buyVolume": 8252000,
+        "sellVolume": 5638000,
+        "sp500Close": 4109.31005859375
+      },
+      {
+        "period": "2023-Q2",
+        "buyVolume": 15296500,
+        "sellVolume": 18323000,
+        "sp500Close": 4450.3798828125
+      },
+      {
+        "period": "2023-Q3",
+        "buyVolume": 4911000,
+        "sellVolume": 4385000,
+        "sp500Close": 4288.0498046875
+      },
+      {
+        "period": "2023-Q4",
+        "buyVolume": 6341500,
+        "sellVolume": 6852000,
+        "sp500Close": 4769.830078125
+      },
+      {
+        "period": "2024-Q1",
+        "buyVolume": 9481500,
+        "sellVolume": 4962500,
+        "sp500Close": 5254.35009765625
+      },
+      {
+        "period": "2024-Q2",
+        "buyVolume": 9713500,
+        "sellVolume": 5656000,
+        "sp500Close": 5460.47998046875
+      },
+      {
+        "period": "2024-Q3",
+        "buyVolume": 6712500,
+        "sellVolume": 4518000,
+        "sp500Close": 5762.47998046875
+      },
+      {
+        "period": "2024-Q4",
+        "buyVolume": 4878000,
+        "sellVolume": 3873500,
+        "sp500Close": 5881.6298828125
+      },
+      {
+        "period": "2025-Q1",
+        "buyVolume": 6385500,
+        "sellVolume": 8594500,
+        "sp500Close": 5611.85009765625
+      },
+      {
+        "period": "2025-Q2",
+        "buyVolume": 10977000,
+        "sellVolume": 7587500,
+        "sp500Close": 6204.9501953125
+      },
+      {
+        "period": "2025-Q3",
+        "buyVolume": 5539000,
+        "sellVolume": 2163000,
+        "sp500Close": 6688.4599609375
+      },
+      {
+        "period": "2025-Q4",
+        "buyVolume": 1821000,
+        "sellVolume": 858500,
+        "sp500Close": 6845.5
+      },
+      {
+        "period": "2026-Q1",
+        "buyVolume": 1730500,
+        "sellVolume": 1435000,
+        "sp500Close": 6528.52001953125
+      },
+      {
+        "period": "2026-Q2",
+        "buyVolume": 2411500,
+        "sellVolume": 1962000,
+        "sp500Close": 7408.5
+      }
+    ]
+  }
+}

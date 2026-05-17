@@ -1,0 +1,246 @@
+{
+  "id": "C001123",
+  "entityType": "person",
+  "name": "Gil Cisneros",
+  "ticker": "FLEX",
+  "companyName": "Flex Ltd",
+  "roles": [
+    "Information Technology"
+  ],
+  "seatSector": "Information Technology",
+  "imageUrl": "/images/politicians/C001123_Gil_Cisneros.jpg",
+  "logoLabel": "GI",
+  "logoColor": "#3B82F6",
+  "allTradesCount": 1360,
+  "activity": {
+    "totalBuys": 505000,
+    "buyTxCount": 29,
+    "totalSells": 21,
+    "sellTxCount": 21,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "trade_C001123_431786_1778600639603_b4liwy",
+      "ticker": "FLEX",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-11",
+      "tradeDate": "2026-05-01"
+    },
+    {
+      "id": "trade_C001123_433122_1778600647162_7stttr",
+      "ticker": "LPLA",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-11",
+      "tradeDate": "2026-05-01"
+    },
+    {
+      "id": "trade_C001123_431330_1778600635836_z67y5y",
+      "ticker": "DASH",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-11",
+      "tradeDate": "2026-05-01"
+    },
+    {
+      "id": "trade_C001123_2335352_1778600639603_3402cs",
+      "ticker": "",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-11",
+      "tradeDate": "2026-05-01"
+    },
+    {
+      "id": "trade_C001123_434919_1778600650978_4z4i32",
+      "ticker": "SSNC",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-11",
+      "tradeDate": "2026-05-01"
+    },
+    {
+      "id": "trade_C001123_434652_1778600650978_an9r7t",
+      "ticker": "PLCST",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-11",
+      "tradeDate": "2026-05-01"
+    },
+    {
+      "id": "trade_C001123_435013_1778600654881_rql525",
+      "ticker": "LCSTE",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-11",
+      "tradeDate": "2026-05-01"
+    },
+    {
+      "id": "trade_C001123_434023_1778600650978_rs60bn",
+      "ticker": "RVTY",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-11",
+      "tradeDate": "2026-05-01"
+    },
+    {
+      "id": "trade_C001123_2334583_1778600658669_5h2x0q",
+      "ticker": "PVLTO",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-11",
+      "tradeDate": "2026-05-01"
+    },
+    {
+      "id": "trade_C001123_435818_1778600658669_lgpdc7",
+      "ticker": "W",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-11",
+      "tradeDate": "2026-05-01"
+    },
+    {
+      "id": "trade_C001123_2335173_1778600632032_r6fks1",
+      "ticker": "CBBIO",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-11",
+      "tradeDate": "2026-04-29"
+    },
+    {
+      "id": "trade_C001123_434919_1778600654881_6i5926",
+      "ticker": "SSNC",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-11",
+      "tradeDate": "2026-04-29"
+    }
+  ],
+  "party": "D",
+  "state": "California",
+  "chamber": "",
+  "politicianCharts": {
+    "stats": {
+      "totalTrades": 1360,
+      "issuerCount": 8,
+      "totalVolume": 36322000,
+      "maxTrade": 5000000,
+      "lastTraded": "2026-05-11"
+    },
+    "topIssuers": [
+      {
+        "issuerId": "432017",
+        "count": 17,
+        "name": "GoDaddy Inc",
+        "ticker": "GDDY",
+        "sector": "資訊科技"
+      },
+      {
+        "issuerId": "431330",
+        "count": 17,
+        "name": "DoorDash Inc",
+        "ticker": "DASH",
+        "sector": "非必需消費"
+      },
+      {
+        "issuerId": "435467",
+        "count": 14,
+        "name": "Unitedhealth Group Inc",
+        "ticker": "UNH",
+        "sector": "醫療保健"
+      },
+      {
+        "issuerId": "431002",
+        "count": 14,
+        "name": "CoStar Group Inc",
+        "ticker": "CSGP",
+        "sector": "房地產"
+      },
+      {
+        "issuerId": "429648",
+        "count": 12,
+        "name": "Amazon.com Inc",
+        "ticker": "AMZN",
+        "sector": "非必需消費"
+      },
+      {
+        "issuerId": "433382",
+        "count": 12,
+        "name": "Microsoft Corp",
+        "ticker": "MSFT",
+        "sector": "資訊科技"
+      },
+      {
+        "issuerId": "430182",
+        "count": 12,
+        "name": "Boston Scientific Corp",
+        "ticker": "BSX",
+        "sector": "醫療保健"
+      },
+      {
+        "issuerId": "431786",
+        "count": 11,
+        "name": "Flex Ltd",
+        "ticker": "FLEX",
+        "sector": "資訊科技"
+      }
+    ],
+    "chartPoints": [
+      {
+        "period": "2025-Q1",
+        "buyVolume": 4684500,
+        "sellVolume": 1026500,
+        "sp500Close": 5611.85009765625
+      },
+      {
+        "period": "2025-Q2",
+        "buyVolume": 701000,
+        "sellVolume": 588000,
+        "sp500Close": 6204.9501953125
+      },
+      {
+        "period": "2025-Q3",
+        "buyVolume": 1796500,
+        "sellVolume": 10407000,
+        "sp500Close": 6688.4599609375
+      },
+      {
+        "period": "2025-Q4",
+        "buyVolume": 5479500,
+        "sellVolume": 3296000,
+        "sp500Close": 6845.5
+      },
+      {
+        "period": "2026-Q1",
+        "buyVolume": 3597000,
+        "sellVolume": 3790500,
+        "sp500Close": 6528.52001953125
+      },
+      {
+        "period": "2026-Q2",
+        "buyVolume": 481500,
+        "sellVolume": 442000,
+        "sp500Close": 7408.5
+      }
+    ]
+  }
+}

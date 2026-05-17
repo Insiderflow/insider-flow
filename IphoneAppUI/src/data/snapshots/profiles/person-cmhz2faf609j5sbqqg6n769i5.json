@@ -1,0 +1,46 @@
+{
+  "id": "person-cmhz2faf609j5sbqqg6n769i5",
+  "entityType": "person",
+  "name": "Seifert Michael Stephen",
+  "ticker": "PSQH",
+  "companyName": "Psq Holdings, Inc.",
+  "roles": [
+    "Founder, Pres, CEO, 10%"
+  ],
+  "logoLabel": "SE",
+  "logoColor": "#6366F1",
+  "allTradesCount": 2,
+  "activity": {
+    "totalBuys": 20026,
+    "buyTxCount": 2,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2fxna0t0ysbqq3zjypra8",
+      "ticker": "PSQH",
+      "side": "buy",
+      "amount": 10013,
+      "shares": 2250,
+      "filedAt": "2024-12-11",
+      "tradeDate": "2024-12-09"
+    },
+    {
+      "id": "cmhz2fxni0t71sbqqun4w18vm",
+      "ticker": "PSQH",
+      "side": "buy",
+      "amount": 10013,
+      "shares": 2250,
+      "filedAt": "2024-12-09",
+      "tradeDate": "2024-12-09"
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { isOpenInsiderSell } from '@/lib/openInsiderTransaction';
 import fs from 'fs/promises';
 import path from 'path';
 
@@ -42,7 +43,7 @@ async function writeDashboardCacheToDisk(cacheKey: string, data: unknown): Promi
 }
 
 function normalizeTradeType(rawType: string): 'Buy' | 'Sell' {
-  return rawType.toLowerCase().includes('sell') ? 'Sell' : 'Buy';
+  return isOpenInsiderSell(rawType) ? 'Sell' : 'Buy';
 }
 
 export async function GET(req: NextRequest) {

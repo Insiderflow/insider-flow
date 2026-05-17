@@ -1,0 +1,192 @@
+{
+  "sector": "InformationTechnology",
+  "side": "sell",
+  "sectors": [
+    {
+      "nameKey": "RealEstate",
+      "name": "RealEstate",
+      "buyAmount": 7254050,
+      "sellAmount": -311745
+    },
+    {
+      "nameKey": "Utilities",
+      "name": "Utilities",
+      "buyAmount": 0,
+      "sellAmount": -1438173
+    },
+    {
+      "nameKey": "Materials",
+      "name": "Materials",
+      "buyAmount": 508866,
+      "sellAmount": -6932323
+    },
+    {
+      "nameKey": "Energy",
+      "name": "Energy",
+      "buyAmount": 66480,
+      "sellAmount": -8951519
+    },
+    {
+      "nameKey": "ConsumerDiscretionary",
+      "name": "ConsumerDiscretionary",
+      "buyAmount": 3816962,
+      "sellAmount": -21772105
+    },
+    {
+      "nameKey": "Financials",
+      "name": "Financials",
+      "buyAmount": 634270,
+      "sellAmount": -39521296
+    },
+    {
+      "nameKey": "ConsumerStaples",
+      "name": "ConsumerStaples",
+      "buyAmount": 0,
+      "sellAmount": -42714926
+    },
+    {
+      "nameKey": "CommunicationServices",
+      "name": "CommunicationServices",
+      "buyAmount": 0,
+      "sellAmount": -66498248
+    },
+    {
+      "nameKey": "Industrials",
+      "name": "Industrials",
+      "buyAmount": 1238471,
+      "sellAmount": -71659784
+    },
+    {
+      "nameKey": "Healthcare",
+      "name": "Healthcare",
+      "buyAmount": 0,
+      "sellAmount": -270588321
+    },
+    {
+      "nameKey": "InformationTechnology",
+      "name": "InformationTechnology",
+      "buyAmount": 0,
+      "sellAmount": -604435814
+    },
+    {
+      "nameKey": "Other",
+      "name": "Other",
+      "buyAmount": 330184823,
+      "sellAmount": -5554718548
+    }
+  ],
+  "companies": [
+    {
+      "ticker": "FTNT",
+      "companyName": "Fortinet, Inc.",
+      "amount": -272160,
+      "tradeCount": 3,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "DLB",
+      "companyName": "Dolby Laboratories, Inc.",
+      "amount": -554850,
+      "tradeCount": 2,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "MTSI",
+      "companyName": "Macom Technology Solutions Holdings, Inc.",
+      "amount": -912000,
+      "tradeCount": 3,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "UI",
+      "companyName": "Ubiquiti Inc.",
+      "amount": -1020795,
+      "tradeCount": 3,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "NOVT",
+      "companyName": "Novanta Inc",
+      "amount": -1128244,
+      "tradeCount": 1,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "FLEX",
+      "companyName": "Flex Ltd.",
+      "amount": -1312920,
+      "tradeCount": 3,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "MRVL",
+      "companyName": "Marvell Technology, Inc.",
+      "amount": -1329450,
+      "tradeCount": 1,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "MKSI",
+      "companyName": "Mks Inc",
+      "amount": -1383177,
+      "tradeCount": 4,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "GLW",
+      "companyName": "Corning Inc /Ny",
+      "amount": -2077708,
+      "tradeCount": 1,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "ZBRA",
+      "companyName": "Zebra Technologies Corp",
+      "amount": -2245860,
+      "tradeCount": 3,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "ALGM",
+      "companyName": "Allegro Microsystems, Inc.",
+      "amount": -2278875,
+      "tradeCount": 3,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "MCHP",
+      "companyName": "Microchip Technology Inc",
+      "amount": -5998845,
+      "tradeCount": 6,
+      "insiderCount": 2
+    },
+    {
+      "ticker": "CRWD",
+      "companyName": "Crowdstrike Holdings, Inc.",
+      "amount": -24164935,
+      "tradeCount": 8,
+      "insiderCount": 2
+    },
+    {
+      "ticker": "TXN",
+      "companyName": "Texas Instruments Inc",
+      "amount": -54173954,
+      "tradeCount": 8,
+      "insiderCount": 3
+    },
+    {
+      "ticker": "AMD",
+      "companyName": "Advanced Micro Devices Inc",
+      "amount": -167065077,
+      "tradeCount": 3,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "INFY",
+      "companyName": "Infosys Ltd",
+      "amount": -338516964,
+      "tradeCount": 3,
+      "insiderCount": 1
+    }
+  ]
+}

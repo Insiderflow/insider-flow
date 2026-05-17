@@ -1,0 +1,37 @@
+{
+  "id": "person-cmhz2f38304pesbqqq78nrj5v",
+  "entityType": "person",
+  "name": "Morrison Denise M",
+  "ticker": "V",
+  "companyName": "Visa Inc.",
+  "roles": [
+    "Dir"
+  ],
+  "logoLabel": "MO",
+  "logoColor": "#6366F1",
+  "allTradesCount": 1,
+  "activity": {
+    "totalBuys": 84096,
+    "buyTxCount": 1,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2fiqw0et1sbqqnhxjmt2m",
+      "ticker": "V",
+      "side": "buy",
+      "amount": 84096,
+      "shares": 455,
+      "filedAt": "2023-02-17",
+      "tradeDate": "2018-11-16"
+    }
+  ]
+}

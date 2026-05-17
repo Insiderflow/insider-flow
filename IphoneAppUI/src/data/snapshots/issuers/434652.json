@@ -1,0 +1,408 @@
+{
+  "id": "434652",
+  "name": "Sensata Technologies Holding",
+  "ticker": "PLCST",
+  "sector": "Industrials",
+  "sectorKey": "Industrials",
+  "country": null,
+  "stats": {
+    "trades": 47,
+    "politicians": 3,
+    "totalVolume": 1078500,
+    "maxTrade": 100000,
+    "lastTraded": "2026-05-01"
+  },
+  "chartPoints": [
+    {
+      "period": "2022-Q3",
+      "buyVolume": 24000,
+      "sellVolume": 0,
+      "sp500Close": 3585.6201171875
+    },
+    {
+      "period": "2022-Q4",
+      "buyVolume": 161500,
+      "sellVolume": 0,
+      "sp500Close": 3839.5
+    },
+    {
+      "period": "2023-Q1",
+      "buyVolume": 8000,
+      "sellVolume": 0,
+      "sp500Close": 4109.31005859375
+    },
+    {
+      "period": "2023-Q2",
+      "buyVolume": 0,
+      "sellVolume": 107500,
+      "sp500Close": 4450.3798828125
+    },
+    {
+      "period": "2023-Q3",
+      "buyVolume": 196500,
+      "sellVolume": 32500,
+      "sp500Close": 4288.0498046875
+    },
+    {
+      "period": "2024-Q2",
+      "buyVolume": 148000,
+      "sellVolume": 0,
+      "sp500Close": 5460.47998046875
+    },
+    {
+      "period": "2024-Q3",
+      "buyVolume": 8000,
+      "sellVolume": 32500,
+      "sp500Close": 5762.47998046875
+    },
+    {
+      "period": "2025-Q2",
+      "buyVolume": 0,
+      "sellVolume": 222500,
+      "sp500Close": 6204.9501953125
+    },
+    {
+      "period": "2025-Q3",
+      "buyVolume": 0,
+      "sellVolume": 64500,
+      "sp500Close": 6688.4599609375
+    },
+    {
+      "period": "2025-Q4",
+      "buyVolume": 32500,
+      "sellVolume": 32500,
+      "sp500Close": 6845.5
+    },
+    {
+      "period": "2026-Q2",
+      "buyVolume": 8000,
+      "sellVolume": 0,
+      "sp500Close": 7408.5
+    }
+  ],
+  "topPoliticians": [
+    {
+      "id": "K000389",
+      "name": "Ro Khanna",
+      "party": "D",
+      "trades": 32,
+      "totalVolume": 470000
+    },
+    {
+      "id": "M001157",
+      "name": "Michael McCaul",
+      "party": "R",
+      "trades": 14,
+      "totalVolume": 600500
+    },
+    {
+      "id": "C001123",
+      "name": "Gil Cisneros",
+      "party": "D",
+      "trades": 1,
+      "totalVolume": 8000
+    }
+  ],
+  "recentTrades": [
+    {
+      "id": "trade_C001123_434652_1778600650978_an9r7t",
+      "politicianId": "C001123",
+      "politicianName": "Gil Cisneros",
+      "party": "D",
+      "side": "buy",
+      "amount": 15000,
+      "tradeDate": "2026-05-01",
+      "filedAt": "2026-05-11"
+    },
+    {
+      "id": "trade_M001157_434652_1762954642882_l49xww",
+      "politicianId": "M001157",
+      "politicianName": "Michael McCaul",
+      "party": "R",
+      "side": "sell",
+      "amount": 50000,
+      "tradeDate": "2025-10-27",
+      "filedAt": "2025-11-11"
+    },
+    {
+      "id": "trade_M001157_434652_1762954639139_2vs0jy",
+      "politicianId": "M001157",
+      "politicianName": "Michael McCaul",
+      "party": "R",
+      "side": "buy",
+      "amount": 50000,
+      "tradeDate": "2025-10-10",
+      "filedAt": "2025-11-11"
+    },
+    {
+      "id": "20003790299",
+      "politicianId": "M001157",
+      "politicianName": "Michael McCaul",
+      "party": "R",
+      "side": "sell",
+      "amount": 50000,
+      "tradeDate": "2025-08-21",
+      "filedAt": "2025-09-11"
+    },
+    {
+      "id": "20003790496",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2025-08-04",
+      "filedAt": "2025-09-11"
+    },
+    {
+      "id": "20003790493",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2025-08-03",
+      "filedAt": "2025-09-11"
+    },
+    {
+      "id": "20003790492",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2025-07-31",
+      "filedAt": "2025-09-11"
+    },
+    {
+      "id": "20003788601",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2025-07-08",
+      "filedAt": "2025-08-07"
+    },
+    {
+      "id": "20003787895",
+      "politicianId": "M001157",
+      "politicianName": "Michael McCaul",
+      "party": "R",
+      "side": "sell",
+      "amount": 100000,
+      "tradeDate": "2025-06-26",
+      "filedAt": "2025-07-08"
+    },
+    {
+      "id": "20003788157",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "sell",
+      "amount": 50000,
+      "tradeDate": "2025-06-25",
+      "filedAt": "2025-07-09"
+    },
+    {
+      "id": "20003786791",
+      "politicianId": "M001157",
+      "politicianName": "Michael McCaul",
+      "party": "R",
+      "side": "sell",
+      "amount": 100000,
+      "tradeDate": "2025-05-18",
+      "filedAt": "2025-06-11"
+    },
+    {
+      "id": "20003787155",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2025-05-07",
+      "filedAt": "2025-06-11"
+    },
+    {
+      "id": "20003787122",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2025-04-30",
+      "filedAt": "2025-06-11"
+    },
+    {
+      "id": "20003786130",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2025-04-29",
+      "filedAt": "2025-05-14"
+    },
+    {
+      "id": "20003785828",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2025-04-10",
+      "filedAt": "2025-05-14"
+    },
+    {
+      "id": "20003786087",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2025-04-03",
+      "filedAt": "2025-05-14"
+    },
+    {
+      "id": "20003778322",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "buy",
+      "amount": 15000,
+      "tradeDate": "2024-09-16",
+      "filedAt": "2024-10-07"
+    },
+    {
+      "id": "20003776381",
+      "politicianId": "M001157",
+      "politicianName": "Michael McCaul",
+      "party": "R",
+      "side": "sell",
+      "amount": 50000,
+      "tradeDate": "2024-07-01",
+      "filedAt": "2024-08-15"
+    },
+    {
+      "id": "20003775066",
+      "politicianId": "M001157",
+      "politicianName": "Michael McCaul",
+      "party": "R",
+      "side": "buy",
+      "amount": 50000,
+      "tradeDate": "2024-06-19",
+      "filedAt": "2024-07-22"
+    },
+    {
+      "id": "20003775011",
+      "politicianId": "M001157",
+      "politicianName": "Michael McCaul",
+      "party": "R",
+      "side": "buy",
+      "amount": 50000,
+      "tradeDate": "2024-06-13",
+      "filedAt": "2024-07-22"
+    },
+    {
+      "id": "20003775004",
+      "politicianId": "M001157",
+      "politicianName": "Michael McCaul",
+      "party": "R",
+      "side": "buy",
+      "amount": 100000,
+      "tradeDate": "2024-06-12",
+      "filedAt": "2024-07-22"
+    },
+    {
+      "id": "20003775014",
+      "politicianId": "M001157",
+      "politicianName": "Michael McCaul",
+      "party": "R",
+      "side": "buy",
+      "amount": 15000,
+      "tradeDate": "2024-06-04",
+      "filedAt": "2024-07-22"
+    },
+    {
+      "id": "20003767619",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "buy",
+      "amount": 15000,
+      "tradeDate": "2023-09-26",
+      "filedAt": "2023-10-08"
+    },
+    {
+      "id": "20003768089",
+      "politicianId": "M001157",
+      "politicianName": "Michael McCaul",
+      "party": "R",
+      "side": "buy",
+      "amount": 50000,
+      "tradeDate": "2023-09-17",
+      "filedAt": "2023-10-18"
+    },
+    {
+      "id": "20003768199",
+      "politicianId": "M001157",
+      "politicianName": "Michael McCaul",
+      "party": "R",
+      "side": "buy",
+      "amount": 50000,
+      "tradeDate": "2023-09-14",
+      "filedAt": "2023-10-18"
+    },
+    {
+      "id": "20003767477",
+      "politicianId": "M001157",
+      "politicianName": "Michael McCaul",
+      "party": "R",
+      "side": "buy",
+      "amount": 50000,
+      "tradeDate": "2023-08-16",
+      "filedAt": "2023-09-24"
+    },
+    {
+      "id": "20003767407",
+      "politicianId": "M001157",
+      "politicianName": "Michael McCaul",
+      "party": "R",
+      "side": "buy",
+      "amount": 100000,
+      "tradeDate": "2023-08-15",
+      "filedAt": "2023-09-24"
+    },
+    {
+      "id": "20003767116",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "buy",
+      "amount": 15000,
+      "tradeDate": "2023-07-31",
+      "filedAt": "2023-09-06"
+    },
+    {
+      "id": "20003765814",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "buy",
+      "amount": 15000,
+      "tradeDate": "2023-07-27",
+      "filedAt": "2023-08-08"
+    },
+    {
+      "id": "20003765826",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "sell",
+      "amount": 50000,
+      "tradeDate": "2023-07-18",
+      "filedAt": "2023-08-08"
+    }
+  ]
+}

@@ -1,0 +1,190 @@
+{
+  "id": "company-mrvl",
+  "entityType": "company",
+  "name": "Marvell Technology, Inc.",
+  "ticker": "MRVL",
+  "companyName": "Marvell Technology, Inc.",
+  "roles": [
+    "Issuer"
+  ],
+  "logoLabel": "MR",
+  "logoColor": "#166534",
+  "displayName": "MARVELL TECHNOLOGY, INC. / US",
+  "exchange": "NYSE",
+  "industry": "—",
+  "description": "Marvell Technology, Inc.",
+  "dataAsOf": "2026-05-14",
+  "allTradesCount": 9,
+  "activity": {
+    "totalBuys": 3425871,
+    "buyTxCount": 7,
+    "totalSells": -2658900,
+    "sellTxCount": 2,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 75.43142857142857,
+    "avgSell": 0,
+    "plan10b5Pct": 0,
+    "ppSalePct": 0,
+    "buyRangeMin": 69,
+    "buyRangeMax": 78.03,
+    "sellRangeMin": null,
+    "sellRangeMax": null
+  },
+  "companyTrades": [
+    {
+      "id": "cmp82pkln018o4ey44yhzh01f",
+      "ticker": "MRVL",
+      "insiderName": "Murphy Matthew J",
+      "personId": "person-cmhz2f8ss08aysbqqxbfhv7ho",
+      "side": "sell",
+      "amount": -1329450,
+      "shares": -7500,
+      "filedAt": "2026-05-14",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82sgxy00gzsbtzfb3tvt1t",
+      "ticker": "MRVL",
+      "insiderName": "Murphy Matthew J",
+      "personId": "person-cmhz2f8ss08aysbqqxbfhv7ho",
+      "side": "sell",
+      "amount": -1329450,
+      "shares": -7500,
+      "filedAt": "2026-05-14",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmhz2g2i80xt4sbqqrpyplxt8",
+      "ticker": "MRVL",
+      "insiderName": "Meintjes Willem A",
+      "personId": "person-cmhz2fc320avtsbqq7zsrij84",
+      "side": "buy",
+      "amount": 265302,
+      "shares": 3400,
+      "filedAt": "2025-09-25",
+      "tradeDate": "2025-09-25"
+    },
+    {
+      "id": "cmhz2g2i30xotsbqquezkgsev",
+      "ticker": "MRVL",
+      "insiderName": "Bharathi Sandeep",
+      "personId": "person-cmhz2fc310auisbqqhkaig3o0",
+      "side": "buy",
+      "amount": 265302,
+      "shares": 3400,
+      "filedAt": "2025-09-25",
+      "tradeDate": "2025-09-25"
+    },
+    {
+      "id": "cmhz2g2ia0xudsbqqsu7a1au5",
+      "ticker": "MRVL",
+      "insiderName": "Koopmans Chris",
+      "personId": "person-cmhz2fc320aw1sbqqu3poubog",
+      "side": "buy",
+      "amount": 530604,
+      "shares": 6800,
+      "filedAt": "2025-09-25",
+      "tradeDate": "2025-09-25"
+    },
+    {
+      "id": "cmhz2g1pj0xhwsbqql6uyxcg3",
+      "ticker": "MRVL",
+      "insiderName": "Murphy Matthew J",
+      "personId": "person-cmhz2f8ss08aysbqqxbfhv7ho",
+      "side": "buy",
+      "amount": 1048424,
+      "shares": 13600,
+      "filedAt": "2025-09-25",
+      "tradeDate": "2025-09-25"
+    },
+    {
+      "id": "cmhz2g03l0vtbsbqqwq2y0jat",
+      "ticker": "MRVL",
+      "insiderName": "Buss Brad W",
+      "personId": "person-cmhz2fbhw0abdsbqqx4s2fc2s",
+      "side": "buy",
+      "amount": 207000,
+      "shares": 3000,
+      "filedAt": "2025-03-07",
+      "tradeDate": "2025-03-07"
+    },
+    {
+      "id": "cmhz2fssp0ohnsbqqq7okgx0c",
+      "ticker": "MRVL",
+      "insiderName": "Murphy Matthew J",
+      "personId": "person-cmhz2f8ss08aysbqqxbfhv7ho",
+      "side": "buy",
+      "amount": 1009190,
+      "shares": 13000,
+      "filedAt": "2024-10-14",
+      "tradeDate": "2024-10-14"
+    },
+    {
+      "id": "cmhz2frzu0o4asbqqgiim1k58",
+      "ticker": "MRVL",
+      "insiderName": "Durn Daniel",
+      "personId": "person-cmhz2f89h0873sbqqn4ux3v8c",
+      "side": "buy",
+      "amount": 100049,
+      "shares": 1425,
+      "filedAt": "2024-06-24",
+      "tradeDate": "2024-06-24"
+    }
+  ],
+  "insiders": [
+    {
+      "id": "person-cmhz2f8ss08aysbqqxbfhv7ho",
+      "name": "Murphy Matthew J",
+      "role": "COB, CEO",
+      "tradesCount": 4
+    },
+    {
+      "id": "person-cmhz2fc320avtsbqq7zsrij84",
+      "name": "Meintjes Willem A",
+      "role": "CFO",
+      "tradesCount": 1
+    },
+    {
+      "id": "person-cmhz2fc310auisbqqhkaig3o0",
+      "name": "Bharathi Sandeep",
+      "role": "Pres, Data Center Group",
+      "tradesCount": 1
+    },
+    {
+      "id": "person-cmhz2fc320aw1sbqqu3poubog",
+      "name": "Koopmans Chris",
+      "role": "Pres, COO",
+      "tradesCount": 1
+    },
+    {
+      "id": "person-cmhz2fbhw0abdsbqqx4s2fc2s",
+      "name": "Buss Brad W",
+      "role": "Dir",
+      "tradesCount": 1
+    },
+    {
+      "id": "person-cmhz2f89h0873sbqqn4ux3v8c",
+      "name": "Durn Daniel",
+      "role": "Dir",
+      "tradesCount": 1
+    }
+  ],
+  "tradeTypes": {
+    "buy": 78,
+    "sell": 22,
+    "option": 0,
+    "proposed": 0
+  },
+  "aiSummary": {
+    "headline": "7 buys and 2 sells for MRVL.",
+    "bullets": [
+      "9 Form 4 filings on record."
+    ],
+    "sentiment": "bullish"
+  },
+  "eventStudies": [],
+  "recentTrades": []
+}

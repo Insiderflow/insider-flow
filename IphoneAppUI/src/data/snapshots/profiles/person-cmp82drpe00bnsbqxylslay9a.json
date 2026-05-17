@@ -1,0 +1,55 @@
+{
+  "id": "person-cmp82drpe00bnsbqxylslay9a",
+  "entityType": "person",
+  "name": "Lake Marianne",
+  "ticker": "JPM",
+  "companyName": "Jpmorgan Chase & Co",
+  "roles": [
+    "CEO CCB"
+  ],
+  "logoLabel": "LA",
+  "logoColor": "#6366F1",
+  "allTradesCount": 3,
+  "activity": {
+    "totalBuys": 0,
+    "buyTxCount": 0,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmp82k8so004n4ey4qs5pagbz",
+      "ticker": "JPM",
+      "side": "sell",
+      "amount": -1917531,
+      "shares": -6427,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-15"
+    },
+    {
+      "id": "cmp82dsa800bpsbqxzcd1d5fy",
+      "ticker": "JPM",
+      "side": "sell",
+      "amount": -1917531,
+      "shares": -6427,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-15"
+    },
+    {
+      "id": "cmp82vsll00pbsbtz95pn9sb3",
+      "ticker": "JPM",
+      "side": "sell",
+      "amount": -1917531,
+      "shares": -6427,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-15"
+    }
+  ]
+}

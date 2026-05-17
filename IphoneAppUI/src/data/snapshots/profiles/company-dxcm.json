@@ -1,0 +1,83 @@
+{
+  "id": "company-dxcm",
+  "entityType": "company",
+  "name": "Dexcom Inc",
+  "ticker": "DXCM",
+  "companyName": "Dexcom Inc",
+  "roles": [
+    "Issuer"
+  ],
+  "logoLabel": "DX",
+  "logoColor": "#166534",
+  "displayName": "DEXCOM INC / US",
+  "exchange": "NYSE",
+  "industry": "—",
+  "description": "Dexcom Inc",
+  "dataAsOf": "2026-05-14",
+  "allTradesCount": 2,
+  "activity": {
+    "totalBuys": 0,
+    "buyTxCount": 0,
+    "totalSells": -121460,
+    "sellTxCount": 2,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0,
+    "plan10b5Pct": 0,
+    "ppSalePct": 0,
+    "buyRangeMin": null,
+    "buyRangeMax": null,
+    "sellRangeMin": null,
+    "sellRangeMax": null
+  },
+  "companyTrades": [
+    {
+      "id": "cmp82ovel011c4ey4f481red3",
+      "ticker": "DXCM",
+      "insiderName": "Heller Bridgette P",
+      "personId": "person-cmp82ovef011a4ey4mh4y1pbl",
+      "side": "sell",
+      "amount": -60730,
+      "shares": -1012,
+      "filedAt": "2026-05-14",
+      "tradeDate": "2026-05-12"
+    },
+    {
+      "id": "cmp82q8jr00b2sbtzux7w53ql",
+      "ticker": "DXCM",
+      "insiderName": "Heller Bridgette P",
+      "personId": "person-cmp82ovef011a4ey4mh4y1pbl",
+      "side": "sell",
+      "amount": -60730,
+      "shares": -1012,
+      "filedAt": "2026-05-14",
+      "tradeDate": "2026-05-12"
+    }
+  ],
+  "insiders": [
+    {
+      "id": "person-cmp82ovef011a4ey4mh4y1pbl",
+      "name": "Heller Bridgette P",
+      "role": "Dir",
+      "tradesCount": 2
+    }
+  ],
+  "tradeTypes": {
+    "buy": 0,
+    "sell": 100,
+    "option": 0,
+    "proposed": 0
+  },
+  "aiSummary": {
+    "headline": "0 buys and 2 sells for DXCM.",
+    "bullets": [
+      "2 Form 4 filings on record."
+    ],
+    "sentiment": "bearish"
+  },
+  "eventStudies": [],
+  "recentTrades": []
+}

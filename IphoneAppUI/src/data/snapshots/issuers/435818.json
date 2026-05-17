@@ -1,0 +1,149 @@
+{
+  "id": "435818",
+  "name": "Wayfair Inc",
+  "ticker": "W",
+  "sector": "ConsumerDiscretionary",
+  "sectorKey": "ConsumerDiscretionary",
+  "country": null,
+  "stats": {
+    "trades": 7,
+    "politicians": 4,
+    "totalVolume": 105000,
+    "maxTrade": 50000,
+    "lastTraded": "2026-05-01"
+  },
+  "chartPoints": [
+    {
+      "period": "2022-Q4",
+      "buyVolume": 8000,
+      "sellVolume": 8000,
+      "sp500Close": 3839.5
+    },
+    {
+      "period": "2023-Q2",
+      "buyVolume": 0,
+      "sellVolume": 8000,
+      "sp500Close": 4450.3798828125
+    },
+    {
+      "period": "2023-Q4",
+      "buyVolume": 40500,
+      "sellVolume": 0,
+      "sp500Close": 4769.830078125
+    },
+    {
+      "period": "2024-Q1",
+      "buyVolume": 0,
+      "sellVolume": 32500,
+      "sp500Close": 5254.35009765625
+    },
+    {
+      "period": "2026-Q2",
+      "buyVolume": 8000,
+      "sellVolume": 0,
+      "sp500Close": 7408.5
+    }
+  ],
+  "topPoliticians": [
+    {
+      "id": "J000309",
+      "name": "Jonathan Jackson",
+      "party": "D",
+      "trades": 3,
+      "totalVolume": 73000
+    },
+    {
+      "id": "K000389",
+      "name": "Ro Khanna",
+      "party": "D",
+      "trades": 2,
+      "totalVolume": 16000
+    },
+    {
+      "id": "C001123",
+      "name": "Gil Cisneros",
+      "party": "D",
+      "trades": 1,
+      "totalVolume": 8000
+    },
+    {
+      "id": "G000599",
+      "name": "Daniel S. Goldman DemocratNew York Trades1,307 Issuers761 Volume59.79M Last Traded2025-02-11",
+      "party": "D",
+      "trades": 1,
+      "totalVolume": 8000
+    }
+  ],
+  "recentTrades": [
+    {
+      "id": "trade_C001123_435818_1778600658669_lgpdc7",
+      "politicianId": "C001123",
+      "politicianName": "Gil Cisneros",
+      "party": "D",
+      "side": "buy",
+      "amount": 15000,
+      "tradeDate": "2026-05-01",
+      "filedAt": "2026-05-11"
+    },
+    {
+      "id": "20003770986",
+      "politicianId": "J000309",
+      "politicianName": "Jonathan Jackson",
+      "party": "D",
+      "side": "sell",
+      "amount": 50000,
+      "tradeDate": "2024-01-16",
+      "filedAt": "2024-02-15"
+    },
+    {
+      "id": "20003770268",
+      "politicianId": "J000309",
+      "politicianName": "Jonathan Jackson",
+      "party": "D",
+      "side": "buy",
+      "amount": 15000,
+      "tradeDate": "2023-12-19",
+      "filedAt": "2024-01-14"
+    },
+    {
+      "id": "20003770269",
+      "politicianId": "J000309",
+      "politicianName": "Jonathan Jackson",
+      "party": "D",
+      "side": "buy",
+      "amount": 50000,
+      "tradeDate": "2023-12-14",
+      "filedAt": "2024-01-14"
+    },
+    {
+      "id": "20003763372",
+      "politicianId": "G000599",
+      "politicianName": "Daniel S. Goldman DemocratNew York Trades1,307 Issuers761 Volume59.79M Last Traded2025-02-11",
+      "party": "D",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2023-04-09",
+      "filedAt": "2023-05-21"
+    },
+    {
+      "id": "20003760747",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "sell",
+      "amount": 15000,
+      "tradeDate": "2022-12-05",
+      "filedAt": "2023-01-04"
+    },
+    {
+      "id": "20003757453",
+      "politicianId": "K000389",
+      "politicianName": "Ro Khanna",
+      "party": "D",
+      "side": "buy",
+      "amount": 15000,
+      "tradeDate": "2022-11-02",
+      "filedAt": "2022-12-06"
+    }
+  ]
+}

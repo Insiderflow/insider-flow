@@ -1,0 +1,133 @@
+{
+  "id": "company-mchp",
+  "entityType": "company",
+  "name": "Microchip Technology Inc",
+  "ticker": "MCHP",
+  "companyName": "Microchip Technology Inc",
+  "roles": [
+    "Issuer"
+  ],
+  "logoLabel": "MC",
+  "logoColor": "#166534",
+  "displayName": "MICROCHIP TECHNOLOGY INC / US",
+  "exchange": "NYSE",
+  "industry": "—",
+  "description": "Microchip Technology Inc",
+  "dataAsOf": "2026-05-15",
+  "allTradesCount": 6,
+  "activity": {
+    "totalBuys": 0,
+    "buyTxCount": 0,
+    "totalSells": -5998845,
+    "sellTxCount": 6,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0,
+    "plan10b5Pct": 0,
+    "ppSalePct": 0,
+    "buyRangeMin": null,
+    "buyRangeMax": null,
+    "sellRangeMin": null,
+    "sellRangeMax": null
+  },
+  "companyTrades": [
+    {
+      "id": "cmp82mvwv00i04ey4stx3l7pd",
+      "ticker": "MCHP",
+      "insiderName": "Bunker Mathew B",
+      "personId": "person-cmp82eed300e1sbqxzg45nmnt",
+      "side": "sell",
+      "amount": -1024155,
+      "shares": -10571,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82mwd900i34ey43t6kp57z",
+      "ticker": "MCHP",
+      "insiderName": "Simoncic Richard J",
+      "personId": "person-cmp82efcc00e5sbqxt5h4pfu3",
+      "side": "sell",
+      "amount": -975460,
+      "shares": -10000,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82eerj00e3sbqx73wwndhz",
+      "ticker": "MCHP",
+      "insiderName": "Bunker Mathew B",
+      "personId": "person-cmp82eed300e1sbqxzg45nmnt",
+      "side": "sell",
+      "amount": -1024155,
+      "shares": -10571,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82efz800e7sbqxzng83be4",
+      "ticker": "MCHP",
+      "insiderName": "Simoncic Richard J",
+      "personId": "person-cmp82efcc00e5sbqxt5h4pfu3",
+      "side": "sell",
+      "amount": -975460,
+      "shares": -10000,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82zhgs00zwsbtznntpf8sx",
+      "ticker": "MCHP",
+      "insiderName": "Bunker Mathew B",
+      "personId": "person-cmp82eed300e1sbqxzg45nmnt",
+      "side": "sell",
+      "amount": -1024155,
+      "shares": -10571,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82zipg00zzsbtzfcnul64u",
+      "ticker": "MCHP",
+      "insiderName": "Simoncic Richard J",
+      "personId": "person-cmp82efcc00e5sbqxt5h4pfu3",
+      "side": "sell",
+      "amount": -975460,
+      "shares": -10000,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    }
+  ],
+  "insiders": [
+    {
+      "id": "person-cmp82eed300e1sbqxzg45nmnt",
+      "name": "Bunker Mathew B",
+      "role": "SVP, OPERATIONS",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmp82efcc00e5sbqxt5h4pfu3",
+      "name": "Simoncic Richard J",
+      "role": "COO",
+      "tradesCount": 3
+    }
+  ],
+  "tradeTypes": {
+    "buy": 0,
+    "sell": 100,
+    "option": 0,
+    "proposed": 0
+  },
+  "aiSummary": {
+    "headline": "0 buys and 6 sells for MCHP.",
+    "bullets": [
+      "6 Form 4 filings on record."
+    ],
+    "sentiment": "bearish"
+  },
+  "eventStudies": [],
+  "recentTrades": []
+}

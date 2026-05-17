@@ -1,0 +1,101 @@
+{
+  "sector": "ConsumerStaples",
+  "side": "sell",
+  "sectors": [
+    {
+      "nameKey": "RealEstate",
+      "name": "RealEstate",
+      "buyAmount": 7254050,
+      "sellAmount": -311745
+    },
+    {
+      "nameKey": "Utilities",
+      "name": "Utilities",
+      "buyAmount": 0,
+      "sellAmount": -1438173
+    },
+    {
+      "nameKey": "Materials",
+      "name": "Materials",
+      "buyAmount": 508866,
+      "sellAmount": -6932323
+    },
+    {
+      "nameKey": "Energy",
+      "name": "Energy",
+      "buyAmount": 66480,
+      "sellAmount": -8951519
+    },
+    {
+      "nameKey": "ConsumerDiscretionary",
+      "name": "ConsumerDiscretionary",
+      "buyAmount": 3816962,
+      "sellAmount": -21772105
+    },
+    {
+      "nameKey": "Financials",
+      "name": "Financials",
+      "buyAmount": 634270,
+      "sellAmount": -39521296
+    },
+    {
+      "nameKey": "ConsumerStaples",
+      "name": "ConsumerStaples",
+      "buyAmount": 0,
+      "sellAmount": -42714926
+    },
+    {
+      "nameKey": "CommunicationServices",
+      "name": "CommunicationServices",
+      "buyAmount": 0,
+      "sellAmount": -66498248
+    },
+    {
+      "nameKey": "Industrials",
+      "name": "Industrials",
+      "buyAmount": 1238471,
+      "sellAmount": -71659784
+    },
+    {
+      "nameKey": "Healthcare",
+      "name": "Healthcare",
+      "buyAmount": 0,
+      "sellAmount": -270588321
+    },
+    {
+      "nameKey": "InformationTechnology",
+      "name": "InformationTechnology",
+      "buyAmount": 0,
+      "sellAmount": -604435814
+    },
+    {
+      "nameKey": "Other",
+      "name": "Other",
+      "buyAmount": 330184823,
+      "sellAmount": -5554718548
+    }
+  ],
+  "companies": [
+    {
+      "ticker": "CHD",
+      "companyName": "Church & Dwight Co Inc /De/",
+      "amount": -565345,
+      "tradeCount": 1,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "GIS",
+      "companyName": "General Mills Inc",
+      "amount": -958195,
+      "tradeCount": 2,
+      "insiderCount": 2
+    },
+    {
+      "ticker": "MNST",
+      "companyName": "Monster Beverage Corp",
+      "amount": -41191386,
+      "tradeCount": 9,
+      "insiderCount": 3
+    }
+  ]
+}

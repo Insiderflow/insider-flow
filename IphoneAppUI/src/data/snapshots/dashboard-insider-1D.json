@@ -1,0 +1,118 @@
+{
+  "meta": {
+    "dataAsOf": "2026-05-17",
+    "nextUpdateEt": "22:15",
+    "generatedAt": "2026-05-17T06:02:41.027Z",
+    "latestFilingAt": "2026-05-15T21:44:31.000Z"
+  },
+  "aiSummary": {
+    "headline": "2026/05/17 Form 4",
+    "narrative": "截至美東時間，2026/05/17 尚無新的 Form 4 內部人申報入庫。申報通常在交易後 2 個工作日內陸續出現，請稍後再查看。",
+    "bullets": [],
+    "sentiment": "mixed"
+  },
+  "kpis": [
+    {
+      "id": "buys",
+      "label": "Buys",
+      "value": 0,
+      "changePct": 0,
+      "spike": [
+        0.5,
+        0.539,
+        0.543,
+        0.574,
+        0.589,
+        0.608,
+        0.635,
+        0.643,
+        0.679,
+        0.68,
+        0.72,
+        0.721,
+        0.757,
+        0.765
+      ]
+    },
+    {
+      "id": "sells",
+      "label": "Sells",
+      "value": 0,
+      "changePct": 0,
+      "spike": [
+        0.549,
+        0.509,
+        0.508,
+        0.471,
+        0.464,
+        0.436,
+        0.418,
+        0.402,
+        0.372,
+        0.367,
+        0.329,
+        0.329,
+        0.289,
+        0.287
+      ]
+    },
+    {
+      "id": "options",
+      "label": "Options",
+      "value": 0,
+      "changePct": 0,
+      "spike": [
+        0.604,
+        0.576,
+        0.576,
+        0.547,
+        0.548,
+        0.522,
+        0.529,
+        0.511,
+        0.528,
+        0.518,
+        0.543,
+        0.541,
+        0.57,
+        0.57
+      ]
+    },
+    {
+      "id": "pp_sale",
+      "label": "PP Sale",
+      "value": 0,
+      "changePct": 0,
+      "spike": [
+        0.313,
+        0.345,
+        0.349,
+        0.388,
+        0.388,
+        0.427,
+        0.431,
+        0.463,
+        0.476,
+        0.497,
+        0.522,
+        0.531,
+        0.567,
+        0.568
+      ]
+    }
+  ],
+  "clusterBuys": [],
+  "clusterSells": [],
+  "topPoliticianBuys": [],
+  "topPoliticianSells": [],
+  "primeBrokers": [],
+  "industryChain": [],
+  "topIndustries": [],
+  "recentTrades": [],
+  "insiderExtras": {
+    "companyClustersBuy": [],
+    "companyClustersSell": [],
+    "highlightsBuy": [],
+    "highlightsSell": []
+  }
+}

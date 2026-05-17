@@ -1,0 +1,37 @@
+{
+  "id": "person-cmhz2faf409gwsbqqxtfguj5x",
+  "entityType": "person",
+  "name": "Simkins Lawrence",
+  "ticker": "LOW",
+  "companyName": "Lowes Companies Inc",
+  "roles": [
+    "Dir"
+  ],
+  "logoLabel": "SI",
+  "logoColor": "#6366F1",
+  "allTradesCount": 1,
+  "activity": {
+    "totalBuys": 245532,
+    "buyTxCount": 1,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2fwzm0ssesbqqjzryxci2",
+      "ticker": "LOW",
+      "side": "buy",
+      "amount": 245532,
+      "shares": 1000,
+      "filedAt": "2024-12-23",
+      "tradeDate": "2024-12-20"
+    }
+  ]
+}

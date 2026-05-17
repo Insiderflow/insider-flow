@@ -1,0 +1,289 @@
+{
+  "id": "company-zandz",
+  "entityType": "company",
+  "name": "Zillow Group, Inc.",
+  "ticker": "ZANDZ",
+  "companyName": "Zillow Group, Inc.",
+  "roles": [
+    "Issuer"
+  ],
+  "logoLabel": "ZA",
+  "logoColor": "#166534",
+  "displayName": "ZILLOW GROUP, INC. / US",
+  "exchange": "NYSE",
+  "industry": "—",
+  "description": "Zillow Group, Inc.",
+  "dataAsOf": "2026-05-15",
+  "allTradesCount": 18,
+  "activity": {
+    "totalBuys": 0,
+    "buyTxCount": 0,
+    "totalSells": -2126022,
+    "sellTxCount": 18,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0,
+    "plan10b5Pct": 0,
+    "ppSalePct": 0,
+    "buyRangeMin": null,
+    "buyRangeMax": null,
+    "sellRangeMin": null,
+    "sellRangeMax": null
+  },
+  "companyTrades": [
+    {
+      "id": "cmp82m5cb00bi4ey4peazudc8",
+      "ticker": "ZANDZ",
+      "insiderName": "Wacksman Jeremy",
+      "personId": "person-cmp82ihsa00s5sbqxr9ycu99y",
+      "side": "sell",
+      "amount": -229469,
+      "shares": -6051,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82m5sb00bl4ey4wn3fqrf7",
+      "ticker": "ZANDZ",
+      "insiderName": "Choo Jun",
+      "personId": "person-cmp82idqq00rpsbqxy2w7qpph",
+      "side": "sell",
+      "amount": -46602,
+      "shares": -1228,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82m6il00br4ey4xswshmvi",
+      "ticker": "ZANDZ",
+      "insiderName": "Beitel David A.",
+      "personId": "person-cmp82icrd00rlsbqxmrbrtpik",
+      "side": "sell",
+      "amount": -71279,
+      "shares": -1879,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82m77100bx4ey4jpu6qcqx",
+      "ticker": "ZANDZ",
+      "insiderName": "Rock Jennifer",
+      "personId": "person-cmp82ifrm00rxsbqxqfxswwov",
+      "side": "sell",
+      "amount": -39282,
+      "shares": -1034,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82m96f00cc4ey4k650eqlp",
+      "ticker": "ZANDZ",
+      "insiderName": "Samuelson Errol G",
+      "personId": "person-cmp82igt200s1sbqxbdbvo436",
+      "side": "sell",
+      "amount": -111599,
+      "shares": -2939,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82ma5800cl4ey44rzayt6f",
+      "ticker": "ZANDZ",
+      "insiderName": "Owens Bradley D.",
+      "personId": "person-cmp82iesd00rtsbqxjyog55zj",
+      "side": "sell",
+      "amount": -210443,
+      "shares": -5610,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82id5z00rnsbqx5fq1s12n",
+      "ticker": "ZANDZ",
+      "insiderName": "Beitel David A.",
+      "personId": "person-cmp82icrd00rlsbqxmrbrtpik",
+      "side": "sell",
+      "amount": -71279,
+      "shares": -1879,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82ie5d00rrsbqxfl1kjxie",
+      "ticker": "ZANDZ",
+      "insiderName": "Choo Jun",
+      "personId": "person-cmp82idqq00rpsbqxy2w7qpph",
+      "side": "sell",
+      "amount": -46602,
+      "shares": -1228,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82if6q00rvsbqxf6phjjfv",
+      "ticker": "ZANDZ",
+      "insiderName": "Owens Bradley D.",
+      "personId": "person-cmp82iesd00rtsbqxjyog55zj",
+      "side": "sell",
+      "amount": -210443,
+      "shares": -5610,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82ig6600rzsbqx0kjawnxk",
+      "ticker": "ZANDZ",
+      "insiderName": "Rock Jennifer",
+      "personId": "person-cmp82ifrm00rxsbqxqfxswwov",
+      "side": "sell",
+      "amount": -39282,
+      "shares": -1034,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82ih7o00s3sbqx1ob715ww",
+      "ticker": "ZANDZ",
+      "insiderName": "Samuelson Errol G",
+      "personId": "person-cmp82igt200s1sbqxbdbvo436",
+      "side": "sell",
+      "amount": -111599,
+      "shares": -2939,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82ii6y00s7sbqx5fzkhsjm",
+      "ticker": "ZANDZ",
+      "insiderName": "Wacksman Jeremy",
+      "personId": "person-cmp82ihsa00s5sbqxr9ycu99y",
+      "side": "sell",
+      "amount": -229469,
+      "shares": -6051,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82x76a00tesbtzs3hzaf1k",
+      "ticker": "ZANDZ",
+      "insiderName": "Wacksman Jeremy",
+      "personId": "person-cmp82ihsa00s5sbqxr9ycu99y",
+      "side": "sell",
+      "amount": -229469,
+      "shares": -6051,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82x85k00thsbtzdn4ivc0b",
+      "ticker": "ZANDZ",
+      "insiderName": "Choo Jun",
+      "personId": "person-cmp82idqq00rpsbqxy2w7qpph",
+      "side": "sell",
+      "amount": -46602,
+      "shares": -1228,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82xa6h00tnsbtzc27056xr",
+      "ticker": "ZANDZ",
+      "insiderName": "Beitel David A.",
+      "personId": "person-cmp82icrd00rlsbqxmrbrtpik",
+      "side": "sell",
+      "amount": -71279,
+      "shares": -1879,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82xc7a00ttsbtzf601fsai",
+      "ticker": "ZANDZ",
+      "insiderName": "Rock Jennifer",
+      "personId": "person-cmp82ifrm00rxsbqxqfxswwov",
+      "side": "sell",
+      "amount": -39282,
+      "shares": -1034,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82xha300u8sbtzhpmb2z4t",
+      "ticker": "ZANDZ",
+      "insiderName": "Samuelson Errol G",
+      "personId": "person-cmp82igt200s1sbqxbdbvo436",
+      "side": "sell",
+      "amount": -111599,
+      "shares": -2939,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82xkim00uhsbtzdu1ekqn3",
+      "ticker": "ZANDZ",
+      "insiderName": "Owens Bradley D.",
+      "personId": "person-cmp82iesd00rtsbqxjyog55zj",
+      "side": "sell",
+      "amount": -210443,
+      "shares": -5610,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    }
+  ],
+  "insiders": [
+    {
+      "id": "person-cmp82ihsa00s5sbqxr9ycu99y",
+      "name": "Wacksman Jeremy",
+      "role": "CEO",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmp82idqq00rpsbqxy2w7qpph",
+      "name": "Choo Jun",
+      "role": "COO",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmp82icrd00rlsbqxmrbrtpik",
+      "name": "Beitel David A.",
+      "role": "CTO",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmp82ifrm00rxsbqxqfxswwov",
+      "name": "Rock Jennifer",
+      "role": "Chief Accounting Officer",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmp82igt200s1sbqxbdbvo436",
+      "name": "Samuelson Errol G",
+      "role": "Chief Industry Dev. Officer",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmp82iesd00rtsbqxjyog55zj",
+      "name": "Owens Bradley D.",
+      "role": "GC",
+      "tradesCount": 3
+    }
+  ],
+  "tradeTypes": {
+    "buy": 0,
+    "sell": 100,
+    "option": 0,
+    "proposed": 0
+  },
+  "aiSummary": {
+    "headline": "0 buys and 18 sells for ZANDZ.",
+    "bullets": [
+      "18 Form 4 filings on record."
+    ],
+    "sentiment": "bearish"
+  },
+  "eventStudies": [],
+  "recentTrades": []
+}

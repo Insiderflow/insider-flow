@@ -1,0 +1,288 @@
+{
+  "id": "F000479",
+  "entityType": "person",
+  "name": "John Fetterman",
+  "ticker": "FBXSL",
+  "companyName": "BLACKSTONE SECURED LENDING",
+  "roles": [
+    "Other"
+  ],
+  "seatSector": "Other",
+  "imageUrl": "/images/politicians/F000479_John_Fetterman.jpg",
+  "logoLabel": "JO",
+  "logoColor": "#3B82F6",
+  "allTradesCount": 88,
+  "activity": {
+    "totalBuys": 435000,
+    "buyTxCount": 29,
+    "totalSells": 21,
+    "sellTxCount": 21,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "trade_F000479_2335405_1778168403496_cf6qn6",
+      "ticker": "FBXSL",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-06",
+      "tradeDate": "2026-04-13"
+    },
+    {
+      "id": "trade_F000479_429896_1778168403496_j80hn4",
+      "ticker": "ATH",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-06",
+      "tradeDate": "2026-04-10"
+    },
+    {
+      "id": "trade_F000479_433556_1778168403496_cfudm5",
+      "ticker": "NFS",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-06",
+      "tradeDate": "2026-04-10"
+    },
+    {
+      "id": "trade_F000479_429622_1775486674694_z3az6e",
+      "ticker": "GOOGL",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-04-03",
+      "tradeDate": "2026-03-30"
+    },
+    {
+      "id": "trade_F000479_433381_1775486674694_qryito",
+      "ticker": "MU",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-04-03",
+      "tradeDate": "2026-03-30"
+    },
+    {
+      "id": "trade_F000479_433382_1775486674694_trf09f",
+      "ticker": "MSFT",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-04-03",
+      "tradeDate": "2026-03-30"
+    },
+    {
+      "id": "trade_F000479_431550_1775486674694_h5e86v",
+      "ticker": "ERIE",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-04-03",
+      "tradeDate": "2026-03-30"
+    },
+    {
+      "id": "trade_F000479_429648_1775486674694_rc9uwd",
+      "ticker": "AMZN",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-04-03",
+      "tradeDate": "2026-03-30"
+    },
+    {
+      "id": "trade_F000479_433382_1775484773388_7k9gpp",
+      "ticker": "MSFT",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-04-03",
+      "tradeDate": "2026-03-27"
+    },
+    {
+      "id": "trade_F000479_431550_1775486674694_30a19v",
+      "ticker": "ERIE",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-04-03",
+      "tradeDate": "2026-03-27"
+    },
+    {
+      "id": "trade_F000479_429914_1775484773388_rxld6f",
+      "ticker": "T",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-04-03",
+      "tradeDate": "2026-03-27"
+    },
+    {
+      "id": "trade_F000479_2331333_1775486674694_puk1hr",
+      "ticker": "CNXC",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-04-03",
+      "tradeDate": "2026-03-11"
+    }
+  ],
+  "party": "D",
+  "state": "Pennsylvania",
+  "chamber": "",
+  "politicianCharts": {
+    "stats": {
+      "totalTrades": 88,
+      "issuerCount": 8,
+      "totalVolume": 728500,
+      "maxTrade": 50000,
+      "lastTraded": "2026-05-15"
+    },
+    "topIssuers": [
+      {
+        "issuerId": "2331333",
+        "count": 4,
+        "name": "Concentrix Corp",
+        "ticker": "CNXC",
+        "sector": "工業"
+      },
+      {
+        "issuerId": "2333618",
+        "count": 4,
+        "name": "Kyndryl Holdings Inc",
+        "ticker": "KD",
+        "sector": "資訊科技"
+      },
+      {
+        "issuerId": "432796",
+        "count": 4,
+        "name": "JPMorgan Chase & Co",
+        "ticker": "JPM",
+        "sector": "金融"
+      },
+      {
+        "issuerId": "429818",
+        "count": 3,
+        "name": "ARES CAPITAL CORPORATIO",
+        "ticker": "NARCC",
+        "sector": "金融"
+      },
+      {
+        "issuerId": "430446",
+        "count": 3,
+        "name": "CELANESE US HOLDINGS LLC",
+        "ticker": null,
+        "sector": "N/A"
+      },
+      {
+        "issuerId": "2334845",
+        "count": 2,
+        "name": "ENSTAR FINANCE LLC",
+        "ticker": "None",
+        "sector": "N/A"
+      },
+      {
+        "issuerId": "2334786",
+        "count": 2,
+        "name": "NATIONAL FINANCE AUTHORITY",
+        "ticker": "None",
+        "sector": "N/A"
+      },
+      {
+        "issuerId": "429765",
+        "count": 2,
+        "name": "Elevance Health Inc",
+        "ticker": "ELV",
+        "sector": "醫療保健"
+      }
+    ],
+    "chartPoints": [
+      {
+        "period": "2023-Q1",
+        "buyVolume": 0,
+        "sellVolume": 8000,
+        "sp500Close": 4109.31005859375
+      },
+      {
+        "period": "2023-Q2",
+        "buyVolume": 152000,
+        "sellVolume": 0,
+        "sp500Close": 4450.3798828125
+      },
+      {
+        "period": "2023-Q3",
+        "buyVolume": 16000,
+        "sellVolume": 8000,
+        "sp500Close": 4288.0498046875
+      },
+      {
+        "period": "2023-Q4",
+        "buyVolume": 72500,
+        "sellVolume": 8000,
+        "sp500Close": 4769.830078125
+      },
+      {
+        "period": "2024-Q2",
+        "buyVolume": 16000,
+        "sellVolume": 0,
+        "sp500Close": 5460.47998046875
+      },
+      {
+        "period": "2024-Q3",
+        "buyVolume": 8000,
+        "sellVolume": 8000,
+        "sp500Close": 5762.47998046875
+      },
+      {
+        "period": "2024-Q4",
+        "buyVolume": 48000,
+        "sellVolume": 40000,
+        "sp500Close": 5881.6298828125
+      },
+      {
+        "period": "2025-Q1",
+        "buyVolume": 56000,
+        "sellVolume": 16000,
+        "sp500Close": 5611.85009765625
+      },
+      {
+        "period": "2025-Q2",
+        "buyVolume": 56000,
+        "sellVolume": 32000,
+        "sp500Close": 6204.9501953125
+      },
+      {
+        "period": "2025-Q3",
+        "buyVolume": 16000,
+        "sellVolume": 32000,
+        "sp500Close": 6688.4599609375
+      },
+      {
+        "period": "2025-Q4",
+        "buyVolume": 8000,
+        "sellVolume": 8000,
+        "sp500Close": 6845.5
+      },
+      {
+        "period": "2026-Q1",
+        "buyVolume": 56000,
+        "sellVolume": 40000,
+        "sp500Close": 6528.52001953125
+      },
+      {
+        "period": "2026-Q2",
+        "buyVolume": 8000,
+        "sellVolume": 16000,
+        "sp500Close": 7408.5
+      }
+    ]
+  }
+}

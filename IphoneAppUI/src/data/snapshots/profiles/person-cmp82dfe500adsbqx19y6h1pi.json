@@ -1,0 +1,55 @@
+{
+  "id": "person-cmp82dfe500adsbqx19y6h1pi",
+  "entityType": "person",
+  "name": "Flammer Martina M.D.",
+  "ticker": "INSM",
+  "companyName": "Insmed Inc",
+  "roles": [
+    "Chief Medical Officer"
+  ],
+  "logoLabel": "FL",
+  "logoColor": "#6366F1",
+  "allTradesCount": 3,
+  "activity": {
+    "totalBuys": 0,
+    "buyTxCount": 0,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmp82n2vq00jr4ey4qyrtatru",
+      "ticker": "INSM",
+      "side": "sell",
+      "amount": -2128892,
+      "shares": -18333,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82dfqp00afsbqx34g6n0l6",
+      "ticker": "INSM",
+      "side": "sell",
+      "amount": -2128892,
+      "shares": -18333,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp83034s011nsbtzm6xkh2ca",
+      "ticker": "INSM",
+      "side": "sell",
+      "amount": -2128892,
+      "shares": -18333,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    }
+  ]
+}

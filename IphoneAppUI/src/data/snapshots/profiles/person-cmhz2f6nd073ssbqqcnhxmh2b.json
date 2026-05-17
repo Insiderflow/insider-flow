@@ -1,0 +1,37 @@
+{
+  "id": "person-cmhz2f6nd073ssbqqcnhxmh2b",
+  "entityType": "person",
+  "name": "Woods Thomas D",
+  "ticker": "BAC",
+  "companyName": "Bank of America Corp /De/",
+  "roles": [
+    "Dir"
+  ],
+  "logoLabel": "WO",
+  "logoColor": "#6366F1",
+  "allTradesCount": 1,
+  "activity": {
+    "totalBuys": 656250,
+    "buyTxCount": 1,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2for10kj9sbqqncl8fov3",
+      "ticker": "BAC",
+      "side": "buy",
+      "amount": 656250,
+      "shares": 25000,
+      "filedAt": "2023-11-03",
+      "tradeDate": "2023-11-01"
+    }
+  ]
+}

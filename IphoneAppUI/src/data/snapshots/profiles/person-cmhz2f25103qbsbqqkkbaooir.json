@@ -1,0 +1,37 @@
+{
+  "id": "person-cmhz2f25103qbsbqqkkbaooir",
+  "entityType": "person",
+  "name": "Hobson Mellody L",
+  "ticker": "JPM",
+  "companyName": "Jpmorgan Chase & Co",
+  "roles": [
+    "Dir"
+  ],
+  "logoLabel": "HO",
+  "logoColor": "#6366F1",
+  "allTradesCount": 1,
+  "activity": {
+    "totalBuys": 50448,
+    "buyTxCount": 1,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2fgmc0cnusbqqdj2mnrm5",
+      "ticker": "JPM",
+      "side": "buy",
+      "amount": 50448,
+      "shares": 375,
+      "filedAt": "2023-01-20",
+      "tradeDate": "2023-01-19"
+    }
+  ]
+}

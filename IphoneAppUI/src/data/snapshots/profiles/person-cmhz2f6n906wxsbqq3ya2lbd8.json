@@ -1,0 +1,55 @@
+{
+  "id": "person-cmhz2f6n906wxsbqq3ya2lbd8",
+  "entityType": "person",
+  "name": "Adams William H III",
+  "ticker": "TXO",
+  "companyName": "Txo Partners, L.P.",
+  "roles": [
+    "See Remarks"
+  ],
+  "logoLabel": "AD",
+  "logoColor": "#6366F1",
+  "allTradesCount": 3,
+  "activity": {
+    "totalBuys": 653598,
+    "buyTxCount": 3,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2g1p30x4ssbqq2q4b34wl",
+      "ticker": "TXO",
+      "side": "buy",
+      "amount": 152600,
+      "shares": 10000,
+      "filedAt": "2025-05-20",
+      "tradeDate": "2025-05-19"
+    },
+    {
+      "id": "cmhz2fw950rensbqq1303ob79",
+      "ticker": "TXO",
+      "side": "buy",
+      "amount": 236998,
+      "shares": 14000,
+      "filedAt": "2025-01-02",
+      "tradeDate": "2024-12-30"
+    },
+    {
+      "id": "cmhz2fny50k0bsbqqluqrzi09",
+      "ticker": "TXO",
+      "side": "buy",
+      "amount": 264000,
+      "shares": 15000,
+      "filedAt": "2023-11-14",
+      "tradeDate": "2023-11-10"
+    }
+  ]
+}

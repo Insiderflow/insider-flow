@@ -1,0 +1,72 @@
+{
+  "id": "company-holx",
+  "entityType": "company",
+  "name": "Hologic Inc",
+  "ticker": "HOLX",
+  "companyName": "Hologic Inc",
+  "roles": [
+    "Issuer"
+  ],
+  "logoLabel": "HO",
+  "logoColor": "#166534",
+  "displayName": "HOLOGIC INC / US",
+  "exchange": "NYSE",
+  "industry": "—",
+  "description": "Hologic Inc",
+  "dataAsOf": "2025-05-09",
+  "allTradesCount": 1,
+  "activity": {
+    "totalBuys": 300760,
+    "buyTxCount": 1,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 55.24,
+    "avgSell": 0,
+    "plan10b5Pct": 0,
+    "ppSalePct": 0,
+    "buyRangeMin": 55.24,
+    "buyRangeMax": 55.24,
+    "sellRangeMin": null,
+    "sellRangeMax": null
+  },
+  "companyTrades": [
+    {
+      "id": "cmhz2g1p40x63sbqqxifa6e0k",
+      "ticker": "HOLX",
+      "insiderName": "Madaus Martin D",
+      "personId": "person-cmhz2f63w06kxsbqq3moo8rgj",
+      "side": "buy",
+      "amount": 300760,
+      "shares": 5445,
+      "filedAt": "2025-05-09",
+      "tradeDate": "2025-05-07"
+    }
+  ],
+  "insiders": [
+    {
+      "id": "person-cmhz2f63w06kxsbqq3moo8rgj",
+      "name": "Madaus Martin D",
+      "role": "Dir",
+      "tradesCount": 1
+    }
+  ],
+  "tradeTypes": {
+    "buy": 100,
+    "sell": 0,
+    "option": 0,
+    "proposed": 0
+  },
+  "aiSummary": {
+    "headline": "1 buys and 0 sells for HOLX.",
+    "bullets": [
+      "1 Form 4 filings on record."
+    ],
+    "sentiment": "bullish"
+  },
+  "eventStudies": [],
+  "recentTrades": []
+}

@@ -74,6 +74,44 @@ export async function GET(request: NextRequest) {
       });
     });
 
+    const [oiCompanies, oiOwners] = await Promise.all([
+      prisma.openInsiderCompany.findMany({
+        where: {
+          OR: [
+            { name: { contains: searchTerm, mode: 'insensitive' } },
+            { ticker: { contains: searchTerm, mode: 'insensitive' } },
+          ],
+        },
+        take: 5,
+        include: { _count: { select: { transactions: true } } },
+      }),
+      prisma.openInsiderOwner.findMany({
+        where: { name: { contains: searchTerm, mode: 'insensitive' } },
+        take: 5,
+        include: { _count: { select: { transactions: true } } },
+      }),
+    ]);
+
+    oiCompanies.forEach((company) => {
+      results.push({
+        id: company.id,
+        type: 'company',
+        title: company.name,
+        subtitle: `$${company.ticker} • Form 4 • ${company._count.transactions} 筆交易`,
+        url: `/insider/company/company-${company.ticker.toLowerCase()}`,
+      });
+    });
+
+    oiOwners.forEach((owner) => {
+      results.push({
+        id: owner.id,
+        type: 'owner',
+        title: owner.name,
+        subtitle: `${owner.title || 'Insider'} • Form 4 • ${owner._count.transactions} 筆交易`,
+        url: `/insider/person/person-${owner.id}`,
+      });
+    });
+
     // Search trades (by politician or issuer name)
     const trades = await prisma.trade.findMany({
       where: {
@@ -111,7 +149,13 @@ export async function GET(request: NextRequest) {
       if (!aExact && bExact) return 1;
       
       // Then by type priority: politicians, issuers, trades
-      const typeOrder = { politician: 0, issuer: 1, trade: 2 };
+      const typeOrder: Record<string, number> = {
+        politician: 0,
+        issuer: 1,
+        company: 2,
+        owner: 3,
+        trade: 4,
+      };
       return typeOrder[a.type as keyof typeof typeOrder] - typeOrder[b.type as keyof typeof typeOrder];
     });
 

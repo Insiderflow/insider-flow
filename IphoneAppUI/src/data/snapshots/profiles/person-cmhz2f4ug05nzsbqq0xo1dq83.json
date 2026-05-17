@@ -1,0 +1,136 @@
+{
+  "id": "person-cmhz2f4ug05nzsbqq0xo1dq83",
+  "entityType": "person",
+  "name": "Duggan Robert W",
+  "ticker": "PLSE",
+  "companyName": "Pulse Biosciences, Inc.",
+  "roles": [
+    "Dir, 10%"
+  ],
+  "logoLabel": "DU",
+  "logoColor": "#6366F1",
+  "allTradesCount": 23,
+  "activity": {
+    "totalBuys": 521082203,
+    "buyTxCount": 23,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmp82k239002z4ey4st24c68h",
+      "ticker": "PLSE",
+      "side": "buy",
+      "amount": 12999988,
+      "shares": 660233,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-11"
+    },
+    {
+      "id": "cmp82fi0900hysbqx99hc2opx",
+      "ticker": "PLSE",
+      "side": "buy",
+      "amount": 12999988,
+      "shares": 660233,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-11"
+    },
+    {
+      "id": "cmp82v85800nnsbtzzbg4kyq4",
+      "ticker": "PLSE",
+      "side": "buy",
+      "amount": 12999988,
+      "shares": 660233,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-11"
+    },
+    {
+      "id": "cmhz2g0w00wbxsbqq8htu8o50",
+      "ticker": "SMMT",
+      "side": "buy",
+      "amount": 499983,
+      "shares": 26680,
+      "filedAt": "2025-10-23",
+      "tradeDate": "2025-10-21"
+    },
+    {
+      "id": "cmhz2g2ia0xuhsbqqucwgtm8d",
+      "ticker": "PLSE",
+      "side": "buy",
+      "amount": 2788624,
+      "shares": 192599,
+      "filedAt": "2025-09-12",
+      "tradeDate": "2025-09-10"
+    },
+    {
+      "id": "cmhz2g1pk0xifsbqq8j0z0hfo",
+      "ticker": "SMMT",
+      "side": "buy",
+      "amount": 5984756,
+      "shares": 338394,
+      "filedAt": "2025-09-11",
+      "tradeDate": "2025-09-10"
+    },
+    {
+      "id": "cmhz2fxns0tg5sbqq9zjo69w4",
+      "ticker": "PLSE",
+      "side": "buy",
+      "amount": 949298,
+      "shares": 55256,
+      "filedAt": "2024-12-17",
+      "tradeDate": "2024-12-13"
+    },
+    {
+      "id": "cmhz2fxna0t0rsbqqhcl5a3sc",
+      "ticker": "PLES",
+      "side": "buy",
+      "amount": 777771,
+      "shares": 45404,
+      "filedAt": "2024-12-16",
+      "tradeDate": "2024-12-12"
+    },
+    {
+      "id": "cmhz2fxn70syesbqq2lpb1v0s",
+      "ticker": "PLSE",
+      "side": "buy",
+      "amount": 972344,
+      "shares": 56054,
+      "filedAt": "2024-12-13",
+      "tradeDate": "2024-12-11"
+    },
+    {
+      "id": "cmhz2fpki0ld7sbqq8712tpsr",
+      "ticker": "PLSE",
+      "side": "buy",
+      "amount": 164691,
+      "shares": 17999,
+      "filedAt": "2023-12-14",
+      "tradeDate": "2023-12-12"
+    },
+    {
+      "id": "cmhz2forg0kw2sbqqeo8m43l4",
+      "ticker": "PLSE",
+      "side": "buy",
+      "amount": 843504,
+      "shares": 90118,
+      "filedAt": "2023-12-13",
+      "tradeDate": "2023-12-11"
+    },
+    {
+      "id": "cmhz2fpkg0lc4sbqqdq0j9042",
+      "ticker": "PLSE",
+      "side": "buy",
+      "amount": 1112898,
+      "shares": 116656,
+      "filedAt": "2023-12-12",
+      "tradeDate": "2023-12-08"
+    }
+  ]
+}

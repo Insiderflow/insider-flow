@@ -1,0 +1,654 @@
+{
+  "meta": {
+    "dataAsOf": "2026-05-15",
+    "nextUpdateEt": "22:15",
+    "generatedAt": "2026-05-17T06:02:39.151Z",
+    "latestDisclosureAt": "2026-05-15T18:15:00.000Z"
+  },
+  "aiSummary": {
+    "headline": "2026/05/17 國會披露",
+    "narrative": "截至美東時間，2026/05/17 尚無新的 STOCK 申報入庫。通常會在披露日後幾小時至數天內陸續出現，請稍後再查看。",
+    "bullets": [],
+    "sentiment": "mixed"
+  },
+  "kpis": [
+    {
+      "id": "buys",
+      "label": "Buys",
+      "value": 545,
+      "changePct": 13.3,
+      "spike": [
+        0.378,
+        0.396,
+        0.412,
+        0.442,
+        0.447,
+        0.485,
+        0.485,
+        0.525,
+        0.527,
+        0.562,
+        0.572,
+        0.596,
+        0.618,
+        0.63
+      ]
+    },
+    {
+      "id": "sells",
+      "label": "Sells",
+      "value": 326,
+      "changePct": -7.6,
+      "spike": [
+        0.365,
+        0.355,
+        0.331,
+        0.309,
+        0.297,
+        0.264,
+        0.261,
+        0.221,
+        0.221,
+        0.183,
+        0.179,
+        0.147,
+        0.133,
+        0.113
+      ]
+    },
+    {
+      "id": "options",
+      "label": "Options",
+      "value": 0,
+      "changePct": 0,
+      "spike": [
+        0.479,
+        0.477,
+        0.501,
+        0.491,
+        0.507,
+        0.488,
+        0.495,
+        0.468,
+        0.469,
+        0.439,
+        0.44,
+        0.412,
+        0.417,
+        0.396
+      ]
+    },
+    {
+      "id": "pp_sale",
+      "label": "PP Sale",
+      "value": 0,
+      "changePct": 0,
+      "spike": [
+        0.54,
+        0.54,
+        0.578,
+        0.584,
+        0.613,
+        0.63,
+        0.647,
+        0.676,
+        0.682,
+        0.719,
+        0.72,
+        0.76,
+        0.761,
+        0.796
+      ]
+    }
+  ],
+  "clusterBuys": [],
+  "clusterSells": [],
+  "topPoliticianBuys": [
+    {
+      "id": "K000389",
+      "politicianId": "K000389",
+      "name": "Ro Khanna",
+      "title": "Information Technology",
+      "titleKey": "Information Technology",
+      "party": "D",
+      "state": "California",
+      "ticker": "IBM",
+      "issuer": "International Business Machines Corp",
+      "amount": 50000,
+      "shares": 0,
+      "tradeDate": "2026-04-24",
+      "filedAt": "2026-05-13",
+      "side": "buy",
+      "imageUrl": "/images/politicians/K000389_Ro_Khanna.jpg",
+      "spike": [
+        0.423,
+        0.446,
+        0.457,
+        0.491,
+        0.493,
+        0.533,
+        0.533,
+        0.571,
+        0.577,
+        0.606,
+        0.622,
+        0.64
+      ]
+    },
+    {
+      "id": "K000389",
+      "politicianId": "K000389",
+      "name": "Ro Khanna",
+      "title": "Financials",
+      "titleKey": "Financials",
+      "party": "D",
+      "state": "California",
+      "ticker": "V",
+      "issuer": "Visa Inc",
+      "amount": 50000,
+      "shares": 0,
+      "tradeDate": "2026-04-24",
+      "filedAt": "2026-05-13",
+      "side": "buy",
+      "imageUrl": "/images/politicians/K000389_Ro_Khanna.jpg",
+      "spike": [
+        0.481,
+        0.496,
+        0.515,
+        0.542,
+        0.549,
+        0.586,
+        0.587,
+        0.627,
+        0.628,
+        0.664,
+        0.672,
+        0.698
+      ]
+    },
+    {
+      "id": "K000389",
+      "politicianId": "K000389",
+      "name": "Ro Khanna",
+      "title": "Information Technology",
+      "titleKey": "Information Technology",
+      "party": "D",
+      "state": "California",
+      "ticker": "INTC",
+      "issuer": "Intel Corp",
+      "amount": 50000,
+      "shares": 0,
+      "tradeDate": "2026-04-24",
+      "filedAt": "2026-05-13",
+      "side": "buy",
+      "imageUrl": "/images/politicians/K000389_Ro_Khanna.jpg",
+      "spike": [
+        0.537,
+        0.544,
+        0.571,
+        0.59,
+        0.605,
+        0.636,
+        0.641,
+        0.679,
+        0.679,
+        0.719,
+        0.721,
+        0.755
+      ]
+    }
+  ],
+  "topPoliticianSells": [
+    {
+      "id": "K000389",
+      "politicianId": "K000389",
+      "name": "Ro Khanna",
+      "title": "Industrials",
+      "titleKey": "Industrials",
+      "party": "D",
+      "state": "California",
+      "ticker": "RSG",
+      "issuer": "Republic Services Inc",
+      "amount": 50000,
+      "shares": 0,
+      "tradeDate": "2026-04-13",
+      "filedAt": "2026-05-13",
+      "side": "sell",
+      "imageUrl": "/images/politicians/K000389_Ro_Khanna.jpg",
+      "spike": [
+        0.377,
+        0.354,
+        0.343,
+        0.309,
+        0.307,
+        0.267,
+        0.267,
+        0.229,
+        0.223,
+        0.194,
+        0.178,
+        0.16
+      ]
+    },
+    {
+      "id": "K000389",
+      "politicianId": "K000389",
+      "name": "Ro Khanna",
+      "title": "Financials",
+      "titleKey": "Financials",
+      "party": "D",
+      "state": "California",
+      "ticker": "V",
+      "issuer": "Visa Inc",
+      "amount": 50000,
+      "shares": 0,
+      "tradeDate": "2026-04-13",
+      "filedAt": "2026-05-13",
+      "side": "sell",
+      "imageUrl": "/images/politicians/K000389_Ro_Khanna.jpg",
+      "spike": [
+        0.419,
+        0.404,
+        0.385,
+        0.358,
+        0.351,
+        0.314,
+        0.313,
+        0.273,
+        0.272,
+        0.236,
+        0.228,
+        0.202
+      ]
+    },
+    {
+      "id": "K000389",
+      "politicianId": "K000389",
+      "name": "Ro Khanna",
+      "title": "Information Technology",
+      "titleKey": "Information Technology",
+      "party": "D",
+      "state": "California",
+      "ticker": "AAPL",
+      "issuer": "Apple Inc",
+      "amount": 50000,
+      "shares": 0,
+      "tradeDate": "2026-04-13",
+      "filedAt": "2026-05-13",
+      "side": "sell",
+      "imageUrl": "/images/politicians/K000389_Ro_Khanna.jpg",
+      "spike": [
+        0.463,
+        0.456,
+        0.429,
+        0.41,
+        0.395,
+        0.364,
+        0.359,
+        0.321,
+        0.321,
+        0.281,
+        0.279,
+        0.245
+      ]
+    }
+  ],
+  "todaysTrades": [],
+  "primeBrokers": [],
+  "industryChain": [
+    {
+      "nameKey": "Financials",
+      "name": "Financials",
+      "buyPct": 66,
+      "sellPct": 34,
+      "netAmount": 420000,
+      "buyAmount": 865000,
+      "sellAmount": 445000,
+      "segments": [
+        {
+          "nameKey": "fin-banks",
+          "name": "Banks",
+          "tone": "buy",
+          "buyPct": 88,
+          "buyAmount": 115000,
+          "sellAmount": 15000
+        }
+      ]
+    },
+    {
+      "nameKey": "InformationTechnology",
+      "name": "InformationTechnology",
+      "buyPct": 69,
+      "sellPct": 31,
+      "netAmount": 440000,
+      "buyAmount": 810000,
+      "sellAmount": 370000,
+      "segments": [
+        {
+          "nameKey": "it-semiconductors",
+          "name": "Semiconductors",
+          "tone": "buy",
+          "buyPct": 100,
+          "buyAmount": 95000,
+          "sellAmount": 0
+        },
+        {
+          "nameKey": "it-consumer-electronics",
+          "name": "Consumer Electronics",
+          "tone": "mixed",
+          "buyPct": 23,
+          "buyAmount": 15000,
+          "sellAmount": 50000
+        },
+        {
+          "nameKey": "it-software-infrastructure",
+          "name": "Software - Infrastructure",
+          "tone": "buy",
+          "buyPct": 100,
+          "buyAmount": 15000,
+          "sellAmount": 0
+        }
+      ]
+    },
+    {
+      "nameKey": "Healthcare",
+      "name": "Healthcare",
+      "buyPct": 53,
+      "sellPct": 47,
+      "netAmount": 70000,
+      "buyAmount": 555000,
+      "sellAmount": 485000,
+      "segments": [
+        {
+          "nameKey": "hc-pharma",
+          "name": "Pharma",
+          "tone": "neutral",
+          "buyPct": 50,
+          "buyAmount": 0,
+          "sellAmount": 0
+        },
+        {
+          "nameKey": "hc-hospitals",
+          "name": "Hospitals",
+          "tone": "neutral",
+          "buyPct": 50,
+          "buyAmount": 0,
+          "sellAmount": 0
+        },
+        {
+          "nameKey": "hc-devices",
+          "name": "Devices",
+          "tone": "neutral",
+          "buyPct": 50,
+          "buyAmount": 0,
+          "sellAmount": 0
+        },
+        {
+          "nameKey": "hc-biotech",
+          "name": "Biotech",
+          "tone": "neutral",
+          "buyPct": 50,
+          "buyAmount": 0,
+          "sellAmount": 0
+        },
+        {
+          "nameKey": "hc-diagnostics",
+          "name": "Diagnostics",
+          "tone": "neutral",
+          "buyPct": 50,
+          "buyAmount": 0,
+          "sellAmount": 0
+        }
+      ]
+    },
+    {
+      "nameKey": "ConsumerDiscretionary",
+      "name": "ConsumerDiscretionary",
+      "buyPct": 56,
+      "sellPct": 44,
+      "netAmount": 80000,
+      "buyAmount": 380000,
+      "sellAmount": 300000,
+      "segments": [
+        {
+          "nameKey": "cd-retail",
+          "name": "Retail",
+          "tone": "neutral",
+          "buyPct": 50,
+          "buyAmount": 0,
+          "sellAmount": 0
+        },
+        {
+          "nameKey": "cd-automotive",
+          "name": "Automotive",
+          "tone": "neutral",
+          "buyPct": 50,
+          "buyAmount": 0,
+          "sellAmount": 0
+        },
+        {
+          "nameKey": "cd-leisure",
+          "name": "Leisure",
+          "tone": "neutral",
+          "buyPct": 50,
+          "buyAmount": 0,
+          "sellAmount": 0
+        },
+        {
+          "nameKey": "cd-e-commerce",
+          "name": "E-Commerce",
+          "tone": "neutral",
+          "buyPct": 50,
+          "buyAmount": 0,
+          "sellAmount": 0
+        }
+      ]
+    },
+    {
+      "nameKey": "Industrials",
+      "name": "Industrials",
+      "buyPct": 73,
+      "sellPct": 27,
+      "netAmount": 295000,
+      "buyAmount": 470000,
+      "sellAmount": 175000,
+      "segments": [
+        {
+          "nameKey": "ind-aerospace-and-defense",
+          "name": "Aerospace & Defense",
+          "tone": "neutral",
+          "buyPct": 50,
+          "buyAmount": 0,
+          "sellAmount": 0
+        },
+        {
+          "nameKey": "ind-machinery",
+          "name": "Machinery",
+          "tone": "neutral",
+          "buyPct": 50,
+          "buyAmount": 0,
+          "sellAmount": 0
+        },
+        {
+          "nameKey": "ind-transportation",
+          "name": "Transportation",
+          "tone": "neutral",
+          "buyPct": 50,
+          "buyAmount": 0,
+          "sellAmount": 0
+        },
+        {
+          "nameKey": "ind-construction",
+          "name": "Construction",
+          "tone": "neutral",
+          "buyPct": 50,
+          "buyAmount": 0,
+          "sellAmount": 0
+        }
+      ]
+    },
+    {
+      "nameKey": "Materials",
+      "name": "Materials",
+      "buyPct": 58,
+      "sellPct": 42,
+      "netAmount": 55000,
+      "buyAmount": 195000,
+      "sellAmount": 140000,
+      "segments": [
+        {
+          "nameKey": "mat-chemicals",
+          "name": "Chemicals",
+          "tone": "neutral",
+          "buyPct": 50,
+          "buyAmount": 0,
+          "sellAmount": 0
+        },
+        {
+          "nameKey": "mat-metals-and-mining",
+          "name": "Metals & Mining",
+          "tone": "neutral",
+          "buyPct": 50,
+          "buyAmount": 0,
+          "sellAmount": 0
+        },
+        {
+          "nameKey": "mat-paper-and-packaging",
+          "name": "Paper & Packaging",
+          "tone": "neutral",
+          "buyPct": 50,
+          "buyAmount": 0,
+          "sellAmount": 0
+        }
+      ]
+    }
+  ],
+  "topIndustries": [
+    {
+      "nameKey": "Financials",
+      "name": "Financials",
+      "buyAmount": 865000,
+      "sellAmount": 445000
+    },
+    {
+      "nameKey": "InformationTechnology",
+      "name": "InformationTechnology",
+      "buyAmount": 810000,
+      "sellAmount": 370000
+    },
+    {
+      "nameKey": "Healthcare",
+      "name": "Healthcare",
+      "buyAmount": 555000,
+      "sellAmount": 485000
+    },
+    {
+      "nameKey": "ConsumerDiscretionary",
+      "name": "ConsumerDiscretionary",
+      "buyAmount": 380000,
+      "sellAmount": 300000
+    },
+    {
+      "nameKey": "Industrials",
+      "name": "Industrials",
+      "buyAmount": 470000,
+      "sellAmount": 175000
+    },
+    {
+      "nameKey": "Materials",
+      "name": "Materials",
+      "buyAmount": 195000,
+      "sellAmount": 140000
+    }
+  ],
+  "recentTrades": [
+    {
+      "id": "trade_F000479_432796_1778953569098_vduwpa",
+      "politicianId": "F000479",
+      "politician": "John Fetterman",
+      "party": "D",
+      "ticker": "JPM",
+      "side": "buy",
+      "amount": 15000,
+      "filedAt": "2026-05-15",
+      "filedAtKey": "trade_F000479_432796_1778953569098_vduwpa"
+    },
+    {
+      "id": "trade_F000479_2335418_1778953569098_jcf90t",
+      "politicianId": "F000479",
+      "politician": "John Fetterman",
+      "party": "D",
+      "ticker": "",
+      "side": "buy",
+      "amount": 15000,
+      "filedAt": "2026-05-15",
+      "filedAtKey": "trade_F000479_2335418_1778953569098_jcf90t"
+    },
+    {
+      "id": "trade_F000479_431699_1778953569098_y5gb7i",
+      "politicianId": "F000479",
+      "politician": "John Fetterman",
+      "party": "D",
+      "ticker": "FCBN",
+      "side": "buy",
+      "amount": 15000,
+      "filedAt": "2026-05-15",
+      "filedAtKey": "trade_F000479_431699_1778953569098_y5gb7i"
+    },
+    {
+      "id": "trade_F000483_432290_1778941408594_k85k18",
+      "politicianId": "F000483",
+      "politician": "Laura Friedman",
+      "party": "D",
+      "ticker": "HOLX",
+      "side": "sell",
+      "amount": 15000,
+      "filedAt": "2026-05-15",
+      "filedAtKey": "trade_F000483_432290_1778941408594_k85k18"
+    },
+    {
+      "id": "trade_F000483_432290_1778941408594_7ip3fb",
+      "politicianId": "F000483",
+      "politician": "Laura Friedman",
+      "party": "D",
+      "ticker": "HOLX",
+      "side": "buy",
+      "amount": 15000,
+      "filedAt": "2026-05-15",
+      "filedAtKey": "trade_F000483_432290_1778941408594_7ip3fb"
+    },
+    {
+      "id": "trade_D000032_433236_1778858389133_dp9kr1",
+      "politicianId": "D000032",
+      "politician": "Byron Donalds",
+      "party": "R",
+      "ticker": "MRVL",
+      "side": "buy",
+      "amount": 15000,
+      "filedAt": "2026-05-14",
+      "filedAtKey": "trade_D000032_433236_1778858389133_dp9kr1"
+    },
+    {
+      "id": "trade_M001239_433770_1778858389133_2s6moh",
+      "politicianId": "M001239",
+      "politician": "John McGuire",
+      "party": "R",
+      "ticker": "NVDA",
+      "side": "buy",
+      "amount": 15000,
+      "filedAt": "2026-05-14",
+      "filedAtKey": "trade_M001239_433770_1778858389133_2s6moh"
+    },
+    {
+      "id": "trade_D000032_432490_1778858389133_fig540",
+      "politicianId": "D000032",
+      "politician": "Byron Donalds",
+      "party": "R",
+      "ticker": "INTU",
+      "side": "sell",
+      "amount": 15000,
+      "filedAt": "2026-05-14",
+      "filedAtKey": "trade_D000032_432490_1778858389133_fig540"
+    }
+  ]
+}

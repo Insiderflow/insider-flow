@@ -1,0 +1,72 @@
+{
+  "id": "company-low",
+  "entityType": "company",
+  "name": "Lowes Companies Inc",
+  "ticker": "LOW",
+  "companyName": "Lowes Companies Inc",
+  "roles": [
+    "Issuer"
+  ],
+  "logoLabel": "LO",
+  "logoColor": "#166534",
+  "displayName": "LOWES COMPANIES INC / US",
+  "exchange": "NYSE",
+  "industry": "—",
+  "description": "Lowes Companies Inc",
+  "dataAsOf": "2024-12-23",
+  "allTradesCount": 1,
+  "activity": {
+    "totalBuys": 245532,
+    "buyTxCount": 1,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 245.53,
+    "avgSell": 0,
+    "plan10b5Pct": 0,
+    "ppSalePct": 0,
+    "buyRangeMin": 245.53,
+    "buyRangeMax": 245.53,
+    "sellRangeMin": null,
+    "sellRangeMax": null
+  },
+  "companyTrades": [
+    {
+      "id": "cmhz2fwzm0ssesbqqjzryxci2",
+      "ticker": "LOW",
+      "insiderName": "Simkins Lawrence",
+      "personId": "person-cmhz2faf409gwsbqqxtfguj5x",
+      "side": "buy",
+      "amount": 245532,
+      "shares": 1000,
+      "filedAt": "2024-12-23",
+      "tradeDate": "2024-12-20"
+    }
+  ],
+  "insiders": [
+    {
+      "id": "person-cmhz2faf409gwsbqqxtfguj5x",
+      "name": "Simkins Lawrence",
+      "role": "Dir",
+      "tradesCount": 1
+    }
+  ],
+  "tradeTypes": {
+    "buy": 100,
+    "sell": 0,
+    "option": 0,
+    "proposed": 0
+  },
+  "aiSummary": {
+    "headline": "1 buys and 0 sells for LOW.",
+    "bullets": [
+      "1 Form 4 filings on record."
+    ],
+    "sentiment": "bullish"
+  },
+  "eventStudies": [],
+  "recentTrades": []
+}

@@ -1,0 +1,72 @@
+{
+  "id": "company-ma",
+  "entityType": "company",
+  "name": "Mastercard Inc",
+  "ticker": "MA",
+  "companyName": "Mastercard Inc",
+  "roles": [
+    "Issuer"
+  ],
+  "logoLabel": "MA",
+  "logoColor": "#166534",
+  "displayName": "MASTERCARD INC / US",
+  "exchange": "NYSE",
+  "industry": "—",
+  "description": "Mastercard Inc",
+  "dataAsOf": "2023-11-09",
+  "allTradesCount": 1,
+  "activity": {
+    "totalBuys": 390960,
+    "buyTxCount": 1,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 390.96,
+    "avgSell": 0,
+    "plan10b5Pct": 0,
+    "ppSalePct": 0,
+    "buyRangeMin": 390.96,
+    "buyRangeMax": 390.96,
+    "sellRangeMin": null,
+    "sellRangeMax": null
+  },
+  "companyTrades": [
+    {
+      "id": "cmhz2for00kifsbqqpq818lkv",
+      "ticker": "MA",
+      "insiderName": "Davis Richard K",
+      "personId": "person-cmhz2f6nc073esbqq0amv2ieu",
+      "side": "buy",
+      "amount": 390960,
+      "shares": 1000,
+      "filedAt": "2023-11-09",
+      "tradeDate": "2023-11-09"
+    }
+  ],
+  "insiders": [
+    {
+      "id": "person-cmhz2f6nc073esbqq0amv2ieu",
+      "name": "Davis Richard K",
+      "role": "Dir",
+      "tradesCount": 1
+    }
+  ],
+  "tradeTypes": {
+    "buy": 100,
+    "sell": 0,
+    "option": 0,
+    "proposed": 0
+  },
+  "aiSummary": {
+    "headline": "1 buys and 0 sells for MA.",
+    "bullets": [
+      "1 Form 4 filings on record."
+    ],
+    "sentiment": "bullish"
+  },
+  "eventStudies": [],
+  "recentTrades": []
+}

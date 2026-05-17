@@ -1,0 +1,46 @@
+{
+  "id": "person-cmhz2f89h0873sbqqn4ux3v8c",
+  "entityType": "person",
+  "name": "Durn Daniel",
+  "ticker": "ADBE",
+  "companyName": "Adobe Inc.",
+  "roles": [
+    "Dir"
+  ],
+  "logoLabel": "DU",
+  "logoColor": "#6366F1",
+  "allTradesCount": 2,
+  "activity": {
+    "totalBuys": 607807,
+    "buyTxCount": 2,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2g03p0vwvsbqqkixsdspg",
+      "ticker": "ADBE",
+      "side": "buy",
+      "amount": 507758,
+      "shares": 1300,
+      "filedAt": "2025-03-21",
+      "tradeDate": "2025-03-20"
+    },
+    {
+      "id": "cmhz2frzu0o4asbqqgiim1k58",
+      "ticker": "MRVL",
+      "side": "buy",
+      "amount": 100049,
+      "shares": 1425,
+      "filedAt": "2024-06-24",
+      "tradeDate": "2024-06-24"
+    }
+  ]
+}

@@ -1,0 +1,155 @@
+{
+  "id": "F000483",
+  "entityType": "person",
+  "name": "Laura Friedman",
+  "ticker": "HOLX",
+  "companyName": "Hologic Inc",
+  "roles": [
+    "Health Care"
+  ],
+  "seatSector": "Health Care",
+  "imageUrl": "/images/politicians/F000483_Laura_Friedman.jpg",
+  "logoLabel": "LA",
+  "logoColor": "#3B82F6",
+  "allTradesCount": 7,
+  "activity": {
+    "totalBuys": 60000,
+    "buyTxCount": 4,
+    "totalSells": 3,
+    "sellTxCount": 3,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "trade_F000483_432290_1778941408594_k85k18",
+      "ticker": "HOLX",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-04-08"
+    },
+    {
+      "id": "trade_F000483_432290_1778941408594_7ip3fb",
+      "ticker": "HOLX",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-04-08"
+    },
+    {
+      "id": "trade_F000483_429442_1776696886686_z1xisp",
+      "ticker": "ABT",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-04-20",
+      "tradeDate": "2026-03-24"
+    },
+    {
+      "id": "trade_F000483_429442_1777533541254_vqna3j",
+      "ticker": "ABT",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2026-04-19",
+      "tradeDate": "2026-03-23"
+    },
+    {
+      "id": "trade_F000483_435687_1760029639508_3ezuo0",
+      "ticker": "PSKY",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2025-10-09",
+      "tradeDate": "2025-09-09"
+    },
+    {
+      "id": "20003790064",
+      "ticker": "DIS",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2025-09-09",
+      "tradeDate": "2025-08-25"
+    },
+    {
+      "id": "20003790063",
+      "ticker": "PSKY",
+      "side": "buy",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2025-09-09",
+      "tradeDate": "2025-08-06"
+    }
+  ],
+  "party": "D",
+  "state": "California",
+  "chamber": "",
+  "politicianCharts": {
+    "stats": {
+      "totalTrades": 7,
+      "issuerCount": 4,
+      "totalVolume": 56000,
+      "maxTrade": 15000,
+      "lastTraded": "2026-05-15"
+    },
+    "topIssuers": [
+      {
+        "issuerId": "429442",
+        "count": 2,
+        "name": "Abbott Laboratories",
+        "ticker": "ABT",
+        "sector": "醫療保健"
+      },
+      {
+        "issuerId": "432290",
+        "count": 2,
+        "name": "Hologic Inc",
+        "ticker": "HOLX",
+        "sector": "醫療保健"
+      },
+      {
+        "issuerId": "435687",
+        "count": 2,
+        "name": "Paramount Global Inc",
+        "ticker": "PSKY",
+        "sector": "通訊服務"
+      },
+      {
+        "issuerId": "431303",
+        "count": 1,
+        "name": "The Walt Disney Co",
+        "ticker": "DIS",
+        "sector": "通訊服務"
+      }
+    ],
+    "chartPoints": [
+      {
+        "period": "2025-Q3",
+        "buyVolume": 0,
+        "sellVolume": 16000,
+        "sp500Close": 6688.4599609375
+      },
+      {
+        "period": "2026-Q1",
+        "buyVolume": 0,
+        "sellVolume": 0,
+        "sp500Close": 6528.52001953125
+      },
+      {
+        "period": "2026-Q2",
+        "buyVolume": 0,
+        "sellVolume": 8000,
+        "sp500Close": 7408.5
+      }
+    ]
+  }
+}

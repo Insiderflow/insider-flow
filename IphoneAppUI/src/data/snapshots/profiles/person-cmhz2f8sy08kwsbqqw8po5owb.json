@@ -1,0 +1,37 @@
+{
+  "id": "person-cmhz2f8sy08kwsbqqw8po5owb",
+  "entityType": "person",
+  "name": "Barrett Burke Thomas",
+  "ticker": "PLSE",
+  "companyName": "Pulse Biosciences, Inc.",
+  "roles": [
+    "Pres, CEO"
+  ],
+  "logoLabel": "BA",
+  "logoColor": "#6366F1",
+  "allTradesCount": 1,
+  "activity": {
+    "totalBuys": 85600,
+    "buyTxCount": 1,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2ftlx0pgvsbqqfhn4k8bx",
+      "ticker": "PLSE",
+      "side": "buy",
+      "amount": 85600,
+      "shares": 10000,
+      "filedAt": "2024-05-22",
+      "tradeDate": "2024-05-20"
+    }
+  ]
+}

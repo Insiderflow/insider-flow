@@ -1,0 +1,89 @@
+{
+  "id": "company-ibm",
+  "entityType": "company",
+  "name": "International Business Machines Corp",
+  "ticker": "IBM",
+  "companyName": "International Business Machines Corp",
+  "roles": [
+    "Issuer"
+  ],
+  "logoLabel": "IB",
+  "logoColor": "#166534",
+  "displayName": "INTERNATIONAL BUSINESS MACHINES CORP / US",
+  "exchange": "NYSE",
+  "industry": "—",
+  "description": "International Business Machines Corp",
+  "dataAsOf": "2025-02-28",
+  "allTradesCount": 2,
+  "activity": {
+    "totalBuys": 495939,
+    "buyTxCount": 2,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 229.81,
+    "avgSell": 0,
+    "plan10b5Pct": 0,
+    "ppSalePct": 0,
+    "buyRangeMin": 210.62,
+    "buyRangeMax": 249,
+    "sellRangeMin": null,
+    "sellRangeMax": null
+  },
+  "companyTrades": [
+    {
+      "id": "cmhz2fxnv0timsbqqfvxdy2nr",
+      "ticker": "IBM",
+      "insiderName": "Farr David N",
+      "personId": "person-cmhz2faf809n4sbqq3wvipiyf",
+      "side": "buy",
+      "amount": 298800,
+      "shares": 1200,
+      "filedAt": "2025-02-28",
+      "tradeDate": "2025-02-28"
+    },
+    {
+      "id": "cmhz2fwa00s4ysbqq1vpjx2pe",
+      "ticker": "IBM",
+      "insiderName": "Zollar Alfred W",
+      "personId": "person-cmhz2f9vt09aosbqqe1rk181p",
+      "side": "buy",
+      "amount": 197139,
+      "shares": 936,
+      "filedAt": "2024-11-13",
+      "tradeDate": "2024-11-13"
+    }
+  ],
+  "insiders": [
+    {
+      "id": "person-cmhz2faf809n4sbqq3wvipiyf",
+      "name": "Farr David N",
+      "role": "Dir",
+      "tradesCount": 1
+    },
+    {
+      "id": "person-cmhz2f9vt09aosbqqe1rk181p",
+      "name": "Zollar Alfred W",
+      "role": "Dir",
+      "tradesCount": 1
+    }
+  ],
+  "tradeTypes": {
+    "buy": 100,
+    "sell": 0,
+    "option": 0,
+    "proposed": 0
+  },
+  "aiSummary": {
+    "headline": "2 buys and 0 sells for IBM.",
+    "bullets": [
+      "2 Form 4 filings on record."
+    ],
+    "sentiment": "bullish"
+  },
+  "eventStudies": [],
+  "recentTrades": []
+}

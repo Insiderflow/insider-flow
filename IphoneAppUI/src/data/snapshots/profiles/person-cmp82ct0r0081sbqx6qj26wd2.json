@@ -1,0 +1,82 @@
+{
+  "id": "person-cmp82ct0r0081sbqx6qj26wd2",
+  "entityType": "person",
+  "name": "Mikkilineni Krishna",
+  "ticker": "RHLD",
+  "companyName": "Resolute Holdings Management, Inc.",
+  "roles": [
+    "Dir"
+  ],
+  "logoLabel": "MI",
+  "logoColor": "#6366F1",
+  "allTradesCount": 6,
+  "activity": {
+    "totalBuys": 600063,
+    "buyTxCount": 6,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmp82jxng001w4ey4ffutxzqk",
+      "ticker": "RHLD",
+      "side": "buy",
+      "amount": 99990,
+      "shares": 921,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82jyeb00224ey41ep5qn7q",
+      "ticker": "GPGI",
+      "side": "buy",
+      "amount": 100031,
+      "shares": 8106,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82uum900mksbtzy4foe4t9",
+      "ticker": "RHLD",
+      "side": "buy",
+      "amount": 99990,
+      "shares": 921,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82uwto00mqsbtzqgm1smws",
+      "ticker": "GPGI",
+      "side": "buy",
+      "amount": 100031,
+      "shares": 8106,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82ctf40083sbqxvfpd2yik",
+      "ticker": "GPGI",
+      "side": "buy",
+      "amount": 100031,
+      "shares": 8106,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82fxdl00jjsbqxm7kottvx",
+      "ticker": "RHLD",
+      "side": "buy",
+      "amount": 99990,
+      "shares": 921,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "id": "person-cmhz2f6n806tysbqqwc94p5on",
+  "entityType": "person",
+  "name": "Kevil Phillip R",
+  "ticker": "TXO",
+  "companyName": "Txo Partners, L.P.",
+  "roles": [
+    "See Remarks"
+  ],
+  "logoLabel": "KE",
+  "logoColor": "#6366F1",
+  "allTradesCount": 4,
+  "activity": {
+    "totalBuys": 146298,
+    "buyTxCount": 4,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2g1os0wvpsbqq2ouf4mwp",
+      "ticker": "TXO",
+      "side": "buy",
+      "amount": 45540,
+      "shares": 3000,
+      "filedAt": "2025-05-15",
+      "tradeDate": "2025-05-14"
+    },
+    {
+      "id": "cmhz2fxnq0tdysbqqdtifhkhg",
+      "ticker": "TXO",
+      "side": "buy",
+      "amount": 32150,
+      "shares": 2000,
+      "filedAt": "2024-12-18",
+      "tradeDate": "2024-12-16"
+    },
+    {
+      "id": "cmhz2fnxv0jrwsbqqx81or1ay",
+      "ticker": "TXO",
+      "side": "buy",
+      "amount": 25024,
+      "shares": 1360,
+      "filedAt": "2023-11-22",
+      "tradeDate": "2023-11-21"
+    },
+    {
+      "id": "cmhz2fnye0k8csbqqr6gswcy0",
+      "ticker": "TXO",
+      "side": "buy",
+      "amount": 43584,
+      "shares": 2400,
+      "filedAt": "2023-11-14",
+      "tradeDate": "2023-11-10"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "id": "person-cmhz2fbi20akksbqqbok8sgdk",
+  "entityType": "person",
+  "name": "Desjardins Clarissa",
+  "ticker": "INSM",
+  "companyName": "Insmed Inc",
+  "roles": [
+    "Dir"
+  ],
+  "logoLabel": "DE",
+  "logoColor": "#6366F1",
+  "allTradesCount": 1,
+  "activity": {
+    "totalBuys": 201694,
+    "buyTxCount": 1,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2g0wf0woisbqqvjys2scb",
+      "ticker": "INSM",
+      "side": "buy",
+      "amount": 201694,
+      "shares": 3025,
+      "filedAt": "2025-05-22",
+      "tradeDate": "2025-05-20"
+    }
+  ]
+}

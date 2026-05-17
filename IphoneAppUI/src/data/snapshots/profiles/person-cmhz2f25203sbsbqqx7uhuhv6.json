@@ -1,0 +1,46 @@
+{
+  "id": "person-cmhz2f25203sbsbqqx7uhuhv6",
+  "entityType": "person",
+  "name": "Austin Roxanne S",
+  "ticker": "CRWD",
+  "companyName": "Crowdstrike Holdings, Inc.",
+  "roles": [
+    "Dir"
+  ],
+  "logoLabel": "AU",
+  "logoColor": "#6366F1",
+  "allTradesCount": 2,
+  "activity": {
+    "totalBuys": 4901200,
+    "buyTxCount": 2,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2fiqv0erxsbqqudkwkgdl",
+      "ticker": "CRWD",
+      "side": "buy",
+      "amount": 1534500,
+      "shares": 15500,
+      "filedAt": "2023-02-14",
+      "tradeDate": "2023-01-05"
+    },
+    {
+      "id": "cmhz2fh9j0cslsbqq4ss9bh4r",
+      "ticker": "CRWD",
+      "side": "buy",
+      "amount": 3366700,
+      "shares": 35000,
+      "filedAt": "2023-01-06",
+      "tradeDate": "2023-01-05"
+    }
+  ]
+}

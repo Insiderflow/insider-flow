@@ -1,0 +1,37 @@
+{
+  "id": "person-cmhz2fbhw0abdsbqqx4s2fc2s",
+  "entityType": "person",
+  "name": "Buss Brad W",
+  "ticker": "MRVL",
+  "companyName": "Marvell Technology, Inc.",
+  "roles": [
+    "Dir"
+  ],
+  "logoLabel": "BU",
+  "logoColor": "#6366F1",
+  "allTradesCount": 1,
+  "activity": {
+    "totalBuys": 207000,
+    "buyTxCount": 1,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2g03l0vtbsbqqwq2y0jat",
+      "ticker": "MRVL",
+      "side": "buy",
+      "amount": 207000,
+      "shares": 3000,
+      "filedAt": "2025-03-07",
+      "tradeDate": "2025-03-07"
+    }
+  ]
+}

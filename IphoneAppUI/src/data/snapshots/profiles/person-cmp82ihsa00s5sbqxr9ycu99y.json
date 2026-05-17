@@ -1,0 +1,55 @@
+{
+  "id": "person-cmp82ihsa00s5sbqxr9ycu99y",
+  "entityType": "person",
+  "name": "Wacksman Jeremy",
+  "ticker": "ZANDZ",
+  "companyName": "Zillow Group, Inc.",
+  "roles": [
+    "CEO"
+  ],
+  "logoLabel": "WA",
+  "logoColor": "#6366F1",
+  "allTradesCount": 3,
+  "activity": {
+    "totalBuys": 0,
+    "buyTxCount": 0,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmp82m5cb00bi4ey4peazudc8",
+      "ticker": "ZANDZ",
+      "side": "sell",
+      "amount": -229469,
+      "shares": -6051,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82ii6y00s7sbqx5fzkhsjm",
+      "ticker": "ZANDZ",
+      "side": "sell",
+      "amount": -229469,
+      "shares": -6051,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    },
+    {
+      "id": "cmp82x76a00tesbtzs3hzaf1k",
+      "ticker": "ZANDZ",
+      "side": "sell",
+      "amount": -229469,
+      "shares": -6051,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-14"
+    }
+  ]
+}

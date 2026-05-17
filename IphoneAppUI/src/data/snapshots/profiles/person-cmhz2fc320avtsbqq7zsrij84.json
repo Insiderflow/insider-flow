@@ -1,0 +1,37 @@
+{
+  "id": "person-cmhz2fc320avtsbqq7zsrij84",
+  "entityType": "person",
+  "name": "Meintjes Willem A",
+  "ticker": "MRVL",
+  "companyName": "Marvell Technology, Inc.",
+  "roles": [
+    "CFO"
+  ],
+  "logoLabel": "ME",
+  "logoColor": "#6366F1",
+  "allTradesCount": 1,
+  "activity": {
+    "totalBuys": 265302,
+    "buyTxCount": 1,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2g2i80xt4sbqqrpyplxt8",
+      "ticker": "MRVL",
+      "side": "buy",
+      "amount": 265302,
+      "shares": 3400,
+      "filedAt": "2025-09-25",
+      "tradeDate": "2025-09-25"
+    }
+  ]
+}

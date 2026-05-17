@@ -1,0 +1,46 @@
+{
+  "id": "person-cmhz2f9vs099bsbqqysi4nw5i",
+  "entityType": "person",
+  "name": "Hess John B",
+  "ticker": "CVX",
+  "companyName": "Chevron Corp",
+  "roles": [
+    "Dir"
+  ],
+  "logoLabel": "HE",
+  "logoColor": "#6366F1",
+  "allTradesCount": 2,
+  "activity": {
+    "totalBuys": 1997584,
+    "buyTxCount": 1,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmoyfm3sy00743ffv3dowyfqr",
+      "ticker": "CVX",
+      "side": "sell",
+      "amount": -36031524,
+      "shares": -195000,
+      "filedAt": "2026-05-08",
+      "tradeDate": "2026-05-06"
+    },
+    {
+      "id": "cmhz2fw9v0s0bsbqq2rve4vou",
+      "ticker": "GS",
+      "side": "buy",
+      "amount": 1997584,
+      "shares": 3904,
+      "filedAt": "2025-04-17",
+      "tradeDate": "2025-04-15"
+    }
+  ]
+}

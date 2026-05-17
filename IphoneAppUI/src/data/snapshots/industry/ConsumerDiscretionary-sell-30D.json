@@ -1,0 +1,143 @@
+{
+  "sector": "ConsumerDiscretionary",
+  "side": "sell",
+  "sectors": [
+    {
+      "nameKey": "RealEstate",
+      "name": "RealEstate",
+      "buyAmount": 7254050,
+      "sellAmount": -311745
+    },
+    {
+      "nameKey": "Utilities",
+      "name": "Utilities",
+      "buyAmount": 0,
+      "sellAmount": -1438173
+    },
+    {
+      "nameKey": "Materials",
+      "name": "Materials",
+      "buyAmount": 508866,
+      "sellAmount": -6932323
+    },
+    {
+      "nameKey": "Energy",
+      "name": "Energy",
+      "buyAmount": 66480,
+      "sellAmount": -8951519
+    },
+    {
+      "nameKey": "ConsumerDiscretionary",
+      "name": "ConsumerDiscretionary",
+      "buyAmount": 3816962,
+      "sellAmount": -21772105
+    },
+    {
+      "nameKey": "Financials",
+      "name": "Financials",
+      "buyAmount": 634270,
+      "sellAmount": -39521296
+    },
+    {
+      "nameKey": "ConsumerStaples",
+      "name": "ConsumerStaples",
+      "buyAmount": 0,
+      "sellAmount": -42714926
+    },
+    {
+      "nameKey": "CommunicationServices",
+      "name": "CommunicationServices",
+      "buyAmount": 0,
+      "sellAmount": -66498248
+    },
+    {
+      "nameKey": "Industrials",
+      "name": "Industrials",
+      "buyAmount": 1238471,
+      "sellAmount": -71659784
+    },
+    {
+      "nameKey": "Healthcare",
+      "name": "Healthcare",
+      "buyAmount": 0,
+      "sellAmount": -270588321
+    },
+    {
+      "nameKey": "InformationTechnology",
+      "name": "InformationTechnology",
+      "buyAmount": 0,
+      "sellAmount": -604435814
+    },
+    {
+      "nameKey": "Other",
+      "name": "Other",
+      "buyAmount": 330184823,
+      "sellAmount": -5554718548
+    }
+  ],
+  "companies": [
+    {
+      "ticker": "QS",
+      "companyName": "Quantumscape Corp",
+      "amount": -425738,
+      "tradeCount": 2,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "TNL",
+      "companyName": "Travel & Leisure Co.",
+      "amount": -478725,
+      "tradeCount": 3,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "TXRH",
+      "companyName": "Texas Roadhouse, Inc.",
+      "amount": -535020,
+      "tradeCount": 3,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "GNTX",
+      "companyName": "Gentex Corp",
+      "amount": -818700,
+      "tradeCount": 6,
+      "insiderCount": 2
+    },
+    {
+      "ticker": "YUM",
+      "companyName": "Yum Brands Inc",
+      "amount": -837672,
+      "tradeCount": 3,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "MAR",
+      "companyName": "Marriott International Inc /Md/",
+      "amount": -1674620,
+      "tradeCount": 1,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "TSLA",
+      "companyName": "Tesla, Inc.",
+      "amount": -4050000,
+      "tradeCount": 3,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "BWA",
+      "companyName": "Borgwarner Inc",
+      "amount": -5569358,
+      "tradeCount": 7,
+      "insiderCount": 3
+    },
+    {
+      "ticker": "TPR",
+      "companyName": "Tapestry, Inc.",
+      "amount": -7382272,
+      "tradeCount": 2,
+      "insiderCount": 1
+    }
+  ]
+}

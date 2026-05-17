@@ -1,0 +1,37 @@
+{
+  "id": "person-cmhz2fcm60b0gsbqqxg1wvcdn",
+  "entityType": "person",
+  "name": "Cascade Investment, L.L.C.",
+  "ticker": "RSG",
+  "companyName": "Republic Services, Inc.",
+  "roles": [
+    "10%"
+  ],
+  "logoLabel": "CA",
+  "logoColor": "#6366F1",
+  "allTradesCount": 1,
+  "activity": {
+    "totalBuys": 1000245,
+    "buyTxCount": 1,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2g2ir0y9asbqqe2eploi9",
+      "ticker": "RSG",
+      "side": "buy",
+      "amount": 1000245,
+      "shares": 4258,
+      "filedAt": "2025-08-21",
+      "tradeDate": "2025-08-19"
+    }
+  ]
+}

@@ -1,0 +1,228 @@
+{
+  "id": "S001211",
+  "entityType": "person",
+  "name": "Greg Stanton",
+  "ticker": "TCNNF",
+  "companyName": "TRULIEVE CANNABIS CORP",
+  "roles": [
+    "Other"
+  ],
+  "seatSector": "Other",
+  "imageUrl": "/images/politicians/S001211_Greg_Stanton.jpg",
+  "logoLabel": "GR",
+  "logoColor": "#3B82F6",
+  "allTradesCount": 189,
+  "activity": {
+    "totalBuys": 0,
+    "buyTxCount": 0,
+    "totalSells": 50,
+    "sellTxCount": 50,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "trade_S001211_2335407_1778252068013_vh2zkn",
+      "ticker": "TCNNF",
+      "side": "sell",
+      "amount": 50000,
+      "shares": 0,
+      "filedAt": "2026-05-08",
+      "tradeDate": "2026-05-06"
+    },
+    {
+      "id": "20003768382",
+      "ticker": "JPM",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2023-11-08",
+      "tradeDate": "2023-10-23"
+    },
+    {
+      "id": "20003768337",
+      "ticker": "CB",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2023-11-08",
+      "tradeDate": "2023-10-23"
+    },
+    {
+      "id": "20003768364",
+      "ticker": "GS",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2023-11-08",
+      "tradeDate": "2023-10-23"
+    },
+    {
+      "id": "20003768374",
+      "ticker": "INTU",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2023-11-08",
+      "tradeDate": "2023-10-23"
+    },
+    {
+      "id": "20003768379",
+      "ticker": "JNJ",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2023-11-08",
+      "tradeDate": "2023-10-23"
+    },
+    {
+      "id": "20003768341",
+      "ticker": "C",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2023-11-08",
+      "tradeDate": "2023-10-23"
+    },
+    {
+      "id": "20003768348",
+      "ticker": "COP",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2023-11-08",
+      "tradeDate": "2023-10-23"
+    },
+    {
+      "id": "20003768356",
+      "ticker": "ELV",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2023-11-08",
+      "tradeDate": "2023-10-23"
+    },
+    {
+      "id": "20003768362",
+      "ticker": "GILD",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2023-11-08",
+      "tradeDate": "2023-10-23"
+    },
+    {
+      "id": "20003768370",
+      "ticker": "INTC",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2023-11-08",
+      "tradeDate": "2023-10-23"
+    },
+    {
+      "id": "20003768371",
+      "ticker": "IBM",
+      "side": "sell",
+      "amount": 15000,
+      "shares": 0,
+      "filedAt": "2023-11-08",
+      "tradeDate": "2023-10-23"
+    }
+  ],
+  "party": "D",
+  "state": "Arizona",
+  "chamber": "",
+  "politicianCharts": {
+    "stats": {
+      "totalTrades": 189,
+      "issuerCount": 8,
+      "totalVolume": 1634500,
+      "maxTrade": 50000,
+      "lastTraded": "2026-05-08"
+    },
+    "topIssuers": [
+      {
+        "issuerId": "429622",
+        "count": 4,
+        "name": "Alphabet Inc",
+        "ticker": "GOOGL",
+        "sector": "通訊服務"
+      },
+      {
+        "issuerId": "2331870",
+        "count": 2,
+        "name": "Axon Enterprise Inc",
+        "ticker": "AXON",
+        "sector": "工業"
+      },
+      {
+        "issuerId": "429469",
+        "count": 2,
+        "name": "Accenture P",
+        "ticker": "LCACN",
+        "sector": "資訊科技"
+      },
+      {
+        "issuerId": "1282836",
+        "count": 2,
+        "name": "Wells Fargo & Co",
+        "ticker": "WFC",
+        "sector": "金融"
+      },
+      {
+        "issuerId": "429442",
+        "count": 2,
+        "name": "Abbott Laboratories",
+        "ticker": "ABT",
+        "sector": "醫療保健"
+      },
+      {
+        "issuerId": "429443",
+        "count": 2,
+        "name": "AbbVie Inc",
+        "ticker": "ABBV",
+        "sector": "醫療保健"
+      },
+      {
+        "issuerId": "2264488",
+        "count": 2,
+        "name": "Berkshire Hathaway IncBRK/",
+        "ticker": "B",
+        "sector": "金融"
+      },
+      {
+        "issuerId": "429495",
+        "count": 2,
+        "name": "Adobe Inc",
+        "ticker": "ADBE",
+        "sector": "資訊科技"
+      }
+    ],
+    "chartPoints": [
+      {
+        "period": "2023-Q3",
+        "buyVolume": 801000,
+        "sellVolume": 0,
+        "sp500Close": 4288.0498046875
+      },
+      {
+        "period": "2023-Q4",
+        "buyVolume": 0,
+        "sellVolume": 801000,
+        "sp500Close": 4769.830078125
+      },
+      {
+        "period": "2026-Q2",
+        "buyVolume": 0,
+        "sellVolume": 32500,
+        "sp500Close": 7408.5
+      }
+    ]
+  }
+}

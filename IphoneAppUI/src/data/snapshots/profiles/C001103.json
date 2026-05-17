@@ -1,0 +1,246 @@
+{
+  "id": "C001103",
+  "entityType": "person",
+  "name": "Buddy Carter",
+  "ticker": "",
+  "companyName": "US TREASURY BILLS",
+  "roles": [
+    "Other"
+  ],
+  "seatSector": "Other",
+  "imageUrl": "/images/politicians/C001103_Buddy_Carter.jpg",
+  "logoLabel": "BU",
+  "logoColor": "#EF4444",
+  "allTradesCount": 14,
+  "activity": {
+    "totalBuys": 11000000,
+    "buyTxCount": 3,
+    "totalSells": 11,
+    "sellTxCount": 11,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "trade_C001103_435544_1778600628245_4hu9v6",
+      "ticker": "",
+      "side": "sell",
+      "amount": 5000000,
+      "shares": 0,
+      "filedAt": "2026-05-11",
+      "tradeDate": "2026-05-07"
+    },
+    {
+      "id": "20003787748",
+      "ticker": "",
+      "side": "buy",
+      "amount": 5000000,
+      "shares": 0,
+      "filedAt": "2025-07-08",
+      "tradeDate": "2025-06-16"
+    },
+    {
+      "id": "20003787747",
+      "ticker": "",
+      "side": "sell",
+      "amount": 5000000,
+      "shares": 0,
+      "filedAt": "2025-07-08",
+      "tradeDate": "2025-06-16"
+    },
+    {
+      "id": "20003784498",
+      "ticker": "",
+      "side": "buy",
+      "amount": 5000000,
+      "shares": 0,
+      "filedAt": "2025-04-23",
+      "tradeDate": "2025-04-14"
+    },
+    {
+      "id": "20003782347",
+      "ticker": "",
+      "side": "buy",
+      "amount": 1000000,
+      "shares": 0,
+      "filedAt": "2025-03-06",
+      "tradeDate": "2025-02-27"
+    },
+    {
+      "id": "20003775086",
+      "ticker": "ABCB",
+      "side": "sell",
+      "amount": 250000,
+      "shares": 0,
+      "filedAt": "2024-07-24",
+      "tradeDate": "2024-07-22"
+    },
+    {
+      "id": "20003775087",
+      "ticker": "ABCB",
+      "side": "sell",
+      "amount": 250000,
+      "shares": 0,
+      "filedAt": "2024-07-24",
+      "tradeDate": "2024-07-18"
+    },
+    {
+      "id": "20003775084",
+      "ticker": "ABCB",
+      "side": "sell",
+      "amount": 250000,
+      "shares": 0,
+      "filedAt": "2024-07-24",
+      "tradeDate": "2024-07-17"
+    },
+    {
+      "id": "20003774408",
+      "ticker": "None",
+      "side": "sell",
+      "amount": 50000,
+      "shares": 0,
+      "filedAt": "2024-06-30",
+      "tradeDate": "2023-08-31"
+    },
+    {
+      "id": "20003774087",
+      "ticker": "None",
+      "side": "sell",
+      "amount": 250000,
+      "shares": 0,
+      "filedAt": "2024-06-12",
+      "tradeDate": "2023-04-30"
+    },
+    {
+      "id": "20003762530",
+      "ticker": "EHSTX",
+      "side": "sell",
+      "amount": 250000,
+      "shares": 0,
+      "filedAt": "2023-05-09",
+      "tradeDate": "2023-04-30"
+    },
+    {
+      "id": "20003762532",
+      "ticker": "None",
+      "side": "sell",
+      "amount": 250000,
+      "shares": 0,
+      "filedAt": "2023-05-09",
+      "tradeDate": "2023-04-30"
+    }
+  ],
+  "party": "R",
+  "state": "Georgia",
+  "chamber": "",
+  "politicianCharts": {
+    "stats": {
+      "totalTrades": 14,
+      "issuerCount": 8,
+      "totalVolume": 14182500,
+      "maxTrade": 5000000,
+      "lastTraded": "2026-05-11"
+    },
+    "topIssuers": [
+      {
+        "issuerId": "435544",
+        "count": 5,
+        "name": "US TREASURY BILLS",
+        "ticker": null,
+        "sector": "N/A"
+      },
+      {
+        "issuerId": "429719",
+        "count": 3,
+        "name": "Ameris Bancorp",
+        "ticker": "ABCB",
+        "sector": "金融"
+      },
+      {
+        "issuerId": "2333657",
+        "count": 1,
+        "name": "NEUBERGER BERMAN INTERNATIONAL ADR PORTFOLIO",
+        "ticker": "UBER",
+        "sector": "N/A"
+      },
+      {
+        "issuerId": "2333662",
+        "count": 1,
+        "name": "STERLING CAPITAL MID VALUE FUND",
+        "ticker": "OVEAX",
+        "sector": "N/A"
+      },
+      {
+        "issuerId": "2333654",
+        "count": 1,
+        "name": "EATON VANCE LARGE CAP VALUE FUND",
+        "ticker": "EHSTX",
+        "sector": "N/A"
+      },
+      {
+        "issuerId": "2334761",
+        "count": 1,
+        "name": "HOUSING AUTHORITY OF CITY OF ATLANTA GEORGIA",
+        "ticker": "None",
+        "sector": "N/A"
+      },
+      {
+        "issuerId": "2333663",
+        "count": 1,
+        "name": "WINSLOW LARGE CAP GROWTH PORTFOLIO",
+        "ticker": "None",
+        "sector": "N/A"
+      },
+      {
+        "issuerId": "2333656",
+        "count": 1,
+        "name": "KAYNE ANDERSON SMALL CAP QUALITY VALUE PORTFOLIO",
+        "ticker": "None",
+        "sector": "N/A"
+      }
+    ],
+    "chartPoints": [
+      {
+        "period": "2023-Q2",
+        "buyVolume": 0,
+        "sellVolume": 875000,
+        "sp500Close": 4450.3798828125
+      },
+      {
+        "period": "2023-Q3",
+        "buyVolume": 0,
+        "sellVolume": 32500,
+        "sp500Close": 4288.0498046875
+      },
+      {
+        "period": "2024-Q3",
+        "buyVolume": 0,
+        "sellVolume": 525000,
+        "sp500Close": 5762.47998046875
+      },
+      {
+        "period": "2025-Q1",
+        "buyVolume": 750000,
+        "sellVolume": 0,
+        "sp500Close": 5611.85009765625
+      },
+      {
+        "period": "2025-Q2",
+        "buyVolume": 6000000,
+        "sellVolume": 3000000,
+        "sp500Close": 6204.9501953125
+      },
+      {
+        "period": "2026-Q2",
+        "buyVolume": 0,
+        "sellVolume": 3000000,
+        "sp500Close": 7408.5
+      }
+    ]
+  }
+}

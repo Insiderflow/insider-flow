@@ -5,9 +5,19 @@ import { prisma } from '@/lib/prisma';
 
 export async function POST(req: NextRequest) {
   try {
-    const sessionUser = await getSessionUser();
+    const sessionUser = await getSessionUser(req);
     if (!sessionUser) {
       return NextResponse.json({ error: '請先登入' }, { status: 401 });
+    }
+
+    let returnUrl = `${req.nextUrl.origin}/account`;
+    try {
+      const body = await req.json();
+      if (typeof body?.return_url === 'string' && body.return_url.startsWith('http')) {
+        returnUrl = body.return_url;
+      }
+    } catch {
+      /* empty body */
     }
 
     // Get full user data from database including stripe_customer_id
@@ -80,7 +90,7 @@ export async function POST(req: NextRequest) {
     // The portal will automatically show subscription management if customer has active subscription
     const portalSession = await stripe.billingPortal.sessions.create({
       customer: user.stripe_customer_id,
-      return_url: `${req.nextUrl.origin}/account`,
+      return_url: returnUrl,
     });
     
     console.log(`Portal session created for user ${user.id}, has active subscription: ${hasActiveSubscription}`);

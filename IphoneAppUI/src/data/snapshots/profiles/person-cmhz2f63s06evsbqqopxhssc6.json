@@ -1,0 +1,37 @@
+{
+  "id": "person-cmhz2f63s06evsbqqopxhssc6",
+  "entityType": "person",
+  "name": "Minogue Michael R",
+  "ticker": "PODD",
+  "companyName": "Insulet Corp",
+  "roles": [
+    "Dir"
+  ],
+  "logoLabel": "MI",
+  "logoColor": "#6366F1",
+  "allTradesCount": 1,
+  "activity": {
+    "totalBuys": 1005675,
+    "buyTxCount": 1,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2fmc70ikbsbqqucuzv2e2",
+      "ticker": "PODD",
+      "side": "buy",
+      "amount": 1005675,
+      "shares": 3300,
+      "filedAt": "2023-05-24",
+      "tradeDate": "2023-05-23"
+    }
+  ]
+}

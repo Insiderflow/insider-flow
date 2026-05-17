@@ -1,0 +1,64 @@
+{
+  "id": "person-cmhz2f4ax05easbqqtsmr4cb8",
+  "entityType": "person",
+  "name": "Weymouth Katharine",
+  "ticker": "CABO",
+  "companyName": "Cable One, Inc.",
+  "roles": [
+    "Dir"
+  ],
+  "logoLabel": "WE",
+  "logoColor": "#6366F1",
+  "allTradesCount": 4,
+  "activity": {
+    "totalBuys": 147792,
+    "buyTxCount": 4,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2fza00v34sbqql2ozyx48",
+      "ticker": "CABO",
+      "side": "buy",
+      "amount": 19632,
+      "shares": 150,
+      "filedAt": "2025-06-16",
+      "tradeDate": "2025-06-16"
+    },
+    {
+      "id": "cmhz2frzx0o77sbqqfnjvz7l4",
+      "ticker": "RSG",
+      "side": "buy",
+      "amount": 100040,
+      "shares": 540,
+      "filedAt": "2024-06-06",
+      "tradeDate": "2024-06-04"
+    },
+    {
+      "id": "cmhz2frz70nktsbqq59mvdbsq",
+      "ticker": "XMTR",
+      "side": "buy",
+      "amount": 8428,
+      "shares": 500,
+      "filedAt": "2024-03-05",
+      "tradeDate": "2024-03-04"
+    },
+    {
+      "id": "cmhz2fk4v0gbzsbqqhqmlcc9d",
+      "ticker": "XMTR",
+      "side": "buy",
+      "amount": 19692,
+      "shares": 1200,
+      "filedAt": "2023-08-15",
+      "tradeDate": "2023-08-11"
+    }
+  ]
+}

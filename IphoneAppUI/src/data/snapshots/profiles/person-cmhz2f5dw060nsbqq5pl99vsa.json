@@ -1,0 +1,37 @@
+{
+  "id": "person-cmhz2f5dw060nsbqq5pl99vsa",
+  "entityType": "person",
+  "name": "Sharoky Melvin Md",
+  "ticker": "INSM",
+  "companyName": "Insmed Inc",
+  "roles": [
+    "Dir"
+  ],
+  "logoLabel": "SH",
+  "logoColor": "#6366F1",
+  "allTradesCount": 1,
+  "activity": {
+    "totalBuys": 385800,
+    "buyTxCount": 1,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2flj90hoxsbqqxiiav5tt",
+      "ticker": "INSM",
+      "side": "buy",
+      "amount": 385800,
+      "shares": 20000,
+      "filedAt": "2023-05-17",
+      "tradeDate": "2023-05-15"
+    }
+  ]
+}

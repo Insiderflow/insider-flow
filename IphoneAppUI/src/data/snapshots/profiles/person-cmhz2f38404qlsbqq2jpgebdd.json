@@ -1,0 +1,37 @@
+{
+  "id": "person-cmhz2f38404qlsbqq2jpgebdd",
+  "entityType": "person",
+  "name": "Kirk Jennifer M",
+  "ticker": "RSG",
+  "companyName": "Republic Services, Inc.",
+  "roles": [
+    "Dir"
+  ],
+  "logoLabel": "KI",
+  "logoColor": "#6366F1",
+  "allTradesCount": 1,
+  "activity": {
+    "totalBuys": 129600,
+    "buyTxCount": 1,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 0,
+    "avgSell": 0
+  },
+  "eventStudies": [],
+  "recentTrades": [
+    {
+      "id": "cmhz2fiqy0euzsbqq15ic6pa6",
+      "ticker": "RSG",
+      "side": "buy",
+      "amount": 129600,
+      "shares": 1000,
+      "filedAt": "2023-02-23",
+      "tradeDate": "2023-02-21"
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "id": "company-podd",
+  "entityType": "company",
+  "name": "Insulet Corp",
+  "ticker": "PODD",
+  "companyName": "Insulet Corp",
+  "roles": [
+    "Issuer"
+  ],
+  "logoLabel": "PO",
+  "logoColor": "#166534",
+  "displayName": "INSULET CORP / US",
+  "exchange": "NYSE",
+  "industry": "—",
+  "description": "Insulet Corp",
+  "dataAsOf": "2024-08-29",
+  "allTradesCount": 4,
+  "activity": {
+    "totalBuys": 2033270,
+    "buyTxCount": 4,
+    "totalSells": 0,
+    "sellTxCount": 0,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 215.26999999999998,
+    "avgSell": 0,
+    "plan10b5Pct": 0,
+    "ppSalePct": 0,
+    "buyRangeMin": 168.92,
+    "buyRangeMax": 304.75,
+    "sellRangeMin": null,
+    "sellRangeMax": null
+  },
+  "companyTrades": [
+    {
+      "id": "cmhz2fvj60r21sbqqcmf8qg99",
+      "ticker": "PODD",
+      "insiderName": "Chadwick Ana Maria",
+      "personId": "person-cmhz2f38204nvsbqq6mlgncmu",
+      "side": "buy",
+      "amount": 20600,
+      "shares": 100,
+      "filedAt": "2024-08-29",
+      "tradeDate": "2024-08-29"
+    },
+    {
+      "id": "cmhz2fha80ddrsbqqmic9pvyn",
+      "ticker": "PODD",
+      "insiderName": "Singh Prem",
+      "personId": "person-cmhz2f2of042msbqqm35d1rk8",
+      "side": "buy",
+      "amount": 169,
+      "shares": 1,
+      "filedAt": "2023-09-21",
+      "tradeDate": "2023-09-19"
+    },
+    {
+      "id": "cmhz2fk4n0g57sbqqn966ecmc",
+      "ticker": "PODD",
+      "insiderName": "Hollingshead James",
+      "personId": "person-cmhz2f4aw05bwsbqqxof2sqc3",
+      "side": "buy",
+      "amount": 1006826,
+      "shares": 5550,
+      "filedAt": "2023-08-29",
+      "tradeDate": "2023-08-28"
+    },
+    {
+      "id": "cmhz2fmc70ikbsbqqucuzv2e2",
+      "ticker": "PODD",
+      "insiderName": "Minogue Michael R",
+      "personId": "person-cmhz2f63s06evsbqqopxhssc6",
+      "side": "buy",
+      "amount": 1005675,
+      "shares": 3300,
+      "filedAt": "2023-05-24",
+      "tradeDate": "2023-05-23"
+    }
+  ],
+  "insiders": [
+    {
+      "id": "person-cmhz2f38204nvsbqq6mlgncmu",
+      "name": "Chadwick Ana Maria",
+      "role": "Dir",
+      "tradesCount": 1
+    },
+    {
+      "id": "person-cmhz2f2of042msbqqm35d1rk8",
+      "name": "Singh Prem",
+      "role": "SVP, Global Operations",
+      "tradesCount": 1
+    },
+    {
+      "id": "person-cmhz2f4aw05bwsbqqxof2sqc3",
+      "name": "Hollingshead James",
+      "role": "Pres, CEO",
+      "tradesCount": 1
+    },
+    {
+      "id": "person-cmhz2f63s06evsbqqopxhssc6",
+      "name": "Minogue Michael R",
+      "role": "Dir",
+      "tradesCount": 1
+    }
+  ],
+  "tradeTypes": {
+    "buy": 100,
+    "sell": 0,
+    "option": 0,
+    "proposed": 0
+  },
+  "aiSummary": {
+    "headline": "4 buys and 0 sells for PODD.",
+    "bullets": [
+      "4 Form 4 filings on record."
+    ],
+    "sentiment": "bullish"
+  },
+  "eventStudies": [],
+  "recentTrades": []
+}

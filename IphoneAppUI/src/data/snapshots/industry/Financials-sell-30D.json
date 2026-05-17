@@ -1,0 +1,192 @@
+{
+  "sector": "Financials",
+  "side": "sell",
+  "sectors": [
+    {
+      "nameKey": "RealEstate",
+      "name": "RealEstate",
+      "buyAmount": 7254050,
+      "sellAmount": -311745
+    },
+    {
+      "nameKey": "Utilities",
+      "name": "Utilities",
+      "buyAmount": 0,
+      "sellAmount": -1438173
+    },
+    {
+      "nameKey": "Materials",
+      "name": "Materials",
+      "buyAmount": 508866,
+      "sellAmount": -6932323
+    },
+    {
+      "nameKey": "Energy",
+      "name": "Energy",
+      "buyAmount": 66480,
+      "sellAmount": -8951519
+    },
+    {
+      "nameKey": "ConsumerDiscretionary",
+      "name": "ConsumerDiscretionary",
+      "buyAmount": 3816962,
+      "sellAmount": -21772105
+    },
+    {
+      "nameKey": "Financials",
+      "name": "Financials",
+      "buyAmount": 634270,
+      "sellAmount": -39521296
+    },
+    {
+      "nameKey": "ConsumerStaples",
+      "name": "ConsumerStaples",
+      "buyAmount": 0,
+      "sellAmount": -42714926
+    },
+    {
+      "nameKey": "CommunicationServices",
+      "name": "CommunicationServices",
+      "buyAmount": 0,
+      "sellAmount": -66498248
+    },
+    {
+      "nameKey": "Industrials",
+      "name": "Industrials",
+      "buyAmount": 1238471,
+      "sellAmount": -71659784
+    },
+    {
+      "nameKey": "Healthcare",
+      "name": "Healthcare",
+      "buyAmount": 0,
+      "sellAmount": -270588321
+    },
+    {
+      "nameKey": "InformationTechnology",
+      "name": "InformationTechnology",
+      "buyAmount": 0,
+      "sellAmount": -604435814
+    },
+    {
+      "nameKey": "Other",
+      "name": "Other",
+      "buyAmount": 330184823,
+      "sellAmount": -5554718548
+    }
+  ],
+  "companies": [
+    {
+      "ticker": "AGNC",
+      "companyName": "Agnc Investment Corp.",
+      "amount": -107920,
+      "tradeCount": 1,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "AFRM",
+      "companyName": "Affirm Holdings, Inc.",
+      "amount": -130000,
+      "tradeCount": 1,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "FMAO",
+      "companyName": "Farmers & Merchants Bancorp Inc",
+      "amount": -161910,
+      "tradeCount": 1,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "STT",
+      "companyName": "State Street Corp",
+      "amount": -226305,
+      "tradeCount": 3,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "TROW",
+      "companyName": "Price T Rowe Group Inc",
+      "amount": -307680,
+      "tradeCount": 1,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "CFG",
+      "companyName": "Citizens Financial Group Inc/Ri",
+      "amount": -376068,
+      "tradeCount": 1,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "SCHW",
+      "companyName": "Schwab Charles Corp",
+      "amount": -455820,
+      "tradeCount": 2,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "ORI",
+      "companyName": "Old Republic International Corp",
+      "amount": -516671,
+      "tradeCount": 1,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "AFL",
+      "companyName": "Aflac Inc",
+      "amount": -804195,
+      "tradeCount": 3,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "BWIN",
+      "companyName": "Baldwin Insurance Group, Inc.",
+      "amount": -900450,
+      "tradeCount": 3,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "AIZ",
+      "companyName": "Assurant, Inc.",
+      "amount": -1510620,
+      "tradeCount": 3,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "COF",
+      "companyName": "Capital One Financial Corp",
+      "amount": -1811760,
+      "tradeCount": 4,
+      "insiderCount": 2
+    },
+    {
+      "ticker": "THG",
+      "companyName": "Hanover Insurance Group, Inc.",
+      "amount": -2401419,
+      "tradeCount": 3,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "APO",
+      "companyName": "Apollo Global Management, Inc.",
+      "amount": -2827542,
+      "tradeCount": 3,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "MORN",
+      "companyName": "Morningstar, Inc.",
+      "amount": -7336839,
+      "tradeCount": 3,
+      "insiderCount": 1
+    },
+    {
+      "ticker": "JPM",
+      "companyName": "Jpmorgan Chase & Co",
+      "amount": -19646097,
+      "tradeCount": 12,
+      "insiderCount": 4
+    }
+  ]
+}

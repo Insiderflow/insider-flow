@@ -1,0 +1,367 @@
+{
+  "generatedAt": "2026-05-17T06:06:29.864Z",
+  "apiBase": "http://localhost:3000",
+  "dashboards": [
+    "politician-1D",
+    "politician-7D",
+    "politician-30D",
+    "insider-1D",
+    "insider-7D",
+    "insider-30D"
+  ],
+  "industryManifest": [
+    {
+      "sector": "Financials",
+      "side": "buy",
+      "period": "7D",
+      "file": "industry/Financials-buy-7D.json"
+    },
+    {
+      "sector": "Financials",
+      "side": "buy",
+      "period": "30D",
+      "file": "industry/Financials-buy-30D.json"
+    },
+    {
+      "sector": "Financials",
+      "side": "sell",
+      "period": "7D",
+      "file": "industry/Financials-sell-7D.json"
+    },
+    {
+      "sector": "Financials",
+      "side": "sell",
+      "period": "30D",
+      "file": "industry/Financials-sell-30D.json"
+    },
+    {
+      "sector": "InformationTechnology",
+      "side": "buy",
+      "period": "7D",
+      "file": "industry/InformationTechnology-buy-7D.json"
+    },
+    {
+      "sector": "InformationTechnology",
+      "side": "buy",
+      "period": "30D",
+      "file": "industry/InformationTechnology-buy-30D.json"
+    },
+    {
+      "sector": "InformationTechnology",
+      "side": "sell",
+      "period": "7D",
+      "file": "industry/InformationTechnology-sell-7D.json"
+    },
+    {
+      "sector": "InformationTechnology",
+      "side": "sell",
+      "period": "30D",
+      "file": "industry/InformationTechnology-sell-30D.json"
+    },
+    {
+      "sector": "Healthcare",
+      "side": "buy",
+      "period": "7D",
+      "file": "industry/Healthcare-buy-7D.json"
+    },
+    {
+      "sector": "Healthcare",
+      "side": "buy",
+      "period": "30D",
+      "file": "industry/Healthcare-buy-30D.json"
+    },
+    {
+      "sector": "Healthcare",
+      "side": "sell",
+      "period": "7D",
+      "file": "industry/Healthcare-sell-7D.json"
+    },
+    {
+      "sector": "Healthcare",
+      "side": "sell",
+      "period": "30D",
+      "file": "industry/Healthcare-sell-30D.json"
+    },
+    {
+      "sector": "ConsumerDiscretionary",
+      "side": "buy",
+      "period": "7D",
+      "file": "industry/ConsumerDiscretionary-buy-7D.json"
+    },
+    {
+      "sector": "ConsumerDiscretionary",
+      "side": "buy",
+      "period": "30D",
+      "file": "industry/ConsumerDiscretionary-buy-30D.json"
+    },
+    {
+      "sector": "ConsumerDiscretionary",
+      "side": "sell",
+      "period": "7D",
+      "file": "industry/ConsumerDiscretionary-sell-7D.json"
+    },
+    {
+      "sector": "ConsumerDiscretionary",
+      "side": "sell",
+      "period": "30D",
+      "file": "industry/ConsumerDiscretionary-sell-30D.json"
+    },
+    {
+      "sector": "Industrials",
+      "side": "buy",
+      "period": "7D",
+      "file": "industry/Industrials-buy-7D.json"
+    },
+    {
+      "sector": "Industrials",
+      "side": "buy",
+      "period": "30D",
+      "file": "industry/Industrials-buy-30D.json"
+    },
+    {
+      "sector": "Industrials",
+      "side": "sell",
+      "period": "7D",
+      "file": "industry/Industrials-sell-7D.json"
+    },
+    {
+      "sector": "Industrials",
+      "side": "sell",
+      "period": "30D",
+      "file": "industry/Industrials-sell-30D.json"
+    },
+    {
+      "sector": "Materials",
+      "side": "buy",
+      "period": "7D",
+      "file": "industry/Materials-buy-7D.json"
+    },
+    {
+      "sector": "Materials",
+      "side": "buy",
+      "period": "30D",
+      "file": "industry/Materials-buy-30D.json"
+    },
+    {
+      "sector": "Materials",
+      "side": "sell",
+      "period": "7D",
+      "file": "industry/Materials-sell-7D.json"
+    },
+    {
+      "sector": "Materials",
+      "side": "sell",
+      "period": "30D",
+      "file": "industry/Materials-sell-30D.json"
+    },
+    {
+      "sector": "RealEstate",
+      "side": "buy",
+      "period": "7D",
+      "file": "industry/RealEstate-buy-7D.json"
+    },
+    {
+      "sector": "RealEstate",
+      "side": "buy",
+      "period": "30D",
+      "file": "industry/RealEstate-buy-30D.json"
+    },
+    {
+      "sector": "RealEstate",
+      "side": "sell",
+      "period": "7D",
+      "file": "industry/RealEstate-sell-7D.json"
+    },
+    {
+      "sector": "RealEstate",
+      "side": "sell",
+      "period": "30D",
+      "file": "industry/RealEstate-sell-30D.json"
+    },
+    {
+      "sector": "Energy",
+      "side": "buy",
+      "period": "7D",
+      "file": "industry/Energy-buy-7D.json"
+    },
+    {
+      "sector": "Energy",
+      "side": "buy",
+      "period": "30D",
+      "file": "industry/Energy-buy-30D.json"
+    },
+    {
+      "sector": "Energy",
+      "side": "sell",
+      "period": "7D",
+      "file": "industry/Energy-sell-7D.json"
+    },
+    {
+      "sector": "Energy",
+      "side": "sell",
+      "period": "30D",
+      "file": "industry/Energy-sell-30D.json"
+    },
+    {
+      "sector": "ConsumerStaples",
+      "side": "buy",
+      "period": "7D",
+      "file": "industry/ConsumerStaples-buy-7D.json"
+    },
+    {
+      "sector": "ConsumerStaples",
+      "side": "buy",
+      "period": "30D",
+      "file": "industry/ConsumerStaples-buy-30D.json"
+    },
+    {
+      "sector": "ConsumerStaples",
+      "side": "sell",
+      "period": "7D",
+      "file": "industry/ConsumerStaples-sell-7D.json"
+    },
+    {
+      "sector": "ConsumerStaples",
+      "side": "sell",
+      "period": "30D",
+      "file": "industry/ConsumerStaples-sell-30D.json"
+    }
+  ],
+  "profileManifest": {
+    "persons": [
+      "K000389",
+      "F000479",
+      "F000483",
+      "D000032",
+      "M001239",
+      "person-cmp82dxy400cbsbqxdpxnduy9",
+      "person-cmp82dzz300cjsbqx8ay4cwx2",
+      "person-cmp82cikn0072sbqxzfi0wjxa",
+      "person-cmhz2f38304pesbqqq78nrj5v",
+      "person-cmhz2f6nc073esbqq0amv2ieu",
+      "person-cmox88ptv009k3ff0e4vgic65",
+      "person-cmhz2f6nd073ssbqqcnhxmh2b",
+      "person-cmhz2faf409gwsbqqxtfguj5x",
+      "person-cmp82eed300e1sbqxzg45nmnt",
+      "person-cmp82efcc00e5sbqxt5h4pfu3",
+      "person-cmhz2fcm60b0gsbqqxg1wvcdn",
+      "person-cmhz2f4ax05easbqqtsmr4cb8",
+      "person-cmhz2f9ca08rasbqqmyi4ryab",
+      "person-cmhz2f38404qlsbqq2jpgebdd",
+      "person-cmhz2f38504svsbqq5cldn376",
+      "person-cmp82dqnv00bjsbqxmg20qdps",
+      "person-cmp82drpe00bnsbqxylslay9a",
+      "person-cmp82dsx400brsbqxjts4qgr3",
+      "person-cmp82dpon00bfsbqxskyqzgha",
+      "person-cmhz2f25103qbsbqqkkbaooir",
+      "person-cmhz2f63w06kxsbqq3moo8rgj",
+      "person-cmhz2f8ss08aysbqqxbfhv7ho",
+      "person-cmhz2fc320avtsbqq7zsrij84",
+      "person-cmhz2fc310auisbqqhkaig3o0",
+      "person-cmhz2fc320aw1sbqqu3poubog",
+      "person-cmhz2fbhw0abdsbqqx4s2fc2s",
+      "person-cmhz2f89h0873sbqqn4ux3v8c",
+      "person-cmhz2faf809n4sbqq3wvipiyf",
+      "person-cmhz2f9vt09aosbqqe1rk181p",
+      "person-cmhz2f0u40362sbqqyxrzhgow",
+      "person-cmhz2f3rk054zsbqqdo4hhpco",
+      "person-cmhz2f38304p3sbqq7j3d17pm",
+      "person-cmoyfltep004d3ffvoia6f2do",
+      "person-cmhz2fc2x0ao3sbqqp1ac0uxv",
+      "person-cmhz2f7q307ussbqqm30gee5t",
+      "person-cmhz2f6n706tdsbqqcinwrg12",
+      "person-cmhz2f4au058ssbqqo9q8zi4r",
+      "person-cmhz2f3rf04v8sbqqb6at22iv",
+      "person-cmhz2f38304pssbqq2foc27mr",
+      "person-cmhz2f25203rqsbqqihuugt1a",
+      "person-cmhz2f4ug05nzsbqq0xo1dq83",
+      "person-cmhz2f8sy08kwsbqqw8po5owb",
+      "person-cmhz2f6nb06zwsbqq1ukh0x2t",
+      "person-cmhz2f6n606rusbqqd7yetmj6",
+      "person-cmhz2f6n706t3sbqqyircw3y6",
+      "person-cmhz2f6n906wxsbqq3ya2lbd8",
+      "person-cmhz2fbi10akbsbqq7dt5dd8k",
+      "person-cmhz2fc2y0aposbqqhbarp0e9",
+      "person-cmhz2f76n0752sbqqbz71sw2f",
+      "person-cmhz2f6n806tysbqqwc94p5on",
+      "person-cmp82d1zn008ysbqxmntc3h08",
+      "person-cmp82d3160092sbqxxz8sf6x6",
+      "person-cmhz2f6n906wasbqq3jjnavgi",
+      "person-cmp82d40f0096sbqxtj6vns83",
+      "person-cmp82d585009asbqxsuqucq2z",
+      "person-cmp82czyp008qsbqxoie8y1z8",
+      "person-cmp82d108008usbqxyeemjv7g",
+      "person-cmhz2f4b005j6sbqqaetj2p7g",
+      "person-cmp82dvxa00c3sbqxv5fd23vt",
+      "person-cmp82duy000bzsbqxec540og4",
+      "person-cmhz2f6nc0734sbqqcpn7v1oh",
+      "person-cmp82ct0r0081sbqx6qj26wd2",
+      "person-cmp82ctyu0085sbqxyyf3gy9d",
+      "person-cmp82fno200iksbqxi1hbccna",
+      "person-cmp82fonn00iosbqxx6te4vmp",
+      "person-cmp82fpp100issbqxl5w0204a",
+      "person-cmhz2fbi00ai2sbqqg260t6sd",
+      "person-cmhz2faf809mjsbqqtrn36sop",
+      "person-cmhz2faf509i8sbqqy53qbmx0",
+      "person-cmhz2faf609j5sbqqg6n769i5",
+      "person-cmhz2f8st08c1sbqqi1shnndy",
+      "person-cmox888z6004g3ff02jefeor2",
+      "person-cmp82blsq003vsbqxj45aczhn",
+      "person-cmhz2f25203sbsbqqx7uhuhv6",
+      "person-cmhz2f3re04tdsbqq8munxleu",
+      "person-cmhz2f0u002yosbqqley9plno",
+      "person-cmp82ann1000lsbqx7pupo4ys",
+      "person-cmhz2f63x06nrsbqq4pvqyqc2"
+    ],
+    "companies": [
+      "company-v",
+      "company-ma",
+      "company-bac",
+      "company-low",
+      "company-mchp",
+      "company-rsg",
+      "company-jpm",
+      "company-holx",
+      "company-mrvl",
+      "company-ibm",
+      "company-intc",
+      "company-aapl",
+      "company-wgs",
+      "company-plse",
+      "company-txo",
+      "company-hdsn",
+      "company-kbr",
+      "company-rhld",
+      "company-psqh",
+      "company-crwd",
+      "company-aehr"
+    ],
+    "issuers": [
+      "431262",
+      "432457",
+      "2335407",
+      "431330",
+      "430403",
+      "435818",
+      "434919",
+      "434652"
+    ],
+    "errors": [
+      {
+        "id": "company-fcbn",
+        "type": "company",
+        "error": "http://localhost:3000/api/mobile/company-profile?ticker=fcbn → 404: {\"error\":\"Not found\"}"
+      },
+      {
+        "id": "company-nvda",
+        "type": "company",
+        "error": "http://localhost:3000/api/mobile/company-profile?ticker=nvda → 404: {\"error\":\"Not found\"}"
+      },
+      {
+        "id": "company-intu",
+        "type": "company",
+        "error": "http://localhost:3000/api/mobile/company-profile?ticker=intu → 404: {\"error\":\"Not found\"}"
+      }
+    ]
+  }
+}

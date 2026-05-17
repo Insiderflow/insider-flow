@@ -1,0 +1,290 @@
+{
+  "id": "company-psqh",
+  "entityType": "company",
+  "name": "Psq Holdings, Inc.",
+  "ticker": "PSQH",
+  "companyName": "Psq Holdings, Inc.",
+  "roles": [
+    "Issuer"
+  ],
+  "logoLabel": "PS",
+  "logoColor": "#166534",
+  "displayName": "PSQ HOLDINGS, INC. / US",
+  "exchange": "NYSE",
+  "industry": "—",
+  "description": "Psq Holdings, Inc.",
+  "dataAsOf": "2026-05-15",
+  "allTradesCount": 17,
+  "activity": {
+    "totalBuys": 3409414,
+    "buyTxCount": 8,
+    "totalSells": -149595,
+    "sellTxCount": 9,
+    "totalOptions": 0,
+    "optionTxCount": 0,
+    "totalProposedSale": 0,
+    "proposedTxCount": 0,
+    "avgBuy": 3.26875,
+    "avgSell": 0,
+    "plan10b5Pct": 0,
+    "ppSalePct": 0,
+    "buyRangeMin": 1.95,
+    "buyRangeMax": 4.45,
+    "sellRangeMin": null,
+    "sellRangeMax": null
+  },
+  "companyTrades": [
+    {
+      "id": "cmp82jpj500024ey4dhixi4xu",
+      "ticker": "PSQH",
+      "insiderName": "Pena Michael",
+      "personId": "person-cmp82fno200iksbqxi1hbccna",
+      "side": "sell",
+      "amount": -6576,
+      "shares": -10682,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82jq0d00054ey4j3on2h29",
+      "ticker": "PSQH",
+      "insiderName": "Rinn James",
+      "personId": "person-cmp82fonn00iosbqxx6te4vmp",
+      "side": "sell",
+      "amount": -18193,
+      "shares": -29554,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82jq8500084ey43o0jj6gg",
+      "ticker": "PSQH",
+      "insiderName": "Wunderlich Dusty",
+      "personId": "person-cmp82fpp100issbqxl5w0204a",
+      "side": "sell",
+      "amount": -25096,
+      "shares": -40768,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82u7yl00kqsbtz1qk4j3dr",
+      "ticker": "PSQH",
+      "insiderName": "Pena Michael",
+      "personId": "person-cmp82fno200iksbqxi1hbccna",
+      "side": "sell",
+      "amount": -6576,
+      "shares": -10682,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82u8y100ktsbtz0a605d4m",
+      "ticker": "PSQH",
+      "insiderName": "Rinn James",
+      "personId": "person-cmp82fonn00iosbqxx6te4vmp",
+      "side": "sell",
+      "amount": -18193,
+      "shares": -29554,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82u9zt00kwsbtzjvbvibci",
+      "ticker": "PSQH",
+      "insiderName": "Wunderlich Dusty",
+      "personId": "person-cmp82fpp100issbqxl5w0204a",
+      "side": "sell",
+      "amount": -25096,
+      "shares": -40768,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82fp2200iqsbqx52wa6bah",
+      "ticker": "PSQH",
+      "insiderName": "Rinn James",
+      "personId": "person-cmp82fonn00iosbqxx6te4vmp",
+      "side": "sell",
+      "amount": -18193,
+      "shares": -29554,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82fo2r00imsbqx41dy3ohj",
+      "ticker": "PSQH",
+      "insiderName": "Pena Michael",
+      "personId": "person-cmp82fno200iksbqxi1hbccna",
+      "side": "sell",
+      "amount": -6576,
+      "shares": -10682,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmp82fq3g00iusbqxgidns87g",
+      "ticker": "PSQH",
+      "insiderName": "Wunderlich Dusty",
+      "personId": "person-cmp82fpp100issbqxl5w0204a",
+      "side": "sell",
+      "amount": -25096,
+      "shares": -40768,
+      "filedAt": "2026-05-15",
+      "tradeDate": "2026-05-13"
+    },
+    {
+      "id": "cmhz2g1oy0x17sbqqwv8tgcrb",
+      "ticker": "PSQH",
+      "insiderName": "Langston Willie",
+      "personId": "person-cmhz2fbi00ai2sbqqg260t6sd",
+      "side": "buy",
+      "amount": 52704,
+      "shares": 27000,
+      "filedAt": "2025-05-20",
+      "tradeDate": "2025-05-20"
+    },
+    {
+      "id": "cmhz2g0w90wj4sbqqny2zzwq5",
+      "ticker": "PSQH",
+      "insiderName": "Searle Bradley",
+      "personId": "person-cmhz2faf809mjsbqqtrn36sop",
+      "side": "buy",
+      "amount": 12018,
+      "shares": 6000,
+      "filedAt": "2025-05-16",
+      "tradeDate": "2025-05-14"
+    },
+    {
+      "id": "cmhz2g0w60wgesbqqsopb8324",
+      "ticker": "PSQH",
+      "insiderName": "Langston Willie",
+      "personId": "person-cmhz2fbi00ai2sbqqg260t6sd",
+      "side": "buy",
+      "amount": 51200,
+      "shares": 25000,
+      "filedAt": "2025-05-14",
+      "tradeDate": "2025-05-13"
+    },
+    {
+      "id": "cmhz2fxnt0tgesbqqlotrxn2p",
+      "ticker": "PSQH",
+      "insiderName": "Searle Bradley",
+      "personId": "person-cmhz2faf809mjsbqqtrn36sop",
+      "side": "buy",
+      "amount": 13452,
+      "shares": 3281,
+      "filedAt": "2024-12-12",
+      "tradeDate": "2024-12-11"
+    },
+    {
+      "id": "cmhz2fxn70sxqsbqqqsqfl556",
+      "ticker": "PSQH",
+      "insiderName": "Seifert Sarah Gabel",
+      "personId": "person-cmhz2faf509i8sbqqy53qbmx0",
+      "side": "buy",
+      "amount": 10013,
+      "shares": 2250,
+      "filedAt": "2024-12-11",
+      "tradeDate": "2024-12-09"
+    },
+    {
+      "id": "cmhz2fxna0t0ysbqq3zjypra8",
+      "ticker": "PSQH",
+      "insiderName": "Seifert Michael Stephen",
+      "personId": "person-cmhz2faf609j5sbqqg6n769i5",
+      "side": "buy",
+      "amount": 10013,
+      "shares": 2250,
+      "filedAt": "2024-12-11",
+      "tradeDate": "2024-12-09"
+    },
+    {
+      "id": "cmhz2fxni0t71sbqqun4w18vm",
+      "ticker": "PSQH",
+      "insiderName": "Seifert Michael Stephen",
+      "personId": "person-cmhz2faf609j5sbqqg6n769i5",
+      "side": "buy",
+      "amount": 10013,
+      "shares": 2250,
+      "filedAt": "2024-12-09",
+      "tradeDate": "2024-12-09"
+    },
+    {
+      "id": "cmhz2fsst0oklsbqqzhz4gtxd",
+      "ticker": "PSQH",
+      "insiderName": "Loeffler Kelly Lynn",
+      "personId": "person-cmhz2f8st08c1sbqqi1shnndy",
+      "side": "buy",
+      "amount": 3250001,
+      "shares": 1203704,
+      "filedAt": "2024-10-28",
+      "tradeDate": "2024-10-24"
+    }
+  ],
+  "insiders": [
+    {
+      "id": "person-cmp82fno200iksbqxi1hbccna",
+      "name": "Pena Michael",
+      "role": "CFO",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmp82fonn00iosbqxx6te4vmp",
+      "name": "Rinn James",
+      "role": "CFO",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmp82fpp100issbqxl5w0204a",
+      "name": "Wunderlich Dusty",
+      "role": "Chief Strategy Officer",
+      "tradesCount": 3
+    },
+    {
+      "id": "person-cmhz2fbi00ai2sbqqg260t6sd",
+      "name": "Langston Willie",
+      "role": "Dir",
+      "tradesCount": 2
+    },
+    {
+      "id": "person-cmhz2faf809mjsbqqtrn36sop",
+      "name": "Searle Bradley",
+      "role": "CFO",
+      "tradesCount": 2
+    },
+    {
+      "id": "person-cmhz2faf509i8sbqqy53qbmx0",
+      "name": "Seifert Sarah Gabel",
+      "role": "Pres of EveryLife, Inc.",
+      "tradesCount": 1
+    },
+    {
+      "id": "person-cmhz2faf609j5sbqqg6n769i5",
+      "name": "Seifert Michael Stephen",
+      "role": "Founder, Pres, CEO, 10%",
+      "tradesCount": 2
+    },
+    {
+      "id": "person-cmhz2f8st08c1sbqqi1shnndy",
+      "name": "Loeffler Kelly Lynn",
+      "role": "Dir",
+      "tradesCount": 1
+    }
+  ],
+  "tradeTypes": {
+    "buy": 47,
+    "sell": 53,
+    "option": 0,
+    "proposed": 0
+  },
+  "aiSummary": {
+    "headline": "8 buys and 9 sells for PSQH.",
+    "bullets": [
+      "17 Form 4 filings on record."
+    ],
+    "sentiment": "bearish"
+  },
+  "eventStudies": [],
+  "recentTrades": []
+}
