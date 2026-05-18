@@ -10,7 +10,14 @@
 # Transient P1002: set optional longer retry window (defaults below).
 set -e
 cd "$(dirname "$0")/.."
-export DATABASE_URL="${DATABASE_URL_UNPOOLED:-$DATABASE_URL}"
+# Only override when UNPOOLED is non-empty (empty string in Render env would break migrate).
+if [ -n "${DATABASE_URL_UNPOOLED:-}" ]; then
+  export DATABASE_URL="$DATABASE_URL_UNPOOLED"
+fi
+if [ -z "${DATABASE_URL:-}" ]; then
+  echo "DATABASE_URL is empty. Set DATABASE_URL or DATABASE_URL_UNPOOLED (Neon direct, non-pooler)."
+  exit 1
+fi
 
 # Total wait can be (max-1) * sleep seconds (default 4 * 15s = 60s extra after first failure).
 MIGRATE_DEPLOY_MAX_ATTEMPTS="${MIGRATE_DEPLOY_MAX_ATTEMPTS:-5}"
