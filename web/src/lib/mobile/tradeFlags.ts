@@ -1,3 +1,4 @@
+import type { Prisma, PrismaClient } from '@prisma/client';
 import {
   inferSeatSectorFromCommittees,
   resolveIssuerTradeSector,
@@ -108,18 +109,8 @@ export function computeInsiderNotableFlags(amountUsd: number): TradeFlagCode[] {
 }
 
 export async function fetchCongressClusterKeys(
-  prisma: {
-    trade: {
-      findMany: (args: unknown) => Promise<
-        {
-          politician_id: string;
-          type: string;
-          Issuer: { ticker: string | null } | null;
-        }[]
-      >;
-    };
-  },
-  tradeWhere: Record<string, unknown>,
+  prisma: Pick<PrismaClient, 'trade'>,
+  tradeWhere: Prisma.TradeWhereInput,
 ): Promise<Set<string>> {
   const since = new Date();
   since.setDate(since.getDate() - CLUSTER_WINDOW_DAYS);

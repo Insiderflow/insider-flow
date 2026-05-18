@@ -241,7 +241,6 @@ export async function buildPoliticianMobileDashboard(
   locale: BriefLocale = 'zh-Hant',
 ) {
   const since = periodStart(period);
-  const prev = previousPeriodRange(period);
   const periodWhere = politicianPublishedWhere(since);
   const prevWhere = politicianPreviousPublishedWhere(period);
   const todayLookback = new Date();
