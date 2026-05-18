@@ -3,6 +3,7 @@ import type { DataMode } from "@/context/DataModeContext";
 import { getMessages } from "@/i18n/messages";
 import type { Locale } from "@/i18n/types";
 import type { Party, TradeSide } from "./mockData";
+import type { TradeFlagCode } from "@/types/tradeFlags";
 
 export type LiveFeedMode = "live" | "history";
 
@@ -25,6 +26,7 @@ export interface LiveTrade {
   profilePath?: string;
   politicianId?: string;
   imageUrl?: string;
+  flags?: TradeFlagCode[];
 }
 
 export interface LiveDateChip {

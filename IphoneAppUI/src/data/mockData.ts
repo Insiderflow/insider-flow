@@ -1,6 +1,7 @@
 import type { DataMode } from "@/context/DataModeContext";
 import { getMessages } from "@/i18n/messages";
 import type { Locale } from "@/i18n/types";
+import type { TradeFlagCode } from "@/types/tradeFlags";
 import type { InsiderDashboardExtras } from "./insiderEntities";
 import { hydrateTodaysTrades } from "./hydrateTodaysTrades";
 import { etCalendarYmd } from "@/lib/etDate";
@@ -101,6 +102,7 @@ export interface PoliticianTradeHighlight {
   side: TradeSide;
   imageUrl?: string;
   spike: number[];
+  flags?: TradeFlagCode[];
 }
 
 export interface PrimeBrokerItem {
@@ -162,6 +164,7 @@ export interface RecentTrade {
   ticker: string;
   side: TradeSide;
   amount: number;
+  flags?: TradeFlagCode[];
   filedAt: string;
   filedAtKey: string;
 }

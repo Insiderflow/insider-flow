@@ -7,6 +7,7 @@ import PoliticianAvatar from "@/components/politician/PoliticianAvatar";
 import { useDataMode } from "@/context/DataModeContext";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { Messages } from "@/i18n/types";
+import TradeFlagBadges from "@/components/trade/TradeFlagBadges";
 
 interface PoliticianCardProps {
   trade: PoliticianTradeHighlight;
@@ -68,16 +69,19 @@ export default function PoliticianCard({ trade }: PoliticianCardProps) {
         <div className="flex items-center gap-2">
           <h3 className="truncate text-sm font-semibold">{trade.name}</h3>
           {isPolitician && <PartyBadge party={trade.party} />}
-          <span
-            className={cn(
-              "ml-auto text-[10px] font-semibold",
-              variant === "buy" && "text-buy",
-              variant === "sell" && "text-sell",
-              variant === "proposed" && "text-proposed"
-            )}
-          >
-            {text}
-          </span>
+          <div className="ml-auto flex flex-col items-end gap-1">
+            <span
+              className={cn(
+                "text-[10px] font-semibold",
+                variant === "buy" && "text-buy",
+                variant === "sell" && "text-sell",
+                variant === "proposed" && "text-proposed",
+              )}
+            >
+              {text}
+            </span>
+            <TradeFlagBadges flags={trade.flags} max={1} />
+          </div>
         </div>
         <p className="text-[11px] text-muted">
           {isPolitician ? `${trade.title} · ${trade.state}` : trade.title}

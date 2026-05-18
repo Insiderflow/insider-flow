@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { cn, formatCurrency } from "@/lib/utils";
 import type { RecentTrade, Party, TradeSide } from "@/data/mockData";
 import { useLanguage } from "@/i18n/LanguageContext";
+import TradeFlagBadges from "@/components/trade/TradeFlagBadges";
 
 interface RecentTradesTimelineProps {
   trades: RecentTrade[];
@@ -101,20 +102,21 @@ export default function RecentTradesTimeline({ trades }: RecentTradesTimelinePro
                       <PartyDot party={tr.party} />
                       <span className="ml-auto text-[10px] text-muted">{tr.filedAt}</span>
                     </div>
-                    <div className="mt-0.5 flex items-center gap-2">
+                    <motion.div className="mt-0.5 flex flex-wrap items-center gap-2">
                       <span className="text-xs font-semibold">{tr.ticker}</span>
                       <span
                         className={cn(
                           "rounded-pill px-1.5 py-0.5 text-[10px] font-semibold",
-                          sideColor(tr.side)
+                          sideColor(tr.side),
                         )}
                       >
                         {sideLabel(tr.side)}
                       </span>
+                      <TradeFlagBadges flags={tr.flags} max={2} />
                       <span className="ml-auto text-xs font-medium tabular-nums text-white/90">
                         {formatCurrency(tr.amount)}
                       </span>
-                    </div>
+                    </motion.div>
                   </div>
                 </motion.li>
               ))}

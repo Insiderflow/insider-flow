@@ -2,6 +2,11 @@ import { prisma } from '@/lib/prisma';
 import { openInsiderSide } from '@/lib/openInsiderTransaction';
 import { politicianTradeSeatLabel } from '@/lib/mobile/politicianSeatLabel';
 import { politicianTradeWhere } from '@/lib/mobile/tradeDateSanity';
+import {
+  computeInsiderNotableFlags,
+  computePoliticianTradeFlags,
+  fetchCongressClusterKeys,
+} from '@/lib/mobile/tradeFlags';
 import { getPoliticianImageSrc } from '@/lib/politicianImageMapping';
 
 function partyCode(raw: string | null | undefined): 'R' | 'D' | 'I' {
@@ -18,12 +23,16 @@ function tradeAmount(sizeMin: unknown, sizeMax: unknown): number {
 }
 
 export async function buildPoliticianLiveFeed() {
-  const rows = await prisma.trade.findMany({
-    where: politicianTradeWhere(),
-    include: { Politician: true, Issuer: true },
-    orderBy: { traded_at: 'desc' },
-    take: 80,
-  });
+  const where = politicianTradeWhere();
+  const [rows, clusterKeys] = await Promise.all([
+    prisma.trade.findMany({
+      where,
+      include: { Politician: true, Issuer: true },
+      orderBy: { traded_at: 'desc' },
+      take: 80,
+    }),
+    fetchCongressClusterKeys(prisma, where),
+  ]);
 
   const trades = rows.map((r) => {
     const sell = r.type.toLowerCase().includes('sell');
@@ -35,6 +44,20 @@ export async function buildPoliticianLiveFeed() {
       tradeTicker: r.Issuer?.ticker,
       issuerSector: r.Issuer?.sector,
     });
+    const side = proposed ? 'proposed_sale' : sell ? 'sell' : 'buy';
+    const amountUsd = tradeAmount(r.size_min, r.size_max);
+    const flags = computePoliticianTradeFlags(
+      {
+        id: r.id,
+        politicianId: r.politician_id,
+        ticker,
+        side,
+        amountUsd,
+        committees: r.Politician?.committees,
+        issuerSector: r.Issuer?.sector,
+      },
+      clusterKeys,
+    );
     return {
       id: r.id,
       ticker,
@@ -47,13 +70,14 @@ export async function buildPoliticianLiveFeed() {
         : undefined,
       showParty: true,
       party: partyCode(r.Politician?.party),
-      side: proposed ? 'proposed_sale' : sell ? 'sell' : 'buy',
+      side,
+      flags,
       disclosureBadge: 'STOCK Act',
       metricLabel: 'holdings' as const,
       metricValue: ticker,
       filedDisplay: r.published_at?.toISOString().slice(0, 10) || r.traded_at.toISOString().slice(0, 10),
       priceDisplay: r.price ? `$${Number(r.price).toFixed(2)}` : '—',
-      totalValueDisplay: `$${tradeAmount(r.size_min, r.size_max).toLocaleString()}`,
+      totalValueDisplay: `$${amountUsd.toLocaleString()}`,
       dateKey: r.traded_at.toISOString().slice(0, 10),
       profilePath: r.politician_id ? `/insider/person/${r.politician_id}` : undefined,
     };
@@ -76,6 +100,8 @@ export async function buildInsiderLiveFeed() {
 
   const trades = rows.map((r) => {
     const ticker = r.company?.ticker || '—';
+    const amountUsd = Number(r.valueNumeric || 0);
+    const flags = computeInsiderNotableFlags(amountUsd);
     return {
       id: r.id,
       ticker,
@@ -83,12 +109,13 @@ export async function buildInsiderLiveFeed() {
       title: r.owner?.title || 'Insider',
       showParty: false,
       side: openInsiderSide(r.transactionType),
+      flags,
       disclosureBadge: 'Form 4',
       metricLabel: 'outstanding' as const,
       metricValue: ticker,
       filedDisplay: r.transactionDate.toISOString().slice(0, 10),
       priceDisplay: r.lastPrice ? `$${Number(r.lastPrice).toFixed(2)}` : '—',
-      totalValueDisplay: `$${Number(r.valueNumeric || 0).toLocaleString()}`,
+      totalValueDisplay: `$${amountUsd.toLocaleString()}`,
       dateKey: r.transactionDate.toISOString().slice(0, 10),
       profilePath: r.ownerId
         ? `/insider/person/person-${r.ownerId}`

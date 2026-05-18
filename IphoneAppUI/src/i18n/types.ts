@@ -63,6 +63,13 @@ export interface Messages {
     Utilities: string;
     Other: string;
   };
+  tradeFlags: {
+    notable_size: string;
+    committee_sector: string;
+    congress_cluster: string;
+    filterOnly: string;
+    filterOff: string;
+  };
   trade: {
     buy: string;
     sell: string;

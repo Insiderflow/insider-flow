@@ -10,6 +10,7 @@ import PullToRefresh from "@/components/layout/PullToRefresh";
 import { fetchLiveFeed, type LiveFeedMode } from "@/data/liveMockData";
 import { useDataMode } from "@/context/DataModeContext";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { tradeHasFlags } from "@/types/tradeFlags";
 
 const QUERY_KEY = "mobile-live";
 
@@ -18,6 +19,7 @@ export default function MobileLive() {
   const { mode: dataMode } = useDataMode();
   const [mode, setMode] = useState<LiveFeedMode>("live");
   const [query, setQuery] = useState("");
+  const [flagsOnly, setFlagsOnly] = useState(false);
   const [selectedDate, setSelectedDate] = useState("2026-05-15");
 
   const { data, isLoading, refetch, isFetching } = useQuery({
@@ -35,9 +37,10 @@ export default function MobileLive() {
         !q ||
         tr.ticker.toLowerCase().includes(q) ||
         tr.displayName.toLowerCase().includes(q);
-      return matchesDate && matchesQuery;
+      const matchesFlags = !flagsOnly || tradeHasFlags(tr.flags);
+      return matchesDate && matchesQuery && matchesFlags;
     });
-  }, [data, mode, query, selectedDate]);
+  }, [data, mode, query, selectedDate, flagsOnly]);
 
   if (isLoading || !data) {
     return (
@@ -61,6 +64,19 @@ export default function MobileLive() {
       <PullToRefresh onRefresh={async () => { await refetch(); }}>
         <div className="space-y-3 px-4 pt-4">
           <LiveSearchBar value={query} onChange={setQuery} />
+
+          <button
+            type="button"
+            onClick={() => setFlagsOnly((v) => !v)}
+            className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors ${
+              flagsOnly
+                ? "border-amber-500/50 bg-amber-500/20 text-amber-100"
+                : "border-white/10 bg-white/5 text-muted"
+            }`}
+            aria-pressed={flagsOnly}
+          >
+            {flagsOnly ? t.tradeFlags.filterOnly : t.tradeFlags.filterOff}
+          </button>
 
           {mode === "history" && (
             <DateChips

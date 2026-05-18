@@ -71,6 +71,13 @@ const zhHant: Messages = {
     Utilities: "公用事業",
     Other: "其他",
   },
+  tradeFlags: {
+    notable_size: "大額",
+    committee_sector: "委員會相關",
+    congress_cluster: "多人同向",
+    filterOnly: "僅標記",
+    filterOff: "全部",
+  },
   trade: {
     buy: "買入",
     sell: "賣出",

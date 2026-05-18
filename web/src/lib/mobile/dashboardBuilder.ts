@@ -10,6 +10,7 @@ import {
   isEtCalendarDay,
   politicianPublishedRange,
   politicianPublishedWhere,
+  politicianTradeWhere,
   politicianTradedAtRange,
 } from '@/lib/mobile/tradeDateSanity';
 import { getPoliticianImageSrc } from '@/lib/politicianImageMapping';
@@ -24,6 +25,10 @@ import {
   getPoliticianDailyTradeBrief,
   type BriefLocale,
 } from '@/lib/mobile/dailyTradeBrief';
+import {
+  computePoliticianTradeFlags,
+  fetchCongressClusterKeys,
+} from '@/lib/mobile/tradeFlags';
 
 export type MobilePeriod = '1D' | '7D' | '30D' | '90D';
 
@@ -175,10 +180,31 @@ function disclosureDate(r: { published_at: Date | null; traded_at: Date }): Date
   return r.published_at ?? r.traded_at;
 }
 
+function flagsForPoliticianRow(
+  r: TradeRow,
+  side: 'buy' | 'sell' | 'proposed_sale',
+  clusterKeys: Set<string>,
+) {
+  const amountUsd = tradeAmount(r.size_min, r.size_max);
+  return computePoliticianTradeFlags(
+    {
+      id: r.id,
+      politicianId: r.politician_id,
+      ticker: r.Issuer?.ticker,
+      side,
+      amountUsd,
+      committees: r.Politician?.committees,
+      issuerSector: r.Issuer?.sector,
+    },
+    clusterKeys,
+  );
+}
+
 function mapPoliticianTradeHighlight(
   r: TradeRow,
   side: 'buy' | 'sell' | 'proposed_sale',
-  i: number
+  i: number,
+  clusterKeys: Set<string>,
 ) {
   const seat = politicianTradeSeatLabel({
     politicianId: r.politician_id,
@@ -201,6 +227,7 @@ function mapPoliticianTradeHighlight(
     tradeDate: r.traded_at.toISOString().slice(0, 10),
     filedAt: disclosureDate(r).toISOString().slice(0, 10),
     side,
+    flags: flagsForPoliticianRow(r, side, clusterKeys),
     imageUrl: r.politician_id
       ? getPoliticianImageSrc(r.politician_id, r.Politician?.name || '')
       : undefined,
@@ -230,6 +257,7 @@ export async function buildPoliticianMobileDashboard(
     prevSells,
     prevOptions,
     prevProposed,
+    clusterKeys,
   ] = await Promise.all([
     prisma.trade.findMany({
       where: periodWhere,
@@ -251,6 +279,7 @@ export async function buildPoliticianMobileDashboard(
     countPoliticianTrades(prevWhere, 'sell'),
     countPoliticianTrades(prevWhere, 'option'),
     countPoliticianTrades(prevWhere, 'proposed'),
+    fetchCongressClusterKeys(prisma, politicianTradeWhere()),
   ]);
 
   const todaysRows = recentForToday.filter((r) => isEtCalendarDay(disclosureDate(r)));
@@ -280,7 +309,7 @@ export async function buildPoliticianMobileDashboard(
       )
       .slice(0, limit)
       .map((r, i) => {
-        const mapped = mapPoliticianTradeHighlight(r, side, i);
+        const mapped = mapPoliticianTradeHighlight(r, side, i, clusterKeys);
         return { ...mapped, id: r.politician_id || r.id };
       });
 
@@ -289,7 +318,7 @@ export async function buildPoliticianMobileDashboard(
       (a, b) =>
         tradeAmount(b.size_min, b.size_max) - tradeAmount(a.size_min, a.size_max),
     )
-    .map((r, i) => mapPoliticianTradeHighlight(r, tradeSide(r), i));
+    .map((r, i) => mapPoliticianTradeHighlight(r, tradeSide(r), i, clusterKeys));
 
   const flowRows = rows.map((row) => {
     const amt = tradeAmount(row.size_min, row.size_max);
@@ -378,21 +407,21 @@ export async function buildPoliticianMobileDashboard(
     primeBrokers: [],
     industryChain,
     topIndustries,
-    recentTrades: rows.slice(0, 8).map((r) => ({
-      id: r.id,
-      politicianId: r.politician_id || undefined,
-      politician: r.Politician?.name || '',
-      party: partyCode(r.Politician?.party),
-      ticker: r.Issuer?.ticker || '',
-      side: (isSellType(r.type)
-        ? r.type.toLowerCase().includes('proposed')
-          ? 'proposed_sale'
-          : 'sell'
-        : 'buy') as 'buy' | 'sell' | 'proposed_sale',
-      amount: tradeAmount(r.size_min, r.size_max),
-      filedAt: r.published_at?.toISOString().slice(0, 10) || r.traded_at.toISOString().slice(0, 10),
-      filedAtKey: r.id,
-    })),
+    recentTrades: rows.slice(0, 8).map((r) => {
+      const side = tradeSide(r);
+      return {
+        id: r.id,
+        politicianId: r.politician_id || undefined,
+        politician: r.Politician?.name || '',
+        party: partyCode(r.Politician?.party),
+        ticker: r.Issuer?.ticker || '',
+        side,
+        amount: tradeAmount(r.size_min, r.size_max),
+        filedAt: r.published_at?.toISOString().slice(0, 10) || r.traded_at.toISOString().slice(0, 10),
+        filedAtKey: r.id,
+        flags: flagsForPoliticianRow(r, side, clusterKeys),
+      };
+    }),
   };
 }
 

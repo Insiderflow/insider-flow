@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { LiveTrade } from "@/data/liveMockData";
 import type { TradeSide } from "@/data/mockData";
+import TradeFlagBadges from "@/components/trade/TradeFlagBadges";
 
 interface LiveTradeCardProps {
   trade: LiveTrade;
@@ -41,16 +42,21 @@ export default function LiveTradeCard({ trade, index = 0 }: LiveTradeCardProps) 
       onClick={() => trade.profilePath && navigate(trade.profilePath)}
       className={cn(
         "glass-card-elevated overflow-hidden p-4",
-        trade.profilePath && "cursor-pointer"
+        trade.profilePath && "cursor-pointer",
       )}
     >
       <div className="flex items-start justify-between gap-2">
         <span className="text-xl font-bold tracking-tight">{trade.ticker}</span>
-        <div className="flex items-center gap-2">
-          <span className="rounded-md bg-white/8 px-2 py-0.5 text-[10px] font-semibold text-muted-foreground">
-            {trade.disclosureBadge}
-          </span>
-          <span className={cn("h-2.5 w-2.5 shrink-0 rounded-full", sideDotClass(trade.side))} />
+        <div className="flex flex-col items-end gap-1.5">
+          <div className="flex items-center gap-2">
+            <span className="rounded-md bg-white/8 px-2 py-0.5 text-[10px] font-semibold text-muted-foreground">
+              {trade.disclosureBadge}
+            </span>
+            <span
+              className={cn("h-2.5 w-2.5 shrink-0 rounded-full", sideDotClass(trade.side))}
+            />
+          </div>
+          <TradeFlagBadges flags={trade.flags} className="justify-end" />
         </div>
       </div>
 
@@ -75,7 +81,7 @@ export default function LiveTradeCard({ trade, index = 0 }: LiveTradeCardProps) 
                   className={cn(
                     "shrink-0 text-[9px] font-bold",
                     trade.party === "R" && "text-red-400",
-                    trade.party === "D" && "text-blue-400"
+                    trade.party === "D" && "text-blue-400",
                   )}
                 >
                   {trade.party}
@@ -117,7 +123,7 @@ function DataPill({
       <p
         className={cn(
           "mt-0.5 truncate text-xs font-semibold tabular-nums",
-          highlight ? "text-white" : "text-white/90"
+          highlight ? "text-white" : "text-white/90",
         )}
       >
         {value}
