@@ -78,6 +78,47 @@ const zhHant: Messages = {
     filterOnly: "僅標記",
     filterOff: "全部",
   },
+  committeeSector: {
+    title: "委員會 × 板塊",
+    subtitle: (period) => `過去 ${period} · 與委員會職權一致的申報`,
+    explainer:
+      "議員在其委員會相關產業的買賣金額（依委員會關鍵字與股票板塊比對，僅供研究參考）。",
+    alignedPct: (pct) => `相關申報 ${pct}%`,
+    rowMeta: (count, buy, sell) => {
+      const fmt = (n: number) =>
+        n >= 1_000_000
+          ? `$${(n / 1_000_000).toFixed(1)}M`
+          : n >= 1000
+            ? `$${Math.round(n / 1000)}K`
+            : `$${Math.round(n)}`;
+      return `${count} 筆 · 買 ${fmt(buy)} · 賣 ${fmt(sell)}`;
+    },
+  },
+  discover: {
+    hint: "輸入代號、議員或公司名稱",
+    empty: "暫無本週活躍資料",
+    activePoliticians: "本週活躍議員",
+    activeTickers: "熱門股票",
+    recentFlagged: "近期標記交易",
+    politicianMeta: (count, volume) => {
+      const fmt =
+        volume >= 1_000_000
+          ? `$${(volume / 1_000_000).toFixed(1)}M`
+          : volume >= 1000
+            ? `$${Math.round(volume / 1000)}K`
+            : `$${Math.round(volume)}`;
+      return `${count} 筆 · ${fmt}`;
+    },
+    tickerMeta: (count, volume) => {
+      const fmt =
+        volume >= 1_000_000
+          ? `$${(volume / 1_000_000).toFixed(1)}M`
+          : volume >= 1000
+            ? `$${Math.round(volume / 1000)}K`
+            : `$${Math.round(volume)}`;
+      return `${count} 筆 · ${fmt}`;
+    },
+  },
   trade: {
     buy: "買入",
     sell: "賣出",

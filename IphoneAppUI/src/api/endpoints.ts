@@ -49,6 +49,41 @@ export interface SearchResult {
   url: string;
 }
 
+export interface DiscoverPolitician {
+  id: string;
+  name: string;
+  party: "R" | "D" | "I";
+  state: string;
+  tradeCount: number;
+  volume: number;
+  imageUrl?: string;
+}
+
+export interface DiscoverTicker {
+  ticker: string;
+  name: string;
+  tradeCount: number;
+  volume: number;
+}
+
+export interface DiscoverFlaggedTrade {
+  id: string;
+  politicianId: string;
+  politicianName: string;
+  party: "R" | "D" | "I";
+  ticker: string;
+  side: string;
+  amount: number;
+  filedAt: string;
+  flags: string[];
+}
+
+export interface MobileDiscoverPayload {
+  activePoliticians: DiscoverPolitician[];
+  activeTickers: DiscoverTicker[];
+  recentFlagged: DiscoverFlaggedTrade[];
+}
+
 export interface WatchlistItem {
   id: string;
   watchlist_type: string;
@@ -111,6 +146,9 @@ export const mobileApi = {
 
   search: (q: string) =>
     apiClient.get<{ results: SearchResult[] }>('/api/search', { q }),
+
+  discover: (period: Period) =>
+    apiClient.get<MobileDiscoverPayload>('/api/mobile/discover', { period }),
 
   watchlist: (params?: Record<string, string>) =>
     apiClient

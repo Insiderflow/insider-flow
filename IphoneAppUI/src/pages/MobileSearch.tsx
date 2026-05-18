@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Search } from "lucide-react";
 import { searchEntities, type SearchResult } from "@/api/services/search";
 import { useDataMode } from "@/context/DataModeContext";
+import SearchDiscoverSections from "@/components/search/SearchDiscoverSections";
 import { companyPathFromTicker, personPathFromOwnerId } from "@/data/insiderEntities";
 import { issuerProfilePath } from "@/data/issuerProfile";
 import { useLanguage } from "@/i18n/LanguageContext";
@@ -33,7 +34,7 @@ function resultPath(item: SearchResult, isInsider: boolean): string | null {
 
 export default function MobileSearch() {
   const { t } = useLanguage();
-  const { isInsider } = useDataMode();
+  const { isInsider, isPolitician } = useDataMode();
   const navigate = useNavigate();
   const location = useLocation();
   const [query, setQuery] = useState("");
@@ -74,12 +75,14 @@ export default function MobileSearch() {
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder={t.live.searchPlaceholder}
+            placeholder={isPolitician ? t.discover.hint : t.live.searchPlaceholderInsider}
             className="flex-1 bg-transparent text-[15px] text-white outline-none placeholder:text-muted"
           />
         </div>
 
-        {loading && (
+        {query.trim().length < 2 && isPolitician ? <SearchDiscoverSections /> : null}
+
+        {loading && query.trim().length >= 2 && (
           <p className="mt-6 text-center text-sm text-muted">{t.live.searching}…</p>
         )}
 

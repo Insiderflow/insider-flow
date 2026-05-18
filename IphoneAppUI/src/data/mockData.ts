@@ -139,6 +139,20 @@ export interface IndustryBarItem {
   sellCount?: number;
 }
 
+export interface CommitteeSectorRow {
+  sectorKey: string;
+  buyAmount: number;
+  sellAmount: number;
+  tradeCount: number;
+}
+
+export interface CommitteeSectorSummary {
+  alignedVolume: number;
+  totalVolume: number;
+  alignedPct: number;
+  rows: CommitteeSectorRow[];
+}
+
 export type IndustryCompareSide = "buy" | "sell";
 
 export interface IndustryCompanyRow {
@@ -182,6 +196,7 @@ export interface DashboardPayload {
   primeBrokers: PrimeBrokerItem[];
   industryChain: IndustryChainNode[];
   topIndustries: IndustryBarItem[];
+  committeeSectors?: CommitteeSectorSummary;
   recentTrades: RecentTrade[];
   insiderExtras?: InsiderDashboardExtras;
 }
@@ -534,6 +549,25 @@ export function buildPoliticianDashboard(locale: Locale): DashboardPayload {
       ...n,
       name: industryName(locale, n.nameKey),
     })),
+    committeeSectors: {
+      alignedVolume: 12_000_000,
+      totalVolume: 48_000_000,
+      alignedPct: 25,
+      rows: [
+        {
+          sectorKey: "Energy",
+          buyAmount: 8_000_000,
+          sellAmount: 1_200_000,
+          tradeCount: 14,
+        },
+        {
+          sectorKey: "Information Technology",
+          buyAmount: 2_500_000,
+          sellAmount: 1_800_000,
+          tradeCount: 9,
+        },
+      ],
+    },
     recentTrades: BASE.recentTrades.map((t) => ({
       ...t,
       filedAt: m.mock.filedAt[t.filedAtKey] ?? t.filedAtKey,

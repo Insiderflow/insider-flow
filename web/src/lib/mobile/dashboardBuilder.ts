@@ -29,6 +29,7 @@ import {
   computePoliticianTradeFlags,
   fetchCongressClusterKeys,
 } from '@/lib/mobile/tradeFlags';
+import { buildCommitteeSectorSummary } from '@/lib/mobile/committeeSectorBuilder';
 
 export type MobilePeriod = '1D' | '7D' | '30D' | '90D';
 
@@ -344,6 +345,17 @@ export async function buildPoliticianMobileDashboard(
 
   const industryChain = buildIndustryChainNodes(sectorAgg, subsectorAgg, 6);
 
+  const committeeSectors = buildCommitteeSectorSummary(
+    rows.map((r) => ({
+      politicianId: r.politician_id,
+      committees: r.Politician?.committees,
+      ticker: r.Issuer?.ticker,
+      issuerSector: r.Issuer?.sector,
+      type: r.type,
+      amountUsd: tradeAmount(r.size_min, r.size_max),
+    })),
+  );
+
   const dataAsOf =
     (rows[0] ? disclosureDate(rows[0]).toISOString().slice(0, 10) : null) ||
     new Date().toISOString().slice(0, 10);
@@ -407,6 +419,7 @@ export async function buildPoliticianMobileDashboard(
     primeBrokers: [],
     industryChain,
     topIndustries,
+    committeeSectors,
     recentTrades: rows.slice(0, 8).map((r) => {
       const side = tradeSide(r);
       return {

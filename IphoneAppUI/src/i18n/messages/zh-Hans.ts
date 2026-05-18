@@ -78,6 +78,47 @@ const zhHans: Messages = {
     filterOnly: "仅标记",
     filterOff: "全部",
   },
+  committeeSector: {
+    title: "委员会 × 板块",
+    subtitle: (period) => `过去 ${period} · 与委员会职权一致的申报`,
+    explainer:
+      "议员在其委员会相关产业的买卖金额（依委员会关键字与股票板块比对，仅供研究参考）。",
+    alignedPct: (pct) => `相关申报 ${pct}%`,
+    rowMeta: (count, buy, sell) => {
+      const fmt = (n: number) =>
+        n >= 1_000_000
+          ? `$${(n / 1_000_000).toFixed(1)}M`
+          : n >= 1000
+            ? `$${Math.round(n / 1000)}K`
+            : `$${Math.round(n)}`;
+      return `${count} 笔 · 买 ${fmt(buy)} · 卖 ${fmt(sell)}`;
+    },
+  },
+  discover: {
+    hint: "输入代号、议员或公司名称",
+    empty: "暂无本周活跃数据",
+    activePoliticians: "本周活跃议员",
+    activeTickers: "热门股票",
+    recentFlagged: "近期标记交易",
+    politicianMeta: (count, volume) => {
+      const fmt =
+        volume >= 1_000_000
+          ? `$${(volume / 1_000_000).toFixed(1)}M`
+          : volume >= 1000
+            ? `$${Math.round(volume / 1000)}K`
+            : `$${Math.round(volume)}`;
+      return `${count} 笔 · ${fmt}`;
+    },
+    tickerMeta: (count, volume) => {
+      const fmt =
+        volume >= 1_000_000
+          ? `$${(volume / 1_000_000).toFixed(1)}M`
+          : volume >= 1000
+            ? `$${Math.round(volume / 1000)}K`
+            : `$${Math.round(volume)}`;
+      return `${count} 笔 · ${fmt}`;
+    },
+  },
   trade: {
     buy: "买入",
     sell: "卖出",

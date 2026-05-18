@@ -5,6 +5,7 @@ import { USE_API } from "@/api/config";
 import { fetchDataFreshness } from "@/api/services/freshness";
 import AISummary from "@/components/dashboard/AISummary";
 import IndustryChainPreviewCard from "@/components/dashboard/IndustryChainPreviewCard";
+import CommitteeSectorCard from "@/components/dashboard/CommitteeSectorCard";
 import InsiderIndustrySection from "@/components/insider/InsiderIndustrySection";
 import TodaysPoliticianTrades from "@/components/dashboard/TodaysPoliticianTrades";
 import KpiCard from "@/components/dashboard/KpiCard";
@@ -162,6 +163,10 @@ export default function MobileDashboard() {
               nodes={data.industryChain}
               period={period}
             />
+
+            {dataMode === "politician" && data.committeeSectors?.rows.length ? (
+              <CommitteeSectorCard data={data.committeeSectors} period={period} />
+            ) : null}
 
             {dataMode === "politician" ? (
               <TodaysPoliticianTrades trades={data.todaysTrades ?? []} />

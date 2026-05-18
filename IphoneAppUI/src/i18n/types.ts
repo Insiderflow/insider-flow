@@ -70,6 +70,22 @@ export interface Messages {
     filterOnly: string;
     filterOff: string;
   };
+  committeeSector: {
+    title: string;
+    subtitle: (period: string) => string;
+    explainer: string;
+    alignedPct: (pct: number) => string;
+    rowMeta: (count: number, buy: number, sell: number) => string;
+  };
+  discover: {
+    hint: string;
+    empty: string;
+    activePoliticians: string;
+    activeTickers: string;
+    recentFlagged: string;
+    politicianMeta: (count: number, volume: number) => string;
+    tickerMeta: (count: number, volume: number) => string;
+  };
   trade: {
     buy: string;
     sell: string;
