@@ -6,11 +6,12 @@ import PeriodToggle from "@/components/layout/PeriodToggle";
 import FeedToggle, { type SignalFeedFilter } from "@/components/layout/FeedToggle";
 import TierToggle, { type SignalTierFilter } from "@/components/layout/TierToggle";
 import PullToRefresh from "@/components/layout/PullToRefresh";
-import { fetchSignals } from "@/api/services/signals";
+import { fetchSignals, fetchSignalsBrief } from "@/api/services/signals";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { Period } from "@/data/mockData";
 
-const QUERY_KEY = "mobile-signals";
+const SIGNALS_KEY = "mobile-signals";
+const BRIEF_KEY = "mobile-signals-brief";
 
 function defaultTier(period: Period): SignalTierFilter {
   return period === "1D" ? "medium_plus" : "all";
@@ -26,16 +27,34 @@ export default function MobileSignals() {
     setTier(defaultTier(period));
   }, [period]);
 
-  const { data, isLoading, refetch } = useQuery({
-    queryKey: [QUERY_KEY, period, feed, tier, locale],
+  const queryParams = [period, feed, tier, locale] as const;
+
+  const {
+    data,
+    isLoading: signalsLoading,
+    refetch: refetchSignals,
+  } = useQuery({
+    queryKey: [SIGNALS_KEY, ...queryParams],
     queryFn: () => fetchSignals(period, feed, locale, tier),
     staleTime: 60_000,
   });
 
+  const {
+    data: briefData,
+    isLoading: briefLoading,
+    refetch: refetchBrief,
+  } = useQuery({
+    queryKey: [BRIEF_KEY, ...queryParams],
+    queryFn: () => fetchSignalsBrief(period, feed, locale, tier),
+    staleTime: 5 * 60_000,
+  });
+
+  const aiSummary = briefData?.aiSummary ?? data?.aiSummary;
+
   return (
     <PullToRefresh
       onRefresh={async () => {
-        await refetch();
+        await Promise.all([refetchSignals(), refetchBrief()]);
       }}
     >
       <div className="min-h-screen pb-tab-safe">
@@ -49,15 +68,15 @@ export default function MobileSignals() {
           </div>
         </header>
         <div className="mx-4 mt-4 space-y-3">
-          {isLoading && (
+          {briefLoading && !aiSummary && (
             <div className="h-36 rounded-card shimmer-loading" aria-hidden />
           )}
-          {!isLoading && data?.aiSummary && <AISummary data={data.aiSummary} />}
-          {isLoading &&
+          {aiSummary && <AISummary data={aiSummary} />}
+          {signalsLoading &&
             [0, 1, 2].map((i) => (
               <div key={i} className="h-28 rounded-xl shimmer-loading" />
             ))}
-          {!isLoading && data?.signals.length === 0 && (
+          {!signalsLoading && data?.signals.length === 0 && (
             <p className="py-12 text-center text-sm text-muted-foreground">
               {t.signalsPage.empty}
             </p>

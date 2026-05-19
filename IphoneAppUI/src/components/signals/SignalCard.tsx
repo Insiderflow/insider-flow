@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import PoliticianAvatar from "@/components/politician/PoliticianAvatar";
 import TradeFlagBadges from "@/components/trade/TradeFlagBadges";
+import { resolveSignalRecommendation } from "@/lib/signalRecommendation";
+import SignalSideBadge, { tradeSideLabel } from "@/components/signals/SignalSideBadge";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { MobileSignalItem } from "@/api/endpoints";
 import type { TradeFlagCode } from "@/types/tradeFlags";
@@ -23,6 +25,7 @@ export default function SignalCard({ signal, index = 0 }: SignalCardProps) {
       code,
   );
   const isCorporate = signal.feed === "corporate";
+  const recommendation = resolveSignalRecommendation(signal);
   const profilePath = isCorporate
     ? signal.ownerId
       ? `/insider/person/person-${signal.ownerId}`
@@ -58,7 +61,7 @@ export default function SignalCard({ signal, index = 0 }: SignalCardProps) {
       <motion.div className="flex items-start justify-between gap-2">
         <div className="min-w-0">
           <span className="text-xl font-bold tracking-tight">{signal.ticker}</span>
-          <span className="ml-2 rounded-md bg-muted/60 px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground">
+          <span className="ml-1.5 rounded-md bg-muted/60 px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground">
             {t.signalsPage.feedBadge[signal.feed]}
           </span>
         </div>
@@ -116,8 +119,15 @@ export default function SignalCard({ signal, index = 0 }: SignalCardProps) {
         )}
         <motion.div className="min-w-0 flex-1">
           <p className="truncate text-sm font-medium">{signal.politicianName}</p>
-          <p className="text-xs text-muted-foreground">
-            {signal.filedAt} · ${signal.amountUsd.toLocaleString()}
+          <p className="flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground">
+            <SignalSideBadge recommendation={recommendation} />
+            <span className="text-[10px] text-muted-foreground/70">
+              {t.signalsPage.filingLabel(tradeSideLabel(signal.side, t))}
+            </span>
+            <span aria-hidden>·</span>
+            <span>{signal.filedAt}</span>
+            <span aria-hidden>·</span>
+            <span>${signal.amountUsd.toLocaleString()}</span>
           </p>
         </motion.div>
       </div>

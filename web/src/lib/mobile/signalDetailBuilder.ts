@@ -5,6 +5,7 @@ import {
   buildPoliticianAmountHistories,
   computeMlSignalScore,
   tradeAmountPercentile,
+  type MlScoreBreakdown,
 } from '@/lib/mobile/signalMlScorer';
 import type { BriefLocale } from '@/lib/mobile/dailyTradeBrief';
 import {
@@ -21,6 +22,7 @@ import {
 } from '@/lib/mobile/tradeFlags';
 import { politicianTradeWhere } from '@/lib/mobile/tradeDateSanity';
 import type { MobileSignalItem } from '@/lib/mobile/signalsBuilder';
+import { computeSignalRecommendation } from '@/lib/mobile/signalRecommendation';
 
 export type SignalCriterionId =
   | 'notable_size'
@@ -50,6 +52,9 @@ export type MobileSignalDetailPayload = {
   };
   clusterSize: number;
   sizePercentile: number;
+  scoreBreakdown: MlScoreBreakdown;
+  /** Other flagged peers on same ticker + side in the cluster window. */
+  sameTickerCount: number;
 };
 
 function parseSignalId(
@@ -284,11 +289,8 @@ function buildCriteriaRows(input: {
     {
       id: 'insider_cluster',
       met: insiderClusterMet,
-      applicable: feed === 'corporate',
-      detail:
-        locale === 'en'
-          ? 'Multi-insider same ticker (coming soon)'
-          : '多人同標的（企業端擴充中）',
+      applicable: false,
+      detail: null,
     },
     {
       id: 'unusual_size',
@@ -391,6 +393,7 @@ async function buildPoliticianSignalDetail(
     politicianName: r.Politician?.name || '',
     party: partyCode(r.Politician?.party),
     side,
+    recommendation: computeSignalRecommendation({ side, mlTier: ml.mlTier }),
     flags,
     amountUsd,
     filedAt:
@@ -428,7 +431,30 @@ async function buildPoliticianSignalDetail(
     thresholds: THRESHOLDS,
     clusterSize,
     sizePercentile,
+    scoreBreakdown: ml.breakdown,
+    sameTickerCount: Math.max(0, clusterSize - 1),
   };
+}
+
+async function countCorporateSameTickerPeers(
+  ticker: string,
+  side: TradeSideFlag,
+  excludeId: string,
+): Promise<number> {
+  if (!ticker || ticker === '—') return 0;
+  const since = new Date();
+  since.setDate(since.getDate() - CLUSTER_WINDOW_DAYS);
+
+  const rows = await prisma.openInsiderTransaction.findMany({
+    where: {
+      id: { not: excludeId },
+      transactionDate: { gte: since },
+      company: { ticker: { equals: ticker, mode: 'insensitive' } },
+    },
+    select: { transactionType: true },
+  });
+
+  return rows.filter((r) => openInsiderSide(r.transactionType) === side).length;
 }
 
 async function buildCorporateSignalDetail(
@@ -461,6 +487,12 @@ async function buildCorporateSignalDetail(
   });
 
   const ownerName = r.owner?.name || r.company?.name || 'Insider';
+  const sameTickerCount = await countCorporateSameTickerPeers(
+    ticker,
+    side,
+    r.id,
+  );
+
   const signal: MobileSignalItem = {
     id: `signal-oi-${r.id}`,
     tradeId: r.id,
@@ -471,6 +503,7 @@ async function buildCorporateSignalDetail(
     politicianName: ownerName,
     party: 'I',
     side,
+    recommendation: computeSignalRecommendation({ side, mlTier: ml.mlTier }),
     flags,
     amountUsd,
     filedAt: r.transactionDate.toISOString().slice(0, 10),
@@ -502,6 +535,8 @@ async function buildCorporateSignalDetail(
     thresholds: THRESHOLDS,
     clusterSize: 0,
     sizePercentile,
+    scoreBreakdown: ml.breakdown,
+    sameTickerCount,
   };
 }
 

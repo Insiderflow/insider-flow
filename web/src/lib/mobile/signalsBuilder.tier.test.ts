@@ -24,3 +24,12 @@ describe('signalsBuilder tier filter', () => {
     expect(defaultSignalsLimit('7D')).toBe(40);
   });
 });
+
+describe('signalsBuilder side filter', () => {
+  it('filters by recommendation', async () => {
+    const { passesSideFilter } = await import('./signalsBuilder');
+    expect(passesSideFilter('hold', 'hold')).toBe(true);
+    expect(passesSideFilter('buy', 'hold')).toBe(false);
+    expect(passesSideFilter('buy', 'buy')).toBe(true);
+  });
+});

@@ -191,6 +191,14 @@ const zhHant: Messages = {
     feedBadge: { politician: "國會", corporate: "企業" },
     tierAria: "評分篩選",
     tier: { high: "高", medium_plus: "中+", all: "全部" },
+    sideAria: "方向篩選",
+    side: { buy: "買", sell: "賣", hold: "持" },
+    recommendation: { buy: "買", sell: "賣", hold: "持" },
+    recommendationAria: (r) =>
+      r === "buy" ? "建議買入" : r === "sell" ? "建議賣出" : "建議觀望",
+    tradeSide: { buy: "買入", sell: "賣出", proposed_sale: "擬出售" },
+    filingLabel: (side) => `申報：${side}`,
+    sideFilter: { all: "全部", buy: "買", sell: "賣", hold: "持" },
     headline: (flags, ticker, name) =>
       `${flags.join("、")} · ${ticker} · ${name}`,
     insiderHeadline: (flags, ticker, name) =>
@@ -214,6 +222,27 @@ const zhHant: Messages = {
     criteriaCol: "條件",
     detailCol: "說明",
     disclaimer: "綠色為命中規則或評分因子；僅供研究，非投資建議。",
+    hitCount: (met, total) => `${met}/${total} 命中`,
+    showUnmet: "查看未命中",
+    hideUnmet: "收合未命中",
+    scoreTitle: "評分構成",
+    scoreBreakdown: {
+      flags: "規則",
+      size: "金額",
+      cluster: "集群",
+      recency: "新近",
+      late: "延遲",
+    },
+    insight: ({ name, side, ticker, amount, percentile, daysAgo }) =>
+      `${name} ${side} ${ticker} ${amount}` +
+      (percentile >= 85 ? `（歷史 P${Math.round(percentile)}）` : "") +
+      (daysAgo <= 7 ? `，${Math.max(1, Math.round(daysAgo))} 日內申報` : ""),
+    tickerContextCongress: ({ count, ticker, side, days }) =>
+      `近 ${days} 日共 ${count} 位議員${side} ${ticker}`,
+    tickerContextCorporate: ({ count, ticker, side, days }) =>
+      count > 0
+        ? `近 ${days} 日另有 ${count} 筆內部人${side} ${ticker}`
+        : `近 ${days} 日暫無其他內部人同向交易 ${ticker}`,
     links: "相關頁面",
     viewPolitician: "議員檔案",
     viewInsider: "內部人檔案",

@@ -5,6 +5,8 @@ import type { MobilePeriod } from '@/lib/mobile/dashboardBuilder';
 import type {
   MobileSignalItem,
   SignalFeed,
+  SignalSideFilter,
+  SignalTierFilter,
 } from '@/lib/mobile/signalsBuilder';
 
 export type SignalsAiSummary = {
@@ -12,9 +14,11 @@ export type SignalsAiSummary = {
   narrative: string;
   bullets: string[];
   sentiment: 'bullish' | 'bearish' | 'mixed';
+  source: 'xai' | 'rules';
 };
 
 const CACHE_DIR = path.join(process.cwd(), '.cache');
+const LOG_FILE = path.join(CACHE_DIR, 'signals-brief-log.json');
 const CACHE_TTL_MS = 30 * 60 * 1000;
 const XAI_SIGNAL_CAP = 25;
 
@@ -50,6 +54,32 @@ const FLAG_LABEL: Record<BriefLocale, Record<string, string>> = {
     insider_cluster: 'Insider cluster',
   },
 };
+
+type CacheKey = {
+  period: MobilePeriod;
+  feed: SignalFeed;
+  tier: SignalTierFilter;
+  side: SignalSideFilter;
+  locale: BriefLocale;
+};
+
+type SignalsBriefLog = { etDate: string; count: number; at?: string };
+
+function etCalendarYmd(): string {
+  return new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'America/New_York',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).format(new Date());
+}
+
+function cacheFile({ period, feed, tier, side, locale }: CacheKey): string {
+  return path.join(
+    CACHE_DIR,
+    `signals-brief-${period}-${feed}-${tier}-${side}-${locale}.json`,
+  );
+}
 
 function formatUsd(n: number): string {
   if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(1)}M`;
@@ -184,16 +214,56 @@ function rulesNarrative(
   return `共 ${signals.length} 則規則標記交易（買入 ${buys}、賣出/其他 ${sells}），${tierNote}標的側重：${tickers.join('、')}。${feedNote}按 ML 評分排序，僅供研究，非投資建議。`;
 }
 
+async function readBriefLog(): Promise<SignalsBriefLog | null> {
+  try {
+    const raw = await fs.readFile(LOG_FILE, 'utf8');
+    return JSON.parse(raw) as SignalsBriefLog;
+  } catch {
+    return null;
+  }
+}
+
+async function bumpBriefLog(etDate: string): Promise<void> {
+  const cur = await readBriefLog();
+  const base: SignalsBriefLog =
+    cur?.etDate === etDate ? cur : { etDate, count: 0 };
+  base.count += 1;
+  await fs.mkdir(path.dirname(LOG_FILE), { recursive: true });
+  await fs.writeFile(
+    LOG_FILE,
+    JSON.stringify({ ...base, at: new Date().toISOString() }),
+    'utf8',
+  );
+}
+
+function briefLogCount(log: SignalsBriefLog | null, etDate: string): number {
+  if (!log || log.etDate !== etDate) return 0;
+  return log.count;
+}
+
+async function readCachedLoose(key: CacheKey): Promise<SignalsAiSummary | null> {
+  const file = cacheFile(key);
+  try {
+    const raw = await fs.readFile(file, 'utf8');
+    const data = JSON.parse(raw) as {
+      cachedAt: string;
+      brief: SignalsAiSummary;
+    };
+    if (data.brief.source !== 'xai') return null;
+    if (Date.now() - new Date(data.cachedAt).getTime() > CACHE_TTL_MS) {
+      return null;
+    }
+    return data.brief;
+  } catch {
+    return null;
+  }
+}
+
 async function readCached(
-  period: MobilePeriod,
-  feed: SignalFeed,
-  locale: BriefLocale,
+  key: CacheKey,
   fingerprint: string,
 ): Promise<SignalsAiSummary | null> {
-  const file = path.join(
-    CACHE_DIR,
-    `signals-brief-${period}-${feed}-${locale}.json`,
-  );
+  const file = cacheFile(key);
   try {
     const raw = await fs.readFile(file, 'utf8');
     const data = JSON.parse(raw) as {
@@ -201,6 +271,7 @@ async function readCached(
       cachedAt: string;
       brief: SignalsAiSummary;
     };
+    if (data.brief.source !== 'xai') return null;
     if (data.fingerprint !== fingerprint) return null;
     if (Date.now() - new Date(data.cachedAt).getTime() > CACHE_TTL_MS) {
       return null;
@@ -212,19 +283,14 @@ async function readCached(
 }
 
 async function writeCached(
-  period: MobilePeriod,
-  feed: SignalFeed,
-  locale: BriefLocale,
+  key: CacheKey,
   fingerprint: string,
   brief: SignalsAiSummary,
 ): Promise<void> {
+  if (brief.source !== 'xai') return;
   await fs.mkdir(CACHE_DIR, { recursive: true });
-  const file = path.join(
-    CACHE_DIR,
-    `signals-brief-${period}-${feed}-${locale}.json`,
-  );
   await fs.writeFile(
-    file,
+    cacheFile(key),
     JSON.stringify(
       { fingerprint, cachedAt: new Date().toISOString(), brief },
       null,
@@ -243,7 +309,7 @@ async function xaiSignalsNarrative(
   const apiKey = process.env.XAI_API_KEY?.trim();
   if (!apiKey || signals.length === 0) return null;
 
-  const model = process.env.XAI_MODEL?.trim() || 'grok-2-latest';
+  const model = process.env.XAI_MODEL?.trim() || 'grok-4.3';
   const lang =
     locale === 'zh-Hans'
       ? 'Simplified Chinese'
@@ -305,30 +371,91 @@ ${signals.length > XAI_SIGNAL_CAP ? `\n(... ${signals.length - XAI_SIGNAL_CAP} m
   }
 }
 
+export async function invalidateSignalsBriefCache(): Promise<string[]> {
+  const cleared: string[] = [];
+  try {
+    const files = await fs.readdir(CACHE_DIR);
+    for (const f of files) {
+      if (f.startsWith('signals-brief-') && f.endsWith('.json')) {
+        const full = path.join(CACHE_DIR, f);
+        await fs.unlink(full);
+        cleared.push(full);
+      }
+    }
+  } catch {
+    /* no cache dir */
+  }
+  try {
+    await fs.unlink(LOG_FILE);
+    cleared.push(LOG_FILE);
+  } catch {
+    /* missing */
+  }
+  return cleared;
+}
+
+export async function getSignalsBriefCached(
+  period: MobilePeriod,
+  feed: SignalFeed,
+  locale: BriefLocale,
+  tier: SignalTierFilter,
+  side: SignalSideFilter,
+): Promise<SignalsAiSummary | null> {
+  if (process.env.SIGNALS_BRIEF_FORCE === '1') return null;
+  return readCachedLoose({ period, feed, tier, side, locale });
+}
+
 export async function getSignalsBrief(
   signals: MobileSignalItem[],
   period: MobilePeriod,
   feed: SignalFeed,
   locale: BriefLocale = 'zh-Hant',
+  tier: SignalTierFilter = 'all',
+  side: SignalSideFilter = 'all',
 ): Promise<SignalsAiSummary> {
+  const key: CacheKey = { period, feed, tier, side, locale };
   const fp = signalFingerprint(signals);
-  const cached = await readCached(period, feed, locale, fp);
+  const forceRefresh = process.env.SIGNALS_BRIEF_FORCE === '1';
+  const cached = forceRefresh ? null : await readCached(key, fp);
   if (cached) return cached;
 
   const sentiment = sentimentFromSignals(signals);
   const headline = rulesHeadline(locale, period, feed, signals.length);
   const bullets = rulesBullets(locale, signals);
-  const narrative =
-    (await xaiSignalsNarrative(locale, period, feed, signals)) ||
-    rulesNarrative(locale, period, feed, signals);
+  const rulesText = rulesNarrative(locale, period, feed, signals);
+
+  const etDate = etCalendarYmd();
+  const maxCalls = Math.max(
+    1,
+    Number(process.env.SIGNALS_BRIEF_MAX_CALLS_PER_DAY || 20),
+  );
+  const log = await readBriefLog();
+  const callsUsed = briefLogCount(log, etDate);
+  const canCallLlm =
+    Boolean(process.env.XAI_API_KEY?.trim()) &&
+    signals.length > 0 &&
+    callsUsed < maxCalls;
+
+  let narrative = rulesText;
+  let source: SignalsAiSummary['source'] = 'rules';
+
+  if (canCallLlm) {
+    const llm = await xaiSignalsNarrative(locale, period, feed, signals);
+    if (llm) {
+      narrative = llm;
+      source = 'xai';
+      await bumpBriefLog(etDate);
+    }
+  }
 
   const brief: SignalsAiSummary = {
     headline,
     narrative,
-    bullets: narrative ? [] : bullets,
+    bullets: source === 'xai' ? [] : bullets,
     sentiment,
+    source,
   };
 
-  await writeCached(period, feed, locale, fp, brief);
+  await writeCached(key, fp, brief);
   return brief;
 }

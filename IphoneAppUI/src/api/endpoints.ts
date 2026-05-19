@@ -123,6 +123,7 @@ export interface ReferencePortfolioPayload {
 
 export type SignalFeedFilter = 'all' | 'politician' | 'corporate';
 export type SignalTierFilter = 'all' | 'medium_plus' | 'high';
+export type SignalSideFilter = 'all' | 'buy' | 'sell' | 'hold';
 export type SignalItemFeed = 'politician' | 'corporate';
 
 export interface MobileSignalItem {
@@ -135,6 +136,7 @@ export interface MobileSignalItem {
   politicianName: string;
   party: 'R' | 'D' | 'I';
   side: string;
+  recommendation: 'buy' | 'sell' | 'hold';
   flags: string[];
   amountUsd: number;
   filedAt: string;
@@ -151,15 +153,22 @@ export interface SignalsAiSummary {
   narrative: string;
   bullets: string[];
   sentiment: 'bullish' | 'bearish' | 'mixed';
+  source?: 'xai' | 'rules';
 }
 
 export interface MobileSignalsPayload {
   period: Period;
   feed: SignalFeedFilter;
   tierFilter: SignalTierFilter;
+  sideFilter: SignalSideFilter;
   generatedAt: string;
-  aiSummary: SignalsAiSummary;
+  aiSummary?: SignalsAiSummary;
   signals: MobileSignalItem[];
+}
+
+export interface MobileSignalsBriefPayload {
+  aiSummary: SignalsAiSummary;
+  generatedAt: string;
 }
 
 export type SignalCriterionId =
@@ -190,6 +199,14 @@ export interface MobileSignalDetailPayload {
   };
   clusterSize: number;
   sizePercentile: number;
+  scoreBreakdown: {
+    flags: number;
+    size: number;
+    cluster: number;
+    recency: number;
+    late: number;
+  };
+  sameTickerCount: number;
 }
 
 export interface WatchlistItem {
@@ -263,12 +280,29 @@ export const mobileApi = {
     feed: SignalFeedFilter = 'all',
     locale: string,
     tier: SignalTierFilter = 'all',
+    side: SignalSideFilter = 'all',
   ) =>
     apiClient.get<MobileSignalsPayload>('/api/mobile/signals', {
       period,
       feed,
       locale,
       tier,
+      side,
+    }),
+
+  signalsBrief: (
+    period: Period,
+    feed: SignalFeedFilter = 'all',
+    locale: string,
+    tier: SignalTierFilter = 'all',
+    side: SignalSideFilter = 'all',
+  ) =>
+    apiClient.get<MobileSignalsBriefPayload>('/api/mobile/signals/brief', {
+      period,
+      feed,
+      locale,
+      tier,
+      side,
     }),
 
   signalDetail: (signalId: string, locale: string) =>

@@ -4,11 +4,21 @@ import { useNavigate, useParams } from "react-router-dom";
 import PoliticianAvatar from "@/components/politician/PoliticianAvatar";
 import TradeFlagBadges from "@/components/trade/TradeFlagBadges";
 import SignalCriteriaTable from "@/components/signals/SignalCriteriaTable";
+import { resolveSignalRecommendation } from "@/lib/signalRecommendation";
+import SignalSideBadge, { tradeSideLabel } from "@/components/signals/SignalSideBadge";
+import SignalScoreRing from "@/components/signals/SignalScoreRing";
+import SignalScoreBreakdown from "@/components/signals/SignalScoreBreakdown";
 import { fetchSignalDetail } from "@/api/services/signals";
 import { companyPathFromTicker } from "@/data/insiderEntities";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { cn, formatCurrency } from "@/lib/utils";
 import type { TradeFlagCode } from "@/types/tradeFlags";
+
+function daysSince(isoDate: string): number {
+  const filed = new Date(isoDate).getTime();
+  if (Number.isNaN(filed)) return 0;
+  return Math.max(0, (Date.now() - filed) / (1000 * 60 * 60 * 24));
+}
 
 export default function MobileSignalDetail() {
   const { signalId } = useParams<{ signalId: string }>();
@@ -47,8 +57,14 @@ export default function MobileSignalDetail() {
     );
   }
 
-  const { signal, criteria } = data;
+  const { signal, criteria, clusterSize, sizePercentile, scoreBreakdown, sameTickerCount, thresholds } =
+    data;
   const isCorporate = signal.feed === "corporate";
+  const recommendation = resolveSignalRecommendation(signal);
+  const tradeSide = tradeSideLabel(signal.side, t);
+  const daysAgo = daysSince(signal.filedAt);
+  const percentilePct = Math.round(sizePercentile * 100);
+
   const profilePath = isCorporate
     ? signal.ownerId
       ? `/insider/person/person-${signal.ownerId}`
@@ -63,19 +79,37 @@ export default function MobileSignalDetail() {
       ? companyPathFromTicker(signal.ticker)
       : null;
 
-  const tierClass =
-    signal.mlTier === "high"
-      ? "bg-accent-purple/25 text-accent-purple"
-      : signal.mlTier === "medium"
-        ? "bg-amber-500/20 text-amber-400"
-        : "bg-muted text-muted-foreground";
+  const accentBorder =
+    recommendation === "buy"
+      ? "border-l-buy"
+      : recommendation === "sell"
+        ? "border-l-sell"
+        : "border-l-muted-foreground";
 
-  const sideLabel =
-    signal.side === "buy"
-      ? t.trade.buy
-      : signal.side === "sell"
-        ? t.trade.sell
-        : t.trade.proposedSale;
+  const insightLine = t.signalDetail.insight({
+    name: signal.politicianName,
+    side: tradeSide,
+    ticker: signal.ticker,
+    amount: formatCurrency(signal.amountUsd),
+    percentile: percentilePct,
+    daysAgo,
+  });
+
+  const tickerContext = isCorporate
+    ? t.signalDetail.tickerContextCorporate({
+        count: sameTickerCount,
+        ticker: signal.ticker,
+        side: tradeSide,
+        days: thresholds.clusterWindowDays,
+      })
+    : clusterSize >= 2
+      ? t.signalDetail.tickerContextCongress({
+          count: clusterSize,
+          ticker: signal.ticker,
+          side: tradeSide,
+          days: thresholds.clusterWindowDays,
+        })
+      : null;
 
   return (
     <div className="min-h-screen pb-tab-safe">
@@ -88,25 +122,58 @@ export default function MobileSignalDetail() {
           <ArrowLeft className="h-4 w-4" />
           {t.signalDetail.back}
         </button>
-        <div className="flex items-start justify-between gap-3">
-          <div>
-            <p className="text-xs text-muted-foreground">{t.signalDetail.title}</p>
-            <h1 className="text-2xl font-bold tracking-tight">{signal.ticker}</h1>
-            <p className="mt-0.5 text-sm text-muted-foreground">{signal.issuerName}</p>
-          </div>
-          <span
-            className={cn(
-              "shrink-0 rounded-lg px-2.5 py-1 text-xs font-semibold tabular-nums",
-              tierClass,
-            )}
-          >
-            {t.signalsPage.mlScore(signal.mlScore)} ·{" "}
-            {t.signalsPage.mlTier[signal.mlTier]}
-          </span>
-        </div>
+        <p className="text-xs text-muted-foreground">{t.signalDetail.title}</p>
       </header>
 
       <div className="mx-4 mt-4 space-y-4">
+        <section
+          className={cn(
+            "glass-card-elevated overflow-hidden border-l-4 p-4",
+            accentBorder,
+          )}
+        >
+          <div className="flex items-start justify-between gap-3">
+            <div className="min-w-0 flex-1">
+              <div className="flex flex-wrap items-center gap-2">
+                <h1 className="text-2xl font-bold tracking-tight">{signal.ticker}</h1>
+                <SignalSideBadge recommendation={recommendation} />
+                <span className="text-[10px] text-muted-foreground">
+                  {t.signalsPage.filingLabel(tradeSide)}
+                </span>
+                <span className="rounded-md bg-muted/60 px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground">
+                  {t.signalsPage.feedBadge[signal.feed]}
+                </span>
+              </div>
+              <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">
+                {signal.issuerName}
+              </p>
+            </div>
+            <SignalScoreRing
+              score={signal.mlScore}
+              tier={signal.mlTier}
+              tierLabel={t.signalsPage.mlTier[signal.mlTier]}
+            />
+          </div>
+
+          <div className="mt-4 flex items-end justify-between gap-3 border-t border-border/40 pt-4">
+            <div>
+              <p className="text-3xl font-bold tabular-nums tracking-tight">
+                {formatCurrency(signal.amountUsd)}
+              </p>
+              <p className="mt-1 text-xs text-muted-foreground">{signal.filedAt}</p>
+            </div>
+            <TradeFlagBadges flags={signal.flags as TradeFlagCode[]} />
+          </div>
+
+          <p className="mt-3 rounded-lg bg-white/5 px-3 py-2 text-xs leading-relaxed text-foreground/90">
+            {insightLine}
+          </p>
+
+          {tickerContext && (
+            <p className="mt-2 text-[11px] text-muted-foreground">{tickerContext}</p>
+          )}
+        </section>
+
         <section className="glass-card-elevated p-4">
           <div className="flex items-center gap-3">
             <PoliticianAvatar
@@ -119,14 +186,26 @@ export default function MobileSignalDetail() {
             <div className="min-w-0 flex-1">
               <p className="font-semibold">{signal.politicianName}</p>
               <p className="text-xs text-muted-foreground">
-                {t.signalsPage.feedBadge[signal.feed]} · {sideLabel} ·{" "}
-                {signal.filedAt}
-              </p>
-              <p className="mt-1 text-sm font-medium tabular-nums">
-                {formatCurrency(signal.amountUsd)}
+                {t.signalsPage.feedBadge[signal.feed]} · {signal.filedAt}
               </p>
             </div>
-            <TradeFlagBadges flags={signal.flags as TradeFlagCode[]} />
+            {profilePath && (
+              <button
+                type="button"
+                onClick={() => navigate(profilePath)}
+                className="shrink-0 text-xs font-medium text-accent-purple"
+              >
+                {isCorporate ? t.signalDetail.viewInsider : t.signalDetail.viewPolitician}
+              </button>
+            )}
+          </div>
+
+          <div className="mt-4 border-t border-border/40 pt-4">
+            <SignalScoreBreakdown
+              breakdown={scoreBreakdown}
+              labels={t.signalDetail.scoreBreakdown}
+              title={t.signalDetail.scoreTitle}
+            />
           </div>
         </section>
 
@@ -140,19 +219,9 @@ export default function MobileSignalDetail() {
           </p>
         </section>
 
-        <section className="space-y-2 pb-6">
-          <h2 className="px-0.5 text-sm font-semibold">{t.signalDetail.links}</h2>
-          {profilePath && (
-            <button
-              type="button"
-              onClick={() => navigate(profilePath)}
-              className="flex w-full items-center justify-between rounded-card border border-border/60 bg-surface-elevated/80 px-4 py-3 text-left text-sm"
-            >
-              {isCorporate ? t.signalDetail.viewInsider : t.signalDetail.viewPolitician}
-              <ChevronRight className="h-4 w-4 text-muted-foreground" />
-            </button>
-          )}
-          {companyPath && (
+        {companyPath && (
+          <section className="space-y-2 pb-6">
+            <h2 className="px-0.5 text-sm font-semibold">{t.signalDetail.links}</h2>
             <button
               type="button"
               onClick={() => navigate(companyPath)}
@@ -161,8 +230,8 @@ export default function MobileSignalDetail() {
               {t.signalDetail.viewCompany}
               <ChevronRight className="h-4 w-4 text-muted-foreground" />
             </button>
-          )}
-        </section>
+          </section>
+        )}
       </div>
     </div>
   );

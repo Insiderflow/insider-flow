@@ -191,6 +191,14 @@ const zhHans: Messages = {
     feedBadge: { politician: "国会", corporate: "企业" },
     tierAria: "评分筛选",
     tier: { high: "高", medium_plus: "中+", all: "全部" },
+    sideAria: "方向筛选",
+    side: { buy: "买", sell: "卖", hold: "持" },
+    recommendation: { buy: "买", sell: "卖", hold: "持" },
+    recommendationAria: (r) =>
+      r === "buy" ? "建议买入" : r === "sell" ? "建议卖出" : "建议观望",
+    tradeSide: { buy: "买入", sell: "卖出", proposed_sale: "拟出售" },
+    filingLabel: (side) => `申报：${side}`,
+    sideFilter: { all: "全部", buy: "买", sell: "卖", hold: "持" },
     headline: (flags, ticker, name) =>
       `${flags.join("、")} · ${ticker} · ${name}`,
     insiderHeadline: (flags, ticker, name) =>
@@ -214,6 +222,27 @@ const zhHans: Messages = {
     criteriaCol: "条件",
     detailCol: "说明",
     disclaimer: "绿色为命中规则或评分因子；仅供研究，非投资建议。",
+    hitCount: (met, total) => `${met}/${total} 命中`,
+    showUnmet: "查看未命中",
+    hideUnmet: "收合未命中",
+    scoreTitle: "评分构成",
+    scoreBreakdown: {
+      flags: "规则",
+      size: "金额",
+      cluster: "集群",
+      recency: "新近",
+      late: "延迟",
+    },
+    insight: ({ name, side, ticker, amount, percentile, daysAgo }) =>
+      `${name} ${side} ${ticker} ${amount}` +
+      (percentile >= 85 ? `（历史 P${Math.round(percentile)}）` : "") +
+      (daysAgo <= 7 ? `，${Math.max(1, Math.round(daysAgo))} 日内申报` : ""),
+    tickerContextCongress: ({ count, ticker, side, days }) =>
+      `近 ${days} 日共 ${count} 位议员${side} ${ticker}`,
+    tickerContextCorporate: ({ count, ticker, side, days }) =>
+      count > 0
+        ? `近 ${days} 日另有 ${count} 笔内部人${side} ${ticker}`
+        : `近 ${days} 日暂无其他内部人同向交易 ${ticker}`,
     links: "相关页面",
     viewPolitician: "议员档案",
     viewInsider: "内部人档案",

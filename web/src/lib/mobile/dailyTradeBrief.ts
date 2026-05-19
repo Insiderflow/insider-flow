@@ -376,6 +376,72 @@ function briefLogCount(log: BriefLog | null, etDate: string, mode: BriefMode): n
   return mode === 'politician' ? log.politician : log.insider;
 }
 
+export async function invalidateDailyBriefCache(
+  etDate?: string,
+): Promise<{ etDate: string; cleared: string[] }> {
+  const date = etDate ?? etCalendarYmd();
+  const cleared: string[] = [];
+  for (const mode of ['politician', 'insider'] as BriefMode[]) {
+    const file = path.join(CACHE_DIR, `daily-brief-${mode}-${date}.json`);
+    try {
+      await fs.unlink(file);
+      cleared.push(file);
+    } catch {
+      /* missing */
+    }
+  }
+  try {
+    await fs.unlink(LOG_FILE);
+    cleared.push(LOG_FILE);
+  } catch {
+    /* missing */
+  }
+  return { etDate: date, cleared };
+}
+
+export type WarmDailyBriefsResult = {
+  etDate: string;
+  cleared: string[];
+  briefs: Array<{
+    mode: BriefMode;
+    locale: BriefLocale;
+    source: DailyTradeBrief['source'];
+    tradeCount: number;
+    headline: string;
+    narrativePreview: string;
+  }>;
+};
+
+export async function warmDailyBriefs(options?: {
+  force?: boolean;
+  locales?: BriefLocale[];
+}): Promise<WarmDailyBriefsResult> {
+  const locales = options?.locales ?? ['zh-Hant', 'zh-Hans', 'en'];
+  const { etDate, cleared } = options?.force
+    ? await invalidateDailyBriefCache()
+    : { etDate: etCalendarYmd(), cleared: [] as string[] };
+
+  const briefs: WarmDailyBriefsResult['briefs'] = [];
+  for (const locale of locales) {
+    for (const [mode, loader] of [
+      ['politician', getPoliticianDailyTradeBrief] as const,
+      ['insider', getInsiderDailyTradeBrief] as const,
+    ]) {
+      const brief = await loader(locale, '7D');
+      briefs.push({
+        mode,
+        locale,
+        source: brief.source,
+        tradeCount: brief.tradeCount,
+        headline: brief.headline,
+        narrativePreview: brief.narrative.slice(0, 160),
+      });
+    }
+  }
+
+  return { etDate, cleared, briefs };
+}
+
 async function readCachedBrief(
   mode: BriefMode,
   etDate: string,
@@ -688,7 +754,7 @@ async function xaiPoliticianNarrative(
   const apiKey = process.env.XAI_API_KEY?.trim();
   if (!apiKey) return null;
 
-  const model = process.env.XAI_MODEL?.trim() || 'grok-2-latest';
+  const model = process.env.XAI_MODEL?.trim() || 'grok-4.3';
   const lang =
     locale === 'zh-Hans' ? 'Simplified Chinese' : locale === 'zh-Hant' ? 'Traditional Chinese' : 'English';
 
@@ -756,7 +822,7 @@ async function xaiInsiderNarrative(
   const apiKey = process.env.XAI_API_KEY?.trim();
   if (!apiKey) return null;
 
-  const model = process.env.XAI_MODEL?.trim() || 'grok-2-latest';
+  const model = process.env.XAI_MODEL?.trim() || 'grok-4.3';
   const lang =
     locale === 'zh-Hans' ? 'Simplified Chinese' : locale === 'zh-Hant' ? 'Traditional Chinese' : 'English';
 
@@ -845,7 +911,8 @@ async function buildDailyTradeBrief<T extends PoliticianBriefTrade | InsiderBrie
 
   const { briefTrades, buys, sells, total, stats } = await load(focusDateEt);
 
-  const cached = await readCachedBrief(mode, focusDateEt);
+  const forceRefresh = process.env.DAILY_BRIEF_FORCE === '1';
+  const cached = forceRefresh ? null : await readCachedBrief(mode, focusDateEt);
   if (cached && cached.tradeCount === total) return cached;
 
   const log = await readBriefLog();

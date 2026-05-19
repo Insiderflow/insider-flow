@@ -152,28 +152,23 @@ export async function fetchCongressClusterKeys(
   prisma: Pick<PrismaClient, 'trade'>,
   tradeWhere: Prisma.TradeWhereInput,
 ): Promise<Set<string>> {
-  const since = new Date();
-  since.setDate(since.getDate() - CLUSTER_WINDOW_DAYS);
-
-  const rows = await prisma.trade.findMany({
-    where: {
-      ...tradeWhere,
-      traded_at: { gte: since },
-    },
-    select: {
-      politician_id: true,
-      type: true,
-      Issuer: { select: { ticker: true } },
-    },
-  });
-
-  return buildCongressClusterKeys(mapClusterRows(rows));
+  const { keys } = await fetchCongressClusterMeta(prisma, tradeWhere);
+  return keys;
 }
 
 export async function fetchCongressClusterCounts(
   prisma: Pick<PrismaClient, 'trade'>,
   tradeWhere: Prisma.TradeWhereInput,
 ): Promise<Map<string, number>> {
+  const { counts } = await fetchCongressClusterMeta(prisma, tradeWhere);
+  return counts;
+}
+
+/** Single query for cluster keys + counts (7-day window). */
+export async function fetchCongressClusterMeta(
+  prisma: Pick<PrismaClient, 'trade'>,
+  tradeWhere: Prisma.TradeWhereInput,
+): Promise<{ keys: Set<string>; counts: Map<string, number> }> {
   const since = new Date();
   since.setDate(since.getDate() - CLUSTER_WINDOW_DAYS);
 
@@ -189,7 +184,11 @@ export async function fetchCongressClusterCounts(
     },
   });
 
-  return buildCongressClusterCounts(mapClusterRows(rows));
+  const mapped = mapClusterRows(rows);
+  return {
+    keys: buildCongressClusterKeys(mapped),
+    counts: buildCongressClusterCounts(mapped),
+  };
 }
 
 export function clusterKeyForTrade(ticker: string, side: TradeSideFlag): string {

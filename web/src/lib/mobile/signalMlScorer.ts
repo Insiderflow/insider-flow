@@ -33,34 +33,23 @@ export type MlScoreResult = {
   mlScore: number;
   mlTier: MlSignalTier;
   mlReasons: MlReasonCode[];
+  breakdown: MlScoreBreakdown;
 };
 
-export function tradeAmountPercentile(
-  amountUsd: number,
-  politicianAmounts: number[],
-): number {
-  if (!Number.isFinite(amountUsd) || amountUsd <= 0) return 0;
-  if (!politicianAmounts.length) return 0.5;
-  const sorted = [...politicianAmounts].sort((a, b) => a - b);
-  let below = 0;
-  for (const v of sorted) {
-    if (v <= amountUsd) below += 1;
-  }
-  return below / sorted.length;
-}
+export type MlScoreBreakdown = {
+  flags: number;
+  size: number;
+  cluster: number;
+  recency: number;
+  late: number;
+};
 
-export function computeMlSignalScore(input: MlScoreInput): MlScoreResult {
-  const reasons: MlReasonCode[] = [];
-
+function scoreParts(input: MlScoreInput): MlScoreBreakdown {
   const flagPart = Math.min(W.flags, (input.flagScore / 55) * W.flags);
-  if (input.flags.includes('congress_cluster')) reasons.push('congress_cluster');
-  if (input.flags.includes('committee_sector')) reasons.push('committee_sector');
-  if (input.flags.includes('notable_size')) reasons.push('notable_size');
 
   let sizePart = 0;
   if (input.sizePercentile >= 0.85) {
     sizePart = W.sizePercentile;
-    reasons.push('unusual_size');
   } else if (input.sizePercentile >= 0.65) {
     sizePart = W.sizePercentile * 0.55;
   } else {
@@ -83,21 +72,66 @@ export function computeMlSignalScore(input: MlScoreInput): MlScoreResult {
         : input.daysSincePublished <= 7
           ? W.recency * 0.4
           : 0;
-  if (recencyPart >= W.recency * 0.4) reasons.push('recent_filing');
 
   let latePart = 0;
   if (input.filedAfterDays != null && input.filedAfterDays >= 45) {
     latePart = W.lateFiling;
+  }
+
+  return {
+    flags: Math.round(flagPart),
+    size: Math.round(sizePart),
+    cluster: Math.round(clusterPart),
+    recency: Math.round(recencyPart),
+    late: Math.round(latePart),
+  };
+}
+
+export function computeMlSignalScore(input: MlScoreInput): MlScoreResult {
+  const reasons: MlReasonCode[] = [];
+  const breakdown = scoreParts(input);
+
+  if (input.flags.includes('congress_cluster')) reasons.push('congress_cluster');
+  if (input.flags.includes('insider_cluster')) reasons.push('congress_cluster');
+  if (input.flags.includes('committee_sector')) reasons.push('committee_sector');
+  if (input.flags.includes('notable_size')) reasons.push('notable_size');
+
+  if (input.sizePercentile >= 0.85) {
+    reasons.push('unusual_size');
+  }
+
+  if (breakdown.recency >= W.recency * 0.4) reasons.push('recent_filing');
+
+  if (input.filedAfterDays != null && input.filedAfterDays >= 45) {
     reasons.push('late_disclosure');
   }
 
-  const raw = flagPart + sizePart + clusterPart + recencyPart + latePart;
+  const raw =
+    breakdown.flags +
+    breakdown.size +
+    breakdown.cluster +
+    breakdown.recency +
+    breakdown.late;
   const mlScore = Math.round(Math.min(100, Math.max(0, raw)));
 
   const mlTier: MlSignalTier =
     mlScore >= 70 ? 'high' : mlScore >= 45 ? 'medium' : 'low';
 
-  return { mlScore, mlTier, mlReasons: [...new Set(reasons)] };
+  return { mlScore, mlTier, mlReasons: [...new Set(reasons)], breakdown };
+}
+
+export function tradeAmountPercentile(
+  amountUsd: number,
+  politicianAmounts: number[],
+): number {
+  if (!Number.isFinite(amountUsd) || amountUsd <= 0) return 0;
+  if (!politicianAmounts.length) return 0.5;
+  const sorted = [...politicianAmounts].sort((a, b) => a - b);
+  let below = 0;
+  for (const v of sorted) {
+    if (v <= amountUsd) below += 1;
+  }
+  return below / sorted.length;
 }
 
 export async function buildPoliticianAmountHistories(

@@ -5,9 +5,9 @@ import {
   defaultTierForPeriod,
   type SignalFeed,
   type SignalTierFilter,
+  type SignalSideFilter,
 } from '@/lib/mobile/signalsBuilder';
 import { requirePaidMobileUser } from '@/lib/mobile/requirePaidMobile';
-import type { BriefLocale } from '@/lib/mobile/dailyTradeBrief';
 import type { MobilePeriod } from '@/lib/mobile/dashboardBuilder';
 
 export const dynamic = 'force-dynamic';
@@ -25,6 +25,9 @@ export async function GET(req: NextRequest) {
     const tierRaw = (searchParams.get('tier') || defaultTierForPeriod(p)).toLowerCase();
     const tierFilter: SignalTierFilter =
       tierRaw === 'high' || tierRaw === 'medium_plus' ? tierRaw : 'all';
+    const sideRaw = (searchParams.get('side') || 'all').toLowerCase();
+    const sideFilter: SignalSideFilter =
+      sideRaw === 'buy' || sideRaw === 'sell' || sideRaw === 'hold' ? sideRaw : 'all';
     const defaultLimit = defaultSignalsLimit(p);
     const limit = Math.min(
       60,
@@ -35,10 +38,14 @@ export async function GET(req: NextRequest) {
       feedRaw === 'politician' || feedRaw === 'corporate' || feedRaw === 'all'
         ? feedRaw
         : 'all';
-    const localeRaw = searchParams.get('locale') || 'zh-Hant';
-    const locale: BriefLocale =
-      localeRaw === 'zh-Hans' || localeRaw === 'en' ? localeRaw : 'zh-Hant';
-    const data = await buildMobileSignals(p, limit, feed, locale, tierFilter);
+    const data = await buildMobileSignals(
+      p,
+      limit,
+      feed,
+      'zh-Hant',
+      tierFilter,
+      sideFilter,
+    );
     return NextResponse.json(data, {
       headers: { 'Cache-Control': 'private, no-store, max-age=0' },
     });

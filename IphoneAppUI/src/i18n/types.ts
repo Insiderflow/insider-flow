@@ -157,6 +157,13 @@ export interface Messages {
     feedBadge: { politician: string; corporate: string };
     tierAria: string;
     tier: { all: string; medium_plus: string; high: string };
+    sideAria: string;
+    side: { buy: string; sell: string; hold: string };
+    recommendation: { buy: string; sell: string; hold: string };
+    recommendationAria: (r: "buy" | "sell" | "hold") => string;
+    tradeSide: { buy: string; sell: string; proposed_sale: string };
+    filingLabel: (side: string) => string;
+    sideFilter: { all: string; buy: string; sell: string; hold: string };
     headline: (flags: string[], ticker: string, name: string) => string;
     insiderHeadline: (flags: string[], ticker: string, name: string) => string;
     mlScore: (score: number) => string;
@@ -179,6 +186,37 @@ export interface Messages {
     criteriaCol: string;
     detailCol: string;
     disclaimer: string;
+    hitCount: (met: number, total: number) => string;
+    showUnmet: string;
+    hideUnmet: string;
+    scoreTitle: string;
+    scoreBreakdown: {
+      flags: string;
+      size: string;
+      cluster: string;
+      recency: string;
+      late: string;
+    };
+    insight: (args: {
+      name: string;
+      side: string;
+      ticker: string;
+      amount: string;
+      percentile: number;
+      daysAgo: number;
+    }) => string;
+    tickerContextCongress: (args: {
+      count: number;
+      ticker: string;
+      side: string;
+      days: number;
+    }) => string;
+    tickerContextCorporate: (args: {
+      count: number;
+      ticker: string;
+      side: string;
+      days: number;
+    }) => string;
     links: string;
     viewPolitician: string;
     viewInsider: string;

@@ -10,8 +10,7 @@ import {
   clusterKeyForTrade,
   computeInsiderNotableFlags,
   computePoliticianTradeFlags,
-  fetchCongressClusterCounts,
-  fetchCongressClusterKeys,
+  fetchCongressClusterMeta,
   NOTABLE_SIZE_USD,
   type TradeFlagCode,
 } from '@/lib/mobile/tradeFlags';
@@ -20,12 +19,19 @@ import type { BriefLocale } from '@/lib/mobile/dailyTradeBrief';
 import type { MobilePeriod } from '@/lib/mobile/dashboardBuilder';
 import {
   getSignalsBrief,
+  getSignalsBriefCached,
   type SignalsAiSummary,
 } from '@/lib/mobile/signalsBriefBuilder';
+import {
+  computeSignalRecommendation,
+  passesRecommendationFilter,
+  type SignalRecommendation,
+} from '@/lib/mobile/signalRecommendation';
 
 export type SignalFeed = 'politician' | 'corporate' | 'all';
 export type SignalItemFeed = 'politician' | 'corporate';
 export type SignalTierFilter = 'all' | 'medium_plus' | 'high';
+export type SignalSideFilter = 'all' | 'buy' | 'sell' | 'hold';
 export type MlSignalTier = 'high' | 'medium' | 'low';
 
 export function passesTierFilter(
@@ -43,6 +49,21 @@ export function defaultTierForPeriod(period: MobilePeriod): SignalTierFilter {
 
 export function defaultSignalsLimit(period: MobilePeriod): number {
   return period === '1D' ? 25 : 40;
+}
+
+export function passesSideFilter(
+  recommendation: SignalRecommendation,
+  sideFilter: SignalSideFilter,
+): boolean {
+  return passesRecommendationFilter(recommendation, sideFilter);
+}
+
+function filterBySide(
+  signals: MobileSignalItem[],
+  sideFilter: SignalSideFilter,
+): MobileSignalItem[] {
+  if (sideFilter === 'all') return signals;
+  return signals.filter((s) => passesSideFilter(s.recommendation, sideFilter));
 }
 
 function filterByTier(
@@ -94,6 +115,8 @@ export type MobileSignalItem = {
   politicianName: string;
   party: 'R' | 'D' | 'I';
   side: 'buy' | 'sell' | 'proposed_sale';
+  /** User-facing action hint (買/賣/持), derived from ML conviction — not raw filing side. */
+  recommendation: SignalRecommendation;
   flags: TradeFlagCode[];
   amountUsd: number;
   filedAt: string;
@@ -111,8 +134,9 @@ export type MobileSignalsPayload = {
   period: MobilePeriod;
   feed: SignalFeed;
   tierFilter: SignalTierFilter;
+  sideFilter: SignalSideFilter;
   generatedAt: string;
-  aiSummary: SignalsAiSummary;
+  aiSummary?: SignalsAiSummary;
   signals: MobileSignalItem[];
 };
 
@@ -138,8 +162,9 @@ async function buildPoliticianSignals(
   const since = periodStart(period);
   const baseWhere = politicianTradeWhere();
   const where = { ...baseWhere, traded_at: { gte: since } };
+  const scanLimit = Math.min(200, Math.max(take * 3, 60));
 
-  const [rows, clusterKeys, clusterCounts] = await Promise.all([
+  const [rows, { keys: clusterKeys, counts: clusterCounts }] = await Promise.all([
     prisma.trade.findMany({
       where,
       include: {
@@ -147,10 +172,9 @@ async function buildPoliticianSignals(
         Issuer: { include: { IndustrySubsector: true } },
       },
       orderBy: { published_at: 'desc' },
-      take: 500,
+      take: scanLimit,
     }),
-    fetchCongressClusterKeys(prisma, baseWhere),
-    fetchCongressClusterCounts(prisma, baseWhere),
+    fetchCongressClusterMeta(prisma, baseWhere),
   ]);
 
   const politicianIds = [...new Set(rows.map((r) => r.politician_id))];
@@ -216,6 +240,7 @@ async function buildPoliticianSignals(
       politicianName: r.Politician?.name || '',
       party: partyCode(r.Politician?.party),
       side,
+      recommendation: computeSignalRecommendation({ side, mlTier: ml.mlTier }),
       flags,
       amountUsd,
       filedAt:
@@ -238,11 +263,12 @@ async function buildCorporateSignals(
   take: number,
 ): Promise<MobileSignalItem[]> {
   const since = periodStart(period);
+  const scanLimit = Math.min(200, Math.max(take * 3, 60));
   const rows = await prisma.openInsiderTransaction.findMany({
     where: { transactionDate: { gte: since } },
     include: { company: true, owner: true },
     orderBy: { transactionDate: 'desc' },
-    take: 500,
+    take: scanLimit,
   });
 
   const now = Date.now();
@@ -280,6 +306,7 @@ async function buildCorporateSignals(
       politicianName: ownerName,
       party: 'I',
       side,
+      recommendation: computeSignalRecommendation({ side, mlTier: ml.mlTier }),
       flags,
       amountUsd,
       filedAt: r.transactionDate.toISOString().slice(0, 10),
@@ -295,19 +322,19 @@ async function buildCorporateSignals(
   return signals.slice(0, take);
 }
 
-export async function buildMobileSignals(
+export async function buildFilteredSignals(
   period: MobilePeriod = '7D',
   limit = 40,
   feed: SignalFeed = 'all',
-  locale: BriefLocale = 'zh-Hant',
   tierFilter: SignalTierFilter = defaultTierForPeriod(period),
-): Promise<MobileSignalsPayload> {
+  sideFilter: SignalSideFilter = 'all',
+): Promise<MobileSignalItem[]> {
   const poolSize =
-    tierFilter === 'all'
+    tierFilter === 'all' && sideFilter === 'all'
       ? feed === 'all'
         ? Math.max(limit, 80)
         : limit
-      : Math.min(500, Math.max(limit * 4, 120));
+      : Math.min(200, Math.max(limit * 4, 120));
 
   const [politicianSignals, corporateSignals] = await Promise.all([
     feed === 'corporate'
@@ -325,15 +352,82 @@ export async function buildMobileSignals(
         ? politicianSignals
         : corporateSignals;
 
-  const filtered = filterByTier(merged, tierFilter).slice(0, limit);
-  const aiSummary = await getSignalsBrief(filtered, period, feed, locale);
+  return filterBySide(
+    filterByTier(merged, tierFilter),
+    sideFilter,
+  ).slice(0, limit);
+}
 
-  return {
+export async function buildMobileSignals(
+  period: MobilePeriod = '7D',
+  limit = 40,
+  feed: SignalFeed = 'all',
+  locale: BriefLocale = 'zh-Hant',
+  tierFilter: SignalTierFilter = defaultTierForPeriod(period),
+  sideFilter: SignalSideFilter = 'all',
+  options?: { includeBrief?: boolean },
+): Promise<MobileSignalsPayload> {
+  const filtered = await buildFilteredSignals(
+    period,
+    limit,
+    feed,
+    tierFilter,
+    sideFilter,
+  );
+
+  const payload: MobileSignalsPayload = {
     period,
     feed,
     tierFilter,
+    sideFilter,
     generatedAt: new Date().toISOString(),
-    aiSummary,
     signals: filtered,
   };
+
+  if (options?.includeBrief) {
+    payload.aiSummary = await getSignalsBrief(
+      filtered,
+      period,
+      feed,
+      locale,
+      tierFilter,
+      sideFilter,
+    );
+  }
+
+  return payload;
+}
+
+export async function buildMobileSignalsBrief(
+  period: MobilePeriod = '7D',
+  limit = 40,
+  feed: SignalFeed = 'all',
+  locale: BriefLocale = 'zh-Hant',
+  tierFilter: SignalTierFilter = defaultTierForPeriod(period),
+  sideFilter: SignalSideFilter = 'all',
+): Promise<SignalsAiSummary> {
+  const cached = await getSignalsBriefCached(
+    period,
+    feed,
+    locale,
+    tierFilter,
+    sideFilter,
+  );
+  if (cached) return cached;
+
+  const filtered = await buildFilteredSignals(
+    period,
+    limit,
+    feed,
+    tierFilter,
+    sideFilter,
+  );
+  return getSignalsBrief(
+    filtered,
+    period,
+    feed,
+    locale,
+    tierFilter,
+    sideFilter,
+  );
 }
