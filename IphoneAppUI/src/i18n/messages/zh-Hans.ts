@@ -185,6 +185,7 @@ const zhHans: Messages = {
     title: "智能信号",
     subtitle: "规则标记 + 异常评分排序，非投资建议",
     empty: "此期间尚无标记交易",
+    loadError: "无法加载信号，请刷新或稍后再试",
     periodLabel: "期间",
     feedAria: "信号来源",
     feed: { all: "全部", politician: "国会", corporate: "企业" },

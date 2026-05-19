@@ -32,11 +32,14 @@ export default function MobileSignals() {
   const {
     data,
     isLoading: signalsLoading,
+    isError: signalsError,
+    error: signalsErr,
     refetch: refetchSignals,
   } = useQuery({
     queryKey: [SIGNALS_KEY, ...queryParams],
     queryFn: () => fetchSignals(period, feed, locale, tier),
     staleTime: 60_000,
+    retry: 1,
   });
 
   const {
@@ -47,6 +50,7 @@ export default function MobileSignals() {
     queryKey: [BRIEF_KEY, ...queryParams],
     queryFn: () => fetchSignalsBrief(period, feed, locale, tier),
     staleTime: 5 * 60_000,
+    retry: false,
   });
 
   const aiSummary = briefData?.aiSummary ?? data?.aiSummary;
@@ -76,7 +80,12 @@ export default function MobileSignals() {
             [0, 1, 2].map((i) => (
               <div key={i} className="h-28 rounded-xl shimmer-loading" />
             ))}
-          {!signalsLoading && data?.signals.length === 0 && (
+          {signalsError && (
+            <p className="rounded-card border border-sell/30 bg-sell-muted/20 px-4 py-3 text-center text-sm text-sell">
+              {signalsErr instanceof Error ? signalsErr.message : t.signalsPage.loadError}
+            </p>
+          )}
+          {!signalsLoading && !signalsError && data?.signals.length === 0 && (
             <p className="py-12 text-center text-sm text-muted-foreground">
               {t.signalsPage.empty}
             </p>

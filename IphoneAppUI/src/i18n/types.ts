@@ -151,6 +151,7 @@ export interface Messages {
     title: string;
     subtitle: string;
     empty: string;
+    loadError: string;
     periodLabel: string;
     feedAria: string;
     feed: { all: string; politician: string; corporate: string };

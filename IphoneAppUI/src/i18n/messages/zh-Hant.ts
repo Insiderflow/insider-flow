@@ -185,6 +185,7 @@ const zhHant: Messages = {
     title: "智能訊號",
     subtitle: "規則標記 + 異常評分排序，非投資建議",
     empty: "此期間尚無標記交易",
+    loadError: "無法載入訊號，請重新整理或稍後再試",
     periodLabel: "期間",
     feedAria: "訊號來源",
     feed: { all: "全部", politician: "國會", corporate: "企業" },
