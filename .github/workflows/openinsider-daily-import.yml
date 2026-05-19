@@ -8,6 +8,17 @@ on:
     - cron: '30 14 * * *'
     - cron: '30 17 * * *'
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/openinsider-daily-import.yml'
+      - '.github/workflows/daily-scrape.yml'
+      - 'web/scripts/openinsider_ci_sync.js'
+      - 'web/scripts/sync_published_day.js'
+      - 'web/scripts/openinsider_backfill_filing_days.js'
+      - 'web/scripts/openinsider_daily_import.js'
+      - 'web/scripts/lib/openinsider_*.js'
+      - 'web/package.json'
 
 concurrency:
   group: openinsider-daily-import
