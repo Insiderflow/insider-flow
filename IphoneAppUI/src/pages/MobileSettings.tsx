@@ -16,6 +16,7 @@ import {
   Sparkles,
   Star,
   UserMinus,
+  Briefcase,
 } from "lucide-react";
 import LanguageSheet from "@/components/settings/LanguageSheet";
 import SettingsRow from "@/components/settings/SettingsRow";
@@ -140,6 +141,13 @@ export default function MobileSettings() {
             label={isPaid ? t.settings.manageSubscription : t.settings.upgradeToPro}
             onClick={() => navigate("/settings/subscription")}
           />
+          {isPaid && (
+            <SettingsRow
+              icon={Briefcase}
+              label={t.settings.referencePortfolio}
+              onClick={() => navigate("/portfolio")}
+            />
+          )}
           <SettingsRow
             icon={RotateCcw}
             label={restoring ? t.paywall.restoring : t.settings.restorePurchases}

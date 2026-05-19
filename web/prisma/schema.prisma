@@ -47,6 +47,7 @@ model Politician {
   created_at    DateTime        @default(now())
   Trade         Trade[]
   UserWatchlist UserWatchlist[]
+  referencePortfolios UserReferencePortfolio[]
 
   @@index([name])
   @@index([party])
@@ -121,6 +122,7 @@ model User {
   subscription_audits      SubscriptionTransitionAudit[]
   LegacySession            LegacySession[]
   UserWatchlist            UserWatchlist[]
+  referencePortfolios      UserReferencePortfolio[]
   accounts                 Account[]
   sessions                 Session[]
 }
@@ -348,6 +350,46 @@ model SubscriptionTransitionAudit {
   @@index([created_at(sort: Desc)])
   @@index([source, created_at(sort: Desc)])
   @@map("subscription_transition_audits")
+}
+
+enum ReferencePortfolioTemplate {
+  politician_mirror
+  flagged_buys
+}
+
+model UserReferencePortfolio {
+  id              String                     @id @default(cuid())
+  user_id         String
+  name            String
+  template        ReferencePortfolioTemplate
+  politician_id   String?
+  period_days     Int                        @default(30)
+  position_limit  Int                        @default(10)
+  last_built_at   DateTime?
+  created_at      DateTime                   @default(now())
+  updated_at      DateTime                   @updatedAt
+  User            User                       @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  Politician      Politician?                @relation(fields: [politician_id], references: [id], onDelete: SetNull)
+  positions       UserReferencePortfolioPosition[]
+
+  @@index([user_id])
+  @@map("user_reference_portfolios")
+}
+
+model UserReferencePortfolioPosition {
+  id              String   @id @default(cuid())
+  portfolio_id    String
+  ticker          String
+  issuer_name     String?
+  side            String
+  weight_pct      Float
+  source_trade_id String?
+  disclosure_date DateTime?
+  added_at        DateTime @default(now())
+  portfolio       UserReferencePortfolio @relation(fields: [portfolio_id], references: [id], onDelete: Cascade)
+
+  @@index([portfolio_id])
+  @@map("user_reference_portfolio_positions")
 }
 
 model OpsAlertNotification {

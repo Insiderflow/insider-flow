@@ -84,6 +84,65 @@ export interface MobileDiscoverPayload {
   recentFlagged: DiscoverFlaggedTrade[];
 }
 
+export type ReferencePortfolioTemplate = 'politician_mirror' | 'flagged_buys';
+
+export interface ReferencePortfolioPosition {
+  id: string;
+  ticker: string;
+  issuerName: string | null;
+  side: string;
+  weightPct: number;
+  disclosureDate: string | null;
+  sourceTradeId: string | null;
+}
+
+export interface ReferencePortfolio {
+  id: string;
+  name: string;
+  template: ReferencePortfolioTemplate;
+  politicianId: string | null;
+  politicianName: string | null;
+  periodDays: number;
+  positionLimit: number;
+  lastBuiltAt: string | null;
+  createdAt: string;
+  positions: ReferencePortfolioPosition[];
+  disclaimer: string;
+}
+
+export interface ReferencePortfolioPayload {
+  portfolios: ReferencePortfolio[];
+  maxPortfolios: number;
+  presets: Array<{
+    template: ReferencePortfolioTemplate;
+    nameKey: string;
+    periodDays: number;
+    positionLimit: number;
+  }>;
+}
+
+export interface MobileSignalItem {
+  id: string;
+  tradeId: string;
+  ticker: string;
+  issuerName: string;
+  politicianId: string;
+  politicianName: string;
+  party: 'R' | 'D' | 'I';
+  side: string;
+  flags: string[];
+  amountUsd: number;
+  filedAt: string;
+  score: number;
+  imageUrl?: string;
+}
+
+export interface MobileSignalsPayload {
+  period: Period;
+  generatedAt: string;
+  signals: MobileSignalItem[];
+}
+
 export interface WatchlistItem {
   id: string;
   watchlist_type: string;
@@ -149,6 +208,28 @@ export const mobileApi = {
 
   discover: (period: Period) =>
     apiClient.get<MobileDiscoverPayload>('/api/mobile/discover', { period }),
+
+  signals: (period: Period) =>
+    apiClient.get<MobileSignalsPayload>('/api/mobile/signals', { period }),
+
+  referencePortfolios: () =>
+    apiClient.get<ReferencePortfolioPayload>('/api/mobile/reference-portfolio'),
+
+  referencePortfolioSave: (body: {
+    id?: string;
+    name?: string;
+    template: ReferencePortfolioTemplate;
+    politicianId?: string;
+    periodDays?: number;
+    positionLimit?: number;
+  }) =>
+    apiClient.post<{ portfolio: ReferencePortfolio }>(
+      '/api/mobile/reference-portfolio',
+      body,
+    ),
+
+  referencePortfolioDelete: (id: string) =>
+    apiClient.delete<void>('/api/mobile/reference-portfolio', { id }),
 
   watchlist: (params?: Record<string, string>) =>
     apiClient

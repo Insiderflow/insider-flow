@@ -1,19 +1,20 @@
-import { LayoutDashboard, Radio, Search, Settings } from "lucide-react";
+import { LayoutDashboard, Radio, Search, Settings, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/i18n/LanguageContext";
 
-export type TabId = "dashboard" | "live" | "search" | "settings";
+export type TabId = "dashboard" | "live" | "signals" | "search" | "settings";
 
 interface TabBarProps {
   active: TabId;
   onChange?: (tab: TabId) => void;
 }
 
-const TAB_IDS: TabId[] = ["dashboard", "live", "search", "settings"];
+const TAB_IDS: TabId[] = ["dashboard", "live", "signals", "search", "settings"];
 
 const ICONS = {
   dashboard: LayoutDashboard,
   live: Radio,
+  signals: Zap,
   search: Search,
   settings: Settings,
 } as const;
@@ -24,6 +25,7 @@ export default function TabBar({ active, onChange }: TabBarProps) {
   const labels: Record<TabId, string> = {
     dashboard: t.tabs.dashboard,
     live: t.tabs.live,
+    signals: t.tabs.signals,
     search: t.tabs.search,
     settings: t.tabs.settings,
   };

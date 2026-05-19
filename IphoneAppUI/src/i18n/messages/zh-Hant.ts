@@ -175,8 +175,35 @@ const zhHant: Messages = {
   tabs: {
     dashboard: "儀表板",
     live: "即時",
+    signals: "訊號",
     search: "搜尋",
     settings: "設定",
+  },
+  signalsPage: {
+    title: "規則訊號",
+    subtitle: "依 P0 標記規則篩選，非投資建議",
+    empty: "此期間尚無標記交易",
+    periodLabel: "期間",
+    headline: (flags, ticker, name) =>
+      `${flags.join("、")} · ${ticker} · ${name}`,
+  },
+  portfolioPage: {
+    title: "參考組合",
+    subtitle: "紙上模擬，不連接券商",
+    paperDisclaimer:
+      "僅供研究參考，不構成買賣建議；持倉依公開申報等權重建，非真實績效。",
+    empty: "尚未建立參考組合",
+    createFlagged: "建立：本週標記買入",
+    createPolitician: "跟隨議員買入",
+    rebuild: "重新平衡",
+    delete: "刪除",
+    weight: (pct) => `${pct.toFixed(1)}%`,
+    lastBuilt: (date) => `上次更新 ${date}`,
+    limitReached: "最多 3 個組合",
+    pickPolitician: "請先從搜尋選擇議員",
+    presetFlagged7d: "本週標記買入",
+    presetFlagged30d: "本月標記買入",
+    politicianMirror: "議員跟隨",
   },
   live: {
     pageTitle: "即時",
@@ -448,6 +475,7 @@ const zhHant: Messages = {
     deleteConfirm: "確定要刪除帳戶嗎？此操作無法復原。",
     signInRequired: "請先登入",
     upgradeToPro: "升級 Insider+",
+    referencePortfolio: "參考組合（紙上）",
     viewDesktopSite: "桌面版網站",
   },
   auth: {

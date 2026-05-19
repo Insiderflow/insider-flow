@@ -11,6 +11,8 @@ import MobileDashboard from "@/pages/MobileDashboard";
 import MobileLive from "@/pages/MobileLive";
 import MobilePaywall from "@/pages/MobilePaywall";
 import MobileSearch from "@/pages/MobileSearch";
+import MobileSignals from "@/pages/MobileSignals";
+import MobileReferencePortfolio from "@/pages/MobileReferencePortfolio";
 import MobileManageSubscription from "@/pages/MobileManageSubscription";
 import MobileSettings from "@/pages/MobileSettings";
 import InsiderPersonPage from "@/pages/insider/InsiderPersonPage";
@@ -52,7 +54,9 @@ export default function App() {
                   </Route>
                   <Route element={<RequirePaid />}>
                     <Route path="/live" element={<MobileLive />} />
+                    <Route path="/signals" element={<MobileSignals />} />
                     <Route path="/search" element={<MobileSearch />} />
+                    <Route path="/portfolio" element={<MobileReferencePortfolio />} />
                     <Route path="/insider/person/:id" element={<InsiderPersonPage />} />
                     <Route path="/insider/company/:id" element={<InsiderCompanyPage />} />
                     <Route path="/issuer/:id" element={<IssuerProfilePage />} />

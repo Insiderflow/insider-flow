@@ -175,8 +175,35 @@ const zhHans: Messages = {
   tabs: {
     dashboard: "仪表板",
     live: "即时",
+    signals: "信号",
     search: "搜索",
     settings: "设置",
+  },
+  signalsPage: {
+    title: "规则信号",
+    subtitle: "依 P0 标记规则筛选，非投资建议",
+    empty: "此期间尚无标记交易",
+    periodLabel: "期间",
+    headline: (flags, ticker, name) =>
+      `${flags.join("、")} · ${ticker} · ${name}`,
+  },
+  portfolioPage: {
+    title: "参考组合",
+    subtitle: "纸上模拟，不连接券商",
+    paperDisclaimer:
+      "仅供研究参考，不构成买卖建议；持仓依公开申报等权重建，非真实绩效。",
+    empty: "尚未建立参考组合",
+    createFlagged: "建立：本周标记买入",
+    createPolitician: "跟随议员买入",
+    rebuild: "重新平衡",
+    delete: "删除",
+    weight: (pct) => `${pct.toFixed(1)}%`,
+    lastBuilt: (date) => `上次更新 ${date}`,
+    limitReached: "最多 3 个组合",
+    pickPolitician: "请先从搜索选择议员",
+    presetFlagged7d: "本周标记买入",
+    presetFlagged30d: "本月标记买入",
+    politicianMirror: "议员跟随",
   },
   live: {
     pageTitle: "即时",
@@ -448,6 +475,7 @@ const zhHans: Messages = {
     deleteConfirm: "确定要删除账户吗？此操作无法恢复。",
     signInRequired: "请先登录",
     upgradeToPro: "升级 Insider+",
+    referencePortfolio: "参考组合（纸上）",
     viewDesktopSite: "桌面版网站",
   },
   auth: {

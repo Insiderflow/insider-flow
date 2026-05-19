@@ -10,7 +10,7 @@ export function isFreeTierPath(pathname: string): boolean {
 }
 
 export function isPremiumTab(tab: TabId): boolean {
-  return tab === "live" || tab === "search";
+  return tab === "live" || tab === "signals" || tab === "search";
 }
 
 export function postAuthRedirectPath(from: string, isPaid: boolean): string {

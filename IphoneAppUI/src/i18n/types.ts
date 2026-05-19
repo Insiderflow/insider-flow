@@ -141,8 +141,33 @@ export interface Messages {
   tabs: {
     dashboard: string;
     live: string;
+    signals: string;
     search: string;
     settings: string;
+  };
+  signalsPage: {
+    title: string;
+    subtitle: string;
+    empty: string;
+    periodLabel: string;
+    headline: (flags: string[], ticker: string, name: string) => string;
+  };
+  portfolioPage: {
+    title: string;
+    subtitle: string;
+    paperDisclaimer: string;
+    empty: string;
+    createFlagged: string;
+    createPolitician: string;
+    rebuild: string;
+    delete: string;
+    weight: (pct: number) => string;
+    lastBuilt: (date: string) => string;
+    limitReached: string;
+    pickPolitician: string;
+    presetFlagged7d: string;
+    presetFlagged30d: string;
+    politicianMirror: string;
   };
   live: {
     pageTitle: string;
@@ -317,6 +342,7 @@ export interface Messages {
     deleteConfirm: string;
     signInRequired: string;
     upgradeToPro: string;
+    referencePortfolio: string;
     viewDesktopSite: string;
   };
   auth: {

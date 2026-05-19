@@ -6,12 +6,14 @@ import { isPremiumTab } from "@/lib/premiumAccess";
 const TAB_ROUTES: Record<TabId, string> = {
   dashboard: "/",
   live: "/live",
+  signals: "/signals",
   search: "/search",
   settings: "/settings",
 };
 
 function tabFromPath(pathname: string): TabId {
   if (pathname.startsWith("/live")) return "live";
+  if (pathname.startsWith("/signals")) return "signals";
   if (pathname.startsWith("/search")) return "search";
   if (pathname.startsWith("/settings")) return "settings";
   return "dashboard";
@@ -26,6 +28,7 @@ function hideTabBar(pathname: string) {
     pathname.startsWith("/industry-compare") ||
     pathname.startsWith("/paywall") ||
     pathname.startsWith("/settings/subscription") ||
+    pathname.startsWith("/portfolio") ||
     pathname.startsWith("/settings/watchlist") ||
     pathname.startsWith("/settings/notifications") ||
     pathname.startsWith("/legal/")
