@@ -22,6 +22,16 @@ export default function SignalCard({ signal, index = 0 }: SignalCardProps) {
       t.signalsPage.mlReason[code as keyof typeof t.signalsPage.mlReason] ||
       code,
   );
+  const isCorporate = signal.feed === "corporate";
+  const profilePath = isCorporate
+    ? signal.ownerId
+      ? `/insider/person/person-${signal.ownerId}`
+      : signal.politicianId
+        ? `/insider/person/${signal.politicianId}`
+        : null
+    : signal.politicianId
+      ? `/politician/${encodeURIComponent(signal.politicianId)}`
+      : null;
   const tierClass =
     signal.mlTier === "high"
       ? "bg-accent-purple/25 text-accent-purple"
@@ -36,13 +46,22 @@ export default function SignalCard({ signal, index = 0 }: SignalCardProps) {
       transition={{ delay: index * 0.04 }}
       role="button"
       tabIndex={0}
-      onClick={() =>
-        navigate(`/issuer/${encodeURIComponent(signal.ticker)}`)
-      }
+      onClick={() => navigate(`/signals/${encodeURIComponent(signal.id)}`)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          navigate(`/signals/${encodeURIComponent(signal.id)}`);
+        }
+      }}
       className="glass-card-elevated cursor-pointer p-4"
     >
       <motion.div className="flex items-start justify-between gap-2">
-        <span className="text-xl font-bold tracking-tight">{signal.ticker}</span>
+        <div className="min-w-0">
+          <span className="text-xl font-bold tracking-tight">{signal.ticker}</span>
+          <span className="ml-2 rounded-md bg-muted/60 px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground">
+            {t.signalsPage.feedBadge[signal.feed]}
+          </span>
+        </div>
         <div className="flex shrink-0 flex-col items-end gap-1">
           {signal.mlScore != null && (
             <span
@@ -57,7 +76,11 @@ export default function SignalCard({ signal, index = 0 }: SignalCardProps) {
         </div>
       </motion.div>
       <p className="mt-2 line-clamp-2 text-xs text-muted-foreground">
-        {t.signalsPage.headline(flagLabels, signal.ticker, signal.politicianName)}
+        {(isCorporate ? t.signalsPage.insiderHeadline : t.signalsPage.headline)(
+          flagLabels,
+          signal.ticker,
+          signal.politicianName,
+        )}
       </p>
       {mlReasonLabels.length > 0 && (
         <p className="mt-1 line-clamp-1 text-[10px] text-muted-foreground/80">
@@ -65,22 +88,32 @@ export default function SignalCard({ signal, index = 0 }: SignalCardProps) {
         </p>
       )}
       <div className="mt-3 flex items-center gap-2.5">
-        <button
-          type="button"
-          className="shrink-0 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-purple"
-          onClick={(e) => {
-            e.stopPropagation();
-            navigate(`/politician/${encodeURIComponent(signal.politicianId)}`);
-          }}
-        >
+        {profilePath ? (
+          <button
+            type="button"
+            className="shrink-0 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-purple"
+            onClick={(e) => {
+              e.stopPropagation();
+              navigate(profilePath);
+            }}
+          >
+            <PoliticianAvatar
+              politicianId={isCorporate ? undefined : signal.politicianId}
+              name={signal.politicianName}
+              imageUrl={signal.imageUrl}
+              party={isCorporate ? undefined : signal.party}
+              size="sm"
+            />
+          </button>
+        ) : (
           <PoliticianAvatar
-            politicianId={signal.politicianId}
+            politicianId={isCorporate ? undefined : signal.politicianId}
             name={signal.politicianName}
             imageUrl={signal.imageUrl}
-            party={signal.party}
+            party={isCorporate ? undefined : signal.party}
             size="sm"
           />
-        </button>
+        )}
         <motion.div className="min-w-0 flex-1">
           <p className="truncate text-sm font-medium">{signal.politicianName}</p>
           <p className="text-xs text-muted-foreground">

@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import { getPoliticianImageSrc } from '@/lib/politicianImageMapping';
+import { openInsiderSide } from '@/lib/openInsiderTransaction';
 import {
   buildPoliticianAmountHistories,
   computeMlSignalScore,
@@ -7,13 +8,50 @@ import {
 } from '@/lib/mobile/signalMlScorer';
 import {
   clusterKeyForTrade,
+  computeInsiderNotableFlags,
   computePoliticianTradeFlags,
   fetchCongressClusterCounts,
   fetchCongressClusterKeys,
+  NOTABLE_SIZE_USD,
   type TradeFlagCode,
 } from '@/lib/mobile/tradeFlags';
 import { politicianTradeWhere } from '@/lib/mobile/tradeDateSanity';
+import type { BriefLocale } from '@/lib/mobile/dailyTradeBrief';
 import type { MobilePeriod } from '@/lib/mobile/dashboardBuilder';
+import {
+  getSignalsBrief,
+  type SignalsAiSummary,
+} from '@/lib/mobile/signalsBriefBuilder';
+
+export type SignalFeed = 'politician' | 'corporate' | 'all';
+export type SignalItemFeed = 'politician' | 'corporate';
+export type SignalTierFilter = 'all' | 'medium_plus' | 'high';
+export type MlSignalTier = 'high' | 'medium' | 'low';
+
+export function passesTierFilter(
+  tier: SignalTierFilter,
+  mlTier: MlSignalTier,
+): boolean {
+  if (tier === 'all') return true;
+  if (tier === 'high') return mlTier === 'high';
+  return mlTier === 'high' || mlTier === 'medium';
+}
+
+export function defaultTierForPeriod(period: MobilePeriod): SignalTierFilter {
+  return period === '1D' ? 'medium_plus' : 'all';
+}
+
+export function defaultSignalsLimit(period: MobilePeriod): number {
+  return period === '1D' ? 25 : 40;
+}
+
+function filterByTier(
+  signals: MobileSignalItem[],
+  tier: SignalTierFilter,
+): MobileSignalItem[] {
+  if (tier === 'all') return signals;
+  return signals.filter((s) => passesTierFilter(tier, s.mlTier));
+}
 
 function periodStart(period: MobilePeriod): Date {
   const d = new Date();
@@ -40,6 +78,7 @@ function partyCode(raw: string | null | undefined): 'R' | 'D' | 'I' {
 function signalScore(flags: TradeFlagCode[]): number {
   let score = flags.length * 10;
   if (flags.includes('congress_cluster')) score += 30;
+  if (flags.includes('insider_cluster')) score += 28;
   if (flags.includes('committee_sector')) score += 20;
   if (flags.includes('notable_size')) score += 15;
   return score;
@@ -48,6 +87,7 @@ function signalScore(flags: TradeFlagCode[]): number {
 export type MobileSignalItem = {
   id: string;
   tradeId: string;
+  feed: SignalItemFeed;
   ticker: string;
   issuerName: string;
   politicianId: string;
@@ -60,21 +100,41 @@ export type MobileSignalItem = {
   /** Rule-based score (flags only). */
   score: number;
   mlScore: number;
-  mlTier: 'high' | 'medium' | 'low';
+  mlTier: MlSignalTier;
   mlReasons: string[];
   imageUrl?: string;
+  /** Corporate insider owner id (mobile: `/insider/person/person-{id}`). */
+  ownerId?: string;
 };
 
 export type MobileSignalsPayload = {
   period: MobilePeriod;
+  feed: SignalFeed;
+  tierFilter: SignalTierFilter;
   generatedAt: string;
+  aiSummary: SignalsAiSummary;
   signals: MobileSignalItem[];
 };
 
-export async function buildMobileSignals(
-  period: MobilePeriod = '7D',
-  limit = 40,
-): Promise<MobileSignalsPayload> {
+function insiderSizePercentile(amountUsd: number): number {
+  if (amountUsd >= 10_000_000) return 0.97;
+  if (amountUsd >= 5_000_000) return 0.88;
+  if (amountUsd >= NOTABLE_SIZE_USD) return 0.78;
+  return 0.5;
+}
+
+function compareSignals(a: MobileSignalItem, b: MobileSignalItem): number {
+  return (
+    b.mlScore - a.mlScore ||
+    b.score - a.score ||
+    b.filedAt.localeCompare(a.filedAt)
+  );
+}
+
+async function buildPoliticianSignals(
+  period: MobilePeriod,
+  take: number,
+): Promise<MobileSignalItem[]> {
   const since = periodStart(period);
   const baseWhere = politicianTradeWhere();
   const where = { ...baseWhere, traded_at: { gte: since } };
@@ -82,7 +142,10 @@ export async function buildMobileSignals(
   const [rows, clusterKeys, clusterCounts] = await Promise.all([
     prisma.trade.findMany({
       where,
-      include: { Politician: true, Issuer: true },
+      include: {
+        Politician: true,
+        Issuer: { include: { IndustrySubsector: true } },
+      },
       orderBy: { published_at: 'desc' },
       take: 500,
     }),
@@ -112,7 +175,9 @@ export async function buildMobileSignals(
         side,
         amountUsd,
         committees: r.Politician?.committees,
+        committeeAssignments: r.Politician?.committee_assignments,
         issuerSector: r.Issuer?.sector,
+        subSectorSlug: r.Issuer?.sub_sector_slug,
       },
       clusterKeys,
     );
@@ -144,6 +209,7 @@ export async function buildMobileSignals(
     signals.push({
       id: `signal-${r.id}`,
       tradeId: r.id,
+      feed: 'politician',
       ticker,
       issuerName: r.Issuer?.name || ticker,
       politicianId: r.politician_id,
@@ -163,16 +229,111 @@ export async function buildMobileSignals(
     });
   }
 
-  signals.sort(
-    (a, b) =>
-      b.mlScore - a.mlScore ||
-      b.score - a.score ||
-      b.filedAt.localeCompare(a.filedAt),
-  );
+  signals.sort(compareSignals);
+  return signals.slice(0, take);
+}
+
+async function buildCorporateSignals(
+  period: MobilePeriod,
+  take: number,
+): Promise<MobileSignalItem[]> {
+  const since = periodStart(period);
+  const rows = await prisma.openInsiderTransaction.findMany({
+    where: { transactionDate: { gte: since } },
+    include: { company: true, owner: true },
+    orderBy: { transactionDate: 'desc' },
+    take: 500,
+  });
+
+  const now = Date.now();
+  const signals: MobileSignalItem[] = [];
+
+  for (const r of rows) {
+    const amountUsd = Number(r.valueNumeric || 0);
+    const flags = computeInsiderNotableFlags(amountUsd);
+    if (!flags.length) continue;
+
+    const ticker = r.company?.ticker?.trim().toUpperCase() || '—';
+    const side = openInsiderSide(r.transactionType);
+    const ruleScore = signalScore(flags);
+    const daysSincePublished = Math.max(
+      0,
+      (now - r.transactionDate.getTime()) / (1000 * 60 * 60 * 24),
+    );
+    const ml = computeMlSignalScore({
+      flagScore: ruleScore,
+      flags,
+      sizePercentile: insiderSizePercentile(amountUsd),
+      clusterSize: 0,
+      daysSincePublished,
+      filedAfterDays: null,
+    });
+
+    const ownerName = r.owner?.name || r.company?.name || 'Insider';
+    signals.push({
+      id: `signal-oi-${r.id}`,
+      tradeId: r.id,
+      feed: 'corporate',
+      ticker,
+      issuerName: r.company?.name || ticker,
+      politicianId: r.ownerId ? `person-${r.ownerId}` : '',
+      politicianName: ownerName,
+      party: 'I',
+      side,
+      flags,
+      amountUsd,
+      filedAt: r.transactionDate.toISOString().slice(0, 10),
+      score: ruleScore,
+      mlScore: ml.mlScore,
+      mlTier: ml.mlTier,
+      mlReasons: ml.mlReasons,
+      ownerId: r.ownerId || undefined,
+    });
+  }
+
+  signals.sort(compareSignals);
+  return signals.slice(0, take);
+}
+
+export async function buildMobileSignals(
+  period: MobilePeriod = '7D',
+  limit = 40,
+  feed: SignalFeed = 'all',
+  locale: BriefLocale = 'zh-Hant',
+  tierFilter: SignalTierFilter = defaultTierForPeriod(period),
+): Promise<MobileSignalsPayload> {
+  const poolSize =
+    tierFilter === 'all'
+      ? feed === 'all'
+        ? Math.max(limit, 80)
+        : limit
+      : Math.min(500, Math.max(limit * 4, 120));
+
+  const [politicianSignals, corporateSignals] = await Promise.all([
+    feed === 'corporate'
+      ? Promise.resolve([])
+      : buildPoliticianSignals(period, poolSize),
+    feed === 'politician'
+      ? Promise.resolve([])
+      : buildCorporateSignals(period, poolSize),
+  ]);
+
+  const merged =
+    feed === 'all'
+      ? [...politicianSignals, ...corporateSignals].sort(compareSignals)
+      : feed === 'politician'
+        ? politicianSignals
+        : corporateSignals;
+
+  const filtered = filterByTier(merged, tierFilter).slice(0, limit);
+  const aiSummary = await getSignalsBrief(filtered, period, feed, locale);
 
   return {
     period,
+    feed,
+    tierFilter,
     generatedAt: new Date().toISOString(),
-    signals: signals.slice(0, limit),
+    aiSummary,
+    signals: filtered,
   };
 }

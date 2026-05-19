@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Fill Politician.committees from GovTrack HTML (same Bioguide IDs as Capitol Trades, e.g. S001201).
- * Seat-alignment alerts need this text so inferSeatSectorFromCommittees() can map keywords → GICS.
+ * Writes Politician.committees (names) + committee_assignments (GovTrack codes for static GICS map).
  *
  * Usage:
  *   cd web && node scripts/enrich_politician_committees_govtrack.js [--dry-run] [--replace] [--limit N] [--sleep-ms 1200]
@@ -33,21 +33,31 @@ function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));
 }
 
-/** @returns {string[] | null} */
-function committeeNamesFromGovtrackHtml(html) {
+/** @returns {{ names: string[], assignments: { code: string, name: string }[] } | null} */
+function committeeMembershipFromGovtrackHtml(html) {
   const reSection =
     /<h2>\s*<span>\s*Committee Membership\s*<\/span>\s*<\/h2>([\s\S]*?)<\/section>\s*<!--\s*\/membership\s*-->/i;
   const m = html.match(reSection);
   if (!m) return null;
   const block = m[1];
-  const names = [];
-  const linkRe = /<a href="\/congress\/committees\/[^"]+">([^<]+)<\/a>/gi;
+  const assignments = [];
+  const seen = new Set();
+  const linkRe = /<a href="\/congress\/committees\/([^"]+)">([^<]+)<\/a>/gi;
   let mm;
   while ((mm = linkRe.exec(block)) !== null) {
-    const name = mm[1].replace(/\s+/g, ' ').trim();
-    if (name && !/^subcommittees$/i.test(name)) names.push(name);
+    const code = String(mm[1] || '')
+      .trim()
+      .toUpperCase();
+    const name = String(mm[2] || '')
+      .replace(/\s+/g, ' ')
+      .trim();
+    if (!code || !name || /^subcommittees$/i.test(name)) continue;
+    if (seen.has(code)) continue;
+    seen.add(code);
+    assignments.push({ code, name });
   }
-  return [...new Set(names)];
+  if (!assignments.length) return null;
+  return { names: assignments.map((a) => a.name), assignments };
 }
 
 async function fetchGovtrackCommittees(bioguideId) {
@@ -64,8 +74,8 @@ async function fetchGovtrackCommittees(bioguideId) {
     throw new Error(`HTTP ${res.status} ${url}`);
   }
   const html = await res.text();
-  const names = committeeNamesFromGovtrackHtml(html);
-  return { url, names };
+  const membership = committeeMembershipFromGovtrackHtml(html);
+  return { url, membership };
 }
 
 async function main() {
@@ -94,22 +104,28 @@ async function main() {
     const row = rows[i];
     const prefix = `[${i + 1}/${rows.length}] ${row.id}`;
     try {
-      const { names } = await fetchGovtrackCommittees(row.id);
+      const { membership } = await fetchGovtrackCommittees(row.id);
       await sleep(sleepMs);
 
-      if (!names || names.length === 0) {
+      if (!membership || membership.assignments.length === 0) {
         console.warn(`${prefix}: no committee section (GovTrack layout change or non-current member)`);
         skipped++;
         continue;
       }
 
-      const committees = names.join('; ').slice(0, 4000);
-      console.log(`${prefix} ${row.name || ''}: ${committees.slice(0, 160)}${committees.length > 160 ? '…' : ''}`);
+      const committees = membership.names.join('; ').slice(0, 4000);
+      const codes = membership.assignments.map((a) => a.code).join(',');
+      console.log(
+        `${prefix} ${row.name || ''}: [${codes}] ${committees.slice(0, 120)}${committees.length > 120 ? '…' : ''}`,
+      );
 
       if (!dryRun) {
         await prisma.politician.update({
           where: { id: row.id },
-          data: { committees },
+          data: {
+            committees,
+            committee_assignments: membership.assignments,
+          },
         });
       }
       updated++;

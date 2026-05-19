@@ -10,6 +10,7 @@ export interface Messages {
     politician: string;
     insider: string;
     switchAria: string;
+    signalsLinkAria: string;
   };
   header: {
     title: string;
@@ -67,6 +68,7 @@ export interface Messages {
     notable_size: string;
     committee_sector: string;
     congress_cluster: string;
+    insider_cluster: string;
     filterOnly: string;
     filterOff: string;
   };
@@ -150,7 +152,13 @@ export interface Messages {
     subtitle: string;
     empty: string;
     periodLabel: string;
+    feedAria: string;
+    feed: { all: string; politician: string; corporate: string };
+    feedBadge: { politician: string; corporate: string };
+    tierAria: string;
+    tier: { all: string; medium_plus: string; high: string };
     headline: (flags: string[], ticker: string, name: string) => string;
+    insiderHeadline: (flags: string[], ticker: string, name: string) => string;
     mlScore: (score: number) => string;
     mlTier: { high: string; medium: string; low: string };
     mlReason: Record<
@@ -158,6 +166,29 @@ export interface Messages {
       | 'congress_cluster'
       | 'committee_sector'
       | 'notable_size'
+      | 'recent_filing'
+      | 'late_disclosure',
+      string
+    >;
+  };
+  signalDetail: {
+    title: string;
+    back: string;
+    notFound: string;
+    whyFlagged: string;
+    criteriaCol: string;
+    detailCol: string;
+    disclaimer: string;
+    links: string;
+    viewPolitician: string;
+    viewInsider: string;
+    viewCompany: string;
+    criteria: Record<
+      | 'notable_size'
+      | 'committee_sector'
+      | 'congress_cluster'
+      | 'insider_cluster'
+      | 'unusual_size'
       | 'recent_filing'
       | 'late_disclosure',
       string

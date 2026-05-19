@@ -51,4 +51,15 @@ describe('tradeFlags', () => {
       }),
     ).toBe(true);
   });
+
+  it('detects banking committee + bank ticker without issuer sector', () => {
+    expect(
+      isCommitteeSectorTrade({
+        politicianId: 'p-bank',
+        committees: 'Senate Banking, Housing, and Urban Affairs',
+        ticker: 'JPM',
+        issuerSector: null,
+      }),
+    ).toBe(true);
+  });
 });

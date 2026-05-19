@@ -1,0 +1,1277 @@
+{
+  "version": 1,
+  "generatedAt": "2026-05-19",
+  "sectorNames": [
+    "Information Technology",
+    "Financials",
+    "Industrials",
+    "Health Care",
+    "Consumer Discretionary",
+    "Communication Services",
+    "Consumer Staples",
+    "Energy",
+    "Materials",
+    "Real Estate",
+    "Utilities"
+  ],
+  "entries": {
+    "HSAG": {
+      "sectors": [
+        "Consumer Staples",
+        "Materials"
+      ],
+      "name": "House Committee on Agriculture"
+    },
+    "HSAG15": {
+      "sectors": [
+        "Consumer Staples",
+        "Materials"
+      ],
+      "name": "Forestry and Horticulture",
+      "parentCode": "HSAG"
+    },
+    "HSAG22": {
+      "sectors": [
+        "Information Technology",
+        "Financials"
+      ],
+      "name": "Commodity Markets, Digital Assets, and Rural Development",
+      "parentCode": "HSAG"
+    },
+    "HSAG16": {
+      "sectors": [
+        "Financials"
+      ],
+      "name": "General Farm Commodities, Risk Management, and Credit",
+      "parentCode": "HSAG"
+    },
+    "HSAG29": {
+      "sectors": [
+        "Consumer Staples",
+        "Materials"
+      ],
+      "name": "Livestock, Dairy, and Poultry",
+      "parentCode": "HSAG"
+    },
+    "HSAG14": {
+      "sectors": [
+        "Consumer Staples",
+        "Materials"
+      ],
+      "name": "Conservation, Research, and Biotechnology",
+      "parentCode": "HSAG"
+    },
+    "HSAG03": {
+      "sectors": [
+        "Consumer Staples",
+        "Materials"
+      ],
+      "name": "Nutrition and Foreign Agriculture",
+      "parentCode": "HSAG"
+    },
+    "HSAP": {
+      "sectors": [],
+      "name": "House Committee on Appropriations"
+    },
+    "HSAP01": {
+      "sectors": [],
+      "name": "Agriculture, Rural Development, Food and Drug Administration, and Related",
+      "parentCode": "HSAP"
+    },
+    "HSAP19": {
+      "sectors": [],
+      "name": "Commerce, Justice, Science, and Related Agencies",
+      "parentCode": "HSAP"
+    },
+    "HSAP02": {
+      "sectors": [],
+      "name": "Defense",
+      "parentCode": "HSAP"
+    },
+    "HSAP10": {
+      "sectors": [],
+      "name": "Energy and Water Development and Related Agencies",
+      "parentCode": "HSAP"
+    },
+    "HSAP23": {
+      "sectors": [],
+      "name": "Financial Services and General Government",
+      "parentCode": "HSAP"
+    },
+    "HSAP15": {
+      "sectors": [],
+      "name": "Homeland Security",
+      "parentCode": "HSAP"
+    },
+    "HSAP06": {
+      "sectors": [],
+      "name": "Interior, Environment, and Related Agencies",
+      "parentCode": "HSAP"
+    },
+    "HSAP07": {
+      "sectors": [],
+      "name": "Labor, Health and Human Services, Education, and Related Agencies",
+      "parentCode": "HSAP"
+    },
+    "HSAP24": {
+      "sectors": [],
+      "name": "Legislative Branch",
+      "parentCode": "HSAP"
+    },
+    "HSAP18": {
+      "sectors": [],
+      "name": "Military Construction, Veterans Affairs, and Related Agencies",
+      "parentCode": "HSAP"
+    },
+    "HSAP04": {
+      "sectors": [],
+      "name": "National Security, Department of State, and Related Programs",
+      "parentCode": "HSAP"
+    },
+    "HSAP20": {
+      "sectors": [],
+      "name": "Transportation, Housing and Urban Development, and Related Agencies",
+      "parentCode": "HSAP"
+    },
+    "HSAS": {
+      "sectors": [
+        "Industrials"
+      ],
+      "name": "House Committee on Armed Services"
+    },
+    "HSAS25": {
+      "sectors": [
+        "Industrials"
+      ],
+      "name": "Tactical Air and Land Forces",
+      "parentCode": "HSAS"
+    },
+    "HSAS02": {
+      "sectors": [
+        "Industrials"
+      ],
+      "name": "Military Personnel",
+      "parentCode": "HSAS"
+    },
+    "HSAS03": {
+      "sectors": [
+        "Industrials"
+      ],
+      "name": "Readiness",
+      "parentCode": "HSAS"
+    },
+    "HSAS28": {
+      "sectors": [
+        "Industrials"
+      ],
+      "name": "Seapower and Projection Forces",
+      "parentCode": "HSAS"
+    },
+    "HSAS29": {
+      "sectors": [
+        "Industrials"
+      ],
+      "name": "Strategic Forces",
+      "parentCode": "HSAS"
+    },
+    "HSAS26": {
+      "sectors": [
+        "Industrials"
+      ],
+      "name": "Intelligence and Special Operations",
+      "parentCode": "HSAS"
+    },
+    "HSAS35": {
+      "sectors": [
+        "Industrials"
+      ],
+      "name": "Cyber, Information Technologies, and Innovation",
+      "parentCode": "HSAS"
+    },
+    "HSBA": {
+      "sectors": [
+        "Financials"
+      ],
+      "name": "House Committee on Financial Services"
+    },
+    "HSBA16": {
+      "sectors": [
+        "Financials"
+      ],
+      "name": "Capital Markets",
+      "parentCode": "HSBA"
+    },
+    "HSBA04": {
+      "sectors": [
+        "Financials"
+      ],
+      "name": "Housing and Insurance",
+      "parentCode": "HSBA"
+    },
+    "HSBA09": {
+      "sectors": [
+        "Financials"
+      ],
+      "name": "Oversight and Investigations",
+      "parentCode": "HSBA"
+    },
+    "HSBA20": {
+      "sectors": [
+        "Financials"
+      ],
+      "name": "Financial Institutions",
+      "parentCode": "HSBA"
+    },
+    "HSBA21": {
+      "sectors": [
+        "Financials"
+      ],
+      "name": "Digital Assets, Financial Technology, and Artificial Intelligence",
+      "parentCode": "HSBA"
+    },
+    "HSBA10": {
+      "sectors": [
+        "Financials"
+      ],
+      "name": "National Security, Illicit Finance, and International Financial Institutions",
+      "parentCode": "HSBA"
+    },
+    "HSBU": {
+      "sectors": [],
+      "name": "House Committee on the Budget"
+    },
+    "HSED": {
+      "sectors": [
+        "Industrials"
+      ],
+      "name": "House Committee on Education and Workforce"
+    },
+    "HSED14": {
+      "sectors": [
+        "Industrials"
+      ],
+      "name": "Early Childhood, Elementary, and Secondary Education",
+      "parentCode": "HSED"
+    },
+    "HSED02": {
+      "sectors": [
+        "Industrials"
+      ],
+      "name": "Health, Employment, Labor, and Pensions",
+      "parentCode": "HSED"
+    },
+    "HSED13": {
+      "sectors": [
+        "Industrials"
+      ],
+      "name": "Higher Education and Workforce Development",
+      "parentCode": "HSED"
+    },
+    "HSED10": {
+      "sectors": [
+        "Industrials"
+      ],
+      "name": "Workforce Protections",
+      "parentCode": "HSED"
+    },
+    "HSFA": {
+      "sectors": [],
+      "name": "House Committee on Foreign Affairs"
+    },
+    "HSFA16": {
+      "sectors": [],
+      "name": "Africa",
+      "parentCode": "HSFA"
+    },
+    "HSFA05": {
+      "sectors": [],
+      "name": "East Asia and Pacific",
+      "parentCode": "HSFA"
+    },
+    "HSFA14": {
+      "sectors": [],
+      "name": "Europe",
+      "parentCode": "HSFA"
+    },
+    "HSFA13": {
+      "sectors": [],
+      "name": "Middle East and North Africa",
+      "parentCode": "HSFA"
+    },
+    "HSFA07": {
+      "sectors": [],
+      "name": "Western Hemisphere",
+      "parentCode": "HSFA"
+    },
+    "HSFA17": {
+      "sectors": [],
+      "name": "Oversight and Intelligence",
+      "parentCode": "HSFA"
+    },
+    "HSFA19": {
+      "sectors": [],
+      "name": "South and Central Asia",
+      "parentCode": "HSFA"
+    },
+    "HSGO": {
+      "sectors": [],
+      "name": "House Committee on Oversight and Government Reform"
+    },
+    "HSGO24": {
+      "sectors": [],
+      "name": "Government Operations",
+      "parentCode": "HSGO"
+    },
+    "HSGO06": {
+      "sectors": [],
+      "name": "Military and Foreign Affairs",
+      "parentCode": "HSGO"
+    },
+    "HSGO27": {
+      "sectors": [],
+      "name": "Health Care and Financial Services",
+      "parentCode": "HSGO"
+    },
+    "HSGO05": {
+      "sectors": [],
+      "name": "Economic Growth, Energy Policy, and Regulatory Affairs",
+      "parentCode": "HSGO"
+    },
+    "HSGO12": {
+      "sectors": [],
+      "name": "Cybersecurity, Information Technology, and Government Innovation",
+      "parentCode": "HSGO"
+    },
+    "HSGO16": {
+      "sectors": [],
+      "name": "Delivering on Government Efficiency",
+      "parentCode": "HSGO"
+    },
+    "HSGO33": {
+      "sectors": [],
+      "name": "Federal Law Enforcement",
+      "parentCode": "HSGO"
+    },
+    "HSHA": {
+      "sectors": [],
+      "name": "House Committee on House Administration"
+    },
+    "HSHA08": {
+      "sectors": [],
+      "name": "Elections",
+      "parentCode": "HSHA"
+    },
+    "HSHA27": {
+      "sectors": [],
+      "name": "Modernization and Innovation",
+      "parentCode": "HSHA"
+    },
+    "HSHM": {
+      "sectors": [],
+      "name": "House Committee on Homeland Security"
+    },
+    "HSHM11": {
+      "sectors": [],
+      "name": "Border Security and Enforcement",
+      "parentCode": "HSHM"
+    },
+    "HSHM12": {
+      "sectors": [],
+      "name": "Emergency Management and Technology",
+      "parentCode": "HSHM"
+    },
+    "HSHM08": {
+      "sectors": [],
+      "name": "Cybersecurity and Infrastructure Protection",
+      "parentCode": "HSHM"
+    },
+    "HSHM05": {
+      "sectors": [],
+      "name": "Counterterrorism and Intelligence",
+      "parentCode": "HSHM"
+    },
+    "HSHM09": {
+      "sectors": [],
+      "name": "Oversight, Investigations, and Accountability",
+      "parentCode": "HSHM"
+    },
+    "HSHM07": {
+      "sectors": [],
+      "name": "Transportation and Maritime Security",
+      "parentCode": "HSHM"
+    },
+    "HSIF": {
+      "sectors": [
+        "Energy",
+        "Utilities",
+        "Communication Services",
+        "Health Care",
+        "Information Technology"
+      ],
+      "name": "House Committee on Energy and Commerce"
+    },
+    "HSIF17": {
+      "sectors": [
+        "Consumer Discretionary",
+        "Communication Services"
+      ],
+      "name": "Commerce, Manufacturing, and Trade",
+      "parentCode": "HSIF"
+    },
+    "HSIF16": {
+      "sectors": [
+        "Communication Services",
+        "Information Technology"
+      ],
+      "name": "Communications and Technology",
+      "parentCode": "HSIF"
+    },
+    "HSIF03": {
+      "sectors": [
+        "Energy",
+        "Utilities"
+      ],
+      "name": "Energy",
+      "parentCode": "HSIF"
+    },
+    "HSIF14": {
+      "sectors": [
+        "Health Care"
+      ],
+      "name": "Health",
+      "parentCode": "HSIF"
+    },
+    "HSIF02": {
+      "sectors": [
+        "Energy",
+        "Utilities",
+        "Communication Services",
+        "Health Care",
+        "Information Technology"
+      ],
+      "name": "Oversight and Investigations",
+      "parentCode": "HSIF"
+    },
+    "HSIF18": {
+      "sectors": [
+        "Utilities",
+        "Materials"
+      ],
+      "name": "Environment",
+      "parentCode": "HSIF"
+    },
+    "HSII": {
+      "sectors": [
+        "Industrials"
+      ],
+      "name": "House Committee on Natural Resources"
+    },
+    "HSII06": {
+      "sectors": [
+        "Industrials"
+      ],
+      "name": "Energy and Mineral Resources",
+      "parentCode": "HSII"
+    },
+    "HSII10": {
+      "sectors": [
+        "Industrials"
+      ],
+      "name": "Federal Lands",
+      "parentCode": "HSII"
+    },
+    "HSII13": {
+      "sectors": [
+        "Industrials"
+      ],
+      "name": "Water, Wildlife and Fisheries",
+      "parentCode": "HSII"
+    },
+    "HSII24": {
+      "sectors": [
+        "Industrials"
+      ],
+      "name": "Indian and Insular Affairs",
+      "parentCode": "HSII"
+    },
+    "HSII15": {
+      "sectors": [
+        "Industrials"
+      ],
+      "name": "Oversight and Investigations",
+      "parentCode": "HSII"
+    },
+    "HLIG": {
+      "sectors": [],
+      "name": "House Permanent Select Committee on Intelligence"
+    },
+    "HLIG09": {
+      "sectors": [],
+      "name": "Oversight and Investigations",
+      "parentCode": "HLIG"
+    },
+    "HLIG01": {
+      "sectors": [],
+      "name": "Central Intelligence Agency",
+      "parentCode": "HLIG"
+    },
+    "HLIG02": {
+      "sectors": [],
+      "name": "National Security Agency and Cyber",
+      "parentCode": "HLIG"
+    },
+    "HLIG04": {
+      "sectors": [],
+      "name": "Defense Intelligence and Overhead Architecture",
+      "parentCode": "HLIG"
+    },
+    "HLIG06": {
+      "sectors": [],
+      "name": "National Intelligence Enterprise",
+      "parentCode": "HLIG"
+    },
+    "HLIG11": {
+      "sectors": [],
+      "name": "Open Source Intelligence",
+      "parentCode": "HLIG"
+    },
+    "HSJU": {
+      "sectors": [],
+      "name": "House Committee on the Judiciary"
+    },
+    "HSJU10": {
+      "sectors": [],
+      "name": "The Constitution and Limited Government",
+      "parentCode": "HSJU"
+    },
+    "HSJU03": {
+      "sectors": [],
+      "name": "Courts, Intellectual Property, Artificial Intelligence, and the Internet",
+      "parentCode": "HSJU"
+    },
+    "HSJU08": {
+      "sectors": [],
+      "name": "Crime and Federal Government Surveillance",
+      "parentCode": "HSJU"
+    },
+    "HSJU01": {
+      "sectors": [],
+      "name": "Immigration Integrity, Security, and Enforcement",
+      "parentCode": "HSJU"
+    },
+    "HSJU05": {
+      "sectors": [],
+      "name": "The Administrative State, Regulatory Reform, and Antitrust",
+      "parentCode": "HSJU"
+    },
+    "HSJU13": {
+      "sectors": [],
+      "name": "Oversight",
+      "parentCode": "HSJU"
+    },
+    "HSPW": {
+      "sectors": [
+        "Industrials",
+        "Utilities",
+        "Materials"
+      ],
+      "name": "House Committee on Transportation and Infrastructure"
+    },
+    "HSPW05": {
+      "sectors": [
+        "Industrials",
+        "Utilities",
+        "Materials"
+      ],
+      "name": "Aviation",
+      "parentCode": "HSPW"
+    },
+    "HSPW07": {
+      "sectors": [
+        "Industrials",
+        "Utilities",
+        "Materials"
+      ],
+      "name": "Coast Guard and Maritime Transportation",
+      "parentCode": "HSPW"
+    },
+    "HSPW13": {
+      "sectors": [
+        "Energy",
+        "Utilities"
+      ],
+      "name": "Economic Development, Public Buildings, and Emergency Management",
+      "parentCode": "HSPW"
+    },
+    "HSPW12": {
+      "sectors": [
+        "Industrials",
+        "Utilities",
+        "Materials"
+      ],
+      "name": "Highways and Transit",
+      "parentCode": "HSPW"
+    },
+    "HSPW14": {
+      "sectors": [
+        "Industrials",
+        "Utilities",
+        "Materials"
+      ],
+      "name": "Railroads, Pipelines, and Hazardous Materials",
+      "parentCode": "HSPW"
+    },
+    "HSPW02": {
+      "sectors": [
+        "Energy",
+        "Utilities"
+      ],
+      "name": "Water Resources and Environment",
+      "parentCode": "HSPW"
+    },
+    "HSRU": {
+      "sectors": [
+        "Energy",
+        "Utilities"
+      ],
+      "name": "House Committee on Rules"
+    },
+    "HSRU02": {
+      "sectors": [
+        "Energy",
+        "Utilities"
+      ],
+      "name": "Legislative and Budget Process",
+      "parentCode": "HSRU"
+    },
+    "HSRU04": {
+      "sectors": [
+        "Energy",
+        "Utilities"
+      ],
+      "name": "Rules and Organization of the House",
+      "parentCode": "HSRU"
+    },
+    "HSSM": {
+      "sectors": [
+        "Information Technology",
+        "Communication Services"
+      ],
+      "name": "House Committee on Small Business"
+    },
+    "HSSM23": {
+      "sectors": [
+        "Information Technology",
+        "Communication Services"
+      ],
+      "name": "Contracting and Infrastructure",
+      "parentCode": "HSSM"
+    },
+    "HSSM24": {
+      "sectors": [
+        "Information Technology",
+        "Communication Services"
+      ],
+      "name": "Oversight, Investigations, and Regulations",
+      "parentCode": "HSSM"
+    },
+    "HSSM27": {
+      "sectors": [
+        "Information Technology",
+        "Communication Services"
+      ],
+      "name": "Economic Growth, Tax, and Capital Access",
+      "parentCode": "HSSM"
+    },
+    "HSSM21": {
+      "sectors": [
+        "Information Technology"
+      ],
+      "name": "Rural Development, Energy, and Supply Chains",
+      "parentCode": "HSSM"
+    },
+    "HSSM22": {
+      "sectors": [
+        "Information Technology",
+        "Communication Services"
+      ],
+      "name": "Innovation, Entrepreneurship, and Workforce Development",
+      "parentCode": "HSSM"
+    },
+    "HSSO": {
+      "sectors": [],
+      "name": "House Committee on Ethics"
+    },
+    "HSSY": {
+      "sectors": [
+        "Information Technology",
+        "Communication Services"
+      ],
+      "name": "House Committee on Science, Space, and Technology"
+    },
+    "HSSY20": {
+      "sectors": [
+        "Information Technology",
+        "Communication Services"
+      ],
+      "name": "Energy",
+      "parentCode": "HSSY"
+    },
+    "HSSY21": {
+      "sectors": [
+        "Information Technology",
+        "Communication Services"
+      ],
+      "name": "Investigations and Oversight",
+      "parentCode": "HSSY"
+    },
+    "HSSY16": {
+      "sectors": [
+        "Information Technology"
+      ],
+      "name": "Space and Aeronautics",
+      "parentCode": "HSSY"
+    },
+    "HSSY18": {
+      "sectors": [
+        "Information Technology",
+        "Communication Services"
+      ],
+      "name": "Environment",
+      "parentCode": "HSSY"
+    },
+    "HSSY15": {
+      "sectors": [
+        "Information Technology"
+      ],
+      "name": "Research and Technology",
+      "parentCode": "HSSY"
+    },
+    "HSVR": {
+      "sectors": [],
+      "name": "House Committee on Veterans' Affairs"
+    },
+    "HSVR09": {
+      "sectors": [],
+      "name": "Disability Assistance and Memorial Affairs",
+      "parentCode": "HSVR"
+    },
+    "HSVR10": {
+      "sectors": [],
+      "name": "Economic Opportunity",
+      "parentCode": "HSVR"
+    },
+    "HSVR03": {
+      "sectors": [],
+      "name": "Health",
+      "parentCode": "HSVR"
+    },
+    "HSVR08": {
+      "sectors": [],
+      "name": "Oversight and Investigations",
+      "parentCode": "HSVR"
+    },
+    "HSVR11": {
+      "sectors": [],
+      "name": "Technology Modernization",
+      "parentCode": "HSVR"
+    },
+    "HSWM": {
+      "sectors": [
+        "Financials"
+      ],
+      "name": "House Committee on Ways and Means"
+    },
+    "HSWM02": {
+      "sectors": [
+        "Financials"
+      ],
+      "name": "Health",
+      "parentCode": "HSWM"
+    },
+    "HSWM03": {
+      "sectors": [
+        "Financials"
+      ],
+      "name": "Work and Welfare",
+      "parentCode": "HSWM"
+    },
+    "HSWM06": {
+      "sectors": [
+        "Financials"
+      ],
+      "name": "Oversight",
+      "parentCode": "HSWM"
+    },
+    "HSWM05": {
+      "sectors": [
+        "Financials"
+      ],
+      "name": "Tax",
+      "parentCode": "HSWM"
+    },
+    "HSWM01": {
+      "sectors": [
+        "Financials"
+      ],
+      "name": "Social Security",
+      "parentCode": "HSWM"
+    },
+    "HSWM04": {
+      "sectors": [
+        "Financials"
+      ],
+      "name": "Trade",
+      "parentCode": "HSWM"
+    },
+    "JCSE": {
+      "sectors": [],
+      "name": "Commission on Security and Cooperation in Europe"
+    },
+    "JSEC": {
+      "sectors": [],
+      "name": "Joint Economic Committee"
+    },
+    "JSLC": {
+      "sectors": [],
+      "name": "Joint Committee of Congress on the Library"
+    },
+    "JSPR": {
+      "sectors": [],
+      "name": "Joint Committee on Printing"
+    },
+    "JSTX": {
+      "sectors": [],
+      "name": "Joint Committee on Taxation"
+    },
+    "SCNC": {
+      "sectors": [
+        "Information Technology",
+        "Communication Services"
+      ],
+      "name": "United States Senate Caucus on International Narcotics Control"
+    },
+    "SLET": {
+      "sectors": [],
+      "name": "Senate Select Committee on Ethics"
+    },
+    "SLIA": {
+      "sectors": [
+        "Communication Services",
+        "Industrials"
+      ],
+      "name": "Senate Committee on Indian Affairs"
+    },
+    "SLIN": {
+      "sectors": [
+        "Communication Services",
+        "Industrials"
+      ],
+      "name": "Senate Select Committee on Intelligence"
+    },
+    "SPAG": {
+      "sectors": [
+        "Consumer Staples",
+        "Materials"
+      ],
+      "name": "Senate Special Committee on Aging"
+    },
+    "SSAF": {
+      "sectors": [],
+      "name": "Senate Committee on Agriculture, Nutrition, and Forestry"
+    },
+    "SSAF13": {
+      "sectors": [],
+      "name": "Commodities, Derivatives, Risk Management, and Trade",
+      "parentCode": "SSAF"
+    },
+    "SSAF14": {
+      "sectors": [],
+      "name": "Conservation, Forestry, Natural Resources, and Biotechnology",
+      "parentCode": "SSAF"
+    },
+    "SSAF15": {
+      "sectors": [],
+      "name": "Rural Development, Energy, and Credit",
+      "parentCode": "SSAF"
+    },
+    "SSAF16": {
+      "sectors": [],
+      "name": "Food and Nutrition, Specialty Crops, Organics, and Research",
+      "parentCode": "SSAF"
+    },
+    "SSAF17": {
+      "sectors": [],
+      "name": "Livestock, Dairy, Poultry, and Food Safety",
+      "parentCode": "SSAF"
+    },
+    "SSAP": {
+      "sectors": [],
+      "name": "Senate Committee on Appropriations"
+    },
+    "SSAP16": {
+      "sectors": [],
+      "name": "Commerce, Justice, Science, and Related Agencies",
+      "parentCode": "SSAP"
+    },
+    "SSAP22": {
+      "sectors": [],
+      "name": "Energy and Water Development",
+      "parentCode": "SSAP"
+    },
+    "SSAP23": {
+      "sectors": [],
+      "name": "Financial Services and General Government",
+      "parentCode": "SSAP"
+    },
+    "SSAP14": {
+      "sectors": [],
+      "name": "Department of Homeland Security",
+      "parentCode": "SSAP"
+    },
+    "SSAP17": {
+      "sectors": [],
+      "name": "Department of Interior, Environment, and Related Agencies",
+      "parentCode": "SSAP"
+    },
+    "SSAP18": {
+      "sectors": [],
+      "name": "Departments of Labor, Health and Human Services, and Education, and Related",
+      "parentCode": "SSAP"
+    },
+    "SSAP19": {
+      "sectors": [],
+      "name": "Military Construction, Veterans Affairs, and Related Agencies",
+      "parentCode": "SSAP"
+    },
+    "SSAP20": {
+      "sectors": [],
+      "name": "State, Foreign Operations, and Related Programs",
+      "parentCode": "SSAP"
+    },
+    "SSAP24": {
+      "sectors": [],
+      "name": "Transportation, Housing and Urban Development, and Related Agencies",
+      "parentCode": "SSAP"
+    },
+    "SSAP01": {
+      "sectors": [],
+      "name": "Agriculture, Rural Development, Food and Drug Administration, and Related",
+      "parentCode": "SSAP"
+    },
+    "SSAP02": {
+      "sectors": [],
+      "name": "Department of Defense",
+      "parentCode": "SSAP"
+    },
+    "SSAP08": {
+      "sectors": [],
+      "name": "Legislative Branch",
+      "parentCode": "SSAP"
+    },
+    "SSAS": {
+      "sectors": [
+        "Industrials"
+      ],
+      "name": "Senate Committee on Armed Services"
+    },
+    "SSAS14": {
+      "sectors": [
+        "Industrials"
+      ],
+      "name": "Airland",
+      "parentCode": "SSAS"
+    },
+    "SSAS20": {
+      "sectors": [
+        "Industrials"
+      ],
+      "name": "Emerging Threats and Capabilities",
+      "parentCode": "SSAS"
+    },
+    "SSAS17": {
+      "sectors": [
+        "Industrials"
+      ],
+      "name": "Personnel",
+      "parentCode": "SSAS"
+    },
+    "SSAS15": {
+      "sectors": [
+        "Industrials"
+      ],
+      "name": "Readiness and Management Support",
+      "parentCode": "SSAS"
+    },
+    "SSAS13": {
+      "sectors": [
+        "Industrials"
+      ],
+      "name": "Seapower",
+      "parentCode": "SSAS"
+    },
+    "SSAS16": {
+      "sectors": [
+        "Industrials"
+      ],
+      "name": "Strategic Forces",
+      "parentCode": "SSAS"
+    },
+    "SSBK": {
+      "sectors": [
+        "Financials",
+        "Real Estate"
+      ],
+      "name": "Senate Committee on Banking, Housing, and Urban Affairs"
+    },
+    "SSBK12": {
+      "sectors": [
+        "Financials",
+        "Real Estate"
+      ],
+      "name": "Economic Policy",
+      "parentCode": "SSBK"
+    },
+    "SSBK05": {
+      "sectors": [
+        "Financials",
+        "Real Estate"
+      ],
+      "name": "National Security and International Trade and Finance",
+      "parentCode": "SSBK"
+    },
+    "SSBK04": {
+      "sectors": [
+        "Financials",
+        "Real Estate"
+      ],
+      "name": "Securities, Insurance, and Investment",
+      "parentCode": "SSBK"
+    },
+    "SSBK09": {
+      "sectors": [
+        "Financials",
+        "Real Estate"
+      ],
+      "name": "Housing, Transportation, and Community Development",
+      "parentCode": "SSBK"
+    },
+    "SSBK08": {
+      "sectors": [
+        "Financials",
+        "Real Estate"
+      ],
+      "name": "Financial Institutions and Consumer Protection",
+      "parentCode": "SSBK"
+    },
+    "SSBU": {
+      "sectors": [
+        "Industrials"
+      ],
+      "name": "Senate Committee on the Budget"
+    },
+    "SSCM": {
+      "sectors": [
+        "Communication Services",
+        "Information Technology",
+        "Industrials",
+        "Consumer Discretionary"
+      ],
+      "name": "Senate Committee on Commerce, Science, and Transportation"
+    },
+    "SSEG": {
+      "sectors": [
+        "Energy",
+        "Utilities"
+      ],
+      "name": "Senate Committee on Energy and Natural Resources"
+    },
+    "SSEG07": {
+      "sectors": [
+        "Energy",
+        "Utilities"
+      ],
+      "name": "Water and Power",
+      "parentCode": "SSEG"
+    },
+    "SSEG04": {
+      "sectors": [
+        "Energy",
+        "Utilities"
+      ],
+      "name": "National Parks",
+      "parentCode": "SSEG"
+    },
+    "SSEG01": {
+      "sectors": [
+        "Energy",
+        "Utilities"
+      ],
+      "name": "Energy",
+      "parentCode": "SSEG"
+    },
+    "SSEG03": {
+      "sectors": [
+        "Energy",
+        "Utilities"
+      ],
+      "name": "Public Lands, Forests, and Mining",
+      "parentCode": "SSEG"
+    },
+    "SSEV": {
+      "sectors": [],
+      "name": "Senate Committee on Environment and Public Works"
+    },
+    "SSEV10": {
+      "sectors": [],
+      "name": "Clean Air, Climate, and Nuclear Innovation and Safety",
+      "parentCode": "SSEV"
+    },
+    "SSEV09": {
+      "sectors": [],
+      "name": "Chemical Safety, Waste Management, Environmental Justice, and Regulatory",
+      "parentCode": "SSEV"
+    },
+    "SSFI": {
+      "sectors": [],
+      "name": "Senate Committee on Finance"
+    },
+    "SSFI12": {
+      "sectors": [],
+      "name": "Energy, Natural Resources, and Infrastructure",
+      "parentCode": "SSFI"
+    },
+    "SSFI10": {
+      "sectors": [],
+      "name": "Health Care",
+      "parentCode": "SSFI"
+    },
+    "SSFI13": {
+      "sectors": [],
+      "name": "International Trade, Customs, and Global Competitiveness",
+      "parentCode": "SSFI"
+    },
+    "SSFI14": {
+      "sectors": [],
+      "name": "Fiscal Responsibility and Economic Growth",
+      "parentCode": "SSFI"
+    },
+    "SSFI11": {
+      "sectors": [],
+      "name": "Taxation and IRS Oversight",
+      "parentCode": "SSFI"
+    },
+    "SSFI02": {
+      "sectors": [],
+      "name": "Social Security, Pensions, and Family Policy",
+      "parentCode": "SSFI"
+    },
+    "SSFR": {
+      "sectors": [],
+      "name": "Senate Committee on Foreign Relations"
+    },
+    "SSFR01": {
+      "sectors": [],
+      "name": "Europe and Regional Security Cooperation",
+      "parentCode": "SSFR"
+    },
+    "SSFR09": {
+      "sectors": [],
+      "name": "Africa and Global Health Policy",
+      "parentCode": "SSFR"
+    },
+    "SSFR02": {
+      "sectors": [],
+      "name": "East Asia, the Pacific, and International Cybersecurity Policy",
+      "parentCode": "SSFR"
+    },
+    "SSFR07": {
+      "sectors": [],
+      "name": "Near East, South Asia, Central Asia, and Counterterrorism",
+      "parentCode": "SSFR"
+    },
+    "SSFR06": {
+      "sectors": [],
+      "name": "Western Hemisphere, Transnational Crime, Civilian Security, Democracy, Human",
+      "parentCode": "SSFR"
+    },
+    "SSGA": {
+      "sectors": [],
+      "name": "Senate Committee on Homeland Security and Governmental Affairs"
+    },
+    "SSHR": {
+      "sectors": [
+        "Health Care"
+      ],
+      "name": "Senate Committee on Health, Education, Labor, and Pensions"
+    },
+    "SSHR11": {
+      "sectors": [
+        "Health Care"
+      ],
+      "name": "Employment and Workplace Safety",
+      "parentCode": "SSHR"
+    },
+    "SSHR12": {
+      "sectors": [
+        "Health Care"
+      ],
+      "name": "Primary Health and Retirement Security",
+      "parentCode": "SSHR"
+    },
+    "SSHR09": {
+      "sectors": [
+        "Health Care"
+      ],
+      "name": "Education and the American Family",
+      "parentCode": "SSHR"
+    },
+    "SSJU": {
+      "sectors": [],
+      "name": "Senate Committee on the Judiciary"
+    },
+    "SSJU21": {
+      "sectors": [],
+      "name": "the Constitution",
+      "parentCode": "SSJU"
+    },
+    "SSJU22": {
+      "sectors": [],
+      "name": "Crime and Counterterrorism",
+      "parentCode": "SSJU"
+    },
+    "SSJU01": {
+      "sectors": [],
+      "name": "Antitrust, Competition Policy, and Consumer Rights",
+      "parentCode": "SSJU"
+    },
+    "SSJU04": {
+      "sectors": [],
+      "name": "Border Security and Immigration",
+      "parentCode": "SSJU"
+    },
+    "SSRA": {
+      "sectors": [],
+      "name": "Senate Committee on Rules and Administration"
+    },
+    "SSSB": {
+      "sectors": [
+        "Consumer Discretionary",
+        "Financials"
+      ],
+      "name": "Senate Committee on Small Business and Entrepreneurship"
+    },
+    "SSVA": {
+      "sectors": [],
+      "name": "Senate Committee on Veterans' Affairs"
+    },
+    "HSZS": {
+      "sectors": [],
+      "name": "House Select Committee on the Strategic Competition Between the United States"
+    },
+    "HSQJ": {
+      "sectors": [],
+      "name": "House Select Subcommittee to Investigate the Remaining Questions Surrounding"
+    }
+  }
+}

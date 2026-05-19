@@ -3,6 +3,8 @@
  * Parent values match `Issuer.sector` (GICS-style strings in Neon).
  */
 
+import type { SectorName } from '@/lib/politiciansBySector';
+
 export type IndustrySubsectorDef = {
   slug: string;
   parent_sector: string;
@@ -185,6 +187,37 @@ const SECTOR_KEY_ALIASES: Record<string, string> = {
   'Real Estate': 'RealEstate',
   FinancialServices: 'Financials',
 };
+
+/** Map taxonomy `parent_sector` / compact Issuer.sector keys → 11 GICS display sectors. */
+export function gicsSectorFromTaxonomyParent(
+  parent: string | null | undefined,
+): SectorName | null {
+  const key = String(parent || '').trim();
+  if (!key) return null;
+  const map: Record<string, SectorName> = {
+    InformationTechnology: 'Information Technology',
+    Healthcare: 'Health Care',
+    HealthCare: 'Health Care',
+    Financials: 'Financials',
+    FinancialServices: 'Financials',
+    Industrials: 'Industrials',
+    Materials: 'Materials',
+    RealEstate: 'Real Estate',
+    ConsumerDiscretionary: 'Consumer Discretionary',
+    ConsumerStaples: 'Consumer Staples',
+    CommunicationServices: 'Communication Services',
+    Energy: 'Energy',
+    Utilities: 'Utilities',
+    Semiconductor: 'Information Technology',
+    Software: 'Information Technology',
+    'Oil & Gas': 'Energy',
+    Biotechnology: 'Health Care',
+    'Banks - Regional': 'Financials',
+    Aerospace: 'Industrials',
+    'Food & Agriculture': 'Consumer Staples',
+  };
+  return map[key] ?? null;
+}
 
 export function normalizeGicsSectorKey(raw: string | null | undefined): string {
   const trimmed = String(raw || '').trim();

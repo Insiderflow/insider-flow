@@ -91,7 +91,9 @@ export async function buildFlaggedBuyPositions(
         side: 'buy',
         amountUsd,
         committees: r.Politician?.committees,
+        committeeAssignments: r.Politician?.committee_assignments,
         issuerSector: r.Issuer?.sector,
+        subSectorSlug: r.Issuer?.sub_sector_slug,
       },
       clusterKeys,
     );

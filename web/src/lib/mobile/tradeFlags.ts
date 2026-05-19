@@ -1,15 +1,13 @@
 import type { Prisma, PrismaClient } from '@prisma/client';
-import {
-  inferSeatSectorFromCommittees,
-  resolveIssuerTradeSector,
-  resolvePoliticianCommittees,
-} from '@/lib/seatSector';
+import { explainCommitteeSectorAlignment } from '@/lib/seatSector';
 
 /** Public codes returned to mobile clients (i18n keys: tradeFlags.*). */
 export const TRADE_FLAG_CODES = [
   'notable_size',
   'committee_sector',
   'congress_cluster',
+  /** Corporate Form 4: multiple insiders same ticker + side in window */
+  'insider_cluster',
 ] as const;
 
 export type TradeFlagCode = (typeof TRADE_FLAG_CODES)[number];
@@ -27,7 +25,9 @@ export interface PoliticianTradeFlagInput {
   side: TradeSideFlag;
   amountUsd: number;
   committees?: string | null;
+  committeeAssignments?: unknown;
   issuerSector?: string | null;
+  subSectorSlug?: string | null;
 }
 
 function clusterKey(ticker: string, side: TradeSideFlag): string {
@@ -85,17 +85,12 @@ export function buildCongressClusterCounts(
 export function isCommitteeSectorTrade(input: {
   politicianId: string;
   committees?: string | null;
+  committeeAssignments?: unknown;
   ticker?: string | null;
   issuerSector?: string | null;
+  subSectorSlug?: string | null;
 }): boolean {
-  const committees = resolvePoliticianCommittees(
-    input.politicianId,
-    input.committees,
-  );
-  const committeeSector = inferSeatSectorFromCommittees(committees);
-  if (!committeeSector) return false;
-  const tradeSector = resolveIssuerTradeSector(input.ticker, input.issuerSector);
-  return Boolean(tradeSector && tradeSector === committeeSector);
+  return explainCommitteeSectorAlignment(input).met;
 }
 
 export function computePoliticianTradeFlags(
@@ -113,8 +108,10 @@ export function computePoliticianTradeFlags(
     isCommitteeSectorTrade({
       politicianId: input.politicianId,
       committees: input.committees,
+      committeeAssignments: input.committeeAssignments,
       ticker: input.ticker,
       issuerSector: input.issuerSector,
+      subSectorSlug: input.subSectorSlug,
     })
   ) {
     flags.push('committee_sector');

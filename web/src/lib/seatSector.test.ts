@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import {
+  explainCommitteeSectorAlignment,
   inferSeatSectorFromCommittees,
+  inferSeatSectorsFromCommittees,
   resolveIssuerTradeSector,
   resolvePoliticianCommittees,
   resolvePoliticianSeatSector,
@@ -31,5 +33,41 @@ describe('seatSector', () => {
 
   it('resolvePoliticianCommittees prefers DB value over seed', () => {
     expect(resolvePoliticianCommittees('unknown-id', 'Senate Banking')).toBe('Senate Banking');
+  });
+
+  it('inferSeatSectorsFromCommittees returns multiple sectors for broad committees', () => {
+    const sectors = inferSeatSectorsFromCommittees('House Energy and Commerce');
+    expect(sectors.length).toBeGreaterThan(1);
+    expect(sectors).toContain('Energy');
+  });
+
+  it('resolveIssuerTradeSector uses sub-sector taxonomy slug', () => {
+    expect(resolveIssuerTradeSector('NVDA', null, 'it-semiconductors')).toBe(
+      'Information Technology',
+    );
+  });
+
+  it('explainCommitteeSectorAlignment matches when trade in any committee sector', () => {
+    const align = explainCommitteeSectorAlignment({
+      politicianId: 'p1',
+      committees: 'House Energy and Commerce',
+      ticker: 'XOM',
+      issuerSector: null,
+    });
+    expect(align.met).toBe(true);
+    expect(align.tradeSector).toBe('Energy');
+  });
+
+  it('prefers GovTrack codes over regex on committee text', () => {
+    const align = explainCommitteeSectorAlignment({
+      politicianId: 'p1',
+      committees: 'Irrelevant text',
+      committeeAssignments: [{ code: 'SSBK', name: 'Senate Banking' }],
+      ticker: 'JPM',
+      issuerSector: null,
+    });
+    expect(align.usedGovtrackMap).toBe(true);
+    expect(align.met).toBe(true);
+    expect(align.committeeCodes).toContain('SSBK');
   });
 });

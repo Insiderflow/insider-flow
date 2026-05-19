@@ -43,8 +43,10 @@ model Politician {
   party         String?
   chamber       String?
   state         String?
-  committees    String?
-  created_at    DateTime        @default(now())
+  committees             String?
+  /** GovTrack committee codes + names: [{ code, name?, parentCode? }] */
+  committee_assignments  Json?
+  created_at             DateTime        @default(now())
   Trade         Trade[]
   UserWatchlist UserWatchlist[]
   referencePortfolios UserReferencePortfolio[]
@@ -404,4 +406,16 @@ model OpsAlertNotification {
 
   @@index([last_sent_at])
   @@map("ops_alert_notifications")
+}
+
+/** Latest batch from Python `insider_ml_analyzer` (Grok CSV / cron). */
+model MlSignalSnapshot {
+  id            String   @id @default(cuid())
+  source_label  String?
+  generated_at  DateTime
+  payload       Json
+  created_at    DateTime @default(now())
+
+  @@index([generated_at(sort: Desc)])
+  @@map("ml_signal_snapshots")
 }

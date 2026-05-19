@@ -121,9 +121,14 @@ export interface ReferencePortfolioPayload {
   }>;
 }
 
+export type SignalFeedFilter = 'all' | 'politician' | 'corporate';
+export type SignalTierFilter = 'all' | 'medium_plus' | 'high';
+export type SignalItemFeed = 'politician' | 'corporate';
+
 export interface MobileSignalItem {
   id: string;
   tradeId: string;
+  feed: SignalItemFeed;
   ticker: string;
   issuerName: string;
   politicianId: string;
@@ -138,12 +143,53 @@ export interface MobileSignalItem {
   mlTier: 'high' | 'medium' | 'low';
   mlReasons: string[];
   imageUrl?: string;
+  ownerId?: string;
+}
+
+export interface SignalsAiSummary {
+  headline: string;
+  narrative: string;
+  bullets: string[];
+  sentiment: 'bullish' | 'bearish' | 'mixed';
 }
 
 export interface MobileSignalsPayload {
   period: Period;
+  feed: SignalFeedFilter;
+  tierFilter: SignalTierFilter;
   generatedAt: string;
+  aiSummary: SignalsAiSummary;
   signals: MobileSignalItem[];
+}
+
+export type SignalCriterionId =
+  | 'notable_size'
+  | 'committee_sector'
+  | 'congress_cluster'
+  | 'insider_cluster'
+  | 'unusual_size'
+  | 'recent_filing'
+  | 'late_disclosure';
+
+export interface SignalCriterionRow {
+  id: SignalCriterionId;
+  met: boolean;
+  applicable: boolean;
+  detail: string | null;
+}
+
+export interface MobileSignalDetailPayload {
+  signal: MobileSignalItem;
+  criteria: SignalCriterionRow[];
+  thresholds: {
+    notableSizeUsd: number;
+    clusterMinMembers: number;
+    clusterWindowDays: number;
+    unusualSizePercentile: number;
+    lateFilingDays: number;
+  };
+  clusterSize: number;
+  sizePercentile: number;
 }
 
 export interface WatchlistItem {
@@ -212,8 +258,24 @@ export const mobileApi = {
   discover: (period: Period) =>
     apiClient.get<MobileDiscoverPayload>('/api/mobile/discover', { period }),
 
-  signals: (period: Period) =>
-    apiClient.get<MobileSignalsPayload>('/api/mobile/signals', { period }),
+  signals: (
+    period: Period,
+    feed: SignalFeedFilter = 'all',
+    locale: string,
+    tier: SignalTierFilter = 'all',
+  ) =>
+    apiClient.get<MobileSignalsPayload>('/api/mobile/signals', {
+      period,
+      feed,
+      locale,
+      tier,
+    }),
+
+  signalDetail: (signalId: string, locale: string) =>
+    apiClient.get<MobileSignalDetailPayload>(
+      `/api/mobile/signals/${encodeURIComponent(signalId)}`,
+      { locale },
+    ),
 
   referencePortfolios: () =>
     apiClient.get<ReferencePortfolioPayload>('/api/mobile/reference-portfolio'),
