@@ -2,6 +2,7 @@ import { prisma } from '@/lib/prisma';
 import { openInsiderSide } from '@/lib/openInsiderTransaction';
 import { politicianTradeSeatLabel } from '@/lib/mobile/politicianSeatLabel';
 import { politicianTradeWhere } from '@/lib/mobile/tradeDateSanity';
+import { findTradeIdsByActivityOrder } from '@/lib/tradeActivity';
 import {
   computeInsiderNotableFlags,
   computePoliticianTradeFlags,
@@ -24,17 +25,21 @@ function tradeAmount(sizeMin: unknown, sizeMax: unknown): number {
 
 export async function buildPoliticianLiveFeed() {
   const where = politicianTradeWhere();
-  const [rows, clusterKeys] = await Promise.all([
-    prisma.trade.findMany({
-      where,
-      include: { Politician: true, Issuer: true },
-      orderBy: { traded_at: 'desc' },
-      take: 80,
-    }),
+  const [ids, clusterKeys] = await Promise.all([
+    findTradeIdsByActivityOrder({ limit: 80 }),
     fetchCongressClusterKeys(prisma, where),
   ]);
+  const rows =
+    ids.length === 0
+      ? []
+      : await prisma.trade.findMany({
+          where: { id: { in: ids } },
+          include: { Politician: true, Issuer: true },
+        });
+  const byId = new Map(rows.map((r) => [r.id, r]));
+  const ordered = ids.map((id) => byId.get(id)).filter((r): r is NonNullable<typeof r> => Boolean(r));
 
-  const trades = rows.map((r) => {
+  const trades = ordered.map((r) => {
     const sell = r.type.toLowerCase().includes('sell');
     const proposed = r.type.toLowerCase().includes('proposed');
     const ticker = r.Issuer?.ticker || '—';
@@ -78,7 +83,7 @@ export async function buildPoliticianLiveFeed() {
       filedDisplay: r.published_at?.toISOString().slice(0, 10) || r.traded_at.toISOString().slice(0, 10),
       priceDisplay: r.price ? `$${Number(r.price).toFixed(2)}` : '—',
       totalValueDisplay: `$${amountUsd.toLocaleString()}`,
-      dateKey: r.traded_at.toISOString().slice(0, 10),
+      dateKey: (r.published_at || r.traded_at).toISOString().slice(0, 10),
       profilePath: r.politician_id ? `/insider/person/${r.politician_id}` : undefined,
     };
   });

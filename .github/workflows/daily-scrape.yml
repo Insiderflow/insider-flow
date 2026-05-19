@@ -101,15 +101,14 @@ jobs:
 
     # Corporate /insider page data: Node Playwright importer runs inside daily-scrape.js after Capitol import (non-fatal if it fails).
 
-    - name: Run daily scrape (Capitol Trades)
+    - name: Sync today + yesterday (Capitol published day + OpenInsider filing day)
       env:
         DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        # Keep CI fast and memory-safe: corporate OpenInsider is optional; Capitol must not depend on it.
-        OPENINSIDER_IMPORT_DISABLED: '1'
-        SCRAPE_MAX_PAGES: '45'
-        SCRAPE_PAGE_DELAY_MS: '600'
       run: |
-        node scripts/daily-scrape.js
+        TODAY=$(date -u +%Y-%m-%d)
+        YESTERDAY=$(date -u -d "yesterday" +%Y-%m-%d)
+        node scripts/sync_published_day.js --date "$TODAY"
+        node scripts/sync_published_day.js --date "$YESTERDAY"
 
     # Advisory only: thresholds lag real-world Capitol disclosure delays; do not fail the job.
     - name: Data freshness guard

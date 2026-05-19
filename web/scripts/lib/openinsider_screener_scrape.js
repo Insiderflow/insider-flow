@@ -17,10 +17,14 @@ function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));
 }
 
+/** Filing calendar day (OpenInsider MM/DD/YYYY → stored as UTC noon). */
 function filingDayKey(iso) {
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return '';
-  return d.toISOString().slice(0, 10);
+  const y = d.getUTCFullYear();
+  const m = String(d.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(d.getUTCDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
 }
 
 function utcDayBounds(dayStr) {
@@ -44,6 +48,12 @@ function recentUtcDayStrings(count) {
 
 async function loadHtmlIntoPage(page, url) {
   const httpUrl = url.replace(/^https:\/\//i, 'http://');
+  try {
+    await page.goto(httpUrl, { waitUntil: 'domcontentloaded', timeout: 120000 });
+    return { url: httpUrl, transport: 'playwright-goto' };
+  } catch {
+    /* fall through */
+  }
   try {
     const html = curlFetchHtml(httpUrl);
     if (html && /<html/i.test(html)) {
