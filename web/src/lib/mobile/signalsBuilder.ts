@@ -19,7 +19,6 @@ import type { BriefLocale } from '@/lib/mobile/dailyTradeBrief';
 import type { MobilePeriod } from '@/lib/mobile/dashboardBuilder';
 import {
   getSignalsBrief,
-  getSignalsBriefCached,
   type SignalsAiSummary,
 } from '@/lib/mobile/signalsBriefBuilder';
 import {
@@ -406,15 +405,6 @@ export async function buildMobileSignalsBrief(
   tierFilter: SignalTierFilter = defaultTierForPeriod(period),
   sideFilter: SignalSideFilter = 'all',
 ): Promise<SignalsAiSummary> {
-  const cached = await getSignalsBriefCached(
-    period,
-    feed,
-    locale,
-    tierFilter,
-    sideFilter,
-  );
-  if (cached) return cached;
-
   const filtered = await buildFilteredSignals(
     period,
     limit,

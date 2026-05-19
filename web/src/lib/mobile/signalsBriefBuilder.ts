@@ -19,7 +19,6 @@ export type SignalsAiSummary = {
 
 const CACHE_DIR = path.join(process.cwd(), '.cache');
 const LOG_FILE = path.join(CACHE_DIR, 'signals-brief-log.json');
-const CACHE_TTL_MS = 30 * 60 * 1000;
 const XAI_SIGNAL_CAP = 25;
 
 const PERIOD_LABEL: Record<BriefLocale, Record<MobilePeriod, string>> = {
@@ -106,11 +105,9 @@ function flagLabels(locale: BriefLocale, flags: string[]): string {
   return flags.map((f) => map[f] || f).join(locale === 'en' ? ', ' : '、');
 }
 
+/** Changes when any flagged signal enters/leaves this filtered feed. */
 function signalFingerprint(signals: MobileSignalItem[]): string {
-  return signals
-    .slice(0, 10)
-    .map((s) => s.id)
-    .join('|');
+  return `${signals.length}:${signals.map((s) => s.id).join('|')}`;
 }
 
 function rulesHeadline(
@@ -241,24 +238,6 @@ function briefLogCount(log: SignalsBriefLog | null, etDate: string): number {
   return log.count;
 }
 
-async function readCachedLoose(key: CacheKey): Promise<SignalsAiSummary | null> {
-  const file = cacheFile(key);
-  try {
-    const raw = await fs.readFile(file, 'utf8');
-    const data = JSON.parse(raw) as {
-      cachedAt: string;
-      brief: SignalsAiSummary;
-    };
-    if (data.brief.source !== 'xai') return null;
-    if (Date.now() - new Date(data.cachedAt).getTime() > CACHE_TTL_MS) {
-      return null;
-    }
-    return data.brief;
-  } catch {
-    return null;
-  }
-}
-
 async function readCached(
   key: CacheKey,
   fingerprint: string,
@@ -271,11 +250,7 @@ async function readCached(
       cachedAt: string;
       brief: SignalsAiSummary;
     };
-    if (data.brief.source !== 'xai') return null;
     if (data.fingerprint !== fingerprint) return null;
-    if (Date.now() - new Date(data.cachedAt).getTime() > CACHE_TTL_MS) {
-      return null;
-    }
     return data.brief;
   } catch {
     return null;
@@ -287,7 +262,6 @@ async function writeCached(
   fingerprint: string,
   brief: SignalsAiSummary,
 ): Promise<void> {
-  if (brief.source !== 'xai') return;
   await fs.mkdir(CACHE_DIR, { recursive: true });
   await fs.writeFile(
     cacheFile(key),
@@ -392,17 +366,6 @@ export async function invalidateSignalsBriefCache(): Promise<string[]> {
     /* missing */
   }
   return cleared;
-}
-
-export async function getSignalsBriefCached(
-  period: MobilePeriod,
-  feed: SignalFeed,
-  locale: BriefLocale,
-  tier: SignalTierFilter,
-  side: SignalSideFilter,
-): Promise<SignalsAiSummary | null> {
-  if (process.env.SIGNALS_BRIEF_FORCE === '1') return null;
-  return readCachedLoose({ period, feed, tier, side, locale });
 }
 
 export async function getSignalsBrief(
