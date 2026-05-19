@@ -12,14 +12,13 @@ import {
   clusterKeyForTrade,
   computeInsiderNotableFlags,
   computePoliticianTradeFlags,
-  fetchCongressClusterCounts,
-  fetchCongressClusterKeys,
-  explainCommitteeSectorAlignment,
+  fetchCongressClusterMeta,
   NOTABLE_SIZE_USD,
   CLUSTER_MIN_POLITICIANS,
   CLUSTER_WINDOW_DAYS,
   type TradeSideFlag,
 } from '@/lib/mobile/tradeFlags';
+import { explainCommitteeSectorAlignment } from '@/lib/seatSector';
 import { politicianTradeWhere } from '@/lib/mobile/tradeDateSanity';
 import type { MobileSignalItem } from '@/lib/mobile/signalsBuilder';
 import { computeSignalRecommendation } from '@/lib/mobile/signalRecommendation';
@@ -338,11 +337,11 @@ async function buildPoliticianSignalDetail(
   const amountUsd = tradeAmount(r.size_min, r.size_max);
   const ticker = r.Issuer?.ticker?.trim().toUpperCase() || '—';
 
-  const [clusterKeys, clusterCounts, amountHistories] = await Promise.all([
-    fetchCongressClusterKeys(prisma, baseWhere),
-    fetchCongressClusterCounts(prisma, baseWhere),
-    buildPoliticianAmountHistories(prisma, [r.politician_id]),
-  ]);
+  const [{ keys: clusterKeys, counts: clusterCounts }, amountHistories] =
+    await Promise.all([
+      fetchCongressClusterMeta(prisma, baseWhere),
+      buildPoliticianAmountHistories(prisma, [r.politician_id]),
+    ]);
 
   const flags = computePoliticianTradeFlags(
     {
