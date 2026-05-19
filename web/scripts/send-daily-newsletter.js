@@ -1,8 +1,8 @@
 /*
  Daily newsletter sender for paid members (Chinese).
  - HKT calendar day via Intl (Asia/Hong_Kong), not host TZ.
- - Rows included if created_at OR published_at falls in that UTC window (new inserts + same-day disclosures).
- - Re-imports that only bump published_at to a past date still need Trade.updated_at (future schema) — see OR below.
+ - Default digest day: previous HKT day (cron 9am HKT; Capitol import ~11pm HKT prior evening).
+ - Rows included if created_at, published_at, or site activity (GREATEST traded_at/published_at) falls in that UTC window.
  - Usage: node scripts/send-daily-newsletter.js [testEmail] (optional test mode)
 */
 
@@ -221,18 +221,24 @@ async function main() {
 
   // For testing: use a specific date with actual trades
   const useTestDate = process.argv[3] === '--test-date' || process.env.USE_TEST_DATE === 'true';
+  const useTodayDigest = process.argv.includes('--today');
   let targetDate = new Date();
   if (useTestDate) {
     // Use November 14, 2024 which has trades (stored at 16:00 UTC = midnight HKT Nov 15)
     targetDate = new Date('2024-11-14T12:00:00Z');
+  } else if (!useTodayDigest) {
+    // 9am send reports prior HKT day — imports land ~23:00 HKT after the morning send.
+    const offsetDays = Number(process.env.NEWSLETTER_DIGEST_OFFSET_DAYS ?? -1);
+    if (Number.isFinite(offsetDays) && offsetDays !== 0) {
+      targetDate = new Date(targetDate.getTime() + offsetDays * 24 * 60 * 60 * 1000);
+    }
   }
 
   const { startUtc, endUtc, dateLabel } = getHktDayBoundsUtc(targetDate);
 
+  console.log(`📅 Digest HKT day: ${dateLabel}`);
   console.log(`📅 HKT window (UTC): ${startUtc.toISOString()} ~ ${endUtc.toISOString()}`);
 
-  // created_at: brand-new rows. published_at: disclosure calendar lands on this HKT day (row may be old).
-  // Still misses "only raw/issuer touched" updates without updated_at — add Trade.updated_at if needed.
   const trades = await prisma.$queryRaw`
     SELECT 
       t.id,
@@ -257,8 +263,16 @@ async function main() {
     WHERE (
       (t.created_at >= ${startUtc} AND t.created_at < ${endUtc})
       OR (t.published_at IS NOT NULL AND t.published_at >= ${startUtc} AND t.published_at < ${endUtc})
+      OR (
+        GREATEST(t.traded_at, COALESCE(t.published_at, t.traded_at)) >= ${startUtc}
+        AND GREATEST(t.traded_at, COALESCE(t.published_at, t.traded_at)) < ${endUtc}
+      )
     )
-    ORDER BY GREATEST(t.created_at, COALESCE(t.published_at, t.created_at)) DESC NULLS LAST
+    ORDER BY GREATEST(
+      t.created_at,
+      COALESCE(t.published_at, t.created_at),
+      t.traded_at
+    ) DESC NULLS LAST
     LIMIT 200
   `;
 

@@ -71,7 +71,9 @@ async function checkNewsletterStatus() {
     });
     console.log(`\n📊 Recent Trades (last 7 days): ${recentTrades}`);
 
-    const { startUtc, endUtc } = getHktDayBoundsUtc();
+    const { startUtc, endUtc, dateLabel: todayLabel } = getHktDayBoundsUtc();
+    const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000);
+    const { startUtc: yStart, endUtc: yEnd, dateLabel: yesterdayLabel } = getHktDayBoundsUtc(yesterday);
 
     const todayTradesByTradedAt = await prisma.trade.count({
       where: {
@@ -96,11 +98,18 @@ async function checkNewsletterStatus() {
         ]
       }
     });
-    console.log(`   Today's trades by traded_at (HKT window): ${todayTradesByTradedAt}`);
-    console.log(`   Today's trades by created_at only: ${todayTradesByCreatedAt}`);
-    console.log(`   Today's trades by published_at only: ${todayTradesByPublishedAt}`);
-    console.log(`   Newsletter digest (created OR published in HKT day): ${digestCount}`);
-    console.log(`   Date range: ${startUtc.toISOString()} to ${endUtc.toISOString()}`);
+    const yesterdayDigest = await prisma.trade.count({
+      where: {
+        OR: [
+          { created_at: { gte: yStart, lt: yEnd } },
+          { published_at: { gte: yStart, lt: yEnd } }
+        ]
+      }
+    });
+    console.log(`   Today (${todayLabel}) by traded_at: ${todayTradesByTradedAt}`);
+    console.log(`   Today created_at / published_at / digest: ${todayTradesByCreatedAt} / ${todayTradesByPublishedAt} / ${digestCount}`);
+    console.log(`   >>> 9am send uses YESTERDAY (${yesterdayLabel}) digest: ${yesterdayDigest} trades <<<`);
+    console.log(`   Yesterday window: ${yStart.toISOString()} to ${yEnd.toISOString()}`);
   } catch (e) {
     console.error('❌ Error checking trades:', e.message);
   }
