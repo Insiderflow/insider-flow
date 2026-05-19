@@ -14,7 +14,7 @@ import {
   NOTABLE_SIZE_USD,
   type TradeFlagCode,
 } from '@/lib/mobile/tradeFlags';
-import { politicianTradeWhere } from '@/lib/mobile/tradeDateSanity';
+import { politicianPublishedWhere, politicianTradeWhere } from '@/lib/mobile/tradeDateSanity';
 import type { BriefLocale } from '@/lib/mobile/dailyTradeBrief';
 import type { MobilePeriod } from '@/lib/mobile/dashboardBuilder';
 import {
@@ -159,13 +159,13 @@ async function buildPoliticianSignals(
   take: number,
 ): Promise<MobileSignalItem[]> {
   const since = periodStart(period);
+  const periodWhere = politicianPublishedWhere(since);
   const baseWhere = politicianTradeWhere();
-  const where = { ...baseWhere, traded_at: { gte: since } };
   const scanLimit = Math.min(200, Math.max(take * 3, 60));
 
   const [rows, { keys: clusterKeys, counts: clusterCounts }] = await Promise.all([
     prisma.trade.findMany({
-      where,
+      where: periodWhere,
       include: {
         Politician: true,
         Issuer: { include: { IndustrySubsector: true } },

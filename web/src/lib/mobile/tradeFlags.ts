@@ -1,5 +1,6 @@
 import type { Prisma, PrismaClient } from '@prisma/client';
 import { explainCommitteeSectorAlignment } from '@/lib/seatSector';
+import { politicianPublishedWhere } from '@/lib/mobile/tradeDateSanity';
 
 /** Public codes returned to mobile clients (i18n keys: tradeFlags.*). */
 export const TRADE_FLAG_CODES = [
@@ -174,8 +175,7 @@ export async function fetchCongressClusterMeta(
 
   const rows = await prisma.trade.findMany({
     where: {
-      ...tradeWhere,
-      traded_at: { gte: since },
+      AND: [tradeWhere, politicianPublishedWhere(since)],
     },
     select: {
       politician_id: true,
