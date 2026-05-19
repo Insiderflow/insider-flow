@@ -180,12 +180,22 @@ const zhHans: Messages = {
     settings: "设置",
   },
   signalsPage: {
-    title: "规则信号",
-    subtitle: "依 P0 标记规则筛选，非投资建议",
+    title: "智能信号",
+    subtitle: "规则标记 + 异常评分排序，非投资建议",
     empty: "此期间尚无标记交易",
     periodLabel: "期间",
     headline: (flags, ticker, name) =>
       `${flags.join("、")} · ${ticker} · ${name}`,
+    mlScore: (score) => `评分 ${score}`,
+    mlTier: { high: "高", medium: "中", low: "低" },
+    mlReason: {
+      unusual_size: "金额异常",
+      congress_cluster: "多人同向",
+      committee_sector: "委员会相关",
+      notable_size: "大额",
+      recent_filing: "新近申报",
+      late_disclosure: "延迟揭露",
+    },
   },
   portfolioPage: {
     title: "参考组合",

@@ -59,6 +59,29 @@ export function buildCongressClusterKeys(
   return hot;
 }
 
+/** `${TICKER}|buy|sell` → distinct politician count in the cluster window. */
+export function buildCongressClusterCounts(
+  rows: {
+    politicianId: string;
+    ticker: string | null | undefined;
+    side: TradeSideFlag;
+  }[],
+): Map<string, number> {
+  const counts = new Map<string, Set<string>>();
+  for (const row of rows) {
+    const ticker = String(row.ticker || '').trim().toUpperCase();
+    if (!ticker) continue;
+    const key = clusterKey(ticker, row.side);
+    if (!counts.has(key)) counts.set(key, new Set());
+    counts.get(key)!.add(row.politicianId);
+  }
+  const sizes = new Map<string, number>();
+  for (const [key, politicians] of counts) {
+    sizes.set(key, politicians.size);
+  }
+  return sizes;
+}
+
 export function isCommitteeSectorTrade(input: {
   politicianId: string;
   committees?: string | null;
@@ -108,6 +131,26 @@ export function computeInsiderNotableFlags(amountUsd: number): TradeFlagCode[] {
   return amountUsd >= NOTABLE_SIZE_USD ? ['notable_size'] : [];
 }
 
+function mapClusterRows(
+  rows: Array<{
+    politician_id: string;
+    type: string;
+    Issuer: { ticker: string | null } | null;
+  }>,
+) {
+  return rows.map((r) => {
+    const t = r.type.toLowerCase();
+    const proposed = t.includes('proposed');
+    const sell = t.includes('sell');
+    const side: TradeSideFlag = proposed ? 'proposed_sale' : sell ? 'sell' : 'buy';
+    return {
+      politicianId: r.politician_id,
+      ticker: r.Issuer?.ticker,
+      side,
+    };
+  });
+}
+
 export async function fetchCongressClusterKeys(
   prisma: Pick<PrismaClient, 'trade'>,
   tradeWhere: Prisma.TradeWhereInput,
@@ -127,21 +170,31 @@ export async function fetchCongressClusterKeys(
     },
   });
 
-  return buildCongressClusterKeys(
-    rows.map((r) => {
-      const t = r.type.toLowerCase();
-      const proposed = t.includes('proposed');
-      const sell = t.includes('sell');
-      const side: TradeSideFlag = proposed
-        ? 'proposed_sale'
-        : sell
-          ? 'sell'
-          : 'buy';
-      return {
-        politicianId: r.politician_id,
-        ticker: r.Issuer?.ticker,
-        side,
-      };
-    }),
-  );
+  return buildCongressClusterKeys(mapClusterRows(rows));
+}
+
+export async function fetchCongressClusterCounts(
+  prisma: Pick<PrismaClient, 'trade'>,
+  tradeWhere: Prisma.TradeWhereInput,
+): Promise<Map<string, number>> {
+  const since = new Date();
+  since.setDate(since.getDate() - CLUSTER_WINDOW_DAYS);
+
+  const rows = await prisma.trade.findMany({
+    where: {
+      ...tradeWhere,
+      traded_at: { gte: since },
+    },
+    select: {
+      politician_id: true,
+      type: true,
+      Issuer: { select: { ticker: true } },
+    },
+  });
+
+  return buildCongressClusterCounts(mapClusterRows(rows));
+}
+
+export function clusterKeyForTrade(ticker: string, side: TradeSideFlag): string {
+  return clusterKey(ticker, side);
 }

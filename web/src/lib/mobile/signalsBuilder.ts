@@ -1,7 +1,14 @@
 import { prisma } from '@/lib/prisma';
 import { getPoliticianImageSrc } from '@/lib/politicianImageMapping';
 import {
+  buildPoliticianAmountHistories,
+  computeMlSignalScore,
+  tradeAmountPercentile,
+} from '@/lib/mobile/signalMlScorer';
+import {
+  clusterKeyForTrade,
   computePoliticianTradeFlags,
+  fetchCongressClusterCounts,
   fetchCongressClusterKeys,
   type TradeFlagCode,
 } from '@/lib/mobile/tradeFlags';
@@ -50,7 +57,11 @@ export type MobileSignalItem = {
   flags: TradeFlagCode[];
   amountUsd: number;
   filedAt: string;
+  /** Rule-based score (flags only). */
   score: number;
+  mlScore: number;
+  mlTier: 'high' | 'medium' | 'low';
+  mlReasons: string[];
   imageUrl?: string;
 };
 
@@ -68,7 +79,7 @@ export async function buildMobileSignals(
   const baseWhere = politicianTradeWhere();
   const where = { ...baseWhere, traded_at: { gte: since } };
 
-  const [rows, clusterKeys] = await Promise.all([
+  const [rows, clusterKeys, clusterCounts] = await Promise.all([
     prisma.trade.findMany({
       where,
       include: { Politician: true, Issuer: true },
@@ -76,8 +87,16 @@ export async function buildMobileSignals(
       take: 500,
     }),
     fetchCongressClusterKeys(prisma, baseWhere),
+    fetchCongressClusterCounts(prisma, baseWhere),
   ]);
 
+  const politicianIds = [...new Set(rows.map((r) => r.politician_id))];
+  const amountHistories = await buildPoliticianAmountHistories(
+    prisma,
+    politicianIds,
+  );
+
+  const now = Date.now();
   const signals: MobileSignalItem[] = [];
 
   for (const r of rows) {
@@ -100,6 +119,28 @@ export async function buildMobileSignals(
     if (!flags.length) continue;
 
     const ticker = r.Issuer?.ticker?.trim().toUpperCase() || '—';
+    const publishedAt = r.published_at || r.traded_at;
+    const daysSincePublished = Math.max(
+      0,
+      (now - publishedAt.getTime()) / (1000 * 60 * 60 * 24),
+    );
+    const clusterSize =
+      ticker !== '—'
+        ? clusterCounts.get(clusterKeyForTrade(ticker, side)) || 0
+        : 0;
+    const ruleScore = signalScore(flags);
+    const ml = computeMlSignalScore({
+      flagScore: ruleScore,
+      flags,
+      sizePercentile: tradeAmountPercentile(
+        amountUsd,
+        amountHistories.get(r.politician_id) || [],
+      ),
+      clusterSize,
+      daysSincePublished,
+      filedAfterDays: r.filed_after_days,
+    });
+
     signals.push({
       id: `signal-${r.id}`,
       tradeId: r.id,
@@ -114,12 +155,20 @@ export async function buildMobileSignals(
       filedAt:
         r.published_at?.toISOString().slice(0, 10) ||
         r.traded_at.toISOString().slice(0, 10),
-      score: signalScore(flags),
+      score: ruleScore,
+      mlScore: ml.mlScore,
+      mlTier: ml.mlTier,
+      mlReasons: ml.mlReasons,
       imageUrl: getPoliticianImageSrc(r.politician_id, r.Politician?.name || ''),
     });
   }
 
-  signals.sort((a, b) => b.score - a.score || b.filedAt.localeCompare(a.filedAt));
+  signals.sort(
+    (a, b) =>
+      b.mlScore - a.mlScore ||
+      b.score - a.score ||
+      b.filedAt.localeCompare(a.filedAt),
+  );
 
   return {
     period,

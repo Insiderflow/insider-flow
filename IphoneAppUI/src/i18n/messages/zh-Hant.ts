@@ -180,12 +180,22 @@ const zhHant: Messages = {
     settings: "設定",
   },
   signalsPage: {
-    title: "規則訊號",
-    subtitle: "依 P0 標記規則篩選，非投資建議",
+    title: "智能訊號",
+    subtitle: "規則標記 + 異常評分排序，非投資建議",
     empty: "此期間尚無標記交易",
     periodLabel: "期間",
     headline: (flags, ticker, name) =>
       `${flags.join("、")} · ${ticker} · ${name}`,
+    mlScore: (score) => `評分 ${score}`,
+    mlTier: { high: "高", medium: "中", low: "低" },
+    mlReason: {
+      unusual_size: "金額異常",
+      congress_cluster: "多人同向",
+      committee_sector: "委員會相關",
+      notable_size: "大額",
+      recent_filing: "新近申報",
+      late_disclosure: "延遲揭露",
+    },
   },
   portfolioPage: {
     title: "參考組合",

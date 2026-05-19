@@ -151,6 +151,17 @@ export interface Messages {
     empty: string;
     periodLabel: string;
     headline: (flags: string[], ticker: string, name: string) => string;
+    mlScore: (score: number) => string;
+    mlTier: { high: string; medium: string; low: string };
+    mlReason: Record<
+      | 'unusual_size'
+      | 'congress_cluster'
+      | 'committee_sector'
+      | 'notable_size'
+      | 'recent_filing'
+      | 'late_disclosure',
+      string
+    >;
   };
   portfolioPage: {
     title: string;

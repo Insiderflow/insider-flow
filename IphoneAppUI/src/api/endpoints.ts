@@ -134,6 +134,9 @@ export interface MobileSignalItem {
   amountUsd: number;
   filedAt: string;
   score: number;
+  mlScore: number;
+  mlTier: 'high' | 'medium' | 'low';
+  mlReasons: string[];
   imageUrl?: string;
 }
 
