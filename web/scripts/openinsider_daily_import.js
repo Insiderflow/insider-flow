@@ -19,6 +19,7 @@ const {
 } = require('./lib/openinsider_import_shared');
 const { curlFetchHtml } = require('./lib/openinsider_http_fetch');
 const { scrapeRecentFilingDays } = require('./lib/openinsider_screener_scrape');
+const { scrapePrimeBrokerFilings } = require('./lib/openinsider_prime_broker_scrape');
 
 const prisma = new PrismaClient();
 
@@ -109,12 +110,16 @@ async function main() {
     }
 
     const maxRows = Math.min(
-      500,
+      3000,
       Math.max(1, Number(process.env.OPENINSIDER_MAX_ROWS || '300') || 300),
     );
     const screenerDays = Math.min(
-      14,
+      30,
       Math.max(0, Number(process.env.OPENINSIDER_SCREENER_DAYS || '7') || 7),
+    );
+    const primeBrokerDays = Math.min(
+      90,
+      Math.max(0, Number(process.env.OPENINSIDER_PRIME_BROKER_DAYS || '0') || 0),
     );
     const persistDelayMs = Math.min(
       5000,
@@ -141,6 +146,9 @@ async function main() {
       screenerDays,
       screenerByDay: {},
       screenerScraped: 0,
+      primeBrokerDays: 0,
+      primeBrokerScraped: 0,
+      primeBrokerBySource: null,
       rateLimit: {
         persistDelayMs,
         persistJitterMs,
@@ -149,8 +157,9 @@ async function main() {
     };
 
     console.log(
-      `OpenInsider import starting (maxRows=${maxRows}, screenerDays=${screenerDays}, dryRun=${dryRun})`,
+      `OpenInsider import starting (maxRows=${maxRows}, screenerDays=${screenerDays}, primeBrokerDays=${primeBrokerDays}, dryRun=${dryRun})`,
     );
+    summary.primeBrokerDays = primeBrokerDays;
 
     let browser;
     try {
@@ -221,6 +230,32 @@ async function main() {
         summary.screenerScraped = screener.rows.length;
         if (!dryRun && screener.rows.length > 0) {
           await persistOpenInsiderRows(prisma, screener.rows, summary, {
+            perRowDelayMs: persistDelayMs,
+            perRowJitterMs: persistJitterMs,
+            stopAfterDuplicateStreak: 0,
+          });
+        }
+      }
+
+      if (primeBrokerDays > 0) {
+        console.log(`OpenInsider prime-broker pass: last ${primeBrokerDays} days`);
+        const pb = await scrapePrimeBrokerFilings(browser, {
+          days: primeBrokerDays,
+          maxPages: Math.min(
+            30,
+            Math.max(1, Number(process.env.OPENINSIDER_PRIME_BROKER_MAX_PAGES || '20') || 20),
+          ),
+          sleepMs: Math.min(
+            5000,
+            Math.max(300, Number(process.env.OPENINSIDER_PRIME_BROKER_SLEEP_MS || '700') || 700),
+          ),
+          globalScreener: true,
+          watchlist: true,
+        });
+        summary.primeBrokerScraped = pb.rows.length;
+        summary.primeBrokerBySource = pb.bySource;
+        if (!dryRun && pb.rows.length > 0) {
+          await persistOpenInsiderRows(prisma, pb.rows, summary, {
             perRowDelayMs: persistDelayMs,
             perRowJitterMs: persistJitterMs,
             stopAfterDuplicateStreak: 0,

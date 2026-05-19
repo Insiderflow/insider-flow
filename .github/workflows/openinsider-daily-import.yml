@@ -18,6 +18,9 @@ on:
       - 'web/scripts/lib/openinsider_screener_scrape.js'
       - 'web/scripts/import_openinsider_filing_csv.js'
       - 'web/scripts/openinsider_filing_day_csv.js'
+      - 'web/scripts/edgar_form4_backfill.js'
+      - 'web/scripts/edgar_form4_export.py'
+      - 'web/requirements-edgar.txt'
       - 'web/package.json'
       - 'web/package-lock.json'
 
@@ -64,13 +67,13 @@ jobs:
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           OPENINSIDER_CURL_IPV4: '1'
-          OPENINSIDER_MAX_ROWS: '300'
-          OPENINSIDER_SCREENER_DAYS: '7'
-          OPENINSIDER_SCREENER_MAX_PAGES: '15'
+          OPENINSIDER_MAX_ROWS: '2500'
+          OPENINSIDER_SCREENER_DAYS: '14'
+          OPENINSIDER_SCREENER_MAX_PAGES: '40'
         run: node scripts/openinsider_daily_import.js
 
-      - name: Backfill this week's filing days (UTC)
+      - name: Backfill recent filing days (UTC)
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           OPENINSIDER_CURL_IPV4: '1'
-        run: node scripts/openinsider_backfill_filing_days.js --days 7 --max-pages 15 --sleep-ms 400
+        run: node scripts/openinsider_backfill_filing_days.js --days 14 --max-pages 40 --sleep-ms 400
