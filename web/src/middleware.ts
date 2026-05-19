@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { cookies } from "next/headers";
-import { isMobileRequest } from "@/lib/mobileRequest";
-
 const DESKTOP_COOKIE = "if_desktop";
 const MOBILE_APP_PREFIX = "/app";
 
@@ -83,8 +81,8 @@ function mobileAppRedirect(req: NextRequest): NextResponse | null {
 
   if (req.cookies.get(DESKTOP_COOKIE)?.value === "1") return null;
 
-  if (!isMobileRequest(req)) return null;
-
+  // Default all visitors (desktop + mobile) to the embedded app UI.
+  // Opt out: /?desktop=1 sets if_desktop cookie → legacy marketing site.
   const dest = new URL(`${MOBILE_APP_PREFIX}/${search}`, req.url);
   return NextResponse.redirect(dest);
 }
