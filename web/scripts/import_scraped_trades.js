@@ -107,16 +107,23 @@ async function importScrapedTrades() {
           }
         });
         
-        // Check for existing trade by content (not just ID) to prevent duplicates
-        const existingTrade = await prisma.trade.findFirst({
-          where: {
-            politician_id: trade.politicianId,
-            issuer_id: trade.issuerId,
-            traded_at: new Date(trade.tradedAt),
-            type: trade.type,
-            price: trade.price ? parseFloat(trade.price) : null
-          }
-        });
+        const capitolTradeId = trade.tradeId ? String(trade.tradeId).trim() : null;
+
+        let existingTrade = null;
+        if (capitolTradeId) {
+          existingTrade = await prisma.trade.findUnique({ where: { id: capitolTradeId } });
+        }
+        if (!existingTrade) {
+          existingTrade = await prisma.trade.findFirst({
+            where: {
+              politician_id: trade.politicianId,
+              issuer_id: trade.issuerId,
+              traded_at: new Date(trade.tradedAt),
+              type: trade.type,
+              price: trade.price ? parseFloat(trade.price) : null,
+            },
+          });
+        }
         
         if (existingTrade) {
           const incomingPub = trade.publishedAt ? new Date(trade.publishedAt) : null;
@@ -161,9 +168,9 @@ async function importScrapedTrades() {
         }
         
         // Create new trade (no duplicates found)
-        const newTrade = await prisma.trade.create({
+        await prisma.trade.create({
           data: {
-            id: trade.tradeId,
+            id: capitolTradeId || trade.tradeId,
             politician_id: trade.politicianId,
             issuer_id: trade.issuerId,
             traded_at: new Date(trade.tradedAt),

@@ -11,6 +11,7 @@ const { execSync } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 const { runValidation } = require('./validate_scraped_trades');
+const { scrapeDateStats } = require('./capitol_date_parse');
 
 const prisma = new PrismaClient();
 const ROOT = path.join(__dirname, '..');
@@ -60,6 +61,8 @@ async function dailyScrape() {
     selectedFile: null,
     validation: null,
     fallbackValidation: null,
+    scrapeStats: null,
+    capitalImport: null,
     database: {
       beforeTradeCount: null,
       afterTradeCount: null,
@@ -126,7 +129,35 @@ async function dailyScrape() {
     }
     report.source = selectedSource;
     report.selectedFile = selectedFile;
-    
+    try {
+      const rows = JSON.parse(fs.readFileSync(selectedFile, 'utf8'));
+      report.scrapeStats = scrapeDateStats(rows);
+      console.log(`📈 Scrape file stats: ${JSON.stringify(report.scrapeStats)}`);
+      const maxPub = report.scrapeStats.maxPublished
+        ? new Date(report.scrapeStats.maxPublished).getTime()
+        : 0;
+      const staleHours = (Date.now() - maxPub) / (1000 * 60 * 60);
+      const maxStaleHours = Number(process.env.SCRAPE_MAX_PUBLISH_STALE_HOURS || 168);
+      if (!maxPub) {
+        throw new Error('Scraped file has no parseable published_at values');
+      }
+      if (staleHours > maxStaleHours) {
+        throw new Error(
+          `Scraped published_at too stale (${report.scrapeStats.maxPublished}; ${staleHours.toFixed(0)}h > ${maxStaleHours}h)`,
+        );
+      }
+      if (staleHours > 72) {
+        console.warn(
+          `⚠️ Scrape max published_at is ${staleHours.toFixed(0)}h old (Capitol listing may be quiet) — continuing import`,
+        );
+      }
+    } catch (statsError) {
+      if (statsError instanceof Error && statsError.message.includes('published_at')) {
+        throw statsError;
+      }
+      console.warn('⚠️ Could not evaluate scrape freshness:', statsError.message);
+    }
+
     // Step 2: Import the scraped data
     console.log(`📥 Step 2: Importing scraped data into database (${selectedSource})...`);
     try {
@@ -135,6 +166,22 @@ async function dailyScrape() {
         cwd: ROOT
       });
       console.log('✅ Import completed');
+      try {
+        report.capitalImport = JSON.parse(
+          fs.readFileSync(path.join(ARTIFACTS_DIR, 'last-capital-import.json'), 'utf8'),
+        );
+        const work =
+          (Number(report.capitalImport.imported) || 0) +
+          (Number(report.capitalImport.updated) || 0);
+        console.log(`📥 Capitol import: imported=${report.capitalImport.imported} updated=${report.capitalImport.updated} skipped=${report.capitalImport.skipped}`);
+        if (work <= 0) {
+          console.warn(
+            '⚠️ Zero Capitol rows imported or updated — listings may already be in DB or scrape matched no new disclosures',
+          );
+        }
+      } catch {
+        /* import artifact optional */
+      }
     } catch (error) {
       console.error('❌ Import failed:', error.message);
       throw error;

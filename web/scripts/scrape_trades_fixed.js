@@ -3,242 +3,190 @@
 const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');
-const SELECTOR_VERSION = 'capitol_table_v2_tbody_td9';
+const { parseCapitolDate, scrapeDateStats } = require('./capitol_date_parse');
+
+const SELECTOR_VERSION = 'capitol_table_v3_trade_link';
+const MAX_PAGES = Number(process.env.SCRAPE_MAX_PAGES || 45);
+const PAGE_DELAY_MS = Number(process.env.SCRAPE_PAGE_DELAY_MS || 800);
+const GOTO_TIMEOUT_MS = Number(process.env.SCRAPE_GOTO_TIMEOUT_MS || 45000);
+
+function rowFromRaw(raw) {
+  const politicianRaw = raw.politicianRaw || '';
+  const politicianName = politicianRaw.replace(/(Republican|Democrat|Independent).*$/, '').trim();
+  const politicianId = raw.politicianId;
+  const issuerId = raw.issuerId;
+  const tradeId = raw.tradeId;
+
+  const issuerRaw = raw.issuerRaw || '';
+  const tickerMatch = issuerRaw.match(/(.+?)([A-Z]{1,5}):US$/);
+  let issuerName = tickerMatch ? tickerMatch[1].trim() : issuerRaw;
+  const ticker = tickerMatch ? tickerMatch[2] : null;
+  if (issuerName.endsWith('N/A')) issuerName = issuerName.replace(/N\/A$/, '').trim();
+
+  const publishedAt = parseCapitolDate(raw.publishedAt);
+  const tradedAt = parseCapitolDate(raw.tradedAt);
+  const type = (raw.type || '').trim().toLowerCase();
+
+  let sizeMin = null;
+  let sizeMax = null;
+  const sizeText = raw.sizeText || '';
+  if (sizeText) {
+    const sizeMatch = sizeText.match(/\$?(\d+(?:,\d{3})*(?:\.\d+)?)\s*[–-]\s*\$?(\d+(?:,\d{3})*(?:\.\d+)?)/);
+    if (sizeMatch) {
+      sizeMin = parseFloat(sizeMatch[1].replace(/,/g, ''));
+      sizeMax = parseFloat(sizeMatch[2].replace(/,/g, ''));
+    } else {
+      const sizeMatchKMB = sizeText.match(/(\d+(?:\.\d+)?)([KMB]?)\s*[–-]\s*(\d+(?:\.\d+)?)([KMB]?)/);
+      if (sizeMatchKMB) {
+        const minVal = parseFloat(sizeMatchKMB[1]);
+        const maxVal = parseFloat(sizeMatchKMB[3]);
+        const minUnit = sizeMatchKMB[2];
+        const maxUnit = sizeMatchKMB[4];
+        sizeMin =
+          minVal *
+          (minUnit === 'K' ? 1000 : minUnit === 'M' ? 1000000 : minUnit === 'B' ? 1000000000 : 1);
+        sizeMax =
+          maxVal *
+          (maxUnit === 'K' ? 1000 : maxUnit === 'M' ? 1000000 : maxUnit === 'B' ? 1000000000 : 1);
+      }
+    }
+  }
+
+  let price = null;
+  const priceText = raw.priceText || '';
+  if (priceText && priceText !== 'N/A') {
+    const priceMatch = priceText.match(/\$?(\d+(?:\.\d+)?)/);
+    if (priceMatch) price = parseFloat(priceMatch[1]);
+  }
+
+  let filedAfterDays = null;
+  if (publishedAt && tradedAt) {
+    const daysDiff = Math.floor(
+      (new Date(publishedAt).getTime() - new Date(tradedAt).getTime()) / (1000 * 60 * 60 * 24),
+    );
+    if (daysDiff >= 0) filedAfterDays = daysDiff;
+  }
+
+  if (!politicianId || !issuerId || !tradeId || !tradedAt || !type) return null;
+
+  return {
+    tradeId,
+    politicianId,
+    politicianName,
+    politicianChamber: null,
+    issuerId,
+    issuerName,
+    ticker,
+    publishedAt,
+    tradedAt,
+    filedAfterDays,
+    owner: raw.owner,
+    type,
+    sizeMin,
+    sizeMax,
+    sizeText,
+    price,
+    detailUrl: raw.detailUrl,
+  };
+}
+
+async function extractRawRows(page) {
+  return page.evaluate(() => {
+    const hrefId = (href) => {
+      if (!href) return null;
+      try {
+        return new URL(href, window.location.href).pathname.split('/').filter(Boolean).pop() || null;
+      } catch {
+        return null;
+      }
+    };
+
+    const rows = [];
+    document.querySelectorAll('table tbody tr').forEach((row) => {
+      const cells = row.querySelectorAll('td');
+      if (cells.length < 9) return;
+
+      const tradeLink =
+        row.querySelector('a[href*="/trades/"]') ||
+        cells[cells.length - 1]?.querySelector('a[href*="/trades/"]');
+
+      rows.push({
+        politicianRaw: cells[0].textContent.trim(),
+        issuerRaw: cells[1].textContent.trim(),
+        publishedAt: cells[2].textContent.trim(),
+        tradedAt: cells[3].textContent.trim(),
+        owner: cells[5].textContent.trim(),
+        type: cells[6].textContent.trim(),
+        sizeText: cells[7] ? cells[7].textContent.trim() : '',
+        priceText: cells[8] ? cells[8].textContent.trim() : '',
+        politicianId: hrefId(cells[0].querySelector('a')?.href),
+        issuerId: hrefId(cells[1].querySelector('a')?.href),
+        tradeId: hrefId(tradeLink?.href),
+        detailUrl: tradeLink?.href || null,
+      });
+    });
+    return rows;
+  });
+}
 
 async function scrapeTrades() {
   const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage();
-  
   const allTrades = [];
-  
+  const seenTradeIds = new Set();
+
   try {
     console.log('🚀 Starting to scrape latest trades from Capitol Trades...');
     console.log(`🧩 Selector version: ${SELECTOR_VERSION}`);
-    
-    // Scrape first 20 pages to get more recent trades
-    for (let pageNum = 1; pageNum <= 35; pageNum++) {
+    console.log(`📄 Max pages: ${MAX_PAGES}`);
+
+    for (let pageNum = 1; pageNum <= MAX_PAGES; pageNum++) {
       console.log(`📄 Scraping page ${pageNum}...`);
-      
       const url = `https://www.capitoltrades.com/trades?page=${pageNum}`;
-      await page.goto(url, { waitUntil: 'networkidle' });
-      
-      // Wait for the table to load
-      await page.waitForSelector('table tbody tr', { timeout: 10000 });
-      
-      // Extract trade data from table rows
-      const trades = await page.evaluate(() => {
-        const rows = document.querySelectorAll('table tbody tr');
-        const tradeData = [];
-        
-        rows.forEach(row => {
-          const cells = row.querySelectorAll('td');
-          if (cells.length >= 9) {
-            // Capitol Trades table structure (based on debug output):
-            // 0: Politician (with link)
-            // 1: Issuer (with link) 
-            // 2: Published Date
-            // 3: Trade Date
-            // 4: Days Filed After
-            // 5: Owner
-            // 6: Type (Buy/Sell)
-            // 7: Size Range
-            // 8: Price
-            // 9: Empty (action button)
-            
-            // Extract clean politician name (remove party and chamber info)
-            const politicianRaw = cells[0].textContent.trim();
-            const politicianName = politicianRaw.replace(/(Republican|Democrat|Independent).*$/, '').trim();
-            
-            // Extract issuer name and ticker symbol
-            const issuerRaw = cells[1].textContent.trim();
-            const tickerMatch = issuerRaw.match(/(.+?)([A-Z]{1,5}):US$/);
-            let issuerName = tickerMatch ? tickerMatch[1].trim() : issuerRaw;
-            const ticker = tickerMatch ? tickerMatch[2] : null;
-            
-            // Clean up issuer name - remove any N/A suffix
-            if (issuerName.endsWith('N/A')) {
-              issuerName = issuerName.replace(/N\/A$/, '').trim();
-            }
-            const publishedAt = cells[2].textContent.trim();
-            const tradedAt = cells[3].textContent.trim();
-            const owner = cells[5].textContent.trim();
-            const type = cells[6].textContent.trim();
-            const sizeText = cells[7] ? cells[7].textContent.trim() : '';
-            const priceText = cells[8] ? cells[8].textContent.trim() : '';
-            
-            // Extract IDs from links
-            const politicianLink = cells[0].querySelector('a');
-            const politicianId = politicianLink ? politicianLink.href.split('/').pop() : null;
-            
-            const issuerLink = cells[1].querySelector('a');
-            const issuerId = issuerLink ? issuerLink.href.split('/').pop() : null;
-            
-            // Generate trade ID since there's no direct trade ID column
-            const tradeId = `trade_${politicianId}_${issuerId}_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`;
-            const detailUrl = null; // No direct trade link in this structure
-            
-            // Parse size range (e.g., "$1,000 - $15,000" or "1K–15K")
-            let sizeMin = null, sizeMax = null;
-            if (sizeText) {
-              // Handle different formats
-              const sizeMatch = sizeText.match(/\$?(\d+(?:,\d{3})*(?:\.\d+)?)\s*[–-]\s*\$?(\d+(?:,\d{3})*(?:\.\d+)?)/);
-              if (sizeMatch) {
-                sizeMin = parseFloat(sizeMatch[1].replace(/,/g, ''));
-                sizeMax = parseFloat(sizeMatch[2].replace(/,/g, ''));
-              } else {
-                // Try K/M/B format
-                const sizeMatchKMB = sizeText.match(/(\d+(?:\.\d+)?)([KMB]?)\s*[–-]\s*(\d+(?:\.\d+)?)([KMB]?)/);
-                if (sizeMatchKMB) {
-                  const minVal = parseFloat(sizeMatchKMB[1]);
-                  const maxVal = parseFloat(sizeMatchKMB[3]);
-                  const minUnit = sizeMatchKMB[2];
-                  const maxUnit = sizeMatchKMB[4];
-                  
-                  sizeMin = minVal * (minUnit === 'K' ? 1000 : minUnit === 'M' ? 1000000 : minUnit === 'B' ? 1000000000 : 1);
-                  sizeMax = maxVal * (maxUnit === 'K' ? 1000 : maxUnit === 'M' ? 1000000 : maxUnit === 'B' ? 1000000000 : 1);
-                }
-              }
-            }
-            
-            // Parse price
-            let price = null;
-            if (priceText && priceText !== 'N/A') {
-              const priceMatch = priceText.match(/\$?(\d+(?:\.\d+)?)/);
-              if (priceMatch) {
-                price = parseFloat(priceMatch[1]);
-              }
-            }
-            
-            // Parse dates
-            const parseDate = (dateStr) => {
-              if (!dateStr || dateStr === 'N/A') return null;
-              
-              // Handle different date formats
-              const today = new Date();
-              const currentYear = today.getFullYear();
-              
-            // Handle "21:05Yesterday" format (published date)
-            if (dateStr.includes('Yesterday')) {
-              const timeMatch = dateStr.match(/(\d{1,2}):(\d{2})/);
-              if (timeMatch) {
-                const hours = parseInt(timeMatch[1]);
-                const minutes = parseInt(timeMatch[2]);
-                const yesterday = new Date(today);
-                yesterday.setDate(yesterday.getDate() - 1);
-                yesterday.setHours(hours, minutes, 0, 0);
-                return yesterday.toISOString();
-              }
-              const yesterday = new Date(today);
-              yesterday.setDate(yesterday.getDate() - 1);
-              return yesterday.toISOString();
-            }
-            
-            // Handle "13:05Today" format (published date)
-            if (dateStr.includes('Today')) {
-              const timeMatch = dateStr.match(/(\d{1,2}):(\d{2})/);
-              if (timeMatch) {
-                const hours = parseInt(timeMatch[1]);
-                const minutes = parseInt(timeMatch[2]);
-                const date = new Date(today);
-                date.setHours(hours, minutes, 0, 0);
-                return date.toISOString();
-              }
-              return today.toISOString();
-            }
-              
-              // Handle "23 Sept2025" format (traded date)
-              if (dateStr.includes('Sept') || dateStr.includes('Sep')) {
-                const match = dateStr.match(/(\d+)\s+(\w+)(\d{4})/);
-                if (match) {
-                  const day = parseInt(match[1]);
-                  const month = match[2];
-                  const year = parseInt(match[3]);
-                  const monthNum = month === 'Sept' || month === 'Sep' ? 8 : 0; // September is month 8 (0-indexed)
-                  const date = new Date(year, monthNum, day);
-                  return date.toISOString();
-                }
-              }
-              
-              // Handle "daysXX" format (days since trade)
-              if (dateStr.startsWith('days')) {
-                const days = parseInt(dateStr.replace('days', ''));
-                const tradeDate = new Date(today);
-                tradeDate.setDate(tradeDate.getDate() - days);
-                return tradeDate.toISOString();
-              }
-              
-              // Try parsing as regular date
-              try {
-                const parsed = new Date(dateStr);
-                if (isNaN(parsed.getTime())) {
-                  return null;
-                }
-                return parsed.toISOString();
-              } catch (e) {
-                return null;
-              }
-            };
-            
-            const publishedDate = parseDate(publishedAt);
-            const tradeDate = parseDate(tradedAt);
-            
-            // Calculate filed_after_days automatically
-            let filedAfterDays = null;
-            if (publishedDate && tradeDate) {
-              const published = new Date(publishedDate);
-              const traded = new Date(tradeDate);
-              const timeDiff = published.getTime() - traded.getTime();
-              const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-              if (daysDiff >= 0) {
-                filedAfterDays = daysDiff;
-              }
-            }
-            
-            // Only include trades with valid data
-            if (politicianId && issuerId && tradeDate && type) {
-              tradeData.push({
-                tradeId: tradeId || `trade_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-                politicianId,
-                politicianName,
-                politicianChamber: null, // Will be filled later
-                issuerId,
-                issuerName,
-                ticker: ticker, // Extracted from issuer name
-                publishedAt: publishedDate,
-                tradedAt: tradeDate,
-                filedAfterDays: filedAfterDays,
-                owner,
-                type: type.toLowerCase(),
-                sizeMin,
-                sizeMax,
-                sizeText,
-                price,
-                detailUrl
-              });
-            }
-          }
-        });
-        
-        return tradeData;
+      const response = await page.goto(url, {
+        waitUntil: 'domcontentloaded',
+        timeout: GOTO_TIMEOUT_MS,
       });
-      
-      allTrades.push(...trades);
-      console.log(`✅ Found ${trades.length} valid trades on page ${pageNum}`);
-      
-      // Small delay between pages
-      await page.waitForTimeout(2000);
+      if (!response || response.status() >= 400) {
+        console.log(`⚠️ Page ${pageNum} HTTP ${response?.status() ?? 'unknown'} — stopping pagination`);
+        break;
+      }
+
+      const hasTable = await page
+        .waitForSelector('table tbody tr', { timeout: 15000 })
+        .then(() => true)
+        .catch(() => false);
+      if (!hasTable) {
+        console.log(`⚠️ No trade table on page ${pageNum} — stopping pagination`);
+        break;
+      }
+
+      const rawRows = await extractRawRows(page);
+      let added = 0;
+      for (const raw of rawRows) {
+        const trade = rowFromRaw(raw);
+        if (!trade || seenTradeIds.has(trade.tradeId)) continue;
+        seenTradeIds.add(trade.tradeId);
+        allTrades.push(trade);
+        added++;
+      }
+      console.log(`✅ Page ${pageNum}: ${added} new trades (${rawRows.length} rows)`);
+
+      if (pageNum < MAX_PAGES) await page.waitForTimeout(PAGE_DELAY_MS);
     }
-    
-    // Save to JSON file
+
+    const stats = scrapeDateStats(allTrades);
+    console.log(
+      `📈 Scrape stats: ${stats.rowCount} trades, max published ${stats.maxPublished ?? 'n/a'}, max traded ${stats.maxTraded ?? 'n/a'}`,
+    );
+
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
     const filename = `trades_scraped_${timestamp}.json`;
     const filepath = path.join(__dirname, '..', filename);
-    
     fs.writeFileSync(filepath, JSON.stringify(allTrades, null, 2));
     console.log(`💾 Saved ${allTrades.length} trades to ${filename}`);
-    
-    return { filename, trades: allTrades };
-    
+
+    return { filename, trades: allTrades, stats };
   } catch (error) {
     console.error('❌ Scraping failed:', error);
     throw error;
@@ -247,13 +195,16 @@ async function scrapeTrades() {
   }
 }
 
-// Run the scraper
-scrapeTrades()
-  .then(result => {
-    console.log(`🎉 Successfully scraped ${result.trades.length} trades`);
-    console.log(`📁 File saved as: ${result.filename}`);
-  })
-  .catch(error => {
-    console.error('💥 Scraping failed:', error);
-    process.exit(1);
-  });
+if (require.main === module) {
+  scrapeTrades()
+    .then((result) => {
+      console.log(`🎉 Successfully scraped ${result.trades.length} trades`);
+      console.log(`📁 File saved as: ${result.filename}`);
+    })
+    .catch((error) => {
+      console.error('💥 Scraping failed:', error);
+      process.exit(1);
+    });
+}
+
+module.exports = { scrapeTrades };
