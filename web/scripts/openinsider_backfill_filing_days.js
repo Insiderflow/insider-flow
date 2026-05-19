@@ -2,9 +2,12 @@
 /**
  * Scrape + import OpenInsider filings for each calendar day in a range (UTC filing date).
  *
- *   cd web && OPENINSIDER_CURL_IPV4=1 node scripts/openinsider_backfill_filing_days.js --from 2026-05-12 --to 2026-05-16
+ *   cd web && DOTENV_CONFIG_PATH=.env.local node -r dotenv/config scripts/openinsider_backfill_filing_days.js --from 2026-05-12 --to 2026-05-16
  *   node scripts/openinsider_backfill_filing_days.js --days 7   # last 7 UTC days incl. today
  */
+
+require('dotenv').config({ path: require('path').join(__dirname, '..', '.env.local') });
+require('dotenv').config({ path: require('path').join(__dirname, '..', '.env') });
 
 const { chromium } = require('playwright');
 const { PrismaClient } = require('@prisma/client');

@@ -63,17 +63,12 @@ jobs:
       - name: Install Playwright Chromium
         run: npx playwright install chromium
 
-      - name: Run OpenInsider daily import
+      - name: Sync OpenInsider filing days (today + yesterday + 7d backfill)
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          OPENINSIDER_CURL_IPV4: '1'
-          OPENINSIDER_MAX_ROWS: '2500'
-          OPENINSIDER_SCREENER_DAYS: '14'
-          OPENINSIDER_SCREENER_MAX_PAGES: '40'
-        run: node scripts/openinsider_daily_import.js
-
-      - name: Backfill recent filing days (UTC)
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          OPENINSIDER_CURL_IPV4: '1'
-        run: node scripts/openinsider_backfill_filing_days.js --days 14 --max-pages 40 --sleep-ms 400
+        run: |
+          TODAY=$(date -u +%Y-%m-%d)
+          YESTERDAY=$(date -u -d "yesterday" +%Y-%m-%d)
+          node scripts/sync_published_day.js --date "$TODAY" --openinsider-only
+          node scripts/sync_published_day.js --date "$YESTERDAY" --openinsider-only
+          node scripts/openinsider_backfill_filing_days.js --days 7 --max-pages 20 --sleep-ms 400

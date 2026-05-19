@@ -79,7 +79,7 @@ async function syncOpenInsider(targetDay) {
   const summary = { imported: 0, skippedDup: 0, errors: 0, errorMessages: [] };
   try {
     const rows = await scrapeScreenerFilingDay(context, targetDay, {
-      maxPages: 12,
+      maxPages: 20,
       sleepMs: 400,
       dedupe: new Set(),
     });
