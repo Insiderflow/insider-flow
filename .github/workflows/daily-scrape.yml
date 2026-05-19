@@ -110,6 +110,13 @@ jobs:
         node scripts/sync_published_day.js --date "$TODAY"
         node scripts/sync_published_day.js --date "$YESTERDAY"
 
+    - name: OpenInsider CI sync (內部交易 backup if day sync skipped rows)
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        OPENINSIDER_CI_LOOKBACK_DAYS: '3'
+        OPENINSIDER_CI_MAX_STALE_HOURS: '48'
+      run: node scripts/openinsider_ci_sync.js
+
     # Advisory only: thresholds lag real-world Capitol disclosure delays; do not fail the job.
     - name: Data freshness guard
       continue-on-error: true

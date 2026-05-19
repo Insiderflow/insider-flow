@@ -1,37 +1,25 @@
-# Corporate OpenInsider → Prisma (openInsider_* tables). Capitol / politician scrape stays in daily-scrape.yml.
+# Corporate OpenInsider → Prisma (openInsider_* tables). Powers 內部交易 /insider.
 name: OpenInsider daily import
 
 on:
   schedule:
-    # Stagger after Daily Data Scrape HKT slots (9pm / 10pm / 1am HKT → 13 / 14 / 17 UTC) by 20m.
-    - cron: '20 13 * * *'
-    - cron: '20 14 * * *'
-    - cron: '20 17 * * *'
+    # HKT 9:30pm / 10:30pm / 1:30am (20m after Capitol scrape slots)
+    - cron: '30 13 * * *'
+    - cron: '30 14 * * *'
+    - cron: '30 17 * * *'
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - '.github/workflows/openinsider-daily-import.yml'
-      - 'web/scripts/openinsider_daily_import.js'
-      - 'web/scripts/lib/openinsider_import_shared.js'
-      - 'web/scripts/lib/openinsider_http_fetch.js'
-      - 'web/scripts/lib/openinsider_screener_scrape.js'
-      - 'web/scripts/import_openinsider_filing_csv.js'
-      - 'web/scripts/openinsider_filing_day_csv.js'
-      - 'web/scripts/edgar_form4_backfill.js'
-      - 'web/scripts/edgar_form4_export.py'
-      - 'web/requirements-edgar.txt'
-      - 'web/package.json'
-      - 'web/package-lock.json'
 
 concurrency:
   group: openinsider-daily-import
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   import:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      issues: write
     defaults:
       run:
         working-directory: web
@@ -63,12 +51,81 @@ jobs:
       - name: Install Playwright Chromium
         run: npx playwright install chromium
 
-      - name: Sync OpenInsider filing days (today + yesterday + 7d backfill)
+      - name: Run OpenInsider CI sync (screener + latest lists)
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          OPENINSIDER_CI_LOOKBACK_DAYS: '3'
+          OPENINSIDER_CI_MAX_STALE_HOURS: '48'
+        run: node scripts/openinsider_ci_sync.js
+
+      - name: OpenInsider freshness guard
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          MAX_OPENINSIDER_STALENESS_DAYS: '3'
+        run: node scripts/check_openinsider_freshness.js
+
+      - name: Upload import report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: openinsider-import-artifacts
+          path: web/.artifacts/openinsider-import-report.json
+          if-no-files-found: warn
+
+      - name: Write job summary
+        if: always()
         run: |
-          TODAY=$(date -u +%Y-%m-%d)
-          YESTERDAY=$(date -u -d "yesterday" +%Y-%m-%d)
-          node scripts/sync_published_day.js --date "$TODAY" --openinsider-only
-          node scripts/sync_published_day.js --date "$YESTERDAY" --openinsider-only
-          node scripts/openinsider_backfill_filing_days.js --days 7 --max-pages 20 --sleep-ms 400
+          if [ -f ".artifacts/openinsider-import-report.json" ]; then
+            node -e '
+              const fs=require("fs");
+              const r=JSON.parse(fs.readFileSync(".artifacts/openinsider-import-report.json","utf8"));
+              const lines=[
+                "## OpenInsider import",
+                "",
+                `- Imported: **${r.imported ?? 0}** (skipped dup: ${r.skippedDup ?? 0})`,
+                `- Latest filing: \`${r.dbLatestFiling ?? "n/a"}\``,
+                `- Stale hours: \`${r.staleHours ?? "n/a"}\``,
+                `- Days: ${(r.targetDays||[]).join(", ")}`,
+              ];
+              fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join("\n")+"\n");
+            '
+          fi
+
+      - name: Create or update failure issue
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = "[CI] OpenInsider daily import failure";
+            const runUrl = `${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`;
+            const body = [
+              "Scheduled OpenInsider sync failed (內部交易 data).",
+              "",
+              `- Run: ${runUrl}`,
+              "",
+              "Check artifact **openinsider-import-artifacts** and Playwright reachability to openinsider.com.",
+            ].join("\n");
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "open",
+              labels: "ci-failure,openinsider",
+              per_page: 50,
+            });
+            const existing = issues.find((i) => i.title === title);
+            if (existing) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.number,
+                body,
+              });
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+                labels: ["ci-failure", "openinsider"],
+              });
+            }

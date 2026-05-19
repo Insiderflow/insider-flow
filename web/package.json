@@ -24,6 +24,7 @@
     "committees:enrich": "node scripts/enrich_politician_committees_govtrack.js",
     "committees:import-csv": "node scripts/import_politician_committees_csv.js",
     "openinsider:import": "node scripts/openinsider_daily_import.js",
+    "openinsider:ci-sync": "node scripts/openinsider_ci_sync.js",
     "openinsider:prime-brokers": "node scripts/openinsider_prime_broker_import.js",
     "openinsider:import-csv": "node scripts/import_openinsider_filing_csv.js",
     "openinsider:filing-day-csv": "node scripts/openinsider_filing_day_csv.js",

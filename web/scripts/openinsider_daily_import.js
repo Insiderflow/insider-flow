@@ -42,6 +42,19 @@ async function loadOpenInsiderDom(page, summary) {
 
   for (const url of OPENINSIDER_URLS) {
     try {
+      await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 120000 });
+      summary.url = url;
+      summary.transport = 'playwright-goto';
+      console.log(`OpenInsider loaded via Playwright (${url})`);
+      return;
+    } catch (err) {
+      lastErr = err;
+      console.warn(`OpenInsider goto failed for ${url}: ${err instanceof Error ? err.message : String(err)}`);
+    }
+  }
+
+  for (const url of OPENINSIDER_URLS) {
+    try {
       const html = curlFetchHtml(url);
       if (!html || !/<html/i.test(html)) throw new Error('curl returned empty/non-html payload');
       await page.setContent(html, { waitUntil: 'domcontentloaded', timeout: 120000 });
@@ -75,25 +88,6 @@ async function loadOpenInsiderDom(page, summary) {
     } catch (err) {
       lastErr = err;
       console.warn(`OpenInsider fetch failed for ${url}: ${err instanceof Error ? err.message : String(err)}`);
-    }
-  }
-
-  for (const url of OPENINSIDER_URLS) {
-    try {
-      await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 120000 });
-      summary.url = url;
-      summary.transport = 'playwright-goto';
-      console.log(`OpenInsider loaded via Playwright (${url})`);
-      return;
-    } catch (err) {
-      lastErr = err;
-      const message = err instanceof Error ? err.message : String(err);
-      const isNetworkRefusal =
-        /ERR_CONNECTION_REFUSED|ERR_CONNECTION_RESET|ERR_CONNECTION_TIMED_OUT|ERR_NAME_NOT_RESOLVED|chrome-error:\/\/chromewebdata|interrupted by another navigation/i.test(
-          message,
-        );
-      console.warn(`OpenInsider goto failed for ${url}: ${message}`);
-      if (!isNetworkRefusal) throw err;
     }
   }
 
