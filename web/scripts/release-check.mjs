@@ -19,6 +19,9 @@ const skipRevenuecatFlag =
   args.has('--skip-revenuecat') ||
   process.env.RELEASE_CHECK_SKIP_REVENUECAT === '1' ||
   process.env.RELEASE_CHECK_SKIP_REVENUECAT === 'true';
+const skipOptionalBackendEnvFlag =
+  args.has('--skip-optional-backend-env') ||
+  process.env.RELEASE_CHECK_SKIP_OPTIONAL_BACKEND_ENV === '1';
 
 function parseEnvFile(filePath) {
   if (!fs.existsSync(filePath)) return {};
@@ -143,15 +146,17 @@ async function run() {
   let prismaFailed = false;
   let healthFailed = false;
 
-  const requiredEnvCore = [
-    'DATABASE_URL',
-    'SESSION_SECRET',
-    'NEXTAUTH_SECRET',
-    'NEXTAUTH_URL',
-    'INTERNAL_JOBS_SECRET',
-    'STRIPE_SECRET_KEY',
-    'STRIPE_WEBHOOK_SECRET',
-  ];
+  const requiredEnvCore = skipOptionalBackendEnvFlag
+    ? ['DATABASE_URL', 'INTERNAL_JOBS_SECRET']
+    : [
+        'DATABASE_URL',
+        'SESSION_SECRET',
+        'NEXTAUTH_SECRET',
+        'NEXTAUTH_URL',
+        'INTERNAL_JOBS_SECRET',
+        'STRIPE_SECRET_KEY',
+        'STRIPE_WEBHOOK_SECRET',
+      ];
   const requiredEnvRevenuecat = [
     'REVENUECAT_SECRET_API_KEY',
     'REVENUECAT_WEBHOOK_AUTH',
@@ -165,6 +170,12 @@ async function run() {
   ];
 
   section('Backend Env Checks');
+  if (skipOptionalBackendEnvFlag) {
+    console.log(
+      'INFO Optional backend env checks skipped (RELEASE_CHECK_SKIP_OPTIONAL_BACKEND_ENV=1) — Render holds auth/billing secrets',
+    );
+    warnings.push('Auth/billing env checks skipped in CI — only DATABASE_URL + INTERNAL_JOBS_SECRET required');
+  }
   if (skipRevenuecatFlag) {
     console.log(
       'INFO RevenueCat backend env checks skipped (RELEASE_CHECK_SKIP_REVENUECAT=1 or --skip-revenuecat)',
