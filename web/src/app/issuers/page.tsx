@@ -8,6 +8,7 @@ import { textLinkStyles } from '@/components/linkStyles';
 import { getIssuersPageData, type SortOrder } from '@/lib/repos/issuersRepo';
 import FilterBar from '@/components/FilterBar';
 import PaginationBar from '@/components/PaginationBar';
+import LocalizedPlaceholderInput from '@/components/LocalizedPlaceholderInput';
 
 export const dynamic = 'force-dynamic';
 
@@ -70,12 +71,12 @@ export default async function IssuersPage({ searchParams }: { searchParams: Prom
             <span className="w-full text-gray-400 sm:w-auto">
               <span className="zh-Hant">搜尋</span>
               <span className="zh-Hans hidden">搜索</span>
-          <span className="ko hidden">點회사名稱可進入該標的的거래明細（付費解鎖）。</span>
+              <span className="ko hidden">검색</span>
             </span>
-            <input
+            <LocalizedPlaceholderInput
               name="q"
               defaultValue={q}
-              placeholder="公司名稱或股票代號…"
+              placeholderKey="searchIssuerQueryPlaceholder"
               className={fieldControlStyles()}
               aria-label="搜尋公司"
             />

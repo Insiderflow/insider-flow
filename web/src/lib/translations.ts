@@ -57,6 +57,16 @@ export interface Translations {
   accountActions: string;
   resendVerification: string;
   logoutAllDevices: string;
+
+  // Search
+  searchPlaceholder: string;
+  searchPoliticianNamePlaceholder: string;
+  searchIssuerQueryPlaceholder: string;
+  searchCompanyPlaceholder: string;
+  searchOwnerPlaceholder: string;
+  searchNoResults: string;
+  searchTryOther: string;
+  searchResultDefault: string;
 }
 
 const translations: Record<Language, Translations> = {
@@ -117,6 +127,14 @@ const translations: Record<Language, Translations> = {
     accountActions: '帳戶操作',
     resendVerification: '重新發送驗證郵件',
     logoutAllDevices: '登出所有裝置',
+    searchPlaceholder: '搜尋政治家、發行商或交易...',
+    searchPoliticianNamePlaceholder: '輸入議員姓名…',
+    searchIssuerQueryPlaceholder: '公司名稱或股票代號…',
+    searchCompanyPlaceholder: '搜尋公司...',
+    searchOwnerPlaceholder: '搜尋交易者...',
+    searchNoResults: '找不到相關結果',
+    searchTryOther: '試試其他關鍵字',
+    searchResultDefault: '結果',
   },
   
   'zh-Hans': {
@@ -176,6 +194,14 @@ const translations: Record<Language, Translations> = {
     accountActions: '账户操作',
     resendVerification: '重新发送验证邮件',
     logoutAllDevices: '登出所有设备',
+    searchPlaceholder: '搜索政治家、发行商或交易...',
+    searchPoliticianNamePlaceholder: '输入议员姓名…',
+    searchIssuerQueryPlaceholder: '公司名称或股票代号…',
+    searchCompanyPlaceholder: '搜索公司...',
+    searchOwnerPlaceholder: '搜索交易者...',
+    searchNoResults: '找不到相关结果',
+    searchTryOther: '试试其他关键字',
+    searchResultDefault: '结果',
   },
 
   ko: {
@@ -226,6 +252,14 @@ const translations: Record<Language, Translations> = {
     accountActions: '계정 작업',
     resendVerification: '인증 메일 재전송',
     logoutAllDevices: '모든 기기에서 로그아웃',
+    searchPlaceholder: '의원, 발행사 또는 거래 검색...',
+    searchPoliticianNamePlaceholder: '의원 이름 입력…',
+    searchIssuerQueryPlaceholder: '회사명 또는 티커…',
+    searchCompanyPlaceholder: '회사 검색...',
+    searchOwnerPlaceholder: '내부자 검색...',
+    searchNoResults: '검색 결과 없음',
+    searchTryOther: '다른 키워드를 입력해 보세요',
+    searchResultDefault: '결과',
   },
 };
 

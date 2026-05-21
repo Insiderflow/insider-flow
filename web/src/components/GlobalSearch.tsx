@@ -1,8 +1,10 @@
-"use client";
+'use client';
 
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { useTranslation } from '@/hooks/useTranslation';
+import type { Translations } from '@/lib/translations';
 
 interface SearchResult {
   id: string;
@@ -17,6 +19,7 @@ interface GlobalSearchProps {
 }
 
 export default function GlobalSearch({ className = "" }: GlobalSearchProps) {
+  const { t } = useTranslation();
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchResult[]>([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -107,12 +110,13 @@ export default function GlobalSearch({ className = "" }: GlobalSearchProps) {
   };
 
   const getTypeLabel = (type: string) => {
-    switch (type) {
-      case 'politician': return '政治家';
-      case 'issuer': return '發行商';
-      case 'trade': return '交易';
-      default: return '結果';
-    }
+    const labels: Record<string, keyof Translations> = {
+      politician: 'politician',
+      issuer: 'issuer',
+      trade: 'trades',
+    };
+    const key = labels[type];
+    return key ? t(key) : t('searchResultDefault');
   };
 
   return (
@@ -125,7 +129,7 @@ export default function GlobalSearch({ className = "" }: GlobalSearchProps) {
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={handleKeyDown}
           onFocus={() => query.trim() && setIsOpen(true)}
-          placeholder="搜尋政治家、發行商或交易..."
+          placeholder={t('searchPlaceholder')}
           className="w-full px-4 py-2 pl-10 pr-4 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200"
         />
         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -190,8 +194,8 @@ export default function GlobalSearch({ className = "" }: GlobalSearchProps) {
           ) : query.trim() && !isLoading ? (
             <div className="px-4 py-8 text-center text-gray-400">
               <div className="text-lg mb-2">🔍</div>
-              <div>找不到相關結果</div>
-              <div className="text-sm mt-1">試試其他關鍵字</div>
+              <div>{t('searchNoResults')}</div>
+              <div className="text-sm mt-1">{t('searchTryOther')}</div>
             </div>
           ) : null}
         </div>

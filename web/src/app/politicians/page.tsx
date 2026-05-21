@@ -10,6 +10,7 @@ import { getPoliticiansPageData, type PoliticianSortKey, type SortOrder } from '
 import StatCard from '@/components/StatCard';
 import FilterBar from '@/components/FilterBar';
 import PaginationBar from '@/components/PaginationBar';
+import LocalizedPlaceholderInput from '@/components/LocalizedPlaceholderInput';
 import { prisma } from '@/lib/prisma';
 import { getSessionUser } from '@/lib/auth';
 
@@ -170,10 +171,10 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
               <span className="zh-Hans hidden">搜索姓名</span>
           <span className="ko hidden">이름 검색</span>
             </span>
-            <input
+            <LocalizedPlaceholderInput
               name="name"
               defaultValue={searchName}
-              placeholder="輸入議員姓名…"
+              placeholderKey="searchPoliticianNamePlaceholder"
               className={fieldControlStyles()}
               aria-label="依議員姓名搜尋"
             />

@@ -7,7 +7,15 @@ export function useTranslation() {
   const [language, setLanguage] = useState<Language>('zh-Hant');
 
   useEffect(() => {
-    setLanguage(getCurrentLanguage());
+    const sync = () => setLanguage(getCurrentLanguage());
+    sync();
+    window.addEventListener('storage', sync);
+    const observer = new MutationObserver(sync);
+    observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    return () => {
+      window.removeEventListener('storage', sync);
+      observer.disconnect();
+    };
   }, []);
 
   const t = (key: keyof Translations) => {

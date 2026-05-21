@@ -1,15 +1,29 @@
-"use client";
-import { useEffect, useRef, useState } from "react";
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from '@/hooks/useTranslation';
+import type { Translations } from '@/lib/translations';
 
 type Props = {
   name: string;
   placeholder?: string;
+  placeholderKey?: keyof Translations;
   initialValue?: string;
-  searchPath: string; // API path for suggestions
-  ariaLabel?: string; // ARIA label for accessibility
+  searchPath: string;
+  ariaLabel?: string;
 };
 
-export default function AutocompleteInput({ name, placeholder, initialValue = "", searchPath, ariaLabel }: Props) {
+export default function AutocompleteInput({
+  name,
+  placeholder,
+  placeholderKey,
+  initialValue = '',
+  searchPath,
+  ariaLabel,
+}: Props) {
+  const { t } = useTranslation();
+  const resolvedPlaceholder =
+    placeholderKey != null ? t(placeholderKey) : placeholder ?? '';
   const [value, setValue] = useState(initialValue);
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [open, setOpen] = useState(false);
@@ -52,7 +66,7 @@ export default function AutocompleteInput({ name, placeholder, initialValue = ""
         value={value}
         onChange={(e) => setValue(e.target.value)}
         onFocus={() => value && setOpen(true)}
-        placeholder={placeholder}
+        placeholder={resolvedPlaceholder}
         className="border border-gray-600 p-1 flex-1 bg-gray-800 text-white placeholder-gray-400 w-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-colors duration-200"
         autoComplete="off"
         aria-label={ariaLabel}

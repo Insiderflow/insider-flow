@@ -306,13 +306,13 @@ export default async function InsiderPage({ searchParams }: { searchParams: Prom
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               <AutocompleteInput
                 name="qc"
-                placeholder="搜索公司..."
+                placeholderKey="searchCompanyPlaceholder"
                 searchPath="/api/companies/search"
                 initialValue={qCompany}
               />
               <AutocompleteInput
                 name="qo"
-                placeholder="搜索交易者..."
+                placeholderKey="searchOwnerPlaceholder"
                 searchPath="/api/owners/search"
                 initialValue={qOwner}
               />
