@@ -38,6 +38,7 @@
     "openinsider:screener-months": "node scripts/openinsider_screener_month_import.js",
     "openinsider:convert-sd3v-csv": "node scripts/convert_sd3v_openinsider_csv.js",
     "capitol:sync": "node scripts/capitol_only_daily.js",
+    "capitol:sync-recent": "node scripts/sync_capitol_recent.js",
     "capitol:import": "node scripts/import_scraped_trades.js",
     "politicians:import": "node scripts/import_politicians_json.js",
     "industry:seed": "node scripts/seed_industry_subsectors.js",

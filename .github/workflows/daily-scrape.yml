@@ -139,6 +139,13 @@ jobs:
         done
         exit 1
 
+    - name: Sync Capitol since last DB max (catches afternoon drip)
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        SCRAPE_GOTO_TIMEOUT_MS: '90000'
+        CAPITOL_RECENT_OVERLAP_HOURS: '18'
+      run: node scripts/sync_capitol_recent.js
+
     - name: OpenInsider filing-day top-up (non-blocking)
       continue-on-error: true
       env:
