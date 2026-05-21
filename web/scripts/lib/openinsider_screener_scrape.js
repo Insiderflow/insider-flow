@@ -48,8 +48,21 @@ function recentUtcDayStrings(count) {
 
 async function loadHtmlIntoPage(page, url) {
   const httpUrl = url.replace(/^https:\/\//i, 'http://');
+  const gotoMs = Number(process.env.OPENINSIDER_GOTO_TIMEOUT_MS || (process.env.CI ? '60000' : '120000'));
+  // CI: curl first — Playwright goto to openinsider.com often hangs on ubuntu-latest.
+  if (process.env.CI === 'true' || process.env.OPENINSIDER_CURL_FIRST === '1') {
+    try {
+      const html = curlFetchHtml(httpUrl);
+      if (html && /<html/i.test(html)) {
+        await page.setContent(html, { waitUntil: 'domcontentloaded', timeout: gotoMs });
+        return { url: httpUrl, transport: 'curl-setContent' };
+      }
+    } catch {
+      /* fall through */
+    }
+  }
   try {
-    await page.goto(httpUrl, { waitUntil: 'domcontentloaded', timeout: 120000 });
+    await page.goto(httpUrl, { waitUntil: 'domcontentloaded', timeout: gotoMs });
     return { url: httpUrl, transport: 'playwright-goto' };
   } catch {
     /* fall through */
@@ -57,13 +70,13 @@ async function loadHtmlIntoPage(page, url) {
   try {
     const html = curlFetchHtml(httpUrl);
     if (html && /<html/i.test(html)) {
-      await page.setContent(html, { waitUntil: 'domcontentloaded', timeout: 120000 });
+      await page.setContent(html, { waitUntil: 'domcontentloaded', timeout: gotoMs });
       return { url: httpUrl, transport: 'curl+setContent' };
     }
   } catch {
     /* fall through */
   }
-  await page.goto(httpUrl, { waitUntil: 'domcontentloaded', timeout: 120000 });
+  await page.goto(httpUrl, { waitUntil: 'domcontentloaded', timeout: gotoMs });
   return { url: httpUrl, transport: 'playwright-goto' };
 }
 

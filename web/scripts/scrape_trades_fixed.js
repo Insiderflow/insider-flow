@@ -143,10 +143,20 @@ async function scrapeTrades() {
     for (let pageNum = 1; pageNum <= MAX_PAGES; pageNum++) {
       console.log(`📄 Scraping page ${pageNum}...`);
       const url = `https://www.capitoltrades.com/trades?page=${pageNum}`;
-      const response = await page.goto(url, {
-        waitUntil: 'domcontentloaded',
-        timeout: GOTO_TIMEOUT_MS,
-      });
+      let response = null;
+      for (let attempt = 1; attempt <= 3; attempt++) {
+        try {
+          response = await page.goto(url, {
+            waitUntil: 'domcontentloaded',
+            timeout: GOTO_TIMEOUT_MS,
+          });
+          break;
+        } catch (err) {
+          console.log(`⚠️ Page ${pageNum} goto attempt ${attempt}/3 failed: ${err.message}`);
+          if (attempt === 3) throw err;
+          await page.waitForTimeout(2000 * attempt);
+        }
+      }
       if (!response || response.status() >= 400) {
         console.log(`⚠️ Page ${pageNum} HTTP ${response?.status() ?? 'unknown'} — stopping pagination`);
         break;

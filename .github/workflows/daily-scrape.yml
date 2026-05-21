@@ -4,6 +4,7 @@ on:
   schedule:
     # Run at 9pm, 10pm, and 1am HKT (Hong Kong Time)
     # 9pm HKT = 1pm UTC, 10pm HKT = 2pm UTC, 1am HKT = 5pm UTC (previous day)
+    - cron: '0 6 * * *'   # 2pm HKT — midday catch-up before US evening disclosures
     - cron: '0 13 * * *'  # 9pm HKT
     - cron: '0 14 * * *'  # 10pm HKT  
     - cron: '0 17 * * *'  # 1am HKT
@@ -11,9 +12,10 @@ on:
 
 # If another Daily Data Scrape starts while this run is still going (manual + cron, or double Run),
 # cancel-in-progress aborts the older run — logs end with "Error: The operation was canceled".
+# Do not cancel a long Playwright run when the next cron fires — that was dropping imports.
 concurrency:
   group: daily-scrape
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   scrape:
@@ -101,21 +103,51 @@ jobs:
 
     # Corporate /insider page data: Node Playwright importer runs inside daily-scrape.js after Capitol import (non-fatal if it fails).
 
-    - name: Sync today + yesterday (Capitol published day + OpenInsider filing day)
+    # OpenInsider first (curl fallback). Day sync is Capitol-only so a 120s OI timeout cannot kill Capitol.
+    - name: OpenInsider CI sync (內部交易)
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        OPENINSIDER_CI_LOOKBACK_DAYS: '3'
+        OPENINSIDER_CI_MAX_STALE_HOURS: '48'
+        OPENINSIDER_CURL_FIRST: '1'
+        CI: 'true'
+      run: node scripts/openinsider_ci_sync.js
+
+    - name: Sync Capitol published day (today, retries)
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        SCRAPE_GOTO_TIMEOUT_MS: '90000'
+      run: |
+        TODAY=$(date -u +%Y-%m-%d)
+        for attempt in 1 2 3; do
+          echo "Capitol today ($TODAY) attempt $attempt"
+          node scripts/sync_published_day.js --date "$TODAY" --capitol-only && exit 0
+          sleep 45
+        done
+        exit 1
+
+    - name: Sync Capitol published day (yesterday, retries)
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        SCRAPE_GOTO_TIMEOUT_MS: '90000'
+      run: |
+        YESTERDAY=$(date -u -d "yesterday" +%Y-%m-%d)
+        for attempt in 1 2 3; do
+          echo "Capitol yesterday ($YESTERDAY) attempt $attempt"
+          node scripts/sync_published_day.js --date "$YESTERDAY" --capitol-only && exit 0
+          sleep 45
+        done
+        exit 1
+
+    - name: OpenInsider filing-day top-up (non-blocking)
+      continue-on-error: true
       env:
         DATABASE_URL: ${{ secrets.DATABASE_URL }}
       run: |
         TODAY=$(date -u +%Y-%m-%d)
         YESTERDAY=$(date -u -d "yesterday" +%Y-%m-%d)
-        node scripts/sync_published_day.js --date "$TODAY"
-        node scripts/sync_published_day.js --date "$YESTERDAY"
-
-    - name: OpenInsider CI sync (內部交易 backup if day sync skipped rows)
-      env:
-        DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        OPENINSIDER_CI_LOOKBACK_DAYS: '3'
-        OPENINSIDER_CI_MAX_STALE_HOURS: '48'
-      run: node scripts/openinsider_ci_sync.js
+        node scripts/sync_published_day.js --date "$TODAY" --openinsider-only || true
+        node scripts/sync_published_day.js --date "$YESTERDAY" --openinsider-only || true
 
     - name: Finalize scrape report (Capitol + OpenInsider counts)
       run: node scripts/finalize_daily_scrape_report.js
