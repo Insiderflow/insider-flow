@@ -17,10 +17,12 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
             <h1 className="text-3xl md:text-4xl font-extrabold mb-3 text-white">
               <span className="zh-Hant">歡迎回來</span>
               <span className="zh-Hans hidden">欢迎回来</span>
+          <span className="ko hidden">다시 오신 것을 환영합니다</span>
             </h1>
             <p className="text-white/90 text-sm sm:text-base">
               <span className="zh-Hant">登入後即可管理追蹤名單與通知設定。</span>
               <span className="zh-Hans hidden">登录后即可管理追踪名单与通知设置。</span>
+          <span className="ko hidden">로그인 후 추적 목록과 알림 설정을 관리할 수 있습니다.</span>
             </p>
           </div>
         </section>

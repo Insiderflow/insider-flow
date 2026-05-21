@@ -52,12 +52,14 @@ export default function PaginationBar({
         <div className="text-xs text-gray-300">
           <span className="zh-Hant">第 {page} 頁，共 {totalPages} 頁</span>
           <span className="zh-Hans hidden">第 {page} 页，共 {totalPages} 页</span>
+          <span className="ko hidden">{page} / {totalPages} 페이지</span>
         </div>
         <div className="flex flex-wrap items-center gap-2">
           {hasPrev ? (
             <Link href={prevHref} className={actionStyles('secondary')}>
               <span className="zh-Hant">上一頁</span>
               <span className="zh-Hans hidden">上一页</span>
+          <span className="ko hidden">이전</span>
             </Link>
           ) : (
             <span
@@ -65,12 +67,14 @@ export default function PaginationBar({
             >
               <span className="zh-Hant">上一頁</span>
               <span className="zh-Hans hidden">上一页</span>
+          <span className="ko hidden">이전</span>
             </span>
           )}
           {hasNext ? (
             <Link href={nextHref} className={actionStyles('secondary')}>
               <span className="zh-Hant">下一頁</span>
               <span className="zh-Hans hidden">下一页</span>
+          <span className="ko hidden">다음</span>
             </Link>
           ) : (
             <span
@@ -78,6 +82,7 @@ export default function PaginationBar({
             >
               <span className="zh-Hant">下一頁</span>
               <span className="zh-Hans hidden">下一页</span>
+          <span className="ko hidden">다음</span>
             </span>
           )}
         </div>
@@ -88,6 +93,7 @@ export default function PaginationBar({
           <span className="text-xs text-gray-500 mr-1 shrink-0">
             <span className="zh-Hant">頁碼</span>
             <span className="zh-Hans hidden">页码</span>
+          <span className="ko hidden">페이지</span>
           </span>
           {pageItems.map((item, idx) =>
             item === 'ellipsis' ? (

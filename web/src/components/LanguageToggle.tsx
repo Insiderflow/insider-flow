@@ -3,11 +3,17 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { getCurrentLanguage, setLanguage, type Language } from '@/lib/languageUtils';
+import LocalizedText from '@/components/LocalizedText';
+
+const OPTIONS: { code: Language; label: string }[] = [
+  { code: 'zh-Hant', label: '繁體' },
+  { code: 'zh-Hans', label: '简体' },
+  { code: 'ko', label: '한국어' },
+];
 
 export default function LanguageToggle() {
   const [language, setLanguageState] = useState<Language>('zh-Hant');
   const router = useRouter();
-  // const _pathname = usePathname();
 
   useEffect(() => {
     const currentLanguage = getCurrentLanguage();
@@ -18,38 +24,29 @@ export default function LanguageToggle() {
   const handleLanguageChange = (newLanguage: Language) => {
     setLanguageState(newLanguage);
     setLanguage(newLanguage);
-    
-    // Force a page refresh to update all text
     router.refresh();
   };
 
   return (
     <div className="flex items-center gap-2">
       <span className="text-sm text-gray-300 shrink-0">
-        <span className="zh-Hant">介面語言</span>
-        <span className="zh-Hans hidden">界面语言</span>
+        <LocalizedText hant="介面語言" hans="界面语言" ko="언어" />
       </span>
       <div className="flex bg-gray-700 rounded-lg p-1">
-        <button
-          onClick={() => handleLanguageChange('zh-Hant')}
-          className={`px-3 py-1 text-xs rounded transition-colors duration-200 ${
-            language === 'zh-Hant'
-              ? 'bg-blue-600 text-white'
-              : 'text-gray-300 hover:text-white'
-          }`}
-        >
-          繁體
-        </button>
-        <button
-          onClick={() => handleLanguageChange('zh-Hans')}
-          className={`px-3 py-1 text-xs rounded transition-colors duration-200 ${
-            language === 'zh-Hans'
-              ? 'bg-blue-600 text-white'
-              : 'text-gray-300 hover:text-white'
-          }`}
-        >
-          简体
-        </button>
+        {OPTIONS.map(({ code, label }) => (
+          <button
+            key={code}
+            type="button"
+            onClick={() => handleLanguageChange(code)}
+            className={`px-2 py-1 text-xs rounded transition-colors duration-200 ${
+              language === code
+                ? 'bg-blue-600 text-white'
+                : 'text-gray-300 hover:text-white'
+            }`}
+          >
+            {label}
+          </button>
+        ))}
       </div>
     </div>
   );

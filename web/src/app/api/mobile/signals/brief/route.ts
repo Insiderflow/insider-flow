@@ -37,7 +37,9 @@ function parseSignalsQuery(req: NextRequest) {
       : 'all';
   const localeRaw = searchParams.get('locale') || 'zh-Hant';
   const locale: BriefLocale =
-    localeRaw === 'zh-Hans' || localeRaw === 'en' ? localeRaw : 'zh-Hant';
+    localeRaw === 'zh-Hans' || localeRaw === 'en' || localeRaw === 'ko'
+      ? localeRaw
+      : 'zh-Hant';
   return { p, limit, feed, locale, tierFilter, sideFilter };
 }
 

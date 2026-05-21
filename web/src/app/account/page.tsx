@@ -35,6 +35,7 @@ export default async function AccountPage({
         <h1 className={`${pageTitleStyles()} mb-6`}>
           <span className="zh-Hant">帳戶設定</span>
           <span className="zh-Hans hidden">账户设置</span>
+          <span className="ko hidden">계정 설정</span>
         </h1>
         
         {/* Error Messages */}
@@ -69,6 +70,7 @@ export default async function AccountPage({
             <p className="text-green-200">
               <span className="zh-Hant">訂閱成功！歡迎成為付費會員。</span>
               <span className="zh-Hans hidden">订阅成功！欢迎成为付费会员。</span>
+          <span className="ko hidden">구독 완료! 유료 회원이 되신 것을 환영합니다.</span>
             </p>
           </div>
         )}
@@ -78,16 +80,19 @@ export default async function AccountPage({
           <h2 className={`${sectionTitleStyles()} mb-4`}>
             <span className="zh-Hant">會員狀態</span>
             <span className="zh-Hans hidden">会员状态</span>
+          <span className="ko hidden">회원 상태</span>
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="flex items-center gap-3">
               <span className={mutedLabelStyles()}>
                 <span className="zh-Hant">會員等級:</span>
                 <span className="zh-Hans hidden">会员等级:</span>
+          <span className="ko hidden">회원 등급:</span>
               </span>
               <span className={badgeStyles(user.membership_tier === 'PAID' ? 'success' : 'neutral')}>
                 <span className="zh-Hant">{user.membership_tier === 'PAID' ? '付費會員' : '免費會員'}</span>
                 <span className="zh-Hans hidden">{user.membership_tier === 'PAID' ? '付费会员' : '免费会员'}</span>
+          <span className="ko hidden">{user.membership_tier === 'PAID' ? '유료 회원' : '무료 회원'}</span>
               </span>
             </div>
             
@@ -96,6 +101,7 @@ export default async function AccountPage({
                 <span className={mutedLabelStyles()}>
                   <span className="zh-Hant">下次續費:</span>
                   <span className="zh-Hans hidden">下次续费:</span>
+          <span className="ko hidden">다음 갱신:</span>
                 </span>
                 <span className="text-white font-medium">
                   {new Date(user.membership_expires_at).toLocaleDateString('zh-TW', {
@@ -112,6 +118,7 @@ export default async function AccountPage({
                 <span className={mutedLabelStyles()}>
                   <span className="zh-Hant">升級會員:</span>
                   <span className="zh-Hans hidden">升级会员:</span>
+          <span className="ko hidden">회원 업그레이드:</span>
                 </span>
                 <Link 
                   href="/upgrade" 
@@ -119,6 +126,7 @@ export default async function AccountPage({
                 >
                   <span className="zh-Hant">立即升級</span>
                   <span className="zh-Hans hidden">立即升级</span>
+          <span className="ko hidden">지금 업그레이드</span>
                 </Link>
               </div>
             )}
@@ -132,12 +140,14 @@ export default async function AccountPage({
             <h2 className={`${sectionTitleStyles()} mb-4`}>
               <span className="zh-Hant">基本資訊</span>
               <span className="zh-Hans hidden">基本信息</span>
+          <span className="ko hidden">기본 정보</span>
             </h2>
             <div className="space-y-3">
               <div>
                 <span className={mutedLabelStyles()}>
                   <span className="zh-Hant">電子郵件:</span>
                   <span className="zh-Hans hidden">电子邮件:</span>
+          <span className="ko hidden">이메일:</span>
                 </span>
                 <span className="text-white ml-2">{user.email}</span>
               </div>
@@ -145,16 +155,19 @@ export default async function AccountPage({
                 <span className={mutedLabelStyles()}>
                   <span className="zh-Hant">郵件驗證:</span>
                   <span className="zh-Hans hidden">邮件验证:</span>
+          <span className="ko hidden">이메일 인증:</span>
                 </span>
                 <span className={badgeStyles(user.email_verified ? 'success' : 'danger', 'sm')}>
                   <span className="zh-Hant">{user.email_verified ? '已驗證' : '未驗證'}</span>
                   <span className="zh-Hans hidden">{user.email_verified ? '已验证' : '未验证'}</span>
+          <span className="ko hidden">{user.email_verified ? '인증됨' : '미인증'}</span>
                 </span>
               </div>
               <div>
                 <span className={mutedLabelStyles()}>
                   <span className="zh-Hant">註冊時間:</span>
                   <span className="zh-Hans hidden">注册时间:</span>
+          <span className="ko hidden">가입일:</span>
                 </span>
                 <span className="text-white ml-2">
                   {new Date(user.created_at).toLocaleDateString('zh-TW')}
@@ -168,6 +181,7 @@ export default async function AccountPage({
             <h2 className={`${sectionTitleStyles()} mb-4`}>
               <span className="zh-Hant">郵件通知設定</span>
               <span className="zh-Hans hidden">邮件通知设置</span>
+          <span className="ko hidden">이메일 알림 설정</span>
             </h2>
             <EmailNotificationSettings />
           </div>
@@ -185,6 +199,7 @@ export default async function AccountPage({
             <h2 className={`${sectionTitleStyles()} mb-4`}>
               <span className="zh-Hant">訂閱管理</span>
               <span className="zh-Hans hidden">订阅管理</span>
+          <span className="ko hidden">구독 관리</span>
             </h2>
             <div className="space-y-4">
               <div className="flex items-center justify-between">
@@ -192,10 +207,12 @@ export default async function AccountPage({
                   <h3 className="text-white font-medium">
                     <span className="zh-Hant">管理訂閱</span>
                     <span className="zh-Hans hidden">管理订阅</span>
+          <span className="ko hidden">구독 관리</span>
                   </h3>
                   <p className={`${bodySubtextStyles()} text-sm`}>
                     <span className="zh-Hant">取消或修改您的訂閱設定</span>
                     <span className="zh-Hans hidden">取消或修改您的订阅设置</span>
+          <span className="ko hidden">구독 설정 변경 또는 취소</span>
                   </p>
                 </div>
                 <ManageSubscriptionButton />

@@ -40,6 +40,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
             <p className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[11px] sm:text-xs font-medium tracking-[0.12em] text-white/85 uppercase mb-6 backdrop-blur-sm">
               <span className="zh-Hant">美國國會 STOCK 披露 · 華語介面</span>
               <span className="zh-Hans hidden">美国国会 STOCK 披露 · 华语界面</span>
+              <span className="ko hidden">미국 의회 STOCK 공시 · 한국어 UI</span>
             </p>
 
             <h1 className="text-balance text-3xl sm:text-4xl md:text-[2.65rem] font-extrabold text-white leading-[1.15] tracking-tight mb-5 drop-shadow-sm zh-Hant">
@@ -47,6 +48,9 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
             </h1>
             <h1 className="text-balance text-3xl sm:text-4xl md:text-[2.65rem] font-extrabold text-white leading-[1.15] tracking-tight mb-5 drop-shadow-sm zh-Hans hidden">
               内幕流 — 把国会资金流变成你的选股雷达
+            </h1>
+            <h1 className="text-balance text-3xl sm:text-4xl md:text-[2.65rem] font-extrabold text-white leading-[1.15] tracking-tight mb-5 drop-shadow-sm ko hidden">
+              Insider Flow — 의회 자금 흐름을 종목 레이더로
             </h1>
 
             <div className="text-white/85 text-[15px] sm:text-base leading-relaxed max-w-xl mb-2 space-y-3 text-left w-full">
@@ -60,6 +64,11 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
                 首页预览最新交易、无限浏览 <Link href="/trades" className="text-white underline decoration-white/30 underline-offset-2 hover:decoration-white">完整 /trades 表</Link>
                 ；订阅 <strong className="text-white">Substack 周报</strong> 拿长文观点。
               </p>
+              <p className="ko hidden">
+                <span className="text-emerald-300/95 font-semibold">무료:</span>
+                홈에서 최신 거래 미리보기, <Link href="/trades" className="text-white underline decoration-white/30 underline-offset-2 hover:decoration-white">전체 /trades 표</Link>
+                무제한 열람; <strong className="text-white">Substack 주간 리포트</strong>로 심층 분석.
+              </p>
               <p className="zh-Hant">
                 <span className="text-blue-300/95 font-semibold">付費 Insider+：</span>
                 議員／發行商<strong className="text-white">深度頁</strong>、圖表、企業內部人專區與 Watchlist 進階能力。
@@ -67,6 +76,10 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
               <p className="zh-Hans hidden">
                 <span className="text-blue-300/95 font-semibold">付费 Insider+：</span>
                 议员／发行商<strong className="text-white">深度页</strong>、图表、企业内部人专区与 Watchlist 进阶能力。
+              </p>
+              <p className="ko hidden">
+                <span className="text-blue-300/95 font-semibold">유료 Insider+:</span>
+                의원／발행사 <strong className="text-white">심층 페이지</strong>, 차트, 기업 내부자 전용 및 Watchlist 고급 기능.
               </p>
             </div>
 
@@ -86,6 +99,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
               >
                 <span className="zh-Hant">立即升級 Insider+</span>
                 <span className="zh-Hans hidden">立即升级 Insider+</span>
+          <span className="ko hidden">지금 Insider+ 업그레이드</span>
               </Link>
               <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-center gap-3 sm:gap-4 text-sm w-full sm:w-auto">
                 <Link
@@ -96,6 +110,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
                 >
                   <span className="zh-Hant">免費訂閱 Substack 週報</span>
                   <span className="zh-Hans hidden">免费订阅 Substack 周报</span>
+          <span className="ko hidden">Substack 무료 주간 리포트 구독</span>
                 </Link>
                 <Link
                   href="/register"
@@ -103,6 +118,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
                 >
                   <span className="zh-Hant">建立 Watchlist（免費）</span>
                   <span className="zh-Hans hidden">建立 Watchlist（免费）</span>
+          <span className="ko hidden">Watchlist 만들기（무료）</span>
                 </Link>
               </div>
             </div>
@@ -117,10 +133,12 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
             <h3 className="font-semibold mb-1">
               <span className="zh-Hant">✅ 電子郵件驗證成功！</span>
               <span className="zh-Hans hidden">✅ 电子邮件验证成功！</span>
+          <span className="ko hidden">✅ 이메일 인증 완료!</span>
             </h3>
             <p className="text-sm">
               <span className="zh-Hant">您的帳戶已成功驗證，現在可以完整使用所有功能。</span>
               <span className="zh-Hans hidden">您的账户已成功验证，现在可以完整使用所有功能。</span>
+          <span className="ko hidden">계정 인증이 완료되었습니다. 모든 기능을 이용할 수 있습니다.</span>
             </p>
           </div>
         </div>
@@ -132,6 +150,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
             <h3 className="font-semibold mb-1">
               <span className="zh-Hant">❌ 驗證失敗</span>
               <span className="zh-Hans hidden">❌ 验证失败</span>
+          <span className="ko hidden">❌ 인증 실패</span>
             </h3>
             <p className="text-sm">
               <span className="zh-Hant">
@@ -146,6 +165,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
                   : '验证过程中发生错误，请重新注册。'
                 }
               </span>
+          <span className="ko hidden">{verificationError === 'invalid' ? '인증 링크가 유효하지 않거나 만료되었습니다. 다시 가입해 주세요.' : '인증 중 오류가 발생했습니다. 다시 가입해 주세요.'}</span>
             </p>
           </div>
         </div>
@@ -157,6 +177,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
           <h2 className={sectionTitleStyles()}>
             <span className="zh-Hant">數據概覽</span>
             <span className="zh-Hans hidden">数据概览</span>
+          <span className="ko hidden">데이터 개요</span>
           </h2>
           <div className="flex flex-col items-stretch sm:items-end gap-3 shrink-0 w-full sm:w-auto">
             <div className="flex flex-wrap items-center justify-end gap-2 text-xs text-gray-400">
@@ -166,9 +187,12 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
           </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <StatCard label={<><span className="zh-Hant">總交易</span><span className="zh-Hans hidden">总交易</span></>} value={stats.tradeCount.toLocaleString('en-US')} />
-          <StatCard label={<><span className="zh-Hant">政治家</span><span className="zh-Hans hidden">政治家</span></>} value={stats.politicianCount.toLocaleString('en-US')} />
-          <StatCard label={<><span className="zh-Hant">發行商</span><span className="zh-Hans hidden">发行商</span></>} value={stats.issuerCount.toLocaleString('en-US')} />
+          <StatCard label={<><span className="zh-Hant">總交易</span><span className="zh-Hans hidden">总交易</span>
+          <span className="ko hidden">총 거래</span></>} value={stats.tradeCount.toLocaleString('en-US')} />
+          <StatCard label={<><span className="zh-Hant">政治家</span><span className="zh-Hans hidden">政治家</span>
+          <span className="ko hidden">정치인</span></>} value={stats.politicianCount.toLocaleString('en-US')} />
+          <StatCard label={<><span className="zh-Hant">發行商</span><span className="zh-Hans hidden">发行商</span>
+          <span className="ko hidden">발행사</span></>} value={stats.issuerCount.toLocaleString('en-US')} />
         </div>
       </section>
       {/* Latest Trades and Most Traded Politicians */}
@@ -180,6 +204,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
               <h2 className={`${sectionTitleStyles()} text-2xl mb-1`}>
                 <span className="zh-Hant">🔥 最新交易</span>
                 <span className="zh-Hans hidden">🔥 最新交易</span>
+          <span className="ko hidden">🔥 최신 거래</span>
               </h2>
               <p className={`text-sm ${mutedLabelStyles()}`}>
                 <span className="zh-Hant">
@@ -188,11 +213,13 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
                 <span className="zh-Hans hidden">
                   公开预览：最新 {HOME_LATEST_TRADES_PREVIEW} 笔卡片（完整表免费见「交易」）
                 </span>
+          <span className="ko hidden">공개 미리보기: 최신 {HOME_LATEST_TRADES_PREVIEW}건 카드（전체 표는 「거래」에서 무료）</span>
               </p>
             </div>
             <Link href="/trades" className={actionStyles('ghost')}>
               <span className="zh-Hant">免費看完整表 →</span>
               <span className="zh-Hans hidden">免费看完整表 →</span>
+          <span className="ko hidden">전체 표 무료 보기 →</span>
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -207,11 +234,13 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
                       <span className="text-sm font-semibold text-emerald-200/95">
                         <span className="zh-Hant">發布日期: {new Date(t.publishedAt).toLocaleDateString('zh-TW')}</span>
                         <span className="zh-Hans hidden">发布日期: {new Date(t.publishedAt).toLocaleDateString('zh-CN')}</span>
+          <span className="ko hidden">공시일: {new Date(t.publishedAt).toLocaleDateString('ko-KR')}</span>
                       </span>
                     ) : null}
                     <span className={`text-xs ${mutedLabelStyles()}`}>
                       <span className="zh-Hant">交易日期: {new Date(t.tradedAt).toLocaleDateString('zh-TW')}</span>
                       <span className="zh-Hans hidden">交易日期: {new Date(t.tradedAt).toLocaleDateString('zh-CN')}</span>
+          <span className="ko hidden">거래일: {new Date(t.tradedAt).toLocaleDateString('ko-KR')}</span>
                     </span>
                   </div>
                   <span className={badgeStyles(
@@ -241,6 +270,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
                     <span className={`text-xs ${mutedLabelStyles()}`}>
                       <span className="zh-Hant">發行商</span>
                       <span className="zh-Hans hidden">发行商</span>
+          <span className="ko hidden">발행사</span>
                     </span>
                     <Link href={issuerHref} className={`${textLinkStyles()} text-sm`}>{t.issuer.name}</Link>
                   </div>
@@ -250,6 +280,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
                       <span className={`text-xs ${mutedLabelStyles()}`}>
                         <span className="zh-Hant">交易規模</span>
                         <span className="zh-Hans hidden">交易规模</span>
+          <span className="ko hidden">거래 규모</span>
                       </span>
                       <span className="text-sm text-white">
                         ${Number(t.sizeMin).toLocaleString()} - ${Number(t.sizeMax).toLocaleString()}
@@ -262,6 +293,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
                       <span className={`text-xs ${mutedLabelStyles()}`}>
                         <span className="zh-Hant">價格</span>
                         <span className="zh-Hans hidden">价格</span>
+          <span className="ko hidden">가격</span>
                       </span>
                       <span className="text-sm text-white">${t.price.toFixed(2)}</span>
                     </div>
@@ -271,6 +303,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
                   <p className="mt-3 pt-2 border-t border-gray-600/80 text-[11px] text-amber-400/95 leading-snug text-center">
                     <span className="zh-Hant">點名稱解鎖深度頁</span>
                     <span className="zh-Hans hidden">点击名称解锁深度页</span>
+          <span className="ko hidden">이름 클릭 시 심층 페이지 잠금 해제</span>
                   </p>
                 ) : null}
               </div>
@@ -287,10 +320,12 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
             <h2 className={sectionTitleStyles()}>
               <span className="zh-Hant">最常交易議員</span>
               <span className="zh-Hans hidden">最常交易议员</span>
+          <span className="ko hidden">최다 거래 의원</span>
             </h2>
             <Link href="/politicians" className={`${textLinkStyles('muted')} text-sm`}>
               <span className="zh-Hant">查看所有</span>
               <span className="zh-Hans hidden">查看所有</span>
+          <span className="ko hidden">전체 보기</span>
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -310,9 +345,9 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
                   </div>
                 </div>
                 <div className="space-y-1 text-sm">
-                  <div className="flex justify-between"><span className="text-gray-400">交易次數</span><span className="text-white">{row.trades}</span></div>
-                  <div className="flex justify-between"><span className="text-gray-400">發行商數</span><span className="text-white">{row.issuers}</span></div>
-                  <div className="flex justify-between"><span className="text-gray-400">總金額</span><span className="text-white">${Math.round(row.totalVolume).toLocaleString('en-US')}</span></div>
+                  <div className="flex justify-between"><span className="text-gray-400"><span className="zh-Hant">交易次數</span><span className="zh-Hans hidden">交易次数</span><span className="ko hidden">거래 횟수</span></span><span className="text-white">{row.trades}</span></div>
+                  <div className="flex justify-between"><span className="text-gray-400"><span className="zh-Hant">發行商數</span><span className="zh-Hans hidden">发行商数</span><span className="ko hidden">발행사 수</span></span><span className="text-white">{row.issuers}</span></div>
+                  <div className="flex justify-between"><span className="text-gray-400"><span className="zh-Hant">總金額</span><span className="zh-Hans hidden">总金额</span><span className="ko hidden">총 금액</span></span><span className="text-white">${Math.round(row.totalVolume).toLocaleString('en-US')}</span></div>
                 </div>
               </div>
               );

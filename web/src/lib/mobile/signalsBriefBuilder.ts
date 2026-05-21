@@ -24,12 +24,14 @@ const XAI_SIGNAL_CAP = 25;
 const PERIOD_LABEL: Record<BriefLocale, Record<MobilePeriod, string>> = {
   'zh-Hant': { '1D': '1日', '7D': '7日', '30D': '30日', '90D': '90日' },
   'zh-Hans': { '1D': '1日', '7D': '7日', '30D': '30日', '90D': '90日' },
+  ko: { '1D': '1일', '7D': '7일', '30D': '30일', '90D': '90일' },
   en: { '1D': '1D', '7D': '7D', '30D': '30D', '90D': '90D' },
 };
 
 const FEED_LABEL: Record<BriefLocale, Record<SignalFeed, string>> = {
   'zh-Hant': { all: '全部', politician: '國會', corporate: '企業' },
   'zh-Hans': { all: '全部', politician: '国会', corporate: '企业' },
+  ko: { all: '전체', politician: '의회', corporate: '기업' },
   en: { all: 'All', politician: 'Congress', corporate: 'Corporate' },
 };
 
@@ -45,6 +47,12 @@ const FLAG_LABEL: Record<BriefLocale, Record<string, string>> = {
     committee_sector: '委员会相关',
     congress_cluster: '国会集群',
     insider_cluster: '内部人集群',
+  },
+  ko: {
+    notable_size: '대규모',
+    committee_sector: '위원회 관련',
+    congress_cluster: '의회 클러스터',
+    insider_cluster: '내부자 클러스터',
   },
   en: {
     notable_size: 'Notable size',
@@ -102,7 +110,7 @@ function sentimentFromSignals(
 
 function flagLabels(locale: BriefLocale, flags: string[]): string {
   const map = FLAG_LABEL[locale] || FLAG_LABEL['zh-Hant'];
-  return flags.map((f) => map[f] || f).join(locale === 'en' ? ', ' : '、');
+  return flags.map((f) => map[f] || f).join(locale === 'en' || locale === 'ko' ? ', ' : '、');
 }
 
 /** Changes when any flagged signal enters/leaves this filtered feed. */
@@ -123,6 +131,11 @@ function rulesHeadline(
       ? `No flagged signals · ${p} · ${f}`
       : `${count} flagged signals · ${p} · ${f}`;
   }
+  if (locale === 'ko') {
+    return count === 0
+      ? `최근 ${p} · ${f} · 규칙 플래그 신호 없음`
+      : `최근 ${p} · ${f} · ${count}건 플래그 신호`;
+  }
   return count === 0
     ? `過去${p} · ${f} · 尚無規則標記訊號`
     : `過去${p} · ${f} · ${count} 則標記訊號`;
@@ -139,20 +152,30 @@ function rulesBullets(
       s.side === 'buy'
         ? locale === 'en'
           ? 'buy'
-          : '買入'
+          : locale === 'ko'
+            ? '매수'
+            : '買入'
         : s.side === 'sell'
           ? locale === 'en'
             ? 'sell'
-            : '賣出'
+            : locale === 'ko'
+              ? '매도'
+              : '賣出'
           : locale === 'en'
             ? 'proposed sale'
-            : '擬出售';
+            : locale === 'ko'
+              ? '매도 예정'
+              : '擬出售';
     const who =
       s.feed === 'corporate'
         ? s.politicianName
         : `${s.politicianName}${s.party !== 'I' ? ` (${s.party})` : ''}`;
     if (locale === 'en') {
       return `${who} ${side} ${s.ticker} · ${flags} · ML ${s.mlScore} (${s.mlTier}) · ${formatUsd(s.amountUsd)}`;
+    }
+    if (locale === 'ko') {
+      const tierKo = s.mlTier === 'high' ? '높음' : s.mlTier === 'medium' ? '중간' : '낮음';
+      return `${who} ${side} ${s.ticker} · ${flags} · 점수 ${s.mlScore}（${tierKo}）· ${formatUsd(s.amountUsd)}`;
     }
     return `${who} ${side} ${s.ticker} · ${flags} · 評分 ${s.mlScore}（${s.mlTier === 'high' ? '高' : s.mlTier === 'medium' ? '中' : '低'}）· ${formatUsd(s.amountUsd)}`;
   });
@@ -170,6 +193,9 @@ function rulesNarrative(
     }
     if (locale === 'zh-Hans') {
       return `过去${PERIOD_LABEL['zh-Hans'][period]}内，${FEED_LABEL['zh-Hans'][feed]}来源暂无满足规则标记（大额、委员会板块、多人同向等）的交易。`;
+    }
+    if (locale === 'ko') {
+      return `최근 ${PERIOD_LABEL.ko[period]} 동안 ${FEED_LABEL.ko[feed]} 출처에서 규칙 플래그(대규모, 위원회 섹터, 동시 거래 등)에 해당하는 거래가 없습니다.`;
     }
     return `過去${PERIOD_LABEL['zh-Hant'][period]}內，${FEED_LABEL['zh-Hant'][feed]}來源暫無滿足規則標記（大額、委員會板塊、多人同向等）的交易。`;
   }
@@ -193,19 +219,29 @@ function rulesNarrative(
     feed === 'all' && pol && corp
       ? locale === 'zh-Hans'
         ? ` 其中国会 ${pol} 条、企业 ${corp} 条。`
-        : ` 其中國會 ${pol} 則、企業 ${corp} 則。`
+        : locale === 'ko'
+          ? ` 의회 ${pol}건, 기업 ${corp}건.`
+          : ` 其中國會 ${pol} 則、企業 ${corp} 則。`
       : '';
   const tierNote =
     locale === 'zh-Hans'
       ? high > 0
         ? `其中 ${high} 条为高评分。`
         : ''
+      : locale === 'ko'
+        ? high > 0
+          ? `이 중 ${high}건이 고점수.`
+          : ''
       : high > 0
         ? `其中 ${high} 則為高評分。`
         : '';
 
   if (locale === 'zh-Hans') {
     return `共 ${signals.length} 条规则标记交易（买入 ${buys}、卖出/其他 ${sells}），${tierNote}标的侧重：${tickers.join('、')}。${feedNote}按 ML 评分排序，仅供研究，非投资建议。`;
+  }
+
+  if (locale === 'ko') {
+    return `규칙 플래그 거래 ${signals.length}건(매수 ${buys}, 매도/기타 ${sells}), ${tierNote}주요 종목: ${tickers.join(', ')}.${feedNote} ML 점수순 정렬, 연구용이며 투자 권유가 아닙니다.`;
   }
 
   return `共 ${signals.length} 則規則標記交易（買入 ${buys}、賣出/其他 ${sells}），${tierNote}標的側重：${tickers.join('、')}。${feedNote}按 ML 評分排序，僅供研究，非投資建議。`;
@@ -289,7 +325,9 @@ async function xaiSignalsNarrative(
       ? 'Simplified Chinese'
       : locale === 'zh-Hant'
         ? 'Traditional Chinese'
-        : 'English';
+        : locale === 'ko'
+          ? 'Korean'
+          : 'English';
 
   const buys = signals.filter((s) => s.side === 'buy').length;
   const sells = signals.length - buys;

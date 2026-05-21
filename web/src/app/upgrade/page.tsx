@@ -11,6 +11,7 @@ export default function UpgradePage() {
           <h1 className={`${pageTitleStyles()} mb-4`}>
             <span className="zh-Hant">升級 Insider+ · 把國會倉位變成你的研究護城河</span>
             <span className="zh-Hans hidden">升级 Insider+ · 把国会仓位变成你的研究护城河</span>
+          <span className="ko hidden">Insider+ 업그레이드 · 의회 포지션을 연구 해자로</span>
           </h1>
           <p className={`${bodySubtextStyles()} text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed`}>
             <span className="zh-Hant">
@@ -23,6 +24,7 @@ export default function UpgradePage() {
               <strong className="text-white">议员／发行商深度页、图表与企业内部人专区</strong>
               ——适合认真跟美股的华语投资人。
             </span>
+          <span className="ko hidden">업그레이드 Insider+ · 把의회倉位變成你的研究護城河</span>
           </p>
           <p lang="en" className="mt-4 text-sm text-gray-500 max-w-2xl mx-auto">
             Free tier already includes the full /trades table. Paid unlocks politician & issuer analytics, charts, and the corporate insider hub—built for serious US-equity research.

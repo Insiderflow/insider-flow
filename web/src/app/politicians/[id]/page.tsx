@@ -92,6 +92,7 @@ export default async function PoliticianDetailPage({
               <p className="text-xs text-gray-400 mb-2">
                 <span className="zh-Hant">Email 追蹤此議員</span>
                 <span className="zh-Hans hidden">Email 追踪此议员</span>
+          <span className="ko hidden">Email로 이 의원 추적</span>
               </p>
               <WatchlistButton userId={me?.id} type="politician" politicianId={politician.id} initialWatching={initialWatching} />
             </div>
@@ -219,12 +220,17 @@ export default async function PoliticianDetailPage({
           <div className="space-y-3">
             {trades.map((trade) => (
               <div key={trade.id} className="rounded-lg border border-gray-700 bg-gray-900 p-3">
+                {(() => {
+                  const tradeType = (trade.type || '').toUpperCase();
+                  const badgeTone = tradeType === 'BUY' ? 'success' : tradeType === 'SELL' ? 'danger' : 'neutral';
+                  return (
+                    <>
                 <div className="flex items-center justify-between">
                   <Link href={`/issuers/${trade.Issuer.id}`} className={textLinkStyles('muted')}>
                     {trade.Issuer.name} {trade.Issuer.ticker ? `(${trade.Issuer.ticker})` : ''}
                   </Link>
-                  <span className={badgeStyles(trade.type.toUpperCase() === 'BUY' ? 'success' : 'danger', 'xs')}>
-                    {trade.type}
+                  <span className={badgeStyles(badgeTone, 'xs')}>
+                    {trade.type || 'N/A'}
                   </span>
                 </div>
                 <div className="mt-2 text-sm text-gray-300 flex flex-wrap gap-4">
@@ -237,6 +243,9 @@ export default async function PoliticianDetailPage({
                       : '未揭露'}
                   </span>
                 </div>
+                    </>
+                  );
+                })()}
               </div>
             ))}
           </div>

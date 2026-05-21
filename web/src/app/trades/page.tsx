@@ -66,6 +66,7 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
           <h1 className={pageTitleStyles()}>
             <span className="zh-Hant">最新交易</span>
             <span className="zh-Hans hidden">最新交易</span>
+          <span className="ko hidden">최신 거래</span>
           </h1>
           <div className="flex items-center gap-2">
             <DataFreshnessIndicator timestamp={lastTradeDate} />
@@ -75,6 +76,7 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
         <p className={`${bodySubtextStyles()} mb-4 text-sm sm:text-base`}>
           <span className="zh-Hant">追蹤國會議員與上市公司的最新披露交易</span>
           <span className="zh-Hans hidden">追踪国会议员与上市公司的最新披露交易</span>
+          <span className="ko hidden">最新거래</span>
         </p>
         <section className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
           <StatCard
@@ -82,6 +84,7 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
               <>
                 <span className="zh-Hant">總交易筆數</span>
                 <span className="zh-Hans hidden">总交易笔数</span>
+          <span className="ko hidden">추적의회의원與上市회사的最新공시거래</span>
               </>
             }
             value={stats.tradeCount.toLocaleString('zh-TW')}
@@ -91,6 +94,7 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
               <>
                 <span className="zh-Hant">國會議員</span>
                 <span className="zh-Hans hidden">国会议员</span>
+          <span className="ko hidden">總거래筆數</span>
               </>
             }
             value={stats.politicianCount.toLocaleString('zh-TW')}
@@ -100,6 +104,7 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
               <>
                 <span className="zh-Hant">上市公司</span>
                 <span className="zh-Hans hidden">上市公司</span>
+          <span className="ko hidden">의회의원</span>
               </>
             }
             value={stats.issuerCount.toLocaleString('zh-TW')}
@@ -118,6 +123,7 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
             <span className="w-full text-gray-400 sm:w-28">
               <span className="zh-Hant">議員姓名</span>
               <span className="zh-Hans hidden">议员姓名</span>
+          <span className="ko hidden">上市회사</span>
             </span>
             <input
               name="qp"
@@ -131,6 +137,7 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
             <span className="w-full text-gray-400 sm:w-24">
               <span className="zh-Hant">公司／代號</span>
               <span className="zh-Hans hidden">公司／代号</span>
+          <span className="ko hidden">의원姓名</span>
             </span>
             <input
               name="qi"
@@ -144,6 +151,7 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
             <span className="w-full text-gray-400 sm:w-auto">
               <span className="zh-Hant">買賣方向</span>
               <span className="zh-Hans hidden">买卖方向</span>
+          <span className="ko hidden">회사／代號</span>
             </span>
             <select name="type" defaultValue={typeFilter} className={fieldControlStyles()} aria-label="買賣方向">
               <option value="">全部</option>
@@ -156,6 +164,7 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
             <span className="w-full text-gray-400 sm:w-auto">
               <span className="zh-Hant">交易日區間</span>
               <span className="zh-Hans hidden">交易日区间</span>
+          <span className="ko hidden">거래일 범위</span>
             </span>
             <div className="flex gap-2">
               <input type="date" name="from" defaultValue={tradedFrom} className={fieldControlStyles()} aria-label="起日" />
@@ -166,6 +175,7 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
             <span className="w-full text-gray-400 sm:w-auto">
               <span className="zh-Hant">排序欄位</span>
               <span className="zh-Hans hidden">排序栏位</span>
+          <span className="ko hidden">거래日區間</span>
             </span>
             <select name="sort" defaultValue={sortKey} className={fieldControlStyles()} aria-label="排序欄位">
               <option value="activity">最新動態（申報／成交）</option>
@@ -179,6 +189,7 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
             <span className="w-full text-gray-400 sm:w-auto">
               <span className="zh-Hant">排序方向</span>
               <span className="zh-Hans hidden">排序方向</span>
+          <span className="ko hidden">정렬欄位</span>
             </span>
             <select name="order" defaultValue={order} className={fieldControlStyles()} aria-label="排序方向">
               <option value="desc">新 → 舊</option>
@@ -188,10 +199,12 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
           <button className={`${actionStyles('secondary')} col-span-1`} type="submit" aria-label="套用篩選">
             <span className="zh-Hant">套用</span>
             <span className="zh-Hans hidden">应用</span>
+          <span className="ko hidden">정렬方向</span>
           </button>
           <Link href="/trades" className={`${actionStyles('ghost')} col-span-1`}>
             <span className="zh-Hant">清除</span>
             <span className="zh-Hans hidden">清除</span>
+          <span className="ko hidden">지우기</span>
           </Link>
         </FilterBar>
         {trades.length === 0 ? (
@@ -208,30 +221,37 @@ export default async function TradesPage({ searchParams }: { searchParams: Promi
                   <th className="px-3 py-2 text-left whitespace-nowrap">
                     <span className="zh-Hant">國會議員</span>
                     <span className="zh-Hans hidden">国会议员</span>
+          <span className="ko hidden">지우기</span>
                   </th>
                   <th className="px-3 py-2 text-left whitespace-nowrap">
                     <span className="zh-Hant">上市公司</span>
                     <span className="zh-Hans hidden">上市公司</span>
+          <span className="ko hidden">의회의원</span>
                   </th>
                   <th className="px-3 py-2 text-left whitespace-nowrap">
                     <span className="zh-Hant">交易日</span>
                     <span className="zh-Hans hidden">交易日</span>
+          <span className="ko hidden">上市회사</span>
                   </th>
                   <th className="px-3 py-2 text-left whitespace-nowrap">
                     <span className="zh-Hant">申報日</span>
                     <span className="zh-Hans hidden">申报日</span>
+          <span className="ko hidden">거래日</span>
                   </th>
                   <th className="px-3 py-2 text-left whitespace-nowrap">
                     <span className="zh-Hant">買賣</span>
                     <span className="zh-Hans hidden">买卖</span>
+          <span className="ko hidden">신고日</span>
                   </th>
                   <th className="px-3 py-2 text-left whitespace-nowrap">
                     <span className="zh-Hant">金額區間（USD）</span>
                     <span className="zh-Hans hidden">金额区间（USD）</span>
+          <span className="ko hidden">금액 구간（USD）</span>
                   </th>
                   <th className="px-3 py-2 text-left whitespace-nowrap">
                     <span className="zh-Hant">成交價</span>
                     <span className="zh-Hans hidden">成交价</span>
+          <span className="ko hidden">체결가</span>
                   </th>
                 </tr>
               </thead>

@@ -1,6 +1,6 @@
 /**
  * Legal copy mirrored from insider-flow/web (terms + privacy pages).
- * Localized for zh-Hant / zh-Hans; English kept as fallback.
+ * Localized for zh-Hant / zh-Hans; ko falls back to zh-Hans; English kept as fallback.
  */
 
 import type { Locale } from "@/i18n/types";
@@ -252,6 +252,7 @@ const PRIVACY_ZH_HANS: LegalDocument = {
 const BY_LOCALE: Record<Locale, { terms: LegalDocument; privacy: LegalDocument }> = {
   "zh-Hant": { terms: TERMS_ZH_HANT, privacy: PRIVACY_ZH_HANT },
   "zh-Hans": { terms: TERMS_ZH_HANS, privacy: PRIVACY_ZH_HANS },
+  ko: { terms: TERMS_ZH_HANS, privacy: PRIVACY_ZH_HANS },
 };
 
 export function getLegalDocument(id: string, locale: Locale = "zh-Hant"): LegalDocument | null {

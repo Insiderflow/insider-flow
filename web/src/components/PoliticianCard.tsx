@@ -78,6 +78,7 @@ export default function PoliticianCard({
             <dt className="text-[11px] text-gray-500">
               <span className="zh-Hant">交易筆數</span>
               <span className="zh-Hans hidden">交易笔数</span>
+          <span className="ko hidden">거래 건수</span>
             </dt>
             <dd className="font-semibold text-white">{politician.trades.toLocaleString('zh-TW')}</dd>
           </div>
@@ -85,6 +86,7 @@ export default function PoliticianCard({
             <dt className="text-[11px] text-gray-500">
               <span className="zh-Hant">涉及公司</span>
               <span className="zh-Hans hidden">涉及公司</span>
+          <span className="ko hidden">거래 건수</span>
             </dt>
             <dd className="font-semibold text-white">{politician.issuers.toLocaleString('zh-TW')}</dd>
           </div>
@@ -92,6 +94,7 @@ export default function PoliticianCard({
             <dt className="text-[11px] text-gray-500">
               <span className="zh-Hant">成交量（估算）</span>
               <span className="zh-Hans hidden">成交量（估算）</span>
+          <span className="ko hidden">관련 회사</span>
             </dt>
             <dd className="font-semibold text-emerald-200/95">
               US${Math.round(politician.totalVolume).toLocaleString('zh-TW')}
@@ -103,6 +106,7 @@ export default function PoliticianCard({
           <p className="text-[11px] text-gray-500">
             <span className="zh-Hant">最後交易</span>
             <span className="zh-Hans hidden">最后交易</span>
+          <span className="ko hidden">최종 거래</span>
           </p>
           <p className="text-sm font-medium text-white">
             {politician.lastTraded
@@ -120,6 +124,7 @@ export default function PoliticianCard({
         <p className="mb-1 text-center text-[10px] font-medium uppercase tracking-wide text-gray-500">
           <span className="zh-Hant">vs S&amp;P 500（近月）</span>
           <span className="zh-Hans hidden">vs S&amp;P 500（近月）</span>
+          <span className="ko hidden">최종 거래</span>
         </p>
         <MiniPortfolioChart politician={politician.name} className="min-h-[5.5rem]" />
       </div>

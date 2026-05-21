@@ -28,12 +28,16 @@ export default function SubstackPromoBand() {
           <p className="inline-flex items-center rounded-md bg-orange-500/90 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-gray-900 shadow-sm">
             <span className="zh-Hant">免費 · 每週深度</span>
             <span className="zh-Hans hidden">免费 · 每周深度</span>
+          <span className="ko hidden">무료 · 주간 심층 분석</span>
           </p>
           <h2 id="substack-promo-heading" className="text-2xl sm:text-3xl md:text-[2rem] font-extrabold text-white leading-tight drop-shadow-sm zh-Hant">
             Substack 週報：國會資金流長文拆解
           </h2>
           <h2 className="text-2xl sm:text-3xl md:text-[2rem] font-extrabold text-white leading-tight drop-shadow-sm zh-Hans hidden">
             Substack 周报：国会资金流长文拆解
+          </h2>
+          <h2 className="text-2xl sm:text-3xl md:text-[2rem] font-extrabold text-white leading-tight drop-shadow-sm ko hidden">
+            Substack 주간 리포트: 의회 자금 흐름 심층 분석
           </h2>
           <p className="text-gray-200 text-sm sm:text-base leading-relaxed max-w-2xl zh-Hant">
             站內表格給你速度；<strong className="text-orange-200">週報</strong>
@@ -44,6 +48,11 @@ export default function SubstackPromoBand() {
             站内表格给你速度；<strong className="text-orange-200">周报</strong>
             给你脉络与选股思路——完全<strong className="text-white">免费订阅</strong>
             ，与付费深度页搭配最有效。
+          </p>
+          <p className="text-gray-200 text-sm sm:text-base leading-relaxed max-w-2xl ko hidden">
+            사이트 표는 속도; <strong className="text-orange-200">주간 리포트</strong>가
+            맥락과 종목 아이디어——<strong className="text-white">무료 구독</strong>
+            , 유료 심층 페이지와 함께 최적.
           </p>
           <p lang="en" className="text-xs text-blue-200/70 leading-relaxed max-w-xl border-l-2 border-blue-400/50 pl-3">
             Weekly deep dives on Capitol flows & themes — free. Pair with Insider+ for charts and politician analytics.
@@ -58,6 +67,7 @@ export default function SubstackPromoBand() {
           >
             <span className="zh-Hant">免費訂閱週報 →</span>
             <span className="zh-Hans hidden">免费订阅周报 →</span>
+          <span className="ko hidden">무료 주간 리포트 구독 →</span>
           </Link>
           <Link
             href="/upgrade"
@@ -65,6 +75,7 @@ export default function SubstackPromoBand() {
           >
             <span className="zh-Hant">升級完整分析</span>
             <span className="zh-Hans hidden">升级完整分析</span>
+          <span className="ko hidden">전체 분석 업그레이드</span>
           </Link>
         </div>
       </div>

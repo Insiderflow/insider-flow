@@ -45,15 +45,18 @@ export default function UpgradeTestimonials() {
               <StarRow />
               <span className="zh-Hant">真實付費用戶</span>
               <span className="zh-Hans hidden">真实付费用户</span>
+          <span className="ko hidden">실제 유료 사용자</span>
             </span>
           </div>
           <h2 id="upgrade-testimonials-heading" className={`${sectionTitleStyles()} text-2xl sm:text-3xl`}>
             <span className="zh-Hant">真實用戶怎麼說</span>
             <span className="zh-Hans hidden">真实用户怎么说</span>
+          <span className="ko hidden">실제 사용자 후기</span>
           </h2>
           <p className={`${bodySubtextStyles()} mx-auto mt-2 max-w-2xl text-sm text-gray-400`}>
             <span className="zh-Hant">付費用戶真實心得 · 以下為匿名節錄，經用戶同意刊登；內容不代表投資建議。</span>
             <span className="zh-Hans hidden">付费用户真实心得 · 以下为匿名节录，经用户同意刊登；内容不代表投资建议。</span>
+          <span className="ko hidden">유료 사용자 실제 후기 · 아래는 동의하에 게재한 익명 발췌이며, 투자 권유가 아닙니다.</span>
           </p>
         </div>
 

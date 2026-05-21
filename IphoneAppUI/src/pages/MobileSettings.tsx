@@ -41,7 +41,11 @@ export default function MobileSettings() {
 
   const displayName = user?.full_name?.trim() || user?.email || "Insider Flow";
   const localeLabel =
-    locale === "zh-Hant" ? t.lang.traditional : t.lang.simplified;
+    locale === "zh-Hant"
+      ? t.lang.traditional
+      : locale === "zh-Hans"
+        ? t.lang.simplified
+        : t.lang.korean;
 
   const noop = () => {
     window.alert(t.settings.comingSoon);

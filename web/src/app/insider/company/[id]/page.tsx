@@ -76,6 +76,7 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
           >
             ← <span className="zh-Hant">返回內幕交易</span>
             <span className="zh-Hans hidden">返回内幕交易</span>
+          <span className="ko hidden">내부자 거래로 돌아가기</span>
           </Link>
           <div className="flex justify-between items-start">
             <div>
@@ -83,6 +84,7 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
               <p className={`${bodySubtextStyles()} text-lg`}>
                 <span className="zh-Hant">股票代碼：</span>
                 <span className="zh-Hans hidden">股票代码：</span>
+          <span className="ko hidden">返回內幕거래</span>
                 <span className="font-mono text-blue-400">{company.ticker}</span>
               </p>
             </div>
@@ -106,6 +108,7 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
             <h3 className={`text-lg font-semibold mb-2 ${bodySubtextStyles()}`}>
               <span className="zh-Hant">總交易數</span>
               <span className="zh-Hans hidden">总交易数</span>
+          <span className="ko hidden">주식代碼：</span>
             </h3>
             <p className="text-3xl font-bold text-blue-400">
               {totalTransactions.toLocaleString()}
@@ -115,6 +118,7 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
             <h3 className={`text-lg font-semibold mb-2 ${bodySubtextStyles()}`}>
               <span className="zh-Hant">總價值</span>
               <span className="zh-Hans hidden">总价值</span>
+          <span className="ko hidden">總거래數</span>
             </h3>
             <p className="text-3xl font-bold text-green-400">
               ${(totalValue / 1000000).toFixed(1)}M
@@ -124,6 +128,7 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
             <h3 className={`text-lg font-semibold mb-2 ${bodySubtextStyles()}`}>
               <span className="zh-Hant">涉及內部人</span>
               <span className="zh-Hans hidden">涉及内部人</span>
+          <span className="ko hidden">관련 내부자</span>
             </h3>
             <p className="text-3xl font-bold text-purple-400">
               {uniqueInsiders}
@@ -137,6 +142,7 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
             <h2 className={sectionTitleStyles()}>
               <span className="zh-Hant">最近交易</span>
               <span className="zh-Hans hidden">最近交易</span>
+          <span className="ko hidden">涉及내부자</span>
             </h2>
           </div>
           <div className={tableWrapperStyles()}>
@@ -146,34 +152,42 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
                   <th className={tableHeaderCellStyles('md')}>
                     <span className="zh-Hant">申報日期</span>
                     <span className="zh-Hans hidden">申报日期</span>
+          <span className="ko hidden">最近거래</span>
                   </th>
                   <th className={tableHeaderCellStyles('md')}>
                     <span className="zh-Hant">交易日期</span>
                     <span className="zh-Hans hidden">交易日期</span>
+          <span className="ko hidden">신고日期</span>
                   </th>
                   <th className={tableHeaderCellStyles('md')}>
                     <span className="zh-Hant">內部人</span>
                     <span className="zh-Hans hidden">内部人</span>
+          <span className="ko hidden">거래日期</span>
                   </th>
                   <th className={tableHeaderCellStyles('md')}>
                     <span className="zh-Hant">職位</span>
                     <span className="zh-Hans hidden">职位</span>
+          <span className="ko hidden">내부자</span>
                   </th>
                   <th className={tableHeaderCellStyles('md')}>
                     <span className="zh-Hant">交易類型</span>
                     <span className="zh-Hans hidden">交易类型</span>
+          <span className="ko hidden">거래 유형</span>
                   </th>
                   <th className={tableHeaderCellStyles('md')}>
                     <span className="zh-Hant">價格</span>
                     <span className="zh-Hans hidden">价格</span>
+          <span className="ko hidden">거래類型</span>
                   </th>
                   <th className={tableHeaderCellStyles('md')}>
                     <span className="zh-Hant">數量</span>
                     <span className="zh-Hans hidden">数量</span>
+          <span className="ko hidden">수량</span>
                   </th>
                   <th className={tableHeaderCellStyles('md')}>
                     <span className="zh-Hant">交易價值</span>
                     <span className="zh-Hans hidden">交易价值</span>
+          <span className="ko hidden">거래 가치</span>
                   </th>
                 </tr>
               </thead>

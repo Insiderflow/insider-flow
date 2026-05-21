@@ -68,19 +68,24 @@ h1, h2, h3 {
 }
 
 /* Language toggle styles */
-.language-zh-Hant .zh-Hans {
+.language-zh-Hant .zh-Hans,
+.language-zh-Hant .ko {
   display: none !important;
 }
 
-.language-zh-Hans .zh-Hant {
+.language-zh-Hans .zh-Hant,
+.language-zh-Hans .ko {
   display: none !important;
 }
 
-.language-zh-Hant .zh-Hans.hidden {
+.language-ko .zh-Hant,
+.language-ko .zh-Hans {
   display: none !important;
 }
 
-.language-zh-Hans .zh-Hant.hidden {
+.language-zh-Hant .zh-Hans.hidden,
+.language-zh-Hans .zh-Hant.hidden,
+.language-ko .ko.hidden {
   display: none !important;
 }
 
@@ -90,6 +95,10 @@ h1, h2, h3 {
 }
 
 .language-zh-Hans .zh-Hans {
+  display: inline !important;
+}
+
+.language-ko .ko {
   display: inline !important;
 }
 

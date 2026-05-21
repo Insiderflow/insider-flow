@@ -35,6 +35,7 @@ export default async function IssuerDetailPage({
           <h1 className={pageTitleStyles()}>
             <span className="zh-Hant">發行商</span>
             <span className="zh-Hans hidden">发行商</span>
+          <span className="ko hidden">발행사</span>
           </h1>
         </div>
 
@@ -84,6 +85,11 @@ export default async function IssuerDetailPage({
             <div className="space-y-3">
               {recentTrades.map((trade) => (
                 <div key={trade.id} className="rounded-lg border border-gray-700 bg-gray-900 p-3">
+                  {(() => {
+                    const tradeType = (trade.type || '').toUpperCase();
+                    const badgeTone = tradeType === 'BUY' ? 'success' : tradeType === 'SELL' ? 'danger' : 'neutral';
+                    return (
+                      <>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="w-9 h-9 rounded-full overflow-hidden bg-gray-700 shrink-0">
@@ -93,8 +99,8 @@ export default async function IssuerDetailPage({
                         {trade.politician.name}
                       </Link>
                     </div>
-                    <span className={badgeStyles(trade.type.toUpperCase() === 'BUY' ? 'success' : 'danger', 'xs')}>
-                      {trade.type}
+                    <span className={badgeStyles(badgeTone, 'xs')}>
+                      {trade.type || 'N/A'}
                     </span>
                   </div>
                   <div className="mt-2 text-sm text-gray-300 flex flex-wrap gap-4">
@@ -102,6 +108,9 @@ export default async function IssuerDetailPage({
                     <span>金額：{trade.sizeMin && trade.sizeMax ? `$${Math.round(trade.sizeMin).toLocaleString('en-US')} - $${Math.round(trade.sizeMax).toLocaleString('en-US')}` : '-'}</span>
                     <span>價格：{trade.price !== null ? `$${trade.price.toFixed(2)}` : '-'}</span>
                   </div>
+                      </>
+                    );
+                  })()}
                 </div>
               ))}
             </div>

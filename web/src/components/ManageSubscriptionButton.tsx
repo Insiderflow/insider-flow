@@ -61,6 +61,7 @@ export default function ManageSubscriptionButton() {
         <>
           <span className="zh-Hant">管理訂閱</span>
           <span className="zh-Hans hidden">管理订阅</span>
+          <span className="ko hidden">구독 관리</span>
         </>
       )}
     </button>

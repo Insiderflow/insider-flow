@@ -145,6 +145,7 @@ export default function WatchlistButton({
         >
           <span className="zh-Hant">追蹤此議員交易通知</span>
           <span className="zh-Hans hidden">追踪此议员交易通知</span>
+          <span className="ko hidden">이 의원 거래 알림 받기</span>
         </Link>
       );
     }
@@ -162,6 +163,7 @@ export default function WatchlistButton({
         </svg>
         <span className="zh-Hant">加入關注（免費註冊）</span>
         <span className="zh-Hans hidden">加入关注（免费注册）</span>
+          <span className="ko hidden">관심 추가（무료 가입）</span>
       </button>
     );
   }
@@ -199,12 +201,14 @@ export default function WatchlistButton({
           </svg>
           <span className="zh-Hant">處理中…</span>
           <span className="zh-Hans hidden">处理中…</span>
+          <span className="ko hidden">처리 중…</span>
         </>
       ) : isWatching ? (
         variant === 'cta' ? (
           <>
             <span className="zh-Hant">已開啟交易通知</span>
             <span className="zh-Hans hidden">已开启交易通知</span>
+          <span className="ko hidden">거래 알림 켜짐</span>
           </>
         ) : (
           <>
@@ -213,12 +217,14 @@ export default function WatchlistButton({
             </svg>
             <span className="zh-Hant">已關注</span>
             <span className="zh-Hans hidden">已关注</span>
+          <span className="ko hidden">관심 목록에 추가됨</span>
           </>
         )
       ) : variant === 'cta' ? (
         <>
           <span className="zh-Hant">追蹤此議員交易通知</span>
           <span className="zh-Hans hidden">追踪此议员交易通知</span>
+          <span className="ko hidden">이 의원 거래 알림 받기</span>
         </>
       ) : (
         <>
@@ -228,6 +234,7 @@ export default function WatchlistButton({
           </svg>
           <span className="zh-Hant">加入關注</span>
           <span className="zh-Hans hidden">加入关注</span>
+          <span className="ko hidden">관심 추가</span>
         </>
       )}
     </button>

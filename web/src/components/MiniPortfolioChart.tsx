@@ -86,6 +86,7 @@ export default function MiniPortfolioChart({ politician, className = "" }: MiniP
       <div className={`text-center text-gray-500 text-xs ${className}`}>
         <span className="zh-Hant">無數據</span>
         <span className="zh-Hans hidden">无数据</span>
+          <span className="ko hidden">데이터 없음</span>
       </div>
     );
   }
@@ -238,6 +239,7 @@ export default function MiniPortfolioChart({ politician, className = "" }: MiniP
             <span className="text-gray-300">
               <span className="zh-Hant">投資組合</span>
               <span className="zh-Hans hidden">投资组合</span>
+          <span className="ko hidden">無데이터</span>
             </span>
           </div>
         </div>

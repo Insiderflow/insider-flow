@@ -1,9 +1,10 @@
-export type Locale = "zh-Hant" | "zh-Hans";
+export type Locale = "zh-Hant" | "zh-Hans" | "ko";
 
 export interface Messages {
   lang: {
     traditional: string;
     simplified: string;
+    korean: string;
     switchAria: string;
   };
   dataMode: {

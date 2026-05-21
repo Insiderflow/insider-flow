@@ -97,6 +97,7 @@ export default function PortfolioChart({ politician }: PortfolioChartProps) {
           <span className="text-gray-400 text-sm">
             <span className="zh-Hant">載入投資組合數據...</span>
             <span className="zh-Hans hidden">载入投资组合数据...</span>
+          <span className="ko hidden">포트폴리오 데이터 로딩 중...</span>
           </span>
         </div>
       </div>
@@ -113,18 +114,21 @@ export default function PortfolioChart({ politician }: PortfolioChartProps) {
         <div className="text-red-500 mb-2">
           <span className="zh-Hant">載入圖表時發生錯誤</span>
           <span className="zh-Hans hidden">载入图表时发生错误</span>
+          <span className="ko hidden">載入포트폴리오데이터...</span>
         </div>
         <div className="text-gray-400 text-sm mb-2">{error}</div>
         {isDataUnavailable && (
           <div className="text-gray-500 text-xs mt-2">
             <span className="zh-Hant">數據正在計算中，請稍後再試</span>
             <span className="zh-Hans hidden">数据正在计算中，请稍后再试</span>
+          <span className="ko hidden">데이터 계산 중입니다. 잠시 후 다시 시도하세요.</span>
           </div>
         )}
         {isNetworkError && (
           <div className="text-gray-500 text-xs mt-2">
             <span className="zh-Hant">請檢查網路連線或稍後再試</span>
             <span className="zh-Hans hidden">请检查网络连线或稍后再试</span>
+          <span className="ko hidden">데이터正在計算中，請稍後再試</span>
           </div>
         )}
       </div>
@@ -137,6 +141,7 @@ export default function PortfolioChart({ politician }: PortfolioChartProps) {
         <div className="text-gray-500">
           <span className="zh-Hant">無可用的投資組合數據</span>
           <span className="zh-Hans hidden">无可用的投资组合数据</span>
+          <span className="ko hidden">사용 가능한 포트폴리오 데이터 없음</span>
         </div>
       </div>
     );
@@ -322,10 +327,12 @@ export default function PortfolioChart({ politician }: PortfolioChartProps) {
             <h3 className="text-xl font-bold text-white mb-2">
               <span className="zh-Hant">投資組合表現分析</span>
               <span className="zh-Hans hidden">投资组合表现分析</span>
+          <span className="ko hidden">사용 가능한 포트폴리오 데이터 없음</span>
             </h3>
             <p className="text-sm text-gray-400">
               <span className="zh-Hant">比較政治家的投資組合回報率與 S&P 500 指數表現</span>
               <span className="zh-Hans hidden">比较政治家的投资组合回报率与 S&P 500 指数表现</span>
+          <span className="ko hidden">포트폴리오表現分析</span>
             </p>
           </div>
         </div>
@@ -342,6 +349,7 @@ export default function PortfolioChart({ politician }: PortfolioChartProps) {
           <h4 className="text-sm font-semibold text-white mb-3">
             <span className="zh-Hant">相關交易記錄</span>
             <span className="zh-Hans hidden">相关交易记录</span>
+          <span className="ko hidden">정치인 포트폴리오 수익률 vs S&P 500 비교</span>
             <span className="text-gray-400 ml-2">({data.trades.length} 筆)</span>
           </h4>
           <div className="max-h-32 overflow-y-auto">
@@ -368,6 +376,7 @@ export default function PortfolioChart({ politician }: PortfolioChartProps) {
                 <div className="text-xs text-gray-500 text-center pt-2">
                   <span className="zh-Hant">還有 {data.trades.length - 5} 筆交易...</span>
                   <span className="zh-Hans hidden">还有 {data.trades.length - 5} 笔交易...</span>
+          <span className="ko hidden">관련 거래 기록</span>
                 </div>
               )}
             </div>

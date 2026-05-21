@@ -4,7 +4,8 @@ const zhHant: Messages = {
   lang: {
     traditional: "繁",
     simplified: "简",
-    switchAria: "切換繁體中文或簡體中文",
+    korean: "韓",
+    switchAria: "切換繁體中文、簡體中文或韓語",
   },
   dataMode: {
     politician: "議員",

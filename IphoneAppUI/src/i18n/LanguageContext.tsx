@@ -15,7 +15,7 @@ const STORAGE_KEY = "insider-flow-locale";
 function readStoredLocale(): Locale {
   try {
     const v = localStorage.getItem(STORAGE_KEY);
-    if (v === "zh-Hant" || v === "zh-Hans") return v;
+    if (v === "zh-Hant" || v === "zh-Hans" || v === "ko") return v;
   } catch {
     /* ignore */
   }
@@ -44,13 +44,16 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const toggleLocale = useCallback(() => {
-    setLocale(locale === "zh-Hant" ? "zh-Hans" : "zh-Hant");
+    const next: Locale =
+      locale === "zh-Hant" ? "zh-Hans" : locale === "zh-Hans" ? "ko" : "zh-Hant";
+    setLocale(next);
   }, [locale, setLocale]);
 
   const t = useMemo(() => getMessages(locale), [locale]);
 
   useEffect(() => {
-    document.documentElement.lang = locale === "zh-Hant" ? "zh-Hant" : "zh-Hans";
+    document.documentElement.lang =
+      locale === "ko" ? "ko" : locale === "zh-Hant" ? "zh-Hant" : "zh-Hans";
   }, [locale]);
 
   const value = useMemo(

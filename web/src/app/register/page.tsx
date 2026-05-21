@@ -14,10 +14,12 @@ export default async function RegisterPage() {
             <h1 className="text-3xl md:text-4xl font-extrabold mb-3 text-white">
               <span className="zh-Hant">建立 Insider Flow 帳號</span>
               <span className="zh-Hans hidden">建立 Insider Flow 账号</span>
+          <span className="ko hidden">Insider Flow 계정 만들기</span>
             </h1>
             <p className="text-white/90 text-sm sm:text-base">
               <span className="zh-Hant">立即註冊，啟用議員追蹤與交易通知。</span>
               <span className="zh-Hans hidden">立即注册，启用议员追踪与交易通知。</span>
+          <span className="ko hidden">지금 가입하고 의원 추적 및 거래 알림을 활성화하세요.</span>
             </p>
           </div>
         </section>

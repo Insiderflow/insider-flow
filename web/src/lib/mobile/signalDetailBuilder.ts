@@ -116,6 +116,7 @@ function detailNotable(locale: BriefLocale, amount: number): string {
   const thr = formatUsd(NOTABLE_SIZE_USD);
   if (locale === 'en') return `${amt} (threshold ${thr})`;
   if (locale === 'zh-Hans') return `${amt}（门槛 ${thr}）`;
+  if (locale === 'ko') return `${amt}（기준 ${thr}）`;
   return `${amt}（門檻 ${thr}）`;
 }
 
@@ -129,12 +130,19 @@ function detailCluster(
     side === 'buy'
       ? locale === 'en'
         ? 'buy'
-        : '買入'
+        : locale === 'ko'
+          ? '매수'
+          : '買入'
       : locale === 'en'
         ? 'sell'
-        : '賣出';
+        : locale === 'ko'
+          ? '매도'
+          : '賣出';
   if (locale === 'en') {
     return `${size} members · ${ticker} ${sideLabel} · ${CLUSTER_WINDOW_DAYS}d`;
+  }
+  if (locale === 'ko') {
+    return `${size}명 · ${ticker} ${sideLabel} · ${CLUSTER_WINDOW_DAYS}일`;
   }
   return `${size} 人 · ${ticker} ${sideLabel} · ${CLUSTER_WINDOW_DAYS} 日`;
 }
@@ -143,15 +151,18 @@ function detailPercentile(locale: BriefLocale, p: number): string {
   const pct = Math.round(p * 100);
   if (locale === 'en') return `${pct}th percentile vs this member's history`;
   if (locale === 'zh-Hans') return `为该申报人历史金额的 P${pct}`;
+  if (locale === 'ko') return `해당 신고인 과거 금액 대비 P${pct}`;
   return `為該申報人歷史金額的 P${pct}`;
 }
 
 function detailDays(locale: BriefLocale, days: number, kind: 'recent' | 'late'): string {
   if (kind === 'recent') {
     if (locale === 'en') return `Disclosed ${days.toFixed(0)} day(s) ago`;
+    if (locale === 'ko') return `${days.toFixed(0)}일 전 공시`;
     return `距今 ${days.toFixed(0)} 日內申報`;
   }
   if (locale === 'en') return `Filed ${days} days after trade`;
+  if (locale === 'ko') return `거래 후 ${days}일 만에 신고`;
   return `交易後 ${days} 日才申報`;
 }
 
@@ -162,39 +173,55 @@ function committeeAlignmentDetail(
   if (!align.committees) {
     if (locale === 'en') return 'No committee membership on file';
     if (locale === 'zh-Hans') return '无委员会任职数据';
+    if (locale === 'ko') return '위원회 임명 정보 없음';
     return '無委員會任職資料';
   }
   if (align.usedGovtrackMap && align.committeeCodes.length) {
     const codes = align.committeeCodes.slice(0, 4).join(', ');
-    const seats = align.committeeSectors.join(locale === 'en' ? ', ' : '、');
+    const seats = align.committeeSectors.join(locale === 'en' || locale === 'ko' ? ', ' : '、');
     if (locale === 'en') {
       return `GovTrack: ${codes} → ${seats || 'no sector map'}`;
+    }
+    if (locale === 'ko') {
+      return `GovTrack: ${codes} → ${seats || '섹터 매핑 없음'}`;
     }
     return `GovTrack：${codes} → ${seats || '無板塊對應'}`;
   }
   if (!align.committeeSectors.length) {
-    const names = align.committeeNames.slice(0, 2).join(locale === 'en' ? '; ' : '；');
+    const names = align.committeeNames.slice(0, 2).join(locale === 'en' || locale === 'ko' ? '; ' : '；');
     if (locale === 'en') {
       return names
         ? `Committees: ${names} — could not map to GICS sector`
         : 'Committee text present but no sector mapping';
     }
+    if (locale === 'ko') {
+      return names
+        ? `위원회: ${names} — GICS 섹터 매핑 불가`
+        : '위원회 정보는 있으나 섹터 매핑 없음';
+    }
     return names ? `委員會：${names} — 未能對應 GICS 板塊` : '有委員會文字但無法對應板塊';
   }
   if (!align.tradeSector) {
-    const seats = align.committeeSectors.join(locale === 'en' ? ', ' : '、');
+    const seats = align.committeeSectors.join(locale === 'en' || locale === 'ko' ? ', ' : '、');
     if (locale === 'en') return `Committee sectors: ${seats}; issuer sector unknown`;
+    if (locale === 'ko') return `위원회 섹터: ${seats}; 발행사 섹터 미확인`;
     return `委員會板塊：${seats}；標的板塊未知`;
   }
-  const seats = align.committeeSectors.join(locale === 'en' ? ', ' : '、');
+  const seats = align.committeeSectors.join(locale === 'en' || locale === 'ko' ? ', ' : '、');
   if (align.met) {
     if (locale === 'en') {
       return `Match: trade ${align.tradeSector} ∈ committee sectors (${seats})`;
+    }
+    if (locale === 'ko') {
+      return `일치: 거래 ${align.tradeSector} ∈ 위원회 섹터（${seats}）`;
     }
     return `命中：標的 ${align.tradeSector} ∈ 委員會板塊（${seats}）`;
   }
   if (locale === 'en') {
     return `Committee sectors: ${seats}; trade sector: ${align.tradeSector}`;
+  }
+  if (locale === 'ko') {
+    return `위원회 섹터: ${seats}; 거래 섹터: ${align.tradeSector}`;
   }
   return `委員會板塊：${seats}；標的板塊：${align.tradeSector}`;
 }
@@ -272,7 +299,9 @@ function buildCriteriaRows(input: {
         ? committeeAlignmentDetail(locale, committeeAlign)
         : locale === 'en'
           ? 'N/A for corporate signals'
-          : '企業訊號不適用',
+          : locale === 'ko'
+            ? '기업 신호에는 해당 없음'
+            : '企業訊號不適用',
     },
     {
       id: 'congress_cluster',
@@ -283,7 +312,9 @@ function buildCriteriaRows(input: {
           ? detailCluster(locale, clusterSize, ticker, side)
           : locale === 'en'
             ? `Need ≥${CLUSTER_MIN_POLITICIANS} members same ticker & side`
-            : `需 ≥${CLUSTER_MIN_POLITICIANS} 位議員同標的同向`,
+            : locale === 'ko'
+              ? `동일 종목·방향 의원 ≥${CLUSTER_MIN_POLITICIANS}명 필요`
+              : `需 ≥${CLUSTER_MIN_POLITICIANS} 位議員同標的同向`,
     },
     {
       id: 'insider_cluster',
@@ -312,7 +343,9 @@ function buildCriteriaRows(input: {
           ? detailDays(locale, filedAfterDays, 'late')
           : locale === 'en'
             ? 'No filing lag on record'
-            : '無延遲申報紀錄',
+            : locale === 'ko'
+              ? '지연 신고 기록 없음'
+              : '無延遲申報紀錄',
     },
   ];
 }

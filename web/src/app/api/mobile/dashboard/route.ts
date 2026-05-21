@@ -18,7 +18,9 @@ export async function GET(req: NextRequest) {
 
     const localeRaw = searchParams.get('locale') || 'zh-Hant';
     const locale =
-      localeRaw === 'zh-Hans' || localeRaw === 'en' ? localeRaw : 'zh-Hant';
+      localeRaw === 'zh-Hans' || localeRaw === 'en' || localeRaw === 'ko'
+        ? localeRaw
+        : 'zh-Hant';
 
     const data =
       mode === 'insider'

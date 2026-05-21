@@ -84,8 +84,10 @@ export default function UpgradePricingClient() {
         <div className="rounded-xl border border-amber-500/40 bg-amber-950/30 px-4 py-3 text-center">
           <p className="text-amber-200 text-xs font-bold uppercase tracking-wide zh-Hant">早鳥／年付</p>
           <p className="text-amber-200 text-xs font-bold uppercase tracking-wide zh-Hans hidden">早鸟／年付</p>
+          <span className="ko hidden">얼리버드／연간</span>
           <p className="text-amber-100 text-sm mt-1 zh-Hant">年方案省約 17%，隨時可能調整 — 以結帳頁為準</p>
           <p className="text-amber-100 text-sm mt-1 zh-Hans hidden">年方案省约 17%，随时可能调整 — 以结账页为准</p>
+          <span className="ko hidden">연간 플랜 약 17% 절약, 언제든 변경 가능 — 결제 페이지 기준</span>
           <p lang="en" className="text-[10px] text-amber-200/80 mt-1">
             Yearly saves ~17%; pricing subject to change at checkout.
           </p>
@@ -93,15 +95,19 @@ export default function UpgradePricingClient() {
         <div className="rounded-xl border border-gray-600 bg-gray-800/50 px-4 py-3 text-center text-sm text-gray-300">
           <p className="font-semibold text-white zh-Hant">Stripe 託管付款</p>
           <p className="font-semibold text-white zh-Hans hidden">Stripe 托管付款</p>
+          <span className="ko hidden">Stripe 호스팅 결제</span>
           <p className="mt-1 text-xs zh-Hant">卡資料不經我們伺服器儲存</p>
           <p className="mt-1 text-xs zh-Hans hidden">卡资料不经我们服务器存储</p>
+          <span className="ko hidden">카드 정보는 당사 서버에 저장되지 않음</span>
           <p lang="en" className="text-[10px] text-gray-500 mt-1">PCI-grade checkout · card data not stored on our stack.</p>
         </div>
         <div className="rounded-xl border border-emerald-700/50 bg-emerald-950/25 px-4 py-3 text-center text-sm text-gray-300">
           <p className="font-semibold text-emerald-200 zh-Hant">華語投資人優先</p>
           <p className="font-semibold text-emerald-200 zh-Hans hidden">华语投资人优先</p>
+          <span className="ko hidden">한국어/중국어 투자자 우선</span>
           <p className="mt-1 text-xs zh-Hant">介面與週報以繁中為主，簡中可切換</p>
           <p className="mt-1 text-xs zh-Hans hidden">界面与周报以繁中为主，简中可切换</p>
+          <span className="ko hidden">UI와 주간 리포트는 번체 기본, 간체/한국어 전환 가능</span>
           <p lang="en" className="text-[10px] text-gray-500 mt-1">Built for HK / TW / global Chinese readers.</p>
         </div>
       </div>
@@ -115,6 +121,7 @@ export default function UpgradePricingClient() {
         >
           <span className="zh-Hant">還沒準備付費？先訂閱免費 Substack 週報拿到長文觀點 →</span>
           <span className="zh-Hans hidden">还没准备付费？先订阅免费 Substack 周报拿到长文观点 →</span>
+          <span className="ko hidden">아직 유료가 부담? 무료 Substack 주간 리포트로 심층 분석 먼저 →</span>
         </Link>
       </div>
 
@@ -125,6 +132,9 @@ export default function UpgradePricingClient() {
           </p>
           <p className="text-yellow-100 font-medium zh-Hans hidden">
             付费暂时无法开通（缺少 Stripe Price 设置）。请稍后再试或联系客服。
+          </p>
+          <p className="text-yellow-100 font-medium ko hidden">
+            유료 결제를 일시적으로 이용할 수 없습니다（Stripe Price 설정 누락）. 잠시 후 다시 시도하거나 고객센터에 문의하세요.
           </p>
           <p lang="en" className="text-yellow-200/80 text-sm mt-2">
             Billing unavailable: missing <code className="text-yellow-100">NEXT_PUBLIC_STRIPE_PRICE_*</code> env vars.
@@ -145,6 +155,7 @@ export default function UpgradePricingClient() {
                 <span className={badgeStyles('info')}>
                   <span className="zh-Hant">最多人選</span>
                   <span className="zh-Hans hidden">最多人选</span>
+                  <span className="ko hidden">가장 인기</span>
                 </span>
               </div>
             )}
@@ -159,11 +170,15 @@ export default function UpgradePricingClient() {
                 <div className="mb-3">
                   <p className="text-yellow-400 text-sm font-bold mb-1 zh-Hant">新客試用</p>
                   <p className="text-yellow-400 text-sm font-bold mb-1 zh-Hans hidden">新客试用</p>
+                  <p className="text-yellow-400 text-sm font-bold mb-1 ko hidden">신규 체험</p>
                   <p className="text-yellow-300 text-base font-semibold zh-Hant">
                     結帳輸入優惠碼 <span className="bg-yellow-400 text-gray-900 px-2 py-1 rounded font-mono font-bold">1month</span>
                   </p>
                   <p className="text-yellow-300 text-base font-semibold zh-Hans hidden">
                     结账输入优惠码 <span className="bg-yellow-400 text-gray-900 px-2 py-1 rounded font-mono font-bold">1month</span>
+                  </p>
+                  <p className="text-yellow-300 text-base font-semibold ko hidden">
+                    결제 시 프로모 코드 입력 <span className="bg-yellow-400 text-gray-900 px-2 py-1 rounded font-mono font-bold">1month</span>
                   </p>
                 </div>
               )}
@@ -171,6 +186,7 @@ export default function UpgradePricingClient() {
                 <p className="text-green-400 text-sm font-medium">
                   <span className="zh-Hant">相較月付每年省約 US$ 20</span>
                   <span className="zh-Hans hidden">相较月付每年省约 US$ 20</span>
+          <span className="ko hidden">월간 대비 연간 약 US$ 20 절약</span>
                 </p>
               )}
             </div>
@@ -178,6 +194,7 @@ export default function UpgradePricingClient() {
             <div className="mb-8">
               <h4 className="text-lg font-semibold mb-4 zh-Hant">你會立刻得到</h4>
               <h4 className="text-lg font-semibold mb-4 zh-Hans hidden">你会立刻得到</h4>
+              <h4 className="text-lg font-semibold mb-4 ko hidden">즉시 이용 가능</h4>
               <ul className="space-y-3">
                 {plan.features.map((feature, index) => (
                   <li key={index} className="flex items-start gap-2">
@@ -221,11 +238,13 @@ export default function UpgradePricingClient() {
                   </svg>
                   <span className="zh-Hant">正在前往 Stripe…</span>
                   <span className="zh-Hans hidden">正在前往 Stripe…</span>
+          <span className="ko hidden">Stripe로 이동 중…</span>
                 </span>
               ) : (
                 <>
                   <span className="zh-Hant">立即解鎖 {plan.name}</span>
                   <span className="zh-Hans hidden">立即解锁 {plan.name}</span>
+          <span className="ko hidden">{plan.name} 지금 잠금 해제</span>
                 </>
               )}
             </button>
@@ -237,14 +256,17 @@ export default function UpgradePricingClient() {
         <h2 className={`${sectionTitleStyles()} text-center mb-8`}>
           <span className="zh-Hant">常見問題</span>
           <span className="zh-Hans hidden">常见问题</span>
+          <span className="ko hidden">자주 묻는 질문</span>
         </h2>
         <div className="space-y-6">
           <div className={panelSurfaceStyles()}>
             <h3 className="text-lg font-semibold mb-2 zh-Hant">如何取消訂閱？</h3>
             <h3 className="text-lg font-semibold mb-2 zh-Hans hidden">如何取消订阅？</h3>
+            <h3 className="text-lg font-semibold mb-2 ko hidden">구독은 어떻게 취소하나요?</h3>
             <p className={bodySubtextStyles()}>
               <span className="zh-Hant">於 Stripe 客戶入口或帳戶內管理訂閱，隨時取消續訂。</span>
               <span className="zh-Hans hidden">于 Stripe 客户入口或账户内管理订阅，随时取消续订。</span>
+          <span className="ko hidden">Stripe 고객 포털 또는 계정에서 구독 관리, 언제든 해지 가능.</span>
             </p>
             <p lang="en" className={`${bodySubtextStyles()} text-xs mt-2 text-gray-500`}>
               Manage renewal in the Stripe customer portal from your account email receipt.
@@ -253,17 +275,21 @@ export default function UpgradePricingClient() {
           <div className={panelSurfaceStyles()}>
             <h3 className="text-lg font-semibold mb-2 zh-Hant">付款安全嗎？</h3>
             <h3 className="text-lg font-semibold mb-2 zh-Hans hidden">付款安全吗？</h3>
+            <h3 className="text-lg font-semibold mb-2 ko hidden">결제는 안전한가요?</h3>
             <p className={bodySubtextStyles()}>
               <span className="zh-Hant">由 Stripe 處理，符合業界 PCI 標準；我們不儲存完整卡號。</span>
               <span className="zh-Hans hidden">由 Stripe 处理，符合业界 PCI 标准；我们不储存完整卡号。</span>
+              <span className="ko hidden">Stripe가 처리하며 PCI 업계 표준을 준수합니다. 당사는 카드 번호 전체를 저장하지 않습니다.</span>
             </p>
           </div>
           <div className={panelSurfaceStyles()}>
             <h3 className="text-lg font-semibold mb-2 zh-Hant">可以退款嗎？</h3>
             <h3 className="text-lg font-semibold mb-2 zh-Hans hidden">可以退款吗？</h3>
+            <h3 className="text-lg font-semibold mb-2 ko hidden">환불이 가능한가요?</h3>
             <p className={bodySubtextStyles()}>
               <span className="zh-Hant">原則上提供 7 天內聯繫客服協商退款；實際依 Stripe 政策與個案為準。</span>
               <span className="zh-Hans hidden">原则上提供 7 天内联系客服协商退款；实际依 Stripe 政策与个案为准。</span>
+          <span className="ko hidden">원칙적으로 7일 이내 고객센터 환불 협의 가능; 실제는 Stripe 정책 및 건별 처리.</span>
             </p>
           </div>
         </div>

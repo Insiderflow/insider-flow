@@ -1,4 +1,4 @@
-export type Language = 'zh-Hant' | 'zh-Hans';
+export type Language = 'zh-Hant' | 'zh-Hans' | 'ko';
 
 export interface Translations {
   // Navigation
@@ -177,6 +177,56 @@ const translations: Record<Language, Translations> = {
     resendVerification: '重新发送验证邮件',
     logoutAllDevices: '登出所有设备',
   },
+
+  ko: {
+    home: '홈',
+    trades: '거래',
+    politicians: '의원',
+    issuers: '발행사',
+    watchlist: '관심목록',
+    account: '계정',
+    login: '로그인',
+    register: '회원가입',
+    logout: '로그아웃',
+    loading: '로딩 중...',
+    error: '오류',
+    success: '성공',
+    apply: '적용',
+    sort: '정렬',
+    order: '순서',
+    page: '페이지',
+    previous: '이전',
+    next: '다음',
+    totalTrades: '총 거래',
+    politician: '의원',
+    issuer: '발행사',
+    published: '공시일',
+    traded: '거래일',
+    filedAfter: '신고 지연',
+    owner: '보유자',
+    type: '유형',
+    size: '금액',
+    price: '가격',
+    name: '이름',
+    ticker: '티커',
+    volume: '거래 금액',
+    accountSettings: '계정 설정',
+    basicInfo: '기본 정보',
+    email: '이메일',
+    emailVerified: '이메일 인증',
+    registrationDate: '가입일',
+    emailNotifications: '이메일 알림 설정',
+    newTradeNotifications: '신규 거래 알림',
+    watchlistUpdates: '관심목록 업데이트',
+    weeklyDigest: '주간 요약',
+    changePassword: '비밀번호 변경',
+    currentPassword: '현재 비밀번호',
+    newPassword: '새 비밀번호',
+    confirmPassword: '비밀번호 확인',
+    accountActions: '계정 작업',
+    resendVerification: '인증 메일 재전송',
+    logoutAllDevices: '모든 기기에서 로그아웃',
+  },
 };
 
 export function getTranslation(key: keyof Translations, language: Language = 'zh-Hant'): string {
@@ -185,6 +235,12 @@ export function getTranslation(key: keyof Translations, language: Language = 'zh
 
 export function getCurrentLanguage(): Language {
   if (typeof window === 'undefined') return 'zh-Hant';
-  return (localStorage.getItem('language') as Language) || 'zh-Hant';
+  try {
+    const value = localStorage.getItem('language');
+    if (value === 'zh-Hans' || value === 'ko') return value;
+    return 'zh-Hant';
+  } catch {
+    return 'zh-Hant';
+  }
 }
 

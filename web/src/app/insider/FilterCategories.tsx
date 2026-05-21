@@ -76,6 +76,7 @@ export default function FilterCategories({ currentFilter }: FilterCategoriesProp
       <h3 className="text-lg font-semibold text-white mb-4">
         <span className="zh-Hant">篩選類別</span>
         <span className="zh-Hans hidden">筛选类别</span>
+          <span className="ko hidden">필터 카테고리</span>
       </h3>
       
       {/* Latest Section */}
@@ -83,6 +84,7 @@ export default function FilterCategories({ currentFilter }: FilterCategoriesProp
         <h4 className="text-md font-medium text-gray-300 mb-3">
           <span className="zh-Hant">最新</span>
           <span className="zh-Hans hidden">最新</span>
+          <span className="ko hidden">필터類別</span>
         </h4>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
           {latestFilters.map(renderFilterButton)}
@@ -97,6 +99,7 @@ export default function FilterCategories({ currentFilter }: FilterCategoriesProp
         <h4 className="text-md font-medium text-gray-300 mb-3">
           <span className="zh-Hant">頂級</span>
           <span className="zh-Hans hidden">顶级</span>
+          <span className="ko hidden">상위</span>
         </h4>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
           {topFilters.map(renderFilterButton)}
@@ -111,6 +114,7 @@ export default function FilterCategories({ currentFilter }: FilterCategoriesProp
         >
           <span className="zh-Hant">清除全部</span>
           <span className="zh-Hans hidden">清除全部</span>
+          <span className="ko hidden">전체 지우기</span>
         </button>
       </div>
     </div>

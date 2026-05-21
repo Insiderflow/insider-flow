@@ -18,7 +18,9 @@ export async function GET(
     const { searchParams } = new URL(req.url);
     const localeRaw = searchParams.get('locale') || 'zh-Hant';
     const locale: BriefLocale =
-      localeRaw === 'zh-Hans' || localeRaw === 'en' ? localeRaw : 'zh-Hant';
+      localeRaw === 'zh-Hans' || localeRaw === 'en' || localeRaw === 'ko'
+        ? localeRaw
+        : 'zh-Hant';
 
     const data = await buildSignalDetail(decodeURIComponent(id), locale);
     if (!data) {

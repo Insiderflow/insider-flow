@@ -8,6 +8,7 @@ export default function LanguageToggle() {
   const options: { id: Locale; label: string }[] = [
     { id: "zh-Hant", label: t.lang.traditional },
     { id: "zh-Hans", label: t.lang.simplified },
+    { id: "ko", label: t.lang.korean },
   ];
 
   return (

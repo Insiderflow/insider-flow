@@ -17,7 +17,9 @@ function formatVolume(n: number): string {
 
 function formatLastTrade(iso: string | null, locale: string): string {
   if (!iso) return "—";
-  return new Date(iso).toLocaleDateString(locale === "zh-Hans" ? "zh-CN" : "zh-TW", {
+  const dateLocale =
+    locale === "ko" ? "ko-KR" : locale === "zh-Hans" ? "zh-CN" : "zh-TW";
+  return new Date(iso).toLocaleDateString(dateLocale, {
     year: "numeric",
     month: "short",
     day: "numeric",

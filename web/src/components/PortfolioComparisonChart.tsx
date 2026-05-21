@@ -96,6 +96,7 @@ export default function PortfolioComparisonChart({
       <div className="text-center text-red-500 p-4">
         <span className="zh-Hant">載入圖表時發生錯誤：{error}</span>
         <span className="zh-Hans hidden">载入图表时发生错误：{error}</span>
+          <span className="ko hidden">차트 로딩 오류: {error}</span>
       </div>
     );
   }
@@ -105,6 +106,7 @@ export default function PortfolioComparisonChart({
       <div className="text-center text-gray-500 p-4">
         <span className="zh-Hant">無可用的投資組合數據</span>
         <span className="zh-Hans hidden">无可用的投资组合数据</span>
+          <span className="ko hidden">사용 가능한 포트폴리오 데이터 없음</span>
       </div>
     );
   }
@@ -239,6 +241,7 @@ export default function PortfolioComparisonChart({
           <h3 className="text-lg font-semibold text-white">
             <span className="zh-Hant">投資組合表現比較</span>
             <span className="zh-Hans hidden">投资组合表现比较</span>
+          <span className="ko hidden">사용 가능한 포트폴리오 데이터 없음</span>
           </h3>
           <div className="flex items-center gap-2">
             <label className="flex items-center gap-2 text-sm text-gray-300">
@@ -250,11 +253,13 @@ export default function PortfolioComparisonChart({
               />
               <span className="zh-Hant">中國股票篩選</span>
               <span className="zh-Hans hidden">中国股票筛选</span>
+          <span className="ko hidden">포트폴리오 성과 비교</span>
             </label>
             {chinaFilterEnabled && (
               <span className="text-sm text-yellow-400 bg-yellow-900/20 px-2 py-1 rounded">
                 <span className="zh-Hant">已啟用</span>
                 <span className="zh-Hans hidden">已启用</span>
+          <span className="ko hidden">중국 주식 필터</span>
               </span>
             )}
           </div>
@@ -262,6 +267,7 @@ export default function PortfolioComparisonChart({
         <p className="text-sm text-gray-400">
           <span className="zh-Hant">比較政治家的投資組合回報率與 S&P 500 指數表現</span>
           <span className="zh-Hans hidden">比较政治家的投资组合回报率与 S&P 500 指数表现</span>
+          <span className="ko hidden">정치인 포트폴리오 수익률 vs S&P 500 비교</span>
         </p>
       </div>
       
@@ -274,6 +280,7 @@ export default function PortfolioComparisonChart({
           <h4 className="text-sm font-medium text-white mb-2">
             <span className="zh-Hant">相關交易記錄</span>
             <span className="zh-Hans hidden">相关交易记录</span>
+          <span className="ko hidden">정치인 포트폴리오 수익률 vs S&P 500 비교</span>
           </h4>
           <div className="max-h-32 overflow-y-auto">
             <div className="space-y-1">
@@ -289,6 +296,7 @@ export default function PortfolioComparisonChart({
                 <div className="text-xs text-gray-500">
                   <span className="zh-Hant">還有 {data.trades.length - 5} 筆交易...</span>
                   <span className="zh-Hans hidden">还有 {data.trades.length - 5} 笔交易...</span>
+          <span className="ko hidden">관련 거래 기록</span>
                 </div>
               )}
             </div>

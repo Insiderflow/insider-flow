@@ -73,6 +73,7 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
           <h1 className={pageTitleStyles()}>
             <span className="zh-Hant">國會議員</span>
             <span className="zh-Hans hidden">国会议员</span>
+          <span className="ko hidden">국회의원</span>
           </h1>
           <div className={`text-sm ${mutedLabelStyles()}`}>
             <span className="zh-Hant">
@@ -81,6 +82,7 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
             <span className="zh-Hans hidden">
               共 {total.toLocaleString('zh-CN')} 位 · 第 {page} / {totalPages} 页
             </span>
+          <span className="ko hidden">의회의원</span>
           </div>
         </div>
 
@@ -90,6 +92,7 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
               <>
                 <span className="zh-Hant">本頁交易筆數</span>
                 <span className="zh-Hans hidden">本页交易笔数</span>
+          <span className="ko hidden">共 {total.toLocaleString('zh-TW')} 位 · 第 {page} / {totalPages} 페이지</span>
               </>
             }
             value={tradeCount.toLocaleString('zh-TW')}
@@ -99,6 +102,7 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
               <>
                 <span className="zh-Hant">名單人數</span>
                 <span className="zh-Hans hidden">名单人数</span>
+          <span className="ko hidden">本페이지거래筆數</span>
               </>
             }
             value={polCount.toLocaleString('zh-TW')}
@@ -108,6 +112,7 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
               <>
                 <span className="zh-Hant">本頁涉及公司（次）</span>
                 <span className="zh-Hans hidden">本页涉及公司（次）</span>
+          <span className="ko hidden">이 페이지 관련 회사（건）</span>
               </>
             }
             value={issuerCount.toLocaleString('zh-TW')}
@@ -118,6 +123,7 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
           <h2 className="mb-3 text-xl font-semibold text-white">
             <span className="zh-Hant">成交金額 Top 5</span>
             <span className="zh-Hans hidden">成交金额 Top 5</span>
+          <span className="ko hidden">本페이지涉及회사（次）</span>
           </h2>
           <div className="rounded-lg border border-gray-600 bg-gray-800 p-4 shadow-md">
             <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-5">
@@ -145,6 +151,7 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
                       <div className="mt-2 text-sm text-blue-300">
                         <span className="zh-Hant">金額</span>
                         <span className="zh-Hans hidden">金额</span>
+          <span className="ko hidden">금액</span>
                         ：US$
                         {new Intl.NumberFormat('zh-TW').format(Math.round(politician.totalVolume))}
                       </div>
@@ -161,6 +168,7 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
             <span className="w-full text-gray-400 sm:w-auto">
               <span className="zh-Hant">搜尋姓名</span>
               <span className="zh-Hans hidden">搜索姓名</span>
+          <span className="ko hidden">이름 검색</span>
             </span>
             <input
               name="name"
@@ -174,6 +182,7 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
             <span className="w-full text-gray-400 sm:w-auto">
               <span className="zh-Hant">議院</span>
               <span className="zh-Hans hidden">议院</span>
+          <span className="ko hidden">원</span>
             </span>
             <select name="chamber" defaultValue={chamber} className={fieldControlStyles()} aria-label="依議院篩選">
               <option value="">全部</option>
@@ -185,6 +194,7 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
             <span className="w-full text-gray-400 sm:w-auto">
               <span className="zh-Hant">排序</span>
               <span className="zh-Hans hidden">排序</span>
+          <span className="ko hidden">정렬</span>
             </span>
             <select name="sort" defaultValue={sortKey} className={fieldControlStyles()} aria-label="排序欄位">
               <option value="trades">交易筆數</option>
@@ -197,6 +207,7 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
             <span className="w-full text-gray-400 sm:w-auto">
               <span className="zh-Hant">順序</span>
               <span className="zh-Hans hidden">顺序</span>
+          <span className="ko hidden">정렬</span>
             </span>
             <select name="order" defaultValue={order} className={fieldControlStyles()} aria-label="升冪或降冪">
               <option value="asc">升序</option>
@@ -206,6 +217,7 @@ export default async function PoliticiansPage({ searchParams }: { searchParams: 
           <button className={actionStyles('ghost')} type="submit" aria-label="套用篩選">
             <span className="zh-Hant">套用</span>
             <span className="zh-Hans hidden">应用</span>
+          <span className="ko hidden">적용</span>
           </button>
         </FilterBar>
 

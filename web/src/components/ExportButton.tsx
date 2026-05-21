@@ -73,6 +73,7 @@ export default function ExportButton({ data, filename = 'insider-trades', classN
           </svg>
           <span className="zh-Hant">匯出中...</span>
           <span className="zh-Hans hidden">导出中...</span>
+          <span className="ko hidden">내보내는 중...</span>
         </>
       ) : (
         <>
@@ -81,6 +82,7 @@ export default function ExportButton({ data, filename = 'insider-trades', classN
           </svg>
           <span className="zh-Hant">匯出 CSV</span>
           <span className="zh-Hans hidden">导出 CSV</span>
+          <span className="ko hidden">CSV 내보내기</span>
         </>
       )}
     </button>

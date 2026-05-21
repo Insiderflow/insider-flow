@@ -44,15 +44,18 @@ export default async function IssuersPage({ searchParams }: { searchParams: Prom
           <h1 className={pageTitleStyles()}>
             <span className="zh-Hant">上市公司</span>
             <span className="zh-Hans hidden">上市公司</span>
+          <span className="ko hidden">상장사</span>
           </h1>
           <div className="text-sm text-gray-300 whitespace-nowrap">
             <span className="zh-Hant">共 {total.toLocaleString('zh-TW')} 家</span>
             <span className="zh-Hans hidden">共 {total.toLocaleString('zh-CN')} 家</span>
+          <span className="ko hidden">上市회사</span>
           </div>
         </div>
         <p className={`${bodySubtextStyles()} mb-4 text-sm sm:text-base`}>
           <span className="zh-Hant">點公司名稱可進入該標的的交易明細（付費解鎖）。</span>
           <span className="zh-Hans hidden">点击公司名称可进入该标的的交易明细（付费解锁）。</span>
+          <span className="ko hidden">회사명 클릭 시 해당 종목 거래 상세（유료 잠금 해제）.</span>
         </p>
         <PaginationBar
           page={page}
@@ -67,6 +70,7 @@ export default async function IssuersPage({ searchParams }: { searchParams: Prom
             <span className="w-full text-gray-400 sm:w-auto">
               <span className="zh-Hant">搜尋</span>
               <span className="zh-Hans hidden">搜索</span>
+          <span className="ko hidden">點회사名稱可進入該標的的거래明細（付費解鎖）。</span>
             </span>
             <input
               name="q"
@@ -80,6 +84,7 @@ export default async function IssuersPage({ searchParams }: { searchParams: Prom
             <span className="w-full text-gray-400 sm:w-auto">
               <span className="zh-Hant">排序欄位</span>
               <span className="zh-Hans hidden">排序栏位</span>
+          <span className="ko hidden">정렬 항목</span>
             </span>
             <select name="sort" defaultValue={sortKey} className={fieldControlStyles()} aria-label="排序欄位">
               <option value="trades">交易筆數</option>
@@ -95,6 +100,7 @@ export default async function IssuersPage({ searchParams }: { searchParams: Prom
             <span className="w-full text-gray-400 sm:w-auto">
               <span className="zh-Hant">排序方向</span>
               <span className="zh-Hans hidden">排序方向</span>
+          <span className="ko hidden">정렬欄位</span>
             </span>
             <select name="order" defaultValue={order} className={fieldControlStyles()} aria-label="排序方向">
               <option value="desc">高 → 低</option>
@@ -104,10 +110,12 @@ export default async function IssuersPage({ searchParams }: { searchParams: Prom
           <button className={actionStyles('secondary')} type="submit" aria-label="套用篩選">
             <span className="zh-Hant">套用</span>
             <span className="zh-Hans hidden">应用</span>
+          <span className="ko hidden">정렬方向</span>
           </button>
           <Link href="/issuers" className={actionStyles('ghost')}>
             <span className="zh-Hant">清除</span>
             <span className="zh-Hans hidden">清除</span>
+          <span className="ko hidden">지우기</span>
           </Link>
         </FilterBar>
         {rows.length === 0 ? (
@@ -116,18 +124,21 @@ export default async function IssuersPage({ searchParams }: { searchParams: Prom
               <>
                 <span className="zh-Hant">沒有符合條件的公司</span>
                 <span className="zh-Hans hidden">没有符合条件的公司</span>
+          <span className="ko hidden">지우기</span>
               </>
             }
             description={
               <>
                 <span className="zh-Hant">請調整搜尋或排序，或清除篩選後再試。</span>
                 <span className="zh-Hans hidden">请调整搜索或排序，或清除筛选后再试。</span>
+          <span className="ko hidden">沒有符合條件的회사</span>
               </>
             }
             actions={
               <Link href="/issuers" className={actionStyles('primary')}>
                 <span className="zh-Hant">清除篩選</span>
                 <span className="zh-Hans hidden">清除筛选</span>
+          <span className="ko hidden">請調整搜尋或정렬，或지우기필터後再試。</span>
               </Link>
             }
           />
@@ -139,38 +150,47 @@ export default async function IssuersPage({ searchParams }: { searchParams: Prom
                   <th className="px-3 py-2 text-left whitespace-nowrap">
                     <span className="zh-Hant">公司</span>
                     <span className="zh-Hans hidden">公司</span>
+          <span className="ko hidden">지우기필터</span>
                   </th>
                   <th className="px-3 py-2 text-left whitespace-nowrap">
                     <span className="zh-Hant">代號</span>
                     <span className="zh-Hans hidden">代号</span>
+          <span className="ko hidden">회사</span>
                   </th>
                   <th className="px-3 py-2 text-left whitespace-nowrap">
                     <span className="zh-Hant">交易筆數</span>
                     <span className="zh-Hans hidden">交易笔数</span>
+          <span className="ko hidden">거래 건수</span>
                   </th>
                   <th className="px-3 py-2 text-left whitespace-nowrap">
                     <span className="zh-Hant">議員人數</span>
                     <span className="zh-Hans hidden">议员人数</span>
+          <span className="ko hidden">거래 건수</span>
                   </th>
                   <th className="px-3 py-2 text-left whitespace-nowrap">
                     <span className="zh-Hant">成交總額（USD）</span>
                     <span className="zh-Hans hidden">成交总额（USD）</span>
+          <span className="ko hidden">의원人數</span>
                   </th>
                   <th className="px-3 py-2 text-left whitespace-nowrap">
                     <span className="zh-Hant">最後交易日</span>
                     <span className="zh-Hans hidden">最后交易日</span>
+          <span className="ko hidden">최종 거래일</span>
                   </th>
                   <th className="px-3 py-2 text-left whitespace-nowrap">
                     <span className="zh-Hant">股價</span>
                     <span className="zh-Hans hidden">股价</span>
+          <span className="ko hidden">最後거래日</span>
                   </th>
                   <th className="px-3 py-2 text-left whitespace-nowrap">
                     <span className="zh-Hant">近 30 日</span>
                     <span className="zh-Hans hidden">近 30 日</span>
+          <span className="ko hidden">최근 30일</span>
                   </th>
                   <th className="px-3 py-2 text-left whitespace-nowrap">
                     <span className="zh-Hant">走勢</span>
                     <span className="zh-Hans hidden">走势</span>
+          <span className="ko hidden">추세</span>
                   </th>
                 </tr>
               </thead>
@@ -200,6 +220,7 @@ export default async function IssuersPage({ searchParams }: { searchParams: Prom
                         <>
                           <span className="zh-Hant">未揭露</span>
                           <span className="zh-Hans hidden">未披露</span>
+          <span className="ko hidden">미공시</span>
                         </>
                       )}
                     </td>
@@ -210,6 +231,7 @@ export default async function IssuersPage({ searchParams }: { searchParams: Prom
                         <>
                           <span className="zh-Hant">未揭露</span>
                           <span className="zh-Hans hidden">未披露</span>
+          <span className="ko hidden">미공시</span>
                         </>
                       )}
                     </td>
@@ -218,21 +240,25 @@ export default async function IssuersPage({ searchParams }: { searchParams: Prom
                         <>
                           <span className="zh-Hant">上升</span>
                           <span className="zh-Hans hidden">上升</span>
+          <span className="ko hidden">상승</span>
                         </>
                       ) : issuer.trend === 'down' ? (
                         <>
                           <span className="zh-Hant">下跌</span>
                           <span className="zh-Hans hidden">下跌</span>
+          <span className="ko hidden">하락</span>
                         </>
                       ) : issuer.trend === 'flat' ? (
                         <>
                           <span className="zh-Hant">持平</span>
                           <span className="zh-Hans hidden">持平</span>
+          <span className="ko hidden">보합</span>
                         </>
                       ) : (
                         <>
                           <span className="zh-Hant">未揭露</span>
                           <span className="zh-Hans hidden">未披露</span>
+          <span className="ko hidden">미공시</span>
                         </>
                       )}
                     </td>

@@ -19,7 +19,9 @@ import { isPaidUser } from "@/lib/membership";
 function formatRenewalDate(iso: string | null | undefined, locale: string) {
   if (!iso) return null;
   try {
-    return new Date(iso).toLocaleDateString(locale === "zh-Hant" ? "zh-TW" : "zh-CN", {
+    const dateLocale =
+      locale === "ko" ? "ko-KR" : locale === "zh-Hant" ? "zh-TW" : "zh-CN";
+    return new Date(iso).toLocaleDateString(dateLocale, {
       year: "numeric",
       month: "long",
       day: "numeric",

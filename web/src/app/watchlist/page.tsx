@@ -27,14 +27,17 @@ export default async function WatchlistPage() {
             >
               ← <span className="zh-Hant">返回內幕交易</span>
               <span className="zh-Hans hidden">返回内幕交易</span>
+          <span className="ko hidden">내부자 거래로 돌아가기</span>
             </Link>
             <h1 className={`${pageTitleStyles()} mb-2`}>
               <span className="zh-Hant">我的關注清單</span>
               <span className="zh-Hans hidden">我的关注清单</span>
+          <span className="ko hidden">返回內幕거래</span>
             </h1>
             <p className={bodySubtextStyles()}>
               <span className="zh-Hant">請登入以查看您的關注項目</span>
               <span className="zh-Hans hidden">请登录以查看您的关注项目</span>
+          <span className="ko hidden">我的관심清單</span>
             </p>
           </div>
           <div className={`${panelSurfaceStyles('lg')} text-center`}>
@@ -42,6 +45,7 @@ export default async function WatchlistPage() {
             <p className="text-gray-400">
               <span className="zh-Hant">尚未登入，無法載入關注清單</span>
               <span className="zh-Hans hidden">尚未登录，无法载入关注清单</span>
+          <span className="ko hidden">請로그인以보기您的관심項目</span>
             </p>
           </div>
         </div>
@@ -99,14 +103,17 @@ export default async function WatchlistPage() {
           >
             ← <span className="zh-Hant">返回內幕交易</span>
             <span className="zh-Hans hidden">返回内幕交易</span>
+          <span className="ko hidden">尚未로그인，無法載入관심清單</span>
           </Link>
             <h1 className={`${pageTitleStyles()} mb-2`}>
             <span className="zh-Hant">我的關注清單</span>
             <span className="zh-Hans hidden">我的关注清单</span>
+          <span className="ko hidden">返回內幕거래</span>
           </h1>
           <p className={bodySubtextStyles()}>
             <span className="zh-Hant">追蹤您感興趣的政治人物、公司和內部人</span>
             <span className="zh-Hans hidden">追踪您感兴趣的政治人物、公司和内部人</span>
+          <span className="ko hidden">我的관심清單</span>
           </p>
         </div>
 
@@ -116,6 +123,7 @@ export default async function WatchlistPage() {
             <h3 className={`text-lg font-semibold mb-2 ${bodySubtextStyles()}`}>
               <span className="zh-Hant">政治人物</span>
               <span className="zh-Hans hidden">政治人物</span>
+          <span className="ko hidden">추적您感興趣的정치인、회사和내부자</span>
             </h3>
             <p className="text-3xl font-bold text-blue-400">
               {groupedWatchlist.politicians.length}
@@ -125,6 +133,7 @@ export default async function WatchlistPage() {
             <h3 className={`text-lg font-semibold mb-2 ${bodySubtextStyles()}`}>
               <span className="zh-Hant">公司</span>
               <span className="zh-Hans hidden">公司</span>
+          <span className="ko hidden">정치인</span>
             </h3>
             <p className="text-3xl font-bold text-green-400">
               {groupedWatchlist.companies.length}
@@ -134,6 +143,7 @@ export default async function WatchlistPage() {
             <h3 className={`text-lg font-semibold mb-2 ${bodySubtextStyles()}`}>
               <span className="zh-Hant">內部人</span>
               <span className="zh-Hans hidden">内部人</span>
+          <span className="ko hidden">회사</span>
             </h3>
             <p className="text-3xl font-bold text-purple-400">
               {groupedWatchlist.owners.length}
@@ -143,6 +153,7 @@ export default async function WatchlistPage() {
             <h3 className={`text-lg font-semibold mb-2 ${bodySubtextStyles()}`}>
               <span className="zh-Hant">股票</span>
               <span className="zh-Hans hidden">股票</span>
+          <span className="ko hidden">내부자</span>
             </h3>
             <p className="text-3xl font-bold text-yellow-400">
               {groupedWatchlist.stocks.length}
@@ -166,6 +177,7 @@ export default async function WatchlistPage() {
               <h2 className={`${sectionTitleStyles()} mb-4`}>
                 <span className="zh-Hant">關注的政治人物</span>
                 <span className="zh-Hans hidden">关注的政治人物</span>
+          <span className="ko hidden">주식</span>
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {groupedWatchlist.politicians.map((item) => (
@@ -198,6 +210,7 @@ export default async function WatchlistPage() {
                       >
                         <span className="zh-Hant">查看詳情</span>
                         <span className="zh-Hans hidden">查看详情</span>
+          <span className="ko hidden">관심的정치인</span>
                       </Link>
                     </div>
                   </div>
@@ -212,6 +225,7 @@ export default async function WatchlistPage() {
               <h2 className={`${sectionTitleStyles()} mb-4`}>
                 <span className="zh-Hant">關注的公司</span>
                 <span className="zh-Hans hidden">关注的公司</span>
+          <span className="ko hidden">보기상세</span>
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {groupedWatchlist.companies.map((item) => (
@@ -234,6 +248,7 @@ export default async function WatchlistPage() {
                       >
                         <span className="zh-Hant">查看詳情</span>
                         <span className="zh-Hans hidden">查看详情</span>
+          <span className="ko hidden">관심的회사</span>
                       </Link>
                     </div>
                   </div>
@@ -248,6 +263,7 @@ export default async function WatchlistPage() {
               <h2 className={`${sectionTitleStyles()} mb-4`}>
                 <span className="zh-Hant">關注的內部人</span>
                 <span className="zh-Hans hidden">关注的内部人</span>
+          <span className="ko hidden">보기상세</span>
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {groupedWatchlist.owners.map((item) => (
@@ -270,6 +286,7 @@ export default async function WatchlistPage() {
                       >
                         <span className="zh-Hant">查看詳情</span>
                         <span className="zh-Hans hidden">查看详情</span>
+          <span className="ko hidden">관심的내부자</span>
                       </Link>
                     </div>
                   </div>
@@ -284,6 +301,7 @@ export default async function WatchlistPage() {
               <h2 className={`${sectionTitleStyles()} mb-4`}>
                 <span className="zh-Hant">關注的股票</span>
                 <span className="zh-Hans hidden">关注的股票</span>
+          <span className="ko hidden">보기상세</span>
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {groupedWatchlist.stocks.map((item) => (
@@ -294,6 +312,7 @@ export default async function WatchlistPage() {
                         <p className={`${bodySubtextStyles()} text-sm`}>
                           <span className="zh-Hant">股票代碼</span>
                           <span className="zh-Hans hidden">股票代码</span>
+          <span className="ko hidden">관심的주식</span>
                         </p>
                       </div>
                       <WatchlistButton 
@@ -309,6 +328,7 @@ export default async function WatchlistPage() {
                       >
                         <span className="zh-Hant">查看交易</span>
                         <span className="zh-Hans hidden">查看交易</span>
+          <span className="ko hidden">주식代碼</span>
                       </Link>
                     </div>
                   </div>
@@ -329,6 +349,7 @@ export default async function WatchlistPage() {
                 >
                   <span className="zh-Hant">瀏覽內幕交易</span>
                   <span className="zh-Hans hidden">浏览内幕交易</span>
+          <span className="ko hidden">보기거래</span>
                 </Link>
               }
             />

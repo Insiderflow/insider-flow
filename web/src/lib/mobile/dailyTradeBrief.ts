@@ -7,6 +7,7 @@ import {
 } from '@/lib/openInsiderTransaction';
 import type { MobilePeriod } from '@/lib/mobile/dashboardBuilder';
 import {
+  addEtCalendarDays,
   etCalendarYmd,
   etDayUtcRange,
   politicianPublishedWhere,
@@ -17,7 +18,7 @@ const XAI_TRADE_LINE_CAP = 120;
 
 type BriefMode = 'politician' | 'insider';
 
-export type BriefLocale = 'zh-Hant' | 'zh-Hans' | 'en';
+export type BriefLocale = 'zh-Hant' | 'zh-Hans' | 'ko' | 'en';
 
 export type DailyTradeBrief = {
   headline: string;
@@ -175,9 +176,10 @@ function formatTickerCluster(
       const amtPart = amt > 0 ? ` ${formatUsd(amt)}` : '';
       if (locale === 'zh-Hans') return `${t.ticker}（${count} 笔${amtPart}）`;
       if (locale === 'zh-Hant') return `${t.ticker}（${count} 筆${amtPart}）`;
+      if (locale === 'ko') return `${t.ticker}（${count}건${amtPart}）`;
       return `${t.ticker} (${count}${amtPart ? `, ${amtPart.trim()}` : ''})`;
     })
-    .join(locale === 'en' ? ', ' : '、');
+    .join(locale === 'en' ? ', ' : locale === 'ko' ? ', ' : '、');
 }
 
 function computePoliticianDayStats(trades: PoliticianBriefTrade[]): DayBriefStats {
@@ -299,6 +301,7 @@ function notionalPhrase(locale: BriefLocale, stats: DayBriefStats): string {
   if (!hasBuy && !hasSell) {
     if (locale === 'zh-Hans') return '多数申报未披露金额区间';
     if (locale === 'zh-Hant') return '多數申報未披露金額區間';
+    if (locale === 'ko') return '대부분의 신고에 금액 구간이 공시되지 않음';
     return 'most filings omit dollar ranges';
   }
   if (locale === 'zh-Hans') {
@@ -306,6 +309,9 @@ function notionalPhrase(locale: BriefLocale, stats: DayBriefStats): string {
   }
   if (locale === 'zh-Hant') {
     return `估計買入規模約 ${hasBuy ? formatUsd(stats.buyNotional) : '—'}、賣出約 ${hasSell ? formatUsd(stats.sellNotional) : '—'}`;
+  }
+  if (locale === 'ko') {
+    return `추정 매수 규모 약 ${hasBuy ? formatUsd(stats.buyNotional) : '—'}, 매도 약 ${hasSell ? formatUsd(stats.sellNotional) : '—'}`;
   }
   return `estimated buy notional ${hasBuy ? formatUsd(stats.buyNotional) : 'n/a'}, sell ${hasSell ? formatUsd(stats.sellNotional) : 'n/a'}`;
 }
@@ -318,10 +324,12 @@ function formatPartyLines(locale: BriefLocale, lines: string[]): string {
     const [, party, buy, sell] = m;
     if (locale === 'zh-Hans') return `${party} 买 ${buy}／卖 ${sell}`;
     if (locale === 'zh-Hant') return `${party} 買 ${buy}／賣 ${sell}`;
+    if (locale === 'ko') return `${party} 매수 ${buy}／매도 ${sell}`;
     return `${party}: ${buy} buys, ${sell} sells`;
   });
   if (locale === 'zh-Hans') return `党派分布：${parsed.join('；')}`;
   if (locale === 'zh-Hant') return `黨派分布：${parsed.join('；')}`;
+  if (locale === 'ko') return `당파별 분포: ${parsed.join('; ')}`;
   return `By party: ${parsed.join('; ')}`;
 }
 
@@ -333,10 +341,12 @@ function formatRoleLines(locale: BriefLocale, lines: string[]): string {
     const [, role, buy, sell] = m;
     if (locale === 'zh-Hans') return `${role} 买 ${buy}／卖 ${sell}`;
     if (locale === 'zh-Hant') return `${role} 買 ${buy}／賣 ${sell}`;
+    if (locale === 'ko') return `${role} 매수 ${buy}／매도 ${sell}`;
     return `${role}: ${buy} buys, ${sell} sells`;
   });
   if (locale === 'zh-Hans') return `职务分布：${parsed.join('；')}`;
   if (locale === 'zh-Hant') return `職務分布：${parsed.join('；')}`;
+  if (locale === 'ko') return `직책별 분포: ${parsed.join('; ')}`;
   return `By role: ${parsed.join('; ')}`;
 }
 
@@ -416,7 +426,7 @@ export async function warmDailyBriefs(options?: {
   force?: boolean;
   locales?: BriefLocale[];
 }): Promise<WarmDailyBriefsResult> {
-  const locales = options?.locales ?? ['zh-Hant', 'zh-Hans', 'en'];
+  const locales = options?.locales ?? ['zh-Hant', 'zh-Hans', 'ko', 'en'];
   const { etDate, cleared } = options?.force
     ? await invalidateDailyBriefCache()
     : { etDate: etCalendarYmd(), cleared: [] as string[] };
@@ -589,6 +599,12 @@ function rulesPoliticianNarrative(
         narrative: `截至美東時間，${dateLabel} 尚無新的 STOCK 申報入庫。通常會在披露日後幾小時至數天內陸續出現，請稍後再查看。`,
       };
     }
+    if (locale === 'ko') {
+      return {
+        headline: `${dateLabel} 의회 공시`,
+        narrative: `미 동부 시간 기준 ${dateLabel}에 새로운 STOCK Act 신고가 아직 없습니다. 공시는 거래일 이후 수시간~수일 내에 순차적으로 반영됩니다.`,
+      };
+    }
     return {
       headline: `Congressional disclosures · ${focusDateEt}`,
       narrative: `No new STOCK Act filings have been recorded for ${focusDateEt} (US Eastern) yet. Disclosures often appear hours or days after the trade date.`,
@@ -604,7 +620,9 @@ function rulesPoliticianNarrative(
         ? `单笔规模前列：${stats.largestLines.join('；')}`
         : locale === 'zh-Hant'
           ? `單筆規模前列：${stats.largestLines.join('；')}`
-          : `Largest disclosed: ${stats.largestLines.join('; ')}`
+          : locale === 'ko'
+            ? `대규모 거래: ${stats.largestLines.join('; ')}`
+            : `Largest disclosed: ${stats.largestLines.join('; ')}`
       : '';
 
   if (locale === 'zh-Hans') {
@@ -628,6 +646,20 @@ function rulesPoliticianNarrative(
         `美東 ${dateLabel} 全日共 ${stats.total} 筆議員 STOCK 申報：買入 ${buys} 筆、賣出 ${sells} 筆，${notionalPhrase(locale, stats)}，涉及 ${stats.uniqueTickers} 檔標的、${stats.uniqueActors} 位議員。`,
         buyCluster ? `買入集中在 ${buyCluster}。` : '',
         sellCluster ? `賣出集中在 ${sellCluster}。` : '',
+        party,
+        largest,
+      ]
+        .filter(Boolean)
+        .join(''),
+    };
+  }
+  if (locale === 'ko') {
+    return {
+      headline: `${dateLabel} · ${stats.total}건 신고`,
+      narrative: [
+        `미 동부 ${dateLabel} 하루 동안 의원 STOCK 신고 ${stats.total}건: 매수 ${buys}건, 매도 ${sells}건, ${notionalPhrase(locale, stats)}, ${stats.uniqueTickers}개 종목, ${stats.uniqueActors}명 의원.`,
+        buyCluster ? `매수 집중: ${buyCluster}.` : '',
+        sellCluster ? `매도 집중: ${sellCluster}.` : '',
         party,
         largest,
       ]
@@ -671,6 +703,12 @@ function rulesInsiderNarrative(
         narrative: `截至美東時間，${dateLabel} 尚無新的 Form 4 內部人申報入庫。申報通常在交易後 2 個工作日內陸續出現，請稍後再查看。`,
       };
     }
+    if (locale === 'ko') {
+      return {
+        headline: `${dateLabel} Form 4`,
+        narrative: `미 동부 시간 기준 ${dateLabel}에 새로운 Form 4 내부자 거래 신고가 아직 없습니다. 신고는 거래 후 영업일 2일 이내에 순차 반영됩니다.`,
+      };
+    }
     return {
       headline: `Form 4 filings · ${focusDateEt}`,
       narrative: `No new SEC Form 4 insider filings have been recorded for ${focusDateEt} (US Eastern) yet. Filings typically land within two business days after the trade.`,
@@ -686,7 +724,9 @@ function rulesInsiderNarrative(
         ? `单笔规模前列：${stats.largestLines.join('；')}`
         : locale === 'zh-Hant'
           ? `單筆規模前列：${stats.largestLines.join('；')}`
-          : `Largest disclosed: ${stats.largestLines.join('; ')}`
+          : locale === 'ko'
+            ? `대규모 거래: ${stats.largestLines.join('; ')}`
+            : `Largest disclosed: ${stats.largestLines.join('; ')}`
       : '';
 
   if (locale === 'zh-Hans') {
@@ -710,6 +750,20 @@ function rulesInsiderNarrative(
         `美東 ${dateLabel} 全日共 ${stats.total} 筆 Form 4 內部人申報：買入 ${buys} 筆、賣出 ${sells} 筆，${notionalPhrase(locale, stats)}，涉及 ${stats.uniqueTickers} 檔標的、${stats.uniqueActors} 位內部人。`,
         buyCluster ? `買入集中在 ${buyCluster}。` : '',
         sellCluster ? `賣出集中在 ${sellCluster}。` : '',
+        roles,
+        largest,
+      ]
+        .filter(Boolean)
+        .join(''),
+    };
+  }
+  if (locale === 'ko') {
+    return {
+      headline: `${dateLabel} · ${stats.total}건 Form 4`,
+      narrative: [
+        `미 동부 ${dateLabel} 하루 동안 Form 4 내부자 신고 ${stats.total}건: 매수 ${buys}건, 매도 ${sells}건, ${notionalPhrase(locale, stats)}, ${stats.uniqueTickers}개 종목, ${stats.uniqueActors}명 내부자.`,
+        buyCluster ? `매수 집중: ${buyCluster}.` : '',
+        sellCluster ? `매도 집중: ${sellCluster}.` : '',
         roles,
         largest,
       ]
@@ -756,7 +810,13 @@ async function xaiPoliticianNarrative(
 
   const model = process.env.XAI_MODEL?.trim() || 'grok-4.3';
   const lang =
-    locale === 'zh-Hans' ? 'Simplified Chinese' : locale === 'zh-Hant' ? 'Traditional Chinese' : 'English';
+    locale === 'zh-Hans'
+      ? 'Simplified Chinese'
+      : locale === 'zh-Hant'
+        ? 'Traditional Chinese'
+        : locale === 'ko'
+          ? 'Korean'
+          : 'English';
 
   const tradeLines = trades.slice(0, XAI_TRADE_LINE_CAP).map(
     (t, i) =>
@@ -824,7 +884,13 @@ async function xaiInsiderNarrative(
 
   const model = process.env.XAI_MODEL?.trim() || 'grok-4.3';
   const lang =
-    locale === 'zh-Hans' ? 'Simplified Chinese' : locale === 'zh-Hant' ? 'Traditional Chinese' : 'English';
+    locale === 'zh-Hans'
+      ? 'Simplified Chinese'
+      : locale === 'zh-Hant'
+        ? 'Traditional Chinese'
+        : locale === 'ko'
+          ? 'Korean'
+          : 'English';
 
   const tradeLines = trades.slice(0, XAI_TRADE_LINE_CAP).map(
     (t, i) =>
@@ -889,6 +955,25 @@ type BriefLoadResult<T> = {
   stats: DayBriefStats;
 };
 
+/** ET calendar day for the digest — rolls at US Eastern midnight, but sticks to the prior day until today has filings. */
+async function resolveDigestFocusDateEt<T>(
+  load: (focusDateEt: string) => Promise<BriefLoadResult<T>>,
+): Promise<{ focusDateEt: string; loadResult: BriefLoadResult<T> }> {
+  const todayEt = etCalendarYmd();
+  const todayResult = await load(todayEt);
+  if (todayResult.total > 0) {
+    return { focusDateEt: todayEt, loadResult: todayResult };
+  }
+
+  const yesterdayEt = addEtCalendarDays(todayEt, -1);
+  const yesterdayResult = await load(yesterdayEt);
+  if (yesterdayResult.total > 0) {
+    return { focusDateEt: yesterdayEt, loadResult: yesterdayResult };
+  }
+
+  return { focusDateEt: todayEt, loadResult: todayResult };
+}
+
 async function buildDailyTradeBrief<T extends PoliticianBriefTrade | InsiderBriefTrade>(
   mode: BriefMode,
   locale: BriefLocale,
@@ -906,12 +991,12 @@ async function buildDailyTradeBrief<T extends PoliticianBriefTrade | InsiderBrie
     stats: DayBriefStats,
   ) => Promise<string | null>,
 ): Promise<DailyTradeBrief> {
-  const focusDateEt = etCalendarYmd();
   const maxCalls = Math.max(1, Number(process.env.DAILY_BRIEF_MAX_CALLS_PER_DAY || 2));
-
-  const { briefTrades, buys, sells, total, stats } = await load(focusDateEt);
-
   const forceRefresh = process.env.DAILY_BRIEF_FORCE === '1';
+
+  const { focusDateEt, loadResult } = await resolveDigestFocusDateEt(load);
+  const { briefTrades, buys, sells, total, stats } = loadResult;
+
   const cached = forceRefresh ? null : await readCachedBrief(mode, focusDateEt);
   if (cached && cached.tradeCount === total) return cached;
 
