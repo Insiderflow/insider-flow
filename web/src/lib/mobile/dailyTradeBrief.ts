@@ -28,6 +28,7 @@ export type DailyTradeBrief = {
   generatedAt: string;
   source: 'xai' | 'rules';
   tradeCount: number;
+  locale?: BriefLocale;
 };
 
 export type DailyBriefOptions = {
@@ -471,23 +472,27 @@ export async function warmDailyBriefs(options?: {
   return { etDate, cleared, briefs };
 }
 
+function briefMatchesLocale(brief: DailyTradeBrief, locale: BriefLocale): boolean {
+  if (brief.locale && brief.locale !== locale) return false;
+  // Reject legacy/shared caches that lack locale but contain CJK when Korean was requested.
+  if (locale === 'ko' && !brief.locale && /[\u4e00-\u9fff]/.test(brief.narrative)) {
+    return false;
+  }
+  return true;
+}
+
 async function readCachedBrief(
   mode: BriefMode,
   locale: BriefLocale,
   etDate: string,
 ): Promise<DailyTradeBrief | null> {
-  for (const file of [
-    briefCachePath(mode, locale, etDate),
-    path.join(CACHE_DIR, `daily-brief-${mode}-${etDate}.json`),
-  ]) {
-    try {
-      const raw = await fs.readFile(file, 'utf8');
-      return JSON.parse(raw) as DailyTradeBrief;
-    } catch {
-      /* try next path */
-    }
+  try {
+    const raw = await fs.readFile(briefCachePath(mode, locale, etDate), 'utf8');
+    const brief = JSON.parse(raw) as DailyTradeBrief;
+    return briefMatchesLocale(brief, locale) ? brief : null;
+  } catch {
+    return null;
   }
-  return null;
 }
 
 async function writeCachedBrief(
@@ -1051,6 +1056,7 @@ async function buildDailyTradeBrief<T extends PoliticianBriefTrade | InsiderBrie
     generatedAt: new Date().toISOString(),
     source,
     tradeCount: total,
+    locale,
   };
 
   await writeCachedBrief(mode, locale, focusDateEt, brief);
