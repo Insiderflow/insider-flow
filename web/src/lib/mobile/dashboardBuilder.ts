@@ -141,29 +141,34 @@ async function countPoliticianTrades(
 }
 
 async function countInsiderSides(since: Date, prev: { start: Date; end: Date }) {
-  const [current, previous] = await Promise.all([
-    prisma.openInsiderTransaction.findMany({
-      where: { transactionDate: { gte: since } },
-      select: { transactionType: true },
-    }),
-    prisma.openInsiderTransaction.findMany({
-      where: { transactionDate: { gte: prev.start, lt: prev.end } },
-      select: { transactionType: true },
-    }),
-  ]);
-  const tally = (list: { transactionType: string }[]) => {
+  const tally = (groups: { transactionType: string; _count: { _all: number } }[]) => {
     let buys = 0;
     let sells = 0;
     let options = 0;
-    for (const r of list) {
-      const t = r.transactionType.toLowerCase();
-      if (t.includes('option')) options += 1;
-      if (isOpenInsiderSell(r.transactionType)) sells += 1;
-      else if (isOpenInsiderBuy(r.transactionType)) buys += 1;
+    for (const group of groups) {
+      const count = group._count._all;
+      const t = group.transactionType.toLowerCase();
+      if (t.includes('option')) options += count;
+      if (isOpenInsiderSell(group.transactionType)) sells += count;
+      else if (isOpenInsiderBuy(group.transactionType)) buys += count;
     }
     return { buys, sells, options };
   };
-  return { current: tally(current), previous: tally(previous) };
+
+  const [currentGroups, previousGroups] = await Promise.all([
+    prisma.openInsiderTransaction.groupBy({
+      by: ['transactionType'],
+      where: { transactionDate: { gte: since } },
+      _count: { _all: true },
+    }),
+    prisma.openInsiderTransaction.groupBy({
+      by: ['transactionType'],
+      where: { transactionDate: { gte: prev.start, lt: prev.end } },
+      _count: { _all: true },
+    }),
+  ]);
+
+  return { current: tally(currentGroups), previous: tally(previousGroups) };
 }
 
 type TradeRow = Awaited<
@@ -246,6 +251,8 @@ export async function buildPoliticianMobileDashboard(
   const todayLookback = new Date();
   todayLookback.setDate(todayLookback.getDate() - 2);
 
+  const briefOptions = { allowLlm: false as const };
+
   const [
     rows,
     recentForToday,
@@ -258,6 +265,8 @@ export async function buildPoliticianMobileDashboard(
     prevOptions,
     prevProposed,
     clusterKeys,
+    latestDisclosure,
+    dailyBrief,
   ] = await Promise.all([
     prisma.trade.findMany({
       where: periodWhere,
@@ -280,6 +289,10 @@ export async function buildPoliticianMobileDashboard(
     countPoliticianTrades(prevWhere, 'option'),
     countPoliticianTrades(prevWhere, 'proposed'),
     fetchCongressClusterKeys(prisma, politicianTradeWhere()),
+    prisma.trade.aggregate({
+      _max: { published_at: true },
+    }),
+    getPoliticianDailyTradeBrief(locale, period, briefOptions),
   ]);
 
   const todaysRows = recentForToday.filter((r) => isEtCalendarDay(disclosureDate(r)));
@@ -359,13 +372,9 @@ export async function buildPoliticianMobileDashboard(
     (rows[0] ? disclosureDate(rows[0]).toISOString().slice(0, 10) : null) ||
     new Date().toISOString().slice(0, 10);
 
-  const latestDisclosure = await prisma.trade.aggregate({
-    _max: { published_at: true },
-  });
   const latestDisclosureAt =
     latestDisclosure._max.published_at?.toISOString() ?? null;
   const generatedAt = new Date().toISOString();
-  const dailyBrief = await getPoliticianDailyTradeBrief(locale, period);
 
   return {
     meta: {
@@ -444,6 +453,8 @@ export async function buildInsiderMobileDashboard(
   const since = periodStart(period);
   const prev = previousPeriodRange(period);
 
+  const briefOptions = { allowLlm: false as const };
+
   const [rows, insiderCounts, dailyBrief] = await Promise.all([
     prisma.openInsiderTransaction.findMany({
       where: { transactionDate: { gte: since } },
@@ -452,7 +463,7 @@ export async function buildInsiderMobileDashboard(
       take: 300,
     }),
     countInsiderSides(since, prev),
-    getInsiderDailyTradeBrief(locale, period),
+    getInsiderDailyTradeBrief(locale, period, briefOptions),
   ]);
 
   const { buys: buysCount, sells: sellsCount, options: optionsCount } =

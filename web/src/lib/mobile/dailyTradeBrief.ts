@@ -30,6 +30,11 @@ export type DailyTradeBrief = {
   tradeCount: number;
 };
 
+export type DailyBriefOptions = {
+  /** Only cron/warm jobs should call xAI; dashboard reads cache or rules. */
+  allowLlm?: boolean;
+};
+
 const CACHE_DIR = path.join(process.cwd(), '.cache');
 const LOG_FILE = path.join(process.cwd(), '.artifacts', 'daily-brief-log.json');
 
@@ -386,16 +391,30 @@ function briefLogCount(log: BriefLog | null, etDate: string, mode: BriefMode): n
   return mode === 'politician' ? log.politician : log.insider;
 }
 
+function briefCachePath(mode: BriefMode, locale: BriefLocale, etDate: string): string {
+  return path.join(CACHE_DIR, `daily-brief-${mode}-${locale}-${etDate}.json`);
+}
+
 export async function invalidateDailyBriefCache(
   etDate?: string,
 ): Promise<{ etDate: string; cleared: string[] }> {
   const date = etDate ?? etCalendarYmd();
   const cleared: string[] = [];
+  const locales: BriefLocale[] = ['zh-Hant', 'zh-Hans', 'ko', 'en'];
   for (const mode of ['politician', 'insider'] as BriefMode[]) {
-    const file = path.join(CACHE_DIR, `daily-brief-${mode}-${date}.json`);
+    for (const locale of locales) {
+      const file = briefCachePath(mode, locale, date);
+      try {
+        await fs.unlink(file);
+        cleared.push(file);
+      } catch {
+        /* missing */
+      }
+    }
+    const legacy = path.join(CACHE_DIR, `daily-brief-${mode}-${date}.json`);
     try {
-      await fs.unlink(file);
-      cleared.push(file);
+      await fs.unlink(legacy);
+      cleared.push(legacy);
     } catch {
       /* missing */
     }
@@ -437,7 +456,7 @@ export async function warmDailyBriefs(options?: {
       ['politician', getPoliticianDailyTradeBrief] as const,
       ['insider', getInsiderDailyTradeBrief] as const,
     ]) {
-      const brief = await loader(locale, '7D');
+      const brief = await loader(locale, '7D', { allowLlm: true });
       briefs.push({
         mode,
         locale,
@@ -454,27 +473,32 @@ export async function warmDailyBriefs(options?: {
 
 async function readCachedBrief(
   mode: BriefMode,
+  locale: BriefLocale,
   etDate: string,
 ): Promise<DailyTradeBrief | null> {
-  try {
-    const raw = await fs.readFile(
-      path.join(CACHE_DIR, `daily-brief-${mode}-${etDate}.json`),
-      'utf8',
-    );
-    return JSON.parse(raw) as DailyTradeBrief;
-  } catch {
-    return null;
+  for (const file of [
+    briefCachePath(mode, locale, etDate),
+    path.join(CACHE_DIR, `daily-brief-${mode}-${etDate}.json`),
+  ]) {
+    try {
+      const raw = await fs.readFile(file, 'utf8');
+      return JSON.parse(raw) as DailyTradeBrief;
+    } catch {
+      /* try next path */
+    }
   }
+  return null;
 }
 
 async function writeCachedBrief(
   mode: BriefMode,
+  locale: BriefLocale,
   etDate: string,
   brief: DailyTradeBrief,
 ): Promise<void> {
   await fs.mkdir(CACHE_DIR, { recursive: true });
   await fs.writeFile(
-    path.join(CACHE_DIR, `daily-brief-${mode}-${etDate}.json`),
+    briefCachePath(mode, locale, etDate),
     JSON.stringify(brief, null, 2),
     'utf8',
   );
@@ -990,19 +1014,21 @@ async function buildDailyTradeBrief<T extends PoliticianBriefTrade | InsiderBrie
     trades: T[],
     stats: DayBriefStats,
   ) => Promise<string | null>,
+  options?: DailyBriefOptions,
 ): Promise<DailyTradeBrief> {
   const maxCalls = Math.max(1, Number(process.env.DAILY_BRIEF_MAX_CALLS_PER_DAY || 2));
   const forceRefresh = process.env.DAILY_BRIEF_FORCE === '1';
+  const allowLlm = options?.allowLlm === true;
 
   const { focusDateEt, loadResult } = await resolveDigestFocusDateEt(load);
   const { briefTrades, buys, sells, total, stats } = loadResult;
 
-  const cached = forceRefresh ? null : await readCachedBrief(mode, focusDateEt);
+  const cached = forceRefresh ? null : await readCachedBrief(mode, locale, focusDateEt);
   if (cached && cached.tradeCount === total) return cached;
 
   const log = await readBriefLog();
   const callsUsed = briefLogCount(log, focusDateEt, mode);
-  const canCallLlm = callsUsed < maxCalls;
+  const canCallLlm = allowLlm && callsUsed < maxCalls;
   const rulesOut = rules(locale, focusDateEt, briefTrades, stats);
 
   let narrative = rulesOut.narrative;
@@ -1027,13 +1053,14 @@ async function buildDailyTradeBrief<T extends PoliticianBriefTrade | InsiderBrie
     tradeCount: total,
   };
 
-  await writeCachedBrief(mode, focusDateEt, brief);
+  await writeCachedBrief(mode, locale, focusDateEt, brief);
   return brief;
 }
 
 export async function getPoliticianDailyTradeBrief(
   locale: BriefLocale,
   _period: MobilePeriod,
+  options?: DailyBriefOptions,
 ): Promise<DailyTradeBrief> {
   return buildDailyTradeBrief(
     'politician',
@@ -1041,12 +1068,14 @@ export async function getPoliticianDailyTradeBrief(
     loadPoliticianTradesForBrief,
     rulesPoliticianNarrative,
     xaiPoliticianNarrative,
+    options,
   );
 }
 
 export async function getInsiderDailyTradeBrief(
   locale: BriefLocale,
   _period: MobilePeriod,
+  options?: DailyBriefOptions,
 ): Promise<DailyTradeBrief> {
   return buildDailyTradeBrief(
     'insider',
@@ -1054,5 +1083,6 @@ export async function getInsiderDailyTradeBrief(
     loadInsiderTradesForBrief,
     rulesInsiderNarrative,
     xaiInsiderNarrative,
+    options,
   );
 }
