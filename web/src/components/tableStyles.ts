@@ -1,5 +1,12 @@
-export function tableWrapperStyles() {
+export function tableWrapperStyles(variant: 'default' | 'wide' = 'default') {
+  if (variant === 'wide') {
+    return 'overflow-x-auto xl:overflow-x-visible rounded border border-gray-600 bg-gray-800 shadow-md';
+  }
   return 'overflow-x-auto rounded border border-gray-600 bg-gray-800 shadow-md';
+}
+
+export function tableCellCompactStyles(extra?: string) {
+  return `px-2 py-2.5 lg:px-3 lg:py-3 whitespace-nowrap text-sm ${extra ?? 'text-gray-300'}`;
 }
 
 export function tableHeaderStyles() {
