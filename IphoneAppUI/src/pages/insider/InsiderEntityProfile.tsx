@@ -3,13 +3,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, ChevronRight, TrendingUp } from "lucide-react";
 import { cn, formatCurrency } from "@/lib/utils";
 import { fetchPersonProfileFromApi } from "@/api/services/profiles";
-import {
-  formatInsiderMoney,
-  formatInsiderShares,
-} from "@/data/insiderEntities";
+import { formatInsiderShares } from "@/data/insiderEntities";
 import type { InsiderEntityProfile as InsiderEntityProfileType } from "@/data/insiderEntities";
 import PoliticianAvatar from "@/components/politician/PoliticianAvatar";
 import PoliticianProfileChartsSection from "@/components/politician/PoliticianProfileCharts";
+import InsiderActivityPanel from "@/components/insider/InsiderActivityPanel";
 import WatchlistButton from "@/components/watchlist/WatchlistButton";
 import { localizePoliticianSeatTitle } from "@/lib/politicianSectorLabel";
 import { getPoliticianImagePath } from "@/lib/politicianImageUrl";
@@ -223,28 +221,7 @@ export default function InsiderEntityProfile() {
                 </span>
               </div>
               <p className="mb-3 text-[11px] text-muted">{t.insiderProfile.liveActivitySub}</p>
-              <div className="grid grid-cols-2 gap-2">
-                <StatCard
-                  label={t.insiderProfile.totalBuys}
-                  value={formatInsiderMoney(a.totalBuys)}
-                  sub={`${a.buyTxCount} ${t.insiderProfile.transactions}`}
-                />
-                <StatCard
-                  label={t.insiderProfile.totalSells}
-                  value={formatInsiderMoney(a.totalSells)}
-                  sub={`${a.sellTxCount} ${t.insiderProfile.transactions}`}
-                />
-                <StatCard
-                  label={t.insiderProfile.totalOptions}
-                  value={formatInsiderMoney(a.totalOptions)}
-                  sub={`${a.optionTxCount} ${t.insiderProfile.transactions}`}
-                />
-                <StatCard
-                  label={t.insiderProfile.totalProposedSale}
-                  value={formatInsiderMoney(a.totalProposedSale)}
-                  sub={`${a.proposedTxCount} ${t.insiderProfile.transactions}`}
-                />
-              </div>
+              <InsiderActivityPanel activity={a} />
             </section>
             )}
           </div>
@@ -311,20 +288,3 @@ export default function InsiderEntityProfile() {
   );
 }
 
-function StatCard({
-  label,
-  value,
-  sub,
-}: {
-  label: string;
-  value: string;
-  sub: string;
-}) {
-  return (
-    <div className="glass-card p-3">
-      <p className="text-[10px] text-muted">{label}</p>
-      <p className="mt-1 text-lg font-bold tabular-nums">{value}</p>
-      <p className="text-[10px] text-muted-foreground">{sub}</p>
-    </div>
-  );
-}

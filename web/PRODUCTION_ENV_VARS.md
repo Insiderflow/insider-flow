@@ -14,6 +14,11 @@ DATABASE_URL_UNPOOLED="postgresql://USER:PASSWORD@YOUR-NEON-DIRECT-HOST/neondb?s
 SESSION_SECRET="your-32-character-secret-key-here"
 INTERNAL_JOBS_SECRET="your_internal_jobs_secret_here"
 
+# Python ML snapshot ingest (GitHub Action ml-signals-daily.yml)
+ML_SIGNALS_POST_URL="https://www.insiderflow.asia/api/internal/ml-signals"
+# Uses INTERNAL_JOBS_SECRET (x-internal-job-token header)
+# Run migration on Neon: npx prisma migrate deploy (includes ml_signal_snapshots)
+
 # Email Service
 GRIDSEND_API_KEY="gs_your_api_key_here"
 EMAIL_FROM="team@insiderflow.asia"
@@ -82,6 +87,22 @@ cd web && export DATABASE_URL="${DATABASE_URL_UNPOOLED:-$DATABASE_URL}" && npx p
 If Render **Root Directory** is already `web`, drop the `cd web &&` prefix from whichever command you use.
 
 Runtime traffic still uses pooled `DATABASE_URL`; migrate temporarily uses `DATABASE_URL_UNPOOLED` when set.
+
+## Security (required after May 2026 audit)
+
+**Rotate `INTERNAL_JOBS_SECRET` on Render and in every GitHub Actions secret** that calls internal APIs. A previous value was committed in `.env.template` and matched production; treat it as compromised.
+
+Generate a new value:
+
+```bash
+openssl rand -base64 48
+```
+
+Update Render → **Environment** → `INTERNAL_JOBS_SECRET`, then GitHub → **Settings → Secrets** (`INTERNAL_JOBS_SECRET`, release/smoke workflows). Redeploy the web service.
+
+- Use server-only `ADMIN_TOKEN` (never `NEXT_PUBLIC_ADMIN_TOKEN`).
+- Dev-only routes (`/api/debug-email`, `/api/setup-db`, `/api/test-notifications`) return **404 in production**; use Render shell + `prisma migrate deploy` for DB changes.
+- Internal/cron routes require `Authorization: Bearer $INTERNAL_JOBS_SECRET` or `x-internal-job-token`.
 
 ## Important Notes
 

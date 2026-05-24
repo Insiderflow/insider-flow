@@ -39,7 +39,7 @@ export function buildInsiderDashboard(locale: Locale): DashboardPayload {
       { id: "buys", label: m.kpi.buys, value: 1243, changePct: 8.6, spike: genSpike(11, 14, "up") },
       { id: "sells", label: m.kpi.sells, value: 1589, changePct: 5.1, spike: genSpike(12, 14, "down") },
       { id: "options", label: m.kpi.options, value: 312, changePct: -2.4, spike: genSpike(13, 14, "mixed") },
-      { id: "pp_sale", label: m.kpi.ppSale, value: 86, changePct: 11.2, spike: genSpike(14, 14, "up") },
+      { id: "plan_10b5", label: m.kpi.plan10b5, value: 86, changePct: 11.2, spike: genSpike(14, 14, "up") },
     ],
     clusterBuys: BASE.clusterBuys.map((c: (typeof BASE.clusterBuys)[number]) => {
       const text = mi.clusters[c.id]!;

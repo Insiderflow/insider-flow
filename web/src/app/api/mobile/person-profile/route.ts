@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { isOpenInsiderBuy, isOpenInsiderSell } from '@/lib/openInsiderTransaction';
+import {
+  aggregateOpenInsiderActivity,
+  openInsiderMarketSide,
+} from '@/lib/openInsiderActivity';
+import { openInsiderTradeValue } from '@/lib/openInsiderTransaction';
 import { politicianTradeSeatLabel } from '@/lib/mobile/politicianSeatLabel';
 import { getPoliticianImageSrc } from '@/lib/politicianImageMapping';
 import { getPoliticianDetailData } from '@/lib/repos/politiciansRepo';
@@ -34,7 +38,7 @@ export async function GET(req: NextRequest) {
       });
       if (!rows.length) return NextResponse.json({ error: 'Not found' }, { status: 404 });
       const owner = rows[0].owner!;
-      const buys = rows.filter((r) => isOpenInsiderBuy(r.transactionType));
+      const activity = aggregateOpenInsiderActivity(rows);
       return NextResponse.json({
         id: `person-${ownerId}`,
         entityType: 'person',
@@ -45,28 +49,20 @@ export async function GET(req: NextRequest) {
         logoLabel: owner.name.slice(0, 2).toUpperCase(),
         logoColor: '#6366F1',
         allTradesCount: rows.length,
-        activity: {
-          totalBuys: buys.reduce((s, r) => s + Number(r.valueNumeric || 0), 0),
-          buyTxCount: buys.length,
-          totalSells: 0,
-          sellTxCount: 0,
-          totalOptions: 0,
-          optionTxCount: 0,
-          totalProposedSale: 0,
-          proposedTxCount: 0,
-          avgBuy: 0,
-          avgSell: 0,
-        },
+        activity,
         eventStudies: [],
-        recentTrades: rows.slice(0, 12).map((r) => ({
-          id: r.id,
-          ticker: r.company?.ticker || '',
-          side: isOpenInsiderSell(r.transactionType) ? 'sell' : 'buy',
-          amount: Number(r.valueNumeric || 0),
-          shares: Number(String(r.quantity).replace(/[^0-9.-]/g, '') || 0),
-          filedAt: r.transactionDate.toISOString().slice(0, 10),
-          tradeDate: r.tradeDate.toISOString().slice(0, 10),
-        })),
+        recentTrades: rows
+          .filter((r) => openInsiderMarketSide(r.transactionType) !== null)
+          .slice(0, 12)
+          .map((r) => ({
+            id: r.id,
+            ticker: r.company?.ticker || '',
+            side: openInsiderMarketSide(r.transactionType)!,
+            amount: openInsiderTradeValue(r.valueNumeric),
+            shares: Number(String(r.quantity).replace(/[^0-9.-]/g, '') || 0),
+            filedAt: r.transactionDate.toISOString().slice(0, 10),
+            tradeDate: r.tradeDate.toISOString().slice(0, 10),
+          })),
       });
     }
 
@@ -128,8 +124,6 @@ export async function GET(req: NextRequest) {
         sellTxCount: rows.length - buys.length,
         totalOptions: 0,
         optionTxCount: 0,
-        totalProposedSale: 0,
-        proposedTxCount: 0,
         avgBuy: 0,
         avgSell: 0,
       },

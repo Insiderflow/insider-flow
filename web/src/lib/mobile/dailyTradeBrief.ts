@@ -587,7 +587,9 @@ async function loadInsiderTradesForBrief(focusDateEt: string) {
         title: r.owner?.title || 'Insider',
         ticker: r.company?.ticker || '',
         company: r.company?.name || '',
-        side: isOpenInsiderSell(r.transactionType) ? 'sell' : 'buy',
+        side: isOpenInsiderSell(r.transactionType)
+          ? 'sell'
+          : ('buy' as const),
         amount: amt,
         amountLabel: formatInsiderValue(r.valueNumeric, r.value),
         tradeDate: r.tradeDate.toISOString().slice(0, 10),

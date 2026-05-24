@@ -1,12 +1,15 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { processNewTrade } from '@/lib/notificationService';
+import { requireInternalJob } from '@/lib/routeGuards';
 
 export const dynamic = 'force-dynamic';
 
-export async function POST() {
+export async function POST(request: NextRequest) {
+  const guard = requireInternalJob(request);
+  if (guard) return guard;
+
   try {
-    // Process trades in the last 10 minutes
     const since = new Date(Date.now() - 10 * 60 * 1000);
     const rows = await prisma.openInsiderTransaction.findMany({
       where: { transactionDate: { gte: since } },
@@ -17,9 +20,13 @@ export async function POST() {
 
     for (const t of rows) {
       await processNewTrade({
-        politician: { id: t.ownerId, name: t.owner?.name || '' }, // reuse TradeData contract
+        politician: { id: t.ownerId, name: t.owner?.name || '' },
         owner: t.owner ? { name: t.owner.name, id: t.ownerId } : undefined,
-        issuer: { id: t.companyId, name: t.company?.name || '', ticker: t.company?.ticker || '' },
+        issuer: {
+          id: t.companyId,
+          name: t.company?.name || '',
+          ticker: t.company?.ticker || '',
+        },
         type: t.transactionType,
         tradedAt: t.tradeDate.toISOString(),
       });
@@ -31,8 +38,3 @@ export async function POST() {
     return NextResponse.json({ error: 'failed' }, { status: 500 });
   }
 }
-
-
-
-
-

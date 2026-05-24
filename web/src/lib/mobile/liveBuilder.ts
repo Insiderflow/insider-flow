@@ -1,5 +1,5 @@
 import { prisma } from '@/lib/prisma';
-import { openInsiderSide } from '@/lib/openInsiderTransaction';
+import { openInsiderMarketSide } from '@/lib/openInsiderTransaction';
 import { politicianTradeSeatLabel } from '@/lib/mobile/politicianSeatLabel';
 import { politicianTradeWhere } from '@/lib/mobile/tradeDateSanity';
 import { findTradeIdsByActivityOrder } from '@/lib/tradeActivity';
@@ -103,9 +103,12 @@ export async function buildInsiderLiveFeed() {
     take: 80,
   });
 
-  const trades = rows.map((r) => {
+  const trades = rows
+    .map((r) => {
     const ticker = r.company?.ticker || '—';
     const amountUsd = Number(r.valueNumeric || 0);
+    const side = openInsiderMarketSide(r.transactionType);
+    if (!side) return null;
     const flags = computeInsiderNotableFlags(amountUsd);
     return {
       id: r.id,
@@ -113,7 +116,7 @@ export async function buildInsiderLiveFeed() {
       displayName: r.owner?.name || r.company?.name || '',
       title: r.owner?.title || 'Insider',
       showParty: false,
-      side: openInsiderSide(r.transactionType),
+      side,
       flags,
       disclosureBadge: 'Form 4',
       metricLabel: 'outstanding' as const,
@@ -128,7 +131,8 @@ export async function buildInsiderLiveFeed() {
           ? `/insider/company/company-${ticker.toLowerCase()}`
           : undefined,
     };
-  });
+  })
+    .filter((t): t is NonNullable<typeof t> => t !== null);
 
   const dates = [...new Set(trades.map((t) => t.dateKey))].slice(0, 7).map((d) => ({
     id: d,

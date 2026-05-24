@@ -1,6 +1,10 @@
 import { prisma } from '@/lib/prisma';
 import { getPoliticianImageSrc } from '@/lib/politicianImageMapping';
-import { openInsiderSide } from '@/lib/openInsiderTransaction';
+import {
+  isOpenInsiderBuy,
+  isOpenInsiderSell,
+  openInsiderMarketSide,
+} from '@/lib/openInsiderTransaction';
 import {
   buildPoliticianAmountHistories,
   computeMlSignalScore,
@@ -486,7 +490,11 @@ async function countCorporateSameTickerPeers(
     select: { transactionType: true },
   });
 
-  return rows.filter((r) => openInsiderSide(r.transactionType) === side).length;
+  return rows.filter((r) =>
+    side === 'sell'
+      ? isOpenInsiderSell(r.transactionType)
+      : isOpenInsiderBuy(r.transactionType),
+  ).length;
 }
 
 async function buildCorporateSignalDetail(
@@ -502,7 +510,7 @@ async function buildCorporateSignalDetail(
   const amountUsd = Number(r.valueNumeric || 0);
   const flags = computeInsiderNotableFlags(amountUsd);
   const ticker = r.company?.ticker?.trim().toUpperCase() || '—';
-  const side = openInsiderSide(r.transactionType);
+  const side = openInsiderMarketSide(r.transactionType) ?? 'sell';
   const ruleScore = signalScore(flags);
   const daysSincePublished = Math.max(
     0,

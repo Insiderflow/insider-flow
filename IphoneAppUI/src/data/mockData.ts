@@ -507,7 +507,7 @@ export function buildPoliticianDashboard(locale: Locale): DashboardPayload {
       { id: "buys", label: m.kpi.buys, value: 847, changePct: 12.4, spike: genSpike(1, 14, "up") },
       { id: "sells", label: m.kpi.sells, value: 612, changePct: -3.2, spike: genSpike(2, 14, "down") },
       { id: "options", label: m.kpi.options, value: 94, changePct: 8.1, spike: genSpike(3, 14, "mixed") },
-      { id: "pp_sale", label: m.kpi.ppSale, value: 41, changePct: 5.6, spike: genSpike(4, 14, "up") },
+      { id: "plan_10b5", label: m.kpi.plan10b5, value: 41, changePct: 5.6, spike: genSpike(4, 14, "up") },
     ],
     clusterBuys: BASE.clusterBuys.map((c) => {
       const text = m.mock.clusters[c.id]!;

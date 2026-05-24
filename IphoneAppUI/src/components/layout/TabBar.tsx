@@ -31,11 +31,8 @@ export default function TabBar({ active, onChange }: TabBarProps) {
   };
 
   return (
-    <nav
-      className="fixed bottom-0 left-1/2 z-50 w-full max-w-[390px] -translate-x-1/2 border-t border-border bg-surface-elevated/95 backdrop-blur-xl"
-      style={{ paddingBottom: "var(--safe-bottom)" }}
-    >
-      <div className="flex h-[var(--tab-bar-height)] items-center justify-around px-2">
+    <nav className="tab-dock" aria-label="Main">
+      <div className="flex h-[var(--tab-bar-height)] items-center justify-around px-1">
         {TAB_IDS.map((id) => {
           const Icon = ICONS[id];
           const isActive = active === id;
@@ -44,19 +41,12 @@ export default function TabBar({ active, onChange }: TabBarProps) {
               key={id}
               type="button"
               onClick={() => onChange?.(id)}
-              className={cn(
-                "flex flex-1 flex-col items-center gap-0.5 py-2 transition-colors",
-                isActive ? "text-white" : "text-muted"
-              )}
+              className={cn("tab-dock-item", isActive && "tab-dock-item-active")}
             >
-              <Icon
-                className={cn(
-                  "h-5 w-5",
-                  isActive && "text-accent-blue drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]"
-                )}
-                strokeWidth={isActive ? 2.5 : 2}
-              />
-              <span className={cn("text-[10px] font-medium", isActive && "font-semibold")}>
+              <span className={cn("tab-dock-icon-wrap", !isActive && "text-muted-foreground")}>
+                <Icon className="h-[18px] w-[18px]" strokeWidth={isActive ? 2.5 : 2} />
+              </span>
+              <span className={cn("text-[9px] font-semibold", isActive && "text-flow")}>
                 {labels[id]}
               </span>
             </button>

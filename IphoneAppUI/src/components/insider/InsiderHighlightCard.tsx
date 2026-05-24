@@ -24,21 +24,23 @@ export default function InsiderHighlightCard({ item }: InsiderHighlightCardProps
       whileTap={{ scale: 0.98 }}
       onClick={() => navigate(path)}
       className={cn(
-        "glass-card snap-card w-[168px] shrink-0 p-3 text-left",
-        isBuy ? "border-buy/20" : "border-sell/20"
+        "snap-card w-[172px] shrink-0 rounded-panel border bg-surface-elevated/90 p-3.5 text-left",
+        isBuy
+          ? "border-buy/25 shadow-glowBuy trade-row-card--buy"
+          : "border-sell/25 shadow-glowSell trade-row-card--sell"
       )}
     >
       <p className="truncate text-sm font-semibold">{item.name}</p>
       <p className="mt-0.5 truncate text-[10px] text-muted">{item.subtitle}</p>
       <p
         className={cn(
-          "mt-2 text-lg font-bold tabular-nums",
+          "mt-2.5 font-tabular text-xl font-bold",
           isBuy ? "text-buy" : "text-sell"
         )}
       >
         {formatInsiderMoney(item.amount)}
       </p>
-      <p className="text-[11px] text-muted-foreground">
+      <p className="font-mono text-[10px] text-muted-foreground">
         {formatInsiderShares(item.shares)}
       </p>
       <div className="mt-2 flex justify-end">

@@ -1,6 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import { getPoliticianImageSrc } from '@/lib/politicianImageMapping';
-import { openInsiderSide } from '@/lib/openInsiderTransaction';
+import { openInsiderMarketSide } from '@/lib/openInsiderTransaction';
 import {
   buildPoliticianAmountHistories,
   computeMlSignalScore,
@@ -279,7 +279,8 @@ async function buildCorporateSignals(
     if (!flags.length) continue;
 
     const ticker = r.company?.ticker?.trim().toUpperCase() || '—';
-    const side = openInsiderSide(r.transactionType);
+    const side = openInsiderMarketSide(r.transactionType);
+    if (!side) continue;
     const ruleScore = signalScore(flags);
     const daysSincePublished = Math.max(
       0,

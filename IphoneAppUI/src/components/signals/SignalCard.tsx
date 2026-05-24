@@ -56,11 +56,13 @@ export default function SignalCard({ signal, index = 0 }: SignalCardProps) {
           navigate(`/signals/${encodeURIComponent(signal.id)}`);
         }
       }}
-      className="glass-card-elevated cursor-pointer p-4"
+      className="trade-row-card cursor-pointer p-4"
     >
       <motion.div className="flex items-start justify-between gap-2">
         <div className="min-w-0">
-          <span className="text-xl font-bold tracking-tight">{signal.ticker}</span>
+          <span className="font-mono text-xl font-bold tracking-tight text-flow">
+            {signal.ticker}
+          </span>
           <span className="ml-1.5 rounded-md bg-muted/60 px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground">
             {t.signalsPage.feedBadge[signal.feed]}
           </span>

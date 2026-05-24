@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { USE_API } from "@/api/config";
 import { fetchDataFreshness } from "@/api/services/freshness";
 import AISummary from "@/components/dashboard/AISummary";
-import IndustryChainPreviewCard from "@/components/dashboard/IndustryChainPreviewCard";
 import CommitteeSectorCard from "@/components/dashboard/CommitteeSectorCard";
 import InsiderIndustrySection from "@/components/insider/InsiderIndustrySection";
 import TodaysPoliticianTrades from "@/components/dashboard/TodaysPoliticianTrades";
@@ -13,6 +12,7 @@ import PoliticianCard from "@/components/dashboard/PoliticianCard";
 import RecentTradesTimeline from "@/components/dashboard/RecentTradesTimeline";
 import InsiderDashboard from "@/components/insider/InsiderDashboard";
 import MobileHeader from "@/components/layout/MobileHeader";
+import SectionHeader from "@/components/layout/SectionHeader";
 import PullToRefresh from "@/components/layout/PullToRefresh";
 import { fetchDashboard, type Period } from "@/data/mockData";
 import { visibleDashboardKpis } from "@/lib/dashboardKpis";
@@ -74,7 +74,7 @@ export default function MobileDashboard() {
         <button
           type="button"
           onClick={() => void refetch()}
-          className="mt-4 rounded-xl bg-accent-blue px-4 py-2 text-sm font-semibold text-white"
+          className="mt-4 rounded-panel bg-flow px-4 py-2.5 text-sm font-semibold text-canvas"
         >
           重試
         </button>
@@ -85,11 +85,11 @@ export default function MobileDashboard() {
   if (isLoading || !data) {
     return (
       <div className="pb-tab-safe">
-        <div className="shimmer-loading mx-4 mt-6 h-8 w-40 rounded-lg" />
-        <div className="mx-4 mt-4 h-32 rounded-card shimmer-loading" />
+        <div className="mx-4 mt-6 h-10 w-36 rounded-lg shimmer-loading" />
+        <div className="mx-4 mt-4 h-36 rounded-card shimmer-loading" />
         <div className="mx-4 mt-4 grid grid-cols-2 gap-2">
-          {[0, 1].map((i) => (
-            <div key={i} className="h-24 rounded-card shimmer-loading" />
+          {[0, 1, 2, 3].map((i) => (
+            <div key={i} className="h-24 rounded-panel shimmer-loading" />
           ))}
         </div>
       </div>
@@ -110,12 +110,12 @@ export default function MobileDashboard() {
             <motion.div
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
-              className="mb-2 h-0.5 origin-left bg-accent-blue"
+              className="mb-2 h-0.5 origin-left bg-flow"
             />
           )}
 
           <motion.div
-            className="mt-4 space-y-6"
+            className="mt-4 space-y-7"
             initial="hidden"
             animate="visible"
             variants={{
@@ -126,64 +126,62 @@ export default function MobileDashboard() {
               <InsiderDashboard data={data} period={period} />
             ) : (
               <>
-            <AISummary data={data.aiSummary} />
+                <AISummary data={data.aiSummary} />
 
-            <section>
-              <h2 className="section-title mb-3 px-1">{t.sections.overview}</h2>
-              <div className="flex flex-wrap gap-2">
-                {visibleDashboardKpis(data.kpis).map((kpi, i) => (
-                  <KpiCard key={kpi.id} item={kpi} index={i} />
-                ))}
-              </div>
-            </section>
+                <section>
+                  <SectionHeader>{t.sections.overview}</SectionHeader>
+                  <div className="flex flex-wrap gap-2">
+                    {visibleDashboardKpis(data.kpis).map((kpi, i) => (
+                      <KpiCard key={kpi.id} item={kpi} index={i} />
+                    ))}
+                  </div>
+                </section>
 
-            <section>
-              <h2 className="section-title mb-3 px-1">
-                {dataMode === "insider" ? t.sections.insiderBuy : t.sections.politicianBuy}
-              </h2>
-              <div className="space-y-2">
-                {data.topPoliticianBuys.map((tr) => (
-                  <PoliticianCard key={tr.id} trade={tr} />
-                ))}
-              </div>
-            </section>
+                <section>
+                  <SectionHeader>
+                    {dataMode === "insider"
+                      ? t.sections.insiderBuy
+                      : t.sections.politicianBuy}
+                  </SectionHeader>
+                  <div className="space-y-2">
+                    {data.topPoliticianBuys.map((tr) => (
+                      <PoliticianCard key={tr.id} trade={tr} />
+                    ))}
+                  </div>
+                </section>
 
-            <section>
-              <h2 className="section-title mb-3 px-1">
-                {dataMode === "insider" ? t.sections.insiderSale : t.sections.politicianSale}
-              </h2>
-              <div className="space-y-2">
-                {data.topPoliticianSells.map((tr) => (
-                  <PoliticianCard key={tr.id} trade={tr} />
-                ))}
-              </div>
-            </section>
+                <section>
+                  <SectionHeader>
+                    {dataMode === "insider"
+                      ? t.sections.insiderSale
+                      : t.sections.politicianSale}
+                  </SectionHeader>
+                  <div className="space-y-2">
+                    {data.topPoliticianSells.map((tr) => (
+                      <PoliticianCard key={tr.id} trade={tr} />
+                    ))}
+                  </div>
+                </section>
 
-            <IndustryChainPreviewCard
-              nodes={data.industryChain}
-              period={period}
-            />
+                {dataMode === "politician" && data.committeeSectors?.rows.length ? (
+                  <CommitteeSectorCard data={data.committeeSectors} period={period} />
+                ) : null}
 
-            {dataMode === "politician" && data.committeeSectors?.rows.length ? (
-              <CommitteeSectorCard data={data.committeeSectors} period={period} />
-            ) : null}
+                {dataMode === "politician" ? (
+                  <TodaysPoliticianTrades trades={data.todaysTrades ?? []} />
+                ) : (
+                  <InsiderIndustrySection
+                    topIndustries={data.topIndustries}
+                    period={period}
+                  />
+                )}
 
-            {dataMode === "politician" ? (
-              <TodaysPoliticianTrades trades={data.todaysTrades ?? []} />
-            ) : (
-              <InsiderIndustrySection
-                topIndustries={data.topIndustries}
-                period={period}
-              />
-            )}
-
-            <RecentTradesTimeline trades={data.recentTrades} />
+                <RecentTradesTimeline trades={data.recentTrades} />
               </>
             )}
           </motion.div>
         </div>
       </PullToRefresh>
-
     </div>
   );
 }

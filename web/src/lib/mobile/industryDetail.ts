@@ -2,6 +2,7 @@ import { normalizeGicsSectorKey } from '@/lib/industrySubsectorTaxonomy';
 import {
   isOpenInsiderBuy,
   isOpenInsiderSell,
+  openInsiderMarketSide,
   openInsiderTradeValue,
 } from '@/lib/openInsiderTransaction';
 import { isPrimeBrokerFiler } from '@/lib/mobile/primeBroker';
@@ -92,11 +93,11 @@ export function buildIndustryDetail(
 
     const sector = sectorForRow(row, issuerByTicker);
     const value = amt(row.valueNumeric);
-    const sell = isOpenInsiderSell(row.transactionType);
+    const marketSide = openInsiderMarketSide(row.transactionType);
 
     const agg = sectorAgg.get(sector) || { buy: 0, sell: 0 };
-    if (sell) agg.sell += value;
-    else agg.buy += value;
+    if (marketSide === 'sell') agg.sell += value;
+    else if (marketSide === 'buy') agg.buy += value;
     sectorAgg.set(sector, agg);
 
     if (sector !== activeSector || !matchesSide(row, side)) continue;

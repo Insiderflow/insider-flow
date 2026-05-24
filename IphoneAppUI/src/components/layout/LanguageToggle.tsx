@@ -15,7 +15,7 @@ export default function LanguageToggle() {
     <div
       role="group"
       aria-label={t.lang.switchAria}
-      className="flex shrink-0 rounded-pill border border-border bg-surface-elevated/80 p-0.5"
+      className="control-pill flex shrink-0"
     >
       {options.map(({ id, label }) => (
         <button
@@ -26,7 +26,7 @@ export default function LanguageToggle() {
           className={cn(
             "min-w-[28px] rounded-pill px-2 py-1 text-[11px] font-bold transition-all",
             locale === id
-              ? "bg-white/15 text-white shadow-sm"
+              ? "control-pill-active"
               : "text-muted hover:text-muted-foreground"
           )}
         >

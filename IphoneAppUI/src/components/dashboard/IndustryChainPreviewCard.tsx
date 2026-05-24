@@ -47,10 +47,7 @@ export default function IndustryChainPreviewCard({
       type="button"
       whileTap={{ scale: 0.98 }}
       onClick={open}
-      className={cn(
-        "glass-card w-full rounded-2xl border border-white/[0.06] p-3 text-left shadow-card",
-        className
-      )}
+      className={cn("panel-card w-full p-4 text-left transition-colors hover:border-flow/25", className)}
     >
       <motion.div className="flex items-start justify-between gap-3">
         <div className="min-w-0 flex-1">

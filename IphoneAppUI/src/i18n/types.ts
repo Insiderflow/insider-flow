@@ -44,6 +44,7 @@ export interface Messages {
     sells: string;
     options: string;
     ppSale: string;
+    plan10b5: string;
     todayChange: string;
   };
   cluster: {

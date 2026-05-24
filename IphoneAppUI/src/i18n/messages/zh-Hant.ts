@@ -52,6 +52,7 @@ const zhHant: Messages = {
     sells: "賣出",
     options: "期權",
     ppSale: "預售",
+    plan10b5: "10b5-1",
     todayChange: "今日",
   },
   cluster: {

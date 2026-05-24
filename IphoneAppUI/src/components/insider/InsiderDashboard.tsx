@@ -1,11 +1,11 @@
 import AISummary from "@/components/dashboard/AISummary";
 import KpiCard from "@/components/dashboard/KpiCard";
+import SectionHeader from "@/components/layout/SectionHeader";
 import InsiderCompanyClusterCard from "./InsiderCompanyClusterCard";
 import InsiderHighlightCard from "./InsiderHighlightCard";
-import IndustryChainPreviewCard from "@/components/dashboard/IndustryChainPreviewCard";
 import InsiderIndustrySection from "./InsiderIndustrySection";
 import type { DashboardPayload, Period } from "@/data/mockData";
-import { visibleDashboardKpis } from "@/lib/dashboardKpis";
+import { visibleInsiderDashboardKpis } from "@/lib/dashboardKpis";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 interface InsiderDashboardProps {
@@ -19,20 +19,20 @@ export default function InsiderDashboard({ data, period }: InsiderDashboardProps
   if (!extras) return null;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-7">
       <AISummary data={data.aiSummary} />
 
       <section>
-        <h2 className="section-title mb-3 px-1">{t.sections.overview}</h2>
+        <SectionHeader>{t.sections.overview}</SectionHeader>
         <div className="flex flex-wrap gap-2">
-          {visibleDashboardKpis(data.kpis).map((kpi, i) => (
+          {visibleInsiderDashboardKpis(data.kpis).map((kpi, i) => (
             <KpiCard key={kpi.id} item={kpi} index={i} />
           ))}
         </div>
       </section>
 
       <section>
-        <h2 className="section-title mb-3 px-1">{t.insiderProfile.topClusterBuy}</h2>
+        <SectionHeader>{t.insiderProfile.topClusterBuy}</SectionHeader>
         <div className="horizontal-scroll">
           {extras.companyClustersBuy.map((c) => (
             <InsiderCompanyClusterCard key={c.id} cluster={c} />
@@ -41,7 +41,7 @@ export default function InsiderDashboard({ data, period }: InsiderDashboardProps
       </section>
 
       <section>
-        <h2 className="section-title mb-3 px-1">{t.insiderProfile.topClusterSale}</h2>
+        <SectionHeader>{t.insiderProfile.topClusterSale}</SectionHeader>
         <div className="horizontal-scroll">
           {extras.companyClustersSell.map((c) => (
             <InsiderCompanyClusterCard key={c.id} cluster={c} />
@@ -50,7 +50,7 @@ export default function InsiderDashboard({ data, period }: InsiderDashboardProps
       </section>
 
       <section>
-        <h2 className="section-title mb-3 px-1">{t.insiderProfile.topInsiderBuy}</h2>
+        <SectionHeader>{t.insiderProfile.topInsiderBuy}</SectionHeader>
         <div className="horizontal-scroll">
           {extras.highlightsBuy.map((h) => (
             <InsiderHighlightCard key={h.id} item={h} />
@@ -59,7 +59,7 @@ export default function InsiderDashboard({ data, period }: InsiderDashboardProps
       </section>
 
       <section>
-        <h2 className="section-title mb-3 px-1">{t.insiderProfile.topInsiderSale}</h2>
+        <SectionHeader>{t.insiderProfile.topInsiderSale}</SectionHeader>
         <div className="horizontal-scroll">
           {extras.highlightsSell.map((h) => (
             <InsiderHighlightCard key={h.id} item={h} />
@@ -67,12 +67,7 @@ export default function InsiderDashboard({ data, period }: InsiderDashboardProps
         </div>
       </section>
 
-      <IndustryChainPreviewCard nodes={data.industryChain} period={period} />
-
-      <InsiderIndustrySection
-        topIndustries={data.topIndustries}
-        period={period}
-      />
+      <InsiderIndustrySection topIndustries={data.topIndustries} period={period} />
     </div>
   );
 }

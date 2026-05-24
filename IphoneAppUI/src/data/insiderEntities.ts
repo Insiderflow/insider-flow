@@ -43,15 +43,15 @@ export interface InsiderActivityStats {
   sellTxCount: number;
   totalOptions: number;
   optionTxCount: number;
-  totalProposedSale: number;
-  proposedTxCount: number;
+  plan10b5TxCount?: number;
+  plan10b5Pct?: number;
   avgBuy: number;
   avgSell: number;
 }
 
 export interface InsiderCompanyActivity extends InsiderActivityStats {
+  plan10b5TxCount: number;
   plan10b5Pct: number;
-  ppSalePct: number;
   buyRangeMin: number | null;
   buyRangeMax: number | null;
   sellRangeMin: number | null;
@@ -74,7 +74,7 @@ export interface TradeTypeBreakdown {
   buy: number;
   sell: number;
   option: number;
-  proposed: number;
+  plan10b5: number;
 }
 
 export interface InsiderCompanyProfile extends InsiderEntityProfile {
@@ -84,6 +84,7 @@ export interface InsiderCompanyProfile extends InsiderEntityProfile {
   industry: string;
   description: string;
   dataAsOf: string;
+  period?: string;
   activity: InsiderCompanyActivity;
   companyTrades: InsiderCompanyTrade[];
   insiders: CompanyInsiderRow[];
@@ -170,8 +171,6 @@ const PROFILES: Record<string, Omit<InsiderEntityProfile, "id">> = {
       sellTxCount: 0,
       totalOptions: 0,
       optionTxCount: 0,
-      totalProposedSale: 0,
-      proposedTxCount: 0,
       avgBuy: 38.92,
       avgSell: 0,
     },
@@ -220,8 +219,6 @@ const PROFILES: Record<string, Omit<InsiderEntityProfile, "id">> = {
       sellTxCount: 1,
       totalOptions: 0,
       optionTxCount: 0,
-      totalProposedSale: 0,
-      proposedTxCount: 0,
       avgBuy: 0.61,
       avgSell: 0.61,
     },
@@ -254,8 +251,6 @@ const PROFILES: Record<string, Omit<InsiderEntityProfile, "id">> = {
       sellTxCount: 3,
       totalOptions: 0,
       optionTxCount: 0,
-      totalProposedSale: 0,
-      proposedTxCount: 0,
       avgBuy: 0,
       avgSell: 20.45,
     },
@@ -288,8 +283,6 @@ const PROFILES: Record<string, Omit<InsiderEntityProfile, "id">> = {
       sellTxCount: 0,
       totalOptions: 0,
       optionTxCount: 0,
-      totalProposedSale: 0,
-      proposedTxCount: 0,
       avgBuy: 4.91,
       avgSell: 0,
     },
@@ -322,8 +315,6 @@ const PROFILES: Record<string, Omit<InsiderEntityProfile, "id">> = {
       sellTxCount: 0,
       totalOptions: 0,
       optionTxCount: 0,
-      totalProposedSale: 0,
-      proposedTxCount: 0,
       avgBuy: 4.89,
       avgSell: 0,
     },
@@ -356,8 +347,6 @@ const PROFILES: Record<string, Omit<InsiderEntityProfile, "id">> = {
       sellTxCount: 0,
       totalOptions: 0,
       optionTxCount: 0,
-      totalProposedSale: 0,
-      proposedTxCount: 0,
       avgBuy: 4.92,
       avgSell: 0,
     },
@@ -390,8 +379,6 @@ const PROFILES: Record<string, Omit<InsiderEntityProfile, "id">> = {
       sellTxCount: 2,
       totalOptions: 0,
       optionTxCount: 0,
-      totalProposedSale: 0,
-      proposedTxCount: 0,
       avgBuy: 0,
       avgSell: 6.55,
     },
@@ -424,8 +411,6 @@ const PROFILES: Record<string, Omit<InsiderEntityProfile, "id">> = {
       sellTxCount: 0,
       totalOptions: 0,
       optionTxCount: 0,
-      totalProposedSale: 0,
-      proposedTxCount: 0,
       avgBuy: 38.92,
       avgSell: 0,
     },
@@ -570,12 +555,10 @@ const COMPANY_EXTRAS: Record<string, CompanyProfileExtras> = {
       sellTxCount: 0,
       totalOptions: 0,
       optionTxCount: 0,
-      totalProposedSale: 0,
-      proposedTxCount: 0,
       avgBuy: 4.91,
       avgSell: 0,
+      plan10b5TxCount: 0,
       plan10b5Pct: 0,
-      ppSalePct: 0,
       buyRangeMin: 4.84,
       buyRangeMax: 4.96,
       sellRangeMin: null,
@@ -621,7 +604,7 @@ const COMPANY_EXTRAS: Record<string, CompanyProfileExtras> = {
       { id: "person-schwartz", name: "Schwartz Robert L.", role: "Director", tradesCount: 4 },
       { id: "person-holmes", name: "Holmes Brian", role: "CEO", tradesCount: 2 },
     ],
-    tradeTypes: { buy: 100, sell: 0, option: 0, proposed: 0 },
+    tradeTypes: { buy: 100, sell: 0, option: 0, plan10b5: 0 },
     aiSummary: {
       headline: "7 insider buys cluster at $4.84–$4.96 with no sells in the last 30 days.",
       bullets: [
@@ -646,12 +629,10 @@ const COMPANY_EXTRAS: Record<string, CompanyProfileExtras> = {
       sellTxCount: 3,
       totalOptions: 0,
       optionTxCount: 0,
-      totalProposedSale: 0,
-      proposedTxCount: 0,
       avgBuy: 0,
       avgSell: 20.45,
+      plan10b5TxCount: 0,
       plan10b5Pct: 0,
-      ppSalePct: 0,
       buyRangeMin: null,
       buyRangeMax: null,
       sellRangeMin: 19.8,
@@ -672,7 +653,7 @@ const COMPANY_EXTRAS: Record<string, CompanyProfileExtras> = {
     insiders: [
       { id: "company-spt", name: "SPT Holding Sarl", role: "10% Owner", tradesCount: 3 },
     ],
-    tradeTypes: { buy: 0, sell: 100, option: 0, proposed: 0 },
+    tradeTypes: { buy: 0, sell: 100, option: 0, plan10b5: 0 },
     aiSummary: {
       headline: "Major block sale by 10% owner SPT Holding Sarl.",
       bullets: [
@@ -696,12 +677,10 @@ const COMPANY_EXTRAS: Record<string, CompanyProfileExtras> = {
       sellTxCount: 0,
       totalOptions: 0,
       optionTxCount: 0,
-      totalProposedSale: 0,
-      proposedTxCount: 0,
       avgBuy: 38.92,
       avgSell: 0,
+      plan10b5TxCount: 0,
       plan10b5Pct: 0,
-      ppSalePct: 0,
       buyRangeMin: 37.86,
       buyRangeMax: 40.59,
       sellRangeMin: null,
@@ -723,7 +702,7 @@ const COMPANY_EXTRAS: Record<string, CompanyProfileExtras> = {
     insiders: [
       { id: "person-meister", name: "Meister Keith A.", role: "Director", tradesCount: 12 },
     ],
-    tradeTypes: { buy: 100, sell: 0, option: 0, proposed: 0 },
+    tradeTypes: { buy: 100, sell: 0, option: 0, plan10b5: 0 },
     aiSummary: {
       headline: "Director Meister Keith A. led $60.6M in open-market buys.",
       bullets: [
@@ -758,8 +737,8 @@ function buildDefaultCompanyExtras(
     dataAsOf: "May 15",
     activity: {
       ...base.activity,
+      plan10b5TxCount: 0,
       plan10b5Pct: 0,
-      ppSalePct: 0,
       buyRangeMin: base.activity.avgBuy > 0 ? base.activity.avgBuy * 0.98 : null,
       buyRangeMax: base.activity.avgBuy > 0 ? base.activity.avgBuy * 1.02 : null,
       sellRangeMin: base.activity.avgSell > 0 ? base.activity.avgSell * 0.98 : null,
@@ -771,7 +750,7 @@ function buildDefaultCompanyExtras(
       buy: buyPct,
       sell: 100 - buyPct,
       option: 0,
-      proposed: 0,
+      plan10b5: 0,
     },
     aiSummary: {
       headline: `${base.ticker} insider activity summary.`,

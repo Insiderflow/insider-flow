@@ -17,7 +17,7 @@ function PartyBadge({ party }: { party: Party }) {
   return (
     <span
       className={cn(
-        "rounded-md px-1.5 py-0.5 text-[10px] font-bold",
+        "rounded-md px-1.5 py-0.5 font-mono text-[10px] font-bold",
         party === "R" && "party-badge-r",
         party === "D" && "party-badge-d"
       )}
@@ -40,6 +40,12 @@ export default function PoliticianCard({ trade }: PoliticianCardProps) {
   const { isPolitician } = useDataMode();
   const { text, variant } = sideLabel(trade.side, t);
   const profileId = trade.politicianId || trade.id;
+  const stripe =
+    trade.side === "buy"
+      ? "trade-row-card--buy"
+      : trade.side === "sell"
+        ? "trade-row-card--sell"
+        : "";
 
   return (
     <motion.article
@@ -50,7 +56,7 @@ export default function PoliticianCard({ trade }: PoliticianCardProps) {
       onKeyDown={(e) => {
         if (e.key === "Enter" && profileId) navigate(`/insider/person/${profileId}`);
       }}
-      className="glass-card flex cursor-pointer gap-3 p-3"
+      className={cn("trade-row-card flex cursor-pointer gap-3 p-3.5", stripe)}
     >
       {isPolitician ? (
         <PoliticianAvatar
@@ -61,7 +67,7 @@ export default function PoliticianCard({ trade }: PoliticianCardProps) {
           size="sm"
         />
       ) : (
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/5 text-xs font-bold text-muted-foreground">
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-flow/10 font-mono text-xs font-bold text-flow">
           {trade.state}
         </div>
       )}
@@ -72,10 +78,10 @@ export default function PoliticianCard({ trade }: PoliticianCardProps) {
           <div className="ml-auto flex flex-col items-end gap-1">
             <span
               className={cn(
-                "text-[10px] font-semibold",
+                "text-[10px] font-bold uppercase tracking-wide",
                 variant === "buy" && "text-buy",
                 variant === "sell" && "text-sell",
-                variant === "proposed" && "text-proposed",
+                variant === "proposed" && "text-proposed"
               )}
             >
               {text}
@@ -86,13 +92,13 @@ export default function PoliticianCard({ trade }: PoliticianCardProps) {
         <p className="text-[11px] text-muted">
           {isPolitician ? `${trade.title} · ${trade.state}` : trade.title}
         </p>
-        <div className="mt-1.5 flex items-end justify-between gap-2">
+        <div className="mt-2 flex items-end justify-between gap-2">
           <div>
-            <p className="text-xs font-medium text-white/90">
-              {trade.ticker}{" "}
-              <span className="font-normal text-muted">· {trade.issuer}</span>
+            <p className="text-xs font-medium">
+              <span className="font-mono font-semibold text-flow">{trade.ticker}</span>
+              <span className="text-muted"> · {trade.issuer}</span>
             </p>
-            <p className="mt-0.5 text-sm font-semibold tabular-nums">
+            <p className="mt-0.5 font-tabular text-sm font-semibold">
               <span
                 className={cn(
                   trade.side === "buy" && "text-buy",
@@ -113,7 +119,7 @@ export default function PoliticianCard({ trade }: PoliticianCardProps) {
           </div>
           <SpikeChart data={trade.spike} variant={variant} width={56} height={24} />
         </div>
-        <p className="mt-1 text-[10px] text-muted">
+        <p className="mt-1.5 font-mono text-[10px] text-muted">
           {isPolitician && trade.filedAt
             ? `${t.trade.publishedAt} ${trade.filedAt}`
             : trade.tradeDate}

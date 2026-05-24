@@ -41,12 +41,14 @@ export default function LiveTradeCard({ trade, index = 0 }: LiveTradeCardProps) 
       tabIndex={trade.profilePath ? 0 : undefined}
       onClick={() => trade.profilePath && navigate(trade.profilePath)}
       className={cn(
-        "glass-card-elevated overflow-hidden p-4",
+        "panel-card overflow-hidden p-4",
         trade.profilePath && "cursor-pointer",
       )}
     >
       <div className="flex items-start justify-between gap-2">
-        <span className="text-xl font-bold tracking-tight">{trade.ticker}</span>
+        <span className="font-mono text-xl font-bold tracking-tight text-flow">
+          {trade.ticker}
+        </span>
         <div className="flex flex-col items-end gap-1.5">
           <div className="flex items-center gap-2">
             <span className="rounded-md bg-white/8 px-2 py-0.5 text-[10px] font-semibold text-muted-foreground">

@@ -1,7 +1,7 @@
 import { useId } from "react";
 import { cn } from "@/lib/utils";
 
-export type SpikeVariant = "buy" | "sell" | "proposed" | "neutral";
+export type SpikeVariant = "buy" | "sell" | "proposed" | "plan" | "neutral";
 
 interface SpikeChartProps {
   data: number[];
@@ -13,17 +13,19 @@ interface SpikeChartProps {
 }
 
 const STROKE: Record<SpikeVariant, string> = {
-  buy: "#22C55E",
-  sell: "#EF4444",
-  proposed: "#F97316",
-  neutral: "#71717A",
+  buy: "#34D399",
+  sell: "#FB7185",
+  proposed: "#FBBF24",
+  plan: "#22D3EE",
+  neutral: "#64748B",
 };
 
 const FILL: Record<SpikeVariant, string> = {
-  buy: "rgba(34, 197, 94, 0.25)",
-  sell: "rgba(239, 68, 68, 0.25)",
-  proposed: "rgba(249, 115, 22, 0.25)",
-  neutral: "rgba(113, 113, 122, 0.2)",
+  buy: "rgba(52, 211, 153, 0.25)",
+  sell: "rgba(251, 113, 133, 0.25)",
+  proposed: "rgba(251, 191, 36, 0.25)",
+  plan: "rgba(34, 211, 238, 0.25)",
+  neutral: "rgba(100, 116, 139, 0.2)",
 };
 
 export default function SpikeChart({
@@ -75,9 +77,7 @@ export default function SpikeChart({
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
-        style={{
-          filter: `drop-shadow(0 0 4px ${FILL[variant]})`,
-        }}
+        style={{ filter: `drop-shadow(0 0 4px ${FILL[variant]})` }}
       />
     </svg>
   );

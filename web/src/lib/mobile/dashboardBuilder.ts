@@ -1,8 +1,11 @@
 import type { Prisma } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
 import {
+  isOpenInsider10b51,
   isOpenInsiderBuy,
+  isOpenInsiderOption,
   isOpenInsiderSell,
+  openInsiderMarketSide,
   openInsiderTradeValue,
 } from '@/lib/openInsiderTransaction';
 import { politicianTradeSeatLabel } from '@/lib/mobile/politicianSeatLabel';
@@ -14,10 +17,7 @@ import {
   politicianTradedAtRange,
 } from '@/lib/mobile/tradeDateSanity';
 import { getPoliticianImageSrc } from '@/lib/politicianImageMapping';
-import {
-  accumulateSectorFlows,
-  buildIndustryChainNodes,
-} from '@/lib/industryChainBuilder';
+import { accumulateSectorFlows } from '@/lib/industryChainBuilder';
 import { normalizeGicsSectorKey } from '@/lib/industrySubsectorTaxonomy';
 import { resolveIssuerTradeSector } from '@/lib/seatSector';
 import {
@@ -145,14 +145,16 @@ async function countInsiderSides(since: Date, prev: { start: Date; end: Date }) 
     let buys = 0;
     let sells = 0;
     let options = 0;
+    let plan10b5 = 0;
     for (const group of groups) {
       const count = group._count._all;
-      const t = group.transactionType.toLowerCase();
-      if (t.includes('option')) options += count;
-      if (isOpenInsiderSell(group.transactionType)) sells += count;
-      else if (isOpenInsiderBuy(group.transactionType)) buys += count;
+      if (isOpenInsiderBuy(group.transactionType)) buys += count;
+      else if (isOpenInsiderSell(group.transactionType)) {
+        sells += count;
+        if (isOpenInsider10b51(group.transactionType)) plan10b5 += count;
+      } else if (isOpenInsiderOption(group.transactionType)) options += count;
     }
-    return { buys, sells, options };
+    return { buys, sells, options, plan10b5 };
   };
 
   const [currentGroups, previousGroups] = await Promise.all([
@@ -343,7 +345,7 @@ export async function buildPoliticianMobileDashboard(
       sell: sell ? amt : 0,
     };
   });
-  const { sectorAgg, subsectorAgg } = accumulateSectorFlows(flowRows);
+  const { sectorAgg } = accumulateSectorFlows(flowRows);
 
   const topIndustries = [...sectorAgg.entries()]
     .map(([nameKey, v]) => ({
@@ -354,8 +356,6 @@ export async function buildPoliticianMobileDashboard(
     }))
     .sort((a, b) => b.buyAmount + b.sellAmount - (a.buyAmount + a.sellAmount))
     .slice(0, 6);
-
-  const industryChain = buildIndustryChainNodes(sectorAgg, subsectorAgg, 6);
 
   const committeeSectors = buildCommitteeSectorSummary(
     rows.map((r) => ({
@@ -425,7 +425,7 @@ export async function buildPoliticianMobileDashboard(
     topPoliticianSells: highlightFrom('sell', 3),
     todaysTrades,
     primeBrokers: [],
-    industryChain,
+    industryChain: [],
     topIndustries,
     committeeSectors,
     recentTrades: rows.slice(0, 8).map((r) => {
@@ -466,9 +466,14 @@ export async function buildInsiderMobileDashboard(
     getInsiderDailyTradeBrief(locale, period, briefOptions),
   ]);
 
-  const { buys: buysCount, sells: sellsCount, options: optionsCount } =
-    insiderCounts.current;
-  const { buys: prevBuys, sells: prevSells } = insiderCounts.previous;
+  const {
+    buys: buysCount,
+    sells: sellsCount,
+    options: optionsCount,
+    plan10b5: plan10b5Count,
+  } = insiderCounts.current;
+  const { buys: prevBuys, sells: prevSells, plan10b5: prevPlan10b5 } =
+    insiderCounts.previous;
 
   type TickerAgg = {
     ticker: string;
@@ -483,7 +488,9 @@ export async function buildInsiderMobileDashboard(
   const byTicker = new Map<string, TickerAgg>();
   for (const row of rows) {
     const ticker = row.company?.ticker || '—';
-    const side = isOpenInsiderSell(row.transactionType) ? 'sell' : 'buy';
+    const marketSide = openInsiderMarketSide(row.transactionType);
+    if (!marketSide) continue;
+    const side = marketSide;
     const key = `${ticker}:${side}`;
     const cur = byTicker.get(key) || {
       ticker,
@@ -500,7 +507,7 @@ export async function buildInsiderMobileDashboard(
     if (ticker !== '—') {
       const flow = tickerFlow.get(ticker) || { buy: 0, sell: 0 };
       const amt = openInsiderTradeValue(row.valueNumeric);
-      if (isOpenInsiderSell(row.transactionType)) flow.sell += amt;
+      if (side === 'sell') flow.sell += amt;
       else flow.buy += amt;
       tickerFlow.set(ticker, flow);
     }
@@ -575,7 +582,7 @@ export async function buildInsiderMobileDashboard(
     string,
     { buy: number; sell: number; buyCount: number; sellCount: number }
   >();
-  const flowRows = rows.map((row) => {
+  for (const row of rows) {
     const ticker = row.company?.ticker?.trim().toUpperCase();
     const issuer = ticker ? issuerByTicker.get(ticker) : undefined;
     const sector = normalizeGicsSectorKey(
@@ -584,29 +591,22 @@ export async function buildInsiderMobileDashboard(
         'Other',
     );
     const amt = openInsiderTradeValue(row.valueNumeric);
-    const sell = isOpenInsiderSell(row.transactionType);
+    const marketSide = openInsiderMarketSide(row.transactionType);
     const stats = sectorStats.get(sector) || {
       buy: 0,
       sell: 0,
       buyCount: 0,
       sellCount: 0,
     };
-    if (sell) {
+    if (marketSide === 'sell') {
       stats.sell += amt;
       stats.sellCount += 1;
-    } else {
+    } else if (marketSide === 'buy') {
       stats.buy += amt;
       stats.buyCount += 1;
     }
     sectorStats.set(sector, stats);
-    return {
-      sector,
-      subsectorSlug: issuer?.sub_sector_slug ?? null,
-      buy: sell ? 0 : amt,
-      sell: sell ? amt : 0,
-    };
-  });
-  const { sectorAgg, subsectorAgg } = accumulateSectorFlows(flowRows);
+  }
 
   const topIndustries = [...sectorStats.entries()]
     .map(([nameKey, v]) => ({
@@ -619,10 +619,6 @@ export async function buildInsiderMobileDashboard(
     }))
     .sort((a, b) => b.buyAmount + b.sellAmount - (a.buyAmount + a.sellAmount))
     .slice(0, 6);
-
-  const industryChain = buildIndustryChainNodes(sectorAgg, subsectorAgg, 6, {
-    syntheticSegments: true,
-  });
 
   const buyHighlights = highlightFrom('buy', 8);
   const sellHighlights = highlightFrom('sell', 8);
@@ -668,14 +664,20 @@ export async function buildInsiderMobileDashboard(
         changePct: 0,
         spike: genSpike(13, 14, 'mixed'),
       },
-      { id: 'pp_sale', label: 'PP Sale', value: 0, changePct: 0, spike: genSpike(14, 14, 'up') },
+      {
+        id: 'plan_10b5',
+        label: '10b5-1',
+        value: plan10b5Count,
+        changePct: pctChange(plan10b5Count, prevPlan10b5),
+        spike: genSpike(14, 14, 'up'),
+      },
     ],
     clusterBuys: [],
     clusterSells: [],
     topPoliticianBuys: [],
     topPoliticianSells: [],
     primeBrokers: [],
-    industryChain,
+    industryChain: [],
     topIndustries,
     recentTrades: [],
     insiderExtras: {

@@ -1,6 +1,5 @@
 import type { DashboardPayload } from '@/data/mockData';
 import { industryName } from '@/data/mockData';
-import { enrichIndustryChain } from '@/lib/industryChainModel';
 import { normalizePrimeBrokers } from '@/lib/normalizePrimeBrokers';
 import { localizePoliticianSeatTitle } from '@/lib/politicianSectorLabel';
 import type { Locale } from '@/i18n/types';
@@ -56,19 +55,11 @@ export function localizeDashboard(
         sells: m.kpi.sells,
         options: m.kpi.options,
         pp_sale: m.kpi.ppSale,
+        plan_10b5: m.kpi.plan10b5,
       };
       return { ...k, label: labelMap[k.id] ?? k.label };
     }),
-    industryChain: enrichIndustryChain(
-      data.industryChain.map((n) => ({
-        ...n,
-        name: m.mock.industries[n.nameKey] ?? n.name ?? industryName(locale, n.nameKey),
-        segments: n.segments?.map((s) => ({
-          ...s,
-          name: m.mock.industries[s.nameKey] ?? s.name ?? industryName(locale, s.nameKey),
-        })),
-      }))
-    ),
+    industryChain: [],
     topIndustries: data.topIndustries.map((n) => ({
       ...n,
       name: m.mock.industries[n.nameKey] ?? n.name ?? industryName(locale, n.nameKey),

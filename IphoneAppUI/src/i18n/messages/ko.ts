@@ -52,6 +52,7 @@ const ko: Messages = {
     sells: "매도",
     options: "옵션",
     ppSale: "예정 매도",
+    plan10b5: "10b5-1",
     todayChange: "오늘",
   },
   cluster: {

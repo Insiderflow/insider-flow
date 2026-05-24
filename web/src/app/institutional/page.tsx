@@ -1,133 +1,161 @@
 import Link from 'next/link';
 import { actionStyles } from '@/components/actionStyles';
-import { badgeStyles } from '@/components/badgeStyles';
 import { panelSurfaceStyles } from '@/components/surfaceStyles';
 import { bodySubtextStyles, pageTitleStyles, sectionTitleStyles } from '@/components/typographyStyles';
+import {
+  formatUsdCompact,
+  getInstitutionalHoldingsOverview,
+} from '@/lib/institutionalHoldings';
 
 export const dynamic = 'force-dynamic';
 
 export default async function InstitutionalPage() {
+  const data = await getInstitutionalHoldingsOverview();
+  const hasData = data.totalRows > 0;
+
   return (
     <div className="min-h-screen bg-gray-900">
       <main className="p-4">
-        {/* Header */}
         <div className="mb-6">
-          <h1 className={`${pageTitleStyles()} mb-2`}>機構投資者</h1>
-          <p className={bodySubtextStyles()}>查看所有機構投資者的持股詳情和投資活動</p>
+          <h1 className={`${pageTitleStyles()} mb-2`}>機構投資者 (13F)</h1>
+          <p className={bodySubtextStyles()}>
+            季度 SEC 13F-HR 持股快照 — 誰在季末持有哪些美股（非逐筆交易）
+          </p>
         </div>
 
-        {/* Info Card */}
-        <div className={`${panelSurfaceStyles()} mb-6`}>
-          <div className="flex items-start gap-4">
-            <div className="text-4xl">🏢</div>
-            <div>
-              <h2 className={`${sectionTitleStyles()} mb-2`}>機構投資者數據庫</h2>
-              <p className={`${bodySubtextStyles()} mb-4`}>
-                此頁面將顯示所有機構投資者的持股數據，包括對沖基金、養老基金、保險公司等。
-              </p>
-              <div className="bg-orange-900/30 border border-orange-500/30 rounded-lg p-4">
-                <h3 className="text-lg font-semibold text-orange-300 mb-2">📊 數據來源</h3>
-                <p className={`${bodySubtextStyles()} text-sm mb-2`}>
-                  數據來自 SEC 13F-HR 申報，包括：
-                </p>
-                <ul className={`${bodySubtextStyles()} text-sm space-y-1 ml-4`}>
-                  <li>• Berkshire Hathaway (巴菲特)</li>
-                  <li>• BlackRock</li>
-                  <li>• Vanguard</li>
-                  <li>• State Street</li>
-                  <li>• 其他大型機構投資者</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Sample Managers */}
-        <div className={`${panelSurfaceStyles()} mb-6`}>
-          <h2 className={`${sectionTitleStyles()} mb-4`}>📈 主要機構投資者</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div className="bg-gray-700 rounded-lg p-4">
-              <h3 className="text-lg font-bold text-white mb-2">Berkshire Hathaway</h3>
-              <p className={`${bodySubtextStyles()} text-sm mb-2`}>CIK: 0001067983</p>
-              <p className="text-gray-400 text-sm">巴菲特投資公司</p>
-              <div className="mt-2">
-                <span className={badgeStyles('success', 'sm')}>評級: 5/5</span>
-              </div>
-            </div>
-            <div className="bg-gray-700 rounded-lg p-4">
-              <h3 className="text-lg font-bold text-white mb-2">BlackRock Inc</h3>
-              <p className={`${bodySubtextStyles()} text-sm mb-2`}>CIK: 0001364742</p>
-              <p className="text-gray-400 text-sm">全球最大資產管理公司</p>
-              <div className="mt-2">
-                <span className={badgeStyles('info', 'sm')}>評級: 5/5</span>
-              </div>
-            </div>
-            <div className="bg-gray-700 rounded-lg p-4">
-              <h3 className="text-lg font-bold text-white mb-2">Vanguard Group</h3>
-              <p className={`${bodySubtextStyles()} text-sm mb-2`}>CIK: 0000102909</p>
-              <p className="text-gray-400 text-sm">指數基金先驅</p>
-              <div className="mt-2">
-                <span className={badgeStyles('neutral', 'sm')}>評級: 5/5</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Features */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <div className={panelSurfaceStyles()}>
-            <div className="text-3xl mb-4">📊</div>
-            <h3 className="text-lg font-bold text-white mb-2">投資組合分析</h3>
-            <p className={`${bodySubtextStyles()} text-sm mb-4`}>
-              分析機構投資者的投資組合集中度、行業分布、持股變化趨勢
+        {!hasData ? (
+          <div className={`${panelSurfaceStyles()} mb-6 border border-amber-500/30`}>
+            <h2 className={`${sectionTitleStyles()} mb-2 text-amber-200`}>尚無 13F 數據</h2>
+            <p className={`${bodySubtextStyles()} mb-4 text-sm`}>
+              需要 Finnhub API key（institutional-ownership 端點）並執行匯入腳本。
             </p>
-            <ul className="text-gray-400 text-sm space-y-1">
-              <li>• 投資組合集中度分析</li>
-              <li>• 行業分布統計</li>
-              <li>• 持股變化追蹤</li>
-              <li>• 投資風格分類</li>
-            </ul>
+            <pre className="overflow-x-auto rounded-lg bg-gray-950 p-3 text-xs text-gray-300">
+{`cd insider-flow/web
+# Free: SEC bulk TSVs in IphoneAppUI/13F (9 quarters, ~2y)
+npm run sec:13f-import
+# Or: npm run sec:13f-import -- --all --batch 800`}
+            </pre>
           </div>
-          <div className={panelSurfaceStyles()}>
-            <div className="text-3xl mb-4">⚡</div>
-            <h3 className="text-lg font-bold text-white mb-2">實時數據</h3>
-            <p className={`${bodySubtextStyles()} text-sm mb-4`}>
-              基於 SEC 13F 申報的季度更新，提供最新的機構持股數據
-            </p>
-            <ul className="text-gray-400 text-sm space-y-1">
-              <li>• 季度申報更新</li>
-              <li>• 持股變化分析</li>
-              <li>• 投資活動追蹤</li>
-              <li>• 績效指標計算</li>
-            </ul>
-          </div>
-        </div>
+        ) : (
+          <>
+            <div
+              className={`${panelSurfaceStyles()} mb-6 grid grid-cols-2 gap-4 md:grid-cols-4`}
+            >
+              <Stat label="持股記錄" value={data.totalRows.toLocaleString()} />
+              <Stat label="最新申報季" value={data.latestReportDate ?? '—'} />
+              <Stat label="機構數" value={data.investorCount.toLocaleString()} />
+              <Stat label="涵蓋股票" value={data.symbolCount.toLocaleString()} />
+            </div>
 
-        {/* Quick Actions */}
+            <div className="mb-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
+              <div className={panelSurfaceStyles()}>
+                <h2 className={`${sectionTitleStyles()} mb-4`}>
+                  機構持倉總額（{data.latestReportDate}）
+                </h2>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-sm">
+                    <thead>
+                      <tr className="border-b border-gray-700 text-gray-400">
+                        <th className="pb-2 pr-2">機構</th>
+                        <th className="pb-2 pr-2 text-right">標的數</th>
+                        <th className="pb-2 text-right">市值</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {data.topInvestors.map((inv) => (
+                        <tr
+                          key={`${inv.name}-${inv.cik}`}
+                          className="border-b border-gray-800"
+                        >
+                          <td className="py-2 pr-2 text-white">
+                            {inv.name}
+                            {inv.cik ? (
+                              <span className="ml-1 text-xs text-gray-500">
+                                CIK {inv.cik}
+                              </span>
+                            ) : null}
+                          </td>
+                          <td className="py-2 pr-2 text-right tabular-nums text-gray-300">
+                            {inv.positions}
+                          </td>
+                          <td className="py-2 text-right tabular-nums text-emerald-400">
+                            {formatUsdCompact(inv.valueUsd)}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div className={panelSurfaceStyles()}>
+                <h2 className={`${sectionTitleStyles()} mb-4`}>
+                  機構持倉最集中標的（{data.latestReportDate}）
+                </h2>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-sm">
+                    <thead>
+                      <tr className="border-b border-gray-700 text-gray-400">
+                        <th className="pb-2 pr-2">代碼</th>
+                        <th className="pb-2 pr-2 text-right">機構數</th>
+                        <th className="pb-2 text-right">申報市值</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {data.topSymbols.map((row) => (
+                        <tr key={row.symbol} className="border-b border-gray-800">
+                          <td className="py-2 pr-2">
+                            <Link
+                              href={`/issuers/${row.symbol}`}
+                              className="font-medium text-orange-400 hover:underline"
+                            >
+                              {row.symbol}
+                            </Link>
+                          </td>
+                          <td className="py-2 pr-2 text-right tabular-nums text-gray-300">
+                            {row.holders}
+                          </td>
+                          <td className="py-2 text-right tabular-nums text-emerald-400">
+                            {formatUsdCompact(row.valueUsd)}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+
         <div className={panelSurfaceStyles()}>
-          <h2 className={`${sectionTitleStyles()} mb-4`}>🚀 快速操作</h2>
-          <div className="flex flex-wrap gap-4">
-            <Link 
-              href="/sec-data" 
-              className={actionStyles('primary')}
-            >
-              查看 SEC 13F 數據
+          <h2 className={`${sectionTitleStyles()} mb-4`}>數據說明</h2>
+          <ul className={`${bodySubtextStyles()} space-y-2 text-sm`}>
+            <li>• 來源：Finnhub → SEC 13F-HR（季末持倉，約滯後 45 天）</li>
+            <li>• 與 Form 4 內部人交易、主經紀商 Form 4 資金流為不同申報</li>
+            <li>
+              • 定期更新：<code className="text-orange-300">npm run finnhub:13f-import</code>
+            </li>
+          </ul>
+          <div className="mt-4 flex flex-wrap gap-3">
+            <Link href="/insider" className={actionStyles('primary')}>
+              內部人交易 (Form 4)
             </Link>
-            <Link 
-              href="/politicians" 
-              className={actionStyles('ghost')}
-            >
-              查看政治人物交易
-            </Link>
-            <Link 
-              href="/issuers" 
-              className={actionStyles('secondary')}
-            >
-              查看公司詳情
+            <Link href="/politicians" className={actionStyles('ghost')}>
+              議員交易
             </Link>
           </div>
         </div>
       </main>
+    </div>
+  );
+}
+
+function Stat({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <p className="text-xs text-gray-500">{label}</p>
+      <p className="text-lg font-semibold tabular-nums text-white">{value}</p>
     </div>
   );
 }
