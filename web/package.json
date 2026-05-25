@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build:mobile-app": "cd ../IphoneAppUI && npm ci && npm run build:embed",
+    "build:mobile-app": "cd ../IphoneAppUI && npm ci --include=dev && npm run build:embed",
     "build": "npm run build:mobile-app && rm -rf .next && prisma generate && next build",
     "build:all": "npm run build",
     "start": "next start",
