@@ -163,14 +163,11 @@ export async function middleware(req: NextRequest) {
     cookieStore.get("__Secure-next-auth.session-token")?.value ||
     cookieStore.get("next-auth.session-token")?.value;
   if (!sessionToken) {
-    const requestHeaders = new Headers(req.headers);
-    requestHeaders.set("x-pathname", url);
     return NextResponse.redirect(
       new URL(
         "/login?next=" + encodeURIComponent(req.nextUrl.pathname),
         req.url,
       ),
-      { request: { headers: requestHeaders } },
     );
   }
 
