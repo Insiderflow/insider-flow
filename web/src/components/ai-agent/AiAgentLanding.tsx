@@ -1,12 +1,8 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
-import { CONTACT_EMAIL } from '@/lib/siteConfig';
-
-const INSTALL_CMD =
-  'curl -fsSL https://www.insiderflow.asia/ai-agent/install.sh | bash';
-const PACKAGE_URL = '/ai-agent/package.tar.gz';
+import DeployButton from '@/components/ai-agent/DeployButton';
+import { AI_AGENT_BRAND, AI_AGENT_CONTACT_EMAIL } from '@/lib/aiAgentSite';
 
 function IconShield({ className }: { className?: string }) {
   return (
@@ -80,130 +76,6 @@ function IconBook({ className }: { className?: string }) {
   );
 }
 
-function DeployModal({
-  open,
-  onClose,
-}: {
-  open: boolean;
-  onClose: () => void;
-}) {
-  const [copied, setCopied] = useState(false);
-
-  const copy = useCallback(async () => {
-    try {
-      await navigator.clipboard.writeText(INSTALL_CMD);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
-    } catch {
-      setCopied(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    document.addEventListener('keydown', onKey);
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.removeEventListener('keydown', onKey);
-      document.body.style.overflow = '';
-    };
-  }, [open, onClose]);
-
-  if (!open) return null;
-
-  return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="deploy-modal-title"
-      onClick={onClose}
-    >
-      <div
-        className="w-full max-w-lg rounded-2xl border border-white/10 bg-gray-900 shadow-2xl shadow-black/50"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="px-6 pt-6 pb-4 border-b border-white/10">
-          <h2 id="deploy-modal-title" className="text-xl font-bold text-white">
-            一鍵部署到公司內部
-          </h2>
-          <p className="mt-2 text-sm text-gray-400">
-            喺公司 Linux / macOS server 貼上以下指令，5–10 分鐘內即可用。
-          </p>
-        </div>
-        <div className="px-6 py-5 space-y-4">
-          <div>
-            <label className="text-xs font-medium text-gray-500 uppercase tracking-wider">
-              安裝指令
-            </label>
-            <div className="mt-2 flex gap-2">
-              <code className="flex-1 rounded-lg bg-black/50 border border-white/10 px-3 py-3 text-sm text-emerald-300 font-mono break-all">
-                {INSTALL_CMD}
-              </code>
-              <button
-                type="button"
-                onClick={copy}
-                className="shrink-0 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 text-sm font-medium transition-colors"
-              >
-                {copied ? '已複製 ✓' : '複製'}
-              </button>
-            </div>
-          </div>
-          <p className="text-xs text-gray-500">
-            GPU 模式：<code className="text-gray-400">... | bash -s -- --profile gpu</code>
-          </p>
-          <a
-            href={PACKAGE_URL}
-            download
-            className="flex items-center justify-center gap-2 w-full rounded-xl border border-blue-500/40 bg-blue-500/10 hover:bg-blue-500/20 text-blue-300 py-3 text-sm font-semibold transition-colors"
-          >
-            <IconDownload className="w-5 h-5" />
-            下載完整 package（離線 / 手動部署）
-          </a>
-        </div>
-        <div className="px-6 pb-6 flex justify-end">
-          <button
-            type="button"
-            onClick={onClose}
-            className="text-sm text-gray-400 hover:text-white transition-colors"
-          >
-            關閉
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function DeployButton({ className = '' }: { className?: string }) {
-  const [open, setOpen] = useState(false);
-
-  const handleClick = useCallback(async () => {
-    setOpen(true);
-    try {
-      await navigator.clipboard.writeText(INSTALL_CMD);
-    } catch {
-      /* modal still shows command */
-    }
-  }, []);
-
-  return (
-    <>
-      <button
-        type="button"
-        onClick={handleClick}
-        className={`inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold shadow-lg shadow-emerald-900/30 transition-all hover:scale-[1.02] active:scale-[0.98] ${className}`}
-      >
-        一鍵部署到公司內部
-      </button>
-      <DeployModal open={open} onClose={() => setOpen(false)} />
-    </>
-  );
-}
-
 const FAQ = [
   {
     q: '數據會唔會傳去 OpenAI / 雲端？',
@@ -219,7 +91,7 @@ const FAQ = [
   },
   {
     q: 'IT 唔識 Docker 點算？',
-    a: 'install.sh 會自動 check Docker、拉 image、起 service。我哋亦提供付費代部署（遠程 / 上門），email team@insiderflow.asia。',
+    a: `install.sh 會自動 check Docker、拉 image、起 service。我哋亦提供付費代部署（遠程 / 上門），email ${AI_AGENT_CONTACT_EMAIL}。`,
   },
   {
     q: '可唔可以接現有 HR / ERP 系統？',
@@ -233,9 +105,9 @@ const FAQ = [
 
 export default function AiAgentLanding() {
   return (
-    <div className="-mx-4 sm:mx-0 min-h-screen text-white">
+    <div className="min-h-screen text-white">
       {/* Hero */}
-      <section className="relative overflow-hidden rounded-none sm:rounded-2xl border-y sm:border border-white/10 hero-gradient">
+      <section className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-[#0f1a2e] to-[#0b1220]">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-emerald-600/10 pointer-events-none" />
         <div className="relative z-10 px-5 sm:px-12 py-16 sm:py-24 text-center max-w-4xl mx-auto">
           <p className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 text-xs font-medium text-emerald-300 mb-6">
@@ -298,7 +170,7 @@ export default function AiAgentLanding() {
       {/* Solution */}
       <section className="mt-20 px-2 sm:px-0">
         <div className="rounded-2xl border border-blue-500/20 bg-gradient-to-br from-blue-950/50 to-gray-900 p-8 sm:p-10">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-4">Insider Flow AI Agent 提供咩？</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold mb-4">{AI_AGENT_BRAND} 提供咩？</h2>
           <p className="text-gray-300 mb-8 max-w-3xl leading-relaxed">
             一套經過整理嘅 open-source 私有化方案：Docker 一鍵起、靚仔 Web UI 俾全公司用、Human-in-the-loop 審批、完整 Audit log——專為非 tech 老闆同 compliance 而設。
           </p>
@@ -431,14 +303,14 @@ export default function AiAgentLanding() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <DeployButton className="px-8 py-4" />
           <Link
-            href={`mailto:${CONTACT_EMAIL}?subject=AI%20Agent%20%E5%B0%88%E4%BA%BA%E4%BB%A3%E9%83%A8%E7%BD%B2`}
+            href={`mailto:${AI_AGENT_CONTACT_EMAIL}?subject=AI%20Agent%20%E5%B0%88%E4%BA%BA%E4%BB%A3%E9%83%A8%E7%BD%B2`}
             className="inline-flex items-center justify-center rounded-xl border border-blue-500/50 text-blue-300 hover:bg-blue-500/10 px-8 py-4 font-semibold transition-colors"
           >
             聯絡專人代部署
           </Link>
         </div>
         <p className="mt-6 text-sm text-gray-500">
-          📧 {CONTACT_EMAIL} · 香港時間 Mon–Fri 回覆
+          📧 {AI_AGENT_CONTACT_EMAIL} · 香港時間 Mon–Fri 回覆
         </p>
       </section>
     </div>

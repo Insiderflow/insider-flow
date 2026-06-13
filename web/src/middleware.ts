@@ -55,6 +55,7 @@ function hasFileExtension(pathname: string): boolean {
 function shouldServeMobileApp(pathname: string): boolean {
   if (pathname.startsWith("/api")) return false;
   if (pathname.startsWith("/crypto")) return false;
+  if (pathname.startsWith("/ai-agent")) return false;
   if (pathname.startsWith(MOBILE_APP_PREFIX)) return false;
   if (pathname.startsWith("/_next")) return false;
   if (pathname === "/favicon.ico" || pathname === "/robots.txt") return false;
@@ -121,6 +122,15 @@ async function proxyCryptoApp(req: NextRequest): Promise<NextResponse> {
 export async function middleware(req: NextRequest) {
   const url = req.nextUrl.pathname;
 
+  const withPathname = (res: NextResponse) => {
+    const requestHeaders = new Headers(req.headers);
+    requestHeaders.set("x-pathname", url);
+    return NextResponse.next({
+      request: { headers: requestHeaders },
+      headers: res.headers,
+    });
+  };
+
   if (url === "/crypto" || url.startsWith("/crypto/")) {
     return proxyCryptoApp(req);
   }
@@ -130,8 +140,7 @@ export async function middleware(req: NextRequest) {
       const res = new NextResponse(null, { status: 204 });
       return applyCors(req, res);
     }
-    const res = NextResponse.next();
-    return applyCors(req, res);
+    return withPathname(applyCors(req, NextResponse.next()));
   }
 
   const mobileRedirect = mobileAppRedirect(req);
@@ -142,7 +151,11 @@ export async function middleware(req: NextRequest) {
   );
   const requiresPaid = false;
 
-  if (!requiresAuth && !requiresPaid) return NextResponse.next();
+  if (!requiresAuth && !requiresPaid) {
+    const requestHeaders = new Headers(req.headers);
+    requestHeaders.set("x-pathname", url);
+    return NextResponse.next({ request: { headers: requestHeaders } });
+  }
 
   const cookieStore = await cookies();
   const sessionToken =
@@ -150,15 +163,20 @@ export async function middleware(req: NextRequest) {
     cookieStore.get("__Secure-next-auth.session-token")?.value ||
     cookieStore.get("next-auth.session-token")?.value;
   if (!sessionToken) {
+    const requestHeaders = new Headers(req.headers);
+    requestHeaders.set("x-pathname", url);
     return NextResponse.redirect(
       new URL(
         "/login?next=" + encodeURIComponent(req.nextUrl.pathname),
         req.url,
       ),
+      { request: { headers: requestHeaders } },
     );
   }
 
-  return NextResponse.next();
+  const requestHeaders = new Headers(req.headers);
+  requestHeaders.set("x-pathname", url);
+  return NextResponse.next({ request: { headers: requestHeaders } });
 }
 
 export const config = {
