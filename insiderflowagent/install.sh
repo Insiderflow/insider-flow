@@ -40,8 +40,8 @@ banner() {
   echo -e "${GREEN}${BOLD}"
   cat <<'EOF'
   ╔══════════════════════════════════════════════╗
-  ║     私域 AI Agent — 一鍵部署                  ║
-  ║     Private On-Prem · 數據唔出公司            ║
+  ║   公司內部私有 AI 助手 — 一鍵部署              ║
+  ║   Private AI Chatbot + RAG · 數據唔出公司    ║
   ╚══════════════════════════════════════════════╝
 EOF
   echo -e "${NC}"
@@ -577,27 +577,31 @@ print_summary() {
   cat <<EOF
 
 ${GREEN}${BOLD}══════════════════════════════════════════════════════════${NC}
-${GREEN}${BOLD}  部署完成！Setup complete!${NC}
+${GREEN}${BOLD}  部署完成！你的公司私有 AI 助手已就緒${NC}
+${GREEN}${BOLD}  Setup complete! Private AI assistant is ready${NC}
 ${GREEN}${BOLD}══════════════════════════════════════════════════════════${NC}
 
-  ${BOLD}Open WebUI（員工聊天）:${NC}  ${WEBUI_URL}
-  n8n（工作流）:           http://localhost:${N8N_PORT:-5678}
-  Chroma（知識庫）:        http://localhost:${CHROMA_PORT:-8000}
+  ${BOLD}Open WebUI（員工聊天 + 知識庫）:${NC}  ${WEBUI_URL}
+  Chroma（RAG 向量庫）:              http://localhost:${CHROMA_PORT:-8000}
 
   預設模型 Default model:  ${DEFAULT_MODEL}
   模型狀態 Model status:   $( [[ "$MODEL_PULL_OK" -eq 1 ]] && echo "✓ 已就緒 ready" || echo "⚠ 請手動 pull / pull manually" )
   安裝目錄 Install dir:   ${INSTALL_DIR}
 
 ${YELLOW}${BOLD}首次使用 First-time setup:${NC}
-  1. 瀏覽器會開啟 Open WebUI
-  2. ${BOLD}建立管理員帳號 Create admin account${NC}（第一個註冊嘅帳號）
-  3. 揀模型 ${DEFAULT_MODEL}，開始對話
+  1. 瀏覽器會開啟 Open WebUI（似 ChatGPT 嘅介面）
+  2. ${BOLD}建立管理員帳號 Create admin account${NC}
+  3. Upload 公司文件（HR / SOP）→ 開始 RAG 問答
+  4. 揀模型 ${DEFAULT_MODEL} 同 AI 對話
+
+${CYAN}需要 AI Agent 工作流 / 審批 / 客製整合？${NC}
+  → 我哋 Professional Plan 會幫你設計，WhatsApp / email team@insiderflow.asia
 
 ${YELLOW}常用指令 Useful commands:${NC}
   停止 Stop:  cd ${INSTALL_DIR} && docker compose --profile ${PROFILE} down
   日誌 Logs:  cd ${INSTALL_DIR} && docker compose logs -f open-webui
 
-  專人代部署 Professional setup: team@insiderflow.asia
+  專人代部署 Professional Plan: team@insiderflow.asia
 ${GREEN}══════════════════════════════════════════════════════════${NC}
 EOF
 }

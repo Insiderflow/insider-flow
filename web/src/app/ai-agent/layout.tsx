@@ -16,7 +16,7 @@ export default function AiAgentLayout({
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-sm text-gray-500">
           <div>
             <p className="font-semibold text-gray-300">{AI_AGENT_BRAND}</p>
-            <p className="mt-1">香港中小企私有化 AI 部署方案</p>
+            <p className="mt-1">香港中小企 · 公司內部私有 AI 助手</p>
           </div>
           <div className="flex flex-col sm:items-end gap-1">
             <a

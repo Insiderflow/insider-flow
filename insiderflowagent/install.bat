@@ -19,8 +19,8 @@ if "%INSTALL_DIR:~-1%"=="\" set "INSTALL_DIR=%INSTALL_DIR:~0,-1%"
 
 echo.
 echo  ========================================================
-echo    私域 AI Agent - Windows 一鍵部署
-echo    Private On-Prem AI Agent Setup
+echo    私域 AI - 公司內部私有 AI 助手
+echo    Private AI Chatbot + RAG - One-click Setup
 echo  ========================================================
 echo.
 
@@ -163,7 +163,8 @@ call :wait_for_webui
 
 echo.
 echo  ========================================================
-echo    部署完成 Setup complete!
+echo    部署完成！公司私有 AI 助手已就緒
+echo    Setup complete! Private AI assistant is ready
 echo  ========================================================
 echo.
 echo    Open WebUI: !WEBUI_URL!
@@ -177,7 +178,10 @@ echo.
 echo    首次使用 First-time:
 echo    1. 瀏覽器會自動開啟
 echo    2. 建立管理員帳號 Create admin account
-echo    3. 揀模型 %DEFAULT_MODEL% 開始使用
+echo    3. Upload 公司文件 HR/SOP 開始 RAG 問答
+echo    4. 揀模型 %DEFAULT_MODEL% 同 AI 對話
+echo.
+echo    需要 AI Agent 工作流? WhatsApp / team@insiderflow.asia
 echo.
 echo    支援 Support: team@insiderflow.asia
 echo  ========================================================

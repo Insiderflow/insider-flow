@@ -1,7 +1,13 @@
-# 私域 AI Agent — Private On-Prem Stack
+# 私域 AI — Free Plan 私有化部署
 #
-# CPU:  COMPOSE_PROFILES=cpu docker compose up -d
-# GPU:  COMPOSE_PROFILES=gpu docker compose -f docker-compose.yml -f docker-compose.gpu.yml up -d
+# Free Plan（預設）: Ollama + Open WebUI + Chroma（私有 AI 助手 + RAG）
+#   COMPOSE_PROFILES=cpu docker compose up -d
+#
+# GPU 加速:
+#   COMPOSE_PROFILES=gpu docker compose -f docker-compose.yml -f docker-compose.gpu.yml up -d
+#
+# Professional 加購（n8n 工作流 / Audit API）— 由專人代部署，唔使自助啟用:
+#   docker compose --profile cpu --profile pro up -d
 
 name: insiderflow-agent
 
@@ -42,10 +48,9 @@ services:
     volumes:
       - openwebui_data:/app/backend/data
     environment:
-      # 用 container_name 連 Ollama（同一 if-agent-net）
       OLLAMA_BASE_URL: http://if-agent-ollama:11434
       WEBUI_SECRET_KEY: ${WEBUI_SECRET_KEY:-change-me-in-production}
-      WEBUI_NAME: ${WEBUI_NAME:-公司 AI 助手}
+      WEBUI_NAME: ${WEBUI_NAME:-公司私有 AI 助手}
       WEBUI_ALLOWED_ORIGINS: ${WEBUI_ALLOWED_ORIGINS:-}
       DEFAULT_MODELS: ${DEFAULT_MODELS:-qwen2.5:3b}
       ENABLE_SIGNUP: "false"
@@ -58,6 +63,23 @@ services:
       - "host.docker.internal:host-gateway"
     profiles: ["cpu", "gpu"]
 
+  chroma:
+    image: chromadb/chroma:latest
+    container_name: if-agent-chroma
+    restart: unless-stopped
+    networks:
+      - if-agent-net
+    ports:
+      - "${CHROMA_PORT:-8000}:8000"
+    volumes:
+      - chroma_data:/chroma/chroma
+    environment:
+      IS_PERSISTENT: "TRUE"
+      ANONYMIZED_TELEMETRY: "FALSE"
+      TZ: ${TZ:-Asia/Hong_Kong}
+    profiles: ["cpu", "gpu"]
+
+  # ── Professional Plan 加購（optional profile: pro）──
   n8n:
     image: n8nio/n8n:latest
     container_name: if-agent-n8n
@@ -78,23 +100,7 @@ services:
       WEBHOOK_URL: ${N8N_WEBHOOK_URL:-http://localhost:5678/}
       GENERIC_TIMEZONE: ${TZ:-Asia/Hong_Kong}
       TZ: ${TZ:-Asia/Hong_Kong}
-    profiles: ["cpu", "gpu"]
-
-  chroma:
-    image: chromadb/chroma:latest
-    container_name: if-agent-chroma
-    restart: unless-stopped
-    networks:
-      - if-agent-net
-    ports:
-      - "${CHROMA_PORT:-8000}:8000"
-    volumes:
-      - chroma_data:/chroma/chroma
-    environment:
-      IS_PERSISTENT: "TRUE"
-      ANONYMIZED_TELEMETRY: "FALSE"
-      TZ: ${TZ:-Asia/Hong_Kong}
-    profiles: ["cpu", "gpu"]
+    profiles: ["pro"]
 
   api:
     build:
@@ -107,7 +113,6 @@ services:
     ports:
       - "${API_PORT:-8080}:8080"
     volumes:
-      # 只 mount 可寫 data volume，避免 read-only filesystem 問題
       - api_data:/app/data
     environment:
       API_SECRET_KEY: ${API_SECRET_KEY:-change-me}
@@ -118,11 +123,11 @@ services:
       TZ: ${TZ:-Asia/Hong_Kong}
     depends_on:
       - chroma
-    profiles: ["cpu", "gpu"]
+    profiles: ["pro"]
 
 volumes:
   ollama_data:
   openwebui_data:
-  n8n_data:
   chroma_data:
+  n8n_data:
   api_data:

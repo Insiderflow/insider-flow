@@ -1,8 +1,14 @@
 'use client';
 
+import Link from 'next/link';
 import DeployButton from '@/components/ai-agent/DeployButton';
 import WhatsAppContactButton from '@/components/ai-agent/WhatsAppContactButton';
-import { AI_AGENT_BRAND, AI_AGENT_CONTACT_EMAIL } from '@/lib/aiAgentSite';
+import {
+  AI_AGENT_BRAND,
+  AI_AGENT_CONTACT_EMAIL,
+  AI_AGENT_PRODUCT,
+  AI_AGENT_QUESTIONNAIRE_URL,
+} from '@/lib/aiAgentSite';
 
 function IconShield({ className }: { className?: string }) {
   return (
@@ -44,18 +50,10 @@ function IconLock({ className }: { className?: string }) {
   );
 }
 
-function IconClock({ className }: { className?: string }) {
+function IconBook({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-    </svg>
-  );
-}
-
-function IconUser({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
     </svg>
   );
 }
@@ -68,38 +66,42 @@ function IconCpu({ className }: { className?: string }) {
   );
 }
 
-function IconBook({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
-    </svg>
-  );
-}
-
 const FAQ = [
   {
+    q: '「私有 AI 助手」同 ChatGPT 有咩分別？',
+    a: 'ChatGPT 係公有雲，你 upload 嘅文件會離開公司。私有 AI 助手跑喺你自己部機 / server，對話同文件都留喺內網，PDPO 風險低好多。',
+  },
+  {
+    q: 'Windows 支唔支援？',
+    a: '支援。Windows 用戶安裝 Docker Desktop（WSL2），解壓 package 後雙擊 install.bat 就得。Linux / macOS 用 install.sh 一條 command。',
+  },
+  {
+    q: '難唔難用？要唔要請 IT？',
+    a: 'Free Plan 設計俾非 tech 老闆：一鍵部署，Open WebUI 介面似 ChatGPT，upload PDF 就可以做知識庫問答。日常用唔使 command line。',
+  },
+  {
     q: '數據會唔會傳去 OpenAI / 雲端？',
-    a: '唔會。整套 stack 跑喺你公司 server，LLM 推理、文件、對話記錄都留喺內網。我哋用開源 Ollama + Open WebUI，唔依賴 SaaS API。',
+    a: '唔會。Free Plan 用 Ollama 本地推理，全部喺你公司 hardware 跑，無 API call 去外部。',
   },
   {
-    q: '需唔需要好勁嘅 hardware？',
-    a: 'CPU 入門版：4 vCPU + 16 GB RAM 已可試用（細模型）。20 人以上或要更快回覆，建議加 NVIDIA GPU（8 GB+ VRAM）。',
+    q: '之後點維護？',
+    a: '一般唔使理，Docker 會自動 restart。偶爾 update：docker compose pull && docker compose up -d。需要專人維護可選 Professional Plan。',
   },
   {
-    q: 'PDPO / 私隱條例點算？',
-    a: 'Private On-Prem 部署令個人資料唔離開公司控制範圍。內建 Audit log 記錄查詢同審批，方便 DPO 做合規查核。詳情可約我哋做 PDPO gap analysis。',
+    q: '要咩 hardware？',
+    a: '10 人以下：迷你主機 4核/16GB/512GB SSD 已夠試用。20 人以上建議加 GPU。詳見下面硬件建議。',
+  },
+  {
+    q: 'Free Plan 包唔包 AI Agent / 工作流？',
+    a: 'Free Plan 係私有 AI 助手（Chat + RAG）。Human-in-the-loop、workflow、系統整合屬於 Professional Plan（AI Agent），填問卷 + 開會由我哋設計。',
+  },
+  {
+    q: 'PDPO 合規點算？',
+    a: 'Private On-Prem 令個人資料唔離開公司。Professional Plan 可加 audit、access control 同 DPO review。',
   },
   {
     q: 'IT 唔識 Docker 點算？',
-    a: `install.sh 會自動 check Docker、拉 image、起 service。需要專人代部署可以 WhatsApp 我哋，或者 email ${AI_AGENT_CONTACT_EMAIL}。`,
-  },
-  {
-    q: '可唔可以接現有 HR / ERP 系統？',
-    a: '可以。n8n 工作流可接 webhook、Email、Google Drive、SharePoint 等。Chroma 做 RAG 知識庫。需要客製整合可聯絡我哋。',
-  },
-  {
-    q: '同 ChatGPT Enterprise 有咩分別？',
-    a: '你擁有完整 infra 同數據主權，一次部署長期用，無 per-seat 雲端費。適合對 data residency 同成本敏感嘅香港 SME。',
+    a: '腳本全自動。仍然唔得可以 WhatsApp 代部署，或揀 Professional Plan。',
   },
 ];
 
@@ -107,184 +109,204 @@ export default function AiAgentLanding() {
   return (
     <div className="min-h-screen text-white">
       {/* Hero */}
-      <section className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-[#0f1a2e] to-[#0b1220]">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-emerald-600/10 pointer-events-none" />
-        <div className="relative z-10 px-5 sm:px-12 py-16 sm:py-24 text-center max-w-4xl mx-auto">
-          <p className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 text-xs font-medium text-emerald-300 mb-6">
+      <section className="relative overflow-hidden rounded-2xl border border-emerald-500/20 bg-gradient-to-b from-[#0f1a2e] to-[#0b1220]">
+        <div className="absolute inset-0 bg-gradient-to-br from-emerald-600/10 via-transparent to-blue-600/10 pointer-events-none" />
+        <div className="relative z-10 px-5 sm:px-12 py-16 sm:py-20 text-center max-w-4xl mx-auto">
+          <p className="inline-flex items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-500/15 px-4 py-1.5 text-xs font-semibold text-emerald-300 mb-6">
             <IconShield className="w-4 h-4" />
-            香港 SME 專用 · Private On-Prem AI Agent
+            香港 SME · Free Plan 完全免費自助部署
           </p>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight tracking-tight mb-5">
-            公司內部 AI 助手
-            <span className="block text-emerald-400 mt-2">數據唔出門，老細都用得</span>
+          <h1 className="text-3xl sm:text-4xl md:text-[3.25rem] font-extrabold leading-tight tracking-tight mb-4">
+            {AI_AGENT_PRODUCT}
           </h1>
-          <p className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto mb-8 leading-relaxed">
-            唔使將機密文件 upload 去 ChatGPT。一條 command，喺自己 server 部署 Ollama + Open WebUI + 知識庫 Agent——PDPO 友好，5–10 分鐘搞掂。
+          <p className="text-xl sm:text-2xl text-emerald-400 font-semibold mb-6">
+            似 ChatGPT，但數據永遠留喺公司
           </p>
-          <DeployButton className="px-8 py-4 text-base sm:text-lg" />
-          <p className="mt-4 text-sm text-gray-500">
-            開源 stack · 無 vendor lock-in · 支援 CPU 入門 / GPU 加速
+          <p className="text-base sm:text-lg text-white/75 max-w-2xl mx-auto mb-10 leading-relaxed">
+            一鍵部署 Ollama + Open WebUI + 知識庫 RAG。唔使學 n8n、唔使請 IT，
+            5–10 分鐘就有公司專用 AI 問答 —— PDPO 友好，老闆自己搞得掂。
           </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-stretch sm:items-center">
+            <DeployButton className="px-10 py-5 text-lg shadow-xl shadow-emerald-900/40 ring-2 ring-emerald-400/30" />
+          </div>
+          <p className="mt-5 text-sm text-gray-500">
+            Linux / macOS / WSL：一條 command · Windows：install.bat · 模型 qwen2.5:3b
+          </p>
+        </div>
+      </section>
+
+      {/* What is */}
+      <section className="mt-16">
+        <h2 className="text-2xl sm:text-3xl font-bold text-center mb-3">咩係「私有 AI 助手」？</h2>
+        <p className="text-center text-gray-400 mb-8 max-w-2xl mx-auto text-sm sm:text-base">
+          用簡單嘅話：喺公司自己部機度，擺一個只俾你哋員工用嘅 ChatGPT。
+        </p>
+        <div className="grid gap-4 sm:grid-cols-3 max-w-4xl mx-auto">
+          {[
+            { title: 'Chat', desc: '員工用瀏覽器同 AI 傾偈，介面直觀' },
+            { title: 'RAG 知識庫', desc: 'Upload HR / SOP PDF，AI 只根據你公司文件答' },
+            { title: 'Private', desc: '所有對話同文件留喺公司 server，唔上公有雲' },
+          ].map((item) => (
+            <div key={item.title} className="rounded-xl border border-white/10 bg-gray-900/70 p-5 text-center">
+              <h3 className="text-emerald-400 font-bold text-lg mb-2">{item.title}</h3>
+              <p className="text-sm text-gray-400">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Plans */}
+      <section className="mt-20" id="plans">
+        <h2 className="text-2xl sm:text-3xl font-bold text-center mb-10">Free Plan vs Professional Plan</h2>
+        <div className="grid gap-6 lg:grid-cols-2 max-w-5xl mx-auto">
+          <div className="rounded-2xl border-2 border-emerald-500/50 bg-emerald-950/20 p-8 relative">
+            <span className="absolute -top-3 left-6 bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+              推薦起步
+            </span>
+            <h3 className="text-xl font-bold text-emerald-300 mb-1">Free · 私有 AI 助手</h3>
+            <p className="text-3xl font-extrabold mb-4">$0 <span className="text-base font-normal text-gray-400">自助部署</span></p>
+            <ul className="space-y-3 text-sm text-gray-300 mb-8">
+              <li>✓ Ollama + Open WebUI + Chroma RAG</li>
+              <li>✓ 一鍵 install.sh / install.bat</li>
+              <li>✓ 公司知識庫問答（HR / SOP / FAQ）</li>
+              <li>✓ 數據 100% 留喺公司</li>
+              <li>✓ 唔使學 workflow 工具</li>
+            </ul>
+            <DeployButton className="w-full py-4" />
+          </div>
+          <div className="rounded-2xl border border-blue-500/30 bg-blue-950/20 p-8">
+            <h3 className="text-xl font-bold text-blue-300 mb-1">Professional · AI Agent</h3>
+            <p className="text-3xl font-extrabold mb-4">按需報價 <span className="text-base font-normal text-gray-400">專人服務</span></p>
+            <ul className="space-y-3 text-sm text-gray-300 mb-8">
+              <li>✓ Human-in-the-loop 審批流程</li>
+              <li>✓ 客製 workflow（n8n 等）</li>
+              <li>✓ 接 HR / ERP / Email / SharePoint</li>
+              <li>✓ PDPO 合規顧問 + 代部署</li>
+              <li>✓ 專人設計，唔使你砌</li>
+            </ul>
+            <div className="flex flex-col gap-3">
+              <Link
+                href={AI_AGENT_QUESTIONNAIRE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold py-4 transition-colors"
+              >
+                填需求問卷
+              </Link>
+              <WhatsAppContactButton className="w-full py-4" label="WhatsApp 預約會議" />
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Problem */}
-      <section className="mt-16 px-2 sm:px-0">
-        <h2 className="text-2xl sm:text-3xl font-bold text-center mb-3">點解香港公司需要 Private AI？</h2>
-        <p className="text-center text-gray-400 mb-10 max-w-2xl mx-auto">
-          員工偷偷用 ChatGPT 處理客戶資料、合約、HR 文件——風險好真。
-        </p>
+      <section className="mt-20">
+        <h2 className="text-2xl sm:text-3xl font-bold text-center mb-10">點解香港 SME 需要？</h2>
         <div className="grid gap-6 sm:grid-cols-3">
           {[
-            {
-              title: 'ChatGPT 怕 leak data',
-              desc: '員工 copy 客戶資料、報價、內部策略去公有雲，一旦外泄難以追責，PDPO 下隨時中招。',
-              icon: IconLock,
-              color: 'text-red-400',
-            },
-            {
-              title: '自己整 AI 太難',
-              desc: 'LangChain、向量庫、GPU、security hardening——中小企 IT 一兩個人，根本無時間由零砌。',
-              icon: IconServer,
-              color: 'text-amber-400',
-            },
-            {
-              title: 'PDPO 合規壓力',
-              desc: '私隱專員同 audit 要證明：邊個查咗咩、數據去咗邊。公有 SaaS 好難完全掌控。',
-              icon: IconShield,
-              color: 'text-blue-400',
-            },
+            { title: 'ChatGPT 怕 leak', desc: '員工將客戶資料 paste 去公有雲，PDPO 風險好高。', icon: IconLock, color: 'text-red-400' },
+            { title: '自己整太難', desc: '向量庫、GPU、security——中小企 IT 無時間由零砌。', icon: IconServer, color: 'text-amber-400' },
+            { title: '要簡單合規', desc: '老闆要安心：數據唔出門、用得易、唔使成日搵 IT。', icon: IconShield, color: 'text-blue-400' },
           ].map((item) => (
-            <div
-              key={item.title}
-              className="rounded-xl border border-white/10 bg-gray-900/80 p-6 hover:border-white/20 transition-colors"
-            >
+            <div key={item.title} className="rounded-xl border border-white/10 bg-gray-900/80 p-6">
               <item.icon className={`w-10 h-10 mb-4 ${item.color}`} />
               <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-              <p className="text-sm text-gray-400 leading-relaxed">{item.desc}</p>
+              <p className="text-sm text-gray-400">{item.desc}</p>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* Solution */}
-      <section className="mt-20 px-2 sm:px-0">
-        <div className="rounded-2xl border border-blue-500/20 bg-gradient-to-br from-blue-950/50 to-gray-900 p-8 sm:p-10">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-4">{AI_AGENT_BRAND} 提供咩？</h2>
-          <p className="text-gray-300 mb-8 max-w-3xl leading-relaxed">
-            一套經過整理嘅 open-source 私有化方案：Docker 一鍵起、靚仔 Web UI 俾全公司用、Human-in-the-loop 審批、完整 Audit log——專為非 tech 老闆同 compliance 而設。
-          </p>
-          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              'Private On-Prem — 全部跑喺公司 server / 私有 cloud',
-              'Docker 一鍵 — 一條 bash command 自動 setup',
-              'Open WebUI — 似 ChatGPT 嘅靚 UI，員工零培訓上手',
-              'Human-in-the-loop — n8n 工作流，敏感答案要主管 approve',
-              'Audit log — 每個 query 有記錄，方便 PDPO 查核',
-              'Chroma RAG — 內部文件向量化，準確答公司政策問題',
-            ].map((text) => (
-              <li key={text} className="flex gap-3 text-sm text-gray-300">
-                <span className="text-emerald-400 shrink-0 mt-0.5">✓</span>
-                {text}
-              </li>
-            ))}
-          </ul>
         </div>
       </section>
 
       {/* How it works */}
-      <section className="mt-20 px-2 sm:px-0">
-        <h2 className="text-2xl sm:text-3xl font-bold text-center mb-10">點樣運作？三步搞掂</h2>
+      <section className="mt-20">
+        <h2 className="text-2xl sm:text-3xl font-bold text-center mb-10">Free Plan 三步搞掂</h2>
         <div className="grid gap-8 sm:grid-cols-3">
           {[
-            {
-              step: '1',
-              title: 'Landing 下載',
-              desc: '撳「一鍵部署」複製 install 指令，或下載完整 package.tar.gz 做離線部署。',
-              icon: IconDownload,
-            },
-            {
-              step: '2',
-              title: 'Server 跑一條 command',
-              desc: '喺公司 Linux / macOS（Docker 已裝）貼上指令，自動 pull images 同起 docker compose。',
-              icon: IconServer,
-            },
-            {
-              step: '3',
-              title: '即刻用 Open WebUI',
-              desc: '打開 http://公司IP:3000，建立 admin 帳號，upload 文件開始問答。',
-              icon: IconChat,
-            },
+            { step: '1', title: '撳一鍵部署', desc: '複製 install 指令，或 Windows 雙擊 install.bat。', icon: IconDownload },
+            { step: '2', title: '等 5–10 分鐘', desc: '腳本自動裝 Docker、起 service、download 中文模型。', icon: IconServer },
+            { step: '3', title: '開 browser 即用', desc: '建立 admin 帳號，upload 文件，開始同 AI 傾偈。', icon: IconChat },
           ].map((item) => (
-            <div key={item.step} className="relative text-center">
+            <div key={item.step} className="text-center">
               <div className="mx-auto w-14 h-14 rounded-full bg-emerald-600/20 border border-emerald-500/40 flex items-center justify-center mb-4">
                 <item.icon className="w-7 h-7 text-emerald-400" />
               </div>
-              <span className="text-xs font-bold text-emerald-500 uppercase tracking-widest">Step {item.step}</span>
+              <span className="text-xs font-bold text-emerald-500 uppercase">Step {item.step}</span>
               <h3 className="text-lg font-semibold mt-2 mb-2">{item.title}</h3>
-              <p className="text-sm text-gray-400 leading-relaxed">{item.desc}</p>
+              <p className="text-sm text-gray-400">{item.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Benefits */}
-      <section className="mt-20 px-2 sm:px-0">
-        <h2 className="text-2xl sm:text-3xl font-bold text-center mb-10">五大優勢</h2>
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {[
-            { icon: IconLock, title: '數據永遠唔出門', desc: 'LLM 推理同文件 storage 全喺內網，無 API call 去 OpenAI。' },
-            { icon: IconShield, title: 'PDPO 友好', desc: 'Audit trail、access control、可約 DPO review 部署架構。' },
-            { icon: IconClock, title: '5–10 分鐘部署', desc: 'install.sh 自動 check Docker、拉 model、顯示 URL。' },
-            { icon: IconUser, title: '非 tech 老闆都用得', desc: 'Open WebUI 介面直觀，唔使識 command line 日常用。' },
-            { icon: IconCpu, title: 'CPU 入門 + GPU 可選', desc: '細團隊 CPU 夠試，人多再 upgrade GPU profile。' },
-          ].map((item) => (
-            <div key={item.title} className="flex gap-4 rounded-xl border border-white/10 bg-gray-900/60 p-5">
-              <item.icon className="w-8 h-8 text-blue-400 shrink-0" />
-              <div>
-                <h3 className="font-semibold mb-1">{item.title}</h3>
-                <p className="text-sm text-gray-400">{item.desc}</p>
-              </div>
-            </div>
-          ))}
+      {/* Hardware */}
+      <section className="mt-20">
+        <h2 className="text-2xl sm:text-3xl font-bold text-center mb-3">硬件建議（迷你主機）</h2>
+        <p className="text-center text-gray-400 mb-8 text-sm">放喺辦公室 server room / IT 房，接公司內網就得</p>
+        <div className="overflow-x-auto rounded-xl border border-white/10">
+          <table className="w-full text-sm text-left">
+            <thead className="bg-gray-900/80 text-gray-300">
+              <tr>
+                <th className="px-5 py-3 font-semibold">規模</th>
+                <th className="px-5 py-3 font-semibold">CPU / RAM / 硬碟</th>
+                <th className="px-5 py-3 font-semibold">參考配置</th>
+                <th className="px-5 py-3 font-semibold">預算（HKD）</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-white/10 text-gray-400">
+              <tr className="bg-gray-900/40">
+                <td className="px-5 py-4 text-white font-medium">試用 / ≤10 人</td>
+                <td className="px-5 py-4">4 核 · 16 GB · 512 GB SSD</td>
+                <td className="px-5 py-4">Intel NUC / 迷你 PC / 舊 workstation</td>
+                <td className="px-5 py-4">$3,000 – $6,000</td>
+              </tr>
+              <tr>
+                <td className="px-5 py-4 text-white font-medium">10–30 人</td>
+                <td className="px-5 py-4">8 核 · 32 GB · 1 TB SSD</td>
+                <td className="px-5 py-4">小型 server 或 GPU 入門機</td>
+                <td className="px-5 py-4">$8,000 – $15,000</td>
+              </tr>
+              <tr className="bg-gray-900/40">
+                <td className="px-5 py-4 text-white font-medium">30 人+</td>
+                <td className="px-5 py-4">+ NVIDIA GPU 8 GB+ VRAM</td>
+                <td className="px-5 py-4">GPU server（Professional 可代選購）</td>
+                <td className="px-5 py-4">按需報價</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </section>
 
-      {/* Template */}
-      <section className="mt-20 px-2 sm:px-0">
+      {/* Use case */}
+      <section className="mt-20">
         <div className="rounded-2xl border border-emerald-500/30 bg-emerald-950/20 p-8 sm:p-10">
-          <div className="flex flex-col sm:flex-row gap-6 items-start">
-            <div className="rounded-xl bg-emerald-600/20 p-4 shrink-0">
+          <div className="flex flex-col sm:flex-row gap-6">
+            <div className="rounded-xl bg-emerald-600/20 p-4 shrink-0 self-start">
               <IconBook className="w-12 h-12 text-emerald-400" />
             </div>
             <div>
-              <p className="text-emerald-400 text-sm font-semibold uppercase tracking-wider mb-2">第一個 Template</p>
-              <h2 className="text-2xl sm:text-3xl font-bold mb-4">公司內部知識庫問答 Agent</h2>
-              <p className="text-gray-300 leading-relaxed mb-4">
-                將 HR handbook、SOP、IT 政策、FAQ PDF upload 去 Open WebUI，經 Chroma 做 RAG 向量化。員工用自然語言問「年假點計」「報銷流程」——Agent 只根據內部文件答，唔會亂估。
+              <p className="text-emerald-400 text-sm font-semibold uppercase mb-2">Free Plan 即刻用到</p>
+              <h2 className="text-2xl font-bold mb-4">公司知識庫問答</h2>
+              <p className="text-gray-300 text-sm leading-relaxed mb-4">
+                Upload HR handbook、SOP、報銷政策 PDF → 員工問「年假點計」「點報銷」→ AI 只根據內部文件答，唔會乱估。
               </p>
-              <ul className="space-y-2 text-sm text-gray-400 mb-6">
-                <li>• 減少 HR / Admin 重複答同一條問題</li>
-                <li>• 新同事 onboarding 自助查政策，24/7 有答</li>
-                <li>• 敏感問題（薪酬、紀律）經 n8n 送主管 approve 先出答案</li>
-                <li>• 所有 query 写入 Audit log，合規有得查</li>
+              <ul className="text-sm text-gray-400 space-y-1 mb-6">
+                <li>• 減少 HR 重複答同一條問題</li>
+                <li>• 新同事 24/7 自助查政策</li>
+                <li>• 唔使學 workflow，upload 就用</li>
               </ul>
-              <DeployButton className="px-6 py-3 text-sm" />
+              <DeployButton className="px-6 py-3" />
             </div>
           </div>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="mt-20 px-2 sm:px-0 mb-16">
+      <section className="mt-20 mb-12" id="faq">
         <h2 className="text-2xl sm:text-3xl font-bold text-center mb-10">常見問題</h2>
-        <div className="max-w-3xl mx-auto space-y-4">
+        <div className="max-w-3xl mx-auto space-y-3">
           {FAQ.map((item) => (
-            <details
-              key={item.q}
-              className="group rounded-xl border border-white/10 bg-gray-900/60 open:border-emerald-500/30 transition-colors"
-            >
-              <summary className="cursor-pointer list-none px-5 py-4 font-medium flex justify-between items-center gap-4">
+            <details key={item.q} className="group rounded-xl border border-white/10 bg-gray-900/60 open:border-emerald-500/30">
+              <summary className="cursor-pointer list-none px-5 py-4 font-medium flex justify-between gap-4">
                 {item.q}
                 <span className="text-gray-500 group-open:rotate-180 transition-transform shrink-0">▼</span>
               </summary>
@@ -295,24 +317,26 @@ export default function AiAgentLanding() {
       </section>
 
       {/* Final CTA */}
-      <section className="rounded-2xl border border-white/10 bg-gradient-to-r from-gray-900 via-blue-950/40 to-gray-900 p-10 text-center mb-8">
-        <h2 className="text-2xl sm:text-3xl font-bold mb-4">準備好將 AI 留喺公司內部？</h2>
-        <p className="text-gray-400 mb-8 max-w-xl mx-auto">
-          自己 deploy 完全免費（open source stack）。需要專人代部署、PDPO 顧問、或客製 Agent？我哋可以幫手。
+      <section className="rounded-2xl border border-emerald-500/20 bg-gradient-to-r from-emerald-950/30 via-[#0b1220] to-blue-950/30 p-10 text-center mb-8">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-3">而家開始：Free Plan 一鍵部署</h2>
+        <p className="text-gray-400 mb-8 max-w-lg mx-auto text-sm">
+          完全免費、開源、數據唔出公司。有進階 AI Agent 需求？填問卷 + 預約會議。
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <DeployButton className="px-8 py-4" />
-          <WhatsAppContactButton className="px-8 py-4" />
-        </div>
-        <p className="mt-6 text-sm text-gray-500">
-          WhatsApp 即時查詢 · 📧{' '}
-          <a
-            href={`mailto:${AI_AGENT_CONTACT_EMAIL}`}
-            className="text-emerald-400/90 hover:text-emerald-300 transition-colors"
+        <DeployButton className="px-10 py-5 text-lg mb-6" />
+        <div className="flex flex-col sm:flex-row gap-3 justify-center items-center pt-4 border-t border-white/10">
+          <Link
+            href={AI_AGENT_QUESTIONNAIRE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-400 hover:text-blue-300 text-sm font-medium"
           >
-            {AI_AGENT_CONTACT_EMAIL}
-          </a>
-          {' '}· 香港時間 Mon–Fri 回覆
+            Professional Plan：填需求問卷 →
+          </Link>
+          <span className="text-gray-600 hidden sm:inline">|</span>
+          <WhatsAppContactButton className="px-6 py-2.5 text-sm" label="WhatsApp 預約會議" />
+        </div>
+        <p className="mt-6 text-xs text-gray-500">
+          📧 {AI_AGENT_CONTACT_EMAIL} · {AI_AGENT_BRAND}
         </p>
       </section>
     </div>
