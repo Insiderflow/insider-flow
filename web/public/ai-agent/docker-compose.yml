@@ -1,0 +1,110 @@
+# Insider Flow AI Agent — Private On-Prem Stack
+# CPU:  COMPOSE_PROFILES=cpu docker compose up -d
+# GPU:  COMPOSE_PROFILES=gpu docker compose -f docker-compose.yml -f docker-compose.gpu.yml up -d
+
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: if-agent-ollama
+    restart: unless-stopped
+    ports:
+      - "${OLLAMA_PORT:-11434}:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    environment:
+      - TZ=${TZ:-Asia/Hong_Kong}
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+    profiles: ["cpu", "gpu"]
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: if-agent-open-webui
+    restart: unless-stopped
+    ports:
+      - "${OPENWEBUI_PORT:-3000}:8080"
+    volumes:
+      - openwebui_data:/app/backend/data
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY:-change-me-in-production}
+      - WEBUI_NAME=${WEBUI_NAME:-公司 AI 助手}
+      - WEBUI_ALLOWED_ORIGINS=${WEBUI_ALLOWED_ORIGINS:-}
+      - ENABLE_SIGNUP=false
+      - ENABLE_OAUTH_SIGNUP=false
+      - TZ=${TZ:-Asia/Hong_Kong}
+    depends_on:
+      ollama:
+        condition: service_healthy
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    profiles: ["cpu", "gpu"]
+
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: if-agent-n8n
+    restart: unless-stopped
+    ports:
+      - "${N8N_PORT:-5678}:5678"
+    volumes:
+      - n8n_data:/home/node/.n8n
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=${N8N_BASIC_AUTH_ACTIVE:-true}
+      - N8N_BASIC_AUTH_USER=${N8N_BASIC_AUTH_USER:-admin}
+      - N8N_BASIC_AUTH_PASSWORD=${N8N_BASIC_AUTH_PASSWORD:-changeme}
+      - N8N_HOST=${N8N_HOST:-localhost}
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=${N8N_PROTOCOL:-http}
+      - WEBHOOK_URL=${N8N_WEBHOOK_URL:-http://localhost:5678/}
+      - GENERIC_TIMEZONE=${TZ:-Asia/Hong_Kong}
+      - TZ=${TZ:-Asia/Hong_Kong}
+    profiles: ["cpu", "gpu"]
+
+  chroma:
+    image: chromadb/chroma:latest
+    container_name: if-agent-chroma
+    restart: unless-stopped
+    ports:
+      - "${CHROMA_PORT:-8000}:8000"
+    volumes:
+      - chroma_data:/chroma/chroma
+    environment:
+      - IS_PERSISTENT=TRUE
+      - ANONYMIZED_TELEMETRY=FALSE
+      - TZ=${TZ:-Asia/Hong_Kong}
+    profiles: ["cpu", "gpu"]
+
+  api:
+    image: python:3.12-slim
+    container_name: if-agent-api
+    restart: unless-stopped
+    ports:
+      - "${API_PORT:-8080}:8080"
+    volumes:
+      - ./api:/app:ro
+      - api_data:/app/data
+    working_dir: /app
+    command: >
+      sh -c "pip install -q -r requirements.txt &&
+             uvicorn main:app --host 0.0.0.0 --port 8080"
+    environment:
+      - API_SECRET_KEY=${API_SECRET_KEY:-change-me}
+      - ENABLE_AUDIT_LOG=${ENABLE_AUDIT_LOG:-true}
+      - DATA_DIR=/app/data
+      - CHROMA_HOST=chroma
+      - CHROMA_PORT=8000
+      - TZ=${TZ:-Asia/Hong_Kong}
+    depends_on:
+      - chroma
+    profiles: ["cpu", "gpu"]
+
+volumes:
+  ollama_data:
+  openwebui_data:
+  n8n_data:
+  chroma_data:
+  api_data:
