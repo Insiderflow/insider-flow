@@ -181,7 +181,7 @@ echo    2. 建立管理員帳號 Create admin account
 echo    3. Upload 公司文件 HR/SOP 開始知識庫問答
 echo    4. 揀模型 %DEFAULT_MODEL% 同 AI 對話
 echo.
-echo    需要 AI Agent 工作流? WhatsApp / team@insiderflow.asia
+echo    需要 AI Agent（LangGraph / 審批）? WhatsApp / team@insiderflow.asia
 echo.
 echo    支援 Support: team@insiderflow.asia
 echo  ========================================================

@@ -12,7 +12,7 @@ export const AI_AGENT_WHATSAPP_DEPLOY_MESSAGE =
 
 /** Professional Plan 預約 */
 export const AI_AGENT_WHATSAPP_PRO_MESSAGE =
-  '你好，我想了解 AI Agent 專業服務（workflow / 審批），想預約會議。';
+  '你好，我想了解 AI Agent 專業方案（LangGraph / 審批流程），想預約會議。';
 
 export const AI_AGENT_PACKAGE_PATH = '/ai-agent/package.tar.gz';
 export const AI_AGENT_INSTALL_SH_PATH = '/ai-agent/install.sh';

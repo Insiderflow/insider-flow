@@ -1,12 +1,12 @@
 # 私域 AI — Free Plan 私有化部署
 #
-# Free Plan（預設）: Ollama + Open WebUI + Chroma（私有 AI 助手 + RAG）
+# Free Plan（預設）: Ollama + Open WebUI + Chroma（私有 AI 助手 + 知識庫問答）
 #   COMPOSE_PROFILES=cpu docker compose up -d
 #
 # GPU 加速:
 #   COMPOSE_PROFILES=gpu docker compose -f docker-compose.yml -f docker-compose.gpu.yml up -d
 #
-# Professional 加購（n8n 工作流 / Audit API）— 由專人代部署，唔使自助啟用:
+# Professional Plan（AI Agent / LangGraph）— 由專人代部署，optional profile: pro
 #   docker compose --profile cpu --profile pro up -d
 
 name: insiderflow-agent
@@ -80,7 +80,7 @@ services:
       TZ: ${TZ:-Asia/Hong_Kong}
     profiles: ["cpu", "gpu"]
 
-  # ── Professional Plan 加購（optional profile: pro）──
+  # ── Professional Plan 加購（optional profile: pro — LangGraph Agent 由專人部署）──
   n8n:
     image: n8nio/n8n:latest
     container_name: if-agent-n8n

@@ -594,7 +594,7 @@ ${YELLOW}${BOLD}首次使用 First-time setup:${NC}
   3. Upload 公司文件（HR / SOP）→ 開始知識庫問答
   4. 揀模型 ${DEFAULT_MODEL} 同 AI 對話
 
-${CYAN}需要 AI Agent 工作流 / 審批 / 客製整合？${NC}
+${CYAN}需要 AI Agent（LangGraph / 審批 / 系統整合）？${NC}
   → 我哋 Professional Plan 會幫你設計，WhatsApp / email team@insiderflow.asia
 
 ${YELLOW}常用指令 Useful commands:${NC}

@@ -2,11 +2,10 @@
 
 import Link from 'next/link';
 import DeploySection from '@/components/ai-agent/DeploySection';
-import WhatsAppContactButton from '@/components/ai-agent/WhatsAppContactButton';
+import ProAgentSection from '@/components/ai-agent/ProAgentSection';
 import {
   AI_AGENT_CONTACT_EMAIL,
   AI_AGENT_PRODUCT,
-  AI_AGENT_QUESTIONNAIRE_URL,
   AI_AGENT_TAGLINE,
   getAiAgentDeployWhatsAppUrl,
 } from '@/lib/aiAgentSite';
@@ -61,40 +60,40 @@ function IconBook({ className }: { className?: string }) {
 
 const FAQ = [
   {
-    q: '「私有 AI 助手」同 ChatGPT 有咩分別？',
-    a: 'ChatGPT 係上網用嘅，你 paste 嘅客戶資料會傳去外面。私有 AI 助手裝喺公司自己部機，對話同文件都留喺公司，唔會上公有雲。',
+    q: '「私有 AI 助手」同「AI Agent」有咩分別？',
+    a: '私有 AI 助手好似公司內部 ChatGPT：員工問答、查文件。AI Agent 就係 AI 幫你「做事」——例如整理請假、跟進客戶、自動發 email，關鍵步驟要你批。大部分公司由 Free Plan 開始就夠。',
+  },
+  {
+    q: '同 ChatGPT 有咩分別？',
+    a: 'ChatGPT 係上網用，你 paste 嘅資料會傳去外面。我哋嘅方案裝喺公司自己部機，對話同文件都留喺公司。',
   },
   {
     q: '我唔識電腦，用得唔用得？',
-    a: '用得。最簡單係 WhatsApp 搵我哋專人幫手裝。如果想自己試，Mac/Linux 下載安裝包、執行 install.sh；Windows 雙擊 install.bat 就得，唔使打長長嘅指令。',
+    a: '用得。最簡單係 WhatsApp 搵我哋專人幫手裝。如果想自己試，Mac/Linux 執行 install.sh；Windows 雙擊 install.bat，唔使打長指令。',
   },
   {
-    q: 'Windows 支唔支援？',
-    a: '支援。先裝 Docker Desktop，下載安裝包，解壓後雙擊 install.bat。Mac 同 Linux 用 install.sh。',
+    q: 'Windows 可唔可以用？',
+    a: '可以。先裝 Docker Desktop，下載安裝包，解壓後雙擊 install.bat 就得。',
+  },
+  {
+    q: '裝完之後點維護？',
+    a: '一般唔使理，裝好之後自己會運行。偶爾想更新可以 WhatsApp 搵我哋，或者揀 Professional Plan 包支援。',
+  },
+  {
+    q: '要咩硬件？',
+    a: '10 人以下：迷你主機 4 核、16GB 記憶體、512GB 硬碟，大約 $3,000–$6,000。詳見下面硬件建議表。',
   },
   {
     q: '公司資料會唔會俾人睇到？',
     a: '唔會傳去 OpenAI 或其他雲端。AI 喺你公司部機度運行，文件同對話都留喺內網。',
   },
   {
-    q: '要咩硬件？貴唔貴？',
-    a: '10 人以下：迷你主機 4 核、16GB 記憶體、512GB 硬碟，大約 $3,000–$6,000 已夠試。詳見下面硬件建議表。',
-  },
-  {
-    q: '裝完之後要唔要請 IT 維護？',
-    a: '一般唔使。裝好之後自己會運行。偶爾想更新，可以 WhatsApp 搵我哋，或者揀 Professional Plan 包維護。',
-  },
-  {
-    q: 'Free Plan 同 Professional Plan 有咩分別？',
-    a: 'Free Plan 係公司內部 AI 助手：似 ChatGPT 咁傾偈，upload 公司文件做問答。Professional Plan 係 AI Agent：自動化 workflow、審批、接 HR/Email 等系統，由我哋填問卷同開會後幫你設計。',
-  },
-  {
-    q: '個人資料條例（PDPO）點算？',
-    a: '數據留喺公司自己控制，風險比用公有 ChatGPT 低好多。Professional Plan 仲可以加審批紀錄同存取控制。',
+    q: 'AI Agent 方案係點運作？',
+    a: '你填問卷、同我哋開會講需求，我哋用 LangGraph 幫你設計流程——AI 自己做大部分事，重要決定要你批。唔使你學任何 workflow 工具。',
   },
   {
     q: '第一次開啟要做咩？',
-    a: '瀏覽器會開一個聊天介面，第一次要建立管理員帳號（公司第一個用戶）。之後 upload PDF 文件，就可以問 AI 公司政策。',
+    a: '瀏覽器會開聊天介面，第一次要建立管理員帳號。之後 upload PDF 文件，就可以問 AI 公司政策。',
   },
 ];
 
@@ -107,14 +106,14 @@ export default function AiAgentLanding() {
         <div className="relative z-10 px-5 sm:px-12 py-16 sm:py-20 text-center max-w-4xl mx-auto">
           <p className="inline-flex items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-500/15 px-4 py-1.5 text-xs font-semibold text-emerald-300 mb-6">
             <IconShield className="w-4 h-4" />
-            香港 SME · 完全免費試用
+            香港 SME · Free Plan 完全免費
           </p>
           <h1 className="text-3xl sm:text-4xl md:text-[2.75rem] font-extrabold leading-tight tracking-tight mb-4">
             {AI_AGENT_PRODUCT}，{AI_AGENT_TAGLINE}
           </h1>
           <p className="text-base sm:text-lg text-white/75 max-w-2xl mx-auto mb-10 leading-relaxed">
             似 ChatGPT 咁易用，但裝喺公司自己部機。
-            員工可以問 HR 政策、SOP、FAQ —— 唔使學複雜工具，5–10 分鐘就用到。
+            員工可以問 HR 政策、SOP、FAQ —— 5–10 分鐘就用到，唔使請 IT。
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-stretch sm:items-center">
             <a
@@ -123,7 +122,7 @@ export default function AiAgentLanding() {
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-full bg-[#25D366] hover:bg-[#20BD5A] text-white font-semibold px-10 py-5 text-lg shadow-lg shadow-[#25D366]/25 transition-all hover:scale-[1.02]"
             >
-              WhatsApp 專人幫手部署（推薦）
+              WhatsApp 專人幫手部署
             </a>
             <a
               href="#deploy"
@@ -138,18 +137,17 @@ export default function AiAgentLanding() {
         </div>
       </section>
 
-      {/* What is */}
+      {/* What is private AI assistant */}
       <section className="mt-16">
         <h2 className="text-2xl sm:text-3xl font-bold text-center mb-3">咩係「私有 AI 助手」？</h2>
         <p className="text-center text-gray-400 mb-8 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
           用白話講：喺公司自己部機度，擺一個只俾你哋員工用嘅 ChatGPT。
-          唔係上網用 ChatGPT，而係<strong className="text-gray-300">數據永遠留喺公司</strong>。
         </p>
         <div className="grid gap-4 sm:grid-cols-3 max-w-4xl mx-auto">
           {[
-            { title: '似 ChatGPT 咁傾', desc: '員工用瀏覽器同 AI 對話，介面直觀，唔使培訓' },
-            { title: '識答公司問題', desc: 'Upload HR 手冊、SOP、FAQ，AI 只根據你公司文件答' },
-            { title: '數據唔出門', desc: '對話同文件都留喺公司 server，唔會傳去外面' },
+            { title: '似 ChatGPT 咁傾', desc: '員工用瀏覽器同 AI 對話，介面直觀' },
+            { title: '識答公司問題', desc: 'Upload HR 手冊、SOP，AI 只根據你公司文件答' },
+            { title: '數據唔出門', desc: '對話同文件都留喺公司，唔會傳去外面' },
           ].map((item) => (
             <div key={item.title} className="rounded-xl border border-white/10 bg-gray-900/70 p-5 text-center">
               <h3 className="text-emerald-400 font-bold text-lg mb-2">{item.title}</h3>
@@ -157,12 +155,37 @@ export default function AiAgentLanding() {
             </div>
           ))}
         </div>
-        <div className="mt-6 max-w-2xl mx-auto rounded-xl border border-white/10 bg-gray-900/50 p-5 text-sm text-gray-400 leading-relaxed">
-          <p className="mb-2"><strong className="text-gray-300">同 ChatGPT 最大分別：</strong></p>
-          <p>
-            ChatGPT 你 paste 咩上去，數據就去咗 OpenAI 嘅雲端。
-            私有 AI 助手全部跑喺你公司部機，客戶資料、內部文件唔會離開公司 —— 對重視私隱嘅香港 SME 尤其重要。
-          </p>
+      </section>
+
+      {/* Assistant vs Agent */}
+      <section className="mt-16 max-w-4xl mx-auto">
+        <h2 className="text-2xl sm:text-3xl font-bold text-center mb-3">私有 AI 助手 vs AI Agent</h2>
+        <p className="text-center text-gray-400 mb-8 text-sm max-w-xl mx-auto">
+          好多老闆問：我係要「傾偈查資料」，定係要 AI「幫我做事」？其實係兩個層次。
+        </p>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div className="rounded-xl border-2 border-emerald-500/40 bg-emerald-950/20 p-6">
+            <p className="text-emerald-400 text-xs font-bold uppercase mb-2">Free Plan · 私有 AI 助手</p>
+            <h3 className="text-lg font-bold mb-3">你問，AI 答</h3>
+            <ul className="text-sm text-gray-300 space-y-2 mb-4">
+              <li>• 查 HR 政策、SOP、FAQ</li>
+              <li>• Upload 文件即刻用</li>
+              <li>• 自己部署，$0 起</li>
+              <li>• 唔使學任何工具</li>
+            </ul>
+            <p className="text-xs text-gray-500">適合：想快啲有公司內部 AI、又驚 data leak 嘅 SME</p>
+          </div>
+          <div className="rounded-xl border border-blue-500/30 bg-blue-950/20 p-6">
+            <p className="text-blue-300 text-xs font-bold uppercase mb-2">Professional · AI Agent</p>
+            <h3 className="text-lg font-bold mb-3">AI 幫你做事，你批關鍵步驟</h3>
+            <ul className="text-sm text-gray-300 space-y-2 mb-4">
+              <li>• 自動整理請假、跟進客戶</li>
+              <li>• 接 Email、HR、SharePoint</li>
+              <li>• 用 LangGraph 設計流程</li>
+              <li>• 填問卷 + 開會，專人幫你搞</li>
+            </ul>
+            <p className="text-xs text-gray-500">適合：想自動化業務流程、又要有人工把關嘅公司</p>
+          </div>
         </div>
       </section>
 
@@ -171,59 +194,32 @@ export default function AiAgentLanding() {
         <DeploySection />
       </section>
 
-      {/* Plans */}
+      {/* Free plan summary */}
       <section className="mt-20" id="plans">
-        <h2 className="text-2xl sm:text-3xl font-bold text-center mb-3">揀邊個 Plan？</h2>
-        <p className="text-center text-gray-400 mb-10 text-sm max-w-xl mx-auto">
-          大部分老闆由 Free Plan 開始就夠。需要自動化流程、審批、接其他系統，先考慮 Professional。
-        </p>
-        <div className="grid gap-6 lg:grid-cols-2 max-w-5xl mx-auto">
-          <div className="rounded-2xl border-2 border-emerald-500/50 bg-emerald-950/20 p-8 relative">
-            <span className="absolute -top-3 left-6 bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full">
-              大部分公司由呢度開始
-            </span>
-            <h3 className="text-xl font-bold text-emerald-300 mb-1">Free · 私有 AI 助手</h3>
-            <p className="text-3xl font-extrabold mb-4">$0 <span className="text-base font-normal text-gray-400">自己裝或搵人幫手</span></p>
-            <ul className="space-y-3 text-sm text-gray-300 mb-8">
-              <li>✓ 似 ChatGPT 嘅聊天介面</li>
-              <li>✓ Upload 公司文件做知識庫問答</li>
-              <li>✓ 數據 100% 留喺公司</li>
-              <li>✓ Mac / Linux / Windows 都支援</li>
-              <li>✓ 唔使學 workflow 工具</li>
-            </ul>
-            <a
-              href="#deploy"
-              className="inline-flex w-full items-center justify-center rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-4 transition-colors"
-            >
-              開始部署
-            </a>
-          </div>
-          <div className="rounded-2xl border border-blue-500/30 bg-blue-950/20 p-8">
-            <h3 className="text-xl font-bold text-blue-300 mb-1">Professional · AI Agent</h3>
-            <p className="text-3xl font-extrabold mb-4">按需報價 <span className="text-base font-normal text-gray-400">專人設計</span></p>
-            <ul className="space-y-3 text-sm text-gray-300 mb-8">
-              <li>✓ 自動化 workflow（例如請假審批）</li>
-              <li>✓ 人工審批再執行（Human-in-the-loop）</li>
-              <li>✓ 接 HR 系統、Email、SharePoint 等</li>
-              <li>✓ 專人幫你設計，唔使你砌</li>
-              <li>✓ 填問卷 + 開會了解需求</li>
-            </ul>
-            <div className="flex flex-col gap-3">
-              <Link
-                href={AI_AGENT_QUESTIONNAIRE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold py-4 transition-colors"
-              >
-                填需求問卷
-              </Link>
-              <WhatsAppContactButton className="w-full py-4" label="WhatsApp 預約會議" />
-            </div>
-          </div>
+        <div className="rounded-2xl border-2 border-emerald-500/50 bg-emerald-950/20 p-8 max-w-2xl mx-auto text-center">
+          <h2 className="text-xl font-bold text-emerald-300 mb-2">Free Plan · 私有 AI 助手</h2>
+          <p className="text-3xl font-extrabold mb-4">$0</p>
+          <ul className="text-sm text-gray-300 space-y-2 mb-6 text-left max-w-xs mx-auto">
+            <li>✓ 似 ChatGPT 嘅聊天介面</li>
+            <li>✓ 公司知識庫問答</li>
+            <li>✓ 數據 100% 留喺公司</li>
+            <li>✓ Mac / Linux / Windows</li>
+          </ul>
+          <a
+            href="#deploy"
+            className="inline-flex items-center justify-center rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-8 py-3 transition-colors"
+          >
+            開始部署
+          </a>
         </div>
       </section>
 
-      {/* Problem */}
+      {/* Pro Agent — prominent standalone block */}
+      <section className="mt-20">
+        <ProAgentSection />
+      </section>
+
+      {/* Why HK SME */}
       <section className="mt-20">
         <h2 className="text-2xl sm:text-3xl font-bold text-center mb-10">點解香港 SME 需要？</h2>
         <div className="grid gap-6 sm:grid-cols-3">
@@ -246,7 +242,7 @@ export default function AiAgentLanding() {
         <h2 className="text-2xl sm:text-3xl font-bold text-center mb-10">Free Plan 三步搞掂</h2>
         <div className="grid gap-8 sm:grid-cols-3">
           {[
-            { step: '1', title: '下載 + 安裝', desc: '揀 Mac/Linux 或 Windows 版，跟住做就得。唔識可以 WhatsApp 搵人幫手。', icon: IconDownload },
+            { step: '1', title: '下載 + 安裝', desc: '揀 Mac/Linux 或 Windows，跟住做。唔識可以 WhatsApp 搵人幫手。', icon: IconDownload },
             { step: '2', title: '等 5–10 分鐘', desc: '程式會自動裝好所需軟件、下載中文 AI 模型。', icon: IconServer },
             { step: '3', title: '開瀏覽器即用', desc: '建立管理員帳號，upload 公司文件，開始同 AI 傾偈。', icon: IconChat },
           ].map((item) => (
@@ -279,8 +275,8 @@ export default function AiAgentLanding() {
             <tbody className="divide-y divide-white/10 text-gray-400">
               <tr className="bg-gray-900/40">
                 <td className="px-5 py-4 text-white font-medium">試用 / ≤10 人</td>
-                <td className="px-5 py-4">4 核 CPU · 16 GB 記憶體 · 512 GB 硬碟</td>
-                <td className="px-5 py-4">Intel NUC、迷你 PC、舊 workstation</td>
+                <td className="px-5 py-4">4 核 · 16 GB 記憶體 · 512 GB 硬碟</td>
+                <td className="px-5 py-4">Intel NUC、迷你 PC</td>
                 <td className="px-5 py-4">$3,000 – $6,000</td>
               </tr>
               <tr>
@@ -291,7 +287,7 @@ export default function AiAgentLanding() {
               </tr>
               <tr className="bg-gray-900/40">
                 <td className="px-5 py-4 text-white font-medium">30 人+</td>
-                <td className="px-5 py-4">加獨立顯示卡（GPU）會快啲</td>
+                <td className="px-5 py-4">加 GPU 會快啲</td>
                 <td className="px-5 py-4">GPU server（Professional 可代選購）</td>
                 <td className="px-5 py-4">按需報價</td>
               </tr>
@@ -314,12 +310,12 @@ export default function AiAgentLanding() {
               <p className="text-emerald-400 text-sm font-semibold uppercase mb-2">Free Plan 即刻用到</p>
               <h2 className="text-2xl font-bold mb-4">公司知識庫問答</h2>
               <p className="text-gray-300 text-sm leading-relaxed mb-4">
-                Upload HR 手冊、SOP、報銷政策 → 員工問「年假點計」「點報銷」→ AI 只根據內部文件答，唔會乱估。
+                Upload HR 手冊、SOP、報銷政策 → 員工問「年假點計」「點報銷」→ AI 只根據內部文件答。
               </p>
               <ul className="text-sm text-gray-400 space-y-1 mb-6">
                 <li>• 減少 HR 重複答同一條問題</li>
                 <li>• 新同事 24/7 自助查政策</li>
-                <li>• Upload PDF 就用，唔使學其他工具</li>
+                <li>• Upload PDF 就用</li>
               </ul>
               <a
                 href="#deploy"
@@ -352,8 +348,7 @@ export default function AiAgentLanding() {
       <section className="rounded-2xl border border-emerald-500/20 bg-gradient-to-r from-emerald-950/30 via-[#0b1220] to-blue-950/30 p-10 text-center mb-8">
         <h2 className="text-2xl sm:text-3xl font-bold mb-3">準備好試吓未？</h2>
         <p className="text-gray-400 mb-8 max-w-lg mx-auto text-sm">
-          完全免費、數據留喺公司。唔識裝就 WhatsApp 搵人幫手。
-          有進階 AI Agent 需求？填問卷 + 預約會議。
+          Free Plan 完全免費、數據留喺公司。需要 AI Agent？睇下面專業方案。
         </p>
         <a
           href={getAiAgentDeployWhatsAppUrl()}
@@ -368,17 +363,13 @@ export default function AiAgentLanding() {
             或者自己下載安裝包 →
           </a>
         </p>
-        <div className="flex flex-col sm:flex-row gap-3 justify-center items-center pt-4 border-t border-white/10">
-          <Link
-            href={AI_AGENT_QUESTIONNAIRE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-400 hover:text-blue-300 text-sm font-medium"
+        <div className="pt-4 border-t border-white/10">
+          <a
+            href="#ai-agent-pro"
+            className="inline-flex items-center justify-center rounded-full bg-blue-600 hover:bg-blue-500 text-white font-semibold px-8 py-3 text-sm transition-colors"
           >
-            Professional Plan：填需求問卷 →
-          </Link>
-          <span className="text-gray-600 hidden sm:inline">|</span>
-          <WhatsAppContactButton className="px-6 py-2.5 text-sm" label="WhatsApp 預約會議" />
+            我想了解 AI Agent 方案 →
+          </a>
         </div>
         <p className="mt-6 text-xs text-gray-500">
           📧 {AI_AGENT_CONTACT_EMAIL}
