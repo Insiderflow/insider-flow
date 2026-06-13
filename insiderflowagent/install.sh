@@ -24,9 +24,11 @@ BOLD='\033[1m'
 NC='\033[0m'
 
 COMPOSE=""
+COMPOSE_FILES=()
 IS_WSL=0
 IS_WINDOWS=0
 DOCKER_SUDO=0
+MODEL_PULL_OK=0
 
 info()  { echo -e "${BLUE}[INFO]${NC} $*"; }
 ok()    { echo -e "${GREEN}[✓]${NC} $*"; }
@@ -67,18 +69,35 @@ ${YELLOW}── 常見問題 Troubleshooting ──${NC}
      → 或暫時用: sudo bash install.sh
 
   2. 端口 3000 已被佔用 Port in use
-     → 修改 .env 入面 OPENWEBUI_PORT=3080
+     → 修改 .env 入面 OPENWEBUI_PORT=3080，再 docker compose up -d
 
-  3. 模型下載慢 Model download slow
-     → 正常，首次 qwen2.5:3b 約 2GB，請等完成
+  3. 模型下載慢 / 失敗 Model download slow or failed
+     → 正常約 2GB；手動: docker compose exec ollama ollama pull qwen2.5:3b
 
-  4. Open WebUI 打唔開
-     → 等 30 秒再試: docker compose logs -f open-webui
+  4. Open WebUI 打唔開 / Ollama 連唔到
+     → 確認 OLLAMA_BASE_URL=http://if-agent-ollama:11434
+     → 日誌: docker compose logs -f open-webui ollama
 
-  5. Windows 用戶
-     → 請用 Docker Desktop + WSL2，或直接雙擊 install.bat
+  5. WSL 用戶
+     → Docker Desktop → Settings → Resources → WSL Integration → 開啟你的 distro
+     → 或改用 Windows 版 install.bat
 
   支援 Support: team@insiderflow.asia
+EOF
+}
+
+print_wsl_guide() {
+  cat <<EOF
+
+${CYAN}${BOLD}── WSL 用戶快速檢查清單 WSL checklist ──${NC}
+
+  1. Windows 已安裝 ${BOLD}Docker Desktop${NC}（唔係只裝 WSL 入面嘅 docker.io）
+  2. Docker Desktop 已 ${BOLD}啟動${NC}（系統 tray 見到 whale icon）
+  3. Docker Desktop → ${BOLD}Settings → Resources → WSL Integration${NC}
+     → 開啟你而家用緊嘅 distro（例如 Ubuntu）
+  4. 喺 WSL terminal 測試: ${BOLD}docker info${NC}（唔好 sudo）
+  5. 如果仍然失敗，可以喺 Windows 下載 package 後雙擊 ${BOLD}install.bat${NC}
+
 EOF
 }
 
@@ -114,8 +133,7 @@ EOF
 
   if [[ "$IS_WSL" -eq 1 ]]; then
     info "偵測到 WSL2 環境 Detected WSL2"
-    info "請確保 Docker Desktop 已啟動且 WSL integration 已開啟"
-    info "Ensure Docker Desktop is running with WSL integration enabled"
+    print_wsl_guide
   fi
 }
 
@@ -132,6 +150,15 @@ parse_args() {
 }
 
 command_exists() { command -v "$1" >/dev/null 2>&1; }
+
+load_env_ports() {
+  cd "$INSTALL_DIR"
+  # shellcheck disable=SC1091
+  set -a; source .env 2>/dev/null || true; set +a
+  OLLAMA_PORT="${OLLAMA_PORT:-11434}"
+  OPENWEBUI_PORT="${OPENWEBUI_PORT:-3000}"
+  WEBUI_URL="http://localhost:${OPENWEBUI_PORT}"
+}
 
 docker_cmd() {
   if [[ "$DOCKER_SUDO" -eq 1 ]]; then
@@ -214,20 +241,9 @@ ensure_docker() {
 
   warn "未偵測到 Docker Docker not found"
   if [[ "$IS_WSL" -eq 1 ]]; then
-    cat <<EOF
-
-${YELLOW}WSL 用戶請先：${NC}
-  1. 安裝 Docker Desktop for Windows
-  2. 開啟 Settings → Resources → WSL Integration → 啟用你的 distro
-  3. 重新執行此腳本
-
-${YELLOW}WSL users:${NC}
-  1. Install Docker Desktop
-  2. Enable WSL Integration for your distro
-  3. Re-run this script
-
-EOF
-    exit 1
+    print_wsl_guide
+    fail "WSL 內無法連接 Docker。請跟上面清單檢查 Docker Desktop。
+Cannot reach Docker from WSL. Follow the checklist above."
   fi
 
   if [[ -f /etc/os-release ]]; then
@@ -268,6 +284,21 @@ GPU test failed; Ollama may fall back to CPU"
   fi
 }
 
+verify_compose_files() {
+  step "檢查部署檔 Checking deployment files..."
+  cd "$INSTALL_DIR"
+
+  [[ -f docker-compose.yml ]] || fail "找不到 docker-compose.yml。請重新下載 package。
+Missing docker-compose.yml — re-download the package."
+
+  if ! grep -q 'OLLAMA_BASE_URL.*if-agent-ollama' docker-compose.yml 2>/dev/null; then
+    warn "docker-compose.yml 可能係舊版本（OLLAMA_BASE_URL 未指向 if-agent-ollama）"
+    warn "Old compose file? Open WebUI may fail to reach Ollama — download latest package"
+  else
+    ok "Open WebUI → Ollama 設定正確 OLLAMA_BASE_URL OK"
+  fi
+}
+
 download_package() {
   step "準備部署檔 Preparing deployment files..."
   mkdir -p "$INSTALL_DIR"
@@ -305,6 +336,8 @@ setup_env() {
   step "設定環境 Configuring environment..."
   cd "$INSTALL_DIR"
 
+  [[ -f .env.example ]] || fail "找不到 .env.example"
+
   if [[ ! -f .env ]]; then
     cp .env.example .env
     ok "已建立 .env Created .env"
@@ -312,7 +345,6 @@ setup_env() {
     info "沿用現有 .env Using existing .env"
   fi
 
-  # 確保預設模型一致 Ensure default model
   for key_val in "COMPOSE_PROFILES=$PROFILE" "OLLAMA_DEFAULT_MODEL=$DEFAULT_MODEL" "DEFAULT_MODELS=$DEFAULT_MODEL"; do
     key="${key_val%%=*}"
     val="${key_val#*=}"
@@ -323,6 +355,7 @@ setup_env() {
     fi
   done
   rm -f .env.bak
+  load_env_ports
 }
 
 compose_files() {
@@ -332,17 +365,144 @@ compose_files() {
   fi
 }
 
+ollama_container_status() {
+  docker_cmd inspect -f '{{.State.Status}}' if-agent-ollama 2>/dev/null || echo "missing"
+}
+
+ollama_health_status() {
+  docker_cmd inspect -f '{{if .State.Health}}{{.State.Health.Status}}{{else}}none{{end}}' if-agent-ollama 2>/dev/null || echo "missing"
+}
+
+ollama_api_ready() {
+  compose_cmd "${COMPOSE_FILES[@]}" --profile "$PROFILE" exec -T ollama ollama list >/dev/null 2>&1 && return 0
+  curl -sf "http://127.0.0.1:${OLLAMA_PORT}/api/tags" >/dev/null 2>&1 && return 0
+  return 1
+}
+
 wait_for_ollama() {
-  local i
-  info "等待 Ollama 就緒 Waiting for Ollama..."
-  for i in $(seq 1 30); do
-    if compose_cmd "${COMPOSE_FILES[@]}" --profile "$PROFILE" exec -T ollama ollama list >/dev/null 2>&1; then
-      ok "Ollama 已就緒 Ollama is ready"
-      return 0
+  local i elapsed=0 max_wait=120
+  local status health
+
+  step "等待 Ollama 就緒 Waiting for Ollama (up to ${max_wait}s)..."
+
+  # Phase 1: container running
+  info "Phase 1/3: 等待容器啟動 container starting..."
+  for i in $(seq 1 60); do
+    status="$(ollama_container_status)"
+    if [[ "$status" == "running" ]]; then
+      ok "Ollama 容器已運行 Container running"
+      break
+    fi
+    if [[ "$status" == "missing" && "$i" -gt 10 ]]; then
+      warn "找不到 if-agent-ollama 容器，檢查 compose 狀態..."
+      compose_cmd "${COMPOSE_FILES[@]}" --profile "$PROFILE" ps ollama || true
     fi
     sleep 2
+    elapsed=$((elapsed + 2))
   done
-  warn "Ollama 等待超時，模型拉取可能失敗 Ollama wait timed out"
+
+  if [[ "$(ollama_container_status)" != "running" ]]; then
+    warn "Ollama 容器未進入 running 狀態 Container not running"
+    return 1
+  fi
+
+  # Phase 2: healthcheck (if configured)
+  info "Phase 2/3: 等待 health check..."
+  for i in $(seq 1 40); do
+    health="$(ollama_health_status)"
+    case "$health" in
+      healthy)
+        ok "Ollama health check: healthy"
+        break
+        ;;
+      unhealthy)
+        warn "Ollama health check: unhealthy（仍會嘗試連 API）"
+        break
+        ;;
+      starting)
+        sleep 3
+        ;;
+      none)
+        ok "Ollama 無 healthcheck，跳過 Phase 2"
+        break
+        ;;
+    esac
+    elapsed=$((elapsed + 3))
+    [[ "$elapsed" -ge "$max_wait" ]] && break
+  done
+
+  # Phase 3: API responds
+  info "Phase 3/3: 等待 Ollama API..."
+  while [[ "$elapsed" -lt "$max_wait" ]]; do
+    if ollama_api_ready; then
+      ok "Ollama API 已就緒 Ollama API ready"
+      return 0
+    fi
+    sleep 3
+    elapsed=$((elapsed + 3))
+    info "  ...已等 ${elapsed}s / ${max_wait}s"
+  done
+
+  warn "Ollama 等待超時（${max_wait}s）Ollama wait timed out"
+  warn "可查看日誌: docker compose logs ollama"
+  return 1
+}
+
+verify_model_pulled() {
+  local model="$1"
+  local list_out
+
+  list_out="$(compose_cmd "${COMPOSE_FILES[@]}" --profile "$PROFILE" exec -T ollama ollama list 2>/dev/null || true)"
+
+  if echo "$list_out" | grep -qF "$model"; then
+    ok "模型已確認存在 Model verified: $model"
+    MODEL_PULL_OK=1
+    return 0
+  fi
+
+  # ollama 有時顯示 tag 略有不同，再試 base name
+  local base="${model%%:*}"
+  if echo "$list_out" | grep -qi "$base"; then
+    ok "模型已確認（部分匹配）Model verified (partial): $model"
+    MODEL_PULL_OK=1
+    return 0
+  fi
+
+  warn "模型列表中未找到 $model Model not found in ollama list"
+  warn "目前模型列表 Current models:"
+  echo "$list_out" | sed 's/^/    /'
+  MODEL_PULL_OK=0
+  return 1
+}
+
+wait_for_open_webui() {
+  local elapsed=0 max_wait=120
+  local http_code
+
+  step "等待 Open WebUI 就緒 Waiting for Open WebUI (up to ${max_wait}s)..."
+
+  while [[ "$elapsed" -lt "$max_wait" ]]; do
+    if command_exists curl; then
+      http_code="$(curl -sf -o /dev/null -w '%{http_code}' "$WEBUI_URL" 2>/dev/null || echo "000")"
+      if [[ "$http_code" =~ ^(200|301|302|307|308)$ ]]; then
+        ok "Open WebUI 可訪問 WebUI reachable (${WEBUI_URL})"
+        return 0
+      fi
+    else
+      # fallback: container running
+      if [[ "$(docker_cmd inspect -f '{{.State.Status}}' if-agent-open-webui 2>/dev/null)" == "running" && "$elapsed" -ge 15 ]]; then
+        warn "未安裝 curl，假設 Open WebUI 已啟動（容器 running）"
+        return 0
+      fi
+    fi
+    sleep 3
+    elapsed=$((elapsed + 3))
+    info "  ...已等 ${elapsed}s（HTTP ${http_code:-n/a}）"
+  done
+
+  warn "Open WebUI 等待超時，仍會嘗試開啟瀏覽器 WebUI wait timed out"
+  warn "請稍等 30 秒後手動開啟: $WEBUI_URL"
+  warn "日誌: docker compose logs -f open-webui"
   return 1
 }
 
@@ -362,21 +522,27 @@ pull_and_start() {
 }
 
 pull_default_model() {
+  local model
   step "下載 AI 模型 Downloading model: $DEFAULT_MODEL..."
   cd "$INSTALL_DIR"
   compose_files
+  load_env_ports
 
-  MODEL=$(grep '^OLLAMA_DEFAULT_MODEL=' .env 2>/dev/null | cut -d= -f2- | tr -d '"' | tr -d "'")
-  [[ -z "$MODEL" ]] && MODEL="$DEFAULT_MODEL"
+  model=$(grep '^OLLAMA_DEFAULT_MODEL=' .env 2>/dev/null | cut -d= -f2- | tr -d '"' | tr -d "'")
+  [[ -z "$model" ]] && model="$DEFAULT_MODEL"
 
-  wait_for_ollama || true
+  if ! wait_for_ollama; then
+    warn "Ollama 未完全就緒，仍會嘗試 pull 模型..."
+  fi
 
-  info "正在 pull $MODEL（約 2GB，請耐心等候）..."
-  if compose_cmd "${COMPOSE_FILES[@]}" --profile "$PROFILE" exec -T ollama ollama pull "$MODEL"; then
-    ok "模型 $MODEL 已就緒 Model ready"
+  info "正在 pull $model（約 2GB，請耐心等候）..."
+  if compose_cmd "${COMPOSE_FILES[@]}" --profile "$PROFILE" exec -T ollama ollama pull "$model"; then
+    verify_model_pulled "$model" || warn "Pull 命令成功但驗證未通過，可稍後重試 pull"
   else
-    warn "模型自動拉取失敗，可稍後手動執行:
-  cd $INSTALL_DIR && docker compose --profile $PROFILE exec ollama ollama pull $MODEL"
+    MODEL_PULL_OK=0
+    warn "模型自動拉取失敗（部署會繼續）Model pull failed — setup continues"
+    warn "稍後手動執行 Manual retry:"
+    echo "  cd $INSTALL_DIR && docker compose --profile $PROFILE exec ollama ollama pull $model"
   fi
 }
 
@@ -399,14 +565,14 @@ open_browser() {
 
   warn "無法自動開啟瀏覽器，請手動前往 Cannot auto-open browser:"
   echo "  $url"
+  if [[ "$IS_WSL" -eq 1 ]]; then
+    info "WSL 提示: 喺 Windows 瀏覽器開 $url"
+  fi
 }
 
 print_summary() {
   cd "$INSTALL_DIR"
-  # shellcheck disable=SC1091
-  set -a; source .env 2>/dev/null || true; set +a
-  WEBUI_PORT="${OPENWEBUI_PORT:-3000}"
-  WEBUI_URL="http://localhost:${WEBUI_PORT}"
+  load_env_ports
 
   cat <<EOF
 
@@ -419,12 +585,13 @@ ${GREEN}${BOLD}═════════════════════�
   Chroma（知識庫）:        http://localhost:${CHROMA_PORT:-8000}
 
   預設模型 Default model:  ${DEFAULT_MODEL}
+  模型狀態 Model status:   $( [[ "$MODEL_PULL_OK" -eq 1 ]] && echo "✓ 已就緒 ready" || echo "⚠ 請手動 pull / pull manually" )
   安裝目錄 Install dir:   ${INSTALL_DIR}
 
 ${YELLOW}${BOLD}首次使用 First-time setup:${NC}
-  1. 瀏覽器會開啟 Open WebUI Browser opens Open WebUI
-  2. ${BOLD}建立管理員帳號 Create admin account${NC}（公司用嘅第一個帳號）
-  3. 開始同 AI 對話 Start chatting!
+  1. 瀏覽器會開啟 Open WebUI
+  2. ${BOLD}建立管理員帳號 Create admin account${NC}（第一個註冊嘅帳號）
+  3. 揀模型 ${DEFAULT_MODEL}，開始對話
 
 ${YELLOW}常用指令 Useful commands:${NC}
   停止 Stop:  cd ${INSTALL_DIR} && docker compose --profile ${PROFILE} down
@@ -433,8 +600,6 @@ ${YELLOW}常用指令 Useful commands:${NC}
   專人代部署 Professional setup: team@insiderflow.asia
 ${GREEN}══════════════════════════════════════════════════════════${NC}
 EOF
-
-  open_browser "$WEBUI_URL"
 }
 
 main() {
@@ -445,10 +610,14 @@ main() {
   check_compose
   check_gpu
   download_package
+  verify_compose_files
   setup_env
+  compose_files
   pull_and_start
   pull_default_model
+  wait_for_open_webui || true
   print_summary
+  open_browser "$WEBUI_URL"
 }
 
 main "$@"
