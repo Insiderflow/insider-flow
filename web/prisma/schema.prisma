@@ -419,3 +419,19 @@ model MlSignalSnapshot {
   @@index([generated_at(sort: Desc)])
   @@map("ml_signal_snapshots")
 }
+
+/** AI Agent professional plan questionnaire ( /ai-agent/questionnaire ). */
+model AiAgentQuestionnaireSubmission {
+  id           String   @id @default(cuid())
+  company_name String
+  contact_name String
+  email        String
+  phone        String?
+  answers      Json
+  notes        String?
+  created_at   DateTime @default(now())
+
+  @@index([created_at(sort: Desc)])
+  @@index([email])
+  @@map("ai_agent_questionnaire_submissions")
+}

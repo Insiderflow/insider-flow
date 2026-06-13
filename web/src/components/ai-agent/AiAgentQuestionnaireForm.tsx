@@ -2,7 +2,10 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { AI_AGENT_QUESTIONNAIRE_QUESTIONS } from '@/lib/aiAgentQuestionnaire';
+import {
+  AI_AGENT_QUESTIONNAIRE_QUESTIONS,
+  type QuestionnaireAnswerValue,
+} from '@/lib/aiAgentQuestionnaire';
 import WhatsAppContactButton from '@/components/ai-agent/WhatsAppContactButton';
 
 type FormState = {
@@ -11,7 +14,7 @@ type FormState = {
   email: string;
   phone: string;
   notes: string;
-  answers: Record<string, string>;
+  answers: Record<string, QuestionnaireAnswerValue>;
   website: string;
 };
 
@@ -25,22 +28,55 @@ const INITIAL: FormState = {
   website: '',
 };
 
+function isMultiSelected(answers: Record<string, QuestionnaireAnswerValue>, qId: string, optId: string) {
+  const v = answers[qId];
+  return Array.isArray(v) && v.includes(optId);
+}
+
 export default function AiAgentQuestionnaireForm() {
   const [form, setForm] = useState<FormState>(INITIAL);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState(false);
 
-  function setAnswer(questionId: string, optionId: string) {
+  function setSingleAnswer(questionId: string, optionId: string) {
     setForm((prev) => ({
       ...prev,
       answers: { ...prev.answers, [questionId]: optionId },
     }));
   }
 
+  function toggleMultiAnswer(questionId: string, optionId: string) {
+    setForm((prev) => {
+      const current = prev.answers[questionId];
+      const selected = Array.isArray(current) ? current : [];
+      const next = selected.includes(optionId)
+        ? selected.filter((id) => id !== optionId)
+        : [...selected, optionId];
+      return {
+        ...prev,
+        answers: { ...prev.answers, [questionId]: next },
+      };
+    });
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
+
+    for (const q of AI_AGENT_QUESTIONNAIRE_QUESTIONS) {
+      const v = form.answers[q.id];
+      if (q.multiple) {
+        if (!Array.isArray(v) || v.length === 0) {
+          setError(`請至少選一項：${q.label.replace(/（可選多項）/g, '')}`);
+          return;
+        }
+      } else if (typeof v !== 'string' || !v) {
+        setError(`請選擇：${q.label}`);
+        return;
+      }
+    }
+
     setSubmitting(true);
 
     try {
@@ -95,12 +131,12 @@ export default function AiAgentQuestionnaireForm() {
         <p className="text-blue-400 text-xs font-bold uppercase tracking-wide mb-2">Professional · AI Agent</p>
         <h1 className="text-2xl sm:text-3xl font-extrabold mb-3">AI Agent 需求問卷</h1>
         <p className="text-gray-400 text-sm leading-relaxed">
-          全部係選擇題，約 2 分鐘搞掂。提交後我哋會 email 收到你嘅答案，再同你安排會議。
+          全部係選擇題，約 2 分鐘搞掂。部分題目可選多項。
+          提交後我哋會 email 收到你嘅答案，再同你安排會議。
         </p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-8">
-        {/* Honeypot */}
         <input
           type="text"
           name="website"
@@ -160,13 +196,19 @@ export default function AiAgentQuestionnaireForm() {
 
         {AI_AGENT_QUESTIONNAIRE_QUESTIONS.map((q, idx) => (
           <section key={q.id} className="rounded-2xl border border-white/10 bg-gray-900/60 p-6">
-            <h2 className="font-bold text-base sm:text-lg mb-4">
+            <h2 className="font-bold text-base sm:text-lg mb-1">
               <span className="text-blue-400 mr-2">{idx + 1}.</span>
               {q.label}
             </h2>
+            {q.multiple && (
+              <p className="text-xs text-gray-500 mb-4">可選多項</p>
+            )}
             <div className="space-y-2">
               {q.options.map((opt) => {
-                const checked = form.answers[q.id] === opt.id;
+                const checked = q.multiple
+                  ? isMultiSelected(form.answers, q.id, opt.id)
+                  : form.answers[q.id] === opt.id;
+
                 return (
                   <label
                     key={opt.id}
@@ -177,13 +219,16 @@ export default function AiAgentQuestionnaireForm() {
                     }`}
                   >
                     <input
-                      type="radio"
+                      type={q.multiple ? 'checkbox' : 'radio'}
                       name={q.id}
                       value={opt.id}
                       checked={checked}
-                      onChange={() => setAnswer(q.id, opt.id)}
+                      onChange={() =>
+                        q.multiple
+                          ? toggleMultiAnswer(q.id, opt.id)
+                          : setSingleAnswer(q.id, opt.id)
+                      }
                       className="h-4 w-4 shrink-0 accent-blue-500"
-                      required
                     />
                     <span>{opt.label}</span>
                   </label>

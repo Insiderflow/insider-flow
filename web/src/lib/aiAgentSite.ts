@@ -4,6 +4,8 @@ export const AI_AGENT_BRAND = '私域 AI';
 export const AI_AGENT_PRODUCT = '公司內部私有 AI 助手';
 export const AI_AGENT_TAGLINE = '數據永遠唔出公司';
 export const AI_AGENT_CONTACT_EMAIL = 'team@insiderflow.asia';
+/** 問卷提交會寄去呢個 inbox（可用 AI_AGENT_QUESTIONNAIRE_TO 覆蓋） */
+export const AI_AGENT_QUESTIONNAIRE_INBOX = AI_AGENT_CONTACT_EMAIL;
 export const AI_AGENT_WHATSAPP_NUMBER = '85264206200';
 
 /** 專人幫手部署（Free Plan 推薦） */

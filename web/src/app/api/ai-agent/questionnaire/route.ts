@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sendEmail } from '@/lib/email';
+import { prisma } from '@/lib/prisma';
 import {
+  formatAnswersForDisplay,
   formatQuestionnaireEmailHtml,
   getQuestionnaireRecipientEmail,
   validateQuestionnairePayload,
@@ -26,6 +28,21 @@ export async function POST(request: NextRequest) {
     const html = formatQuestionnaireEmailHtml(data);
 
     await sendEmail(recipient, subject, html);
+
+    try {
+      await prisma.aiAgentQuestionnaireSubmission.create({
+        data: {
+          company_name: data.companyName,
+          contact_name: data.contactName,
+          email: data.email,
+          phone: data.phone || null,
+          answers: data.answers,
+          notes: data.notes || null,
+        },
+      });
+    } catch (dbError) {
+      console.error('[ai-agent questionnaire] db save failed (email sent):', dbError);
+    }
 
     return NextResponse.json({ ok: true });
   } catch (error) {

@@ -6,6 +6,8 @@ export type QuestionnaireQuestion = {
   id: string;
   label: string;
   options: QuestionnaireOption[];
+  /** 允許選多項（預設單選） */
+  multiple?: boolean;
 };
 
 export const AI_AGENT_QUESTIONNAIRE_QUESTIONS: QuestionnaireQuestion[] = [
@@ -21,7 +23,8 @@ export const AI_AGENT_QUESTIONNAIRE_QUESTIONS: QuestionnaireQuestion[] = [
   },
   {
     id: 'primaryGoal',
-    label: '最想 AI Agent 幫你解決咩？',
+    label: '最想 AI Agent 幫你解決咩？（可選多項）',
+    multiple: true,
     options: [
       { id: 'leave-approval', label: '請假 / 審批流程' },
       { id: 'customer-followup', label: '客戶跟進同回覆' },
@@ -32,7 +35,8 @@ export const AI_AGENT_QUESTIONNAIRE_QUESTIONS: QuestionnaireQuestion[] = [
   },
   {
     id: 'painPoint',
-    label: '而家最花人手、最易出錯嘅係邊部分？',
+    label: '而家最花人手、最易出錯嘅係邊部分？（可選多項）',
+    multiple: true,
     options: [
       { id: 'repeat-qa', label: 'HR / 前線重複答同一條問題' },
       { id: 'slow-approval', label: '跨部門審批慢' },
@@ -85,13 +89,17 @@ export const AI_AGENT_QUESTIONNAIRE_QUESTIONS: QuestionnaireQuestion[] = [
 
 const QUESTION_IDS = new Set(AI_AGENT_QUESTIONNAIRE_QUESTIONS.map((q) => q.id));
 
+const QUESTION_BY_ID = new Map(AI_AGENT_QUESTIONNAIRE_QUESTIONS.map((q) => [q.id, q]));
+
 const OPTION_MAP = new Map<string, string>(
   AI_AGENT_QUESTIONNAIRE_QUESTIONS.flatMap((q) =>
     q.options.map((o) => [`${q.id}:${o.id}`, o.label] as const),
   ),
 );
 
-export type QuestionnaireAnswers = Record<string, string>;
+export type QuestionnaireAnswerValue = string | string[];
+
+export type QuestionnaireAnswers = Record<string, QuestionnaireAnswerValue>;
 
 export type QuestionnaireSubmission = {
   companyName: string;
@@ -113,6 +121,30 @@ function escapeHtml(value: string): string {
 
 function labelForAnswer(questionId: string, optionId: string): string {
   return OPTION_MAP.get(`${questionId}:${optionId}`) ?? optionId;
+}
+
+function labelsForQuestionAnswer(questionId: string, value: QuestionnaireAnswerValue): string {
+  if (Array.isArray(value)) {
+    return value.map((id) => labelForAnswer(questionId, id)).join('、');
+  }
+  return labelForAnswer(questionId, value);
+}
+
+function parseAnswerValue(
+  question: QuestionnaireQuestion,
+  raw: unknown,
+): QuestionnaireAnswerValue | null {
+  if (question.multiple) {
+    if (!Array.isArray(raw) || raw.length === 0) return null;
+    const ids = raw.filter((v): v is string => typeof v === 'string' && v.trim().length > 0);
+    if (ids.length === 0) return null;
+    if (!ids.every((id) => question.options.some((o) => o.id === id))) return null;
+    return [...new Set(ids)];
+  }
+
+  if (typeof raw !== 'string' || !raw.trim()) return null;
+  if (!question.options.some((o) => o.id === raw)) return null;
+  return raw;
 }
 
 export function validateQuestionnairePayload(
@@ -149,12 +181,12 @@ export function validateQuestionnairePayload(
 
   const answers: QuestionnaireAnswers = {};
   for (const q of AI_AGENT_QUESTIONNAIRE_QUESTIONS) {
-    const selected = (answersRaw as Record<string, unknown>)[q.id];
-    if (typeof selected !== 'string' || !selected.trim()) {
-      return { ok: false, error: `請選擇：${q.label}` };
-    }
-    if (!q.options.some((o) => o.id === selected)) {
-      return { ok: false, error: `無效選項：${q.label}` };
+    const selected = parseAnswerValue(q, (answersRaw as Record<string, unknown>)[q.id]);
+    if (selected === null) {
+      return {
+        ok: false,
+        error: q.multiple ? `請至少選一項：${q.label}` : `請選擇：${q.label}`,
+      };
     }
     answers[q.id] = selected;
   }
@@ -188,8 +220,7 @@ function trimStr(value: unknown, max: number): string {
 
 export function formatQuestionnaireEmailHtml(data: QuestionnaireSubmission): string {
   const rows = AI_AGENT_QUESTIONNAIRE_QUESTIONS.map((q) => {
-    const answerId = data.answers[q.id] ?? '';
-    const answerLabel = labelForAnswer(q.id, answerId);
+    const answerLabel = labelsForQuestionAnswer(q.id, data.answers[q.id] ?? '');
     return `
       <tr>
         <td style="padding:10px 12px;border-bottom:1px solid #e5e7eb;color:#374151;width:38%;vertical-align:top;">${escapeHtml(q.label)}</td>
@@ -238,4 +269,18 @@ export function getQuestionnaireRecipientEmail(): string {
 
 export function isValidQuestionId(id: string): boolean {
   return QUESTION_IDS.has(id);
+}
+
+export function isQuestionMultiple(questionId: string): boolean {
+  return QUESTION_BY_ID.get(questionId)?.multiple === true;
+}
+
+export function formatAnswersForDisplay(answers: QuestionnaireAnswers): Record<string, string> {
+  const out: Record<string, string> = {};
+  for (const q of AI_AGENT_QUESTIONNAIRE_QUESTIONS) {
+    const value = answers[q.id];
+    if (value === undefined) continue;
+    out[q.label] = labelsForQuestionAnswer(q.id, value);
+  }
+  return out;
 }
