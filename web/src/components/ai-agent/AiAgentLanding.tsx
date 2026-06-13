@@ -1,7 +1,7 @@
 'use client';
 
-import Link from 'next/link';
 import DeployButton from '@/components/ai-agent/DeployButton';
+import WhatsAppContactButton from '@/components/ai-agent/WhatsAppContactButton';
 import { AI_AGENT_BRAND, AI_AGENT_CONTACT_EMAIL } from '@/lib/aiAgentSite';
 
 function IconShield({ className }: { className?: string }) {
@@ -91,7 +91,7 @@ const FAQ = [
   },
   {
     q: 'IT 唔識 Docker 點算？',
-    a: `install.sh 會自動 check Docker、拉 image、起 service。我哋亦提供付費代部署（遠程 / 上門），email ${AI_AGENT_CONTACT_EMAIL}。`,
+    a: `install.sh 會自動 check Docker、拉 image、起 service。需要專人代部署可以 WhatsApp 我哋，或者 email ${AI_AGENT_CONTACT_EMAIL}。`,
   },
   {
     q: '可唔可以接現有 HR / ERP 系統？',
@@ -302,15 +302,17 @@ export default function AiAgentLanding() {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <DeployButton className="px-8 py-4" />
-          <Link
-            href={`mailto:${AI_AGENT_CONTACT_EMAIL}?subject=AI%20Agent%20%E5%B0%88%E4%BA%BA%E4%BB%A3%E9%83%A8%E7%BD%B2`}
-            className="inline-flex items-center justify-center rounded-xl border border-blue-500/50 text-blue-300 hover:bg-blue-500/10 px-8 py-4 font-semibold transition-colors"
-          >
-            聯絡專人代部署
-          </Link>
+          <WhatsAppContactButton className="px-8 py-4" />
         </div>
         <p className="mt-6 text-sm text-gray-500">
-          📧 {AI_AGENT_CONTACT_EMAIL} · 香港時間 Mon–Fri 回覆
+          WhatsApp 即時查詢 · 📧{' '}
+          <a
+            href={`mailto:${AI_AGENT_CONTACT_EMAIL}`}
+            className="text-emerald-400/90 hover:text-emerald-300 transition-colors"
+          >
+            {AI_AGENT_CONTACT_EMAIL}
+          </a>
+          {' '}· 香港時間 Mon–Fri 回覆
         </p>
       </section>
     </div>
