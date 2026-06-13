@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { getIssuerDetailData } from '@/lib/repos/issuersRepo';
+import {
+  getIssuerDetailData,
+  resolveIssuerIdByTicker,
+} from '@/lib/repos/issuersRepo';
 
 function partyCode(raw: string | null | undefined): 'R' | 'D' | 'I' {
   const p = (raw || '').toLowerCase();
@@ -31,11 +34,7 @@ async function resolveIssuer(idOrTicker: string) {
   });
   if (direct) return direct.id;
 
-  const byTicker = await prisma.issuer.findFirst({
-    where: { ticker: { equals: idOrTicker, mode: 'insensitive' } },
-    select: { id: true },
-  });
-  return byTicker?.id ?? null;
+  return resolveIssuerIdByTicker(idOrTicker);
 }
 
 export async function GET(req: NextRequest) {
