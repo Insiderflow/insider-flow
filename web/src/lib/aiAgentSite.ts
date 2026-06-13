@@ -22,9 +22,10 @@ export const AI_AGENT_INSTALL_BAT_PATH = '/ai-agent/install.bat';
 export const AI_AGENT_INSTALL_CMD =
   'curl -fsSL https://www.insiderflow.asia/ai-agent/install.sh | bash';
 
+export const AI_AGENT_QUESTIONNAIRE_PATH = '/ai-agent/questionnaire';
+
 export const AI_AGENT_QUESTIONNAIRE_URL =
-  process.env.NEXT_PUBLIC_AI_AGENT_QUESTIONNAIRE_URL ??
-  `mailto:${AI_AGENT_CONTACT_EMAIL}?subject=${encodeURIComponent('AI Agent 專業服務需求問卷')}&body=${encodeURIComponent('公司名稱：\n聯絡人：\n電話：\n想解決咩問題：\n預算範圍：')}`;
+  process.env.NEXT_PUBLIC_AI_AGENT_QUESTIONNAIRE_URL ?? AI_AGENT_QUESTIONNAIRE_PATH;
 
 export function getWhatsAppUrl(message: string): string {
   return `https://wa.me/${AI_AGENT_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;

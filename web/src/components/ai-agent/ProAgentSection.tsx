@@ -59,8 +59,6 @@ export default function ProAgentSection() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             href={AI_AGENT_QUESTIONNAIRE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
             className="inline-flex items-center justify-center rounded-full bg-blue-600 hover:bg-blue-500 text-white font-bold px-10 py-4 text-lg shadow-lg shadow-blue-900/40 transition-all hover:scale-[1.02]"
           >
             我想了解 AI Agent 方案
