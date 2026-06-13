@@ -53,7 +53,8 @@ services:
       WEBUI_NAME: ${WEBUI_NAME:-公司私有 AI 助手}
       WEBUI_ALLOWED_ORIGINS: ${WEBUI_ALLOWED_ORIGINS:-}
       DEFAULT_MODELS: ${DEFAULT_MODELS:-qwen2.5:3b}
-      ENABLE_SIGNUP: "false"
+      # 首次開啟可建立管理員；建議建立後於 WebUI 設定關閉註冊
+      ENABLE_SIGNUP: ${ENABLE_SIGNUP:-true}
       ENABLE_OAUTH_SIGNUP: "false"
       TZ: ${TZ:-Asia/Hong_Kong}
     depends_on:

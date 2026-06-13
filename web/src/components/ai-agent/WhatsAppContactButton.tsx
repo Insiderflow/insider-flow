@@ -1,7 +1,6 @@
-import {
-  AI_AGENT_WHATSAPP_NUMBER,
-  getAiAgentWhatsAppUrl,
-} from '@/lib/aiAgentSite';
+'use client';
+
+import { getAiAgentProWhatsAppUrl } from '@/lib/aiAgentSite';
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -11,24 +10,22 @@ function WhatsAppIcon({ className }: { className?: string }) {
   );
 }
 
-type WhatsAppContactButtonProps = {
-  className?: string;
-  label?: string;
-};
-
 export default function WhatsAppContactButton({
   className = '',
-  label = '聯絡專人代部署',
-}: WhatsAppContactButtonProps) {
-  const href = getAiAgentWhatsAppUrl();
-  const displayNumber = `+${AI_AGENT_WHATSAPP_NUMBER.slice(0, 3)} ${AI_AGENT_WHATSAPP_NUMBER.slice(3)}`;
+  label = 'WhatsApp 聯絡我哋',
+  href,
+}: {
+  className?: string;
+  label?: string;
+  href?: string;
+}) {
+  const url = href ?? getAiAgentProWhatsAppUrl();
 
   return (
     <a
-      href={href}
+      href={url}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`${label}（WhatsApp ${displayNumber}）`}
       className={`inline-flex items-center justify-center gap-2.5 rounded-full bg-[#25D366] hover:bg-[#20BD5A] text-white font-semibold shadow-lg shadow-[#25D366]/25 transition-all hover:scale-[1.02] active:scale-[0.98] ${className}`}
     >
       <WhatsAppIcon className="w-5 h-5 shrink-0" />

@@ -41,7 +41,7 @@ banner() {
   cat <<'EOF'
   ╔══════════════════════════════════════════════╗
   ║   公司內部私有 AI 助手 — 一鍵部署              ║
-  ║   Private AI Chatbot + RAG · 數據唔出公司    ║
+  ║   似 ChatGPT，但數據永遠留喺公司              ║
   ╚══════════════════════════════════════════════╝
 EOF
   echo -e "${NC}"
@@ -591,7 +591,7 @@ ${GREEN}${BOLD}═════════════════════�
 ${YELLOW}${BOLD}首次使用 First-time setup:${NC}
   1. 瀏覽器會開啟 Open WebUI（似 ChatGPT 嘅介面）
   2. ${BOLD}建立管理員帳號 Create admin account${NC}
-  3. Upload 公司文件（HR / SOP）→ 開始 RAG 問答
+  3. Upload 公司文件（HR / SOP）→ 開始知識庫問答
   4. 揀模型 ${DEFAULT_MODEL} 同 AI 對話
 
 ${CYAN}需要 AI Agent 工作流 / 審批 / 客製整合？${NC}

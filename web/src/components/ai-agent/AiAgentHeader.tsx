@@ -1,7 +1,7 @@
 'use client';
 
-import { AI_AGENT_BRAND, AI_AGENT_PRODUCT } from '@/lib/aiAgentSite';
-import DeployButton from '@/components/ai-agent/DeployButton';
+import { AI_AGENT_PRODUCT } from '@/lib/aiAgentSite';
+import DeploySection from '@/components/ai-agent/DeploySection';
 
 export default function AiAgentHeader() {
   return (
@@ -14,9 +14,9 @@ export default function AiAgentHeader() {
           >
             AI
           </span>
-          <span className="font-bold text-white truncate">{AI_AGENT_PRODUCT}</span>
+          <span className="font-bold text-white truncate text-sm sm:text-base">{AI_AGENT_PRODUCT}</span>
         </div>
-        <DeployButton className="px-4 py-2 text-sm shrink-0" />
+        <DeploySection compact />
       </div>
     </header>
   );
