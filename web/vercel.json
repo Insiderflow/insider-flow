@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/crypto",
+      "destination": "https://insiderflow-crypto.vercel.app/crypto"
+    },
+    {
+      "source": "/crypto/:path*",
+      "destination": "https://insiderflow-crypto.vercel.app/crypto/:path*"
+    }
+  ]
+}
