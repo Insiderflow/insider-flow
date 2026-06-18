@@ -12,7 +12,6 @@ import PoliticianCard from "@/components/dashboard/PoliticianCard";
 import RecentTradesTimeline from "@/components/dashboard/RecentTradesTimeline";
 import InsiderDashboard from "@/components/insider/InsiderDashboard";
 import MobileHeader from "@/components/layout/MobileHeader";
-import ShutdownNotice from "@/components/ShutdownNotice";
 import SectionHeader from "@/components/layout/SectionHeader";
 import PullToRefresh from "@/components/layout/PullToRefresh";
 import { fetchDashboard, type Period } from "@/data/mockData";
@@ -106,8 +105,6 @@ export default function MobileDashboard() {
             period={period}
             onPeriodChange={setPeriod}
           />
-
-          <ShutdownNotice />
 
           {isFetching && (
             <motion.div

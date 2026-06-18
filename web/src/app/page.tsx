@@ -3,7 +3,6 @@ import HomePoliticianImage from '@/components/HomePoliticianImage';
 import LastUpdated from '@/components/LastUpdated';
 import CatalogFreshnessTrustNote from '@/components/marketing/CatalogFreshnessTrustNote';
 import SubstackPromoBand from '@/components/marketing/SubstackPromoBand';
-import ShutdownNotice from '@/components/marketing/ShutdownNotice';
 import { actionStyles } from '@/components/actionStyles';
 import { badgeStyles } from '@/components/badgeStyles';
 import { textLinkStyles } from '@/components/linkStyles';
@@ -34,8 +33,6 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
   return (
     <div className="min-h-screen bg-gray-900">
       <main className="p-4 space-y-8">
-      <ShutdownNotice variant="card" />
-
       {/* hero */}
       <section className="rounded-2xl overflow-hidden hero-gradient border border-white/10 shadow-xl shadow-black/40">
         <div className="relative z-10 px-5 sm:px-10 py-14 sm:py-20 text-center">
