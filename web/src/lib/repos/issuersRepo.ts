@@ -317,3 +317,52 @@ export async function getIssuerDetailData(id: string) {
     })),
   };
 }
+
+/** Prefer explicit issuer; else pick duplicate ticker with the most Trade rows. */
+export async function resolveIssuerIdByTicker(
+  ticker: string,
+  preferredIssuerId?: string | null,
+): Promise<string | null> {
+  const normalized = ticker.trim().toUpperCase();
+  if (!normalized) return null;
+
+  if (preferredIssuerId) {
+    const preferred = await prisma.issuer.findUnique({
+      where: { id: preferredIssuerId },
+      select: { id: true, ticker: true },
+    });
+    if (
+      preferred?.ticker &&
+      preferred.ticker.trim().toUpperCase() === normalized
+    ) {
+      return preferred.id;
+    }
+  }
+
+  const candidates = await prisma.issuer.findMany({
+    where: { ticker: { equals: normalized, mode: 'insensitive' } },
+    select: { id: true },
+  });
+  if (candidates.length === 0) return null;
+  if (candidates.length === 1) return candidates[0].id;
+
+  const counts = await prisma.trade.groupBy({
+    by: ['issuer_id'],
+    where: { issuer_id: { in: candidates.map((c) => c.id) } },
+    _count: { _all: true },
+  });
+  const countByIssuer = new Map(
+    counts.map((row) => [row.issuer_id, row._count._all]),
+  );
+
+  let bestId = candidates[0].id;
+  let bestCount = -1;
+  for (const c of candidates) {
+    const n = countByIssuer.get(c.id) || 0;
+    if (n > bestCount) {
+      bestCount = n;
+      bestId = c.id;
+    }
+  }
+  return bestId;
+}
